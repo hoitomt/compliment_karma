@@ -1,0 +1,18 @@
+// Use the javascript view for the fancybox
+$.fancybox('<%= j(render "users/panels/new_compliment_popup") %>', 
+	{
+		afterShow: function() {
+			UserProfile.reinitialize();
+			console.log("Im loaded");
+		},
+		padding: 0,
+		scrolling: 'no',
+		helpers: {
+			overlay: {
+				css: {
+					'background-color': '#A7DBD8'
+				}
+			}
+		}
+	}
+);

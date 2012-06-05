@@ -1,0 +1,29 @@
+<% user_accomplishment = feed_item.item_object %>
+<% accomplishment = user_accomplishment.accomplishment %>
+<% user = user_accomplishment.user %>
+<div class="image">
+	<% if user %>
+		<%= link_to user do %>
+			<%= image_tag(user.photo.url(:thumb)) %>
+		<% end %>
+	<% else %>
+		<%= image_tag('/photos/thumb/missing.png') %>
+	<% end %>
+</div>
+<div class="feed-item-center">
+	<%= render 'users/panels/recognition_participants', :feed_item => feed_item %>
+	<%= link_to show_recognition_path(:recognition_type_id => feed_item.item_type_id, 
+																		:recognition_id => feed_item.item_object.id),
+																		:remote => true do %>
+	<div class="feed-item">
+		<p>Earns a <%= accomplishment.name %></p>
+	</div>
+	<% end %>
+	<%= render 'users/panels/item_social', :feed_item => feed_item %>	
+</div>
+<div class="image">
+	<%= get_image(accomplishment.image_thumb)%>
+</div>
+<div class="timestamp">
+	<%= timestamp(user_accomplishment.updated_at) %>
+</div>

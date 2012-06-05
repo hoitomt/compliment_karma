@@ -1,0 +1,11 @@
+<div id="earned-compliment">
+	<p class="div-title">Earned your compliment this week</p>
+	<div class="sent-compliment-indicator">
+		<% 7.times do |index| %>
+			<div class="no-recent-compliment">
+				<%= get_content_for_recent_compliments(@compliments_since_last_monday, index) %>
+			</div>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+</div>

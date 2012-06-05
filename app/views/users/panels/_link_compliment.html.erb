@@ -1,0 +1,7 @@
+<% if feed_item.item_type_id == @recognition_type_compliment.id %>
+	<li class="social-compliment social-link-style">Compliment</li>
+<% elsif feed_item.item_type_id == @recognition_type_reward.id %>
+	<li class="social-compliment-user social-link-style">Compliment</li>
+<% elsif feed_item.item_type_id == @recognition_type_accomplishment.id %>
+	<li class="social-compliment-user social-link-style">Compliment</li>
+<% end %>

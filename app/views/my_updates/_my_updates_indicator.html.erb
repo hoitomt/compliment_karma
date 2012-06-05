@@ -1,0 +1,23 @@
+<% if current_user %>
+	<% if update_history_count > 0 %>
+		<%= link_to my_updates_path(:id => current_user.id), 
+															 :class => 'header-update-link', 
+															 :remote => true do %>
+			<div class="header-updates clearfix">
+				<div class="header-update-indicator">
+					<%= image_tag('user_profile/my_updates_with_items.png') %>
+				</div>
+				<div id="update-history-count" class="header-update-count" >
+					<%= update_history_count_display %>
+				</div>
+			</div>
+		<% end %>
+	<% else %>
+		<div class="header-update-indicator">
+			<%= image_tag('user_profile/my_updates_no_items.png') %>
+		</div>
+	<% end %>
+<% end %>
+<div id="my-updates-detail">
+	<%= render 'my_updates/my_updates' %>
+</div>

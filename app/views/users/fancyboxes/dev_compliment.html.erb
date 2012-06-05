@@ -1,0 +1,13 @@
+<%= content_for :javascript do %>
+	<script type="text/javascript">
+		$(function() {
+			var userEmail = '<%= current_user.email %>';
+			var userId = '<%= current_user.id %>';
+			var perPage = '<%= @per_page %>';
+			var unconfirmed = '<%= @unconfirmed %>';
+			var pendingItems = '<%= @pending_items_count %>';
+			UserProfile.init(userId, perPage, userEmail, unconfirmed, pendingItems);
+			$.fancybox('<%= j(render "users/fancyboxes/compliment") %>');
+		});
+	</script>
+<% end %>

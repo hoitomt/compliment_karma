@@ -1,0 +1,40 @@
+<%= content_for :javascript do %>
+	<script type="text/javascript">
+		$(function() {
+			var flashMsg = '<%= flash[:error] %>';
+			if(flashMsg.length > 0) {
+				$('#field label').hide();
+			}
+
+			// Testing
+
+
+			var userEmail = '<%= current_user.email %>';
+			var userId = '<%= current_user.id %>';
+			var perPage = '<%= @per_page %>';
+			var pendingItems = '<%= @pending_items_count %>';
+			UserProfile.init(userId, perPage, userEmail, pendingItems);
+		});
+	</script>
+<% end %>
+<%= hidden_field_tag :feed_items_count, @karma_live_items_count %>
+<div id="explanation">
+	<%= render 'shared/flash', :flash => flash %>
+</div>
+<div id="user-profile">
+	<%= render 'users/panels/user_profile_short', :flash => flash %>
+	<div id="content-container">
+		<div id="karma-live-updates" class="right-two-thirds">
+			<ul id="feed-items">
+				<%#= render 'users/panels/debug' %>
+				<%= render 'users/panels/karma_live_updates' %>
+			</ul>
+			<div id="infinite-scroll-processing">
+				Loading Records &nbsp; <%= image_tag('ajax-loader.gif') %>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<%= render 'users/panels/new_compliment' %>
+	<%= render 'users/panels/menu' %>
+</div>

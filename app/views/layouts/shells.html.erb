@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="container_16 clearfix">
+		<section id="flash">
+	    <% flash.each do |key, value| %>
+	      <div class="flash <%= key %>"><%= value %></div>
+	    <% end %>
+	  </section>
+	
+		<%= yield %>
+	</div>
+	<div class="container_16">
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</body>
+</html>

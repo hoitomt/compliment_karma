@@ -1,0 +1,9 @@
+var action = "<%= @current_action %>";
+
+// $('#menu-social-profile').click(function() {console.log("Click");});
+$.each($("#menu-social-profile").data("events"), function(i, event) {
+  alert(i);
+  $.each(event, function(j, h) {
+    alert(h.handler);
+  });
+});

@@ -1,0 +1,39 @@
+@import "common";
+@import "user_common";
+
+$top-row-height: 250px;
+
+#user-overview.box { padding: 0; background: #ffffff; }
+#user-overview {
+}
+
+.personal-container {
+	position: relative;
+	float: left;
+	width: 375px;
+	height: $top-row-height;
+	padding: 10px 0 0 0;
+	.demographics-container { float: left; height: 100px;}
+	.profile-photo { float: left; margin: 0 0 0 10px; }
+	.demographics { float: left; margin: 0 0 0 10px; }
+	.rank-buttons { position: absolute; bottom: 10px; margin-left: 10px; }
+	.profile-button { margin: 0 0 0 10px; padding: 5px 0 0 0; float: left;}
+}
+.primary-stats {
+	width: 225px;
+	height: $top-row-height;
+	float: right;
+	td.value {
+		color: #3275ae;
+		font-weight: bold;
+		font-size: 16px;
+		text-align: right;
+		padding: 5px 0 0 0;
+	}
+	td.label {
+		padding: 10px 0 0 10px;
+		font-size: 12px;
+		text-align: left;
+		color: #6c6c6c
+	}
+}

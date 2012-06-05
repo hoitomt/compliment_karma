@@ -1,0 +1,82 @@
+<%= content_for :stylesheets do %>
+	<style type="text/css">
+		#footer  { display: none; }
+	</style>
+<% end %>
+<%= content_for :javascript do %>
+	<script type="text/javascript">
+		$(function(){
+			var showFlash = <%= flash && !flash.empty? %>;
+			HomePage.init(showFlash);
+			$.fn.inputStyle();
+		});
+	</script>
+<% end %>
+<%= content_for :home_page do %>
+	<div id="main-container" class="container_16">
+		<div class="grid_16">
+			<div id="explanation">
+				<%= render 'shared/flash', :flash => flash %>
+			</div>
+			<div id="home-page">
+				<p style="margin-top: 55px;">Share Compliments<br />
+					Earn Rewards
+					<%= image_tag 'reward_money.png', :style => "margin: 0 -5px -10px 0"%>
+					<%= image_tag 'gold_trophy.png', :style => "margin: 0 -10px -4px -10px"%>
+					<%= image_tag 'certificate.png', :style => "margin: 0 0 -4px -5px"%>
+				</p>
+				<div id="sub-title">
+					Sign up for your free account
+				</div>
+				<%= link_to "Let's Get Started!", signup_path, :class => 'sign-up-button' %>
+				<div id='learn-more'>
+					<%= link_to "Learn more", '#overview', :class => 'fancybox' %>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="home-page-bottom" style="margin-top: 70px;">
+		<div id="home-page-bg-bars"></div>
+		<div class="container_16">
+			<div class="grid_16 main" style="margin-top: 0px;">
+				<div id="slider-nav" class="grid_1 prefix_15">
+					<div id="slider-state-1"></div>
+					<div id="slider-state-2"></div>
+				</div>
+				<div id="slider" style="height: 330px;">
+					<%= render 'pages/slides/slide_employee' %>
+					<%= render 'pages/slides/slide_employer' %>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div
+	</div>	
+	<div class="clear"></div>
+<% end %>
+<%= content_for :no_container do %>
+	<div id="home-footer-bottom">
+		<div id="home-footer-bg"></div>
+		<div class="container_16" style="margin-top: 2px;">
+			<div class="grid_16 home-footer">
+				<% if current_founder %>
+					Welcome <%= current_founder.name %> 
+					(<%= link_to "Founder Sign Out", founder_signout_path %>)
+				<% end %>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div style="margin: 230px auto 0 auto; width:980px; height:80px; text-align:left; background-color:#1F1F1F; border-radius:8px; border-bottom: 1px solid black; box-shadow: 0 1px 0 #373731, 0 -1px 0 #0E0D0B;">
+	</div>
+<% end %>
+
+<div id="overview" style="display: none;">
+	overview
+</div>
+
+
+
+

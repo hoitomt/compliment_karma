@@ -1,0 +1,25 @@
+<div class="grid_16">
+	<div style="width: 520px; margin: 100px auto 0 auto;">
+		<div class="login-box" style="padding: 20px;">
+			<%= form_for(:shell, :url => shells_path, :html => {:id => 'login-form'}) do |f| %>
+				<fieldset>
+					<ol>
+						<li>
+					    <%= f.label :email %>
+					    <%= f.text_field :email %>
+						</li>
+						<li>
+					    <%= f.label :password %>
+					    <%= f.password_field :password %>
+						</li>
+				</fieldset>
+				<fieldset>
+					<div class="center-button">
+						<button type=submit>Submit</button>
+					</div>
+      
+				</fieldset>
+			<% end %>
+		</div>
+	</div>
+</div>

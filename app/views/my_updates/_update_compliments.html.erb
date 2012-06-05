@@ -1,0 +1,12 @@
+<% if item.recognition_type_id == RecognitionType.COMPLIMENT.id %>
+	<% compliment = Compliment.find_by_id(item.recognition_id) %>
+	<div class="my-update-compliment">
+		<div class="my-update-compliment-comment">
+			<p><%= compliment_text(compliment) %></p>
+		</div>
+	</div>
+	<div class="my-update-compliment-type-skill">
+		<%= compliment_type(compliment) %>
+		<%= compliment_skill(compliment) %>
+	</div>
+<% end %>

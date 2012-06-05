@@ -1,0 +1,12 @@
+<% unless @confirmed || !current_user?(@user) %>
+	<div id="account-confirmation">
+		<h2 style="color:#ffff00;">Unconfirmed Account</h2>
+		<p>
+			Please check your email to confirm your account.<br />
+			<% if flash[:notice].blank? %>
+				<%= link_to 'Resend Link', resend_new_account_confirmation_path %> |
+			<% end %>
+			<%= link_to 'Change Email Address', '#' %>
+		</p>
+	</div>
+<% end %>

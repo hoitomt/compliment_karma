@@ -1,0 +1,10 @@
+Hi!<br />
+You have received a compliment from <%= @compliment.sender_email %>
+
+<h2><%= @compliment.comment %></h2>
+for
+<h2><%= @compliment.skill %></h2>
+
+Please confirm your account to receive you compliments by clicking on the following link <br />
+
+<%= new_account_confirmation_url(@receiver.new_account_confirmation_token) %>

@@ -1,0 +1,43 @@
+<% compliment = feed_item.item_object %>
+<% sender = User.find_by_email(compliment.sender_email) %>
+<% receiver = User.find_by_email(compliment.receiver_email) %>
+<div class="image">
+	<% if sender %>
+		<%= link_to sender do %>
+			<%= image_tag(sender.photo.url(:thumb)) %>
+		<% end %>
+	<% else %>
+		<%= image_tag('/photos/thumb/missing.png') %>
+	<% end %>
+</div>
+<div class="feed-item-center">
+	<%= render 'users/panels/recognition_participants', :feed_item => feed_item %>
+	<%= link_to show_recognition_path(:recognition_type_id => feed_item.item_type_id, 
+																		:recognition_id => feed_item.item_object.id),
+																		:remote => true do %>
+		<div class="feed-item clearfix" title="<%= tooltip(compliment) %>">
+			<div class="comment-text">
+				<%= compliment_text(compliment) %>
+			</div>
+			<div class="compliment-sender">
+				<%= compliment_type(compliment) %>
+				<%= compliment_skill(compliment) %>
+			</div>
+		</div>
+	<% end %>
+	<div class="clear"></div>
+	<%= render 'users/panels/item_social', :feed_item => feed_item %>
+</div>
+<div class="image">
+	<% if receiver %>
+		<%= link_to receiver do%>
+			<%= image_tag(receiver.photo.url(:thumb)) %>
+		<% end %>
+	<% else %>
+		<%= image_tag('/photos/thumb/missing.png') %>
+	<% end %>
+</div>
+<div class="timestamp">
+	<%= timestamp(compliment.updated_at) %>
+</div>
+

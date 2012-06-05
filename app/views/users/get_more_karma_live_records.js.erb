@@ -1,0 +1,17 @@
+<% if @replace_content %>
+	<% if @karma_live_items.nil? || @karma_live_items.empty? %>
+		$('#feed-items').html('<%= j(render "users/panels/karma_live_updates", :feed_items => nil) %>');
+	<% else %>
+		$('#feed-items').html('<%= j(render "users/panels/karma_live_updates", :feed_items => @karma_live_items) %>');
+	<% end %>
+<% else %>
+	<% if @karma_live_items.nil? || @karma_live_items.empty? %>
+		$('#feed-items').append('<%= j(render "users/panels/karma_live_updates", :feed_items => nil) %>');
+	<% else %>
+		$('#feed-items').append('<%= j(render "users/panels/karma_live_updates", :feed_items => @karma_live_items) %>');
+	<% end %>
+<% end %>
+$('#feed_items_count').val('<%= @karma_live_items_count %>');
+$('#visible-count').html('<%= @current_count %> of <%= @karma_live_items_count %>');
+
+UserProfile.reinitialize();

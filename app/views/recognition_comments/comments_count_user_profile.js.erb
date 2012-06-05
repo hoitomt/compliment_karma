@@ -1,0 +1,16 @@
+var id = '<%= @count %>';
+var commentsCount = '<%= @comments_count %>';
+var updateId = "#comment-count-" + id;
+var containerId = '#feed-item-social-' + id;
+console.log('Render stuff :' + updateId + ' to ' + commentsCount);
+
+$(updateId).html("Comment (" + commentsCount + ")");
+$.fancybox.close();
+
+$(containerId).show();
+$(updateId).effect("highlight", {}, 3000);
+
+<% unless flash[:recognition_comment_errors].blank? %>
+	var errors = "<%= flash[:recognition_comment_errors] %>"
+	$.jGrowl(errors);
+<% end %>

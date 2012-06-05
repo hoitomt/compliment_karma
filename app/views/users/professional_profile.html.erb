@@ -1,0 +1,81 @@
+<%= content_for :javascript do %>
+	<script type="text/javascript">
+		$(function() {
+			var flashMsg = '<%= flash[:error] %>';
+			if(flashMsg.length > 0) {
+				$('#field label').hide();
+			}
+
+			var userEmail = '<%= current_user.email %>';
+			var userId = '<%= current_user.id %>';
+			var perPage = '<%= @per_page %>';
+			var unconfirmed = '<%= @unconfirmed %>';
+			var pendingItems = '<%= @pending_items_count %>';
+			UserProfile.init(userId, perPage, userEmail, unconfirmed, pendingItems);
+		});
+	</script>
+<% end %>
+<div id="user-profile">
+	<%= render 'users/panels/new_compliment' %>
+	<div id="user-overview" class="right-two-thirds box clearfix">
+		<div id="user-profile-details" class="first-row clearfix">
+
+			<div class="personal-container clearfix">
+				<div class="demographics-container">
+					<div class="profile-photo">
+						<%= image_tag(@user.photo.url(:thumb)) %>
+					</div>
+					<div class="demographics">
+						<h1><%= @user.full_name %></h2>
+						<h2>Title placeholder</h3>
+						<p class="small-gray"><%= location(@user) %></p>
+					</div>
+				</div>
+				<div class="rank-buttons">
+					<%= compliment_rank_image(@compliments_sent) %>
+					<div class="profile-button">
+						<%= compliment_button_large(@user) %>
+					</div>
+					<div class="profile-button">
+						<%= follows_button_large(@user) %>
+					</div>
+				</div>
+			</div>
+
+			<div class="primary-stats">
+				<table>
+					<tr>
+						<td class="value"><%= @compliments_sent %></td>
+						<td class="label"><%= stats_label(@compliments_sent, "Compliment") %> Sent</td>
+					</tr>
+					<tr>
+						<td class="value"><%= @compliments_received %></td>
+						<td class="label">Compliments Received</td>
+					</tr>
+					<tr>
+						<td class="value"><%= number_to_currency(@rewards_earned_amount, :unit => "$") %></td>
+						<td class="label">Amount Earned in Rewards</td>
+					</tr>
+					<tr>
+						<td class="value"><%= @rewards_earned_count %></td>
+						<td class="label"><%= stats_label(@rewards_earned_count, "Reward") %> Earned</td>
+					</tr>
+					<tr>
+						<td class="value"><%= @followers %></td>
+						<td class="label"><%= stats_label(@followers, "Follower") %></td>
+					</tr>
+					<tr>
+						<td class="value"><%= @following %></td>
+						<td class="label">Following</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="user-achievements" class="second-row clearfix">
+			<h1 class="section-title">Achievements by Skill</h1>
+		</div>
+		<div id="user-experience" class="third-row">
+			<h1 class="section-title">Professional Experience</h1>
+		</div>
+	</div>
+</div>

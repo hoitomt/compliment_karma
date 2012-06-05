@@ -1,0 +1,91 @@
+<div class="popup-box">
+	<div class="popup-header clearfix">
+		<div class="date">
+			<%= date_format_month_day(@compliment_popup.updated_at) %>
+		</div>
+		<div class="like-button">
+			<%= link_to image_tag('user_profile/like_button_x.png'), '#' %>
+		</div>
+	</div>	
+	<div class="popup-box-container">
+		<div class="left-column">
+			<div class="image-function">
+				<%= get_user_photo_link_small(@sender) %>
+				<div class="functions">
+					<h3><%= get_user_full_name(@sender) %></h3>
+					<%= link_to "Compliment", '#', :class => 'popup-button' %>
+					<%= link_to "Follow", '#', :class => 'popup-button' %>
+				</div>
+			</div>
+		</div>
+		<div class="left-column">
+			<div class="action">Compliments</div>
+		</div>
+		<div class="right-column">
+			<div class="image-function">
+				<%= get_user_photo_link_small(@receiver) %>
+				<div class="functions">
+					<h3><%= get_user_full_name(@receiver) %></h3>
+					<%= link_to "Compliment", '#', :class => 'popup-button' %>
+					<%= link_to "Follow", '#', :class => 'popup-button' %>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="item-details clearfix">
+			<div class="item-details-label"><%= get_user_full_name(@sender) %> says</div>
+			<div class="item-details-comment"><%= @compliment_popup.comment %></div>
+			<div class="clear"></div>
+			<div class="item-details-label">Skill</div>
+			<div class="item-details-comment"><%= @compliment_popup.skill %></div>
+			<div class="clear"></div>
+			<div class="item-details-label">Compliment Type</div>
+			<div class="item-details-comment"><%= @compliment_popup_type %></div>
+		</div>
+		<div class="item-comments clearfix">
+			<ul>
+				<% if @comments %>
+					<% @comments.each do |comment| %>
+						<% u = User.find_by_id(comment.user_id)%>
+						<li class="clearfix">
+							<div class="comment-photo">
+								<%= get_user_photo_link_mini(u) %>
+							</div>
+							<div class="comment-text">
+								<h4><%= get_user_full_name(u) %></h4>
+								<p><%= comment.comment %></p>
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+				<li class="clearfix">
+					<div class="comment-photo">
+						<%= image_tag(current_user.photo.url(:mini)) %>
+					</div>
+					<div class="comment-text-new">
+						<%= form_for @comment_new, :remote => true do |f| %>
+							<%= f.hidden_field :recognition_id, :value => @recognition_id %>
+							<%= f.hidden_field :recognition_type_id, :value => @recognition_type_id %>
+							<%= f.hidden_field :user_id, :value => current_user.id %>
+							<%= hidden_field_tag :count, @count %>
+							<%= f.text_area :comment, 
+															:class => "comment-text-new-text", 
+															:id => "popup-compliment-comment",
+													    :placeholder => "Add a Comment..." %>
+							<div class="comment-text-new-submit clearfix">
+								<button type=submit class="submit-comment">Add Comment</button>
+							</div>
+							<div class="clear"></div>
+						<% end %>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="item-likes clearfix">
+			<h5><%= display_likes_header_count(@likes_count) %></h5>
+			<% @likes_users.each do |u| %>
+			  <%= get_user_photo_link_mini(u) %>
+			<% end %>
+		</div>
+	</div>
+</div>

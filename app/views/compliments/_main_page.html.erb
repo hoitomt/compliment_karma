@@ -1,0 +1,39 @@
+<div id="sub-title">
+	Send a compliment to a colleague now
+</div>
+<div id="main-page-compliment">
+	<%= form_for(@compliment) do |f| %>
+		<%= hidden_field_tag 'request_page', "main" %>
+		<ol>
+			<li>
+				<%= f.label :receiver_email, "", :id => "main-page-receiver-email-label"%>
+				<%= f.text_field :receiver_email, :placeholder => "Enter Receiver's Work Email" %>
+			</li><br class="clear">
+		</ol>
+		<div id="compliment-form-slider" style="display:none; width: 680px;">
+			<ol>
+				<li>
+					<%= f.label :skill, "*Skill" %>
+					<%= f.text_field :skill %>				
+				</li><br class="clear">
+				<li>
+					<%= f.label :comment, "*Comment" %>
+					<%= f.text_area :comment,	:rows => 3, 
+													:placeholder => "#{length_of_comment} character limit" %>
+				</li><br class="clear">
+				<li>
+					<% if current_user %>
+						<%= f.label :sender_email, "*From"%>
+						<%= f.text_field :sender_email, :value => current_user.email %>
+					<% else %>
+						<%= f.label :sender_email, "*From"%>
+						<%= f.text_field :sender_email, :placeholder => "Enter your work email" %>
+					<% end %>
+				</li><br class="clear">
+
+			</ol>
+			<button class="center-button" type=submit>Send Compliment</button>			
+		</div>
+	<% end %>
+</div>	
+<div class="clear"></div>

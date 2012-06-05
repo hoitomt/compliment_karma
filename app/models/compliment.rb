@@ -1,0 +1,287 @@
+class Compliment < ActiveRecord::Base
+  belongs_to :relation
+  belongs_to :compliment_status
+  belongs_to :visibility
+  belongs_to :compliment_type
+  
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  
+  validates :receiver_email, :presence => true,
+                             :format => { :with => email_regex }
+  
+  validates :sender_email, :presence => true,
+                           :format => { :with => email_regex }
+  
+  validates :skill, :presence => true
+  
+  validates :comment, :presence => true,
+                      :length => {:within => 2..140}
+
+  validate :compliment_cannot_be_to_self
+  validate :sender_is_confirmed_user
+  
+  before_save :set_sender
+  before_save :set_compliment_status
+  before_save :parse_sender_domain
+  before_save :parse_receiver_domain
+  before_save :set_sender_user_id
+  before_save :set_receiver_user_id
+  before_create :set_visibility
+  after_create :send_fulfillment
+  after_create :set_relationship
+  after_create :update_history
+  
+  # return the compliments that are pending for an email address
+  # intent is to notify a potential user that there are compliments waiting for them
+  def self.get_pending_compliments(receiver_email)
+    pending = Compliment.where("receiver_email = ? AND receiver_user_id is null", receiver_email)
+  end
+  
+  def compliment_cannot_be_to_self
+    if(self.sender_email == self.receiver_email)
+      errors.add(:receiver_email, "The compliment must not be from the sender") 
+    end
+  end
+
+  def sender_is_confirmed_user
+    user = User.find_by_email(self.sender_email)
+    if(!user || !user.confirmed?)
+      errors.add(:sender_email, "Please confirm your account prior to complimenting") 
+    end
+  end
+  
+  def send_fulfillment
+    begin
+      set_compliment_status if self.compliment_status.nil?
+      case self.compliment_status
+      when ComplimentStatus.ACTIVE
+        ComplimentMailer.send_compliment(self).deliver
+      when ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
+        ComplimentMailer.receiver_confirmation_reminder(self).deliver
+      when ComplimentStatus.PENDING_RECEIVER_REGISTRATION
+        ComplimentMailer.receiver_registration_invitation(self).deliver
+      else
+        # Do Nothing
+      end
+    rescue SocketError => e
+      logger.info("Sending email to #{self.receiver_email}\n#{e.message}")
+    end
+  end
+
+  def set_sender
+    if self.sender_email.nil?
+      self.sender_email = current_user.email
+    end
+  end
+  
+  # If both the sender and receiver have user_ids, create a relationship
+  def set_relationship
+    if self.compliment_status == ComplimentStatus.ACTIVE ||
+       self.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
+      sender = User.find_by_email(self.sender_email)
+      receiver = User.find_by_email(self.receiver_email)
+      new_relationship_status = RelationshipStatus.PENDING
+      # Coworkers
+      new_relationship_status = RelationshipStatus.ACCEPTED if sender.domain == receiver.domain
+      # Previously Accepted
+      relationship = Relationship.get_relationship(sender, receiver)
+      if relationship.nil? || relationship.blank?
+        Relationship.create(:user_1_id => sender.id,
+                            :user_2_id => receiver.id,
+                            :relationship_status_id => new_relationship_status.id)
+      end
+    end      
+  end
+  
+  def set_compliment_status
+    if receiver_status == AccountStatus.CONFIRMED
+      self.compliment_status = ComplimentStatus.ACTIVE
+    elsif receiver_status == AccountStatus.UNCONFIRMED
+      self.compliment_status = ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
+    else
+      self.compliment_status = ComplimentStatus.PENDING_RECEIVER_REGISTRATION
+    end
+  end
+  
+  def sender_status
+    return User.get_account_status(self.sender_email)
+  end
+  
+  def receiver_status
+    return User.get_account_status(self.receiver_email)
+  end
+  
+  def parse_sender_domain
+    d = self.sender_email.split('@')
+    self.sender_domain = d[1] if d.size > 1
+  end
+  
+  def parse_receiver_domain
+    d = self.receiver_email.split('@')
+    self.receiver_domain = d[1] if d.size > 1
+  end
+  
+  def set_sender_user_id
+    u = User.find_by_email(self.sender_email)
+    self.sender_user_id = u.id if u
+  end
+  
+  def set_receiver_user_id
+    u = User.find_by_email(self.receiver_email)
+    self.receiver_user_id = u.id if u
+  end
+  
+  def set_visibility
+    if self.visibility_id.blank?
+      # Look up the visibility from the relationship
+      receiver = User.find_by_id(self.receiver_user_id)
+      sender = User.find_by_id(self.sender_user_id)
+      relationship = Relationship.get_relationship(sender, receiver)
+      if relationship
+        self.visibility = relationship.visibility
+      end
+      
+      if self.visibility.nil?
+        if self.sender_domain == self.receiver_domain
+          self.visibility = Visibility.EVERYBODY
+        else
+          self.visibility = Visibility.SENDER_AND_RECEIVER
+        end
+      end
+    end
+  end
+  
+  def get_sender
+    User.find(self.sender_user_id) unless self.sender_user_id.blank?
+  end
+  
+  def get_receiver
+    User.find(self.receiver_user_id) unless self.receiver_user_id.blank?
+  end
+
+  def update_history
+    UpdateHistory.Received_Compliment(self)
+  end
+  
+  def self.compliment_by_relation_item_type(user, relation_item_type_id=nil)
+    if relation_item_type_id
+      case relation_item_type_id.to_i
+      when RelationItemType.ONLY_MINE.id
+        return Compliment.only_mine(user)
+      when RelationItemType.INTERNAL_COWORKERS.id
+        return Compliment.internal_coworkers(user)
+      when RelationItemType.EXTERNAL_COLLEAGUES.id
+        return Compliment.external_colleagues
+      when RelationItemType.ALL_PROFESSIONAL_CONTACTS.id
+        return Compliment.all_professional_contacts(user)
+      end
+    else
+      return Compliment.all_compliments_from_followed(user)
+      # return Compliment.all_compliments(user)
+    end
+  end
+  
+  def self.all_compliments(user)
+    logger.info("Compliments: All")
+    Compliment.where('sender_email = ? OR receiver_email = ?',
+                     user.email, user.email)
+  end
+
+  def self.all_compliments_from_followed(user)
+    logger.info("Compliments from everybody user is following")
+    followed = Follow.find_all_by_follower_user_id(user.id)
+    list_of_compliments = []
+    followed.each do |follow| 
+      list_of_compliments += all_active_compliments(follow.subject_user_id)
+    end
+    logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
+    return list_of_compliments
+  end
+
+  def self.all_compliments_from_followed_and_self(user)
+    logger.info("Compliments from everybody user is following and the user")
+    followed = Follow.find_all_by_follower_user_id(user.id)
+    list_of_compliments = all_active_compliments(user.id)
+    followed.each do |follow| 
+      list_of_compliments += all_active_compliments(follow.subject_user_id)
+    end
+    logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
+    return list_of_compliments
+  end
+
+  def self.all_active_compliments(user_id)
+    logger.info("Active Compliments")
+    Compliment.where('(sender_user_id = ? OR receiver_user_id = ?) ' +
+                     'AND compliment_status_id = ? AND visibility_id = ?',
+                     user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+  end
+  
+  def self.all_active_compliments_by_email(user)
+    logger.info("Active Compliments")
+    Compliment.where('(sender_email = ? OR receiver_email = ?) ' +
+                     'AND compliment_status_id = ? AND visibility_id = ?',
+                     user.email, user.email, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+  end
+  
+  def self.only_mine(user)
+    logger.info("Compliments: Only Mine")
+    v = [Visibility.SENDER_AND_RECEIVER.id,
+         Visibility.EVERYBODY.id,
+         Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
+         Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
+    Compliment.where('(sender_user_id = ? AND visibility_id in (?) ) OR ' + 
+                     '(receiver_user_id = ? and visibility_id in (?) )',
+                     user.id, Visibility.all_visibility_ids, user.id, v)
+  end
+  
+  def self.internal_coworkers(user)
+    logger.info("Compliments: Internal Coworkers")
+    internal_relationships = Relationship.all_internal_contacts(user)
+    v = [Visibility.EVERYBODY.id,
+         Visibility.COWORKERS_FROM_THIS_JOB.id,
+         Visibility.COWORKERS_FROM_ALL_JOBS.id,
+         Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
+         Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
+    Compliment.where('(sender_user_id in (?) OR receiver_user_id in (?)) AND visibility_id in (?)',
+                    internal_relationships.keys, internal_relationships.keys, v)
+  end
+  
+  def self.external_colleagues(user)
+    logger.info("Compliments: External")
+    external_relationships = Relationship.all_external_contacts(user)
+    sender_v = [Visibility.COWORKERS_FROM_THIS_JOB.id,
+                Visibility.COWORKERS_FROM_ALL_JOBS.id,
+                Visibility.EVERYBODY.id,
+                Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
+                Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
+    receiver_v = [Visibility.EVERYBODY.id,            
+                  Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
+                  Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
+    Compliment.where('(sender_user_id in (?) AND visibility_id in (?)) '+
+                     'OR (receiver_user_id in (?) AND visibility_id in (?))',
+                     external_relationships.keys, sender_v, external_relationships.keys, receiver_v)
+  end
+  
+  def self.get_compliments_to_be_updated_to_visible(relationship)
+    logger.info("Compliments: Update visiblity")
+    c = Compliment.where('(sender_user_id = ? AND receiver_user_id = ?) OR ' + 
+                     '(sender_user_id = ? and receiver_user_id = ?)',
+                     relationship.user_1_id, relationship.user_2_id, 
+                     relationship.user_2_id, relationship.user_1_id)
+  end
+  
+  def self.get_compliments_since_monday(user)
+    logger.info("Compliments: This week")
+    d = DateUtil.get_previous_monday_at_zero_time
+    c = Compliment.where('created_at >= ? AND sender_user_id = ?', d, user.id)
+  end
+
+  def self.sent_compliments(user)
+    Compliment.where('sender_user_id = ?', user.id).count
+  end
+
+  def self.received_compliments(user)
+    Compliment.where('receiver_user_id = ?', user.id).count
+  end
+
+end

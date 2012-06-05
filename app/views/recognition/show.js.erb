@@ -1,0 +1,5 @@
+var view = '<%= j(render "recognition/detail_view") %>';
+var socialPopup = '<%= j(render "recognition/social_popup_links",
+																		{:recognition_id => @recognition_id,
+																		 :recognition_type_id => @recognition_type_id}) %>'
+ShowRecognitionFancyBox.init(view, socialPopup);

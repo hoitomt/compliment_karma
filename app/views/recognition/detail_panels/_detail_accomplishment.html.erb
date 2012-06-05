@@ -1,0 +1,22 @@
+<div class="left-column">
+	<div class="image-function">
+		<%= get_user_photo_link_small(@user) %>
+		<div class="functions">
+			<h3><%= get_user_full_name(@user) %></h3>
+			<%= compliment_button_medium(@user) %>
+			<%= follows_button(@user) %>
+		</div>
+	</div>
+</div>
+<div class="left-column">
+	<div class="action accomplishment-action">Earns</div>
+</div>
+<div class="right-column">
+	<div class="image-function">
+		<%= image_tag @accomplishment.image_thumb %>
+		<div class="functions">
+			<h3><%= @accomplishment.name %></h3>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>

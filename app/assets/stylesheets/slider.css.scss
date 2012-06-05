@@ -1,0 +1,40 @@
+@import "common";
+
+#slider-nav {
+	position: absolute; z-index: 100; margin-top: -25px;
+}
+#slider {	
+	.slide-component {
+		margin-left: 25px;
+		float: left;
+		width: 295px;
+	}
+	.slide-header {
+		background: none;
+		font-size:20px; 
+		color:#0B486B; 
+		padding:5px 0 5px 8px; font-weight:bold;
+		margin-top: -40px;
+	}
+	td { width:300px;}
+	.header-text { 
+		display: block; text-align: center;
+		font-size:18px; font-weight:bold; color:#C02942; }
+	.image-header_number { color:#BCBCBC; padding-right:8px; }
+	
+	.image {
+		width: 185px; // width is key to centering the div
+		height: 185px;
+		margin: 0px auto;
+		img { width: 180px; height: 180px; }
+	}
+	.image-comment {
+		text-align: center;
+		padding: 0px 20px;
+		font-size: 13px;
+	}
+}
+#slider-state-1 { @include slider-status-circle; }
+#slider-state-2 { @include slider-status-circle; }
+.slider-active { background: $slider-status-blue; }
+.slider-inactive { background: $slider-status-gray; }

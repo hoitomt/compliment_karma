@@ -1,0 +1,79 @@
+@import "common";
+
+a.login-links {
+	display: block; text-align: left;
+	font-size: 12px;
+}
+form#login-form{
+	margin-bottom: 0px;
+	fieldset {
+		margin-bottom: 0px;
+	}
+	ol { margin-bottom: 10px; }
+	ol li {
+	 list-style: none;
+	}
+	label {
+		float: left;
+		line-height: 20px;
+//		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		width: 80px;
+		color: #000;
+		text-align: right;
+		margin-right: 10px;
+		padding-top: 3px;
+	}
+	input,
+	textarea {
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		border: $border-gray 1px solid;
+		background-color:#FFFFFF;
+		color:#999;
+		font-size: 18px;
+		width: 300px;
+		height: 30px;
+		margin-bottom: 5px;
+		padding-left: 4px;
+	}
+	.checkbox-div {
+		margin-left: 90px;
+		float: left;
+		width: 30px;
+	}
+	.checkbox-label {
+		text-align: left;
+		float: left;
+		width: 200px;
+		font-size: 12px;
+		padding: 5px 0 0 0;
+	}
+	button {
+		background: #173371;
+		border: none;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 14px;
+		padding: 7px 25px;
+		font-weight: normal;
+		text-shadow: none;
+	}
+	button:hover,
+	button.log-in:hover {
+		background: $blue;
+		cursor: pointer;
+	}
+	button.log-in {
+		@include gradient-bg;
+		width: 100%;
+		margin-bottom: 5px;
+	}
+	.log-in-button { width: 300px; margin: 10px 0 10px 120px; text-align: center; }
+	.center-button { width: 100px; margin: 20px auto 0 auto; text-align: center; }
+}

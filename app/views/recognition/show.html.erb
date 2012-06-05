@@ -1,0 +1,33 @@
+<%= content_for :javascript do %>
+	<script type="text/javascript">
+		$(function() {
+			UserProfile.reinitialize();
+			$.fancybox('<%= j(render "recognition/detail_view") %>', {
+				beforeLoad: function() {
+					$('body').addClass('lock-screen');
+					this.title = '<%= j(render "recognition/social_popup_links",
+																			{:recognition_id => @recognition_id,
+																			 :recognition_type_id => @recognition_type_id}) %>';
+				},
+				beforeClose: function() {
+					$('body').removeClass('lock-screen');
+				},
+				afterClose: function() {
+					// $.get('/users/3.html');
+					window.location = '/users/3';
+				},
+				minWidth: 590,
+				helpers: {
+					overlay: {
+						css: {
+							'background-color': '#A7DBD8'
+						}
+					},
+					title: {
+						type: 'float'
+					}
+				}
+			});
+		});
+	</script>
+<% end %>

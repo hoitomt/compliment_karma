@@ -1,0 +1,77 @@
+<%= content_for :stylesheets do %>
+	<style type="text/css">
+		#nav-upper-right, #nav-main-menu  { display: none; }
+	</style>
+<% end %>
+<%= content_for :javascript do %>
+	<script>
+		$(function() {
+			var newUser = '<%= flash[:new_user] %>';
+			if(newUser) {
+				$.fancybox('#new-user',{
+					maxWidth: 400,
+					minHeight: 220,
+					maxHeight: 400
+				});
+			}
+
+		});
+	</script>
+<% end %>
+<div class="grid_16 main">
+	<div id="signup" class="grid_10">
+		<%= render 'users/signup_progress', :active => "slide1" %>
+		<div id="form-heading">
+			<p class="signup-title">
+				Sign Up for 100% free account
+			</p>
+			<p class="small">happy complimenting</p>
+		</div>
+		<div class="clear"></div>
+		<%= form_for(@user, :validate => true, 
+								 :html => {:id => 'signup-form', :multipart => true }) do |f| %>
+			<fieldset>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= f.label :email, "Work Email" %></div>
+					<div id="field"><%= f.text_field :email %>
+						<div id="user_email_helper" class="helper">
+							e.g. you@yourcompany.com
+						</div>
+						<div id="user_email_error"></div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= f.label :name, "Full Name" %></div>
+					<div id="field"><%= f.text_field :name %>
+						<div id="user_name_helper" class="helper">
+							e.g. jake sully or jake m sully
+						</div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= f.label :password %></div>
+					<div id="field"><%= f.password_field :password %>
+						<div id="user_password_helper" class="helper">
+							must be 6 characters or more
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset>
+				<div>
+					<button class="sign-up" type=submit>Sign Up Free</button>
+				</div>
+			</fieldset>
+		<% end %>
+	</div>
+</div>
+
+<div id="new-user" style="display: none;">
+	<%= image_tag 'ck_logo.png' %>
+	<h1>Welcome to ComplimentKarma</h1>
+	<p>Thank you for using ComplimentKarma to send a compliment. Please fill in the 
+		sign up form to create your account.
+	  Once you have confirmed your account we will send your compliment and you 
+		can use ComplimentKarma to Share Compliments and Earn Rewards!</p>
+	<h2>Thanks!</h2>
+</div>

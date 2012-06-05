@@ -1,0 +1,14 @@
+<% @recognition_comment = RecognitionComment.new %>
+<%= form_for @recognition_comment, :remote => true do |f| %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+	<%= f.hidden_field :recognition_id, :value => feed_item.item_object.id %>
+	<%= f.hidden_field :recognition_type_id, :value => feed_item.item_type_id %>
+	<%= hidden_field_tag :count, @count %>
+	<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">
+		<div id="label"><%= f.label :comment, "Comment" %></div>
+		<div id="field"><%= f.text_area :comment, :rows => 2 %></div>
+	</div>
+	<div>
+		<button class="button-location" type=submit>Add Comment</button>
+	</div>
+<% end %>

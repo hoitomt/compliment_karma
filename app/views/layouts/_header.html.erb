@@ -1,0 +1,50 @@
+<div id="header">
+	<div class="container_16">
+		<div id="logo">
+			<% if current_user %>
+				<%= link_to image_tag('ck_logo.png'), current_user %>
+			<% else %>
+				<%= link_to image_tag('ck_logo.png'), root_path %>
+			<% end %>
+		</div>
+		<%= render 'my_updates/my_updates_indicator' %>
+		<div id="nav-upper-right">
+			<ul>
+				<% if current_user.nil? %>
+					<li><%= link_to 'Log In', login_path %></li>
+					<li><%= link_to 'Sign Up', signup_path %></li>
+					<li><%= link_to 'Pricing', pricing_path %>
+					<li><%= link_to 'Demo', demo_path %></li>
+				<% else %>
+					<li>
+						<%= link_to current_user.email, current_user %>
+						<ul>
+							<li><%= link_to 'Profile', current_user %></li>
+							<li><%= link_to 'Invite', new_invitation_path %></li>
+							<li><%= link_to 'Log Out', logout_path %></li>
+						</ul>
+					</li>
+					<li><%= link_to 'Pricing', pricing_path %></li>
+				<% end %>
+				<li><%= link_to 'Help', '#' %></li>
+			</ul>				
+		</div>
+		<div id="nav-main-menu">
+			<% if current_user.nil? %>
+				<ul>
+					<li><%= home_link('Home') %></li>
+					<li><%= link_to 'People', '#' %></li>
+					<li><%= link_to 'Companies', '#' %></li>
+					<li style="border-right: none;"><%= link_to 'Top', '#' %></li>
+				</ul>
+			<% else %>
+				<ul>
+					<li><%= home_link('Home') %></li>
+					<li><%= link_to 'People', '#' %></li>
+					<li style="border-right: none;"><%= link_to 'Companies', '#' %></li>
+				</ul>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

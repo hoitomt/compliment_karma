@@ -1,0 +1,41 @@
+<div id="user-profile-short" 
+		 class="box left-one-third <%= account_status_display(@confirmed, @pending_items) %>">
+	<%= render 'users/panels/account_confirmation', :flash => flash %>
+	<div style="float: left; width: 250px;">
+		<%= link_to user_professional_profile_path(@user) do %>
+			<%= image_tag(@user.photo.url(:thumb))%>
+			<h1><%= @user.full_name %></h1>
+			<h2>View Profile</h2>
+		<% end %>
+		<p><%= location(@user) %></p>
+	</div>
+	<% if current_user?(@user) %>
+		<div style="float: right">
+			<% if current_user?(@user) && @pending_items_count && @pending_items_count > 0 %>
+				<p><%= link_to "pending (#{@pending_items_count})", '#pending-items', :class => 'fancybox' %>
+			<% end %>
+		</div>
+	<% end %>
+	<div class="clear"></div>
+</div>
+
+<% if current_user?(@user) %>
+	<div id="pending-items" style="display:none;">
+		<h2>Pending Items</h2>
+		<% if @pending_items && @pending_items[:relationships] %>
+			<ul>
+			<% @pending_items[:relationships].each do |user| %>
+				<li>
+					<% if @confirmed %>
+						<%= link_to 'Accept', accept_relationship_path(:sender_id => user.id) %> | 
+						<%= link_to 'Decline', decline_relationship_path(:sender_id => user.id) %>
+					<% else %>
+						<span style="color: #B0B0B0;">Please confirm your account to accept/decline</span>
+					<% end %>
+					<%= pending_relationship_display(user) %>
+				</li>
+			<% end %>
+			</ul>
+		<% end %>
+	</div>
+<% end %>

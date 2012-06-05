@@ -1,0 +1,39 @@
+<div class="grid_16">
+	<div style="width: 570px; margin: 0 auto 0 auto;">
+		<div class="box" style="padding: 0 20px 20px 20px;">
+			<div id="explanation">
+				<%= render 'shared/flash', :flash => flash %>
+			</div>
+			<%= form_for(@user, 
+									 :url => password_reset_path(params[:id]),
+									 :html => {:id => 'login-form'}) do |f| %>
+				<% if @user.errors.any? %>
+				  <div id="error_explanation">
+				    <h2><%= pluralize(@user.errors.count, "error") %> 
+				        prohibited this user from being saved:</h2>
+				    <p>There were problems with the following fields:</p>
+				    <ul>
+				    <% @user.errors.full_messages.each do |msg| %>
+				      <li><%= msg %></li>
+				    <% end %>
+				    </ul>
+				  </div>
+				<% end %>
+
+				<fieldset style="padding-top:20px; margin-top:20px;">
+					<ol>
+						<li>
+					    <%= f.label :password, "New Password", :style => "width: 100px; padding-top: 5px;" %>
+					    <%= f.password_field :password %>
+						</li>
+				</fieldset>
+				<fieldset>
+					<div class="center-button">
+						<button type=submit>Submit</button>
+					</div>
+    
+				</fieldset>
+			<% end %>
+		</div>
+	</div>
+</div>

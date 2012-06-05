@@ -1,0 +1,32 @@
+<% if feed_item.item_type_id == @recognition_type_compliment.id %>
+	<li class="social-follow social-link-style">Follow
+		<div class='social-follow-sub-menu'>
+			<ul id="<%= @count %>">
+				<li class="social-follow-sender">
+					<%= link_to 'Follow Sender', 
+											create_follow_path(:subject_user_id => feed_item.item_object.sender_user_id,
+																	 :follower_user_id => current_user.id) %>
+				</li>
+				<li class="social-follow-receiver">
+					<%= link_to 'Follow Receiver', 
+											create_follow_path(:subject_user_id => feed_item.item_object.receiver_user_id,
+																	 :follower_user_id => current_user.id) %>
+				</li>
+				<li class="social-follow-sender-and-receiver">
+					<%= link_to 'Follow Both', 
+											multi_create_follows_path(:subject1_user_id => feed_item.item_object.receiver_user_id,
+																								:subject2_user_id => feed_item.item_object.receiver_user_id,
+																	 							:follower_user_id => current_user.id)%>
+				</li>
+			</ul>
+		</div>
+	</li>
+<% elsif feed_item.item_type_id == @recognition_type_reward.id || 
+				 feed_item.item_type_id == @recognition_type_accomplishment.id %>
+	<li class="social-follow-user social-link-style">
+		<%= link_to 'Follow', 
+								create_follow_path(:subject_user_id => feed_item.item_object.user_id,
+														 :follower_user_id => current_user.id),
+							  :method => :post %>
+	</li>
+<% end %>

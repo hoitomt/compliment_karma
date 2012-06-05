@@ -1,0 +1,187 @@
+@import "common";
+
+$arrow-height: 45px;
+
+#signup {
+	margin: 30px;
+	#progress {
+		.h1_active { color: $comment-red; }
+		.h1_inactive { color: $progress-inactive; }
+		.h1-padding { float: left; margin-top: 8px; }
+		.number_active {
+			float: left;
+			height: 30px; width: 25px; margin: 5px 0 0 5px; padding: 5px 0 0 10px;
+			background: url(/assets/progress/signup_circle_active.png) no-repeat;
+		}
+		.number_inactive {
+			float: left;
+			height: 30px; width: 25px; margin: 5px 0 0 5px; padding: 5px 0 0 10px;
+			background: url(/assets/progress/signup_circle_inactive.png) no-repeat;
+		}
+		h1 {
+			font-size: 16px;
+			font-family: $san-serif-font-family;
+			font-weight: normal;
+		}
+		#arrow1 {
+			float: left;
+			width: 130px;
+			.active {
+				height: $arrow-height;
+				background: url(/assets/progress/signup_arrow_active.png) no-repeat;
+			}
+			.inactive {
+				height: $arrow-height;
+				background: url(/assets/progress/signup_arrow_inactive.png) no-repeat;
+			}
+		}
+		#arrow2 {
+			float: left;
+			width: 207px;
+			margin-left: 10px;
+			.active {
+				height: $arrow-height;
+				background: url(/assets/progress/signup_invite_coworkers_active.png) no-repeat;
+			}
+			.inactive {
+				height: $arrow-height;
+				background: url(/assets/progress/signup_invite_coworkers_inactive.png) no-repeat;
+			}
+		}
+		#arrow3 {
+			float: left;
+			width: 200px;
+			margin-left: 10px;
+			.active {
+				height: $arrow-height;
+				background: url(/assets/progress/signup_invite_external_contacts_active.png) no-repeat;
+			}
+			.inactive {
+				height: $arrow-height;
+				background: url(/assets/progress/signup_invite_external_contacts_inactive.png) no-repeat;
+			}
+		}
+	}
+		
+	.small { color: $font-gray; font-size: 12px; font-weight: normal; }
+	.signup-title {
+		font-size: 18px;
+		font-weight: normal;
+		margin: 20px 0 5px 0;
+		color: #000;
+		border-bottom: 2px $light-gray solid;
+	}
+	.invite-subheading {
+		font-size: 14px;
+		font-weight: bold;
+		margin: 20px 0 5px 30px;
+		color: #000;
+	}
+}
+
+#signup-form {
+	color: $font-gray;
+	font-size: 12px;
+	margin-top: 20px;
+	
+	fieldset {
+		border: none;
+	}
+	ol li {
+		line-height: 20px;
+		list-style: none;
+		padding: 5px 10px;
+		margin-left: 0px;
+	}
+	ol ol li {
+		background: none;
+		border: none;
+		float: left;
+	}
+	.field_with_errors {
+		display: inline;
+	}
+	.field_with_errors .message {
+		
+	}
+	#validation-error {
+		display: block;
+		background: $inline-error-red;
+		color: #fff;
+		width: 300px;
+		margin-top: -4px;
+		padding: 2px;
+	}
+	#data-entry {
+		display: block;
+			margin-bottom: 5px;
+	}
+	#label {
+		float: left;
+		padding-top: 5px;
+	}
+	#field {
+		float: left;
+	}
+	.helper {
+		display: block;
+		width: 300px;
+		background: $light-gray;
+		color: $helper-font;
+		padding: 2px 2px 4px 2px;
+	}
+	label {
+	//		float: left;
+		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		width: 120px;
+		color: #000;
+		text-align: right;
+		margin-right: 10px;
+		padding-top: 3px;
+	}
+	input,
+	textarea {
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		border: $border-gray 1px solid;
+		background-color:#FFFFFF;
+		color:#999;
+		font-size: 18px;
+		width: 300px;
+		height: 30px;
+		margin-bottom: 4px;
+		padding-left: 4px;
+	}
+	.invitation {
+		margin-left: 80px;
+	}
+	.user-photo {
+		font-size: 12px;
+		padding: 10px 0 0 10px;
+		width: 295px;
+	}
+	button {
+		@include gradient-bg;
+		border: none;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 12px;
+		padding: 7px 15px;
+		font-weight: normal;
+		text-shadow: none;
+	}
+	button:hover,
+	button.sign-up:hover {
+		background: $blue;
+		cursor: pointer;
+	}
+	button.sign-up { margin: 10px 0 0 130px; font-weight: bold; }
+	button.invitation { margin: 15px 0 0 80px; font-weight: bold;	}
+	.center-button { width: 100px; margin: 20px auto 0 auto; text-align: center; }
+}

@@ -1,0 +1,73 @@
+<%= content_for :stylesheets do %>
+	<style type="text/css">
+		#nav-upper-right, #nav-main-menu  { display: none; }
+	</style>
+<% end %>
+<div class = "grid_16 main">
+	<div id="signup" class="grid_10">
+		<%= render 'users/signup_progress', :active => "slide2" %>
+		<div id="form-heading">
+			<p class="signup-title">
+				Complete Your Organization Chart
+			</p>
+			<p class="small">more contacts = more compliments &amp; rewards</p>
+		</div>
+		<div class="clear"></div>
+		<% count = 0 %>
+		<%= form_for(@invitation, :validate => true, :html => {:id => 'signup-form'}) do |f| %>
+			<%= hidden_field_tag :next_page, "invite_coworkers "%>
+			<div id="work-with">
+				<p class="invite-subheading">I work with:</p>
+				<div id="field">
+					<%= text_field_tag new_invitation_email(count += 1), nil, :class => "invitation" %> &#64;
+					<%= current_user.domain if current_user %>
+					<div id="user_email_error"></div>
+				</div>
+				<div id="field">
+					<%= text_field_tag new_invitation_email(count += 1), nil, :class => "invitation" %> &#64;
+					<%= current_user.domain if current_user %>
+					<div id="user_email_error"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="report-to">
+				<p class="invite-subheading">I report-to:</p>
+				<div id="field">
+					<%= text_field_tag new_invitation_email(count += 1), nil, :class => "invitation" %> &#64;
+					<%= current_user.domain if current_user %>
+					<div id="user_email_error"></div>
+				</div>
+				<div id="field">
+					<%= text_field_tag new_invitation_email(count += 1), nil, :class => "invitation" %> &#64;
+					<%= current_user.domain if current_user %>
+					<div id="user_email_error"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="manage">
+				<p class="invite-subheading">I manage:</p>
+				<div id="field">
+					<%= text_field_tag new_invitation_email(count += 1), nil, :class => "invitation" %> &#64;
+					<%= current_user.domain if current_user %>
+					<div id="user_email_error"></div>
+				</div>
+				<div id="field">
+					<%= text_field_tag new_invitation_email(count += 1), nil, :class => "invitation" %> &#64;
+					<%= current_user.domain if current_user %>
+					<div id="user_email_error"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		
+			<fieldset>
+				<div>
+					<button class="invitation" type=submit>Invite</button>
+					<span style="margin: 0px 10px;">or</span>
+					<%= link_to 'skip', invite_others_path %>
+				</div>
+			</fieldset>
+		<% end %>
+	</div>
+	<%= render 'pages/valid_email' %>
+</div>
+

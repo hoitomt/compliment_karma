@@ -1,0 +1,46 @@
+<div id="my-updates">
+	<h2 class="header" style="display: inline;">My Notifications</h2>
+	<% if @show_header_link %>
+		<span class="my-notification-header_link">
+			<%= link_to 'See All', my_updates_path(@user) %>
+		</span>
+	<% end %>
+	<% if @my_update_items %>
+		<ul id="my-update-content">
+			<% @my_update_items.each do |item| %>
+				<% originator = User.find_by_id(item.originating_user_id) %>
+				<% if item.recognition_type_id.nil? %>
+					<%= link_to originator do %>
+						<li class="clearfix">
+							<div class="my-update-item-image">
+								<%= get_user_photo_thumb(originator) %>
+							</div>
+							<div class="my-update-item-note clearfix">
+								<p class="originator-note">
+									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+								</p>
+							</div>
+						</li>
+					<% end %>
+				<% else %>
+					<%= link_to show_recognition_path(:recognition_type_id => item.recognition_type_id, 
+																						:recognition_id => item.recognition_id),
+																						:remote => true do %>
+						<li class="clearfix">
+							<div class="my-update-item-image">
+								<%= get_user_photo_thumb(originator) %>
+							</div>
+							<div class="my-update-item-note clearfix">
+								<p class="originator-note">
+									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+								</p>
+								<%= render 'my_updates/update_compliments', :item => item %>
+								<%= render 'my_updates/update_indicator_time', :item => item %>
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+			<% end %>
+		</ul>
+	<% end %>
+</div>

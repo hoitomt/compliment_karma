@@ -1,0 +1,24 @@
+var updateMe = "#social-like-" + "<%= @count %>";
+var likesCount = "<%= @likes_count %>";
+var likesStatus = "<%= @like_status %>";
+var likesBool = "<%= @liked %>";
+
+console.log("Liked: " + likesBool);
+console.log(updateMe + '|' + likesCount + '|' + likesStatus);
+
+if(parseInt(likesCount) > 0) {
+	$(updateMe).html(likesStatus + " (" + likesCount + ")");
+} else {
+	$(updateMe).html(likesStatus);
+}
+
+if(likesBool == "true") {
+	$('#like-button').html('<%= j(image_tag "user_profile/unlike_button.png") %>');
+} else {
+	$('#like-button').html('<%= j(image_tag "user_profile/like_button.png") %>');
+}
+
+// Update my updates status
+var updateCountDisplay = '<%= update_history_count_display %>';
+console.log("Update Count: " + updateCountDisplay);
+$('#update-history-count').html(updateCountDisplay);

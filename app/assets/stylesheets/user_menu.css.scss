@@ -1,0 +1,39 @@
+@import "common";
+@import "user_common";
+
+$inactive: #347284;
+$font-size: 16px;
+
+#user-menu {
+	clear: left;
+	li {
+		@include border-effect;
+		background: url(user_profile/menu_arrow_inactive_10.png) no-repeat;
+		font-size: $font-size;
+		color: $inactive;
+		padding: 10px 10px 0 10px;
+		height: 30px;
+	}
+	li:first-child {
+		@include top-border-radius;
+		padding: 10px 10px 0 10px;
+		border-top: none;
+	}
+	li:hover {
+		background: #F3F3F3 url(user_profile/menu_arrow_inactive_10.png) no-repeat;
+	}
+	li.active {
+		color: #000000;
+		background: #F3F3F3 url(user_profile/menu_arrow_active_10.png) no-repeat;
+		a {
+			color: #000000;
+		}
+	}
+	a {
+		display: block;
+		color: $inactive;
+		font-size: $font-size;
+	}
+	a:visited {color: $inactive;}
+}
+

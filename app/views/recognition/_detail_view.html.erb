@@ -1,0 +1,75 @@
+<%= render 'layouts/facebook' %>
+<div class="popup-box">
+	<div class="popup-header clearfix">
+		<div class="date">
+			<%= date_format_month_day(@updated_at) %>
+		</div>
+		<div class="like-button">
+			<% if @recognition_type_id == @recognition_type_compliment_id %>
+				<%= like_button(@compliment_popup, @recognition_type_id) %>
+			<% elsif @recognition_type_id == @recognition_type_reward_id %>
+				<%= like_button(@reward, @recognition_type_id) %>
+			<% elsif @recognition_type_id == @recognition_type_accomplishment_id %>
+				<%= like_button(@accomplishment, @recognition_type_id) %>
+			<% end %>
+		</div>
+	</div>	
+	<div class="popup-box-container">
+		<% if @recognition_type_id == @recognition_type_compliment_id %>
+			<%= render 'recognition/detail_panels/detail_compliment' %>
+		<% elsif @recognition_type_id == @recognition_type_reward_id %>
+			<%= render 'recognition/detail_panels/detail_reward' %>
+		<% elsif @recognition_type_id == @recognition_type_accomplishment_id %>
+			<%= render 'recognition/detail_panels/detail_accomplishment' %>
+		<% end %>
+		<div class="item-comments clearfix">
+			<ul>
+				<% if @comments %>
+					<% @comments.each do |comment| %>
+						<% u = User.find_by_id(comment.user_id)%>
+						<li class="clearfix">
+							<div class="comment-photo">
+								<%= get_user_photo_link_mini(u) %>
+							</div>
+							<div class="comment-text">
+								<h4><%= get_user_full_name(u) %></h4>
+								<p><%= comment.comment %></p>
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+				<li class="clearfix">
+					<div class="comment-photo">
+						<%= image_tag(current_user.photo.url(:mini)) %>
+					</div>
+					<div class="comment-text-new">
+						<% @comment_new ||= RecognitionComment.new %>
+						<%= form_for @comment_new, :remote => true do |f| %>
+							<%= f.hidden_field :recognition_id, :value => @recognition_id %>
+							<%= f.hidden_field :recognition_type_id, :value => @recognition_type_id %>
+							<%= f.hidden_field :user_id, :value => current_user.id %>
+							<%= hidden_field_tag :count, @count %>
+							<%= f.text_area :comment, 
+															:class => "comment-text-new-text", 
+															:id => "popup-compliment-comment",
+													    :placeholder => "Add a Comment..." %>
+							<div class="comment-text-new-submit clearfix">
+								<button type=submit class="submit-comment">Add Comment</button>
+							</div>
+							<div class="clear"></div>
+						<% end %>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="item-likes clearfix">
+			<h5><%= display_likes_header_count(@likes_count) %></h5>
+			<% if @likes_users %>
+				<% @likes_users.each do |u| %>
+				  <%= get_user_photo_link_mini(u) %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<%#= render 'recognition/social_popup_links' %>

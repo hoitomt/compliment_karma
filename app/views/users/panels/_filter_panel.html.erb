@@ -1,0 +1,9 @@
+<div id="u-p-filter-form">
+	<%= form_tag(:url => current_user) do %>
+		<%=  select_tag "feed_item_type", options_from_collection_for_select(@feed_item_types, :id, :name)%>
+		<%=  select_tag "relation_type", options_from_collection_for_select(@relation_item_types, :id, :name)%>
+		<div id="select-processing" style="display:inline;"><%= image_tag 'ajax-loader.gif'%></div>
+	<% end %>
+	<div class="link"><%= link_to 'Filter & Sort', '#' %></div>
+	<div class="clear"></div>
+</div>

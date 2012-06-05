@@ -1,0 +1,79 @@
+@import "common";
+
+#my-updates-detail {
+	display: none;
+	position: absolute;
+	width: 600px;
+	height: 300px;
+}
+
+#my-updates {
+	background: $main-menu-color;
+	width: 100%;
+	font-size: 12px;
+	h2.header {
+		font-weight: bold;
+		font-size: 16px;
+		padding: 5px 10px;
+		border-bottom: 2px solid #e9e9e9;
+	}
+	.my-update-item-image {
+		float: left;
+		width: 60px;
+	}
+	.my-update-item-note {
+		position: relative;
+		float: left;
+		width: 420px;
+		height: 70px;
+		margin: 0 0 0 10px;
+	}
+	.my-update-compliment {
+		float: left;
+	}
+	.my-update-compliment-type-skill {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		font-weight: bold;
+		z-index: 2;
+	}
+
+	.my-update-indicator-time {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		z-index: 2;
+		// height: 30px;
+		// margin: 40px 0 0 0;
+		padding: 0 10px 0 0;
+		float: right;
+		.indicator-image { 
+			float: left; margin-right: 10px;
+		}
+		.update-time { 
+			float: left; 
+			padding: 5px 0 0 0;
+		}
+	}
+	li {
+		display: block;
+		margin: 0 0 0 0;
+		padding: 5px;
+		border-top: 1px solid #ffffff;
+		border-bottom: 2px solid #e9e9e9;
+		// height: 70px;
+	}
+	li:lastChild {
+		border-bottom: 0px;
+	}
+	li:hover {
+		background-color: #F3F3F3;
+		// cursor: pointer;
+	}
+	a { color: #000000; }
+	a:visited { color: #000000; }
+}
+
+.my-notification-header_link { float: right; padding: 0 20px 0 0;}
+.my-notification-header_link a { font-size: 12px;}
