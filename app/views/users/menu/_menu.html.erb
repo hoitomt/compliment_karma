@@ -1,0 +1,28 @@
+<div id="user-menu" class="box-no-padding left-one-third-no-padding">
+	<ul>
+		<li id="menu-karma-live">
+			<%= link_to 'Karma Live', @user, :remote => true %>
+		</li>
+		<li id="menu-professional-profile">
+			<%= link_to 'Professional Profile', user_professional_profile_path(@user), :remote => true %>
+		</li>
+		<li id="menu-social-profile">
+			<%= link_to 'Social Profile', user_social_profile_path(@user), :remote => true %>
+		</li>
+		<li id="menu-received-compliments">
+			<%= link_to 'Received Compliments', user_received_compliments_path(@user), :remote => true %>
+		</li>
+		<li id="menu-sent-compliments">
+			<%= link_to 'Sent Compliments', user_sent_compliments_path(@user), :remote => true %>
+		</li>
+		<li id="menu-achievements">
+			<%= link_to 'Achievements', user_achievements_path(@user), :remote => true %>
+		</li>
+		<li id="menu-contacts">
+			<%= link_to 'Contacts', user_contacts_path(@user), :remote => true %>
+		</li>
+		<li id="menu-settings">
+			<%= link_to 'Settings', user_settings_path(@user), :remote => true %>
+		</li>
+	</ul>
+</div>

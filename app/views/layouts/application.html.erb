@@ -30,12 +30,11 @@
 			$.fn.resizeMe();
 			
 			$('.fancybox').fancybox();
-			// UserMenu.init();
+			UserMenu.init();
 		});
 	</script>	
 </head>
 <body>
-	<%= hidden_field_tag 'current_action', @current_action %>
 	<%= render 'layouts/facebook' %>
 	<%= render 'layouts/header' %>
 	<%= yield :flash_container %>

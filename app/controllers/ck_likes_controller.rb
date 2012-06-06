@@ -2,16 +2,16 @@ class CkLikesController < ApplicationController
   before_filter :authenticate
   
   def create
-    recognition_type_id = params[:recognition_type_id]
-    recognition_id = params[:recognition_id]
-    user_id = params[:user_id]
+    @recognition_type_id = params[:recognition_type_id]
+    @recognition_id = params[:recognition_id]
+    @user_id = params[:user_id]
     @count = params[:count]
     
-    existing = CkLike.get_existing(recognition_id, recognition_type_id, user_id)
+    existing = CkLike.get_existing(@recognition_id, @recognition_type_id, @user_id)
     if existing.blank?
-      @ck = CkLike.new( :recognition_type_id => recognition_type_id,
-                        :recognition_id => recognition_id, 
-                        :user_id => user_id )
+      @ck = CkLike.new( :recognition_type_id => @recognition_type_id,
+                        :recognition_id => @recognition_id, 
+                        :user_id => @user_id )
       @ck.save
       @ck.update_history(current_user)
       @liked = true
@@ -20,8 +20,8 @@ class CkLikesController < ApplicationController
       existing[0].delete
       @liked = false
     end
-    @like_status = CkLike.get_like_status(recognition_id, recognition_type_id, user_id)
-    @likes_count = CkLike.get_count(recognition_id, recognition_type_id)
+    @like_status = CkLike.get_like_status(@recognition_id, @recognition_type_id, @user_id)
+    @likes_count = CkLike.get_count(@recognition_id, @recognition_type_id)
     handle_redirect
   end
   

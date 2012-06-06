@@ -6,17 +6,15 @@
 				$('#field label').hide();
 			}
 
-			// Testing
-
-
-			var userEmail = '<%= current_user.email %>';
 			var userId = '<%= current_user.id %>';
 			var perPage = '<%= @per_page %>';
-			var pendingItems = '<%= @pending_items_count %>';
-			UserProfile.init(userId, perPage, userEmail, pendingItems);
+			var userEmail = '<%= current_user.email %>';
+			UserProfile.init(userId, perPage, userEmail);
+			UserMenu.init();
 		});
 	</script>
 <% end %>
+<%= hidden_field_tag 'current_action', @current_action %>
 <%= hidden_field_tag :feed_items_count, @karma_live_items_count %>
 <div id="explanation">
 	<%= render 'shared/flash', :flash => flash %>
@@ -36,5 +34,5 @@
 		</div>
 	</div>
 	<%= render 'users/panels/new_compliment' %>
-	<%= render 'users/panels/menu' %>
+	<%= render 'users/menu/menu' %>
 </div>

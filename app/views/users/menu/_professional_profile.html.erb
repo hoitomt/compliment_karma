@@ -9,15 +9,12 @@
 			var userEmail = '<%= current_user.email %>';
 			var userId = '<%= current_user.id %>';
 			var perPage = '<%= @per_page %>';
-			var unconfirmed = '<%= @unconfirmed %>';
-			var pendingItems = '<%= @pending_items_count %>';
-			UserProfile.init(userId, perPage, userEmail, unconfirmed, pendingItems);
+			UserProfile.init(userId, perPage, userEmail);
 		});
 	</script>
 <% end %>
 <div id="user-profile">
-	<%= render 'users/panels/new_compliment' %>
-	<div id="user-overview" class="right-two-thirds box clearfix">
+	<div id="user-overview" class="right-two-thirds box-no-padding clearfix">
 		<div id="user-profile-details" class="first-row clearfix">
 
 			<div class="personal-container clearfix">

@@ -89,8 +89,8 @@ module UsersHelper
 		return html
   end
   
-  def get_likes_count(item_object, recognition_type_id)
-    count = CkLike.get_count(item_object.id, recognition_type_id)
+  def get_likes_count(item_object_id, recognition_type_id)
+    count = CkLike.get_count(item_object_id, recognition_type_id)
     return count_display(count)
   end
 
@@ -109,39 +109,48 @@ module UsersHelper
     return count_display(count)
   end
   
-  def get_like_status(recognition, recognition_type_id)
-    return CkLike.get_like_status(recognition.id, recognition_type_id, current_user.id)
+  def get_like_status(recognition_id, recognition_type_id)
+    return CkLike.get_like_status(recognition_id, recognition_type_id, current_user.id)
   end
 
-  def like_button(recognition, recognition_type_id)
-    return if recognition.nil? || recognition_type_id.nil?
-    status = get_like_status(recognition, recognition_type_id)
+  def like_button(recognition_id, recognition_type_id)
+    return if recognition_id.nil? || recognition_type_id.nil?
+    status = get_like_status(recognition_id, recognition_type_id)
     logger.info("Like Status: #{status}")
     if status == CkLike.UNLIKE
-      img = image_tag('user_profile/unlike_button.png')
+      button_class = "unlike-button"
+      # img = image_tag('buttons/Button_Unlike.png')
     else
-      img = image_tag('user_profile/like_button.png')
+      button_class = "like-button"
+      # img = image_tag('buttons/Button_Like.png')
     end
-    return link_to img, ck_likes_path(:recognition_type_id => recognition_type_id,
-                                      :recognition_id => recognition.id,
+    logger.info("Button Class: #{button_class}")
+    # return link_to img, ck_likes_path(:recognition_type_id => recognition_type_id,
+    #                                   :recognition_id => recognition_id,
+    #                                   :count => @count,
+    #                                   :user_id => current_user.id),
+    #                     :method => :post,
+    #                     :remote => true,
+    #                     :id => "like-button"
+    return link_to '', ck_likes_path(:recognition_type_id => recognition_type_id,
+                                      :recognition_id => recognition_id,
                                       :count => @count,
                                       :user_id => current_user.id),
                         :method => :post,
                         :remote => true,
-                        :id => "like-button"
+                        :class => button_class
   end
 
-  def likes_link(feed_item)
-    label = get_like_status(feed_item.item_object, feed_item.item_type_id)
-    count = get_likes_count(feed_item.item_object, feed_item.item_type_id)
+  def likes_link(recognition_id, recognition_type_id)
+    label = get_like_status(recognition_id, recognition_type_id)
+    count = get_likes_count(recognition_id, recognition_type_id)
     return link_to "#{label}#{count}", 
-                    ck_likes_path(:recognition_type_id => feed_item.item_type_id,
-                                  :recognition_id => feed_item.item_object.id,
+                    ck_likes_path(:recognition_type_id => recognition_type_id,
+                                  :recognition_id => recognition_id,
                                   :count => @count,
                                   :user_id => current_user.id),
                     :method => :post,
-                    :remote => true,
-                    :id => "social-like-#{@count}"
+                    :remote => true
   end
 
   def comments_link(feed_item)
@@ -206,13 +215,9 @@ module UsersHelper
   end
 
   def follows_button(user=nil, followed=nil, button_size_class)
-    return "" if user.nil?
-    if user.id == current_user.id
-      html = '<div class="popup-button popup-button-self '
-      html += button_size_class
-      html += '">No Follow</div>'
-      return html.html_safe
-    elsif user
+    return "" if user.nil? || user.id == current_user.id
+    
+    if user
       button_class = 'popup-button'
       button_text = "Follow"
       if follow_exists?(user.id)

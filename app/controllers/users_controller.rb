@@ -63,34 +63,27 @@ class UsersController < ApplicationController
   end
 
   def social_profile
-    render_menu_response
+    
   end
 
   def received_compliments
-    render_menu_response
+    
   end
 
   def sent_compliments
-    render_menu_response
+    
   end
 
   def achievements
-    render_menu_response
+    
   end
 
   def contacts
-    render_menu_response
+    
   end
 
   def settings
-    render_menu_response
-  end
-
-  def render_menu_response
-    respond_to do |format|
-      format.html { render @current_action }
-      format.js { render 'users/menu/user_menu' }
-    end 
+    
   end
 
   def set_compliment_panel(params)

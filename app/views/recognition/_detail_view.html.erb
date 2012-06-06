@@ -4,13 +4,13 @@
 		<div class="date">
 			<%= date_format_month_day(@updated_at) %>
 		</div>
-		<div class="like-button">
+		<div class="like-button-container">
 			<% if @recognition_type_id == @recognition_type_compliment_id %>
-				<%= like_button(@compliment_popup, @recognition_type_id) %>
+				<%= like_button(@compliment_popup.id, @recognition_type_id) %>
 			<% elsif @recognition_type_id == @recognition_type_reward_id %>
-				<%= like_button(@reward, @recognition_type_id) %>
+				<%= like_button(@reward.id, @recognition_type_id) %>
 			<% elsif @recognition_type_id == @recognition_type_accomplishment_id %>
-				<%= like_button(@accomplishment, @recognition_type_id) %>
+				<%= like_button(@accomplishment.id, @recognition_type_id) %>
 			<% end %>
 		</div>
 	</div>	

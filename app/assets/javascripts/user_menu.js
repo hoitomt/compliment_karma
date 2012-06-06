@@ -1,16 +1,16 @@
 var UserMenu = {
 	init: function() {
-		this.setCurrentMenuItem();
-	},
-	setCurrentMenuItem: function() {
 		var currentAction = $('#current_action').val();
+		this.setCurrentMenuItem(currentAction);
+	},
+	setCurrentMenuItem: function(currentAction) {
 		var activeMenuItem = UserMenu.mapper(currentAction);
-		console.log(activeMenuItem);
+		UserMenu.clearMenuItems();
 		$('#' + activeMenuItem).addClass('active');
 	},
 	clearMenuItems: function() {
-		$('#user-menu').each('li', function() {
-			this.removeClass('active');
+		$('#user-menu li').each(function() {
+			$(this).removeClass('active');
 		});
 	},
 	mapper: function(currentAction) {

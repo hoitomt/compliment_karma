@@ -1,5 +1,5 @@
 var UserProfile = {
-	init: function(userId, perPage, userEmail, pendingItems) {
+	init: function(userId, perPage, userEmail) {
 		$('#processing').hide();
 		$('#end-of-list').hide();
 		$('#select-processing').hide();
