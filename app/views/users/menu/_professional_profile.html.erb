@@ -27,10 +27,10 @@
 				</div>
 				<div class="rank-buttons">
 					<div class="profile-rank-image">
-						<%= complimenter_rank_image(@compliments_sent) %>
+						<%= complimenter_rank_image(@compliments_sent.to_i) %>
 					</div>
 					<div class="profile-rank-image">
-						<%= rewarder_rank_image(@rewards_sent) %>
+						<%= rewarder_rank_image(@rewards_sent.to_i) %>
 					</div>
 					<div class="profile-button">
 						<%= follows_button_large(@user) %>
