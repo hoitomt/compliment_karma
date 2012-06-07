@@ -53,13 +53,16 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @compliment = Compliment.new
     set_this_week_compliments
-    @compliments_sent = Compliment.sent_compliments(@user)
-    @compliments_received = Compliment.received_compliments(@user)
+    sent_compliments = Compliment.sent_compliments(@user)
+    received_compliments = Compliment.received_compliments(@user)
+    @compliments_sent = sent_compliments.count
+    @compliments_received = received_compliments.count
     @rewards_earned_amount = UserReward.earned_reward_amount(@user.id)
     @rewards_earned_count = UserReward.earned_reward_count(@user.id)
     @rewards_sent = UserReward.sent_reward_count(@user.id)
     @followers = Follow.followers(@user.id)
     @following = Follow.following(@user.id)
+    @compliments_received_by_skill = compliment_count_by_skill(received_compliments)
   end
 
   def social_profile
@@ -265,6 +268,17 @@ class UsersController < ApplicationController
     @compliments_since_last_monday = Compliment.get_compliments_since_monday(@user)
   end
   
+  ## return hash of skill and number of occurrences
+  def compliment_count_by_skill(compliments)
+    return if compliments.nil?
+    h = Hash.new(0)
+    compliments.each do |compliment|
+      h[compliment.skill] += 1
+    end
+
+    return h.sort_by{ |k,v| v }.reverse
+  end
+
   private
     def authenticate
       deny_access unless signed_in?

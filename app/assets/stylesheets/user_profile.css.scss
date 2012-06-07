@@ -1,10 +1,12 @@
 @import "common";
 @import "user_common";
 
-$top-row-height: 250px;
+$top-row-height: 200px;
 
-#user-overview.box { padding: 0; background: #ffffff; }
-#user-overview {
+#user-profile {
+	.container {
+		margin: 10px;
+	}
 }
 
 .personal-container {
@@ -12,11 +14,11 @@ $top-row-height: 250px;
 	float: left;
 	width: 375px;
 	height: $top-row-height;
-	padding: 10px 0 0 0;
 	.demographics-container { float: left; height: 100px;}
 	.profile-photo { float: left; margin: 0 0 0 10px; }
 	.demographics { float: left; margin: 0 0 0 10px; }
 	.rank-buttons { position: absolute; bottom: 10px; margin-left: 10px; }
+	.profile-rank-image { margin: 0 0 0 10px; padding: 5px 0 0 0; float: left;}
 	.profile-button { margin: 0 0 0 10px; padding: 5px 0 0 0; float: left;}
 }
 .primary-stats {
@@ -36,4 +38,32 @@ $top-row-height: 250px;
 		text-align: left;
 		color: #6c6c6c
 	}
+}
+#achievements-by-skill {
+	width: 90%;
+	margin: 15px 20px;	
+	tr {
+		height: 40px;
+	}
+	tr.header {
+		background: #7f7f7f;
+		height: 30px;
+	}
+	th {
+		width: 31%;
+		color: #ffffff;
+		font-size: 14px;
+		font-weight: bold;
+		text-align: center;
+		padding: 5px 0 0 0;
+	}
+	tr.alt { background: #f3f3f3; }
+	td { 
+		font-weight: bold;
+		color: #1e5faf;
+	}
+	td.non-image {padding-top: 10px; }
+	.left { text-align: left; }
+	.center { text-align: center; }
+	.first { padding-left: 5px;}
 }

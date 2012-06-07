@@ -31,7 +31,7 @@
 	}
 	.item {
 		@include right-border-radius;
-		background-color: #DCF1EF;
+		background-color: #ffffff;// #DCF1EF;
 		// background: #DCF1EF;
 		border-top: 1px solid #ffffff;
 		border-bottom: 2px solid #e9e9e9;
@@ -209,16 +209,12 @@
 	padding: 10px;
 }
 #send-compliment {
-	border-bottom: $border-bottom;
-	// padding-bottom: 10px;
 	margin: 0px -10px 0 -10px;
 }
-// #compliment-panel.box { padding: 0 10px 0 10px; }
 #compliment-panel {
 	clear: left;
 	#compliment-form { 
 		margin-top: 10px; 
-		border-bottom: 1px solid #e9e9e9;
 	}
 	#earned-compliment { 
 		border-top: 1px solid #ffffff;

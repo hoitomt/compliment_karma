@@ -319,16 +319,16 @@ module UsersHelper
          UpdateHistoryType.Comment_on_Sent_Compliment.id,
          UpdateHistoryType.Comment_on_Reward.id,
          UpdateHistoryType.Comment_on_Accomplishment.id
-         return image_tag('my_updates/compliment_comment_mini.png')
+         return image_tag('my_updates/icon_24x24_callout.png')
     when UpdateHistoryType.Accepted_Compliment_Receiver.id
-         return image_tag('my_updates/compliment_accepted_mini.png')
+         return image_tag('my_updates/icon_24x24_greencheck.png')
     when UpdateHistoryType.Rejected_Compliment_Receiver.id
          return image_tag('my_updates/sad_face.png')
     when UpdateHistoryType.Like_Received_Compliment.id, 
          UpdateHistoryType.Like_Sent_Compliment.id
          UpdateHistoryType.Like_Reward.id
          UpdateHistoryType.Like_Accomplishment.id
-         return image_tag('my_updates/compliment_like_mini.png')
+         return image_tag('my_updates/icon_24x24_compliment.png')
     when UpdateHistoryType.Share_Received_Compliment_On_Facebook.id,
          UpdateHistoryType.Share_Sent_Compliment_On_Facebook.id,
          UpdateHistoryType.Share_Reward_on_Facebook.id,
@@ -344,7 +344,7 @@ module UsersHelper
     when UpdateHistoryType.Earned_an_Accomplishment.id
          return get_accomplishment_image(item.recognition_id)
     when UpdateHistoryType.Following_You.id
-         return image_tag('my_updates/happy_face.png')
+         return image_tag('my_updates/icon_24x24_heart.png')
     end
   end
 
@@ -451,22 +451,26 @@ module UsersHelper
     return label
   end
 
-  def compliment_rank_image(compliment_count)
-    html = '<div style="float: left;">'
-    image_height = 60
-    if compliment_count >= 1 && compliment_count < 50
-      html += image_tag('status_indicators/level_1_complimenter.png', :height => image_height)
-    elsif compliment_count >= 50 && compliment_count < 200
-      html += image_tag('status_indicators/level_2_complimenter.png', :height => image_height)
-    elsif compliment_count >= 200 && compliment_count < 500
-      html += image_tag('status_indicators/level_3_complimenter.png', :height => image_height)
-    elsif compliment_count >= 200 && compliment_count < 1000
-      html += image_tag('status_indicators/level_4_complimenter.png', :height => image_height)
-    elsif compliment_count >= 1000
-      html += image_tag('status_indicators/level_5_complimenter.png', :height => image_height)
+  def complimenter_rank_image(compliment_count)
+    accomplishment = Accomplishment.complimenter_level(compliment_count)
+    if accomplishment
+      return image_tag(accomplishment.image_thumb, :height => 110)
     end
-    html += '</div>'
-    return html.html_safe
+  end
+
+  def rewarder_rank_image(reward_count)
+    accomplishment = Accomplishment.rewarder_level(reward_count)
+    if accomplishment
+      return image_tag(accomplishment.image_thumb, :height => 110)
+    end
+  end
+
+  def badge_image(count)
+    return "" if count.nil?
+    accomplishment = Accomplishment.badge(count)
+    if accomplishment
+      return image_tag(accomplishment.image_thumb, :height => 40)
+    end
   end
 
 end

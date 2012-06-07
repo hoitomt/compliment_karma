@@ -14,8 +14,8 @@
 	</script>
 <% end %>
 <div id="user-profile">
-	<div id="user-overview" class="right-two-thirds box-no-padding clearfix">
-		<div id="user-profile-details" class="first-row clearfix">
+	<div id="user-overview" class="right-two-thirds box-no-padding-white clearfix">
+		<div id="user-profile-details" class="first-row clearfix container">
 
 			<div class="personal-container clearfix">
 				<div class="demographics-container">
@@ -31,9 +31,6 @@
 					</div>
 					<div class="profile-rank-image">
 						<%= rewarder_rank_image(@rewards_sent) %>
-					</div>
-					<div class="profile-button">
-						<%= compliment_button_large(@user) %>
 					</div>
 					<div class="profile-button">
 						<%= follows_button_large(@user) %>
@@ -70,10 +67,24 @@
 				</table>
 			</div>
 		</div>
-		<div id="user-achievements" class="second-row clearfix">
+		<div id="user-achievements" class="second-row clearfix container">
 			<h1 class="section-title">Achievements by Skill</h1>
+			<table id="achievements-by-skill" class="stripe-me">
+				<tr class="header">
+					<th class="left first">Skills</th>
+					<th>Compliments Received</th>
+					<th>Badges</th>
+				</tr>
+				<% @compliments_received_by_skill.each do |k,v| %>
+				<tr>
+					<td class="non-image first"><%= k %></td>
+					<td class="non-image center"><%= v %></td>
+					<td class="center"><%= badge_image(v) %></td>
+				</tr>
+				<% end %>
+			</table>
 		</div>
-		<div id="user-experience" class="third-row">
+		<div id="user-experience" class="third-row container">
 			<h1 class="section-title">Professional Experience</h1>
 		</div>
 	</div>

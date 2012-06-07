@@ -22,16 +22,7 @@
 <div id="user-profile">
 	<%= render 'users/panels/user_profile_short', :flash => flash %>
 	<div id="content-container">
-		<div id="karma-live-updates" class="right-two-thirds">
-			<ul id="feed-items">
-				<%#= render 'users/panels/debug' %>
-				<%= render 'users/panels/karma_live_updates' %>
-			</ul>
-			<div id="infinite-scroll-processing">
-				Loading Records &nbsp; <%= image_tag('ajax-loader.gif') %>
-				<div class="clear"></div>
-			</div>
-		</div>
+		<%= render 'users/menu/karma_live' %>
 	</div>
 	<%= render 'users/panels/new_compliment' %>
 	<%= render 'users/menu/menu' %>

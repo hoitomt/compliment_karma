@@ -277,11 +277,11 @@ class Compliment < ActiveRecord::Base
   end
 
   def self.sent_compliments(user)
-    Compliment.where('sender_user_id = ?', user.id).count
+    Compliment.where('sender_user_id = ?', user.id)
   end
 
   def self.received_compliments(user)
-    Compliment.where('receiver_user_id = ?', user.id).count
+    Compliment.where('receiver_user_id = ?', user.id)
   end
 
 end

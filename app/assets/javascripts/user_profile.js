@@ -14,6 +14,7 @@ var UserProfile = {
 		this.validateSenderNotReceiver(userEmail);
 	},
 	reinitialize: function() {
+		this.stripeTable();
 		this.hideSubMenu();
 		this.hoverKarmaLiveItems();
 		this.hideSocialItemHelpers();
@@ -243,6 +244,9 @@ var UserProfile = {
 				$('.comment-text-new-submit').slideDown();
 			}
 		});
+	},
+	stripeTable: function() {
+		$('.stripe-me tr:odd').addClass('alt');
 	}
 }
 

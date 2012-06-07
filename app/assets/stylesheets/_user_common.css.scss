@@ -5,7 +5,7 @@ $left-column-width-no-padding: 350px;
 $right-column-width: $total-width - ($left-column-width + 35px);
 $input-width: $left-column-width - 120px;
 $helper-width: $input-width + 2px;
-$border-bottom: 1px solid #F0F8F8;
+$border-bottom: 1px solid #dadada;
 $item-height: 100px;
 
 @mixin border-effect {
@@ -28,6 +28,7 @@ $item-height: 100px;
 	width: $right-column-width;
 	float: right;
 }
+#user-profile.box-no-padding {background: #ffffff;}
 #user-profile {
 	h1 { font-size: 18px; font-weight: bold; font-family: inherit; }
 	h1.section-title { display: block; font-size: 20px; border-bottom: $border-bottom;}

@@ -96,6 +96,12 @@ br.small { display: block; height: 1px;}
 	border: 1px solid #F0F8F8;
 	background: $main-menu-color;
 }
+.box-no-padding-white {
+	@include border-radius;
+//	@include page-box-shadow;
+	border: 1px solid #F0F8F8;
+	background: #ffffff;
+}
 h2.box-header {
 	display: block;
 	font-weight: bold;
