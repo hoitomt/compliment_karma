@@ -9,20 +9,26 @@
 		<li id="menu-social-profile">
 			<%= link_to 'Social Profile', user_social_profile_path(@user), :remote => true %>
 		</li>
-		<li id="menu-received-compliments">
-			<%= link_to 'Received Compliments', user_received_compliments_path(@user), :remote => true %>
-		</li>
-		<li id="menu-sent-compliments">
-			<%= link_to 'Sent Compliments', user_sent_compliments_path(@user), :remote => true %>
-		</li>
+		<% if current_user?(@user) %>
+			<li id="menu-received-compliments">
+				<%= link_to 'Received Compliments', user_received_compliments_path(@user), :remote => true %>
+			</li>
+		<% end %>
+		<% if current_user?(@user) %>
+			<li id="menu-sent-compliments">
+				<%= link_to 'Sent Compliments', user_sent_compliments_path(@user), :remote => true %>
+			</li>
+		<% end %>
 		<li id="menu-achievements">
 			<%= link_to 'Achievements', user_achievements_path(@user), :remote => true %>
 		</li>
 		<li id="menu-contacts">
 			<%= link_to 'Contacts', user_contacts_path(@user), :remote => true %>
 		</li>
-		<li id="menu-settings">
-			<%= link_to 'Settings', user_settings_path(@user), :remote => true %>
-		</li>
+		<% if current_user?(@user) %>
+			<li id="menu-settings">
+				<%= link_to 'Settings', user_settings_path(@user), :remote => true %>
+			</li>
+		<% end %>
 	</ul>
 </div>

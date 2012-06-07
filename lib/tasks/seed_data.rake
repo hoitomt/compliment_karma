@@ -3,7 +3,7 @@ namespace :compliment do
   @skills = ["Marketing", "Accounting", "Ruby on Rails", 
              "C# Developer", "Java Developer", "Financial Management",
              "Business Intelligence", "Systems Analysis", 
-             "Quality Assurance", "Project Management"]
+             "Quality Assurance", "Project Management", "Sewing"]
   @comments = ["You're awesome!", "I love your work", "Great Job on the Obama Case",
                "Sweet job", "Way to go", "Nice work on that project",
                "Good job", "Awesome", "You're a rockstar!", "You're great",
@@ -12,9 +12,83 @@ namespace :compliment do
   desc "Add some compliments for the dummy user at various visibilities"
   task :add do |cmd, args|
     Rake::Task[:environment].invoke
+
+    homer = User.find_by_email("homerj@springfield.net")
+    homer_attr = { :email => "homerj@springfield.net", 
+                   :name => "Homer J Simpson", 
+                   :password => "maggie",
+                   :account_status_id => AccountStatus.CONFIRMED.id }
+    if homer.nil?  
+      homer = User.create!( homer_attr )
+    else
+      homer.update_attributes(homer_attr)
+    end
+
     u = User.find_by_email(@dummy_email)
     count = 0
     
+    puts "Add compliments from Homer to Dummy"
+    # Compliments from Dummy to coworker
+    r = Relation.find_by_name('Coworker').id
+    t = ComplimentType.COWORKER_TO_COWORKER
+    tp = ComplimentType.PERSONAL_TO_PERSONAL
+    501.times do |index|
+      count += 1
+      s = @skills[2]
+      c = @comments[4]
+      Compliment.create!( :sender_email => homer.email, 
+                          :receiver_email => u.email, :skill => s, 
+                          :comment => c, :relation_id => t.id)
+    end
+
+    301.times do |index|
+      count += 1
+      s = @skills[6]
+      c = @comments[8]
+      Compliment.create!( :sender_email => homer.email, 
+                          :receiver_email => u.email, :skill => s, 
+                          :comment => c, :relation_id => t.id)
+    end
+
+    101.times do |index|
+      count += 1
+      s = @skills[10]
+      c = @comments[0]
+      Compliment.create!( :sender_email => homer.email, 
+                          :receiver_email => u.email, :skill => s, 
+                          :comment => c, :relation_id => tp.id)
+    end
+
+    301.times do |index|
+      count += 1
+      s = @skills[2]
+      c = @comments[1]
+      Compliment.create!( :sender_email => homer.email, 
+                          :receiver_email => u.email, :skill => s, 
+                          :comment => c, :relation_id => t.id)
+    end
+    
+    puts "#{cmd} Complete - #{count} Compliments Created"
+  end
+  
+  task :create_compliment, :sender_email, 
+                           :receiver_email, 
+                           :skill, 
+                           :comment, 
+                           :relation_id do |cmd, args|
+    Rake::Task[:environment].invoke
+    puts "Create Compliment"
+    params = {:sender_email => args.sender_email, 
+              :receiver_email => args.receiver_email,
+              :skill => args.skill, 
+              :comment => args.comment, 
+              :relation_id => args.relation_id}
+    Compliment.create!(params)
+  end
+
+  task :create_extra_compliments do |cmd, args|
+    Rake::Task[:environment].invoke
+    puts "Create Extra Compliments"
     puts "Add compliments from Dummy to Coworker"
     # Compliments from Dummy to coworker
     r = Relation.find_by_name('Coworker').id
@@ -117,24 +191,8 @@ namespace :compliment do
       Compliment.create!( :sender_email => se, 
                           :receiver_email => u.email, :skill => s, 
                           :comment => c, :relation_id => r)
-    end
-    
-    puts "#{cmd} Complete - #{count} Compliments Created"
-  end
-  
-  task :create_compliment, :sender_email, 
-                           :receiver_email, 
-                           :skill, 
-                           :comment, 
-                           :relation_id do |cmd, args|
-    Rake::Task[:environment].invoke
-    puts "Create Compliment"
-    params = {:sender_email => args.sender_email, 
-              :receiver_email => args.receiver_email,
-              :skill => args.skill, 
-              :comment => args.comment, 
-              :relation_id => args.relation_id}
-    Compliment.create!(params)
+    end    
+
   end
   
 end

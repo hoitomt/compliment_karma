@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120601024149) do
+ActiveRecord::Schema.define(:version => 20120607021416) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120601024149) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_mini"
+    t.integer  "threshold"
   end
 
   create_table "account_statuses", :force => true do |t|

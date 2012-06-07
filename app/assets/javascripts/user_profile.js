@@ -126,17 +126,13 @@ var UserProfile = {
 		}, '.social-hide-me');
 		$("ul#feed-items").on({
 			mouseover: function() {
-				var parent = $(this).parent();
-				var item = $(parent).find('.item');
 				UserProfile.hideSocialItemHelpers();
-				$(item).addClass('hovered');
+				$(this).addClass('hovered')
 				UserProfile.showSocialItemHelpers(this);
 			},
 			mouseout: function() {
-				var parent = $(this).parent();
-				var item = $(parent).find('.item');
 				UserProfile.hideSocialItemHelpers();
-				$(item).removeClass('hovered');	
+				$(this).removeClass('hovered');	
 			}
 		},'.item');
 	},

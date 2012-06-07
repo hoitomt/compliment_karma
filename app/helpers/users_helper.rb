@@ -206,32 +206,34 @@ module UsersHelper
     end
   end
 
-  def follows_button_medium(user=nil, followed=nil)
-    follows_button(user, followed, "medium-button")
+  def follows_button_medium(user=nil)
+    return "" if user.nil?
+    follows_button(user.id, "medium-button")
   end
 
-  def follows_button_large(user=nil, followed=nil)
-    follows_button(user, followed, "large-button")
+  def follows_button_large(user=nil)
+    return "" if user.nil?
+    follows_button(user.id, "large-button")
   end
 
-  def follows_button(user=nil, followed=nil, button_size_class)
-    return "" if user.nil? || user.id == current_user.id
-    
-    if user
-      button_class = 'popup-button'
+  def follows_button(user_id=nil, button_size_class)
+    return "" if user_id == current_user.id
+
+    if user_id
+      button_class = "popup-button #{button_size_class}"
       button_text = "Follow"
-      if follow_exists?(user.id)
+      if follow_exists?(user_id)
         button_class = "popup-button popup-button-following #{button_size_class}"
         button_text = "Following"
       end
-      return follows_button_link(user, button_text, button_class)
+      return follows_button_link(user_id, button_text, button_class)
     else
       return "Unknown"
     end
   end
 
-  def follows_button_link(user, button_text, button_class)
-    return link_to button_text, follows_path(:subject_user_id => user.id,
+  def follows_button_link(user_id, button_text, button_class)
+    return link_to button_text, follows_path(:subject_user_id => user_id,
                                          :follower_user_id => current_user.id),
                                 :method => :post,
                                 :class => button_class,

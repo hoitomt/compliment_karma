@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
   before_filter :get_confirmation_status, :except => [:new, :create]
+  before_filter :set_static_vars
   before_filter :authenticate, :except => [:new, :create, :new_account_confirmation]
-  before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show]
+  before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
+                                           :professional_profile, :social_profile, 
+                                           :achievements, :contacts]
     
   def new
     @user = User.new
@@ -37,15 +40,11 @@ class UsersController < ApplicationController
     @my_update_items = UpdateHistory.where('user_id = ?', @user.id)
     @compliment = Compliment.new
     set_this_week_compliments
-    @per_page = 10
-    @page = (params[:page] || 1).to_i
     respond_to do |format|
-      format.html {
-        @my_update_items = UpdateHistory.where('user_id = ?', @user.id)
-      }
+      format.html {}
       format.js {
         @show_header_link = true
-        @my_update_items = UpdateHistory.where('user_id = ?', @user.id).limit(5)
+        @my_update_items = @my_update_items.limit(5)
       }
     end
   end
@@ -56,10 +55,11 @@ class UsersController < ApplicationController
     set_this_week_compliments
     @compliments_sent = Compliment.sent_compliments(@user)
     @compliments_received = Compliment.received_compliments(@user)
-    @rewards_earned_amount = UserReward.earned_reward_amount(@user)
-    @rewards_earned_count = UserReward.earned_reward_count(@user)
-    @followers = Follow.followers(@user)
-    @following = Follow.following(@user)
+    @rewards_earned_amount = UserReward.earned_reward_amount(@user.id)
+    @rewards_earned_count = UserReward.earned_reward_count(@user.id)
+    @rewards_sent = UserReward.sent_reward_count(@user.id)
+    @followers = Follow.followers(@user.id)
+    @following = Follow.following(@user.id)
   end
 
   def social_profile
@@ -107,8 +107,6 @@ class UsersController < ApplicationController
     @recognition_type_reward = RecognitionType.REWARD
     @recognition_type_accomplishment = RecognitionType.ACCOMPLISHMENT
     @karma_live_items_count = karma_live_items.count
-    @per_page = 10
-    @page = (params[:page] || 1).to_i
     @current_count = @page * @per_page
     @current_count = @karma_live_items_count if @current_count > @karma_live_items_count
     @karma_live_items = Paging.page(karma_live_items, @page, @per_page)
@@ -280,6 +278,11 @@ class UsersController < ApplicationController
     def get_confirmation_status
       @user = User.find(params[:id])
       @confirmed = @user.confirmed? if @user
+    end
+
+    def set_static_vars
+      @page = (params[:page] || 1).to_i
+      @per_page = 10
     end
     
     def get_karma_live_items(feed_item_type_id, relation_type_id)

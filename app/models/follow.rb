@@ -26,12 +26,12 @@ class Follow < ActiveRecord::Base
     Follow.where('subject_user_id = ? AND follower_user_id = ?', subject_user_id, follower_user_id)[0]
   end
 
-  def self.followers(user)
-    Follow.where('subject_user_id = ?', user.id).count
+  def self.followers(user_id)
+    Follow.where('subject_user_id = ?', user_id).count
   end
 
-  def self.following(user)
-    Follow.where('follower_user_id = ?', user.id).count
+  def self.following(user_id)
+    Follow.where('follower_user_id = ?', user_id).count
   end
 
 end

@@ -18,8 +18,8 @@ class UserReward < ActiveRecord::Base
     return list_of_rewards
   end
 
-  def self.earned_reward_amount(user)
-    user_rewards = UserReward.where('user_id = ?', user.id)
+  def self.earned_reward_amount(user_id)
+    user_rewards = UserReward.where('user_id = ?', user_id)
     sum = 0
     user_rewards.each do |user_reward|
       sum += user_reward.reward.value if user_reward.reward && user_reward.reward.value
@@ -27,7 +27,11 @@ class UserReward < ActiveRecord::Base
     return sum
   end
 
-  def self.earned_reward_count(user)
-    UserReward.where('user_id = ?', user.id).count
+  def self.earned_reward_count(user_id)
+    UserReward.where('user_id = ?', user_id).count
+  end
+
+  def self.sent_reward_count(user_id)
+    UserReward.where('presenter_id = ?', user_id).count
   end
 end

@@ -27,7 +27,7 @@ class Compliment < ActiveRecord::Base
   before_save :set_sender_user_id
   before_save :set_receiver_user_id
   before_create :set_visibility
-  after_create :send_fulfillment
+  # after_create :send_fulfillment
   after_create :set_relationship
   after_create :update_history
   

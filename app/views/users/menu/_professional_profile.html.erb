@@ -19,9 +19,6 @@
 
 			<div class="personal-container clearfix">
 				<div class="demographics-container">
-					<div class="profile-photo">
-						<%= image_tag(@user.photo.url(:thumb)) %>
-					</div>
 					<div class="demographics">
 						<h1><%= @user.full_name %></h2>
 						<h2>Title placeholder</h3>
@@ -29,7 +26,12 @@
 					</div>
 				</div>
 				<div class="rank-buttons">
-					<%= compliment_rank_image(@compliments_sent) %>
+					<div class="profile-rank-image">
+						<%= complimenter_rank_image(@compliments_sent) %>
+					</div>
+					<div class="profile-rank-image">
+						<%= rewarder_rank_image(@rewards_sent) %>
+					</div>
 					<div class="profile-button">
 						<%= compliment_button_large(@user) %>
 					</div>

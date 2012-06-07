@@ -4,7 +4,7 @@
 		<div class="functions">
 			<h3><%= get_user_full_name(@sender) %></h3>
 			<%= compliment_button_medium(@sender) %>
-			<%= follows_button_medium(@sender) %>
+			<span id="follows-button-<%= @sender.id %>"><%= follows_button_medium(@sender) %></span>
 		</div>
 	</div>
 </div>
@@ -21,7 +21,7 @@
 		<div class="functions">
 			<h3><%= get_user_full_name(@receiver) %></h3>
 			<%= compliment_button_medium(@receiver) %>
-			<%= follows_button_medium(@receiver) %>
+			<span id="follows-button-<%= @receiver.id %>"><%= follows_button_medium(@receiver) %></span>
 		</div>
 	</div>
 </div>

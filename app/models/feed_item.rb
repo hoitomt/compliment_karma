@@ -10,25 +10,28 @@ class FeedItem
   
   def self.construct_items(compliments=nil, rewards=nil, accomplishments=nil)
     h = {} # key = sort_date, value = FeedItem obj
-    
+    rt_compliment_id = RecognitionType.COMPLIMENT.id
+    rt_reward_id = RecognitionType.REWARD.id
+    rt_accomplishment_id = RecognitionType.ACCOMPLISHMENT.id
+
     if compliments
       compliments.each do |compliment|
-        h[compliment.updated_at] = FeedItem.new(compliment.updated_at, RecognitionType.COMPLIMENT.id, compliment)
+        h[compliment.updated_at] = FeedItem.new(compliment.updated_at, rt_compliment_id, compliment)
       end
     end
 
     if rewards
       rewards.each do |user_reward|
-        h[user_reward.updated_at] = FeedItem.new(user_reward.updated_at, RecognitionType.REWARD.id, user_reward)
+        h[user_reward.updated_at] = FeedItem.new(user_reward.updated_at, rt_reward_id, user_reward)
       end
     end
-    
+
     if accomplishments
       accomplishments.each do |user_a|
-        h[user_a.updated_at] = FeedItem.new(user_a.updated_at, RecognitionType.ACCOMPLISHMENT.id, user_a)
+        h[user_a.updated_at] = FeedItem.new(user_a.updated_at, rt_accomplishment_id, user_a)
       end
     end
-    
+
     hs = h.sort_by{ |k,v| k }.reverse
   end
   

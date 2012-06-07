@@ -1,16 +1,16 @@
 class FollowsController < ApplicationController
 
 	def create
-		subject = params[:subject_user_id]
-		follower = params[:follower_user_id]
-		if Follow.follow_exists?(subject, follower)
+		@subject_id = params[:subject_user_id]
+		@follower_id = params[:follower_user_id]
+		if Follow.follow_exists?(@subject_id, @follower_id)
 			logger.info("Delete Existing Follow")
-			f = Follow.get_follow(subject, follower)
+			f = Follow.get_follow(@subject_id, @follower_id)
 			f.delete
 		else
 			logger.info("Create Follow")
-			f = Follow.create(:subject_user_id => subject, 
-												:follower_user_id => follower)
+			f = Follow.create(:subject_user_id => @subject_id, 
+												:follower_user_id => @follower_id)
 			print_hash(f) unless f.valid?
 		end
 
