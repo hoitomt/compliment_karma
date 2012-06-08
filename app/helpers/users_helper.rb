@@ -469,7 +469,7 @@ module UsersHelper
     return "" if count.nil?
     accomplishment = Accomplishment.badge(count)
     if accomplishment
-      return image_tag(accomplishment.image_thumb, :height => 40)
+      return image_tag(accomplishment.image_thumb, :class => 'badge')
     end
   end
 

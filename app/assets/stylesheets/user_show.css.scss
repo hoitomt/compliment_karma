@@ -5,7 +5,10 @@
 	color: #606060;
 	font: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
 	a { color: #606060; }
-	img { float: left; margin-right: 5px;}
+	img { }
+	.photo { display: block; width: 150px; margin: 10px auto; }
+	h1 {display: block; text-align:center;}
+	h2 {display: block; text-align:center;}
 }
 #user-profile-short.not-confirmed {
 	background: $inline-error-red;
@@ -206,19 +209,29 @@
 }
 #send-compliment-form {
 	@include user-profile-form-styling;
-	padding: 10px;
+	// padding: 10px;
 }
 #send-compliment {
-	margin: 0px -10px 0 -10px;
+	// margin: 0px -10px 0 -10px;
+}
+.unclickable {
+	@include border-radius;
+	position: absolute;
+	height: 345px;
+	z-index: 10;
+	margin-top: 0px;
+	background-color: rgba(255,0,0,0.5);
+	h1{color: #fff; display: block; text-align: center; margin-top:120px;}
 }
 #compliment-panel {
 	clear: left;
+	margin-top: 10px;
 	#compliment-form { 
 		margin-top: 10px; 
 	}
 	#earned-compliment { 
 		border-top: 1px solid #ffffff;
-		margin: 0px -10px 0 -10px;
+		// margin: 0px -10px 0 -10px;
 	}
 	.div-title {
 		display: block;
@@ -229,7 +242,7 @@
 	.sent-compliment-indicator {
 		width: 310px;
 		margin: 10px auto 20px auto;
-		padding: 5px;
+		padding: 2px;
 		background-color: #f0f8f8;
 	}
 	.no-recent-compliment {
@@ -269,7 +282,7 @@
 //	display: none;
 	background: $inline-error-red;
 	color: #ffffff;
-	margin: 0 0 10px 0;
+	margin: 10px 0 10px 0;
 	text-align: center;
 	font-weight: bold;
 	font-size: 16px;

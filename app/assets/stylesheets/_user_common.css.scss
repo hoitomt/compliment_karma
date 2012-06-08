@@ -2,7 +2,7 @@
 
 $left-column-width: 330px;
 $left-column-width-no-padding: 350px;
-$right-column-width: $total-width - ($left-column-width + 35px);
+$right-column-width: $total-width - ($left-column-width + 15px);
 $input-width: $left-column-width - 120px;
 $helper-width: $input-width + 2px;
 $border-bottom: 1px solid #dadada;

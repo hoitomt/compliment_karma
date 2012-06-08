@@ -1,52 +1,55 @@
-<% if @confirmed %>
-	<div id="compliment-panel" class="box left-one-third">
-		<div id="send-compliment">
-			<p class="div-title">Who deserves your compliment today?</p>
-			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
-				<%= hidden_field_tag 'request_page', "user" %>
-				<%#= f.hidden_field :sender_email, :value => current_user.email %>
-				<div id="data-entry" class="clearfix">
-					<div id="label"><%= f.label :receiver_email, "To" %></div>
-					<div id="field"><%= f.text_field :receiver_email, :placeholder => "receiver's email address" %>
-						<div id="compliment_receiver_email_helper" class="helper">
-							recipient@yourcompany.com
-						</div>
-						<div id="compliment_receiver_email_helper"></div>
-					</div>
-				</div>
-
-				<div id="data-entry" class="clearfix">
-					<div id="label"><%= f.label :skill, "Skill" %></div>
-					<div id="field"><%= f.text_field :skill, :placeholder => "start typing for a list" %>
-						<div id="compliment_skill_helper" class="helper">
-							e.g. ruby on rails developer
-						</div>
-						<div id="compliment_skill_error"></div>
-					</div>
-				</div>
-
-				<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">
-					<div id="label"><%= f.label :comment, "Comment" %></div>
-					<div id="field"><%= f.text_area :comment, :rows => 2 %>
-						<div id="compliment_comment_helper" class="helper">
-							140 character limit
-						</div>
-						<div id="compliment_comment_error"></div>
-					</div>
-				</div>
-				
-				<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">
-					<div id="label"><%= f.label :compliment_type, "Type" %></div>
-					<div id="field"><%= f.collection_select :compliment_type_id, ComplimentType.all, :id, :name, 
-																									:prompt => "select compliment type" %>
-						<div id="compliment_compliment_type_error"></div>
-					</div>
-				</div>
-				<div style="margin-bottom: 10px;">
-					<button class="button-location" type=submit>Send Compliment</button>
-				</div>
-			<% end %>
+<div id="compliment-panel" class="box-no-padding left-one-third">
+	<% unless @confirmed %>
+		<div class="unclickable left-one-third">
+			<h1>Please confirm your account before sending a compliment</h1>
 		</div>
-		<%= render 'users/panels/recent_compliments' %>
+	<% end %>
+	<div id="send-compliment">
+		<p class="div-title">Who deserves your compliment today?</p>
+		<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
+			<%= hidden_field_tag 'request_page', "user" %>
+			<%#= f.hidden_field :sender_email, :value => current_user.email %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :receiver_email, "To" %></div>
+				<div id="field"><%= f.text_field :receiver_email, :placeholder => "receiver's email address" %>
+					<div id="compliment_receiver_email_helper" class="helper">
+						recipient@yourcompany.com
+					</div>
+					<div id="compliment_receiver_email_helper"></div>
+				</div>
+			</div>
+
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :skill, "Skill" %></div>
+				<div id="field"><%= f.text_field :skill, :placeholder => "start typing for a list" %>
+					<div id="compliment_skill_helper" class="helper">
+						e.g. ruby on rails developer
+					</div>
+					<div id="compliment_skill_error"></div>
+				</div>
+			</div>
+
+			<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">
+				<div id="label"><%= f.label :comment, "Comment" %></div>
+				<div id="field"><%= f.text_area :comment, :rows => 2 %>
+					<div id="compliment_comment_helper" class="helper">
+						140 character limit
+					</div>
+					<div id="compliment_comment_error"></div>
+				</div>
+			</div>
+			
+			<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">
+				<div id="label"><%= f.label :compliment_type, "Type" %></div>
+				<div id="field"><%= f.collection_select :compliment_type_id, ComplimentType.all, :id, :name, 
+																								:prompt => "select compliment type" %>
+					<div id="compliment_compliment_type_error"></div>
+				</div>
+			</div>
+			<div style="margin-bottom: 10px;">
+				<button class="button-location" type=submit>Send Compliment</button>
+			</div>
+		<% end %>
 	</div>
-<% end %>
+	<%= render 'users/panels/recent_compliments' %>
+</div>

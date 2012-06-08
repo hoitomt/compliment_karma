@@ -31,8 +31,15 @@ describe "Compliments" do
     end
 
     it "should not generate a compliment from an unconfirmed user" do
-      response.should_not have_selector("label", :content => "To" )
+      lambda do
+        fill_in "To", :with => "attaboy@goodjob.com" 
+        fill_in "Skill", :with => "tennis"
+        fill_in "Comment", :with => "Awesome job at the meet yesterday"
+        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+        click_button
+      end.should_not change(Compliment, :count).by(1)
     end
+
   end
   
   describe "send compliment from user profile" do

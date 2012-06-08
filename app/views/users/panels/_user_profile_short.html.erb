@@ -1,13 +1,14 @@
 <div id="user-profile-short" 
-		 class="box left-one-third <%= account_status_display(@confirmed, @pending_items) %>">
+		 class="box-no-padding left-one-third <%= account_status_display(@confirmed, @pending_items) %>">
 	<%= render 'users/panels/account_confirmation', :flash => flash %>
-	<div style="float: left; width: 250px;">
+	<div style="margin: 0 0 10px 0;>
 		<%= link_to user_professional_profile_path(@user) do %>
-			<%= image_tag(@user.photo.url(:thumb))%>
+			<div class="photo">
+				<%= image_tag(@user.photo.url(:small))%>
+			</div>
 			<h1><%= @user.full_name %></h1>
-			<h2>View Profile</h2>
+			<p><%= location(@user) %></p>
 		<% end %>
-		<p><%= location(@user) %></p>
 	</div>
 	<% if current_user?(@user) %>
 		<div style="float: right">

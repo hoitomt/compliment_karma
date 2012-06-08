@@ -1,19 +1,19 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
-gem 'thin'
-gem 'pg'
+gem 'rails', '3.1.5'
+gem 'thin', '1.3.1'
+gem 'pg', '0.13.2'
 gem 'heroku'
-gem 'bcrypt-ruby', :require => "bcrypt"
+gem 'bcrypt-ruby', '3.0.1', :require => "bcrypt"
 gem 'jquery-rails'
-gem 'client_side_validations'
+gem 'client_side_validations', '3.1.4'
 
 # Email - HTTP to mailgun
-gem 'rest-client'
+gem 'rest-client', '1.6.7'
 
 # Photo Support
 gem 'paperclip', '~>3.0.2'
-gem 'aws-sdk'
+gem 'aws-sdk', '1.4.1'
 
 group :development do
 	gem 'rspec-rails', '2.6.1'
