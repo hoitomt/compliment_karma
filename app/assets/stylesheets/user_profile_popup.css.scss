@@ -15,27 +15,7 @@ $popup-border-bottom: 1px solid #f2f2f2;
 		.like-button-container {
 			float: right;
 		}
-		a { display: block; }
-		a.like-button {
-			background: url(buttons/Button_Like.png) no-repeat;
-			height: 30px;
-			width: 65px;
-		}
-		a.like-button:hover {
-			background: url(buttons/Button_Like_Hover.png) no-repeat;
-			height: 30px;
-			width: 65px;
-		}
-		a.unlike-button {
-			background: url(buttons/Button_Unlike.png) no-repeat;
-			height: 30px;
-			width: 65px;
-		}
-		a.unlike-button {
-			background: url(buttons/Button_Unlike_Hover.png) no-repeat;
-			height: 30px;
-			width: 65px;
-		}
+		// a { display: block; }
 	}
 	.popup-box-container {
 		width: $popup-box-width - 25px;
@@ -57,10 +37,10 @@ $popup-border-bottom: 1px solid #f2f2f2;
 				margin-top: 10px;
 				font-size: 16px;
 			}
-			img {
-				width: 150px;
-				margin: 0px auto;
-			}
+			// img {
+			// 	width: 150px;
+			// 	margin: 0px auto;
+			// }
 			.functions {
 				text-align: center;
 				margin: 0 auto;

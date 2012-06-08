@@ -1,7 +1,7 @@
 <div id="user-profile-short" 
 		 class="box-no-padding left-one-third <%= account_status_display(@confirmed, @pending_items) %>">
 	<%= render 'users/panels/account_confirmation', :flash => flash %>
-	<div class="photo">
+	<div class="photo-small">
 		<% if @user && @user.photo_file_name.nil? %>
 			<%= render 'users/panels/upload_photo' %>
 		<% else %>

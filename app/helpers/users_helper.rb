@@ -110,6 +110,9 @@ module UsersHelper
   end
   
   def get_like_status(recognition_id, recognition_type_id)
+    logger.info("Recognition ID: #{recognition_id}")
+    logger.info("Recognition Type ID: #{recognition_type_id}")
+    logger.info("User ID: #{current_user.id}")
     return CkLike.get_like_status(recognition_id, recognition_type_id, current_user.id)
   end
 
@@ -118,9 +121,12 @@ module UsersHelper
     status = get_like_status(recognition_id, recognition_type_id)
     logger.info("Like Status: #{status}")
     if status == CkLike.UNLIKE
+      button_text = "Unlike"
       button_class = "unlike-button"
       # img = image_tag('buttons/Button_Unlike.png')
     else
+      # button_text = '<font style="font-weight:bold;">♥</font>'
+      button_text = "&hearts; Like"
       button_class = "like-button"
       # img = image_tag('buttons/Button_Like.png')
     end
@@ -132,7 +138,7 @@ module UsersHelper
     #                     :method => :post,
     #                     :remote => true,
     #                     :id => "like-button"
-    return link_to '', ck_likes_path(:recognition_type_id => recognition_type_id,
+    return link_to button_text.html_safe, ck_likes_path(:recognition_type_id => recognition_type_id,
                                       :recognition_id => recognition_id,
                                       :count => @count,
                                       :user_id => current_user.id),
@@ -185,38 +191,42 @@ module UsersHelper
   end
 
   def compliment_button_medium(user=nil)
-    compliment_button(user, 'medium-button')
+    # compliment_button(user, 'medium-button')
+    compliment_button(user)
   end
 
   def compliment_button_large(user=nil)
-    compliment_button(user, 'large-button')
+    # compliment_button(user, 'large-button')
+    compliment_button(user)
   end
 
-  def compliment_button(user=nil, button_class)
+  def compliment_button(user=nil, button_class=nil)
     if user && user.id != current_user.id
       return link_to "Compliment", 
                      new_compliment_path(:recipient_id => user.id), 
-                     :class => "popup-button #{button_class}",
+                     :class => "compliment-button #{button_class}",
                      :remote => true
     else
       return link_to "Compliment", 
                      new_compliment_path, 
-                     :class => "popup-button #{button_class}",
+                     :class => "compliment-button #{button_class}",
                      :remote => true      
     end
   end
 
   def follows_button_medium(user=nil)
     return "" if user.nil?
-    follows_button(user.id, "medium-button")
+    # follows_button(user.id, "medium-button")
+    follows_button(user.id)
   end
 
   def follows_button_large(user=nil)
     return "" if user.nil?
-    follows_button(user.id, "large-button")
+    # follows_button(user.id, "large-button")
+    follows_button(user.id)
   end
 
-  def follows_button(user_id=nil, button_size_class)
+  def follows_button(user_id=nil, button_size_class=nil)
     return "" if user_id == current_user.id
 
     if user_id
@@ -232,11 +242,11 @@ module UsersHelper
     end
   end
 
-  def follows_button_link(user_id, button_text, button_class)
+  def follows_button_link(user_id, button_text, button_class=nil)
     return link_to button_text, follows_path(:subject_user_id => user_id,
                                          :follower_user_id => current_user.id),
                                 :method => :post,
-                                :class => button_class,
+                                :class => 'follow-button',
                                 :remote => true
   end
 

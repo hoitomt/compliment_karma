@@ -6,12 +6,13 @@ var UserProfile = {
 		$('#infinite-scroll-processing').hide();
 		
 		this.setDocState(userId, perPage);
-		this.infiniteScrolling();
+		// this.infiniteScrolling();
 		this.feed_items_filters(userId);
 		this.formValidation();
 		this.reinitialize();
 		this.setValidateSenderNotReceiver(userEmail);
 		this.validateSenderNotReceiver(userEmail);
+		console.log('complete');
 	},
 	reinitialize: function() {
 		this.stripeTable();
@@ -195,21 +196,6 @@ var UserProfile = {
 	hideSlideSocialItemHelpers: function() {
 		$('.social-hide-me').slideUp();
 	},
-	processSelect: function (userId, feed_item_type_id, relation_type_id) {
-		$.ajax({
-			url: '/users/' + userId + '/get_more_karma_live_records',
-			type: 'POST',
-			data: { feed_item_type: feed_item_type_id, relation_type: relation_type_id, replace: true},
-			beforeSend: function() {
-				$('#select-processing').show();
-			},
-			complete: function() {
-				$('#select-processing').hide();
-			}
-		}).done(function() {
-			this.resetPage();
-		});
-	},
 	resetPage: function() {
 		$('#feed-items').scrollTop(0);
 		docState.currentCount = 0;
@@ -241,11 +227,13 @@ var UserProfile = {
 		$('#popup-compliment-comment').off('focus');
 		$('#popup-compliment-comment').on({
 			focus: function() {
+				console.log("Slide");
 				$('.comment-text-new-submit').slideDown();
 			}
 		});
 	},
 	stripeTable: function() {
+		console.log("Strip it");
 		$('.stripe-me tr:odd').addClass('alt');
 	}
 }

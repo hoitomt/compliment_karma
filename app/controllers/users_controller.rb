@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :get_confirmation_status, :except => [:new, :create]
-  before_filter :set_static_vars
   before_filter :authenticate, :except => [:new, :create, :new_account_confirmation]
   before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
                                            :professional_profile, :social_profile, 
                                            :achievements, :contacts]
+  before_filter :get_confirmation_status, :except => [:new, :create]
+  before_filter :set_static_vars
     
   def new
     @user = User.new

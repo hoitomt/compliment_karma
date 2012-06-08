@@ -1,8 +1,20 @@
+var CommonScripts = {
+	toggleScrolling: function() {
+		// Remove infinite scrolling for pages that don't require it
+		var karmaLive = $('#karma-live-updates');
+		if(karmaLive == null || karmaLive == undefined || karmaLive.size() < 1) {
+			$(document).off('scroll');
+			return;
+		}
+	}
+}
+
 $(function() {
 	var inputs = $.merge($('input'), $('textarea'));
 	$.each(inputs, function() {
 		$(this).blur($(this).inputStyle());
 	});
+	CommonScripts.toggleScrolling();
 });
 
 $.fn.inputStyle = function() {

@@ -1,6 +1,8 @@
 <div class="left-column">
 	<div class="image-function">
-		<%= get_user_photo_link_small(@sender) %>
+		<div class="photo-small">
+			<%= get_user_photo_link_small(@sender) %>
+		</div>
 		<div class="functions">
 			<h3><%= get_user_full_name(@sender) %></h3>
 			<%= compliment_button_medium(@sender) %>
@@ -17,7 +19,9 @@
 </div>
 <div class="right-column">
 	<div class="image-function">
-		<%= get_user_photo_link_small(@receiver) %>
+		<div class="photo-small">
+			<%= get_user_photo_link_small(@receiver) %>
+		</div>
 		<div class="functions">
 			<h3><%= get_user_full_name(@receiver) %></h3>
 			<%= compliment_button_medium(@receiver) %>

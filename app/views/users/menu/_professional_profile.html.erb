@@ -1,18 +1,3 @@
-<%= content_for :javascript do %>
-	<script type="text/javascript">
-		$(function() {
-			var flashMsg = '<%= flash[:error] %>';
-			if(flashMsg.length > 0) {
-				$('#field label').hide();
-			}
-
-			var userEmail = '<%= current_user.email %>';
-			var userId = '<%= current_user.id %>';
-			var perPage = '<%= @per_page %>';
-			UserProfile.init(userId, perPage, userEmail);
-		});
-	</script>
-<% end %>
 <div id="user-profile">
 	<div id="user-overview" class="right-two-thirds box-no-padding-white clearfix">
 		<div id="user-profile-details" class="first-row clearfix container">

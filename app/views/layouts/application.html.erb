@@ -4,7 +4,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
   <title>Compliment Karma Application | <%= @title %></title>
   <%= stylesheet_link_tag    "application" %>
-	<!-- <link href='http://fonts.googleapis.com/css?family=Corben' rel='stylesheet' type='text/css'> -->
   <%= javascript_include_tag "application" %>
 	<!--
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript">
@@ -14,14 +13,13 @@
   <%= csrf_meta_tags %>
 	<%= yield :stylesheets %>
 	<%= yield :javascript %>
-<!--[if gte IE 9]>
-  <style type="text/css">
-    .gradient {
-       filter: none;
-    }
-  </style>
-<![endif]-->
-  
+	<!--[if gte IE 9]>
+	  <style type="text/css">
+	    .gradient {
+	       filter: none;
+	    }
+	  </style>
+	<![endif]-->
 	<script type="text/javascript">
 		$(function() {
 			if(<%= flash && !flash.empty? %>) {
@@ -30,7 +28,6 @@
 			$.fn.resizeMe();
 			
 			$('.fancybox').fancybox();
-			UserMenu.init();
 		});
 	</script>	
 </head>

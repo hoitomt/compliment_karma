@@ -1,14 +1,18 @@
 @import "common";
 @import "user_common";
 
+.photo-small { 
+	display: block; 
+	width: 150px;
+	height: 150px; 
+	margin: 20px auto 10px auto;
+	text-align: center;
+}
 #user-profile-short {
 	color: #606060;
 	font: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
 	a { color: #606060; }
 	img { }
-	.photo { 
-		display: block; max-width: 150px; margin: 30px auto 10px auto;
-	}
 	h1 {display: block; text-align:center;}
 	h2 {display: block; text-align:center;}
 	.photo-upload {

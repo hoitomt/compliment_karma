@@ -62,5 +62,4 @@ class CkLike < ActiveRecord::Base
   def self.UNLIKE
     return "Unlike"
   end
-  
 end

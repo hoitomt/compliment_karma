@@ -1,4 +1,6 @@
 class RecognitionController < ApplicationController
+  before_filter :authenticate
+  
   def show
   	@recognition_type_id = params[:recognition_type_id].to_i
   	@recognition_id = params[:recognition_id].to_i
@@ -70,5 +72,11 @@ class RecognitionController < ApplicationController
     end
     return likes_users
   end
+  
+  private
+    
+    def authenticate
+      deny_access unless signed_in?
+    end
 
 end
