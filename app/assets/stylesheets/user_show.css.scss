@@ -6,9 +6,32 @@
 	font: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
 	a { color: #606060; }
 	img { }
-	.photo { display: block; width: 150px; margin: 10px auto; }
+	.photo { 
+		display: block; max-width: 150px; margin: 30px auto 10px auto;
+	}
 	h1 {display: block; text-align:center;}
 	h2 {display: block; text-align:center;}
+	.photo-upload {
+		height: 150px;
+		width: 150px;
+		background: #A7DBD8;
+		text-align: center;
+		p {
+			font-size: 14px;
+			font-weight: bold;
+			color: $nav-main-font-color;
+			padding: 55px 10px 0 10px;
+		}
+	}
+	#photo-upload-input {
+		opacity: 0;
+		height: 150px; 
+		width: 150px; 
+		position: absolute; 
+		cursor: pointer; 
+		z-index: 9999; 
+		padding-left: 0px;
+	}
 }
 #user-profile-short.not-confirmed {
 	background: $inline-error-red;

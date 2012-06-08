@@ -89,6 +89,12 @@ class UsersController < ApplicationController
     
   end
 
+  def upload_photo
+    @user = User.find(params[:id])
+    @user.update_attributes(params[:user])
+    redirect_to @user
+  end
+
   def set_compliment_panel(params)
     @compliment = Compliment.new(params[:compliment])
     @compliment.sender_email = current_user.email

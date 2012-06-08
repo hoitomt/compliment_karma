@@ -6,6 +6,12 @@
 				$('#field label').hide();
 			}
 
+			$('#photo-upload-input').on({
+				change: function() {
+					$('#photo-upload-form').submit();
+				}
+			});
+
 			var userId = '<%= current_user.id %>';
 			var perPage = '<%= @per_page %>';
 			var userEmail = '<%= current_user.email %>';

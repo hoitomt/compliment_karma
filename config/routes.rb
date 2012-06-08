@@ -44,6 +44,7 @@ Ck::Application.routes.draw do
   match "users/:id/achievements" => "users#achievements", :as => :user_achievements
   match "users/:id/contacts" => "users#contacts", :as => :user_contacts
   match "users/:id/settings" => "users#settings", :as => :user_settings
+  match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
   resources :follows
   resources :recognition_comments, :only => [:create]
   resources :ck_likes, :only => [:new, :create]
