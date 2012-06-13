@@ -16,7 +16,6 @@
 			var perPage = '<%= @per_page %>';
 			var userEmail = '<%= current_user.email %>';
 			UserProfile.init(userId, perPage, userEmail);
-			UserMenu.init();
 		});
 	</script>
 <% end %>

@@ -98,6 +98,7 @@ class UsersController < ApplicationController
   def set_compliment_panel(params)
     @compliment = Compliment.new(params[:compliment])
     @compliment.sender_email = current_user.email
+    @skills = Skill.list_for_autocomplete
     if flash[:compliment]
       @compliment = Compliment.new(flash[:compliment].attributes)
       flash[:compliment].errors.each do |attr, msg|

@@ -1,0 +1,10 @@
+<script type="text/javascript">
+	$(function() {
+		var skills = <%=raw @skills.to_json %>;
+		SkillAutoComplete.init(skills);
+	});
+</script>
+<div id="skill-auto-complete" class="box-no-padding">
+	<div id="skill-auto-complete-results">
+	</div>
+</div>
