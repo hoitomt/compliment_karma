@@ -4,20 +4,19 @@ var SkillAutoComplete = {
 	},
 	init: function(skills) {
 		this.parameters.skillsArray = skills;
-		console.log(this.parameters.skillsArray);
 		this.registerHandler();
 	},
 	registerHandler: function() {
 		$('input#compliment_skill').bind('input', function(event) {
 			var searchString = $(this).val();
-			console.log(searchString);
-			var results = SkillAutoComplete.search(searchString);
-			console.log(results.length);
-			if(results && results.length > 0) {
-				var displayResults = SkillAutoComplete.formatResults(results);
-				$('#skill-auto-complete-results').html(displayResults);
-				SkillAutoComplete.showResults();
-				SkillAutoComplete.setResultClickHandlers();
+			var results = SkillAutoComplete.ajaxSearch(searchString);
+			// var results = SkillAutoComplete.search(searchString);
+			if(searchString.length == 0) {
+				SkillAutoComplete.hideResults();
+			} else if(results && results.length > 0) {
+				SkillAutoComplete.showResults(results);
+			} else {
+				SkillAutoComplete.hideResults();
 			}
 			event.stopPropagation();
 		});
@@ -25,7 +24,10 @@ var SkillAutoComplete = {
 			SkillAutoComplete.hideResults();
 		});
 	},
-	showResults: function() {
+	showResults: function(results) {		
+		var displayResults = SkillAutoComplete.formatResults(results);
+		$('#skill-auto-complete-results').html(displayResults);
+		SkillAutoComplete.setResultClickHandlers();
 		$('#skill-auto-complete').show();
 	},
 	hideResults: function() {
@@ -37,8 +39,18 @@ var SkillAutoComplete = {
 			if(val.toLowerCase().indexOf(searchString.toLowerCase()) >= 0) {
 				results.push(val);
 			}
+			// Load max of 10 results
+			if(results.length > 10) {
+				return false;
+			}
 		});
 		return results;
+	},
+	ajaxSearch: function(searchString) {
+		$.ajax({
+			url: '/search_skills',
+			data: {'search_string' : searchString}
+		});
 	},
 	formatResults: function(results) {
 		result = '<ul id="register-me">';
@@ -49,11 +61,9 @@ var SkillAutoComplete = {
 		return result;
 	},
 	setResultClickHandlers: function() {
-		console.log('set result click handlers');
 		$('#register-me').off('click');
 		$('#register-me').on({
 			click: function() {
-				console.log($(this).html());
 				$('input#compliment_skill').val($(this).html());
 				SkillAutoComplete.hideResults();
 			}

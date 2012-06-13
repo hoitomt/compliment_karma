@@ -12,7 +12,6 @@ var UserProfile = {
 		this.reinitialize();
 		this.setValidateSenderNotReceiver(userEmail);
 		this.validateSenderNotReceiver(userEmail);
-		console.log('complete');
 	},
 	reinitialize: function() {
 		this.stripeTable();
@@ -84,6 +83,7 @@ var UserProfile = {
 		this.hideAllHelpers();
 
 		$('#compliment_receiver_email').focus(function() {
+			SkillAutoComplete.hideResults();
 			$('#compliment_receiver_email_helper').show(200);
 		});
 		$('#compliment_receiver_email').blur(function() {
@@ -98,6 +98,7 @@ var UserProfile = {
 		// });
 
 		$('#compliment_comment').focus(function() {
+			SkillAutoComplete.hideResults();
 			$('#compliment_comment_helper').show(200);
 		});
 		$('#compliment_comment').blur(function() {
@@ -105,6 +106,7 @@ var UserProfile = {
 		});
 
 		$('#compliment_relation').focus(function() {
+			SkillAutoComplete.hideResults();
 			$('#compliment_relation_helper').show(200);
 		});
 		$('#compliment_relation').blur(function() {
@@ -233,7 +235,6 @@ var UserProfile = {
 		});
 	},
 	stripeTable: function() {
-		console.log("Strip it");
 		$('.stripe-me tr:odd').addClass('alt');
 	}
 }

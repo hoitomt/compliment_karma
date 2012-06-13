@@ -11,6 +11,7 @@ Ck::Application.routes.draw do
   match "/founder_signout" => "shells#destroy"
   match "/invite_coworkers" => "pages#invite_coworkers"
   match "/invite_others" => "pages#invite_others"
+  match "/search_skills" => "pages#search_skills"
   
   match "recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
@@ -45,6 +46,7 @@ Ck::Application.routes.draw do
   match "users/:id/contacts" => "users#contacts", :as => :user_contacts
   match "users/:id/settings" => "users#settings", :as => :user_settings
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
+
   resources :follows
   resources :recognition_comments, :only => [:create]
   resources :ck_likes, :only => [:new, :create]

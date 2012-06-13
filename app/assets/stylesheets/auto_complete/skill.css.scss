@@ -5,12 +5,9 @@
 	// @include border-radius;
 	padding: 5px;
 	background: #ffffff;
-
-	overflow: auto;
+	overflow: none;
 	display: none;
 	position: absolute;
-	height: 100px;
-	width: 450px;
 	li.alternate{
 		background: #e9e9e9;
 	}

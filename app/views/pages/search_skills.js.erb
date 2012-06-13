@@ -1,0 +1,4 @@
+console.log("Search Skills <%= @search_string %>")
+var skills = <%=raw @skills.to_json %>;
+console.log(skills);
+SkillAutoComplete.showResults(skills);
