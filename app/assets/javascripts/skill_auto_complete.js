@@ -7,8 +7,8 @@ var SkillAutoComplete = {
 		this.registerHandler();
 	},
 	registerHandler: function() {
-		$('input#compliment_skill').unbind('input');
-		$('input#compliment_skill').bind('input', function(event) {
+		$('input#compliment_skill_id').unbind('input');
+		$('input#compliment_skill_id').bind('input', function(event) {
 			setTimeout("SkillAutoComplete.searchFx()", 400);
 			event.stopPropagation();
 		});
@@ -18,7 +18,7 @@ var SkillAutoComplete = {
 	},
 	searchFx: function() {
 		console.log("Fire");
-		var searchString = $('input#compliment_skill').val();
+		var searchString = $('input#compliment_skill_id').val();
 		var results = SkillAutoComplete.ajaxSearch(searchString);
 		// var results = SkillAutoComplete.search(searchString);
 		if(searchString.length == 0) {
@@ -69,7 +69,7 @@ var SkillAutoComplete = {
 		$('#register-me').off('click');
 		$('#register-me').on({
 			click: function() {
-				$('input#compliment_skill').val($(this).html());
+				$('input#compliment_skill_id').val($(this).html());
 				SkillAutoComplete.hideResults();
 			}
 		}, 'li')

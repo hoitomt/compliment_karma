@@ -200,3 +200,7 @@ UpdateHistoryType.create(:name => 'Like Accomplishment', :text => 'liked your ac
 UpdateHistoryType.create(:name => 'Share Accomplishment on Facebook', :text => 'shared your accomplishment on Facebook')
 UpdateHistoryType.create(:name => 'Share Accomplishment on Twitter', :text => 'shared your accomplishment on Twitter')
 
+if Skill.find_by_name('User Defined').nil?
+  s = Skill.create(:name => 'User Defined')
+  s.update_attributes(:parent_skill_id => s.id)
+end

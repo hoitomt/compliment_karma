@@ -28,10 +28,10 @@
 			</div>
 
 			<div id="data-entry" class="clearfix">
-				<div id="label"><%= f.label :skill, "Skill" %></div>
-				<div id="field"><%= f.text_field :skill, :placeholder => "start typing for a list", :autocomplete => 'off' %>
+				<div id="label"><%= f.label :skill_id, "Skill" %></div>
+				<div id="field"><%= f.text_field :skill_id, :placeholder => "start typing for a list", :autocomplete => 'off' %>
 					<%= render 'users/panels/skill_auto_complete_results' %>
-					<div id="compliment_skill_error"></div>
+					<div id="compliment_skill_id_error"></div>
 				</div>
 			</div>
 

@@ -90,13 +90,6 @@ var UserProfile = {
 			$('#compliment_receiver_email_helper').hide(200);
 		});
 
-		// $('#compliment_skill').focus(function() {
-		// 	$('#compliment_skill_helper').show(200);
-		// });
-		// $('#compliment_skill').blur(function() {
-		// 	$('#compliment_skill_helper').hide(200);
-		// });
-
 		$('#compliment_comment').focus(function() {
 			SkillAutoComplete.hideResults();
 			$('#compliment_comment_helper').show(200);
