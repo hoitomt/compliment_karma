@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$(function() {
-		var skills = <%=raw @skills.to_json %>;
+		var skills = [];
 		SkillAutoComplete.init(skills);
 	});
 </script>
