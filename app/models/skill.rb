@@ -21,7 +21,7 @@ class Skill < ActiveRecord::Base
 	def self.get_autocomplete_results(search_string)
 		results = []
 		list_for_autocomplete.each do |autocomplete_key|
-			results << autocomplete_key if autocomplete_key.include?(search_string)
+			results << autocomplete_key if autocomplete_key.downcase.include?(search_string.downcase)
 			break if results.size > 10
 		end
 		return results

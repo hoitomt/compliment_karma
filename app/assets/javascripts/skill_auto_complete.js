@@ -7,22 +7,27 @@ var SkillAutoComplete = {
 		this.registerHandler();
 	},
 	registerHandler: function() {
+		$('input#compliment_skill').unbind('input');
 		$('input#compliment_skill').bind('input', function(event) {
-			var searchString = $(this).val();
-			var results = SkillAutoComplete.ajaxSearch(searchString);
-			// var results = SkillAutoComplete.search(searchString);
-			if(searchString.length == 0) {
-				SkillAutoComplete.hideResults();
-			} else if(results && results.length > 0) {
-				SkillAutoComplete.showResults(results);
-			} else {
-				SkillAutoComplete.hideResults();
-			}
+			setTimeout("SkillAutoComplete.searchFx()", 400);
 			event.stopPropagation();
 		});
 		$('html').click(function() {
 			SkillAutoComplete.hideResults();
 		});
+	},
+	searchFx: function() {
+		console.log("Fire");
+		var searchString = $('input#compliment_skill').val();
+		var results = SkillAutoComplete.ajaxSearch(searchString);
+		// var results = SkillAutoComplete.search(searchString);
+		if(searchString.length == 0) {
+			SkillAutoComplete.hideResults();
+		} else if(results && results.length > 0) {
+			SkillAutoComplete.showResults(results);
+		} else {
+			SkillAutoComplete.hideResults();
+		}
 	},
 	showResults: function(results) {		
 		var displayResults = SkillAutoComplete.formatResults(results);
@@ -35,7 +40,7 @@ var SkillAutoComplete = {
 	},
 	search: function(searchString) {
 		results = [];
-		$.each(this.parameters.skillsArray, function(i, val) {
+		$.each(SkillAutoComplete.parameters.skillsArray, function(i, val) {
 			if(val.toLowerCase().indexOf(searchString.toLowerCase()) >= 0) {
 				results.push(val);
 			}
