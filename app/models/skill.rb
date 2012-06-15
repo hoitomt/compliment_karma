@@ -20,7 +20,11 @@ class Skill < ActiveRecord::Base
 	end
 
 	def self.autocomplete_key(skill, parents)
-		"#{parents[skill.parent_skill_id]} - #{skill.name}"
+		"#{parents[skill.parent_skill_id]}#{key_separator}#{skill.name}"
+	end
+
+	def self.key_separator
+		return ' - '
 	end
 
 	def self.get_autocomplete_results(search_string)
@@ -33,10 +37,18 @@ class Skill < ActiveRecord::Base
 		return results
 	end
 
+	def self.get_skill_by_autocomplete_key(autocomplete_key)
+		split = autocomplete_key.split(key_separator)
+		parent_skill_id = Skill.where('name = ? AND id = parent_skill_id', split[0])[0]
+		skill = Skill.where('name = ? AND parent_skill_id = ?', split[1], parent_skill_id)[0]
+	end
+
 	def self.find_or_create(skill_key)
 		skill = get_autocomplete_results(skill_key)
 		if skill.blank?
 			skill = Skill.create(:name => skill_key.to_s, :parent_skill_id => Skill.USER_DEFINED.id)
+		else
+			skill = get_skill_by_autocomplete_key(skill_key)
 		end
 		return skill
 	end
