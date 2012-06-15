@@ -19,9 +19,9 @@
 ActionMailer::Base.smtp_settings = {
   :port           => 587, 
   :address        => 'smtp.mailgun.org',
-  :user_name      => 'postmaster@app4032012.mailgun.org',
-  :password       => '2lvtpcyfh9z1',
-  :domain         => 'app4032012.mailgun.org',
+  :user_name      => 'postmaster@app5024011.mailgun.org',
+  :password       => '62jp2h0bmg31',
+  :domain         => 'app5024011.mailgun.org',
   :authentication => :plain
 }
 # ActionMailer::Base.delivery_method = :smtp
