@@ -80,7 +80,10 @@ var SkillAutoComplete = {
 		$('#register-me').off('click');
 		$('#register-me').on({
 			click: function() {
-				$('input#compliment_skill_id').val($(this).html());
+				var value = $(this).html();
+				var formattedValue = value.replace('<strong>', '');
+				formattedValue = formattedValue.replace('</strong>', '');
+				$('input#compliment_skill_id').val(formattedValue);
 				SkillAutoComplete.hideResults();
 			}
 		}, 'li')
