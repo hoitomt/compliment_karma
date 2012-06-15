@@ -50,4 +50,8 @@ class PagesController < ApplicationController
     @skills = Skill.get_autocomplete_results(@search_string)
   end
 
+  def search
+    
+  end
+
 end

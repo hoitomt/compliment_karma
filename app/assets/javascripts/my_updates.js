@@ -4,7 +4,6 @@ var MyUpdates = {
 	},
 	showMyUpdates: function() {
 		$('#my-updates-link').click(function() {
-			console.log("hi");
 		})
 	}
 }

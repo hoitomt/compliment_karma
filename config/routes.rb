@@ -12,6 +12,7 @@ Ck::Application.routes.draw do
   match "/invite_coworkers" => "pages#invite_coworkers"
   match "/invite_others" => "pages#invite_others"
   match "/search_skills" => "pages#search_skills"
+  match "/search" => "pages#search"
   
   match "recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition

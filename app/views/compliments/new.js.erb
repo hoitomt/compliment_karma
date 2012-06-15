@@ -3,7 +3,6 @@ $.fancybox('<%= j(render "users/panels/new_compliment_popup") %>',
 	{
 		afterShow: function() {
 			UserProfile.reinitialize();
-			console.log("Im loaded");
 		},
 		padding: 0,
 		scrolling: 'no',

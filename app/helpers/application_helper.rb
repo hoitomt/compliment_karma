@@ -97,4 +97,8 @@ module ApplicationHelper
     UpdateHistory.find_all_by_user_id(current_user.id).count
   end
 
+  def search_types
+    return "<option>People</option><option>Businesses</option>".html_safe
+  end
+
 end

@@ -222,7 +222,6 @@ var UserProfile = {
 		$('#popup-compliment-comment').off('focus');
 		$('#popup-compliment-comment').on({
 			focus: function() {
-				console.log("Slide");
 				$('.comment-text-new-submit').slideDown();
 			}
 		});

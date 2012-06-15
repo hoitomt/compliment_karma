@@ -1,6 +1,5 @@
 var Social = {
 	init: function() {
-		console.log("Social fired");
 		this.google();
 		this.twitter(document,"script","twitter-wjs");
 	},

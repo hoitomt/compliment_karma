@@ -1,12 +1,10 @@
 var searchString = '<%= @search_string %>';
 var results = <%=raw @skills.to_json %>;
-console.log("Search Skills: " + searchString);
-console.log(results);
 
 if(searchString.length == 0) {
 	SkillAutoComplete.hideResults();
 } else if(results && results.length > 0) {
-	SkillAutoComplete.showResults(results);
+	SkillAutoComplete.showResults(results, searchString);
 } else {
 	SkillAutoComplete.hideResults();
 }
