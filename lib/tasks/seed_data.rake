@@ -37,6 +37,7 @@ namespace :compliment do
                           :comment => c, :relation_id => t.id)
     end
 
+    puts "Add compliments from Homer to Dummy2"
     301.times do |index|
       count += 1
       s = Skill.where('lower(name) like ?', '%marketing%').last.id
@@ -46,6 +47,7 @@ namespace :compliment do
                           :comment => c, :relation_id => t.id)
     end
 
+    puts "Add compliments from Homer to Dummy3"
     101.times do |index|
       count += 1
       s = Skill.where('lower(name) like ?', '%intelligence%').last.id
@@ -55,6 +57,7 @@ namespace :compliment do
                           :comment => c, :relation_id => tp.id)
     end
 
+    puts "Add compliments from Homer to Dummy4"
     301.times do |index|
       count += 1
       s = Skill.where('lower(name) like ?', '%project%').last.id
