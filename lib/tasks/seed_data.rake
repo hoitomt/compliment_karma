@@ -72,6 +72,15 @@ namespace :compliment do
   
 end
 
+namespace :skill do
+
+  desc "Populate the database with skills"
+  task :add do |cmd, args|
+    Rake::Task[:environment].invoke
+    SkillsSandbox.parse_list
+  end
+end
+
 namespace :reward do
   @dummy_email = "dummy@example.org"
 
