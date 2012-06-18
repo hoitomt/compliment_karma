@@ -25,7 +25,7 @@ module UsersHelper
   def compliment_skill(compliment)
     if compliment && compliment.skill_id
       skill = Skill.find_by_id(compliment.skill_id)
-      return skill.name
+      return skill.name unless skill.blank?
     end
   end
   
