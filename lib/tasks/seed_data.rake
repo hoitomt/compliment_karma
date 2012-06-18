@@ -30,7 +30,7 @@ namespace :compliment do
     tp = ComplimentType.PERSONAL_TO_PERSONAL
     501.times do |index|
       count += 1
-      s = 24280
+      s = Skill.where('lower(name) like ?', '%ruby%').last.id
       c = @comments[4]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
@@ -39,7 +39,7 @@ namespace :compliment do
 
     301.times do |index|
       count += 1
-      s = 21788
+      s = Skill.where('lower(name) like ?', '%marketing%').last.id
       c = @comments[8]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
@@ -48,7 +48,7 @@ namespace :compliment do
 
     101.times do |index|
       count += 1
-      s = 22533
+      s = Skill.where('lower(name) like ?', '%intelligence%').last.id
       c = @comments[0]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
@@ -57,7 +57,7 @@ namespace :compliment do
 
     301.times do |index|
       count += 1
-      s = 20488
+      s = Skill.where('lower(name) like ?', '%project%').last.id
       c = @comments[1]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
