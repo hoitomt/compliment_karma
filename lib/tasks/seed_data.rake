@@ -1,9 +1,5 @@
 namespace :compliment do
   @dummy_email = "dummy@example.org"
-  @skills = ["Marketing", "Accounting", "Ruby on Rails", 
-             "C# Developer", "Java Developer", "Financial Management",
-             "Business Intelligence", "Systems Analysis", 
-             "Quality Assurance", "Project Management", "Sewing"]
   @comments = ["You're awesome!", "I love your work", "Great Job on the Obama Case",
                "Sweet job", "Way to go", "Nice work on that project",
                "Good job", "Awesome", "You're a rockstar!", "You're great",
@@ -34,165 +30,41 @@ namespace :compliment do
     tp = ComplimentType.PERSONAL_TO_PERSONAL
     501.times do |index|
       count += 1
-      s = @skills[2]
+      s = 24280
       c = @comments[4]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill => s, 
+                          :receiver_email => u.email, :skill_id => s, 
                           :comment => c, :relation_id => t.id)
     end
 
     301.times do |index|
       count += 1
-      s = @skills[6]
+      s = 21788
       c = @comments[8]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill => s, 
+                          :receiver_email => u.email, :skill_id => s, 
                           :comment => c, :relation_id => t.id)
     end
 
     101.times do |index|
       count += 1
-      s = @skills[10]
+      s = 22533
       c = @comments[0]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill => s, 
+                          :receiver_email => u.email, :skill_id => s, 
                           :comment => c, :relation_id => tp.id)
     end
 
     301.times do |index|
       count += 1
-      s = @skills[2]
+      s = 20488
       c = @comments[1]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill => s, 
+                          :receiver_email => u.email, :skill_id => s, 
                           :comment => c, :relation_id => t.id)
     end
     
     puts "#{cmd} Complete - #{count} Compliments Created"
-  end
-  
-  task :create_compliment, :sender_email, 
-                           :receiver_email, 
-                           :skill, 
-                           :comment, 
-                           :relation_id do |cmd, args|
-    Rake::Task[:environment].invoke
-    puts "Create Compliment"
-    params = {:sender_email => args.sender_email, 
-              :receiver_email => args.receiver_email,
-              :skill => args.skill, 
-              :comment => args.comment, 
-              :relation_id => args.relation_id}
-    Compliment.create!(params)
-  end
-
-  task :create_extra_compliments do |cmd, args|
-    Rake::Task[:environment].invoke
-    puts "Create Extra Compliments"
-    puts "Add compliments from Dummy to Coworker"
-    # Compliments from Dummy to coworker
-    r = Relation.find_by_name('Coworker').id
-    10.times do |index|
-      count += 1
-      re = "cw#{index}@#{u.domain}"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => u.email, 
-                          :receiver_email => re, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Coworker to Dummy"
-    # Compliments from coworker to dummy
-    r = Relation.find_by_name('Coworker').id
-    10.times do |index|
-      count += 1
-      se = "cw#{index}@#{u.domain}"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => se, 
-                          :receiver_email => u.email, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Dummy to Client"
-    # Compliments from dummy to client
-    r = Relation.find_by_name('Client').id
-    10.times do |index|
-      count += 1
-      re = "cw#{index}@#{index}client.com"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => u.email, 
-                          :receiver_email => re, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Client to Dummy"
-    # Compliments from client to dummy - Assumes that client refers to dummy as client
-    r = Relation.find_by_name('Client').id
-    10.times do |index|
-      count += 1
-      se = "cw#{index}@#{index}client.com"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => se, 
-                          :receiver_email => u.email, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Dummy to Business Partner"
-    # Compliments from dummy to business partners
-    r = Relation.find_by_name('Business Partner').id
-    10.times do |index|
-      count += 1
-      re = "bp#{index}@#{index}business-partner.com"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => u.email, 
-                          :receiver_email => re, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Business Partner to Dummy"
-    # Compliments from business partner to dummy
-    r = Relation.find_by_name('Business Partner').id
-    10.times do |index|
-      count += 1
-      se = "bp#{index}@#{index}business-partner.com"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => se, 
-                          :receiver_email => u.email, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Dummy to Service Provider"
-    # Compliments from dummy to service provider
-    r = Relation.find_by_name('Service Provider').id
-    10.times do |index|
-      count += 1
-      re = "sp#{index}@#{index}service-provider.com"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => u.email, 
-                          :receiver_email => re, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end
-    
-    puts "Add compliments from Service Provider to Dummy"
-    # Compliments from service provider to dummy
-    r = Relation.find_by_name('Business Partner').id
-    10.times do |index|
-      count += 1
-      se = "sp#{index}@#{index}service-provider.com"
-      s = @skills[index]
-      c = @comments[index]
-      Compliment.create!( :sender_email => se, 
-                          :receiver_email => u.email, :skill => s, 
-                          :comment => c, :relation_id => r)
-    end    
-
   end
   
 end

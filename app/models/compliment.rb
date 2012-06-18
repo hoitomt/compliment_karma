@@ -13,7 +13,6 @@ class Compliment < ActiveRecord::Base
                            :format => { :with => email_regex }
   
   validates :skill_id, :presence => true
-                       # :numericality => {:greater_than => 0}
   
   validates :comment, :presence => true,
                       :length => {:within => 2..140}

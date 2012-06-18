@@ -21,10 +21,11 @@ module UsersHelper
       return html.html_safe
     end
   end
-  
+
   def compliment_skill(compliment)
-    if compliment
-      return "#{compliment.skill}"
+    if compliment && compliment.skill_id
+      skill = Skill.find_by_id(compliment.skill_id)
+      return skill.name
     end
   end
   

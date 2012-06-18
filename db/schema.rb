@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614035542) do
+ActiveRecord::Schema.define(:version => 20120618052134) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20120614035542) do
   end
 
   create_table "compliments", :force => true do |t|
-    t.string   "skill"
     t.string   "sender_email"
     t.string   "receiver_email"
     t.integer  "sender_user_id"
