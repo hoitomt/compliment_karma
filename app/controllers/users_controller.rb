@@ -280,7 +280,7 @@ class UsersController < ApplicationController
     return if compliments.nil?
     h = Hash.new(0)
     compliments.each do |compliment|
-      h[compliment.skill] += 1
+      h[compliment.skill_id] += 1
     end
 
     return h.sort_by{ |k,v| v }.reverse
