@@ -11,8 +11,8 @@ Ck::Application.routes.draw do
   match "/founder_signout" => "shells#destroy"
   match "/invite_coworkers" => "pages#invite_coworkers"
   match "/invite_others" => "pages#invite_others"
-  match "/search_skills" => "pages#search_skills"
-  match "/search" => "pages#search"
+  match "/search/skills" => "search#skills"
+  match "/search/site" => "search#site"
   
   match "recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition

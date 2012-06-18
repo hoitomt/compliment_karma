@@ -52,7 +52,7 @@ var SkillAutoComplete = {
 	// },
 	ajaxSearch: function(searchString) {
 		$.ajax({
-			url: '/search_skills',
+			url: '/search/skills',
 			data: {'search_string' : searchString}
 		});
 	},

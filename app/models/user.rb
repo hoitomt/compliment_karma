@@ -207,6 +207,44 @@ class User < ActiveRecord::Base
   def confirmed?
     self.account_status.id == AccountStatus.CONFIRMED.id
   end
+
+  def self.search(search_string)
+    return [] if search_string.nil?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    sa = search_string.split(' ')
+    search_array = []
+    select_fields = 'id, first_name, last_name, city'
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
+                               'lower(city) in (?) AND lower(email) in (?)',
+                                sa, sa, sa, sa).select(select_fields)
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' + 
+                               'lower(city) in (?)', 
+                                sa, sa, sa).select(select_fields)
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?)', 
+                                sa, sa).select(select_fields)
+    search_array << User.where('lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
+                               'lower(city) in (?) OR lower(email) in (?)',
+                                sa, sa, sa, sa).select(select_fields)
+    if search_array.length < 10
+      sa.each do |s|
+        term = "%#{s}%"
+        search_array << User.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
+                                   'lower(city) LIKE ? OR lower(email) LIKE ?',
+                                    term, term, term, term).select(select_fields)
+      end
+    end
+    result_array = []
+    logger.info("size: #{search_array.flatten.uniq.size}")
+    unless search_array.blank?
+      search_array.flatten.uniq.each do |user|
+        result_array << {:id => user.id,
+                         :first_name => user.first_name, 
+                         :last_name => user.last_name,
+                         :city => user.city}
+      end
+    end
+    return result_array
+  end
   
   private
     def encrypt(password)

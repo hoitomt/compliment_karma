@@ -1,0 +1,109 @@
+@import "common";
+
+#menu-bar-search-form {
+	position: relative;
+	float: right;
+	input,
+	textarea,
+	select {
+		// -moz-border-radius: 5px;
+		// -webkit-border-radius: 5px;
+		// border-radius: 5px;
+		// border: 0px;
+		// background-color:#FFFFFF;
+		// color:#000;
+		// font-size: 14px;
+		padding-left: 5px;
+		margin: 5px 5px 0px 10px;
+		// height: 20px;
+	}
+	input {
+		@include border-radius;
+		outline: none;
+		display: block;
+		width: 163px;
+		height: 14px;
+		min-height: auto	9;
+		padding: 8px 30px 6px 8px;
+		font-size: 12px;
+		line-height: 1;
+		color: #666;
+		background-color: #fff;
+		border: 0;
+		-webkit-box-shadow: inset 0 1px 2px 
+		rgba(0, 0, 0, .2);
+		-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+		box-shadow: inset 0 1px 2px 
+		rgba(0, 0, 0, .2);
+	}
+	button {
+		@include gradient-bg;
+		border: none;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 12px;
+		padding: 4px 10px;
+		margin: 10px 10px 0 0;
+		font-weight: normal;
+		text-shadow: none;
+	}
+	button:hover {
+		background: $blue;
+		cursor: pointer;
+	}
+	#search-icon {
+		position: absolute;
+		margin: 5px 5px 0 0;
+		right: 0;
+		height: 30px;
+		width: 30px;
+		background: url(search_icon.png) center center no-repeat;
+		z-index: 10;
+		cursor: pointer;
+	}
+}
+.search-input {
+	float: left;
+}
+#site-search {
+	@include page-box-shadow;
+	position: absolute;
+	padding: 5px;
+	background: #ffffff;
+	overflow: none;
+	display: none;
+	width: 200px;
+	margin: 35px 0 0 10px;
+	li {
+		margin: 0 0 0 0;
+		float: none;
+		color: #347284;
+		font-size: 14px;
+		border: none;
+		@include border-effect;
+	}
+	li:not(:first-child) {
+		border: none;
+		@include border-effect;
+	}
+	li:not(:last-child) {
+		border: none;
+		@include border-effect;
+	}
+	li:last-child {
+		border: none;
+	}
+	li:hover {
+		cursor: pointer;
+		background: $main-menu-color;
+		background: #e9e9e9;
+	}
+	li a {
+		font-weight: normal;
+		font-size: 14px;
+		padding: 0 0 0 0;
+		color: #347284;
+	}
+}

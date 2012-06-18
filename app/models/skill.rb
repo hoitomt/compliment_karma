@@ -10,7 +10,6 @@ class Skill < ActiveRecord::Base
 		skills = Skill.where('id <> parent_skill_id')
 		parents = Skill.parent_skills
 		a = skills.collect{|skill| autocomplete_key(skill, parents) }
-		# hash = Hash[ skills.map{ |skill| [ skill.id, [parents[skill.parent_skill_id],skill.name ] ]} ]
 		return a
 	end
 

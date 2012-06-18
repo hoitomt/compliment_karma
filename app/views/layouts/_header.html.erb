@@ -29,22 +29,24 @@
 				<li><%= link_to 'Help', '#' %></li>
 			</ul>				
 		</div>
-		<div id="nav-main-menu">
-			<% if current_user.nil? %>
-				<ul>
-					<li><%= home_link('Home') %></li>
-					<li><%= link_to 'People', '#' %></li>
-					<li><%= link_to 'Companies', '#' %></li>
-					<li style="border-right: none;"><%= link_to 'Top', '#' %></li>
-				</ul>
-			<% else %>
-				<ul>
-					<li><%= home_link('Home') %></li>
-					<li><%= link_to 'People', '#' %></li>
-					<li style="border-right: none;"><%= link_to 'Companies', '#' %></li>
-				</ul>
-			<% end %>
-			<%= render 'pages/menu-bar-search-form' %>
+		<div id="menu-bar-container">
+			<div id="nav-main-menu">
+				<% if current_user.nil? %>
+					<ul>
+						<li><%= home_link('Home') %></li>
+						<li><%= link_to 'People', '#' %></li>
+						<li><%= link_to 'Companies', '#' %></li>
+						<li style="border-right: none;"><%= link_to 'Top', '#' %></li>
+					</ul>
+				<% else %>
+					<ul>
+						<li><%= home_link('Home') %></li>
+						<li><%= link_to 'People', '#' %></li>
+						<li style="border-right: none;"><%= link_to 'Companies', '#' %></li>
+					</ul>
+				<% end %>
+			</div>
+			<%= render 'search/site_search_form' %>
 		</div>
 		<div class="clear"></div>
 	</div>

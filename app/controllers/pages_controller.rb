@@ -45,11 +45,6 @@ class PagesController < ApplicationController
     @title = "Demo"
   end
 
-  def search_skills
-    @search_string = params[:search_string]
-    @skills = Skill.get_autocomplete_results(@search_string)
-  end
-
   def search
     
   end
