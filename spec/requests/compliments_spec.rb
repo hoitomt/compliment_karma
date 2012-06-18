@@ -304,7 +304,7 @@ describe "Compliments" do
       @compliment_attr = {
         :sender_email => user.email,
         :receiver_email => @receiver,
-        :skill => "testing",
+        :skill_id => Skill.first.id,
         :comment => "awesome job"
       }
       

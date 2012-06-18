@@ -6,7 +6,7 @@ describe ComplimentMailer do
   let(:user3){FactoryGirl.create(:user3)}
 
   before(:each) do
-    @compliment = Compliment.create(:skill => "Sewing",
+    @compliment = Compliment.create(:skill_id => Skill.first.id,
                                     :sender_email => user.email,
                                     :receiver_email => user3.email,
                                     :comment => "I like your sewing",

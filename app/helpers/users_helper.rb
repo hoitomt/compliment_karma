@@ -484,4 +484,10 @@ module UsersHelper
     end
   end
 
+  def skill_autocomplete_key(id)
+    skill = Skill.find_by_id(id)
+    logger.info("Skill ID: #{id} - Skill Name: #{skill}")
+    parent_skill_key = skill.parent_skill_key if skill
+  end
+
 end

@@ -42,8 +42,8 @@ describe UsersController do
         # Confirmed compliment
         10.times do |index|
           Compliment.create(:sender_email => user2.email,
-                            :receiver_email => user3.email, 
-                            :skill => "knitting",
+                            :receiver_email => user3.email,
+                            :skill_id => Skill.first.id,
                             :comment => "Nice work on my sweater" )
         end
         Follow.create(:subject_user_id => user3.id, :follower_user_id => user2.id)
@@ -51,8 +51,8 @@ describe UsersController do
         # Unconfirmed compliment
         10.times do |index|
           Compliment.create(:sender_email => user2.email,
-                            :receiver_email => unconfirmed_user.email, 
-                            :skill => "knitting",
+                            :receiver_email => unconfirmed_user.email,
+                            :skill_id => Skill.first.id,
                             :comment => "Nice work on my sweater" )
         end
         Compliment.all.count.should eq(20)

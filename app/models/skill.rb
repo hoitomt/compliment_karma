@@ -22,6 +22,11 @@ class Skill < ActiveRecord::Base
 		"#{parents[skill.parent_skill_id]}#{key_separator}#{skill.name}"
 	end
 
+	def parent_skill_key
+		parent = Skill.find_by_id(self.parent_skill_id)
+		return "#{parent.name}#{key_separator}#{self.name}"
+	end
+
 	def self.key_separator
 		return ' - '
 	end

@@ -8,7 +8,7 @@ describe Compliment do
     @attr = {
       :receiver_email => "compliment@example.com",
       :sender_email => user.email,
-      :skill => "ruby on rails development",
+      :skill_id => Skill.first.id,
       :comment => "I love what you did with our application",
       :relation_id => 1
     }
@@ -54,7 +54,7 @@ describe Compliment do
   end
   
   it "should require a skill" do
-    c = Compliment.new(@attr.merge(:skill => ""))
+    c = Compliment.new(@attr.merge(:skill_id => ""))
     c.should_not be_valid
   end
   

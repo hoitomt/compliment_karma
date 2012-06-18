@@ -14,7 +14,7 @@ describe ComplimentsController do
         @attr = {
           :receiver_email => "",
           :sender_email => "",
-          :skill => "",
+          :skill_id => "",
           :comment => "",
           :relation_id => 1
         }
@@ -54,7 +54,7 @@ describe ComplimentsController do
         @attr = {
           :receiver_email => user2.email,
           :sender_email => user.email,
-          :skill => "ruby on rails development",
+          :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
           :relation_id => 1
         }
@@ -101,7 +101,7 @@ describe ComplimentsController do
         @attr = {
           :receiver_email => user2.email,
           :sender_email => user.email,
-          :skill => "ruby on rails development",
+          :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
           :relation_id => 1
         }
@@ -150,7 +150,7 @@ describe ComplimentsController do
         @attr = {
           :receiver_email => "imastranger@example.com",
           :sender_email => user.email,
-          :skill => "ruby on rails development",
+          :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
           :relation_id => 1
         }
@@ -200,7 +200,7 @@ describe ComplimentsController do
           @attr = {
             :receiver_email => company1_user1.email,
             :sender_email => company1_user2.email,
-            :skill => "ruby on rails development",
+            :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
             :relation_id => Relation.COWORKER.id
           }
@@ -222,7 +222,7 @@ describe ComplimentsController do
           @attr = {
             :receiver_email => company2_user1.email,
             :sender_email => company1_user2.email,
-            :skill => "ruby on rails development",
+            :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
             :relation_id => Relation.CLIENT.id
           }
@@ -249,7 +249,7 @@ describe ComplimentsController do
           @attr = {
             :receiver_email => company1_user1.email,
             :sender_email => company1_user2.email,
-            :skill => "ruby on rails development",
+            :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
             :relation_id => Relation.COWORKER.id
           }
@@ -269,7 +269,7 @@ describe ComplimentsController do
           @attr = {
             :receiver_email => company2_user1.email,
             :sender_email => company1_user2.email,
-            :skill => "ruby on rails development",
+            :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
             :relation_id => Relation.COWORKER.id
           }
