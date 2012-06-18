@@ -5,7 +5,7 @@ You have attempted to send a compliment to <%= @compliment.receiver_email %>
 
 <h2><%= @compliment.comment %></h2>
 for
-<h2><%= @compliment.skill %></h2>
+<h2><%= @skill.name if @skill %></h2>
 
 Please confirm your account to send your compliments by clicking on the following link <br />
 

@@ -3,4 +3,4 @@ You have received a compliment from <%= @compliment.sender_email %>
 
 <h2><%= @compliment.comment %></h2>
 for
-<h2><%= @compliment.skill %></h2>
+<h2><%= @skill.name if @skill %></h2>

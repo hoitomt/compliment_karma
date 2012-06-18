@@ -4,6 +4,7 @@ class ComplimentMailer < ActionMailer::Base
   # ACTIVE
   def send_compliment(compliment)
     @compliment = compliment
+    @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.receiver_email,
          subject: "You have received a compliment"
   end
@@ -13,6 +14,7 @@ class ComplimentMailer < ActionMailer::Base
     @receiver = User.find_by_email(compliment.receiver_email)
     @receiver.generate_token(:new_account_confirmation_token)
     @compliment = compliment
+    @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.receiver_email,
          subject: "You have received a compliment"
   end
@@ -20,6 +22,7 @@ class ComplimentMailer < ActionMailer::Base
   # PENDING_RECEIVER_REGISTRATION
   def receiver_registration_invitation(compliment)
     @compliment = compliment
+    @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.receiver_email,
          subject: "You have received a compliment"
   end
@@ -29,6 +32,7 @@ class ComplimentMailer < ActionMailer::Base
     @sender = User.find_by_email(compliment.sender_email)
     @sender.generate_token(:new_account_confirmation_token)
     @compliment = compliment
+    @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.sender_email,
          subject: "Please confirm your account to send your compliment"
   end
@@ -36,6 +40,7 @@ class ComplimentMailer < ActionMailer::Base
   # PENDING_SENDER_REGISTRATION
   def sender_registration_invitation(compliment)
     @compliment = compliment
+    @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.sender_email,
          subject: "Please register for an account to send your compliment"
   end
