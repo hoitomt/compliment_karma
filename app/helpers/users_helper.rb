@@ -202,7 +202,9 @@ module UsersHelper
   end
 
   def compliment_button(user=nil, button_class=nil)
-    if user && user.id != current_user.id
+    if user && user.id == current_user.id
+      return ""
+    elsif user && user.id != current_user.id
       return link_to "Compliment", 
                      new_compliment_path(:recipient_id => user.id), 
                      :class => "compliment-button #{button_class}",

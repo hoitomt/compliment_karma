@@ -59,12 +59,4 @@ FactoryGirl.define do
     invite_email "invited_user@example.com"
     from_email "nonfounder@example.com"
   end
-
-  factory :compliment, class: Compliment do
-    receiver_email "compliment@example.com"
-    sender_email "factory_user@testing.com"
-    skill "ruby on rails development"
-    comment "I love what you did with our application"
-    relation_id 1
-  end
 end

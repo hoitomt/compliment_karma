@@ -1,6 +1,6 @@
 @import "common";
 
-$popup-box-width: 590px;
+$popup-box-width: 660px;
 $popup-border-bottom: 1px solid #f2f2f2;
 .popup-box {
 	width: $popup-box-width;
@@ -30,7 +30,7 @@ $popup-border-bottom: 1px solid #f2f2f2;
 			@include border-radius;
 			background: #f2f2f2;
 			padding: 10px;
-			width: 170px;
+			width: 210px;
 			margin: 0 auto;
 			text-align: center;
 			h3 {
@@ -43,7 +43,7 @@ $popup-border-bottom: 1px solid #f2f2f2;
 			// }
 			.functions {
 				text-align: center;
-				margin: 0 auto;
+				margin: 5px auto;
 			}
 		}
 		.action {

@@ -5,6 +5,7 @@ class RecognitionCommentsController < ApplicationController
     @rc = RecognitionComment.new(params[:recognition_comment])
     @count = params[:count]
     if @rc.save
+      logger.info("Current User: #{current_user}")
       @rc.update_history(current_user)
     else
       flash[:recognition_comment_errors] = parse_errors_into_array.join("\n")

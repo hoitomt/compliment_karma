@@ -3,10 +3,11 @@
 		<div class="photo-small">
 			<%= get_user_photo_link_small(@sender) %>
 		</div>
+		<h3><%= get_user_full_name(@sender) %></h3>
 		<div class="functions">
-			<h3><%= get_user_full_name(@sender) %></h3>
 			<%= compliment_button_medium(@sender) %>
 			<span id="follows-button-<%= @sender.id %>"><%= follows_button_medium(@sender) %></span>
+			<div class="clear"></div>
 		</div>
 	</div>
 </div>
@@ -22,10 +23,11 @@
 		<div class="photo-small">
 			<%= get_user_photo_link_small(@receiver) %>
 		</div>
+		<h3><%= get_user_full_name(@receiver) %></h3>
 		<div class="functions">
-			<h3><%= get_user_full_name(@receiver) %></h3>
 			<%= compliment_button_medium(@receiver) %>
 			<span id="follows-button-<%= @receiver.id %>"><%= follows_button_medium(@receiver) %></span>
+			<div class="clear"></div>
 		</div>
 	</div>
 </div>
