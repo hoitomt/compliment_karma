@@ -14,8 +14,8 @@ var SiteSearch = {
 		$('#search-icon').off('click');
 		$('#search-icon').on({
 			click: function() {
-				console.log('glass click');
-				$('#site-search-form').submit();
+				var searchString = $('input#search_string').val();
+				window.location.href = '/search/site?=' + searchString;
 			}
 		});
 	},
@@ -41,7 +41,7 @@ var SiteSearch = {
 	},
 	ajaxSearch: function(searchString) {
 		$.ajax({
-			url: '/search/site',
+			url: '/search/site.js',
 			data: {'search_string' : searchString}
 		});
 	}//,
