@@ -3,7 +3,7 @@ var ShowRecognitionFancyBox = {
 		$.fancybox(view, {
 			beforeLoad: function() {
 				$('body').addClass('lock-screen');
-				this.title = socialPopup;
+				this.title = String(socialPopup);
 			},
 			afterShow: function() {
 				UserProfile.reinitialize();

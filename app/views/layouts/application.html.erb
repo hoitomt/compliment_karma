@@ -28,10 +28,11 @@
 			$('.fancybox').fancybox();
 			SiteSearch.init();
 		});
-	</script>	
+	</script>
 </head>
 <body>
-	<%= render 'layouts/facebook' %>
+	<%= render 'social/facebook_javascript' %>
+	<%= render 'social/twitter_javascript' %>
 	<%= render 'layouts/header' %>
 	<%= yield :flash_container %>
 	<%= yield :home_page %>

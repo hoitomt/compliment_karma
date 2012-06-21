@@ -1,10 +1,22 @@
 <li class="no-hover">
-	<%#= render 'social/facebook_iframe_nocount', { :recognition_type_id => recognition_type_id,
+	<% if iframe %>
+		<%= render 'social/facebook_iframe', { :recognition_type_id => recognition_type_id,
 																				 :recognition_id => recognition_id } %>
+	<% else %>
+		<%= render 'social/facebook_link', { :recognition_type_id => recognition_type_id,
+																			 :recognition_id => recognition_id,
+																			 :show_count => show_count } %>
+	<% end %>
 </li>
 <li class="no-hover">
-	<%= render 'social/twitter_iframe', { :recognition_type_id => recognition_type_id,
+	<% if iframe %>
+		<%= render 'social/twitter_iframe', { :recognition_type_id => recognition_type_id,
 																			:recognition_id => recognition_id }  %>
+	<% else %>
+		<%= render 'social/twitter_link', { :recognition_type_id => recognition_type_id,
+																			:recognition_id => recognition_id,
+																			:show_count => show_count }  %>
+  <% end %>
 </li>
 <li class="no-hover">
 	<%= render 'social/google_link', { :recognition_type_id => recognition_type_id,

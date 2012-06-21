@@ -1,7 +1,5 @@
-console.log("Render");
 var searchString = '<%= @search_string %>';
 var results = <%=raw @results.to_json %>;
-console.log('<%= @results %>');
 $('#site-search').html('<%= j(render "search/site_search_results", :users => @results) %>');
 if(results && results.length > 0) {
 	$('#site-search').show();

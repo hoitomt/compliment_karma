@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def site_url
+    return "http://fierce-sunset-4672.herokuapp.com/"
+  end
+
   def home_link(text)
     html = nil
     if current_user
@@ -99,6 +103,10 @@ module ApplicationHelper
 
   def search_types
     return "<option>People</option><option>Businesses</option>".html_safe
+  end
+
+  def social_link(recognition_type_id, recognition_id)
+    return "#{site_url}recognition/#{recognition_type_id}/#{recognition_id}".html_safe
   end
 
 end

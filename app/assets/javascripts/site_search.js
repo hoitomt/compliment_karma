@@ -15,7 +15,7 @@ var SiteSearch = {
 		$('#search-icon').on({
 			click: function() {
 				var searchString = $('input#search_string').val();
-				window.location.href = '/search/site?=' + searchString;
+				window.location.href = '/search/site?search_string=' + searchString;
 			}
 		});
 	},
