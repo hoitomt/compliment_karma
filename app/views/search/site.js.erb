@@ -1,10 +1,8 @@
 var searchString = '<%= @search_string %>';
 var results = <%=raw @results.to_json %>;
-
-if(searchString.length == 0) {
-	SiteSearch.hideResults();
-} else if(results && results.length > 0) {
-	SiteSearch.showResults(results, searchString);
+$('#site-search').html('<%= j(render "search/site_search_results", :users => @results) %>');
+if(results && results.length > 0) {
+	$('#site-search').show();
 } else {
-	SiteSearch.hideResults();
+	$('#site-search').hide();
 }

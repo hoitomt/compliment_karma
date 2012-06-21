@@ -213,6 +213,33 @@ class User < ActiveRecord::Base
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
     sa = search_string.split(' ')
     search_array = []
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
+                               'lower(city) in (?) AND lower(email) in (?)',
+                                sa, sa, sa, sa)
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' + 
+                               'lower(city) in (?)', 
+                                sa, sa, sa)
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?)', 
+                                sa, sa)
+    search_array << User.where('lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
+                               'lower(city) in (?) OR lower(email) in (?)',
+                                sa, sa, sa, sa)
+    if search_array.length < 10
+      sa.each do |s|
+        term = "%#{s}%"
+        search_array << User.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
+                                   'lower(city) LIKE ? OR lower(email) LIKE ?',
+                                    term, term, term, term)
+      end
+    end
+    return search_array.flatten.uniq
+  end
+
+  def self.searchx(search_string)
+    return [] if search_string.nil?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    sa = search_string.split(' ')
+    search_array = []
     select_fields = 'id, first_name, last_name, city'
     search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
                                'lower(city) in (?) AND lower(email) in (?)',

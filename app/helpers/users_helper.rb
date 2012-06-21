@@ -492,4 +492,21 @@ module UsersHelper
     parent_skill_key = skill.parent_skill_key if skill
   end
 
+  def search_result_info(user)
+    return '' if user.blank?
+    if user.city || user.state_cd
+      html = '<div class="search-result-info">'
+      html += "<span class='user-name'>#{user.full_name}</span>"
+      html += "#{user.city}" if user.city
+      html += ", " if user.city && user.state_cd
+      html += "#{user.state_cd}" if user.state_cd
+      html += '</div>'
+    else
+      html = '<div class="search-result-info">'
+      html += "<span class='user-name padded'>#{user.full_name}</span>"
+      html += '</div>'
+    end
+    return html.html_safe
+  end
+
 end

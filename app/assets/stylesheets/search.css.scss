@@ -1,4 +1,5 @@
 @import "common";
+@import "user_common";
 
 #menu-bar-search-form {
 	position: relative;
@@ -68,16 +69,31 @@
 	float: left;
 }
 #site-search {
-	@include page-box-shadow;
+	@include drop-box-shadow;
+	display: none;
 	position: absolute;
-	padding: 5px;
+	padding: 0 0 5px 0;
 	background: #ffffff;
 	overflow: none;
-	display: none;
-	width: 200px;
-	margin: 35px 0 0 10px;
+	width: 197px;
+	margin: 30px 0 0 11px;
+	.search-result-photo {
+		float: left;
+	}
+	.search-result-info {
+		float: left;
+		margin: 0 0 0 10px;
+	}
+	.user-name {
+		display: block;
+		font-size: 13px;
+	}
+	.padded {
+		margin-top: 10px;
+	}
 	li {
 		margin: 0 0 0 0;
+		display: block;
 		float: none;
 		color: #347284;
 		font-size: 14px;
@@ -95,6 +111,9 @@
 	li:last-child {
 		border: none;
 	}
+	li:first-child {
+		border-top: none;
+	}
 	li:hover {
 		cursor: pointer;
 		background: $main-menu-color;
@@ -105,5 +124,6 @@
 		font-size: 14px;
 		padding: 0 0 0 0;
 		color: #347284;
+		display: block;
 	}
 }

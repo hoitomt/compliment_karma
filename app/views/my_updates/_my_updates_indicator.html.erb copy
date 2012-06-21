@@ -8,7 +8,7 @@
 					<%= image_tag('user_profile/my_updates_with_items.png') %>
 				</div>
 				<div id="update-history-count" class="header-update-count" >
-					<%= update_history_count %>
+					<%= update_history_count_display %>
 				</div>
 			</div>
 		<% end %>

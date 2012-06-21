@@ -96,6 +96,12 @@ $total-width: 992px;
   box-shadow:         0px 0px 5px #8EBAB8;
 }
 
+@mixin drop-box-shadow {
+  -moz-box-shadow:    0px 5px 5px #8EBAB8;
+  -webkit-box-shadow: 0px 5px 5px #8EBAB8;
+  box-shadow:         0px 5px 5px #8EBAB8;
+}
+
 @mixin explanation-radius {
 	-moz-border-radius-bottom-left: 5px;
 	-moz-border-radius-bottom-right: 5px;
@@ -116,6 +122,15 @@ $total-width: 992px;
 	-webkit-border-top-right-radius: 8px;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
+}
+
+@mixin bottom-border-radius {
+   -moz-border-radius-bottomleft: 8px;
+   -moz-border-radius-bottomright: 8px;
+   -webkit-border-bottom-left-radius: 8px;
+   -webkit-border-bottom-right-radius: 8px;
+   border-bottom-left-radius: 8px;
+   border-bottom-right-radius: 8px;
 }
 
 @mixin right-border-radius {

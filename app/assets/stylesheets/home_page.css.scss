@@ -157,11 +157,19 @@ a.sign-up-button:hover {
 	z-index: 1;
 }
 .header-update-count {
-	background: url(/assets/user_profile/my_update_item_count.png) no-repeat;
-	width: 25px;
-	height: 25px;
-	padding: 4px 0 0 0px;
-	margin: 0 0 0 -8px;
+	// background: url(/assets/user_profile/my_update_item_count.png) no-repeat;
+	background-color: #ba3028;
+	border: #ffffff 2px solid;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+  -moz-box-shadow:    0px 0px 3px #ffffff;
+  -webkit-box-shadow: 0px 0px 3px #ffffff;
+  box-shadow:         0px 0px 3px #ffffff;
+	// width: 25px;
+	// height: 25px;
+	padding: 0 4px;
+	margin: 2px 0 0 -8px;
 	float: left;
 	font-size: 12px;
 	z-index: 2;
