@@ -1,9 +1,11 @@
-<%= form_tag(upload_photo_path, :multipart => true, 
-																:id => "photo-upload-form", 
-																:remote => true) do %>
-	<%= file_field 'user', 'photo', :id => 'photo-upload-input' %>
-	<!-- <input type="file" id="photo-upload-input"> -->
-	<div class="photo-upload">
-		<p>Click to add a<br/>Profile Image</p>
-	</div>
+<% if @user == current_user %>
+	<%= form_tag(upload_photo_path, :multipart => true, 
+																	:id => "photo-upload-form", 
+																	:remote => true) do %>
+		<%= file_field 'user', 'photo', :id => 'photo-upload-input' %>
+		<!-- <input type="file" id="photo-upload-input"> -->
+		<div class="photo-upload">
+			<p>Click to add a<br/>Profile Image</p>
+		</div>
+	<% end %>
 <% end %>
