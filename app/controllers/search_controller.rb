@@ -1,6 +1,7 @@
 class SearchController < ApplicationController
 
 	def skills
+		@popup = params[:popup] || 'false'
     @search_string = params[:search_string]
     @skills = Skill.get_autocomplete_results(@search_string)
 	end

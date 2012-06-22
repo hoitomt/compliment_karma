@@ -1,4 +1,10 @@
-<div id="send-compliment">
+<script type="text/javascript">
+	$(function() {
+		FormHelpers.init();
+		SkillAutoCompletePop.init();
+	});
+</script>
+<div id="send-compliment-popup">
 	<%= form_for(@compliment, :validate => true, :html => {:id => 'send-compliment-form'}) do |f| %>
 		<%= hidden_field_tag 'request_page', "user" %>
 		<div id="data-entry" class="clearfix">
@@ -14,10 +20,11 @@
 		<div id="data-entry" class="clearfix">
 			<div id="label"><%= f.label :skill, "Skill" %></div>
 			<div id="field">
-				<%= f.text_field :skill, 
+				<%= f.text_field :skill_id, 
 												 :placeholder => "start typing for a list",
-												 :id => "pop_compliment_skill" %>
+												 :id => "pop_compliment_skill_id" %>
 			</div>
+			<%= render 'search/skill_auto_complete_results_pop' %>
 		</div>
 
 		<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">

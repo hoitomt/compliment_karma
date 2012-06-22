@@ -1,10 +1,22 @@
 var searchString = '<%= @search_string %>';
 var results = <%=raw @skills.to_json %>;
+var popup = <%= @popup %>;
+console.log("Popup " + popup)
 
-if(searchString.length == 0) {
-	SkillAutoComplete.hideResults();
-} else if(results && results.length > 0) {
-	SkillAutoComplete.showResults(results, searchString);
+if(popup) {
+	if(searchString.length == 0) {
+		SkillAutoCompletePop.hideResults();
+	} else if(results && results.length > 0) {
+		SkillAutoCompletePop.showResults(results, searchString);
+	} else {
+		SkillAutoCompletePop.hideResults();
+	}
 } else {
-	SkillAutoComplete.hideResults();
+	if(searchString.length == 0) {
+		SkillAutoComplete.hideResults();
+	} else if(results && results.length > 0) {
+		SkillAutoComplete.showResults(results, searchString);
+	} else {
+		SkillAutoComplete.hideResults();
+	}
 }

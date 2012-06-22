@@ -45,15 +45,16 @@ $item-height: 100px;
 	color: #ffffff;
 	text-shadow: none;
 }
+.popup-button a{ display: block; }
 .popup-button a:hover { background-color: #3ab0d1; }
 .medium-button {
-	width: 70px;
+	// width: 70px;
 	font-size: 12px;
 	padding: 5px 5px;
 	font-weight: normal;
 }
 .large-button {
-	width: 80px;
+	// width: 80px;
 	font-size: 14px;
 	padding: 5px 15px;
 	font-weight: bold;
@@ -68,6 +69,13 @@ $item-height: 100px;
 	@include border-radius;
 	background-color: $main-menu-color;
 	padding: 10px;
+}
+#send-compliment-popup {
+	@include border-radius;
+	background-color: $main-menu-color;
+	padding: 10px;
+	height: 400px;
+	width: 400px;
 }
 @mixin user-profile-form-styling {
 	#validation-error {

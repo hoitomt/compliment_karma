@@ -231,7 +231,6 @@ module UsersHelper
 
   def follows_button(user_id=nil, button_size_class=nil)
     return "" if user_id == current_user.id
-
     if user_id
       button_class = "popup-button #{button_size_class}"
       button_text = "Follow"
@@ -240,8 +239,6 @@ module UsersHelper
         button_text = "Following"
       end
       return follows_button_link(user_id, button_text, button_class)
-    else
-      return "Unknown"
     end
   end
 
