@@ -77,29 +77,29 @@ class Accomplishment < ActiveRecord::Base
   end
 
   def self.complimenter_level(count)
-    if count > Accomplishment.LEVEL_5_COMPLIMENTER.threshold
+    if count >= Accomplishment.LEVEL_5_COMPLIMENTER.threshold
       return Accomplishment.LEVEL_5_COMPLIMENTER
-    elsif count > Accomplishment.LEVEL_4_COMPLIMENTER.threshold
+    elsif count >= Accomplishment.LEVEL_4_COMPLIMENTER.threshold
       return Accomplishment.LEVEL_4_COMPLIMENTER
-    elsif count > Accomplishment.LEVEL_3_COMPLIMENTER.threshold
+    elsif count >= Accomplishment.LEVEL_3_COMPLIMENTER.threshold
       return Accomplishment.LEVEL_3_COMPLIMENTER
-    elsif count > Accomplishment.LEVEL_2_COMPLIMENTER.threshold
+    elsif count >= Accomplishment.LEVEL_2_COMPLIMENTER.threshold
       return Accomplishment.LEVEL_2_COMPLIMENTER
-    elsif count > Accomplishment.LEVEL_1_COMPLIMENTER.threshold
+    elsif count >= Accomplishment.LEVEL_1_COMPLIMENTER.threshold
       return Accomplishment.LEVEL_1_COMPLIMENTER
     end
   end
 
   def self.rewarder_level(count)
-    if count > Accomplishment.LEVEL_5_REWARDER.threshold
+    if count >= Accomplishment.LEVEL_5_REWARDER.threshold
       return Accomplishment.LEVEL_5_REWARDER
-    elsif count > Accomplishment.LEVEL_4_REWARDER.threshold
+    elsif count >= Accomplishment.LEVEL_4_REWARDER.threshold
       return Accomplishment.LEVEL_4_REWARDER
-    elsif count > Accomplishment.LEVEL_3_REWARDER.threshold
+    elsif count >= Accomplishment.LEVEL_3_REWARDER.threshold
       return Accomplishment.LEVEL_3_REWARDER
-    elsif count > Accomplishment.LEVEL_2_REWARDER.threshold
+    elsif count >= Accomplishment.LEVEL_2_REWARDER.threshold
       return Accomplishment.LEVEL_2_REWARDER
-    elsif count > Accomplishment.LEVEL_1_REWARDER.threshold
+    elsif count >= Accomplishment.LEVEL_1_REWARDER.threshold
       return Accomplishment.LEVEL_1_REWARDER
     end
   end
