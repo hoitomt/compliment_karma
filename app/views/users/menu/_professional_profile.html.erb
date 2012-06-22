@@ -7,7 +7,10 @@
 					<div class="demographics">
 						<h1>Title Placeholder</h1>
 						<h2>Company Placeholder</h2>
-						<p class="small-gray"><%= location(@user) %></p>
+						<p class="small-gray" style="margin: 0 0 10px 0;">
+							<%= location(@user) %>
+						</p>
+						<%= render 'follows/follows_button', :user => @user %>
 					</div>
 				</div>
 				<div class="rank-buttons">
@@ -16,9 +19,6 @@
 					</div>
 					<div class="profile-rank-image">
 						<%= rewarder_rank_image(@rewards_sent.to_i) %>
-					</div>
-					<div class="profile-button">
-						<%= follows_button_large(@user) %>
 					</div>
 				</div>
 			</div>

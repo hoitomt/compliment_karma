@@ -11,7 +11,8 @@ var ShowRecognitionFancyBox = {
 			beforeClose: function() {
 				$('body').removeClass('lock-screen');
 			},
-			minWidth: 590,
+			minWidth: 675,
+			padding: 10,
 			helpers: {
 				overlay: {
 					css: {

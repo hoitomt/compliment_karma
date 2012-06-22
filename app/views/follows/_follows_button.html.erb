@@ -1,0 +1,10 @@
+<script type="text/javascript">
+	$(function() {
+		UserProfile.followButtonHover();
+	})
+</script>
+<% unless current_user?(user) %>
+	<div id="follows-button-<%= user.id %>" class="profile-button">
+		<%= follows_button_medium(user) %>
+	</div>
+<% end %>
