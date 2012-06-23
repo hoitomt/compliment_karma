@@ -13,25 +13,29 @@ Ck::Application.routes.draw do
   match "/invite_others" => "pages#invite_others"
   match "/search/skills" => "search#skills"
   match "/search/site" => "search#site"
+  match "/admin" => "admin#index", :as => :admin
+  match "/admin/rewards" => "admin#rewards", :as => :admin_rewards
+  match "/admin/users" => "admin#users", :as => :admin_users
+  match "/admin/settings" => "admin#settings", :as => :admin_settings
   
   match "recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
-  match "/user/:id/resend_new_account_confirmation" => "users#resend_new_account_confirmation",
-        :as => :resend_new_account_confirmation
   match "/email_api/new_account_confirmation" => "email_api#new_account_confirmation",
         :as => :new_account_confirmation
   match "/email_api/invitation_acceptance" => "email_api#invitation_acceptance",
         :as => :invitation_acceptance
   match "/email_api/compliment_new_user" => "email_api#compliment_new_user",
         :as => :compliment_new_user
+  match "/ck_likes/like_compliment_from_user_profile" => "ck_likes#like_compliment_from_user_profile",
+        :as => :like_compliment_from_user_profile
+  match "/user/:id/resend_new_account_confirmation" => "users#resend_new_account_confirmation",
+        :as => :resend_new_account_confirmation
   match "/users/:id/get_more_karma_live_records" => "users#get_more_karma_live_records",
         :as => :get_more_karma_live_records
   match "/users/:id/accept_relationship" => "users#accept_relationship",
         :as => :accept_relationship
   match "/users/:id/decline_relationship" => "users#decline_relationship",
         :as => :decline_relationship
-  match "/ck_likes/like_compliment_from_user_profile" => "ck_likes#like_compliment_from_user_profile",
-        :as => :like_compliment_from_user_profile
   match "users/:id/show_recognition_detail" => "users#show_recognition_detail", 
         :as => :show_recognition_detail
   match "users/:id/dev_popup" => "users#dev_popup"
@@ -47,6 +51,7 @@ Ck::Application.routes.draw do
   match "users/:id/contacts" => "users#contacts", :as => :user_contacts
   match "users/:id/settings" => "users#settings", :as => :user_settings
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
+  match "users/:id/account_settings" => "users#account_settings", :as => :account_settings
 
   resources :follows
   resources :recognition_comments, :only => [:create]

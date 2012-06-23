@@ -234,7 +234,6 @@ var UserProfile = {
 		$('.follow-button').on({
 			mouseover: function(event) {
 				var followText = $(this).html();
-				console.log(followText);
 				if(followText == "Following") {
 					var width = $(this).width();
 					$(this).html('Unfollow');
@@ -243,7 +242,6 @@ var UserProfile = {
 			},
 			mouseout: function(event) {
 				var followText = $(this).html();
-				console.log(followText);
 				if(followText == "Unfollow") {
 					$(this).html('Following');
 				};

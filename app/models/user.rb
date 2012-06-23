@@ -49,6 +49,14 @@ class User < ActiveRecord::Base
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
+
+  def is_customer_admin?
+    return true # replace with admin lookup later
+  end
+
+  def is_site_admin?
+    return true # replace with admin lookup later
+  end
   
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)

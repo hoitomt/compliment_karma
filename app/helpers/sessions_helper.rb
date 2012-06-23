@@ -18,6 +18,14 @@ module SessionsHelper
   def current_user
     @current_user ||= user_from_remember_token
   end
+
+  def customer_admin_user?
+    current_user.is_customer_admin?
+  end
+
+  def site_admin_user?
+    current_user.is_site_admin?
+  end
   
   def signed_in?
     !current_user.nil?

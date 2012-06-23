@@ -1,7 +1,6 @@
 var searchString = '<%= @search_string %>';
 var results = <%=raw @skills.to_json %>;
 var popup = <%= @popup %>;
-console.log("Popup " + popup)
 
 if(popup) {
 	if(searchString.length == 0) {

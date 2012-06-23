@@ -18,11 +18,7 @@
 				<% else %>
 					<li>
 						<%= link_to current_user.email, current_user %>
-						<ul>
-							<li><%= link_to 'Profile', current_user %></li>
-							<li><%= link_to 'Invite', new_invitation_path %></li>
-							<li><%= link_to 'Log Out', logout_path %></li>
-						</ul>
+						<%= render 'layouts/admin/admin_menu' %>
 					</li>
 					<li><%= link_to 'Pricing', pricing_path %></li>
 				<% end %>

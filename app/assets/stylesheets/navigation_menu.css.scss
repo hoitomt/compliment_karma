@@ -25,27 +25,25 @@
 	}
 	li ul {
 		position: absolute;
-		width: 5em;
+		width: 8em;
 		left: -999em;
 	}
 	li:hover ul {
+		@include bottom-border-radius-small;
 		@include nav-box-shadow;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radius: 5px;
 		left: auto;
 		background: $main-menu-color;
 		color: $nav-main-font-color;
-		font-weight: bold;
+		font-weight: normal;
 		padding: 5px;
 		z-index: 200;		
 	}
 	li ul li {
 		display: block;
 		margin: 0px 0px 5px 0px;
-		width: 5em;
+		width: 8em;
 	}
-	li ul li a {color: $nav-main-font-color; }
+	li ul li a {color: $nav-main-font-color; font-weight:normal; }
 	li ul li a:hover {color: $main-menu-color; }
 	li ul li:hover {
 		background: $nav-main-font-color;

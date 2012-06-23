@@ -292,6 +292,9 @@ class UsersController < ApplicationController
     return h.sort_by{ |k,v| v }.reverse
   end
 
+  def account_settings
+  end
+
   private
     def authenticate
       deny_access unless signed_in?

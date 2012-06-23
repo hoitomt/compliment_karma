@@ -4,9 +4,11 @@ module ApplicationHelper
     return "http://fierce-sunset-4672.herokuapp.com/"
   end
 
-  def home_link(text)
+  def home_link(text, admin_ind=nil)
     html = nil
-    if current_user
+    if admin_ind
+      html = link_to text, admin_path
+    elsif current_user
       html = link_to(text, current_user)
     else
       html = link_to(text, root_path)

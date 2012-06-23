@@ -33,7 +33,11 @@
 <body>
 	<%= render 'social/facebook_javascript' %>
 	<%= render 'social/twitter_javascript' %>
-	<%= render 'layouts/header' %>
+	<% if @admin %>
+		<%= render 'layouts/admin/admin_header' %>
+	<% else %>
+		<%= render 'layouts/header' %>
+	<% end %>
 	<%= yield :flash_container %>
 	<%= yield :home_page %>
 	<div id="main-container" class="container_16">
