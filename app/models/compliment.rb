@@ -5,6 +5,8 @@ class Compliment < ActiveRecord::Base
   belongs_to :compliment_type
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  attr_accessor :suppress_fulfillment # for seeding data only
   
   validates :receiver_email, :presence => true,
                              :format => { :with => email_regex }
@@ -16,6 +18,8 @@ class Compliment < ActiveRecord::Base
   
   validates :comment, :presence => true,
                       :length => {:within => 2..140}
+  
+  validates :compliment_type_id, :presence => true
 
   validate :compliment_cannot_be_to_self
   validate :sender_is_confirmed_user
@@ -51,6 +55,7 @@ class Compliment < ActiveRecord::Base
   end
   
   def send_fulfillment
+    return if suppress_fulfillment
     begin
       set_compliment_status if self.compliment_status.nil?
       case self.compliment_status
@@ -276,12 +281,24 @@ class Compliment < ActiveRecord::Base
     c = Compliment.where('created_at >= ? AND sender_user_id = ?', d, user.id)
   end
 
-  def self.sent_compliments(user)
-    Compliment.where('sender_user_id = ?', user.id)
+  def self.sent_professional_compliments(user)
+    types = ComplimentType.professional_send_ids
+    Compliment.where('sender_user_id = ? AND compliment_type_id in (?)', user.id, types)
   end
 
-  def self.received_compliments(user)
-    Compliment.where('receiver_user_id = ?', user.id)
+  def self.sent_social_compliments(user)
+    types = ComplimentType.social_send_ids
+    Compliment.where('sender_user_id = ? AND compliment_type_id in (?)', user.id, types)
   end
+
+  def self.received_professional_compliments(user)
+    types = ComplimentType.professional_receive_ids
+    Compliment.where('receiver_user_id = ? AND compliment_type_id in (?)', user.id, types)
+  end
+
+  def self.received_social_compliments(user)
+    types = ComplimentType.social_receive_ids
+    Compliment.where('receiver_user_id = ? AND compliment_type_id in (?)', user.id, types)
+  end  
 
 end

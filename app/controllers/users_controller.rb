@@ -38,7 +38,6 @@ class UsersController < ApplicationController
   def my_updates
     @user ||= User.find(params[:id])
     @my_update_items = UpdateHistory.where('user_id = ?', @user.id)
-    @compliment = Compliment.new
     set_this_week_compliments
     respond_to do |format|
       format.html {}
@@ -51,10 +50,9 @@ class UsersController < ApplicationController
 
   def professional_profile
     @user = User.find_by_id(params[:id])
-    @compliment = Compliment.new
     set_this_week_compliments
-    sent_compliments = Compliment.sent_compliments(@user)
-    received_compliments = Compliment.received_compliments(@user)
+    sent_compliments = Compliment.sent_professional_compliments(@user)
+    received_compliments = Compliment.received_professional_compliments(@user)
     @compliments_sent = sent_compliments.count
     @compliments_received = received_compliments.count
     @rewards_earned_amount = UserReward.earned_reward_amount(@user.id)
@@ -66,7 +64,15 @@ class UsersController < ApplicationController
   end
 
   def social_profile
-    
+    @user = User.find_by_id(params[:id])
+    set_this_week_compliments
+    sent_compliments = Compliment.sent_social_compliments(@user)
+    received_compliments = Compliment.received_social_compliments(@user)
+    @compliments_sent = sent_compliments.count
+    @compliments_received = received_compliments.count
+    @followers = Follow.followers(@user.id)
+    @following = Follow.following(@user.id)
+    @compliments_received_by_skill = compliment_count_by_skill(received_compliments)
   end
 
   def received_compliments
@@ -304,6 +310,7 @@ class UsersController < ApplicationController
     def set_static_vars
       @page = (params[:page] || 1).to_i
       @per_page = 10
+      @compliment = Compliment.new
     end
     
     def get_karma_live_items(feed_item_type_id, relation_type_id)

@@ -28,4 +28,35 @@ class ComplimentType < ActiveRecord::Base
            compliment_type_id == ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id ||
            compliment_type_id == ComplimentType.PROFESSIONAL_TO_PERSONAL.id
   end
+
+  def self.professional_send_ids
+    return [
+      self.COWORKER_TO_COWORKER.id, 
+      self.PROFESSIONAL_TO_PROFESSIONAL.id, 
+      self.PROFESSIONAL_TO_PERSONAL.id
+    ]
+  end
+
+  def self.professional_receive_ids
+    return [
+      self.COWORKER_TO_COWORKER.id, 
+      self.PROFESSIONAL_TO_PROFESSIONAL.id,
+      self.PERSONAL_TO_PROFESSIONAL.id
+    ]
+  end
+
+  def self.social_send_ids
+    return [
+      self.PERSONAL_TO_PROFESSIONAL.id,
+      self.PERSONAL_TO_PERSONAL.id
+    ]
+  end
+
+  def self.social_receive_ids
+    return [
+      self.PROFESSIONAL_TO_PERSONAL.id,
+      self.PERSONAL_TO_PERSONAL.id
+    ]
+  end
+
 end

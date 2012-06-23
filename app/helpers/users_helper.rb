@@ -457,7 +457,7 @@ module UsersHelper
   end
 
   def stats_label(count, label)
-    return label.pluralize if count > 1
+    return label.pluralize if count && count > 1 && label
     return label
   end
 

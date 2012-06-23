@@ -1,3 +1,67 @@
-<div id="user-social-profile" class="box-no-padding right-two-thirds">
-	<h1>Social Profile</h1>
+<div id="user-profile">
+	<div id="user-overview" class="right-two-thirds box-no-padding-white clearfix">
+		<div id="user-profile-details" class="first-row clearfix container">
+			<div class="personal-container clearfix">
+				<div class="demographics-container">
+					<div class="demographics">
+						<p class="small-gray" style="margin: 0 0 10px 0;">
+							<%= location(@user) %>
+						</p>
+						<%= render 'follows/follows_button', :user => @user %>
+					</div>
+				</div>
+				<div class="rank-buttons">
+					<div class="profile-rank-image">
+						<%= complimenter_rank_image(@compliments_sent.to_i) %>
+					</div>
+					<div class="profile-rank-image">
+						<%= rewarder_rank_image(@rewards_sent.to_i) %>
+					</div>
+				</div>
+			</div>
+
+			<div class="primary-stats">
+				<table>
+					<tr>
+						<td class="value"><%= @compliments_sent %></td>
+						<td class="label"><%= stats_label(@compliments_sent, "Compliment") %> Sent</td>
+					</tr>
+					<tr>
+						<td class="value"><%= @compliments_received %></td>
+						<td class="label">Compliments Received</td>
+					</tr>
+					<tr>
+						<td class="value"><%= @followers %></td>
+						<td class="label"><%= stats_label(@followers, "Follower") %></td>
+					</tr>
+					<tr>
+						<td class="value"><%= @following %></td>
+						<td class="label">Following</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="user-achievements" class="second-row clearfix container">
+			<h1 class="section-title">Achievements by Skill</h1>
+			<table id="achievements-by-skill" class="stripe-me">
+				<tr class="header">
+					<th class="left first">Skills</th>
+					<th>Compliments Received</th>
+					<th>Badges</th>
+				</tr>
+				<% if @compliments_received_by_skill %>
+					<% @compliments_received_by_skill.each do |k,v| %>
+					<tr>
+						<td class="non-image first"><%= skill_autocomplete_key(k) %></td>
+						<td class="non-image center"><%= v %></td>
+						<td class="center"><%= badge_image(v) %></td>
+					</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</div>
+<!-- 		<div id="user-experience" class="third-row container">
+			<h1 class="section-title">Professional Experience</h1>
+		</div> -->
+	</div>
 </div>

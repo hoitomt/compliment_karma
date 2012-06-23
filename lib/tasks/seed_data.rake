@@ -34,7 +34,8 @@ namespace :compliment do
       c = @comments[4]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
-                          :comment => c, :relation_id => t.id)
+                          :comment => c, :compliment_type_id => t.id,
+                          :suppress_fulfillment => true)
     end
 
     puts "Add compliments from Homer to Dummy2"
@@ -44,17 +45,19 @@ namespace :compliment do
       c = @comments[8]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
-                          :comment => c, :relation_id => t.id)
+                          :comment => c, :compliment_type_id => t.id,
+                          :suppress_fulfillment => true)
     end
 
     puts "Add compliments from Homer to Dummy3"
     101.times do |index|
       count += 1
-      s = Skill.where('lower(name) like ?', '%intelligence%').last.id
+      s = Skill.where('lower(name) like ?', '%cooking%').last.id
       c = @comments[0]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
-                          :comment => c, :relation_id => tp.id)
+                          :comment => c, :compliment_type_id => tp.id,
+                          :suppress_fulfillment => true)
     end
 
     puts "Add compliments from Homer to Dummy4"
@@ -64,7 +67,8 @@ namespace :compliment do
       c = @comments[1]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
-                          :comment => c, :relation_id => t.id)
+                          :comment => c, :compliment_type_id => t.id,
+                          :suppress_fulfillment => true)
     end
     
     puts "#{cmd} Complete - #{count} Compliments Created"
