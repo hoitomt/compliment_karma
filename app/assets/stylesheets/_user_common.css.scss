@@ -18,6 +18,11 @@ $item-height: 100px;
 	width: $left-column-width-no-padding;
 	float: left;
 }
+.left-two-thirds {
+	margin-top: 10px;
+	width: $right-column-width;
+	float: left;
+}
 .right-two-thirds {
 	margin-top: 10px;
 	width: $right-column-width;

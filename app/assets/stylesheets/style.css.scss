@@ -96,6 +96,13 @@ br.small { display: block; height: 1px;}
 	border-top: none;
 	background: $main-menu-color;
 }
+.top-box {
+	@include top-border-radius;
+	border: 1px solid #F0F8F8;
+	border-top: none;
+	background: $main-menu-color;
+	padding:10px;
+}
 .box-no-padding {
 	@include border-radius;
 //	@include page-box-shadow;
