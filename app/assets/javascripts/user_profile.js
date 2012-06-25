@@ -235,9 +235,7 @@ var UserProfile = {
 			mouseover: function(event) {
 				var followText = $(this).html();
 				if(followText == "Following") {
-					var width = $(this).width();
 					$(this).html('Unfollow');
-					$(this).css('width: ' + width + 'px;');
 				};
 			},
 			mouseout: function(event) {
