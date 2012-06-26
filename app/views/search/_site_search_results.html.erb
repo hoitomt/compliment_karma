@@ -2,7 +2,7 @@
 	<div id="site-search-results" class="clearfix">
 		<ul>
 			<% users.each do |user| %>
-				<li class="clearfix" style="padding: 3px;">
+				<li id="<%= user.id %>" class="clearfix" style="padding: 3px;">
 					<%= link_to user do %>
 							<div class="search-result-photo">
 								<%= image_tag(user.photo.url(:mini)) %>

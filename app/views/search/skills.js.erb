@@ -14,7 +14,13 @@ if(popup) {
 	if(searchString.length == 0) {
 		SkillAutoComplete.hideResults();
 	} else if(results && results.length > 0) {
+		var container = $('#skill-auto-complete');
+		console.log(container);
+		var list = container.find('li');
+		console.log(list);
+		var inputField = $('input#compliment_skill_id');
 		SkillAutoComplete.showResults(results, searchString);
+		ListNavigator.init(list, inputField, container);
 	} else {
 		SkillAutoComplete.hideResults();
 	}

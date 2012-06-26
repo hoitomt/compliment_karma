@@ -123,6 +123,14 @@ class User < ActiveRecord::Base
     l = self.last_name[0].capitalize if self.last_name
     return "#{self.first_name} #{l}"
   end
+
+  def first_last
+    if self.last_name
+      return "#{self.first_name} #{self.last_name}"
+    else
+      return "#{self.first_name}"
+    end
+  end
   
   def set_domain
     domain_array = self.email.split('@')
@@ -219,7 +227,7 @@ class User < ActiveRecord::Base
   def self.search(search_string)
     return [] if search_string.nil?
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
-    sa = search_string.split(' ')
+    sa = search_string.downcase.split(' ')
     search_array = []
     search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
                                'lower(city) in (?) AND lower(email) in (?)',
@@ -246,7 +254,7 @@ class User < ActiveRecord::Base
   def self.searchx(search_string)
     return [] if search_string.nil?
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
-    sa = search_string.split(' ')
+    sa = search_string.downcase.split(' ')
     search_array = []
     select_fields = 'id, first_name, last_name, city'
     search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +

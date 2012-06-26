@@ -61,7 +61,7 @@
 //	li a:hover { color: #4A8396; }
 //}
 #menu-bar-container {
-	@include nav-box-shadow;
+	// @include nav-box-shadow;
 	@include border-radius;
 	background-color:$main-menu-color;
 	border: 1px solid #F0F8F8;

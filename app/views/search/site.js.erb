@@ -1,8 +1,12 @@
 var searchString = '<%= @search_string %>';
 var results = <%=raw @results.to_json %>;
 $('#site-search').html('<%= j(render "search/site_search_results", :users => @results) %>');
+var container = $('#site-search');
 if(results && results.length > 0) {
-	$('#site-search').show();
+	var list = container.find('li');
+	var inputField = $('input#search_string');
+	container.show();
+	ListNavigator.init(list, inputField, container);
 } else {
 	$('#site-search').hide();
 }
