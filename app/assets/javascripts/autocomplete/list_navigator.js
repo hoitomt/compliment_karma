@@ -30,6 +30,7 @@ var ListNavigator = {
 				console.log("Down: " + list.length + '|' + ListNavigator.index);
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 13) { // enter key
+				e.stopPropagation();
 				var userId = list[ListNavigator.index].id;
 				var userName = $(list[ListNavigator.index]).find('.user-name');
 				console.log($(userName).html());
