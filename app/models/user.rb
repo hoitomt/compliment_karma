@@ -55,8 +55,8 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
 
-  def is_customer_admin?(company_id)
-    return self.companies.exists?(company_id)
+  def is_customer_admin?
+    return !self.companies.blank?
   end
 
   def is_site_admin?

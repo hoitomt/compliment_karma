@@ -19,8 +19,8 @@ module SessionsHelper
     @current_user ||= user_from_remember_token
   end
 
-  def customer_admin_user?(company_id)
-    current_user.is_customer_admin?(company_id)
+  def customer_admin_user?
+    current_user.is_customer_admin?
   end
 
   def site_admin_user?
