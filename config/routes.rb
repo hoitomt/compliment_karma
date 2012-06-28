@@ -1,4 +1,6 @@
 Ck::Application.routes.draw do
+  resources :companies
+
   root :to => "pages#index"
   
   match "follows/multi_create_new" => "follows#multi_create", :as => :multi_create_follows

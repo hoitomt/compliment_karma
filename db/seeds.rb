@@ -21,6 +21,17 @@ else
   mike.update_attributes(mike_attr)
 end
 
+mike_ck = User.find_by_email("mike@complimentkarma.com")
+mike_ck_attr = {:email => "mike@complimentkarma.com", 
+                :name => "Michael Hoitomt", 
+                :password => "w1sco kid 33"}
+if mike_ck.nil?
+  mike_ck = User.new(mike_ck_attr)
+  mike_ck.save
+else
+  mike_ck.update_attributes(mike_ck_attr)
+end
+
 aman = User.find_by_email("rewardtheproductive@gmail.com")
 aman_attr = { :email => "rewardtheproductive@gmail.com", 
                    :name => "Guramandeep Singh", 
@@ -36,6 +47,17 @@ else
   aman.update_attributes(aman_attr)
 end
 
+aman_ck = User.find_by_email("aman@complimentkarma.com")
+aman_ck_attr = {:email => "aman@complimentkarma.com", 
+                :name => "Aman Singh", 
+                :password => "ch1 town 41"}
+if aman_ck.nil?
+  aman_ck = User.new(aman_ck_attr)
+  aman_ck.save
+else
+  aman_ck.update_attributes(aman_ck_attr)
+end
+
 dummy = User.find_by_email("dummy@example.org")
 dummy_attr = { :email => "dummy@example.org", 
                    :name => "Dummy User", 
@@ -48,6 +70,45 @@ if dummy.nil?
   dummy.save
 else
   dummy.update_attributes(dummy_attr)
+end
+
+ck = Company.find_by_name("Compliment Karma")
+ck_attr = {
+  :name => "Compliment Karma",
+  :address_line_1 => '1316 White Pine Dr',
+  :city => 'Eau Claire',
+  :state_cd => 'WI',
+  :zip_cd => '54701',
+  :country => 'USA',
+  :email => 'info@complimentkarma.com',
+  :url => 'www.complimentkarma.com',
+  :phone => '(715) 225-2563'
+}
+if ck.nil?
+  ck = Company.create(ck_attr)
+else
+  ck.update_attributes(ck_attr)
+end
+
+ck_user = User.find_by_email("info@complimentkarma.com")
+ck_user_attr = {:email => "info@complimentkarma.com", 
+                :name => "Corporate Communication", 
+                :password => "ck 33 wi il",
+                :company_id => Company.find_by_name("Compliment Karma").id }
+if ck_user.nil?
+  ck_user = User.create(ck_user_attr)
+else
+  ck_user.update_attributes(ck_user_attr)
+end
+
+mike_c_ck = CompanyAdministrator.find_by_user_id(mike_ck.id)
+if mike_c_ck.blank?
+  mike_c_ck = CompanyAdministrator.create(:user_id => mike_ck.id, :company_id => ck.id)
+end
+
+aman_c_ck = CompanyAdministrator.find_by_user_id(aman_ck.id)
+if aman_c_ck.blank?
+  aman_c_ck = CompanyAdministrator.create(:user_id => aman_ck.id, :company_id => ck.id)
 end
 
 # Relations
@@ -173,7 +234,8 @@ RecognitionType.create(:name => 'Accomplishment')
 UpdateHistoryType.create(:name => 'Received Compliment', :text => 'received a compliment')
 UpdateHistoryType.create(:name => 'Accepted Compliment Receiver', :text => 'accepted your compliment')
 UpdateHistoryType.create(:name => 'Rejected Compliment Receiver', :text => 'rejected your compliment')
-UpdateHistoryType.create(:name => 'Comment on Received Compliment', :text => 'commented on received compliment')
+UpdateHistoryType.create(:name => 'Comment on Received Compliment', 
+  :text => 'commented on received compliment')
 UpdateHistoryType.create(:name => 'Comment on Sent Compliment', :text => 'commented on sent compliment')
 UpdateHistoryType.create(:name => 'Like Received Compliment', :text => 'liked a received compliment')
 UpdateHistoryType.create(:name => 'Like Sent Compliment', :text => 'liked a sent compliment')
@@ -197,8 +259,10 @@ UpdateHistoryType.create(:name => 'Share Reward on Twitter', :text => 'shared yo
 UpdateHistoryType.create(:name => 'Earned an Accomplishment', :text => 'earned an')
 UpdateHistoryType.create(:name => 'Comment on Accomplishment', :text => 'commented on your accomplishment')
 UpdateHistoryType.create(:name => 'Like Accomplishment', :text => 'liked your accomplishment')
-UpdateHistoryType.create(:name => 'Share Accomplishment on Facebook', :text => 'shared your accomplishment on Facebook')
-UpdateHistoryType.create(:name => 'Share Accomplishment on Twitter', :text => 'shared your accomplishment on Twitter')
+UpdateHistoryType.create(:name => 'Share Accomplishment on Facebook', 
+  :text => 'shared your accomplishment on Facebook')
+UpdateHistoryType.create(:name => 'Share Accomplishment on Twitter', 
+  :text => 'shared your accomplishment on Twitter')
 
 if Skill.find_by_name('User Defined').nil?
   s = Skill.create(:name => 'User Defined')

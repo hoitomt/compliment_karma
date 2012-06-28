@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   belongs_to :account_status
+  # User Representation of the company
+  belongs_to :company
+  # Users that are company application administrators
+  has_many :company_administrators
+  has_many :companies, :through => :company_administrators
   has_many :user_rewards
   has_many :rewards, :through => :user_rewards
   has_many :user_accomplishments
@@ -50,8 +55,8 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
 
-  def is_customer_admin?
-    return true # replace with admin lookup later
+  def is_customer_admin?(company_id)
+    return self.companies.exists?(company_id)
   end
 
   def is_site_admin?
@@ -287,6 +292,10 @@ class User < ActiveRecord::Base
       end
     end
     return result_array
+  end
+
+  def company?
+    return !self.company.nil?
   end
   
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618052134) do
+ActiveRecord::Schema.define(:version => 20120628053038) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,29 @@ ActiveRecord::Schema.define(:version => 20120618052134) do
   create_table "ck_likes", :force => true do |t|
     t.integer  "recognition_id"
     t.integer  "recognition_type_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "address_line_3"
+    t.string   "city"
+    t.string   "state_cd"
+    t.string   "zip_cd"
+    t.string   "country"
+    t.string   "email"
+    t.string   "url"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_administrators", :force => true do |t|
+    t.integer  "company_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -207,6 +230,7 @@ ActiveRecord::Schema.define(:version => 20120618052134) do
     t.string   "job_title"
     t.string   "domain"
     t.string   "new_account_confirmation_token"
+    t.integer  "company_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
