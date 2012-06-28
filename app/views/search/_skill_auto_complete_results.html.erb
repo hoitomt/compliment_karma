@@ -3,7 +3,16 @@
 		SkillAutoComplete.init();
 	});
 </script>
-<div id="skill-auto-complete" class="skill-auto-complete box-no-padding">
+<% if @skills %>
 	<div id="skill-auto-complete-results" class="clearfix">
+		<ul>
+			<% @skills.each do |skill| %>
+				<li id="<%= skill.id %>" class="clearfix register-me" style="padding: 3px;">
+					<%= skill_result_display(skill.name.clone, @search_string) %>
+					<span class="value-for-input-field"><%= skill.name %></span>
+					<span class="id-for-input-field"><%= skill.id %></span>
+				</li>
+			<% end %>
+		</ul>
 	</div>
-</div>
+<% end %>

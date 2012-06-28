@@ -2,14 +2,21 @@ class SearchController < ApplicationController
   before_filter :set_static_vars
   
 	def skills
-		@popup = params[:popup] || 'false'
     @search_string = params[:search_string]
-    @skills = Skill.get_autocomplete_results(@search_string)
+    if @search_string.blank?
+      @skills = nil
+    else
+      @skills = Skill.get_autocomplete_results(@search_string)
+    end
 	end
 
 	def site
     @search_string = params[:search_string]
-    @results = User.search(@search_string)
+    if @search_string.blank?
+      @results = nil
+    else
+      @results = User.search(@search_string)
+    end
 	end
 
 	private

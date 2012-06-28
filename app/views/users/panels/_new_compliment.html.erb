@@ -17,6 +17,7 @@
 		<p class="div-title">Who deserves your compliment today?</p>
 		<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
 			<%= hidden_field_tag 'request_page', "user" %>
+			<%= hidden_field_tag 'skill_id_result' %>
 			<%#= f.hidden_field :sender_email, :value => current_user.email %>
 			<div id="data-entry" class="clearfix">
 				<div id="label"><%= f.label :receiver_email, "To" %></div>
@@ -31,7 +32,7 @@
 			<div id="data-entry" class="clearfix">
 				<div id="label"><%= f.label :skill_id, "Skill" %></div>
 				<div id="field"><%= f.text_field :skill_id, :placeholder => "start typing for a list", :autocomplete => 'off' %>
-					<%= render 'search/skill_auto_complete_results' %>
+					<div id="skill-auto-complete" class="skill-auto-complete box-no-padding"></div>
 					<div id="compliment_skill_id_error"></div>
 				</div>
 			</div>

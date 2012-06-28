@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
   end
 
   def self.search(search_string)
-    return [] if search_string.nil?
+    return [] if search_string.blank?
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
     sa = search_string.downcase.split(' ')
     search_array = []

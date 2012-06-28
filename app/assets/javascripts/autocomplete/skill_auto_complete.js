@@ -15,20 +15,6 @@ var SkillAutoComplete = {
 	searchFx: function() {
 		var searchString = $('input#compliment_skill_id').val();
 		var results = SkillAutoComplete.ajaxSearch(searchString);
-		// var results = SkillAutoComplete.search(searchString);
-		if(searchString.length == 0) {
-			SkillAutoComplete.hideResults();
-		} else if(results && results.length > 0) {
-			SkillAutoComplete.showResults(results, searchString);
-		} else {
-			SkillAutoComplete.hideResults();
-		}
-	},
-	showResults: function(results, searchString) {
-		var displayResults = SkillAutoComplete.formatResults(results, searchString);
-		$('#skill-auto-complete-results').html(displayResults);
-		SkillAutoComplete.setResultClickHandlers();
-		$('#skill-auto-complete').show();
 	},
 	hideResults: function() {
 		$('#skill-auto-complete').hide();
@@ -38,26 +24,6 @@ var SkillAutoComplete = {
 			url: '/search/skills',
 			data: {'search_string' : searchString}
 		});
-	},
-	formatResults: function(results, searchString) {
-		var result = '<ul id="register-me">';
-		$.each(results, function(i, val) {
-			var formattedResult = SkillAutoComplete.highlightSearchString(val, searchString);
-			result += "<li>" + formattedResult + "</li>";
-		})
-		result += "</ul>";
-		return result;
-	},
-	highlightSearchString: function(result, searchString) {
-		if( result == null || result == undefined || 
-				searchString == null || searchString == undefined) {
-			return;
-		}
-		var length = searchString.length;
-		var start = result.toLowerCase().indexOf(searchString.toLowerCase());
-		var replaceMe = result.substring(start, start + length);
-		var formattedResult = result.replace(replaceMe, '<strong>' + replaceMe + '</strong>');
-		return formattedResult;
 	},
 	setResultClickHandlers: function() {
 		$('#register-me').off('click');

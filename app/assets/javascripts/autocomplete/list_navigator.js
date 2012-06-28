@@ -1,12 +1,13 @@
 var ListNavigator = {
 	index: 0,
-	inputField: null,
+	inputTextField: null,
+	inputIdField: 0,
 	container: null,
-	init: function(list, inputField, autoCompleteWindow) {
+	init: function(list, inputTextField, inputIdField, container) {
 		this.index = 0;
-		this.inputField = inputField;
-		this.container = autoCompleteWindow;
-		console.log(list[this.index]);
+		this.inputTextField = inputTextField;
+		this.inputIdField = inputIdField;
+		this.container = container;
 		this.highlightElement(list);
 		this.addListHandlers(list);
 	},
@@ -14,49 +15,54 @@ var ListNavigator = {
 		$(document).off('keydown');
 		$(document).keydown(function(e) {
 			if(e.keyCode == 38) { // up arrow
-				console.log("Going Up");
 				ListNavigator.index -= 1;
 				if(ListNavigator.index < 0) {
 					ListNavigator.index = 0;
 				}
-				console.log(ListNavigator.index);
+				// console.log("Up: " + ListNavigator.index);
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 40) { // down arrow
-				console.log("Going Down");
 				ListNavigator.index += 1;
 				if(ListNavigator.index >= list.length) {
 					ListNavigator.index = list.length - 1;
 				}
-				console.log("Down: " + list.length + '|' + ListNavigator.index);
+				// console.log("Down: " + ListNavigator.index);
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 13) { // enter key
-				e.stopPropagation();
-				var userId = list[ListNavigator.index].id;
-				var userName = $(list[ListNavigator.index]).find('.user-name');
-				console.log($(userName).html());
-				if(inputField != null) {
-					$(inputField).val($(userName).html());
-					$(ListNavigator.container).hide();
-				}
+				var listElement = list[ListNavigator.index];
+				ListNavigator.setInputAndClose(listElement);
+				return false;
 			}
 		});
+		$('li.register-me').off('click');
+		$('li.register-me').click(function() {
+			ListNavigator.setInputAndClose($(this)[0])
+		})
 		$(list).on({
 			hover: function() {
 				ListNavigator.unhighlightList(this);
 			}
 		});
 	},
+	setInputAndClose: function(listElement) {
+		console.log(listElement);
+		var inputValue = $(listElement).find('.value-for-input-field');
+		var inputId = $(listElement).find('.id-for-input-field');
+		$(ListNavigator.inputTextField).val($(inputValue).html());
+		$(ListNavigator.inputIdField).val($(inputId).html());
+		$(ListNavigator.container).hide();
+	},
 	highlightElement: function(list) {
 		listElement = list[this.index];
 		ListNavigator.unhighlightList(list);
-		$(listElement).addClass('active');
+		$(listElement).addClass('xactive');
 	},
 	unhighlightElement: function(list) {
-		$(listElement).removeClass('active');
+		$(listElement).removeClass('xactive');
 	},
 	unhighlightList: function(list) {
 		$(list).each(function() {
-			$(this).removeClass('active');
+			$(this).removeClass('xactive');
 		});
 	}
 }

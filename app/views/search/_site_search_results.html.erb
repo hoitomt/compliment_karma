@@ -2,13 +2,13 @@
 	<div id="site-search-results" class="clearfix">
 		<ul>
 			<% users.each do |user| %>
-				<li id="<%= user.id %>" class="clearfix" style="padding: 3px;">
-					<%= link_to user do %>
-							<div class="search-result-photo">
-								<%= image_tag(user.photo.url(:mini)) %>
-							</div>
-							<%= search_result_info(user) %>
-					<% end %>
+				<li id="<%= user.id %>" class="clearfix register-me" style="padding: 3px;">
+					<div class="search-result-photo">
+						<%= image_tag(user.photo.url(:mini)) %>
+					</div>
+					<%= search_result_info(user) %>
+					<span class="value-for-input-field"><%= user.first_last %></span>
+					<span class="id-for-input-field"><%= user.id %></span>
 				</li>
 			<% end %>
 		</ul>

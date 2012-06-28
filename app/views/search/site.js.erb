@@ -1,12 +1,15 @@
 var searchString = '<%= @search_string %>';
 var results = <%=raw @results.to_json %>;
-$('#site-search').html('<%= j(render "search/site_search_results", :users => @results) %>');
+
 var container = $('#site-search');
+container.html('<%= j(render "search/site_search_results", :users => @results) %>');
+
 if(results && results.length > 0) {
 	var list = container.find('li');
-	var inputField = $('input#search_string');
+	var inputTextField = $('input#search_string');
+	var inputIdField = $('input#user_id_result')
 	container.show();
-	ListNavigator.init(list, inputField, container);
+	ListNavigator.init(list, inputTextField, inputIdField, container);
 } else {
-	$('#site-search').hide();
+	container.hide();
 }
