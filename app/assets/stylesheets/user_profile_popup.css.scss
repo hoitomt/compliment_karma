@@ -87,6 +87,7 @@ $popup-border-bottom: 1px solid #f2f2f2;
 			.item-details-comment {
 				margin-left: 10px;
 				float: left;
+				width: $popup-box-width * 3/4 - 35px;
 			}
 		}
 		.item-comments {

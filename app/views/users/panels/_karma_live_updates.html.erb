@@ -2,7 +2,7 @@
 <% if @karma_live_items %>
 	<% @karma_live_items.each do |time, feed_item| %>
 		<% @count += 1 %>
-		<li id="item_<%= @count %>" class="item">
+		<li id="item_<%= @count %>" class="item <%= indicator(feed_item) %>">
 			<% if feed_item.item_type_id == @recognition_type_compliment.id %>
 				<%= ajax_helpers_compliment(feed_item, @count)%>
 				<%= render 'users/panels/item_compliment', :feed_item => feed_item %>
@@ -14,6 +14,7 @@
 				<%= render 'users/panels/item_accomplishment', :feed_item => feed_item %>
 			<% end %>
 			<div class="indicator <%= indicator(feed_item) %> clearfix"></div>
+			<div class="clear"></div>
 		</li>
 	<% end %>
 

@@ -1,7 +1,7 @@
 @import "common";
 @import "user_common";
 
-$top-row-height: 200px;
+$top-row-height: 225px;
 
 #user-profile {
 	.container {
@@ -14,7 +14,7 @@ $top-row-height: 200px;
 	float: left;
 	width: 375px;
 	height: $top-row-height;
-	.demographics-container { float: left; height: 100px;}
+	.demographics-container { float: left; }
 	.profile-photo { float: left; margin: 0 0 0 10px; }
 	.demographics { float: left; margin: 0 0 0 10px; }
 	.rank-buttons { position: absolute; bottom: 10px; margin-left: 10px; }
