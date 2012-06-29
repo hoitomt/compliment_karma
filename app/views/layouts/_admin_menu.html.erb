@@ -1,0 +1,14 @@
+<div id="admin-menu">
+	<div class="am-help-link">
+		<%= link_to 'help', '#' %>
+	</div>
+
+</div>
+
+<ul>
+	<% if customer_admin_user? %>
+		<li><%= link_to 'Admin Console', admin_path %></li>
+	<% end %>
+	<li><%= link_to 'Account Settings', account_settings_path(:id => current_user.id) %></li>
+	<li><%= link_to 'Log Out', logout_path %></li>
+</ul>

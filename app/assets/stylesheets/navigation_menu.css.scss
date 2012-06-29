@@ -23,26 +23,26 @@
 //		width: 5em;
 		margin-left: 20px;
 	}
-	li ul {
-		position: absolute;
-		width: 8em;
-		left: -999em;
-	}
-	li:hover ul {
-		@include bottom-border-radius-small;
-		@include nav-box-shadow;
-		left: auto;
-		background: $main-menu-color;
-		color: $nav-main-font-color;
-		font-weight: normal;
-		padding: 5px;
-		z-index: 200;		
-	}
-	li ul li {
-		display: block;
-		margin: 0px 0px 5px 0px;
-		width: 8em;
-	}
+	// li ul {
+	// 	position: absolute;
+	// 	width: 8em;
+	// 	left: -999em;
+	// }
+	// li:hover ul {
+	// 	@include bottom-border-radius-small;
+	// 	@include nav-box-shadow;
+	// 	left: auto;
+	// 	background: $main-menu-color;
+	// 	color: $nav-main-font-color;
+	// 	font-weight: normal;
+	// 	padding: 5px;
+	// 	z-index: 200;		
+	// }
+	// li ul li {
+	// 	display: block;
+	// 	margin: 0px 0px 5px 0px;
+	// 	width: 8em;
+	// }
 	li ul li a {color: $nav-main-font-color; font-weight:normal; }
 	li ul li a:hover {color: $main-menu-color; }
 	li ul li:hover {
@@ -96,4 +96,78 @@
 		border-top-left-radius: 8px;
 	}
 	
+}
+
+
+#admin-menu {
+	@include nav-box-shadow;
+	display: none;
+	position:absolute;
+	z-index: 11;
+	width: 300px;
+	color: #6c6c6c;
+	font-size: 12px;
+	a { color: $nav-main-font-color; display: inline-block;
+			font-weight: normal; font-size: 12px;}
+	a:hover { color: #ffffff; }
+	li {
+		width: 100%;
+		margin: 0 0 0 0;
+	}
+	li ul li a { color: #000000; }
+}
+.am-user-image { float: left;}
+.am-user-info { margin: 0 0 0 5px; float: left; }
+.am-profile-list { padding-bottom: 5px; border-bottom: 1px solid #d9d9d9; }
+.am-profile-title { margin: 0 0 5px 5px; }
+.am-user-profile {}
+.am-user-profile-image { float: left; margin: 5px 0 0 5px; }
+.am-user-profile-info {
+	// color: #000000;
+	padding-top: 15px;
+	margin: 0 0 0 5px;
+	float: left;
+	a:hover {color: #ffffff;}
+}
+.am-name{ color: #000000; font-weight: bold; }
+.am-help-link {
+	float: right;
+	margin: 4px 4px 0 0;
+}
+.am-current-user {
+	padding: 0 5px 5px 5px;
+	border-bottom: 1px solid #d9d9d9;
+}
+.am-current-user-links {
+	margin: 5px 0 0 45px;
+	a { display: inline-block; }
+}
+.am-button-container {
+	margin: 10px 0;
+	width: 100%;
+	.button {
+		background: $background-color;
+		width: 80px;
+		display: inline-block;
+		padding: 4px 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		font-weight: bold;
+		color: #ffffff;
+		font-size: 14px;
+		font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+		text-decoration: none;
+		vertical-align: middle;
+	}
+	.left-button {
+		float: left;
+		width: 50%;
+		text-align: center;
+	}
+	.right-button{
+		float: right;
+		width: 50%;
+		text-align: center;
+	}
 }

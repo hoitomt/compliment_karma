@@ -17,8 +17,8 @@
 					<li><%= link_to 'Demo', demo_path %></li>
 				<% else %>
 					<li>
-						<%= link_to current_user.email, current_user %>
-						<%= render 'layouts/admin/admin_menu' %>
+						<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
+						<%= render 'admin/header/admin_menu' %>
 					</li>
 					<li><%= link_to 'Pricing', pricing_path %></li>
 				<% end %>
