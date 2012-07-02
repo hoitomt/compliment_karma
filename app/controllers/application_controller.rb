@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
   include ShellHelper
+  include ViewStateHelper
   
   before_filter :shell_authenticate
   before_filter :current_view

@@ -1,10 +1,11 @@
-<% if @user == current_user %>
+<% if view_state(@user) == view_state_user_manager ||
+			view_state(@user) == view_state_company_manager %>
 	<%= form_tag(upload_photo_path, :multipart => true, 
 																	:id => "photo-upload-form", 
 																	:remote => true) do %>
 		<%= file_field 'user', 'photo', :id => 'photo-upload-input' %>
 		<!-- <input type="file" id="photo-upload-input"> -->
-		<div class="photo-upload">
+		<div class="photo-upload <%= upload_background_photo(@user) %>">
 			<p>Click to add a<br/>Profile Image</p>
 		</div>
 	<% end %>

@@ -16,7 +16,7 @@ describe ComplimentsController do
           :sender_email => "",
           :skill_id => "",
           :comment => "",
-          :relation_id => 1
+          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
         }
       end
 
@@ -32,6 +32,8 @@ describe ComplimentsController do
       end
       
       it "should not create an email message" do
+        Compliment.delete_all
+        reset_email
         post :create, :compliment => @attr
         c = Compliment.last
         last_email.should be_nil
@@ -56,7 +58,7 @@ describe ComplimentsController do
           :sender_email => user.email,
           :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
-          :relation_id => 1
+          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
         }
       end
       
@@ -103,7 +105,7 @@ describe ComplimentsController do
           :sender_email => user.email,
           :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
-          :relation_id => 1
+          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
         }
       end
       
@@ -152,7 +154,7 @@ describe ComplimentsController do
           :sender_email => user.email,
           :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
-          :relation_id => 1
+          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
         }
       end
       
@@ -202,7 +204,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :relation_id => Relation.COWORKER.id
+            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
           }
         end
         
@@ -224,7 +226,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :relation_id => Relation.CLIENT.id
+            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
           }
         end
         
@@ -251,7 +253,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :relation_id => Relation.COWORKER.id
+            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
           }
         end
         
@@ -271,7 +273,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :relation_id => Relation.COWORKER.id
+            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
           }
         end
         

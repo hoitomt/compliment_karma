@@ -72,9 +72,9 @@ else
   dummy.update_attributes(dummy_attr)
 end
 
-ck = Company.find_by_name("Compliment Karma")
+ck = Company.find_by_name("ComplimentKarma")
 ck_attr = {
-  :name => "Compliment Karma",
+  :name => "ComplimentKarma",
   :address_line_1 => '1316 White Pine Dr',
   :city => 'Eau Claire',
   :state_cd => 'WI',
@@ -92,23 +92,27 @@ end
 
 ck_user = User.find_by_email("info@complimentkarma.com")
 ck_user_attr = {:email => "info@complimentkarma.com", 
-                :name => "Corporate Communication", 
+                :name => "ComplimentKarma", 
                 :password => "ck 33 wi il",
-                :company_id => Company.find_by_name("Compliment Karma").id }
+                :company_id => ck.id }
 if ck_user.nil?
   ck_user = User.create(ck_user_attr)
 else
   ck_user.update_attributes(ck_user_attr)
 end
 
-mike_c_ck = CompanyAdministrator.find_by_user_id(mike_ck.id)
+mike_c_ck = CompanyUser.find_by_user_id(mike_ck.id)
 if mike_c_ck.blank?
-  mike_c_ck = CompanyAdministrator.create(:user_id => mike_ck.id, :company_id => ck.id)
+  mike_c_ck = CompanyUser.create(:user_id => mike_ck.id, 
+                                     :company_id => ck.id,
+                                     :administrator => "true")
 end
 
-aman_c_ck = CompanyAdministrator.find_by_user_id(aman_ck.id)
+aman_c_ck = CompanyUser.find_by_user_id(aman_ck.id)
 if aman_c_ck.blank?
-  aman_c_ck = CompanyAdministrator.create(:user_id => aman_ck.id, :company_id => ck.id)
+  aman_c_ck = CompanyUser.create(:user_id => aman_ck.id, 
+                                          :company_id => ck.id,
+                                          :administrator => "true")
 end
 
 # Relations

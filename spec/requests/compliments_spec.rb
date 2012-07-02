@@ -70,6 +70,7 @@ describe "Compliments" do
       fill_in "To", :with => "attaboy@goodjob.com"
       fill_in "Skill", :with => "tennis"
       fill_in "Comment", :with => "Awesome job at the meet yesterday"
+      select "Coworker to Coworker", :from => "compliment_compliment_type_id"
       click_button
       response.should have_selector('title', :content => 'Profile')
     end
@@ -81,6 +82,7 @@ describe "Compliments" do
           fill_in "To", :with => @receiver_email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
+          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -103,6 +105,7 @@ describe "Compliments" do
           fill_in "To", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
+          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -125,6 +128,7 @@ describe "Compliments" do
           fill_in "To", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
+          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -147,6 +151,7 @@ describe "Compliments" do
            fill_in "To", :with => receiver.email
            fill_in "Skill", :with => "tennis"
            fill_in "Comment", :with => "Awesome job at the meet yesterday"
+           select "Coworker to Coworker", :from => "compliment_compliment_type_id"
            click_button
          end.should change(Compliment, :count).by(1)
          @compliment = Compliment.last
@@ -179,6 +184,7 @@ describe "Compliments" do
           fill_in "To", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
+          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -205,6 +211,7 @@ describe "Compliments" do
           fill_in "To", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
+          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -227,6 +234,7 @@ describe "Compliments" do
            fill_in "To", :with => receiver.email
            fill_in "Skill", :with => "tennis"
            fill_in "Comment", :with => "Awesome job at the meet yesterday"
+           select "Coworker to Coworker", :from => "compliment_compliment_type_id"
            click_button
          end.should change(Compliment, :count).by(1)
          @compliment = Compliment.last
@@ -256,6 +264,7 @@ describe "Compliments" do
           fill_in "To", :with => "attaboy@goodjob.com" 
           fill_in "Skill", :with => ""
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
+          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
           click_button
         end.should_not change(Compliment, :count)
       end
@@ -265,6 +274,7 @@ describe "Compliments" do
         fill_in "To", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => ""
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
+        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
         click_button
         response.should have_selector('title', :content => 'Profile')
       end
@@ -286,6 +296,7 @@ describe "Compliments" do
         fill_in "To", :with => "jimbob@godaddy.com"
         fill_in "Skill", :with => "Ruby on Rails"
         fill_in "Comment", :with => "You are awesome"
+        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
         click_button
       end.should change(Compliment, :count).by(1)
       c = Compliment.last
@@ -305,7 +316,8 @@ describe "Compliments" do
         :sender_email => user.email,
         :receiver_email => @receiver,
         :skill_id => Skill.first.id,
-        :comment => "awesome job"
+        :comment => "awesome job",
+        :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
       }
       
       visit signup_path

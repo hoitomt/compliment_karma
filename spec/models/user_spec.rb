@@ -181,5 +181,24 @@ describe User do
       u.account_status.should eq(AccountStatus.UNCONFIRMED)
     end
   end
+
+  describe "company adminstrator" do
+    let(:company_admin){User.find_by_email('mike@complimentkarma.com')}
+    let(:company){Company.find_by_name('ComplimentKarma')}
+
+    it 'should get a user' do
+      company_admin.should_not be_nil
+    end
+
+    it "should get a company" do
+      company.should_not be_nil
+    end
+
+    it "should be the administrator of the company" do
+      admin = company_admin.is_company_administrator?(company.id)
+      admin.should be_true
+    end
+
+  end
   
 end

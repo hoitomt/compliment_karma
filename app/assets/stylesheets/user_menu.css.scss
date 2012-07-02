@@ -19,6 +19,10 @@ $font-size: 16px;
 		padding: 10px 10px 0 10px;
 		border-top: none;
 	}
+	li:last-child {
+		@include bottom-border-radius;
+		border-bottom: none;
+	}
 	li:hover {
 		background: #ffffff url(user_profile/menu_arrow_inactive_10.png) no-repeat;
 	}

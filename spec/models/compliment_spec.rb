@@ -10,7 +10,7 @@ describe Compliment do
       :sender_email => user.email,
       :skill_id => Skill.first.id,
       :comment => "I love what you did with our application",
-      :relation_id => 1
+      :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
     }
   end
   

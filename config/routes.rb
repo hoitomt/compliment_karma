@@ -1,4 +1,6 @@
 Ck::Application.routes.draw do
+  resources :company_users
+
   resources :companies
 
   root :to => "pages#index"
@@ -52,6 +54,7 @@ Ck::Application.routes.draw do
   match "users/:id/achievements" => "users#achievements", :as => :user_achievements
   match "users/:id/contacts" => "users#contacts", :as => :user_contacts
   match "users/:id/settings" => "users#settings", :as => :user_settings
+  match "users/:id/employees" => "users#employees", :as => :user_employees
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
   match "users/:id/account_settings" => "users#account_settings", :as => :account_settings
 

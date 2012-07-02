@@ -14,7 +14,8 @@ describe CkLikesController do
 	    :receiver_email => user3.email,
 	    :sender_email => user2.email,
 	    :skill_id => @skill.id,
-	    :comment => "Great Job"
+	    :comment => "Great Job",
+      :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
     )
 	  @attr = {
     	:recognition_id => @compliment.id,

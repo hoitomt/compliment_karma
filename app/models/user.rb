@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   # User Representation of the company
   belongs_to :company
   # Users that are company application administrators
-  has_many :company_administrators
-  has_many :companies, :through => :company_administrators
+  has_many :company_users
+  has_many :companies, :through => :company_users
   has_many :user_rewards
   has_many :rewards, :through => :user_rewards
   has_many :user_accomplishments
@@ -294,8 +294,12 @@ class User < ActiveRecord::Base
     return result_array
   end
 
-  def company?
+  def is_a_company?
     return !self.company.nil?
+  end
+
+  def is_company_administrator?(company_id)
+    CompanyUser.administers_company?(self.id, company_id)
   end
   
   private

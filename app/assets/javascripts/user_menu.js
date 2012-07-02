@@ -23,6 +23,7 @@ var UserMenu = {
 			case 'achievements':  return 'menu-achievements';
 			case 'contacts': return 'menu-contacts';
 			case 'settings': return 'menu-settings';
+			case 'employees': return 'menu-employees';
 			default: break;
 		}
 	}

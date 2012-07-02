@@ -489,4 +489,12 @@ module UsersHelper
     parent_skill_key = skill.parent_skill_key if skill
   end
 
+  def upload_background_photo(user)
+    if view_state(user) == view_state_company_manager
+      return "background-image-company"
+    elsif view_state(user) == view_state_user_manager
+      return "background-image-user"
+    end
+  end
+
 end

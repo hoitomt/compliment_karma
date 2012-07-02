@@ -9,7 +9,8 @@
 	text-align: center;
 }
 #user-profile-short {
-	color: #606060;
+	color: #ffffff;
+	background: #ffffff;
 	font: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
 	a { color: #606060; }
 	img { }
@@ -29,13 +30,26 @@
 	}
 	#photo-upload-input {
 		opacity: 0;
+		// background: #000;
 		height: 150px; 
-		width: 150px; 
+		width: 150px;
 		position: absolute; 
 		cursor: pointer; 
 		z-index: 9999; 
 		padding-left: 0px;
 	}
+	.background-image-company {
+		background: url('user_profile/default_company_image.png'), no-repeat;
+	}
+	.background-image-user {
+		background: url('user_profile/default_people_image.png'), no-repeat;
+	}
+	.name-location {
+		width: 200px;
+		margin: 0 auto 10px auto;
+		h1 { color: #000; text-align: left; }
+	}
+	.edit-link { float:right; margin: 0 10px 5px 0; font-size: 11px;}
 }
 #user-profile-short.not-confirmed {
 	background: $inline-error-red;

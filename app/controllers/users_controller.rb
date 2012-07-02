@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate, :except => [:new, :create, :new_account_confirmation]
   before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
                                            :professional_profile, :social_profile, 
-                                           :achievements, :contacts]
+                                           :achievements, :contacts, :employees]
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :set_static_vars
     
@@ -93,6 +93,11 @@ class UsersController < ApplicationController
 
   def settings
     
+  end
+
+  def employees
+    @company = @user.company
+    @results = @company.employees
   end
 
   def upload_photo
