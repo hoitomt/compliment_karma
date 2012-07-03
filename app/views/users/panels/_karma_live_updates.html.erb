@@ -1,5 +1,5 @@
 <% @count = @page * @per_page - @per_page %>
-<% if @karma_live_items %>
+<% unless @karma_live_items.blank? && @count == 0 %>
 	<% @karma_live_items.each do |time, feed_item| %>
 		<% @count += 1 %>
 		<li id="item_<%= @count %>" class="item <%= indicator(feed_item) %>">
@@ -22,4 +22,5 @@
 	<p style="margin-top: 15px;">
 		No Compliments, Rewards or Accomplishments have been received yet.
 	</p>
+	<div class="clear"></div>
 <% end %>
