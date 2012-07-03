@@ -1,0 +1,30 @@
+<div id="header">
+	<div class="container_16">
+		<div id="logo">
+			<%= link_to image_tag('ck_logo.png'), current_user %>
+		</div>
+		<%= render 'my_updates/my_updates_indicator' %>
+		<div id="nav-upper-right">
+			<ul>
+				<li><%= image_tag 'shopping_cart.png', :height => '25' %></li>
+				<li>
+					<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
+					<%= render 'admin/header/admin_menu' %>
+				</li>
+				<li><%= link_to 'Pricing', pricing_path %></li>
+				<li><%= link_to 'Help', '#' %></li>
+			</ul>				
+		</div>
+		<div id="menu-bar-container">
+			<div id="nav-main-menu">
+				<ul>
+					<li><%= link_to 'Home', @user %></li>
+					<li><%= link_to 'Rewards', user_rewards_path(@user) %></li>
+					<li><%= link_to 'Users', user_employees_path(@user) %></li>
+					<li style="border-right: none;"><%= link_to 'Settings', user_settings_path(@user) %></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

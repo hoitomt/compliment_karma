@@ -7,7 +7,9 @@ module ViewStateHelper
   # @user is the page being viewed
 
   def view_state(user)
-  	if user.is_a_company?
+    if user.nil?
+      return view_state_user_visitor
+  	elsif user.is_a_company?
   		company_id = user.company_id
   		if current_user.is_company_administrator?(company_id)
   			return view_state_company_manager

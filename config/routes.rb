@@ -18,9 +18,6 @@ Ck::Application.routes.draw do
   match "/search/skills" => "search#skills"
   match "/search/site" => "search#site"
   match "/admin" => "admin#index", :as => :admin
-  match "/admin/rewards" => "admin#rewards", :as => :admin_rewards
-  match "/admin/users" => "admin#users", :as => :admin_users
-  match "/admin/settings" => "admin#settings", :as => :admin_settings
   
   match "recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
@@ -56,7 +53,7 @@ Ck::Application.routes.draw do
   match "users/:id/settings" => "users#settings", :as => :user_settings
   match "users/:id/employees" => "users#employees", :as => :user_employees
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
-  match "users/:id/account_settings" => "users#account_settings", :as => :account_settings
+  match "users/:id/rewards" => "users#rewards", :as => :user_rewards
 
   resources :follows
   resources :recognition_comments, :only => [:create]

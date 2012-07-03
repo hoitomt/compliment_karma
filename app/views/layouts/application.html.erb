@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraph.org/schema/">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Compliment Karma Application | <%= @title %></title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
@@ -31,9 +31,9 @@
 	</script>
 </head>
 <body>
-	<%= render 'social/facebook_javascript' %>
+	<%#= render 'social/facebook_javascript' %>
 	<%= render 'social/twitter_javascript' %>
-	<% if @admin %>
+	<% if view_state(@user) == view_state_company_manager %>
 		<%= render 'layouts/admin_header' %>
 	<% else %>
 		<%= render 'layouts/header' %>

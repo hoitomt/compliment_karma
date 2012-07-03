@@ -9,14 +9,20 @@
 	</div>
 	<div class="clearfix"></div>
 	<div class="am-current-user">
-		<div class="am-user-image">
-			<%= image_tag(current_user.photo.url(:mini)) %>
-		</div>
-		<div class="am-user-info">
-			<span class="am-name"><%= current_user.first_last %></span><br />
-			<span class="am-email"><%= current_user.email %></span>
-		</div>
-		<div class="clear"></div>
+		<ul>
+		<%= link_to current_user, :class => 'company_profile' do %>
+			<li>
+				<div class="am-user-image">
+					<%= image_tag(current_user.photo.url(:mini)) %>
+				</div>
+				<div class="am-user-info">
+					<span class="am-name"><%= current_user.first_last %></span><br />
+					<span class="am-email"><%= current_user.email %></span>
+				</div>
+				<div class="clear"></div>
+			</li>
+		<% end %>
+		</ul>
 		<div class="am-current-user-links">
 			<%= link_to "Account", '#' %> - <%= link_to "Privacy Settings", '#' %>
 		</div>
@@ -28,7 +34,7 @@
 				<% current_user.companies.each do |company| %>
 					<% c_user = company.user %>
 					<li>
-						<%= link_to c_user do %>
+						<%= link_to c_user, :class => 'company_profile' do %>
 							<div class="am-user-profile">
 								<div class="am-user-profile-image">
 									<%= image_tag(c_user.photo.url(:mini)) %>

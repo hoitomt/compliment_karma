@@ -1,12 +1,17 @@
-namespace :compliment do
+namespace :ck do
   @dummy_email = "dummy@example.org"
   @comments = ["You're awesome!", "I love your work", "Great Job on the Obama Case",
                "Sweet job", "Way to go", "Nice work on that project",
                "Good job", "Awesome", "You're a rockstar!", "You're great",
                "Chicago is a cool city"]
-  
+               
+  desc "Seed the Database"
+  task :seed_database => [:add_skills, :add_compliments, :add_rewards, :add_compliments] do
+    puts "Database has been seeded"
+  end
+
   desc "Add some compliments for the dummy user at various visibilities"
-  task :add do |cmd, args|
+  task :add_compliments do |cmd, args|
     Rake::Task[:environment].invoke
 
     homer = User.find_by_email("homerj@springfield.net")
@@ -73,23 +78,15 @@ namespace :compliment do
     
     puts "#{cmd} Complete - #{count} Compliments Created"
   end
-  
-end
-
-namespace :skill do
 
   desc "Populate the database with skills"
-  task :add do |cmd, args|
+  task :add_skills do |cmd, args|
     Rake::Task[:environment].invoke
-    SkillsSandbox.parse_list
+    SkillsLoader.parse_list
   end
-end
-
-namespace :reward do
-  @dummy_email = "dummy@example.org"
 
   desc "Add some rewards for the dummy user at various visibilities"
-  task :add do |cmd, args|
+  task :add_rewards do |cmd, args|
     Rake::Task[:environment].invoke
     u = User.find_by_email(@dummy_email)
     
@@ -97,13 +94,9 @@ namespace :reward do
     u.rewards << Reward.GIFT_CARD_75
     u.save
   end
-end
-
-namespace :accomplishment do
-  @dummy_email = "dummy@example.org"
 
   desc "Add some accomplishments for the dummy user at various visibilities"
-  task :add do |cmd, args|
+  task :add_accomplishments do |cmd, args|
     Rake::Task[:environment].invoke
     u = User.find_by_email(@dummy_email)
     

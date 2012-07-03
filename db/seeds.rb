@@ -6,115 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-mike = User.find_by_email("mike@hoitomt.com")
-mike_attr = {:email => "mike@hoitomt.com", 
-                :name => "Mike Hoitomt", 
-                :password => "w1sco kid 33",
-                :first_name => "Mike",
-                :last_name => "Hoitomt",
-                :domain => "hoitomt.com"}
-if mike.nil?
-  mike = User.new(mike_attr)
-  mike.founder = "Y"
-  mike.save
-else
-  mike.update_attributes(mike_attr)
-end
-
-mike_ck = User.find_by_email("mike@complimentkarma.com")
-mike_ck_attr = {:email => "mike@complimentkarma.com", 
-                :name => "Michael Hoitomt", 
-                :password => "w1sco kid 33"}
-if mike_ck.nil?
-  mike_ck = User.new(mike_ck_attr)
-  mike_ck.save
-else
-  mike_ck.update_attributes(mike_ck_attr)
-end
-
-aman = User.find_by_email("rewardtheproductive@gmail.com")
-aman_attr = { :email => "rewardtheproductive@gmail.com", 
-                   :name => "Guramandeep Singh", 
-                   :password => "ch1 town 41",
-                   :first_name => "Guramandeep",
-                   :last_name => "Singh",
-                   :domain => "gmail.com" }
-if aman.nil?  
-  aman = User.new( aman_attr )
-  aman.founder = "Y"
-  aman.save
-else
-  aman.update_attributes(aman_attr)
-end
-
-aman_ck = User.find_by_email("aman@complimentkarma.com")
-aman_ck_attr = {:email => "aman@complimentkarma.com", 
-                :name => "Aman Singh", 
-                :password => "ch1 town 41"}
-if aman_ck.nil?
-  aman_ck = User.new(aman_ck_attr)
-  aman_ck.save
-else
-  aman_ck.update_attributes(aman_ck_attr)
-end
-
-dummy = User.find_by_email("dummy@example.org")
-dummy_attr = { :email => "dummy@example.org", 
-                   :name => "Dummy User", 
-                   :password => "dummy user",
-                   :first_name => "Dummy",
-                   :last_name => "User",
-                   :domain => "example.org" }
-if dummy.nil?  
-  dummy = User.new( dummy_attr )
-  dummy.save
-else
-  dummy.update_attributes(dummy_attr)
-end
-
-ck = Company.find_by_name("ComplimentKarma")
-ck_attr = {
-  :name => "ComplimentKarma",
-  :address_line_1 => '1316 White Pine Dr',
-  :city => 'Eau Claire',
-  :state_cd => 'WI',
-  :zip_cd => '54701',
-  :country => 'USA',
-  :email => 'info@complimentkarma.com',
-  :url => 'www.complimentkarma.com',
-  :phone => '(715) 225-2563'
-}
-if ck.nil?
-  ck = Company.create(ck_attr)
-else
-  ck.update_attributes(ck_attr)
-end
-
-ck_user = User.find_by_email("info@complimentkarma.com")
-ck_user_attr = {:email => "info@complimentkarma.com", 
-                :name => "ComplimentKarma", 
-                :password => "ck 33 wi il",
-                :company_id => ck.id }
-if ck_user.nil?
-  ck_user = User.create(ck_user_attr)
-else
-  ck_user.update_attributes(ck_user_attr)
-end
-
-mike_c_ck = CompanyUser.find_by_user_id(mike_ck.id)
-if mike_c_ck.blank?
-  mike_c_ck = CompanyUser.create(:user_id => mike_ck.id, 
-                                     :company_id => ck.id,
-                                     :administrator => "true")
-end
-
-aman_c_ck = CompanyUser.find_by_user_id(aman_ck.id)
-if aman_c_ck.blank?
-  aman_c_ck = CompanyUser.create(:user_id => aman_ck.id, 
-                                          :company_id => ck.id,
-                                          :administrator => "true")
-end
-
 # Relations
 Relation.create(:name => 'Coworker', :category => 'Internal')
 Relation.create(:name => 'Client', :category => 'External')
@@ -146,15 +37,6 @@ Visibility.create(:name => 'everybody')
 RelationshipStatus.create(:name => 'Accepted')
 RelationshipStatus.create(:name => 'Pending')
 RelationshipStatus.create(:name => 'Not Accepted')
-
-mike.account_status = AccountStatus.find_by_name('Confirmed')
-mike.save
-
-aman.account_status = AccountStatus.find_by_name('Confirmed')
-aman.save
-
-dummy.account_status= AccountStatus.find_by_name('Confirmed')
-dummy.save
 
 Reward.create(:name => '$25 Gift Card', 
               :image_thumb => 'reward/reward_thumb.png',
@@ -272,3 +154,122 @@ if Skill.find_by_name('User Defined').nil?
   s = Skill.create(:name => 'User Defined')
   s.update_attributes(:parent_skill_id => s.id)
 end
+
+mike = User.find_by_email("mike@hoitomt.com")
+mike_attr = {:email => "mike@hoitomt.com", 
+                :name => "Mike Hoitomt", 
+                :password => "w1sco kid 33",
+                :first_name => "Mike",
+                :last_name => "Hoitomt",
+                :domain => "hoitomt.com"}
+if mike.nil?
+  mike = User.new(mike_attr)
+  mike.founder = "Y"
+  mike.save
+else
+  mike.update_attributes(mike_attr)
+end
+
+mike_ck = User.find_by_email("mike@complimentkarma.com")
+mike_ck_attr = {:email => "mike@complimentkarma.com", 
+                :name => "Michael Hoitomt", 
+                :password => "w1sco kid 33"}
+if mike_ck.nil?
+  mike_ck = User.new(mike_ck_attr)
+  mike_ck.save
+else
+  mike_ck.update_attributes(mike_ck_attr)
+end
+
+aman = User.find_by_email("rewardtheproductive@gmail.com")
+aman_attr = { :email => "rewardtheproductive@gmail.com", 
+                   :name => "Guramandeep Singh", 
+                   :password => "ch1 town 41",
+                   :first_name => "Guramandeep",
+                   :last_name => "Singh",
+                   :domain => "gmail.com" }
+if aman.nil?  
+  aman = User.new( aman_attr )
+  aman.founder = "Y"
+  aman.save
+else
+  aman.update_attributes(aman_attr)
+end
+
+aman_ck = User.find_by_email("aman@complimentkarma.com")
+aman_ck_attr = {:email => "aman@complimentkarma.com", 
+                :name => "Aman Singh", 
+                :password => "ch1 town 41"}
+if aman_ck.nil?
+  aman_ck = User.new(aman_ck_attr)
+  aman_ck.save
+else
+  aman_ck.update_attributes(aman_ck_attr)
+end
+
+dummy = User.find_by_email("dummy@example.org")
+dummy_attr = { :email => "dummy@example.org", 
+                   :name => "Dummy User", 
+                   :password => "dummy user",
+                   :first_name => "Dummy",
+                   :last_name => "User",
+                   :domain => "example.org" }
+if dummy.nil?  
+  dummy = User.new( dummy_attr )
+  dummy.save
+else
+  dummy.update_attributes(dummy_attr)
+end
+
+ck = Company.find_by_name("ComplimentKarma")
+ck_attr = {
+  :name => "ComplimentKarma",
+  :address_line_1 => '1316 White Pine Dr',
+  :city => 'Eau Claire',
+  :state_cd => 'WI',
+  :zip_cd => '54701',
+  :country => 'USA',
+  :email => 'info@complimentkarma.com',
+  :url => 'www.complimentkarma.com',
+  :phone => '(715) 225-2563'
+}
+if ck.nil?
+  ck = Company.create(ck_attr)
+else
+  ck.update_attributes(ck_attr)
+end
+
+ck_user = User.find_by_email("info@complimentkarma.com")
+ck_user_attr = {:email => "info@complimentkarma.com", 
+                :name => "ComplimentKarma", 
+                :password => "ck 33 wi il",
+                :company_id => ck.id,
+                :account_status_id => 2 }
+if ck_user.nil?
+  ck_user = User.create(ck_user_attr)
+else
+  ck_user.update_attributes(ck_user_attr)
+end
+
+mike_c_ck = CompanyUser.find_by_user_id(mike_ck.id)
+if mike_c_ck.blank?
+  mike_c_ck = CompanyUser.create(:user_id => mike_ck.id, 
+                                     :company_id => ck.id,
+                                     :administrator => "true")
+end
+
+aman_c_ck = CompanyUser.find_by_user_id(aman_ck.id)
+if aman_c_ck.blank?
+  aman_c_ck = CompanyUser.create(:user_id => aman_ck.id, 
+                                          :company_id => ck.id,
+                                          :administrator => "true")
+end
+
+mike.account_status = AccountStatus.find_by_name('Confirmed')
+mike.save
+
+aman.account_status = AccountStatus.find_by_name('Confirmed')
+aman.save
+
+dummy.account_status= AccountStatus.find_by_name('Confirmed')
+dummy.save
