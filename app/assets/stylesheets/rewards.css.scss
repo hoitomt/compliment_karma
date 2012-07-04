@@ -1,1 +1,16 @@
 @import 'common';
+
+.rewards-header {
+	@include top-border-radius;
+	margin: 10px 0 0 0;
+	background: #ffffff;
+	border-bottom: solid 1px #D9D9D9;
+	.title { 
+		font-size: 16px;
+		font-weight: bold;
+		padding: 15px 0 0 25px;}
+}
+.rewards-body {
+	@include bottom-border-radius;
+	background: #ffffff;
+}

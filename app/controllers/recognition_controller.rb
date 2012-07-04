@@ -42,12 +42,11 @@ class RecognitionController < ApplicationController
   
   def set_reward_detail
     logger.info('Reward Detail')
-    @user_reward = UserReward.find(@recognition_id)
-    if @user_reward
-      @user = @user_reward.user
-      @reward = @user_reward.reward
-      @updated_at = @user_reward.updated_at
-      @presenter = User.find_by_id(@user_reward.presenter_id)
+    @reward = Reward.find(@recognition_id)
+    if @reward
+      @receiver = @reward.receiver
+      @presenter = @reward.presenter
+      @updated_at = @reward.updated_at
     end      
   end
   

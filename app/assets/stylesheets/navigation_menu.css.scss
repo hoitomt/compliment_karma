@@ -117,19 +117,20 @@
 	li {
 		width: 100%;
 		margin: 0 0 0 0;
-		padding: 5px 0 5px 5px;
+		padding: 5px 0 5px 0;
 	}
+	li:hover, li:hover a { color: #ffffff; }
 	li ul li a { color: #000000; }
 }
-.am-user-image { float: left;}
-.am-user-info { margin: 0 0 0 0; float: left; }
+.am-user-image { float: left; margin: 0 0 0 5px;}
+.am-user-info { margin: 0 0 0 5px; float: left; }
 .am-profile-list { border-bottom: 1px solid #d9d9d9; }
-.am-profile-title { margin: 0 0 5px 5px; }
+.am-profile-title { margin: 0 0 5px 5px; font-weight: bold;}
 .am-user-profile {}
-.am-user-profile-image { float: left; }
+.am-user-profile-image { float: left;  margin: 0 0 0 5px; }
 .am-user-profile-info {
 	// color: #000000;
-	padding-top: 15px;
+	padding-top: 10px;
 	margin: 0 0 0 5px;
 	float: left;
 	a:hover {color: #ffffff;}
@@ -140,7 +141,7 @@
 	margin: 4px 4px 0 0;
 }
 .am-current-user {
-	padding: 0 5px 5px 0;
+	padding: 0 0 5px 0;
 	border-bottom: 1px solid #d9d9d9;
 }
 .am-current-user-links {

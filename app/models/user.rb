@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   # Users that are company application administrators
   has_many :company_users
   has_many :companies, :through => :company_users
-  has_many :user_rewards
-  has_many :rewards, :through => :user_rewards
+  has_many :rewards_presented, :class_name => 'Reward', :foreign_key => 'presenter_id'
+  has_many :rewards_received, :class_name => 'Reward', :foreign_key => 'receiver_id'
   has_many :user_accomplishments
   has_many :accomplishments, :through => :user_accomplishments
   has_many :ck_likes

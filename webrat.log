@@ -11116,3 +11116,277 @@ REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REF
 REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
 REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"user@example.com", "name"=>"Example User", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
 REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"unconfirmed_user@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/141 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"attaboy@goodjob.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/141"}
+REQUESTING PAGE: GET http://www.example.com/users/141 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/143 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"attaboy@goodjob.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/143"}
+REQUESTING PAGE: GET http://www.example.com/users/143 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/145 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"attaboy@goodjob.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/145"}
+REQUESTING PAGE: GET http://www.example.com/users/145 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/147 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"attaboy@goodjob.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/147"}
+REQUESTING PAGE: GET http://www.example.com/users/147 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/149 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"unconfirmed_user3@simpsons.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/149"}
+REQUESTING PAGE: GET http://www.example.com/users/149 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/152 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"unconfirmed_user@example.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/152"}
+REQUESTING PAGE: GET http://www.example.com/users/152 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/155 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"factory_user@testing.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/155"}
+REQUESTING PAGE: GET http://www.example.com/users/155 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/158 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"factory_user@testing.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/158"}
+REQUESTING PAGE: GET http://www.example.com/users/158 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/161 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"factory_user@testing.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/161"}
+REQUESTING PAGE: GET http://www.example.com/users/161 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/164 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"factory_user@testing.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/164"}
+REQUESTING PAGE: GET http://www.example.com/users/164 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/167 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"factory_user3@example.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/167"}
+REQUESTING PAGE: GET http://www.example.com/users/167 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/170 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"factory_user3@example.com", "skill_id"=>"tennis", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/170"}
+REQUESTING PAGE: GET http://www.example.com/users/170 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/173 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"attaboy@goodjob.com", "skill_id"=>"", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/173"}
+REQUESTING PAGE: GET http://www.example.com/users/173 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user2@example.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/175 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"attaboy@goodjob.com", "skill_id"=>"", "comment"=>"Awesome job at the meet yesterday", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/175"}
+REQUESTING PAGE: GET http://www.example.com/users/175 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/177 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: POST /compliments with {"utf8"=>"✓", "request_page"=>"user", "skill_id_result"=>"", "compliment"=>{"receiver_email"=>"jimbob@godaddy.com", "skill_id"=>"Ruby on Rails", "comment"=>"You are awesome", "compliment_type_id"=>"1"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/177"}
+REQUESTING PAGE: GET http://www.example.com/users/177 with {} and HTTP headers {"HTTP_REFERER"=>"/compliments"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_sender@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_sender@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_sender@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: GET /password_resets/new with {} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: POST /password_resets with {"utf8"=>"✓", "email"=>"factory_user@testing.com"} and HTTP headers {"HTTP_REFERER"=>"/password_resets/new"}
+REQUESTING PAGE: GET http://www.example.com/login with {} and HTTP headers {"HTTP_REFERER"=>"/password_resets"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: GET /password_resets/new with {} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: POST /password_resets with {"utf8"=>"✓", "email"=>"madeupuser@example.com"} and HTTP headers {"HTTP_REFERER"=>"/password_resets/new"}
+REQUESTING PAGE: GET http://www.example.com/login with {} and HTTP headers {"HTTP_REFERER"=>"/password_resets"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_user@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_user@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/invite_coworkers"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_user@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/invite_coworkers"}
+REQUESTING PAGE: GET /users/196 with {} and HTTP headers {"HTTP_REFERER"=>"/invite_others"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/198 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/198"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "next_page"=>"invite_coworkers ", "multi_invitation"=>{"email1"=>"my_coworker", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_coworkers"}
+REQUESTING PAGE: GET http://www.example.com/invite_others with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/200 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/200"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "next_page"=>"invite_coworkers ", "multi_invitation"=>{"email1"=>"my_coworker@google.com", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_coworkers"}
+REQUESTING PAGE: GET http://www.example.com/invite_others with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/202 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/202"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "next_page"=>"invite_coworkers ", "multi_invitation"=>{"email1"=>"my coworker", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_coworkers"}
+REQUESTING PAGE: GET http://www.example.com/invite_others with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/204 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/204"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "next_page"=>"invite_coworkers ", "multi_invitation"=>{"email1"=>"my_employee", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_coworkers"}
+REQUESTING PAGE: GET http://www.example.com/invite_others with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/206 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/206"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "multi_invitation"=>{"email1"=>"my_coworker", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_others"}
+REQUESTING PAGE: GET http://www.example.com/users/206 with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/208 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/208"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "multi_invitation"=>{"email1"=>"my_coworker@google.com", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_others"}
+REQUESTING PAGE: GET http://www.example.com/users/208 with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /sessions with {"utf8"=>"✓", "session"=>{"email"=>"factory_user@testing.com", "password"=>"foobar", "remember_me"=>"0"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/users/210 with {} and HTTP headers {"HTTP_REFERER"=>"/sessions"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/210"}
+REQUESTING PAGE: POST /invitations with {"utf8"=>"✓", "multi_invitation"=>{"email1"=>"my coworker", "email2"=>"", "email3"=>"", "email4"=>"", "email5"=>"", "email6"=>""}} and HTTP headers {"HTTP_REFERER"=>"/invite_others"}
+REQUESTING PAGE: GET http://www.example.com/users/210 with {} and HTTP headers {"HTTP_REFERER"=>"/invitations"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_user@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/invite_coworkers"}
+REQUESTING PAGE: GET /users/212 with {} and HTTP headers {"HTTP_REFERER"=>"/invite_others"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"test_user@example.com", "name"=>"test user mcgee", "password"=>"1234 on the floor"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET /invite_others with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/invite_coworkers"}
+REQUESTING PAGE: GET /users/214 with {} and HTTP headers {"HTTP_REFERER"=>"/invite_others"}
+REQUESTING PAGE: GET http://www.example.com/email_api/new_account_confirmation.3QPwy0KlSTrQxJEY2uGx1g with {} and HTTP headers {"HTTP_REFERER"=>"/users/214"}
+REQUESTING PAGE: GET /users/214 with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/email_api/new_account_confirmation.3QPwy0KlSTrQxJEY2uGx1g"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"", "name"=>"", "password"=>""}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET /shells/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /shells with {"utf8"=>"✓", "shell"=>{"email"=>"founder@example.com", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/shells/new"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/shells"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: POST /users with {"utf8"=>"✓", "user"=>{"email"=>"user@example.com", "name"=>"Example User", "password"=>"foobar"}} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/invite_coworkers with {} and HTTP headers {"HTTP_REFERER"=>"/users"}

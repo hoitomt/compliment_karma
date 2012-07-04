@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702043241) do
+ActiveRecord::Schema.define(:version => 20120703060722) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -153,12 +153,11 @@ ActiveRecord::Schema.define(:version => 20120702043241) do
   end
 
   create_table "rewards", :force => true do |t|
-    t.string   "name"
-    t.string   "image_thumb"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_mini"
-    t.decimal  "value",       :precision => 8, :scale => 2
+    t.decimal  "value",        :precision => 8, :scale => 2
+    t.integer  "receiver_id"
+    t.integer  "presenter_id"
   end
 
   create_table "skills", :force => true do |t|
@@ -191,14 +190,6 @@ ActiveRecord::Schema.define(:version => 20120702043241) do
     t.integer  "accomplishment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "user_rewards", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "reward_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "presenter_id"
   end
 
   create_table "users", :force => true do |t|

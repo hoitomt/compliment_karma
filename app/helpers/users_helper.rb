@@ -185,6 +185,9 @@ module UsersHelper
       else
         link_to link_text, new_compliment_path, :remote => true
       end
+    elsif feed_item && feed_item.item_type_id == @recognition_type_reward.id
+      return link_to link_text, new_compliment_path(:recipient_id => feed_item.item_object.receiver_id),
+                                                    :remote => true
     else
       return link_to link_text, new_compliment_path(:recipient_id => feed_item.item_object.user_id),
                                                     :remote => true
@@ -259,6 +262,8 @@ module UsersHelper
       else
         return "Follow"
       end
+    elsif feed_item.item_type_id == @recognition_type_reward.id
+      return follow_single_link(feed_item.item_object.receiver_id, "Follow")
     else
       return follow_single_link(feed_item.item_object.user_id, "Follow")
     end
@@ -313,7 +318,7 @@ module UsersHelper
   def ajax_helpers_reward(feed_item, count)
     html = ajax_helpers_standard(feed_item, count)
   	html += hidden_field_tag "recognition-type-id", RecognitionType.REWARD.id
-    html += hidden_field_tag "user-id", feed_item.item_object.user_id
+    html += hidden_field_tag "user-id", feed_item.item_object.receiver_id
   end
   
   def ajax_helpers_accomplishment(feed_item, count)
@@ -359,8 +364,8 @@ module UsersHelper
   end
 
   def get_reward_image(id)
-    ur = UserReward.find_by_id(reward_id)
-    return image_tag(ur.reward.image_mini)
+    reward = Reward.find_by_id(reward_id)
+    return image_tag(reward.image_mini)
   end
 
   def get_accomplishment_image(id)
@@ -379,10 +384,9 @@ module UsersHelper
     return "#{domain}/#{recognition_type_id}/#{recognition_id}"
   end
 
-  def presenter_name(user_reward)
-    unless user_reward.presenter_id.blank?
-      u = User.find_by_id(user_reward.presenter_id)
-      return " from #{u.full_name}"
+  def presenter_name(reward)
+    unless reward.presenter_id.blank?
+      return " from #{reward.presenter.full_name}"
     end
   end
 
@@ -409,7 +413,7 @@ module UsersHelper
         return User.find_by_id(feed_item.item_object.receiver_user_id).full_name
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
-      return User.find_by_id(feed_item.item_object.user_id).full_name
+      return User.find_by_id(feed_item.item_object.receiver_id).full_name
     elsif feed_item.item_type_id == @recognition_type_accomplishment.id
       # Nothing
     end

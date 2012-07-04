@@ -20,12 +20,14 @@
 					<span class="am-email"><%= current_user.email %></span>
 				</div>
 				<div class="clear"></div>
+				<div class="am-current-user-links">
+					<%= link_to "Account", '#' %> - <%= link_to "Privacy Settings", '#' %>
+				</div>
+				<div class="clear"></div>
 			</li>
 		<% end %>
 		</ul>
-		<div class="am-current-user-links">
-			<%= link_to "Account", '#' %> - <%= link_to "Privacy Settings", '#' %>
-		</div>
+		<div class="clear"></div>
 	</div>
 	<% if customer_admin_user? %>
 		<div class="am-profile-list">
@@ -33,19 +35,17 @@
 			<ul>
 				<% current_user.companies.each do |company| %>
 					<% c_user = company.user %>
-					<li>
-						<%= link_to c_user, :class => 'company_profile' do %>
-							<div class="am-user-profile">
-								<div class="am-user-profile-image">
-									<%= image_tag(c_user.photo.url(:mini)) %>
-								</div>
-								<div class="am-user-profile-info">
-									<%= company.name %>
-								</div>
-								<div class="clear"></div>
+					<%= link_to c_user, :class => 'company_profile' do %>
+						<li>
+							<div class="am-user-profile-image">
+								<%= image_tag(c_user.photo.url(:mini)) %>
 							</div>
-						<% end %>
-					</li>
+							<div class="am-user-profile-info">
+								<%= company.name %>
+							</div>
+							<div class="clear"></div>
+						</li>
+					<% end %>
 				<% end %>
 			</ul>
 			<div class="clear"></div>

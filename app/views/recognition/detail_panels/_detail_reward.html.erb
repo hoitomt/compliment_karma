@@ -1,10 +1,10 @@
 <div class="left-column">
 	<div class="image-function">
-		<%= get_user_photo_link_small(@user) %>
+		<%= get_user_photo_link_small(@receiver) %>
 		<div class="functions">
-			<h3><%= get_user_full_name(@user) %></h3>
-			<%= compliment_button(@user) %>
-			<%= follows_button_medium(@user) %>
+			<h3><%= get_user_full_name(@receiver) %></h3>
+			<%= compliment_button(@receiver) %>
+			<%= follows_button_medium(@receiver) %>
 		</div>
 	</div>
 </div>
@@ -13,9 +13,9 @@
 </div>
 <div class="right-column">
 	<div class="image-function">
-		<%= image_tag @reward.image_thumb %>
+		<%= image_tag 'reward_money.png' %>
 		<div class="functions">
-			<h3><%= @reward.name %></h3>
+			<h3><%= number_to_currency(@reward.value) %></h3>
 		</div>
 	</div>
 </div>

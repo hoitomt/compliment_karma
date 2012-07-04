@@ -1,10 +1,9 @@
-<% user_reward = feed_item.item_object %>
-<% reward = user_reward.reward %>
-<% user = user_reward.user %>
+<% reward = feed_item.item_object %>
+<% receiver = reward.receiver %>
 <div class="image">
-	<% if user %>
-		<%= link_to user do %>
-			<%= image_tag(user.photo.url(:thumb)) %>
+	<% if receiver %>
+		<%= link_to receiver do %>
+			<%= image_tag(receiver.photo.url(:thumb)) %>
 		<% end %>
 	<% else %>
 		<%= image_tag('/photos/thumb/missing.png') %>
@@ -16,15 +15,15 @@
 																		:recognition_id => feed_item.item_object.id),
 																		:remote => true do %>
 	<div class="feed-item">
-		<p>Rewards with <%= reward.name %>
+		<p>Rewards with <%= number_to_currency(reward.value) %>
 			 <%= presenter_name(feed_item.item_object) %></p>
 	</div>
 	<% end %>
 	<%= render 'users/panels/item_social', :feed_item => feed_item %>	
 </div>
 <div class="image">
-	<%= get_image(reward.image_thumb) %>
+	<%= image_tag('reward_money.png') %>
 </div>
 <div class="timestamp">
-	<%= timestamp(user_reward.updated_at) %>
+	<%= timestamp(reward.updated_at) %>
 </div>

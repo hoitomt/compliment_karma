@@ -21,8 +21,8 @@ class FeedItem
     end
 
     if rewards
-      rewards.each do |user_reward|
-        h[user_reward.updated_at] = FeedItem.new(user_reward.updated_at, rt_reward_id, user_reward)
+      rewards.each do |reward|
+        h[reward.updated_at] = FeedItem.new(reward.updated_at, rt_reward_id, reward)
       end
     end
 

@@ -31,11 +31,11 @@ class UpdateHistory < ActiveRecord::Base
   end
 
   def self.Like_Reward(ck_like, current_user_id)
-    r = UserReward.find_by_id(ck_like.recognition_id)
+    r = Reward.find_by_id(ck_like.recognition_id)
     reward_presenter = User.find_by_id(r.presenter_id).full_name unless r.presenter_id.blank?
     note = "liked your reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
-    add_update_history( r.user_id,
+    add_update_history( r.receiver_id,
                         UpdateHistoryType.Like_Reward.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
@@ -89,11 +89,11 @@ class UpdateHistory < ActiveRecord::Base
   end
 
   def self.Comment_on_Reward(recognition_comment, current_user_id)
-    r = UserReward.find_by_reward_id(recognition_comment.recognition_id)
+    r = Reward.find_by_id(recognition_comment.recognition_id)
     reward_presenter = User.find_by_id(r.presenter_id).full_name unless r.presenter_id.blank?
-    note = "commented on your #{r.name}"
+    note = "commented on your #{r.value} reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
-    add_update_history( r.user_id,
+    add_update_history( r.receiver_id,
                         UpdateHistoryType.Comment_on_Reward,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
@@ -118,16 +118,17 @@ class UpdateHistory < ActiveRecord::Base
                         "earned a #{a.name}", user_accomplishment.user_id)
   end
 
-  def self.Received_Reward(user_reward)
-    reward_presenter = User.find_by_id(user_reward.presenter_id).full_name unless 
-                            user_reward.presenter_id.blank?
-    note = "received a #{user_reward.reward.name}"
+  def self.Received_Reward(reward)
+    reward_presenter = User.find_by_id(reward.presenter_id).full_name unless 
+                            reward.presenter_id.blank?
+    value = "$%6.2f" % reward.value
+    note = "received a #{value} reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
-    add_update_history( user_reward.user_id,
+    add_update_history( reward.receiver_id,
                         UpdateHistoryType.Received_Reward,
-                        RecognitionType.REWARD,
-                        user_reward.reward_id,
-                        note, user_reward.user_id)
+                        RecognitionType.REWARD.id,
+                        reward.id,
+                        note, reward.receiver_id)
   end
 
   def self.Accepted_Compliments_Receiver(relationship)

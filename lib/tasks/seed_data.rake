@@ -1,5 +1,6 @@
 namespace :ck do
   @dummy_email = "dummy@example.org"
+  @homer_email = "homerj@springfield.net"
   @comments = ["You're awesome!", "I love your work", "Great Job on the Obama Case",
                "Sweet job", "Way to go", "Nice work on that project",
                "Good job", "Awesome", "You're a rockstar!", "You're great",
@@ -88,11 +89,10 @@ namespace :ck do
   desc "Add some rewards for the dummy user at various visibilities"
   task :add_rewards do |cmd, args|
     Rake::Task[:environment].invoke
-    u = User.find_by_email(@dummy_email)
-    
-    u.rewards << Reward.GIFT_CARD_25
-    u.rewards << Reward.GIFT_CARD_75
-    u.save
+    receiver = User.find_by_email(@dummy_email)
+    presenter = User.find_by_email(@homer_email)
+    Reward.create(:receiver_id => receiver.id, :presenter_id => presenter.id, :value => 25)
+    Reward.create(:receiver_id => receiver.id, :presenter_id => presenter.id, :value => 75)
   end
 
   desc "Add some accomplishments for the dummy user at various visibilities"

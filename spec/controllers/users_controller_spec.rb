@@ -73,15 +73,19 @@ describe UsersController do
     
     describe "rewards" do
       before(:each) do
-        4.times do
-          user3.rewards << Reward.GIFT_CARD_25
-          user3.save!
+        Reward.delete_all
+        4.times do |index|
+          value = index * 25 +25
+          Reward.create(:receiver_id => user2.id, :presenter_id => user3.id, :value => value)
         end
         Follow.create(:subject_user_id => user3.id, :follower_user_id => user2.id)
         test_sign_in(user2)
       end
       
       it "should have the correct number of Rewards in Karma Live for Followed user" do
+        Reward.count.should eq(4)
+        r = Reward.last
+        r.receiver.should eq(user2)
         get :show, :id => user2
         assigns(:karma_live_items_count).should eq(4)
       end

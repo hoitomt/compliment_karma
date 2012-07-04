@@ -28,7 +28,7 @@ class RecognitionComment < ActiveRecord::Base
     get_all_comments(recognition_id, RecognitionType.COMPLIMENT.id)
   end
   
-  # The recognition_id is the user_reward_id
+  # The recognition_id is the reward_id
   def self.get_all_reward_comments(recognition_id)
     get_all_comments(recognition_id, RecognitionType.REWARD.id)
   end

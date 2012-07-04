@@ -56,9 +56,9 @@ class UsersController < ApplicationController
     received_compliments = Compliment.received_professional_compliments(@user)
     @compliments_sent = sent_compliments.count
     @compliments_received = received_compliments.count
-    @rewards_earned_amount = UserReward.earned_reward_amount(@user.id)
-    @rewards_earned_count = UserReward.earned_reward_count(@user.id)
-    @rewards_sent = UserReward.sent_reward_count(@user.id)
+    @rewards_earned_amount = Reward.earned_reward_amount(@user.id)
+    @rewards_earned_count = Reward.earned_reward_count(@user.id)
+    @rewards_sent = Reward.sent_reward_count(@user.id)
     @followers = Follow.followers(@user.id)
     @following = Follow.following(@user.id)
     @compliments_received_by_skill = compliment_count_by_skill(received_compliments)
@@ -211,12 +211,11 @@ class UsersController < ApplicationController
   
   def set_reward_detail
     logger.info('Reward Detail')
-    @user_reward = UserReward.find(@recognition_id)
-    if @user_reward
-      @user = @user_reward.user
-      @reward = @user_reward.reward
-      @updated_at = @user_reward.updated_at
-      @presenter = User.find_by_id(@user_reward.presenter_id)
+    @reward = Reward.find(@recognition_id)
+    if @reward
+      @user = @reward.receiver
+      @updated_at = @reward.updated_at
+      @presenter = @reward.presenter
     end      
   end
   
@@ -352,7 +351,7 @@ class UsersController < ApplicationController
       else
         compliments = Compliment.all_compliments_from_followed_and_self(@user)
       end
-      rewards = UserReward.rewards_from_followed(@user)
+      rewards = Reward.rewards_from_followed(@user)
       accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
       FeedItem.construct_items(compliments, rewards, accomplishments)
     end

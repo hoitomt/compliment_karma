@@ -38,19 +38,6 @@ RelationshipStatus.create(:name => 'Accepted')
 RelationshipStatus.create(:name => 'Pending')
 RelationshipStatus.create(:name => 'Not Accepted')
 
-Reward.create(:name => '$25 Gift Card', 
-              :image_thumb => 'reward/reward_thumb.png',
-              :image_mini => 'reward/reward_mini.png')
-Reward.create(:name => '$50 Gift Card', 
-              :image_thumb => 'reward/reward_thumb.png',
-              :image_mini => 'reward/reward_mini.png')
-Reward.create(:name => '$75 Gift Card', 
-              :image_thumb => 'reward/reward_thumb.png',
-              :image_mini => 'reward/reward_mini.png')
-Reward.create(:name => '$100 Gift Card', 
-              :image_thumb => 'reward/reward_thumb.png',
-              :image_mini => 'reward/reward_mini.png')
-
 Accomplishment.create(:name => 'Gold Trophy', 
                       :threshold => 500,
                       :image_thumb => 'accomplishment/trophy_thumb.png',
