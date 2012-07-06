@@ -9,8 +9,8 @@ var Reward = {
 		$('#filter_stop_date').datepicker();
 	},
 	setHandlers: function() {
+		$('select#filter_time_period_type').off('change');
 		$('select#filter_time_period_type').change(function() {
-			console.log();
 			var selectedOption = $(this).val();
 			var stopDate = $('#show-stop-date');
 			if(selectedOption == "Between") {
@@ -18,6 +18,16 @@ var Reward = {
 			} else {
 				stopDate.hide();
 			}
+		});
+		$('select#department_filter').off('change');
+		$('select#department_filter').change(function() {
+			var departmentId = $(this).val();
+			var companyUserId = $('#company_user_id').val();
+			$.ajax({
+				url: '/users/' + companyUserId + '/rewards.js',
+				type: 'POST',
+				data: {department_id: departmentId}
+			})
 		});
 		
 	},

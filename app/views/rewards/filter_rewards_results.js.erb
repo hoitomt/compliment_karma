@@ -1,1 +1,5 @@
 console.log('Template');
+
+$('#rewards-results').html('<%= j(render "rewards/rewards_results", {:departments => @departments, 
+																						 :user => @user, 
+																						 :employees => @employees}) %>');

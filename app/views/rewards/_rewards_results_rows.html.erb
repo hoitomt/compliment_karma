@@ -1,0 +1,16 @@
+<% employees.each_with_index do |employee, index| %>
+	<tr>
+		<td><div class="col1"><%= index + 1 %></td>
+		<td><div class="col2"><%= employee.first_last %></div></td>
+		<td><div class="col3"></div></td>
+		<td><div class="col4"><%= compliments_sent(employee) %></div></td>
+		<td><div class="col5">
+			<%= text_field 'reward_amount', employee.id, :size => 7, :style => "background: #ffffff;" %>
+		</div></td>
+		<td>
+			<div class="col6">
+				<%= check_box 'select_reward', employee.id, :class =>"checkbox" %>
+			</div>
+		</td>
+	</tr>
+<% end %>

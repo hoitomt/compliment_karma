@@ -226,6 +226,10 @@ else
   ck.update_attributes(ck_attr)
 end
 
+CompanyDepartment.create(:name => 'Human Resources', :company_id => ck.id)
+CompanyDepartment.create(:name => 'Engineering', :company_id => ck.id)
+CompanyDepartment.create(:name => 'Marketing', :company_id => ck.id)
+
 ck_user = User.find_by_email("info@complimentkarma.com")
 ck_user_attr = {:email => "info@complimentkarma.com", 
                 :name => "ComplimentKarma", 

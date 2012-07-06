@@ -103,11 +103,18 @@ class UsersController < ApplicationController
   end
 
   def rewards
-    department = params[:department_filter]
     @company = @user.company
-    # @employees = @company.users.where('department_id = ?', department.id) if @company
-    @employees = @company.users
-    @departments = @company.departments
+    departments_list = @company.departments
+    @departments = departments_list.collect { |v| [v.name, v.id] }
+    @departments.insert(0, ['All Departments', '0'])
+    @department = CompanyDepartment.find_by_id(params[:department_id])
+    logger.info("Department #{@department.name}") if @department
+    if @department
+      @employees = @department.users
+    else
+      @employees = @company.users
+    end
+    logger.info("Employees: #{@employees.count}")
   end
 
   def upload_photo

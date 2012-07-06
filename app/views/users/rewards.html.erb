@@ -1,8 +1,3 @@
-<script type="text/javascript">
-	$(function() {
-		Reward.init();
-	})
-</script>
 <div id="content-container">
 	<div class="rewards-header">
 		<p class="title">Rewards and Reporting</p>
@@ -37,43 +32,11 @@
 			<div class="clear"></div>
 		</div>
 		<div id="rewards-results">
-			<%= form_tag '/rewards/add_to_cart', :id => 'reward-add-to-cart-form' do %>
-				<table id="select-reward-results">
-					<tr class="header-row">
-						<th><div class="col1">Rank</div></th>
-						<th><div class="col2">Full Name</div></th>
-						<th style="padding-top: 5px;"><div class="col3">
-							<%= select_tag 'department_filter', 
-														 options_from_collection_for_select(@departments, :id, :name), 
-														 :prompt => "Department" %>
-						</div></th>
-						<th><div class="col4">Compliments Received</div></th>
-						<th><div class="col5">Reward Amount</div></th>
-						<th><div class="col6">Select</div></th>
-					</tr>
-					<% unless @employees.blank? %>
-						<% @employees.each_with_index do |employee, index| %>
-							<tr>
-								<td><div class="col1"><%= index + 1 %></td>
-								<td><div class="col2"><%= employee.first_last %></div></td>
-								<td><div class="col3"></div></td>
-								<td><div class="col4"><%= compliments_sent(employee) %></div></td>
-								<td><div class="col5">
-									<%= text_field 'reward_amount', employee.id, :size => 7, :style => "background: #ffffff;" %>
-								</div></td>
-								<td>
-									<div class="col6">
-										<%= check_box 'select_reward', employee.id, :class =>"checkbox" %>
-									</div>
-								</td>
-							</tr>
-						<% end %>
-					<% end %>
-					<tr class="footer-row">
-						<td colspan="6"></td>
-					</tr>
-				</table>
-			<% end %>
+			<%= render :partial => 'rewards/rewards_results', 
+								 :locals => {:departments => @departments,
+								 						:department => @department, 
+														:user => @user, 
+														:employees => @employees} %>
 		</div>
 	</div>
 </div>

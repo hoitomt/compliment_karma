@@ -1,0 +1,34 @@
+<script type="text/javascript">
+	$(function() {
+		Reward.init();
+	})
+</script>
+	<%= form_tag '/rewards/add_to_cart', :id => 'reward-add-to-cart-form' do %>
+		<table id="select-reward-results">
+			<tr class="header-row">
+				<th><div class="col1">Rank</div></th>
+				<th><div class="col2">Full Name</div></th>
+				<th style="padding-top: 5px;"><div class="col3">
+					<% if department.blank? %>
+						<%= select_tag 'department_filter', 
+													 options_for_select(departments, 'name') %>
+					<% else %>
+						<%= select_tag 'department_filter', 
+													 options_for_select(departments, department.id), 
+													 :selected => department.name %>
+					<% end %>
+					<%= hidden_field_tag 'company_user_id', user.id %>
+				</div></th>
+				<th><div class="col4">Compliments Received</div></th>
+				<th><div class="col5">Reward Amount</div></th>
+				<th><div class="col6">Select</div></th>
+			</tr>
+			<% unless employees.blank? %>
+				<%= render 'rewards/rewards_results_rows', :employees => employees %>
+			<% end %>
+			<tr class="footer-row">
+				<td colspan="6"></td>
+			</tr>
+		</table>
+	<% end %>
+</div>

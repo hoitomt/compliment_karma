@@ -19,6 +19,7 @@ Ck::Application.routes.draw do
   match "/founder_signout" => "shells#destroy"
   match "/invite_coworkers" => "pages#invite_coworkers"
   match "/invite_others" => "pages#invite_others"
+  match "/rewards/filter_rewards_results" => "rewards#filter_rewards_results"
   match "/search/skills" => "search#skills"
   match "/search/site" => "search#site"
   match "/admin" => "admin#index", :as => :admin
@@ -57,8 +58,6 @@ Ck::Application.routes.draw do
   match "users/:id/settings" => "users#settings", :as => :user_settings
   match "users/:id/employees" => "users#employees", :as => :user_employees
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
-  match "users/:id/rewards/filter_rewards_results" => "rewards#filter_rewards_results", 
-        :as => :filter_rewards_results
   match "users/:id/rewards" => "users#rewards", :as => :user_rewards
 
   resources :follows
