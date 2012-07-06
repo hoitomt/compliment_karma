@@ -15,6 +15,8 @@ class ComplimentsController < ApplicationController
     @compliment = Compliment.new(params[:compliment])
     skill = Skill.find_or_create(params[:compliment][:skill_id])
     @compliment.skill_id = skill.id if skill
+    logger.info("Skill: #{skill}")
+    logger.info("Compliment Skill: #{@compliment.skill_id}")
     @compliment.sender_email = sender_email(params)
     if @compliment.save
       respond_to do |format|
