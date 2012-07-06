@@ -48,15 +48,14 @@ class Skill < ActiveRecord::Base
 		skill = Skill.where('name = ? AND parent_skill_id = ?', split[1], parent_skill_id)[0]
 	end
 
-	def self.find_or_create(skill_key)
-		skill = get_autocomplete_results(skill_key)
-		if skill.blank?
-			skill = Skill.create(:name => skill_key.to_s, :parent_skill_id => Skill.USER_DEFINED.id)
-		else
-			skill = get_skill_by_autocomplete_key(skill_key)
-		end
-		return skill
-	end
+	# def self.find_or_create(skill_name)
+	# 	if skill.blank?
+	# 		skill = Skill.create(:name => skill_key.to_s, :parent_skill_id => Skill.USER_DEFINED.id)
+	# 	else
+	# 		skill = get_skill_by_autocomplete_key(skill_key)
+	# 	end
+	# 	return skill
+	# end
 
 	def self.USER_DEFINED
 		Skill.find_by_name('User Defined')

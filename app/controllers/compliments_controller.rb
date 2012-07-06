@@ -13,8 +13,8 @@ class ComplimentsController < ApplicationController
   def create
     logger.info("Request " + request.fullpath)
     @compliment = Compliment.new(params[:compliment])
-    skill = Skill.find_or_create(params[:compliment][:skill_id])
-    @compliment.skill_id = skill.id if skill
+    # skill = Skill.find_or_create(params[:compliment][:skill_id])
+    @compliment.skill_id = params[:skill_id_result]
     logger.info("Skill: #{skill}")
     logger.info("Compliment Skill: #{@compliment.skill_id}")
     @compliment.sender_email = sender_email(params)
