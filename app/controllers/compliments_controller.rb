@@ -28,7 +28,7 @@ class ComplimentsController < ApplicationController
     else
       respond_to do |format|
         format.html {
-          flash[:error] = "Your compliment could not be sent"
+          flash[:error] = "Your compliment could not be sent #{@compliment.errors.messages.to_s}"
           process_redirect("failure")
         }
       end
