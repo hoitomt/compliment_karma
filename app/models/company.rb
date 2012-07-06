@@ -4,6 +4,7 @@ class Company < ActiveRecord::Base
 	# Company Administrator
 	has_many :company_users
 	has_many :users, :through => :company_users
+	has_many :departments, :class_name => 'CompanyDepartment'
 
 	def employees
 		return self.users

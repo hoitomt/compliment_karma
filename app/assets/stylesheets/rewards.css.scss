@@ -36,6 +36,10 @@
 	input.checkbox {
 		margin: 5px 0 0 17px;
 	}
+	select {
+		font-size: 12px;
+		padding-top: 0;
+	}
 	button {
 		@include gradient-bg;
 		border: 1px solid gray;
@@ -71,12 +75,11 @@ table {
 	@include top-border-radius;
 	font-size: 12px;
 	margin: 10px 0 10px 10px;
-	th { padding: 10px 0 0 0; }
+	th { padding: 10px 0 0 0; height: 25px; }
 	td { height: 30px; padding: 10px 0 0 0; }
 	tr.header-row {
 		@include top-border-radius;
 		@include gradient-gray;
-		height: 25px;
 	}
 	tr.footer-row {
 		background: #dbdbdb;

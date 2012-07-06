@@ -42,7 +42,11 @@
 					<tr class="header-row">
 						<th><div class="col1">Rank</div></th>
 						<th><div class="col2">Full Name</div></th>
-						<th><div class="col3">Department</div></th>
+						<th style="padding-top: 5px;"><div class="col3">
+							<%= select_tag 'department_filter', 
+														 options_from_collection_for_select(@departments, :id, :name), 
+														 :prompt => "Department" %>
+						</div></th>
 						<th><div class="col4">Compliments Received</div></th>
 						<th><div class="col5">Reward Amount</div></th>
 						<th><div class="col6">Select</div></th>

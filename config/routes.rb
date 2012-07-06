@@ -1,4 +1,8 @@
 Ck::Application.routes.draw do
+  resources :company_department_users
+
+  resources :company_departments
+
   resources :company_users
 
   resources :companies

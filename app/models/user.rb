@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :user_accomplishments
   has_many :accomplishments, :through => :user_accomplishments
   has_many :ck_likes
+  has_many :company_department_users
+  has_many :company_departments, :through => :company_department_users
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned

@@ -1,3 +1,21 @@
 <div id="user-settings" class="box-no-padding right-two-thirds">
 	<h1>Settings</h1>
+	<h2>Departments</h2>
+	<% if view_state(@user) == view_state_company_manager %>
+		<% unless @departments.blank? %>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Manager</th>
+				</tr>
+				<%= @departments.each do |department| %>
+					<tr>
+						<td><%= department.name %></td>
+						<td><%= department.manager %></td>
+					</tr>
+				<% end %>
+			</table>
+			<%= link_to 'New Department', new_company_department_path(:company_id => @company.id) %>
+		<% end %>
+	<% end %>
 </div>

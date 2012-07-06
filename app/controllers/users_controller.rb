@@ -93,7 +93,8 @@ class UsersController < ApplicationController
   end
 
   def settings
-    
+    @company = @user.company
+    @departments = @company.departments if @company
   end
 
   def employees
@@ -102,8 +103,11 @@ class UsersController < ApplicationController
   end
 
   def rewards
+    department = params[:department_filter]
     @company = @user.company
-    @employees = @company.users if @company
+    # @employees = @company.users.where('department_id = ?', department.id) if @company
+    @employees = @company.users
+    @departments = @company.departments
   end
 
   def upload_photo

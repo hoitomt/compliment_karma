@@ -1,0 +1,2 @@
+module CompanyDepartmentsHelper
+end
