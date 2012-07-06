@@ -182,6 +182,18 @@ a:hover { text-decoration: none; }
    background: -o-linear-gradient(top, #bbbbbb, #827f82);
 }
 
+@mixin gradient-gray {
+   background: #dbdbdb; /* Old browsers */
+   background: -moz-linear-gradient(top,  #dbdbdb 0%, #bfbfbf 99%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbdb), color-stop(99%,#bfbfbf)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #dbdbdb 0%,#bfbfbf 99%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #dbdbdb 0%,#bfbfbf 99%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #dbdbdb 0%,#bfbfbf 99%); /* IE10+ */
+   background: linear-gradient(to bottom,  #dbdbdb 0%,#bfbfbf 99%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#bfbfbf',GradientType=0 ); /* IE6-9 */
+
+}
+
 @mixin button-gradient-green {   
    border: 1px solid #005B15;
    background: #00781c;

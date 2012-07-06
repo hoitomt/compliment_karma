@@ -1,4 +1,5 @@
 @import 'common';
+@import 'user_common';
 
 .rewards-header {
 	@include top-border-radius;
@@ -6,11 +7,101 @@
 	background: #ffffff;
 	border-bottom: solid 1px #D9D9D9;
 	.title { 
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
-		padding: 15px 0 0 25px;}
+		padding: 15px 0 0 25px;
+	}
 }
-.rewards-body {
+.send-reward {
 	@include bottom-border-radius;
 	background: #ffffff;
+	padding-bottom: 10px;
+}
+#reward-filter-form, #reward-add-to-cart-form {
+	input,
+	textarea,
+	select {
+		float: left;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		border: 0px;
+		border: $border-gray 2px solid;
+		background-color:#f0f0f0;
+		color:#000;
+		font-size: 13px;
+		padding-left: 5px;
+		margin-bottom: 0px;
+	}
+	input.checkbox {
+		margin: 5px 0 0 17px;
+	}
+	button {
+		@include gradient-bg;
+		border: 1px solid gray;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 12px;
+		padding: 7px 10px;
+		font-weight: normal;
+		text-shadow: none;
+	}
+	button:hover { @include button-gradient-gray; }
+	li { margin: 5px ;}
+	.reward-add-to-cart {
+		margin: 10px 0 10px 260px;
+	}
+	.radio-label { color: #000000; font-weight: bold; width: 225px; float: left;}
+	.reward-type-radio-group {
+		padding: 10px 0 0 25px;
+		.reward-radio-btn { margin: 10px 0 0 0; display: block;}
+	}
+	.user-filter-info {
+		float: left; width: 600px;
+		label { float: left; width: 100px; text-align:right; margin-right: 5px; font-weight: bold;} 
+	}
+	.user-filter-submit {
+		float: right;
+		padding: 20px 10px 0 0;
+	}
+}
+table {
+	@include top-border-radius;
+	font-size: 12px;
+	margin: 10px 0 10px 10px;
+	th { padding: 10px 0 0 0; }
+	td { height: 30px; padding: 10px 0 0 0; }
+	tr.header-row {
+		@include top-border-radius;
+		@include gradient-gray;
+		height: 25px;
+	}
+	tr.footer-row {
+		background: #dbdbdb;
+	}
+	tr.alternate { background: #f2f2f2; }
+	th:first-child {
+	    -moz-border-radius: 8px 0 0 0;
+	    -webkit-border-radius: 8px 0 0 0;
+	    border-radius: 8px 0 0 0;
+	}
+	th:last-child {
+	    -moz-border-radius: 0 8px 0 0;
+	    -webkit-border-radius: 0 8px 0 0;
+	    border-radius: 0 8px 0 0;
+	}
+	th:only-child{
+	    -moz-border-radius: 8px 8px 0 0;
+	    -webkit-border-radius: 8px 8px 0 0;
+	    border-radius: 8px 8px 0 0;
+	}
+	.white-bg{ background-color: #ffffff; }
+	.col1 { width: 100px; text-align: center; }
+	.col2 { width: 150px; }
+	.col3 { width: 150px; }
+	.col4 { width: 200px; text-align: center; }
+	.col5 { width: 100px; }
+	.col6 { width: 50px; text-align: center; }
 }

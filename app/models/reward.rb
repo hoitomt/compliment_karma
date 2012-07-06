@@ -20,7 +20,7 @@ class Reward < ActiveRecord::Base
     return list_of_rewards
   end
 
-  def self.earned_reward_amount(user_id)
+  def self.earned_reward_amount(user)
     sum = 0
     user.rewards_received.each do |reward|
       sum += reward.value
@@ -28,12 +28,12 @@ class Reward < ActiveRecord::Base
     return sum
   end
 
-  def self.earned_reward_count(user_id)
-    Reward.where('receiver_id = ?', user_id).count
+  def self.activity_type
+    return ['Compliment Received', 'Compliment Sent', 'Number of Trophies Earned', 'Number of Badges Earned']
   end
 
-  def self.sent_reward_count(user_id)
-    Reward.where('presenter_id = ?', user_id).count
+  def self.user_type
+    return ['All', 'Full Time Employee', 'Part Time Employee', 'Interns', 'Contractors']
   end
 
 end

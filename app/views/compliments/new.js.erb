@@ -1,21 +1,16 @@
-$('input#compliment_receiver_email').val('<%=j @recipient_email %>');
-$.fn.inputStyle();
-ComplimentUI.flashBlue();
-
-// Use the javascript view for the fancybox
-// $.fancybox('<%= j(render "users/panels/new_compliment_popup") %>', 
-// 	{
-// 		afterShow: function() {
-// 			UserProfile.reinitialize();
-// 		},
-// 		padding: 0,
-// 		scrolling: 'no',
-// 		helpers: {
-// 			overlay: {
-// 				css: {
-// 					'background-color': '#A7DBD8'
-// 				}
-// 			}
-// 		}
-// 	}
-// );
+console.log("Handle Event");
+var updateNewCompliment = function() {
+	$('input#compliment_receiver_email').val('<%=j @recipient_email %>');
+	$.fn.inputStyle();
+	ComplimentUI.flashBlue();
+}
+console.log("Handle Event 2");
+var popupOpen = $('.fancybox-skin').is(':visible');
+if(popupOpen) {
+	console.log("Close Fancybox");
+	$.fancybox.close();
+	setTimeout(updateNewCompliment, 750);
+} else {
+	console.log("no fancybox to close");
+	updateNewCompliment();
+}

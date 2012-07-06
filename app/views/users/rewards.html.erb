@@ -1,8 +1,75 @@
+<script type="text/javascript">
+	$(function() {
+		Reward.init();
+	})
+</script>
 <div id="content-container">
 	<div class="rewards-header">
 		<p class="title">Rewards and Reporting</p>
 	</div>
-	<div class="rewards-body">
-		Stuff
+	<div class="send-reward">
+		<%#= render 'rewards/filter_criteria' %>
+		<div class="rewards-body">
+			<%= form_tag("/users/#{@user.id}/rewards/filter_rewards_results", 
+									 :id => 'reward-filter-form',
+									 :remote => true
+									 ) do %>
+				<div class="user-filter-info">
+					<fieldset style="padding: 20px 0 0 0;">
+						<ol>
+							<li>
+						    <%= label 'filter', "time_period", "Time Period" %>
+						    <%= select_tag 'filter_time_period_type', options_for_select(['Before', 'Between', 'After']) %>
+						    <%= text_field 'filter', 'as_of_date', :size => 15 %>
+						    <div id="show-stop-date" style="display: none; float:left;">
+							    <span style="padding: 2px 5px; float:left;">And</span>
+							    <%= text_field 'filter', 'stop_date', :size => 15 %>
+							  </div>
+						    <div class="clear"></div>
+							</li>
+						</ol>
+					</fieldset>
+				</div>
+				<div class="user-filter-submit">
+					<button type=submit>Update Time Period</button>
+				</div>
+			<% end %>
+			<div class="clear"></div>
+		</div>
+		<div id="rewards-results">
+			<%= form_tag '/rewards/add_to_cart', :id => 'reward-add-to-cart-form' do %>
+				<table id="select-reward-results">
+					<tr class="header-row">
+						<th><div class="col1">Rank</div></th>
+						<th><div class="col2">Full Name</div></th>
+						<th><div class="col3">Department</div></th>
+						<th><div class="col4">Compliments Received</div></th>
+						<th><div class="col5">Reward Amount</div></th>
+						<th><div class="col6">Select</div></th>
+					</tr>
+					<% unless @employees.blank? %>
+						<% @employees.each_with_index do |employee, index| %>
+							<tr>
+								<td><div class="col1"><%= index + 1 %></td>
+								<td><div class="col2"><%= employee.first_last %></div></td>
+								<td><div class="col3"></div></td>
+								<td><div class="col4"><%= compliments_sent(employee) %></div></td>
+								<td><div class="col5">
+									<%= text_field 'reward_amount', employee.id, :size => 7, :style => "background: #ffffff;" %>
+								</div></td>
+								<td>
+									<div class="col6">
+										<%= check_box 'select_reward', employee.id, :class =>"checkbox" %>
+									</div>
+								</td>
+							</tr>
+						<% end %>
+					<% end %>
+					<tr class="footer-row">
+						<td colspan="6"></td>
+					</tr>
+				</table>
+			<% end %>
+		</div>
 	</div>
 </div>

@@ -1,0 +1,67 @@
+<div class="rewards-body">
+	<%= form_tag("/users/#{@user.id}/rewards/filter_rewards_results", 
+							 :id => 'reward-filter-form',
+							 :remote => true
+							 ) do %>
+		<div class="reward-type-radio-group">
+			<div class="reward-radio-btn">
+				<%= radio_button("reward_budget", "type", "company_wide") %>
+				<span class="radio-label">Company Wide Reward Budget</span>
+				<span class="budget-amount" style="float: left; padding-top: 3px;">$</span>
+				<%= text_field "reward_budget-", "amount", :size => 7 %>
+			</div>
+			<div class="clear"></div>
+			<div class="reward-radio-btn">
+				<%= radio_button("reward_budget", "type", "department") %>
+				<span class="radio-label">Reward Budget By Department</span>
+			</div>
+			<div class="clear"></div>
+			<div class="reward-radio-btn">
+				<%= radio_button("reward_budget", "type", "user") %>
+				<span class="radio-label">Reward Specific Users</span>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="user-filter-info">
+			<fieldset style="padding: 20px 0 0 0;">
+				<ol>
+					<li>
+				    <%= label 'filter', 'number_of_users', "Number of Users to Reward" %>
+				    <%= text_field 'filter', 'number_of_users', :size => 7 %>
+				    <div class="clear"></div>
+					</li>
+					<li>
+				    <%= label 'filter', "user_type", "User Type" %>
+				    <%= select_tag 'user_type', 
+				    							 options_for_select(Reward.user_type), 
+				    							 :multiple => true, 
+				    							 :size => 5 %>
+				    <div class="clear"></div>
+					</li>
+					<li>
+				    <%= label 'filter', "activity_type", "Activity Type" %>
+				    <%= select_tag 'activity_type', 
+				    							 options_for_select(Reward.activity_type), 
+				    							 :multiple => true, 
+				    							 :size => 4 %>
+				    <div class="clear"></div>
+					</li>
+					<li>
+				    <%= label 'filter', "time_period", "Time Period" %>
+				    <%= select_tag 'filter_time_period_type', options_for_select(['Before', 'Between', 'After']) %>
+				    <%= text_field 'filter', 'as_of_date', :size => 15 %>
+				    <div id="show-stop-date" style="display: none; float:left; width: 400px;">
+					    <span style="padding: 20pxpx 5px; float:left;">And</span>
+					    <%= text_field 'filter', 'stop_date', :size => 15 %>
+					  </div>
+				    <div class="clear"></div>
+					</li>
+				</ol>
+			</fieldset>
+		</div>
+		<div class="profile-button reward-add-to-cart">
+			<button type=submit>Show Top Users</button>
+		</div>
+	<% end %>
+	<div class="clear"></div>
+</div>

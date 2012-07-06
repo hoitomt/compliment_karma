@@ -56,9 +56,9 @@ class UsersController < ApplicationController
     received_compliments = Compliment.received_professional_compliments(@user)
     @compliments_sent = sent_compliments.count
     @compliments_received = received_compliments.count
-    @rewards_earned_amount = Reward.earned_reward_amount(@user.id)
-    @rewards_earned_count = Reward.earned_reward_count(@user.id)
-    @rewards_sent = Reward.sent_reward_count(@user.id)
+    @rewards_earned_amount = Reward.earned_reward_amount(@user)
+    @rewards_earned_count = @user.rewards_received.count
+    @rewards_sent = @user.rewards_presented.count
     @followers = Follow.followers(@user.id)
     @following = Follow.following(@user.id)
     @compliments_received_by_skill = compliment_count_by_skill(received_compliments)
@@ -102,7 +102,8 @@ class UsersController < ApplicationController
   end
 
   def rewards
-    
+    @company = @user.company
+    @employees = @company.users if @company
   end
 
   def upload_photo
