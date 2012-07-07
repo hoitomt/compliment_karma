@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
                                            :professional_profile, :social_profile, 
                                            :achievements, :contacts, :employees, 
-                                           :rewards, :settings]
+                                           :rewards, :settings ]
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :set_static_vars
     

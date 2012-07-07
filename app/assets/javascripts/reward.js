@@ -29,7 +29,16 @@ var Reward = {
 				data: {department_id: departmentId}
 			})
 		});
-		
+		$('input.reward-amount').change(function() {
+			var sum = 0;
+			$('input.reward-amount').each(function() {
+				var fieldAmount = $(this).val();
+				if(fieldAmount.length > 0 && !isNaN(fieldAmount)) {
+					sum += parseFloat(fieldAmount);
+				}
+			});
+			$('#total-reward-amount').html('$' + sum.toFixed(2));
+		});
 	},
 	setAlternatingRows: function() {
 		console.log("stuff");

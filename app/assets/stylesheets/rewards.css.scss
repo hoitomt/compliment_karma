@@ -17,7 +17,7 @@
 	background: #ffffff;
 	padding-bottom: 10px;
 }
-#reward-filter-form, #reward-add-to-cart-form {
+#reward-filter-form {
 	input,
 	textarea,
 	select {
@@ -71,6 +71,30 @@
 		padding: 20px 10px 0 0;
 	}
 }
+#reward-add-to-cart-form {
+	input,
+	textarea,
+	select {
+		float: left;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		border: 0px;
+		border: $border-gray 2px solid;
+		background-color:#f0f0f0;
+		color:#000;
+		font-size: 13px;
+		padding-left: 5px;
+		margin-bottom: 0px;
+	}
+	input.checkbox {
+		margin: 5px 0 0 17px;
+	}
+	select {
+		font-size: 12px;
+		padding-top: 0;
+	}
+}
 table {
 	@include top-border-radius;
 	font-size: 12px;
@@ -108,3 +132,26 @@ table {
 	.col5 { width: 100px; }
 	.col6 { width: 50px; text-align: center; }
 }
+.add-to-cart-submit { 
+	float: right;
+	margin: 10px 10px 0 0;
+}
+.add-to-cart-button {
+	@include button-gradient-green;
+	border: 1px solid gray;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #ffffff;
+	font-size: 12px;
+	padding: 7px 10px;
+	font-weight: normal;
+	text-shadow: none;
+ }
+.add-to-cart-button:hover {
+	@include button-gradient-gray;
+ }
+.add-to-cart-button:active {
+   border: 1px solid #005B15;
+   background: #005B15;
+ }

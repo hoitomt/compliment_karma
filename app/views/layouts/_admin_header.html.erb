@@ -4,9 +4,11 @@
 			<%= link_to image_tag('ck_logo.png'), current_user %>
 		</div>
 		<%= render 'my_updates/my_updates_indicator' %>
+		<%= render 'rewards/shopping_cart' %>
 		<div id="nav-upper-right">
 			<ul>
-				<li><%= image_tag 'shopping_cart.png', :height => '25' %></li>
+				<li style="width: 70px;">
+				</li>
 				<li>
 					<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
 					<%= render 'admin/header/admin_menu' %>

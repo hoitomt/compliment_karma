@@ -3,7 +3,8 @@
 		Reward.init();
 	})
 </script>
-	<%= form_tag '/rewards/add_to_cart', :id => 'reward-add-to-cart-form' do %>
+	<%= form_tag "/rewards/add_to_cart", :id => 'reward-add-to-cart-form' do %>
+		<%= hidden_field_tag 'company_user_id', @user.id %>
 		<table id="select-reward-results">
 			<tr class="header-row">
 				<th><div class="col1">Rank</div></th>
@@ -24,11 +25,40 @@
 				<th><div class="col6">Select</div></th>
 			</tr>
 			<% unless employees.blank? %>
-				<%= render 'rewards/rewards_results_rows', :employees => employees %>
+				<% employees.each_with_index do |employee, index| %>
+					<tr>
+						<td><div class="col1"><%= index + 1 %></td>
+						<td><div class="col2"><%= employee.first_last %></div></td>
+						<td><div class="col3"><%= department(employee) %></div></td>
+						<td><div class="col4"><%= compliments_received(employee) %></div></td>
+						<td><div class="col5">
+							<%= text_field 'reward', 
+														 employee.id, 
+														 :size => 7, 
+														 :class=> 'reward-amount', 
+														 :style => "background: #ffffff;" %>
+						</div></td>
+						<td>
+							<div class="col6">
+								<%= check_box 'select_reward', employee.id, :class =>"checkbox" %>
+							</div>
+						</td>
+					</tr>
+				<% end %>
 			<% end %>
 			<tr class="footer-row">
-				<td colspan="6"></td>
+				<td colspan="3"></td>
+				<td style="font-weight: bold; font-size: 14px; text-align: right;">Total</td>
+				<td id="total-reward-amount" style="font-weight: bold; font-size: 14px; padding-left: 5px;"></td>
+				<td></td>
 			</tr>
 		</table>
+		<div class="add-to-cart-submit">
+			<button type=submit class="add-to-cart-button">
+				<%= image_tag 'shopping_cart.png', :height => '20' %>
+				<span style="margin-left: 5px;">Add to Cart</span>
+			</button>
+		</div>
+		<div class="clear"></div>
 	<% end %>
 </div>

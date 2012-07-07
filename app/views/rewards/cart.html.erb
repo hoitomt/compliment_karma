@@ -1,0 +1,43 @@
+<script type="text/javascript">
+	$(function() {
+		Reward.setAlternatingRows();
+	})
+</script>
+<div id="content-container">
+	<div class="rewards-header">
+		<p class="title">Rewards and Reporting</p>
+	</div>
+	<div id="rewards-results">
+
+			<%= form_tag "/rewards/payment", :id => 'reward-add-to-cart-form' do %>
+				<%= hidden_field_tag 'company_user_id', @user.id %>
+				<table id="select-reward-results">
+					<tr class="header-row">
+						<th><div class="col1">Rank</div></th>
+						<th><div class="col2">Full Name</div></th>
+						<th><div class="col3">Department</div></th>
+						<th><div class="col4">Compliments Received</div></th>
+						<th><div class="col5">Reward Amount</div></th>
+					</tr>
+					<% unless @rewards.blank? %>
+						<% @rewards.each_with_index do |reward, index| %>
+							<tr>
+								<td><div class="col1"><%= index + 1 %></td>
+								<td><div class="col2"><%= reward.receiver.first_last %></div></td>
+								<td><div class="col3"><%= department(reward.receiver) %></div></td>
+								<td><div class="col4"><%= compliments_received(reward.receiver) %></div></td>
+								<td><div class="col5"><%= reward.value %></td>
+							</tr>
+						<% end %>
+					<% end %>
+				</table>
+				<div class="add-to-cart-submit">
+					<button type=submit class="add-to-cart-button">
+						<span style="margin-left: 5px;">Proceed to Payment</span>
+					</button>
+				</div>
+				<div class="clear"></div>
+			<% end %>
+		</div>
+	</div>
+</div>

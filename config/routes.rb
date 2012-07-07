@@ -19,13 +19,15 @@ Ck::Application.routes.draw do
   match "/founder_signout" => "shells#destroy"
   match "/invite_coworkers" => "pages#invite_coworkers"
   match "/invite_others" => "pages#invite_others"
-  match "/rewards/filter_rewards_results" => "rewards#filter_rewards_results"
-  match "/search/skills" => "search#skills"
-  match "/search/site" => "search#site"
   match "/admin" => "admin#index", :as => :admin
   
-  match "recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
+  match "/recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
+  match "/rewards/add_to_cart" => "rewards#add_to_cart"
+  match "/rewards/filter_rewards_results" => "rewards#filter_rewards_results"
+  match "/rewards/cart" => "rewards#cart", :as => :cart
+  match "/search/skills" => "search#skills"
+  match "/search/site" => "search#site"
   match "/email_api/new_account_confirmation" => "email_api#new_account_confirmation",
         :as => :new_account_confirmation
   match "/email_api/invitation_acceptance" => "email_api#invitation_acceptance",

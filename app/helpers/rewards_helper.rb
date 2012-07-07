@@ -8,4 +8,12 @@ module RewardsHelper
     Compliment.received_professional_compliments(@user).count
 	end
 
+	def department(user)
+		if !user.blank? && !user.company_departments.blank?
+			dept = user.company_departments.first.name
+		else
+			return "None"
+		end
+	end
+
 end

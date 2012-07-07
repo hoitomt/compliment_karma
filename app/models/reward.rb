@@ -3,6 +3,7 @@ class Reward < ActiveRecord::Base
   belongs_to :presenter, :class_name => 'User', :foreign_key => 'presenter_id'
 
   validates_presence_of :receiver_id, :presenter_id, :value
+  validates_numericality_of :value
   
   after_create :update_history
 

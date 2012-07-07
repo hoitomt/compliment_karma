@@ -1,0 +1,10 @@
+<%= link_to cart_path(:user_id => @user.id), :style => "color: #ffffff;" do %>
+	<div id="shopping-cart-img">
+		<%= image_tag 'shopping_cart.png', :height => '30' %>
+	</div>
+	<% if session[:cart] && session[:cart].length > 0 %>
+		<div id="shopping-cart-count" class="header-cart-count">
+			<%= session[:cart].length if session[:cart] %>
+		</div>
+	<% end %>
+<% end %>
