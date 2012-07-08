@@ -5,7 +5,7 @@
 	<div class="send-reward">
 		<%#= render 'rewards/filter_criteria' %>
 		<div class="rewards-body">
-			<%= form_tag("/users/#{@user.id}/rewards/filter_rewards_results", 
+			<%= form_tag("/users/#{@user.id}/rewards", 
 									 :id => 'reward-filter-form',
 									 :remote => true
 									 ) do %>
@@ -13,8 +13,27 @@
 					<fieldset style="padding: 20px 0 0 0;">
 						<ol>
 							<li>
+								<%= label 'filter', 'number_of_employees', 'Number of Employees to Show' %>
+								<%= text_field 'filter', 'number_of_employees', :size => 7 %>
+						    <div class="clear"></div>
+							</li>
+							<li>
+						    <%= label 'filter', "department", "Department" %>
+								<%= select_tag 'filter[department_id]',
+															 options_from_collection_for_select(@departments, :id, :name),
+															 :prompt => 'All Departments' %>
+						    <div class="clear"></div>
+						  </li>
+							<li>
+						    <%= label 'filter', "activity_type", "Activity Type" %>
+								<%= select_tag 'filter[activity_type_id]', 
+															 options_from_collection_for_select(@activity_types, :id, :name),
+															 :prompt => 'All Activity Types' %>
+						    <div class="clear"></div>
+						  </li>
+							<li>
 						    <%= label 'filter', "time_period", "Time Period" %>
-						    <%= select_tag 'filter_time_period_type', options_for_select(['Before', 'Between', 'After']) %>
+						    <%= select_tag 'filter[time_period]', options_for_select(['Before', 'Between', 'After']) %>
 						    <%= text_field 'filter', 'as_of_date', :size => 15 %>
 						    <div id="show-stop-date" style="display: none; float:left;">
 							    <span style="padding: 2px 5px; float:left;">And</span>
@@ -24,10 +43,11 @@
 							</li>
 						</ol>
 					</fieldset>
+					<div class="user-filter-submit">
+						<button type=submit>Show Employees</button>
+					</div>
 				</div>
-				<div class="user-filter-submit">
-					<button type=submit>Update Time Period</button>
-				</div>
+
 			<% end %>
 			<div class="clear"></div>
 		</div>

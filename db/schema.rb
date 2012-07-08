@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706154434) do
+ActiveRecord::Schema.define(:version => 20120707214515) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -167,12 +167,19 @@ ActiveRecord::Schema.define(:version => 20120706154434) do
     t.integer  "default_visibility_id"
   end
 
+  create_table "reward_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rewards", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "value",        :precision => 8, :scale => 2
+    t.decimal  "value",            :precision => 8, :scale => 2
     t.integer  "receiver_id"
     t.integer  "presenter_id"
+    t.integer  "reward_status_id"
   end
 
   create_table "skills", :force => true do |t|

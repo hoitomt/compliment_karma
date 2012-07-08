@@ -21,6 +21,9 @@ ComplimentStatus.create(:name => 'Pending Receiver Confirmation')
 ComplimentStatus.create(:name => 'Active')
 ComplimentStatus.create(:name => 'Withdrawn')
 
+RewardStatus.create(:name => 'Pending')
+RewardStatus.create(:name => 'Complete')
+
 ComplimentType.create(:name => 'Coworker to Coworker')
 ComplimentType.create(:name => 'Professional to Professional (across companies)')
 ComplimentType.create(:name => 'Professional to Personal')

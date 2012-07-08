@@ -41,7 +41,6 @@ var Reward = {
 		});
 	},
 	setAlternatingRows: function() {
-		console.log("stuff");
 		$('#select-reward-results tr:nth-child(even)').addClass('alternate');
 	}
 }

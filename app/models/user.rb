@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :companies, :through => :company_users
   has_many :rewards_presented, :class_name => 'Reward', :foreign_key => 'presenter_id'
   has_many :rewards_received, :class_name => 'Reward', :foreign_key => 'receiver_id'
+  has_many :compliments_sent, :class_name => 'Compliment', :foreign_key => 'sender_user_id'
+  has_many :compliments_received, :class_name => 'Compliment', :foreign_key => 'receiver_user_id'
   has_many :user_accomplishments
   has_many :accomplishments, :through => :user_accomplishments
   has_many :ck_likes

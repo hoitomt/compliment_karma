@@ -26,6 +26,7 @@ Ck::Application.routes.draw do
   match "/rewards/add_to_cart" => "rewards#add_to_cart"
   match "/rewards/filter_rewards_results" => "rewards#filter_rewards_results"
   match "/rewards/cart" => "rewards#cart", :as => :cart
+  match "/rewards/remove_from_cart" => "rewards#remove_from_cart", :as => :remove_from_cart
   match "/search/skills" => "search#skills"
   match "/search/site" => "search#site"
   match "/email_api/new_account_confirmation" => "email_api#new_account_confirmation",

@@ -1,6 +1,7 @@
 class Reward < ActiveRecord::Base  
   belongs_to :receiver, :class_name => 'User', :foreign_key => 'receiver_id'
   belongs_to :presenter, :class_name => 'User', :foreign_key => 'presenter_id'
+  belongs_to :reward_status
 
   validates_presence_of :receiver_id, :presenter_id, :value
   validates_numericality_of :value
@@ -27,10 +28,6 @@ class Reward < ActiveRecord::Base
       sum += reward.value
     end
     return sum
-  end
-
-  def self.activity_type
-    return ['Compliment Received', 'Compliment Sent', 'Number of Trophies Earned', 'Number of Badges Earned']
   end
 
   def self.user_type

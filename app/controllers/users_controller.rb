@@ -104,17 +104,46 @@ class UsersController < ApplicationController
 
   def rewards
     @company = @user.company
-    departments_list = @company.departments
-    @departments = departments_list.collect { |v| [v.name, v.id] }
-    @departments.insert(0, ['All Departments', '0'])
-    @department = CompanyDepartment.find_by_id(params[:department_id])
-    logger.info("Department #{@department.name}") if @department
-    if @department
-      @employees = @department.users
-    else
-      @employees = @company.users
+    @departments = @company.departments
+    @activity_types = ActivityType.list
+    employees = set_employees
+    build_employee_vo(employees)
+  end
+
+  def set_employees
+    unless params[:filter]
+      employees = @company.users
+      return employees
     end
-    logger.info("Employees: #{@employees.count}")
+    number_of_employees = params[:filter][:number_of_employees]
+    department = CompanyDepartment.find_by_id(params[:filter][:department_id])
+    activity_type = ActivityType.find(params[:filter][:activity_type_id])
+    @start_date = params[:filter][:as_of_date]
+    @stop_date = params[:filter][:stop_date]
+    if !department.blank? && !number_of_employees.blank?
+      return department.users.limit(number_of_employees.to_i)
+    elsif !department.blank? && number_of_employees.blank?
+      return department.users
+    elsif department.blank? && !number_of_employees.blank?
+      return @company.users.limit(number_of_employees.to_i)
+    else
+      return @company.users
+    end
+  end
+
+  def build_employee_vo(employees)
+    @employees = []
+    employees.each do |user|
+      e = {}
+      e[:id] = user.id
+      e[:full_name] = user.first_last
+      e[:department] = user.company_departments.first
+      e[:compliments_sent] = Compliment.sent_professional_compliments(user).count
+      e[:compliments_received] = Compliment.received_professional_compliments(user).count
+      # e[:trophies_earned] = 
+      # e[:badges_earned] = 
+      @employees << e
+    end
   end
 
   def upload_photo

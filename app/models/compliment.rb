@@ -3,6 +3,9 @@ class Compliment < ActiveRecord::Base
   belongs_to :compliment_status
   belongs_to :visibility
   belongs_to :compliment_type
+
+  belongs_to :receiver, :class_name => 'User', :foreign_key => 'receiver_user_id'
+  belongs_to :sender, :class_name => 'User', :foreign_key => 'sender_user_id'
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

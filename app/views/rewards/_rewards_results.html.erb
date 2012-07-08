@@ -1,6 +1,8 @@
 <script type="text/javascript">
 	$(function() {
 		Reward.init();
+  	var results = <%=raw @employees.to_json %>;
+  	console.log(results);
 	})
 </script>
 	<%= form_tag "/rewards/add_to_cart", :id => 'reward-add-to-cart-form' do %>
@@ -9,48 +11,33 @@
 			<tr class="header-row">
 				<th><div class="col1">Rank</div></th>
 				<th><div class="col2">Full Name</div></th>
-				<th style="padding-top: 5px;"><div class="col3">
-					<% if department.blank? %>
-						<%= select_tag 'department_filter', 
-													 options_for_select(departments, 'name') %>
-					<% else %>
-						<%= select_tag 'department_filter', 
-													 options_for_select(departments, department.id), 
-													 :selected => department.name %>
-					<% end %>
-					<%= hidden_field_tag 'company_user_id', user.id %>
-				</div></th>
+				<th><div class="col3">Department</div></th>
 				<th><div class="col4">Compliments Received</div></th>
-				<th><div class="col5">Reward Amount</div></th>
-				<th><div class="col6">Select</div></th>
+				<th><div class="col5">Compliments Sent</div></th>
+				<th><div class="col6">Reward Amount</div></th>
 			</tr>
 			<% unless employees.blank? %>
 				<% employees.each_with_index do |employee, index| %>
 					<tr>
 						<td><div class="col1"><%= index + 1 %></td>
-						<td><div class="col2"><%= employee.first_last %></div></td>
-						<td><div class="col3"><%= department(employee) %></div></td>
-						<td><div class="col4"><%= compliments_received(employee) %></div></td>
-						<td><div class="col5">
+						<td><div class="col2"><%= employee[:full_name] %></div></td>
+						<td><div class="col3"><%= employee[:department] %></div></td>
+						<td><div class="col4"><%= employee[:compliments_received] %></div></td>
+						<td><div class="col5"><%= employee[:compliments_sent] %></div></td>
+						<td><div class="col6">
 							<%= text_field 'reward', 
-														 employee.id, 
+														 employee[:id], 
 														 :size => 7, 
 														 :class=> 'reward-amount', 
 														 :style => "background: #ffffff;" %>
 						</div></td>
-						<td>
-							<div class="col6">
-								<%= check_box 'select_reward', employee.id, :class =>"checkbox" %>
-							</div>
-						</td>
 					</tr>
 				<% end %>
 			<% end %>
 			<tr class="footer-row">
-				<td colspan="3"></td>
+				<td colspan="4"></td>
 				<td style="font-weight: bold; font-size: 14px; text-align: right;">Total</td>
 				<td id="total-reward-amount" style="font-weight: bold; font-size: 14px; padding-left: 5px;"></td>
-				<td></td>
 			</tr>
 		</table>
 		<div class="add-to-cart-submit">

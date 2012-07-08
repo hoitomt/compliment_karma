@@ -213,4 +213,11 @@ describe Compliment do
     
   end
   
+  describe "accomplishment" do
+    it "should create 10 compliments" do
+      Compliment.create(@attr)
+      Compliment.count.should eq(10)
+    end
+  end
+
 end
