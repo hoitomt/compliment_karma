@@ -96,12 +96,18 @@ br.small { display: block; height: 1px;}
 	border-top: none;
 	background: $main-menu-color;
 }
+.drop-box-white {
+	@include bottom-border-radius;
+	border: 1px solid #c9e6ee;
+	border-top: none;
+	background: #ffffff;
+}
 .top-box {
 	@include top-border-radius;
-	border: 1px solid #F0F8F8;
+	// border: 1px solid #F0F8F8;
 	border-top: none;
 	background: $main-menu-color;
-	padding:10px;
+	// padding:10px;
 }
 .box-no-padding {
 	@include border-radius;

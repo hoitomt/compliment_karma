@@ -12,6 +12,7 @@ var UserProfile = {
 		this.reinitialize();
 		this.setValidateSenderNotReceiver(userEmail);
 		this.validateSenderNotReceiver(userEmail);
+		this.setNewComplimentHandlers();
 	},
 	reinitialize: function() {
 		this.stripeTable();
@@ -244,6 +245,14 @@ var UserProfile = {
 					$(this).html('Following');
 				};
 			}
+		});
+	},
+	setNewComplimentHandlers: function() {
+		$('input#compliment_receiver_email').click(function() {
+			$('.hide-me').slideDown();
+		});
+		$('#minimize-me').click(function() {
+			$('.hide-me').slideUp();
 		});
 	}
 }

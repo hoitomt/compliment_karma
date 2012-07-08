@@ -1,9 +1,9 @@
 @import "common";
 
-$left-column-width: 330px;
+$left-column-width: 220px;
 $left-column-width-no-padding: 350px;
 $right-column-width: $total-width - ($left-column-width + 15px);
-$input-width: $left-column-width - 120px;
+$input-width: 210px; //$left-column-width - 120px;
 $helper-width: $input-width + 2px;
 $border-bottom: 1px solid #dadada;
 $item-height: 100px;
@@ -24,7 +24,7 @@ $item-height: 100px;
 	float: left;
 }
 .right-two-thirds {
-	margin-top: 10px;
+	// margin-top: 10px;
 	width: $right-column-width;
 	float: right;
 }
@@ -83,17 +83,17 @@ $item-height: 100px;
 	width: 400px;
 }
 @mixin user-profile-form-styling {
-	#validation-error {
-		display: block;
-		background: $inline-error-red;
-		color: #fff;
-		width: $helper-width;
-		margin-top: -4px;
-		padding: 2px;
-	}
+	// #validation-error {
+	// 	display: block;
+	// 	background: $inline-error-red;
+	// 	color: #fff;
+	// 	width: $helper-width;
+	// 	margin-top: -4px;
+	// 	padding: 2px;
+	// }
 	#data-entry {
 		display: block;
-		margin-bottom: 5px;
+		margin-bottom: 10px;
 	}
 	#label {
 		float: left;
@@ -125,7 +125,7 @@ $item-height: 100px;
 		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 		border-radius: 5px;
-		border: 0px;
+		// border: 0px;
 //		border: $border-gray 2px solid;
 		background-color:#FFFFFF;
 		color:#999;
@@ -133,7 +133,7 @@ $item-height: 100px;
 		padding-left: 5px;
 		margin-bottom: 0px;
 	}
-	select { color: #000; font-size: 13px; width: $input-width + 5px;}
+	select { color: #000; font-size: 13px; width: $input-width + 8px;}
 	input, select { height: 25px; }
 	input, textarea {	width: $input-width; }
 

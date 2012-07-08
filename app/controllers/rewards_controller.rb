@@ -14,7 +14,9 @@ class RewardsController < ApplicationController
 				end
 			end
 		end
-
+		respond_to do |format|
+			format.html { redirect_to @user }
+		end
 	end
 
 	def remove_from_cart

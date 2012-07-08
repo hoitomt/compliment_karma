@@ -9,7 +9,9 @@ class Reward < ActiveRecord::Base
   after_create :update_history
 
   def update_history
-    UpdateHistory.Received_Reward(self)
+    if self.reward_status == RewardStatus.complete
+      UpdateHistory.Received_Reward(self)
+    end
   end
 
   def self.rewards_from_followed(user)

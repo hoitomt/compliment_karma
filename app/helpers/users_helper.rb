@@ -80,9 +80,9 @@ module UsersHelper
     if (index + 1 <= compliments_since_last_monday.size)
       receiver = compliments_since_last_monday[index].get_receiver
       if receiver
-        html = link_to image_tag(receiver.photo.url(:mini)), receiver
+        html = link_to image_tag(receiver.photo.url(:mini), :size => "30x30"), receiver
       else
-        html = image_tag('/photos/mini/missing.png')
+        html = image_tag('/photos/mini/missing.png', :size => "30x30")
       end
     else
       html = (index + 1).to_s
@@ -501,4 +501,15 @@ module UsersHelper
     end
   end
 
+  def new_compliment_heading(user)
+    if view_state(user) == view_state_user_manager 
+      return "Who deserves your compliment today?"
+    elsif view_state(user) == view_state_user_visitor
+      return "Send a compliment to #{user.first_name}"
+    elsif view_state(user) == view_state_company_visitor
+      return "Send a compliment to #{user.company.name}"
+    elsif view_state(user) == view_state_company_manager
+      return "Who deserves our compliment today?"
+    end
+  end
 end

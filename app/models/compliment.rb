@@ -20,7 +20,7 @@ class Compliment < ActiveRecord::Base
   validates :skill_id, :presence => true
   
   validates :comment, :presence => true,
-                      :length => {:within => 2..140}
+                      :length => {:within => 2..140, :message => "Too short"}
   
   validates :compliment_type_id, :presence => true
 
