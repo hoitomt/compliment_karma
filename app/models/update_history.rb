@@ -4,12 +4,14 @@ class UpdateHistory < ActiveRecord::Base
 
   def self.add_update_history(user_id, update_history_type_id, recognition_type_id, 
                               recognition_id, note, current_user_id)
-  	self.create(:user_id => user_id,
-                :update_history_type_id => update_history_type_id,
-  							:recognition_type_id => recognition_type_id,
-  							:recognition_id => recognition_id,
-  							:note => note,
-                :originating_user_id => current_user_id)
+  	unless(current_user_id == user_id)
+      self.create(:user_id => user_id,
+                  :update_history_type_id => update_history_type_id,
+    							:recognition_type_id => recognition_type_id,
+    							:recognition_id => recognition_id,
+    							:note => note,
+                  :originating_user_id => current_user_id)
+    end
   end
 
   def self.Like_Sent_Compliment(ck_like, current_user_id)
