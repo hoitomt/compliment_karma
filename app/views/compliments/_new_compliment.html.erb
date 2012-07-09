@@ -51,7 +51,7 @@
 					</div>
 					<div id="field"><%= f.collection_select :compliment_type_id, ComplimentType.all, :id, :name, 
 																									{:prompt => "select compliment type"},
-																									{:style => "width: 338px;"} %>
+																									{:style => "width: 338px; height: 38px;"} %>
 						<div id="compliment_compliment_type_error"></div>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 						<button class="send-new-compliment-button" type=submit>Send Compliment</button>
 					</div>
 					<div style="float: right; padding-top: 15px;">
-						<%= link_to "&#8593; minimize".html_safe, '#', 
+						<%#= link_to "&#8593; minimize".html_safe, '#', 
 												:style => "font-size: 11px;",
 												:id => 'minimize-me' %>
 					</div>

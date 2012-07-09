@@ -169,9 +169,6 @@ $total-width: 992px;
    border-bottom: 2px solid #e9e9e9;
 }
 
-a { text-decoration: none; }
-a:hover { text-decoration: none; }
-
 @mixin button-gradient-gray {
    border: 1px solid #808080;
    background: #827f82;

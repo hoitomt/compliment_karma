@@ -23,7 +23,7 @@
 			if(<%= flash && !flash.empty? %>) {
 				$('#explanation').slideDown(200);
 			}
-			$.fn.resizeMe();
+			FooterResize.init();
 			
 			$('.fancybox').fancybox();
 			SiteSearch.init();

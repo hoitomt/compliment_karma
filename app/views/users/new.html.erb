@@ -32,11 +32,8 @@
 								 :html => {:id => 'signup-form', :multipart => true }) do |f| %>
 			<fieldset>
 				<div id="data-entry" class="clearfix">
-					<div id="label"><%= f.label :email, "Work Email" %></div>
+					<div id="label"><%= f.label :email, "Email" %></div>
 					<div id="field"><%= f.text_field :email %>
-						<div id="user_email_helper" class="helper">
-							e.g. you@yourcompany.com
-						</div>
 						<div id="user_email_error"></div>
 					</div>
 				</div>

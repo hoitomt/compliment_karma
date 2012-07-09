@@ -11,7 +11,6 @@
 	<%= link_to user_professional_profile_path(@user) do %>
 		<div class="name-location">
 			<h1><%= @user.full_name %></h1>
-			<p>(Testing<%= location(@user) %>)</p>
 		</div>
 		<% if view_state(@user) == view_state_company_manager ||
 					view_state(@user) == view_state_user_manager %>
