@@ -33,13 +33,8 @@ class Skill < ActiveRecord::Base
 
 	def self.get_autocomplete_results(search_string)
 		return if search_string.nil?
-		results = Skill.where('name like ? AND id <> parent_skill_id', "%#{search_string.downcase}%").limit(10)
-		# results = []
-		# list_for_autocomplete.each do |autocomplete_key|
-		# 	results << autocomplete_key if autocomplete_key.downcase.include?(search_string.downcase)
-		# 	break if results.size > 10
-		# end
-		# return results
+		results = Skill.where('lower(name) like ? AND id <> parent_skill_id', 
+													"%#{search_string.downcase}%").limit(10)
 	end
 
 	def self.get_skill_by_autocomplete_key(autocomplete_key)
