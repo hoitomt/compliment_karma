@@ -1,5 +1,4 @@
 <div id="my-updates">
-	<h2 class="header" style="display: inline;">My Notifications</h2>
 	<% if @show_header_link %>
 		<span class="my-notification-header_link">
 			<%= link_to 'See All', my_updates_path(@user) %>
@@ -11,7 +10,7 @@
 				<% originator = User.find_by_id(item.originating_user_id) %>
 				<% if item.recognition_type_id.nil? %>
 					<%= link_to originator do %>
-						<li class="clearfix">
+						<li class="clearfix" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
@@ -26,7 +25,7 @@
 					<%= link_to show_recognition_path(:recognition_type_id => item.recognition_type_id, 
 																						:recognition_id => item.recognition_id),
 																						:remote => true do %>
-						<li class="clearfix">
+						<li class="clearfix" style="border-left: 2px solid #DCF1EF; margin-left: -2px">
 							<div class="my-update-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
