@@ -16,7 +16,10 @@
 	</script>
 <% end %>
 <div id="user-profile">
-	<%= render 'users/panels/user_profile_short', :flash => flash %>
+	<div class="left-one-third">
+		<%= render 'users/panels/user_profile_short', :flash => flash %>
+	</div>
+	<%= render 'compliments/new_compliment' %>
 	<div id="karma-live-updates" class="right-two-thirds">
 		<%= render 'my_updates/my_updates' %>
 		<div id="infinite-scroll-processing">
@@ -24,5 +27,4 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<%= render 'users/panels/new_compliment' %>
 </div>

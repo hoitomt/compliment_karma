@@ -389,11 +389,13 @@ class UsersController < ApplicationController
       # Use this until the filtering is needed
       if current_user?(@user)
         compliments = Compliment.all_compliments_from_followed(@user)
+        rewards = Reward.rewards_from_followed(@user)
+        accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
       else
-        compliments = Compliment.all_compliments_from_followed_and_self(@user)
+        compliments = Compliment.all_active_compliments(@user)
+        rewards = Reward.all_completed_rewards(@user)
+        accomplishments = @user.accomplishments
       end
-      rewards = Reward.rewards_from_followed(@user)
-      accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
       FeedItem.construct_items(compliments, rewards, accomplishments)
     end
 

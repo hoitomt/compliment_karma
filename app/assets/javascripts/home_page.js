@@ -1,7 +1,8 @@
 var HomePage = {
 	init: function(showFlash){
 		this.slider();
-		this.resetStatus();
+		// this.setStatusHandlers();
+		// this.resetStatus();
 		this.displayComplimentForm(showFlash);
 		$('#learn-more').fancybox();
 	},
@@ -12,8 +13,18 @@ var HomePage = {
 			pause: true,
 			next: '#slider-state-1',
 			prev: '#slider-state-2',
-			before: HomePage.resetStatus()
+			before: HomePage.resetStatus
 		});
+	},
+	setStatusHandlers: function() {
+		$('#slider-state-1').click(function() {
+			console.log("click state 1");
+			HomePage.resetStatus();
+		});
+		$('#slider-state-2').click(function(){
+			console.log("click state 2");
+			HomePage.resetStatus();
+		})
 	},
 	resetStatus: function() {
 		// On initial load, neither of them will have slider-active

@@ -36,4 +36,9 @@ class Reward < ActiveRecord::Base
     return ['All', 'Full Time Employee', 'Part Time Employee', 'Interns', 'Contractors']
   end
 
+  def self.all_completed_rewards(user)
+    Reward.where('(receiver_id = ? OR presenter_id = ?) AND reward_status_id = ?',
+                  user.id, user.id, RewardStatus.complete.id)
+  end
+
 end

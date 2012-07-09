@@ -3,6 +3,6 @@ var ComplimentUI = {
 
 	},
 	flashBlue: function() {
-		$('#send-compliment').effect("highlight", {color: "#006791"}, 2500);
+		$('#new-compliment-container').effect("highlight", {color: "#006791"}, 2500);
 	}
 }

@@ -5,6 +5,7 @@ $inactive: #347284;
 $font-size: 16px;
 
 #user-menu {
+	margin-top: 15px;
 	clear: left;
 	li {
 		@include border-effect;
