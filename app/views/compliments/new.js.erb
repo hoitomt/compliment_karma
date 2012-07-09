@@ -10,15 +10,10 @@ if(popupOpen) {
 } else {
 	updateNewCompliment();
 }
-// handleAjaxError = function(event, data, status) {
-//   $("#compliment-form input#compliment_receiver_email").trigger("change");
-//   $("#compliment-form").trigger("ajax:beforeSend", { target: this.$("#compliment-form")[0] });
-// };
+
 $("#compliment-form input#compliment_receiver_email").trigger("change");
-// console.log($("#compliment-form input#compliment_receiver_email").val());
-// var settings = window["compliment-form"];
-// var valid = $('input#compliment_receiver_email').isValid(settings.validators);
-// console.log("Field Valid: " + valid);
+var settings = window["compliment-form"];
+var valid = $('input#compliment_receiver_email').isValid(settings.validators);
 
 
 
