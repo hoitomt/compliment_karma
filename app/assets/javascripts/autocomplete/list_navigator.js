@@ -30,7 +30,8 @@ var ListNavigator = {
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 13) { // enter key
 				var listElement = list[ListNavigator.index];
-				ListNavigator.setInputAndClose(listElement);
+				// ListNavigator.setInputAndClose(listElement);
+				ListNavigator.retrieveUserAndClose(listElement);
 				return false;
 			}
 		});
@@ -45,12 +46,16 @@ var ListNavigator = {
 		});
 	},
 	setInputAndClose: function(listElement) {
-		console.log(listElement);
 		var inputValue = $(listElement).find('.value-for-input-field');
 		var inputId = $(listElement).find('.id-for-input-field');
 		$(ListNavigator.inputTextField).val($(inputValue).html());
 		$(ListNavigator.inputIdField).val($(inputId).html());
 		$(ListNavigator.container).hide();
+	},
+	retrieveUserAndClose: function(listElement) {
+		console.log(listElement);
+		var inputId = $(listElement).find('.id-for-input-field');
+		SiteSearch.retrieveUser($(inputId).html());
 	},
 	highlightElement: function(list) {
 		listElement = list[this.index];

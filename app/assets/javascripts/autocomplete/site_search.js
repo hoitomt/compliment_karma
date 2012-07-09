@@ -31,5 +31,10 @@ var SiteSearch = {
 			url: '/search/site.js',
 			data: {'search_string' : searchString}
 		});
+	},
+	retrieveUser: function(userId) {
+		console.log("User: " + userId);
+		var userPath = '/users/' + userId.toString();
+		window.location.href = userPath;
 	}
 }
