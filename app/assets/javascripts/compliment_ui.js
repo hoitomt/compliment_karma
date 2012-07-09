@@ -1,6 +1,7 @@
 var ComplimentUI = {
 	init: function() {
 		this.setNewComplimentHandlers();
+		this.stickyNewCompliment();
 	},
 	flashBlue: function() {
 		$('#new-compliment').effect("highlight", {color: "#006791"}, 2500);
@@ -36,5 +37,14 @@ var ComplimentUI = {
 	},
 	isPanelVisible: function() {
 		return $('.hide-me').is(':visible');
+	},
+	stickyNewCompliment: function() {
+		var stickMe = $('#scroll-sticky');
+		var complimentContainer = $('#new-compliment-container');
+		stickMe.waypoint({
+			handler: function(event, direction) {
+				complimentContainer.toggleClass('sticky', direction=='down');
+			}
+		});
 	}
 }

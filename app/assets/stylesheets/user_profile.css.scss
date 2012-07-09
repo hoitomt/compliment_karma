@@ -68,10 +68,12 @@ $top-row-height: 225px;
 	.center { text-align: center; }
 	.first { padding-left: 5px;}
 }
+#scroll-sticky { margin-top: 10px; }
 #new-compliment-container {
-	margin-top: 10px;
+	// margin-top: 10px;
 	background: #dbeef4;
 	border: 1px solid #c9e6ee;
+	// float: right;
 	#new-compliment {
 		float: left;
 		padding: 10px;
@@ -105,8 +107,8 @@ $top-row-height: 225px;
 	}
 	select { border: 0px; }
 	#earned-compliment { 
-		float: right;
-		margin: 15px 10px 0 0;
+		float: left;
+		margin: 15px 0 0 55px;
 	}
 	.div-title {
 		display: block;
