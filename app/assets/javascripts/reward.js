@@ -9,8 +9,8 @@ var Reward = {
 		$('#filter_stop_date').datepicker();
 	},
 	setHandlers: function() {
-		$('select#filter_time_period_type').off('change');
-		$('select#filter_time_period_type').change(function() {
+		$('select#filter_time_period').off('change');
+		$('select#filter_time_period').change(function() {
 			var selectedOption = $(this).val();
 			var stopDate = $('#show-stop-date');
 			if(selectedOption == "Between") {

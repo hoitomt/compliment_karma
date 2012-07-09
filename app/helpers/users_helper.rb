@@ -343,7 +343,7 @@ module UsersHelper
          UpdateHistoryType.Like_Sent_Compliment.id
          UpdateHistoryType.Like_Reward.id
          UpdateHistoryType.Like_Accomplishment.id
-         return image_tag('my_updates/icon_24x24_compliment.png')
+         return image_tag('my_updates/icon_24x24_heart.png')
     when UpdateHistoryType.Share_Received_Compliment_On_Facebook.id,
          UpdateHistoryType.Share_Sent_Compliment_On_Facebook.id,
          UpdateHistoryType.Share_Reward_on_Facebook.id,

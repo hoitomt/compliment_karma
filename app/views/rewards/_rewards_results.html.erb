@@ -2,7 +2,6 @@
 	$(function() {
 		Reward.init();
   	var results = <%=raw @employees.to_json %>;
-  	console.log(results);
 	})
 </script>
 	<%= form_tag "/rewards/add_to_cart", :id => 'reward-add-to-cart-form' do %>

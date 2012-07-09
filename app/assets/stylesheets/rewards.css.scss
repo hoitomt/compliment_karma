@@ -29,7 +29,7 @@
 		border: $border-gray 2px solid;
 		background-color:#f0f0f0;
 		color:#000;
-		font-size: 13px;
+		font-size: 14px;
 		padding-left: 5px;
 		margin-bottom: 0px;
 	}
@@ -37,7 +37,7 @@
 		margin: 5px 0 0 17px;
 	}
 	select {
-		font-size: 12px;
+		font-size: 14px;
 		padding-top: 0;
 	}
 	button {
@@ -52,8 +52,9 @@
 		font-weight: normal;
 		text-shadow: none;
 	}
+	.hasDatePicker{ color: #000; }
 	button:hover { @include button-gradient-gray; }
-	li { margin: 5px ;}
+	li { margin: 5px 0 15px 0;}
 	.reward-add-to-cart {
 		margin: 10px 0 10px 260px;
 	}
@@ -63,7 +64,7 @@
 		.reward-radio-btn { margin: 10px 0 0 0; display: block;}
 	}
 	.user-filter-info {
-		float: left; width: 600px;
+		float: left; width: 700px;
 		label { 
 			float: left; 
 			width: 250px; 
@@ -104,9 +105,9 @@
 #rewards-results { padding: 10px 0 0 0; }
 table {
 	@include top-border-radius;
-	font-size: 12px;
+	font-size: 13px;
 	margin: 0 0 10px 10px;
-	th { padding: 10px 0 0 0; height: 25px; }
+	th { padding: 10px 0 0 0; height: 25px; font-weight: bold; }
 	td { height: 30px; padding: 10px 0 0 0; }
 	tr.header-row {
 		@include top-border-radius;
@@ -132,12 +133,12 @@ table {
 	    border-radius: 8px 8px 0 0;
 	}
 	.white-bg{ background-color: #ffffff; }
-	.col1 { width: 100px; text-align: center; }
+	.col1 { width: 60px; text-align: center; }
 	.col2 { width: 150px; }
-	.col3 { width: 100px; }
+	.col3 { width: 150px; }
 	.col4 { width: 150px; text-align: center; }
 	.col5 { width: 150px; text-align: center; }
-	.col6 { width: 100px; text-align: center; }
+	.col6 { width: 125px; text-align: center; }
 }
 .add-to-cart-submit { 
 	float: right;
@@ -162,3 +163,6 @@ table {
    border: 1px solid #005B15;
    background: #005B15;
  }
+.reward-amount {
+	margin: 0 0 0 25px;
+}
