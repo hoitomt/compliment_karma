@@ -3,6 +3,8 @@ $(function() {
 		// element is the input element (text field). The text field is wrapped by 
 		// the error so the parent is the error_wrapper. The label is a child of 
 		// the wrapper and the html of the label is the actual error message
+		// console.log(eventData);
+		// console.log(element);
 		var elementContainer = element.parents('#field');
 		var errorLabel = element.parent().find('label');
 		var errorMsg = errorLabel.html();

@@ -7,7 +7,6 @@ var UserMenu = {
 		var activeMenuItem = UserMenu.mapper(currentAction);
 		UserMenu.clearMenuItems();
 		$('#' + activeMenuItem).addClass('active');
-		FooterResize.init();
 	},
 	clearMenuItems: function() {
 		$('#user-menu li').each(function() {

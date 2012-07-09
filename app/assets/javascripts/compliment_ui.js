@@ -20,12 +20,12 @@ var ComplimentUI = {
 			event.stopPropagation();
 		});
 		$('html').click(function(event) {
-			// var isAnchor = $(event.srcElement).is('a');
+			var isAnchor = $(event.srcElement).is('a');
 			// var isInContainer = $(event.srcElement).parents('#new-compliment-container');
 			// console.log(isInContainer);
-			// if(!isAnchor) {
+			if(!isAnchor/* && !isInContainer*/) {
 				ComplimentUI.hideNewComplimentPanel();
-			// }
+			}
 		})
 	},
 	showNewComplimentPanel: function() {

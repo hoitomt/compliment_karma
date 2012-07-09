@@ -10,6 +10,11 @@ if(popupOpen) {
 } else {
 	updateNewCompliment();
 }
+console.log($("#compliment-form input#compliment_receiver_email"));
+handleAjaxError = function(event, data, status) {
+  $("#compliment-form input#compliment_receiver_email").trigger("change");
+  $("#compliment-form").trigger("ajax:beforeSend", { target: this.$("#compliment-form")[0] });
+};
 // if(ComplimentUI.isPanelVisible()) {
 // 	// do nothing
 // } else {
