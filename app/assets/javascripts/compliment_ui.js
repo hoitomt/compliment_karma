@@ -7,8 +7,8 @@ var ComplimentUI = {
 		$('#new-compliment').effect("highlight", {color: "#006791"}, 2500);
 	},
 	setNewComplimentHandlers: function() {
-		$('input#compliment_receiver_email').off('click, change');
-		$('input#compliment_receiver_email').click(function() {
+		$('input#compliment_receiver').off('click, change');
+		$('input#compliment_receiver').click(function() {
 			ComplimentUI.showNewComplimentPanel();
 			// event.stopPropagation();
 		});

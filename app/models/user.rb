@@ -140,6 +140,15 @@ class User < ActiveRecord::Base
       return "#{self.first_name}"
     end
   end
+
+  def search_result_display
+    if self.is_a_company?
+      return self.company.name
+    else
+      # return self.full_name + ' &#60;' + self.email + '&#62;'
+      return "#{self.full_name} (#{self.email})"
+    end
+  end
   
   def set_domain
     domain_array = self.email.split('@')

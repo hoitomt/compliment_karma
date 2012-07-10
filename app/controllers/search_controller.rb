@@ -19,6 +19,15 @@ class SearchController < ApplicationController
     end
 	end
 
+  def compliment_receiver
+    @search_string = params[:search_string]
+    if @search_string.blank?
+      @results = nil
+    else
+      @results = User.search(@search_string)
+    end
+  end
+
 	private
     def set_static_vars
       @page = (params[:page] || 1).to_i

@@ -3,6 +3,7 @@
 		FormHelpers.init();
 		SkillAutoComplete.init();
 		ComplimentUI.init();
+		ComplimentReceiver.init();
 	});
 </script>
 <div id="scroll-sticky" class="right-two-thirds">
@@ -19,14 +20,16 @@
 			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
 				<%= hidden_field_tag 'request_page', "user" %>
 				<%= hidden_field_tag 'skill_id_result' %>
-				<%#= f.hidden_field :sender_email, :value => current_user.email %>
+				<%= hidden_field_tag "new_compliment_user_id_result" %>
 
 				<div id="data-entry" class="clearfix">
-					<div id="label"><%= f.label :receiver_email, "To", :class => "new-compliment" %></div>
-					<div id="field"><%= f.text_field :receiver_email, 
+					<div id="label"><%= label_tag 'receiver', "To", :class => "new-compliment" %></div>
+					<div id="field"><%= text_field 'compliment', 'receiver', 
 																					 :placeholder => "receiver's email address",
+																					 :autocomplete => 'off',
 																					 :class =>"new-compliment-input" %>
-						<div id="compliment_receiver_email_helper"></div>
+					  <div id="compliment-receiver-results-container" 
+					  		 class="compliment-receiver-search drop-box-white"></div>
 					</div>
 				</div>
 				<div class="hide-me">

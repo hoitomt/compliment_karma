@@ -35,12 +35,15 @@ var ListNavigator = {
 
 				// Make sure we only care about enter for the appropriate results
 				var skillAutoCompleteContainer = $(listElement).parents('#skill-auto-complete');
+				var complimentReceiverContainer = $(listElement).parents('#compliment-receiver-results');
 				var siteSearchContainer = $(listElement).parents('#site-search-results');
 				console.log(skillAutoCompleteContainer);
 				console.log(siteSearchContainer);
 				if(siteSearchContainer.length > 0) {
 					ListNavigator.retrieveUserAndClose(listElement);
 				} else if (skillAutoCompleteContainer.length > 0) {
+					ListNavigator.setInputAndClose(listElement);
+				} else if (complimentReceiverContainer.length > 0) {
 					ListNavigator.setInputAndClose(listElement);
 				}
 				return false;

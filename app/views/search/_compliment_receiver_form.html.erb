@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	$(function() {
+		ComplimentReceiver.init();
+	});
+</script>
+<div id="menu-bar-search-form">
+	<span id="search-icon"></span>
+	<div class="search-input">
+		<%= text_field_tag "search_string", nil,:autocomplete => 'off' %>
+		<%= hidden_field_tag "user_id_result" %>
+	</div>
+	<div id="site-search" class="drop-box">
+	</div>
+</div>

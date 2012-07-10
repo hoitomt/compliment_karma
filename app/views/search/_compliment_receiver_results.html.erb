@@ -1,0 +1,25 @@
+<% if users %>
+	<div id="compliment-receiver-results" class="clearfix">
+		<ul>
+			<% users.each do |user| %>
+				<li id="<%= user.id %>" class="clearfix register-me" style="padding: 3px;">
+					<div class="search-result-photo">
+						<% if user.is_a_company? %>
+							<% if user.photo_file_name.blank? %>
+								<%= image_tag('user_profile/default_company_image.png', :height => '40') %>
+							<% else %>
+								<%= image_tag(user.photo.url(:mini)) %>
+							<% end %>
+						<% else %>
+							<%= image_tag(user.photo.url(:mini)) %>
+						<% end %>
+					</div>
+					<%= search_result_info(user) %>
+					<span class="value-for-input-field"><%= user.search_result_display.html_safe %></span>
+					<span class="id-for-input-field"><%= user.id %></span>
+				</li>
+			<% end %>
+		</ul>
+		<div class="clear"></div>
+	</div>
+<% end %>

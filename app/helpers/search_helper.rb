@@ -12,16 +12,14 @@ module SearchHelper
 
   def search_result_info(user)
     return '' if user.blank?
-    if user.city || user.state_cd
+    if user.is_a_company?
       html = '<div class="search-result-info">'
-      html += "<span class='user-name'>#{user.first_last}</span>"
-      html += "#{user.city}" if user.city
-      html += ", " if user.city && user.state_cd
-      html += "#{user.state_cd}" if user.state_cd
+      html += "<span class='user-name padded'>#{user.company.name}</span>"
       html += '</div>'
     else
       html = '<div class="search-result-info">'
-      html += "<span class='user-name padded'>#{user.first_last}</span>"
+      html += "<span class='user-name'>#{user.full_name}</span>"
+      html += "<span class='email'>#{user.email}</span>"
       html += '</div>'
     end
     return html.html_safe

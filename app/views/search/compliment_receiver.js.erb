@@ -1,0 +1,15 @@
+var searchString = '<%= @search_string %>';
+var results = <%=raw @results.to_json %>;
+console.log(results);
+var container = $('#compliment-receiver-results-container');
+container.html('<%= j(render "search/compliment_receiver_results", :users => @results) %>');
+
+if(results && results.length > 0) {
+	var list = container.find('li');
+	var inputTextField = $('input#compliment_receiver');
+	var inputIdField = $('input#new_compliment_user_id_result')
+	container.show();
+	ListNavigator.init(list, inputTextField, inputIdField, container);
+} else {
+	container.hide();
+}

@@ -10,7 +10,7 @@ var UserProfile = {
 		this.feed_items_filters(userId);
 		this.formValidation();
 		this.reinitialize();
-		this.setValidateSenderNotReceiver(userEmail);
+		// this.setValidateSenderNotReceiver(userEmail);
 		this.validateSenderNotReceiver(userEmail);
 	},
 	reinitialize: function() {
@@ -82,12 +82,12 @@ var UserProfile = {
 	formValidation: function() {
 		this.hideAllHelpers();
 
-		$('#compliment_receiver_email').focus(function() {
+		$('#compliment_receiver').focus(function() {
 			SkillAutoComplete.hideResults();
-			$('#compliment_receiver_email_helper').show(200);
+			$('#compliment_receiver_helper').show(200);
 		});
-		$('#compliment_receiver_email').blur(function() {
-			$('#compliment_receiver_email_helper').hide(200);
+		$('#compliment_receiver').blur(function() {
+			$('#compliment_receiver_helper').hide(200);
 		});
 
 		$('#compliment_comment').focus(function() {
@@ -107,7 +107,7 @@ var UserProfile = {
 		});	
 	},
 	hideAllHelpers: function() {
-		$('#compliment_receiver_email_helper').hide();
+		$('#compliment_receiver_helper').hide();
 		$('#compliment_skill_helper').hide();
 		$('#compliment_comment_helper').hide();
 		$('#compliment_relation_helper').hide();
@@ -198,12 +198,12 @@ var UserProfile = {
 		docState.totalCount = parseInt($('#feed_items_count').val());
 	},
 	setValidateSenderNotReceiver: function(userEmail) {
-		$('#compliment_receiver_email').blur(function() {
+		$('#compliment_receiver').blur(function() {
 			UserProfile.validateSenderNotReceiver(userEmail);
 		});
 	},
   validateSenderNotReceiver: function(userEmail) {
-	  element = $('#compliment_receiver_email');
+	  element = $('#compliment_receiver');
 		if(element.val() == userEmail) {
 			var errorMsg = "I think you are talking to yourself again";
 			var elementContainer = element.parents('#field');

@@ -1,5 +1,5 @@
 var updateNewCompliment = function() {
-	$('input#compliment_receiver_email').val('<%=j @recipient_email %>');
+	$('input#compliment_receiver').val('<%=j @recipient_email %>');
 	$.fn.inputStyle();
 	ComplimentUI.flashBlue();
 }
@@ -11,6 +11,6 @@ if(popupOpen) {
 	updateNewCompliment();
 }
 
-$("#compliment-form input#compliment_receiver_email").trigger("change");
-var settings = window["compliment-form"];
-var valid = $('input#compliment_receiver_email').isValid(settings.validators);
+// $("#compliment-form input#compliment_receiver_email").trigger("change");
+// var settings = window["compliment-form"];
+// var valid = $('input#compliment_receiver_email').isValid(settings.validators);
