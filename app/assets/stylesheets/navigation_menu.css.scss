@@ -104,6 +104,7 @@
 	position:absolute;
 	z-index: 11;
 	width: 275px;
+	margin-left: -80px;
 	color: #6c6c6c;
 	font-size: 12px;
 	a { 
@@ -135,7 +136,14 @@
 	float: left;
 	a:hover {color: #ffffff;}
 }
-.am-name{ color: #000000; font-weight: bold; }
+.am-name{ 
+	color: #000000; 
+	font-weight: bold; 
+	a:hover { text-decoration: none; }
+}
+.am-email {
+	a:hover { text-decoration: none; }
+}
 .am-help-link {
 	float: right;
 	margin: 4px 4px 0 0;
@@ -145,8 +153,9 @@
 	border-bottom: 1px solid #d9d9d9;
 }
 .am-current-user-links {
-	margin: 5px 0 0 45px;
-	a { display: inline-block; }
+	margin: 5px 0 0 50px;
+	// margin: 5px 0 0 5px;
+	// a { display: inline-block; }
 }
 .am-button-container {
 	margin: 10px 0;

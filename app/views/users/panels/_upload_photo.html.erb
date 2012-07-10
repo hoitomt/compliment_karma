@@ -9,4 +9,8 @@
 			<p>Click to add a<br/>Profile Image</p>
 		</div>
 	<% end %>
+<% else %>
+	<div class="photo-upload <%= upload_background_photo(@user) %>">
+		<!-- <p>Click to add a<br/>Profile Image</p> -->
+	</div>
 <% end %>

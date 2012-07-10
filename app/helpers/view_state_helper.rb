@@ -40,4 +40,5 @@ module ViewStateHelper
   def view_state_company_visitor
   	return "Company Visitor"
   end
+
 end

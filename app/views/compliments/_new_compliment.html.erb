@@ -7,10 +7,12 @@
 </script>
 <div id="scroll-sticky" class="right-two-thirds">
 	<div id="new-compliment-container" class="right-two-thirds top-box" >
-		<% unless @confirmed %>
-			<div class="unclickable right-two-thirds">
-				<h1>Please confirm your account before sending a compliment</h1>
-			</div>
+		<% unless view_state(@user) == view_state_user_visitor %>
+			<% unless @confirmed %>
+				<div class="unclickable right-two-thirds">
+					<h1>Please confirm your account before sending a compliment</h1>
+				</div>
+			<% end %>
 		<% end %>
 		<div id="new-compliment">
 			<p class="new-compliment-heading"><%= new_compliment_heading(@user) %></p>

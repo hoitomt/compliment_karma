@@ -12,6 +12,7 @@ var ListNavigator = {
 		this.addListHandlers(list);
 	},
 	addListHandlers: function(list) {
+		console.log("Set Handlers");
 		$(document).off('keydown');
 		$(document).keydown(function(e) {
 			if(e.keyCode == 38) { // up arrow
@@ -29,9 +30,19 @@ var ListNavigator = {
 				// console.log("Down: " + ListNavigator.index);
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 13) { // enter key
+				console.log("Enter Pressed");
 				var listElement = list[ListNavigator.index];
-				// ListNavigator.setInputAndClose(listElement);
-				ListNavigator.retrieveUserAndClose(listElement);
+
+				// Make sure we only care about enter for the appropriate results
+				var skillAutoCompleteContainer = $(listElement).parents('#skill-auto-complete');
+				var siteSearchContainer = $(listElement).parents('#site-search-results');
+				console.log(skillAutoCompleteContainer);
+				console.log(siteSearchContainer);
+				if(siteSearchContainer.length > 0) {
+					ListNavigator.retrieveUserAndClose(listElement);
+				} else if (skillAutoCompleteContainer.length > 0) {
+					ListNavigator.setInputAndClose(listElement);
+				}
 				return false;
 			}
 		});

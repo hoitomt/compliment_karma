@@ -494,9 +494,11 @@ module UsersHelper
   end
 
   def upload_background_photo(user)
-    if view_state(user) == view_state_company_manager
+    if view_state(user) == view_state_company_manager ||
+       view_state(user) == view_state_company_visitor
       return "background-image-company"
-    elsif view_state(user) == view_state_user_manager
+    elsif view_state(user) == view_state_user_manager ||
+          view_state(user) == view_state_user_visitor
       return "background-image-user"
     end
   end
