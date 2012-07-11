@@ -6,11 +6,13 @@ container.html('<%= j(render "search/compliment_receiver_results", :users => @re
 if(results && results.length > 0) {
 	var list = container.find('li');
 	var inputTextField = $('input#compliment_receiver');
-	var inputIdField = $('input#compliment_receiver_id')
-	container.show();
+	var inputIdField = $('input#compliment_receiver_id');
+	// container.show();
 	ListNavigator.init(list, inputTextField, inputIdField, container);
 } else {
-	container.hide();
+	// container.hide();
 }
-
+if($('input#compliment_receiver').is(':focus')) {
+	container.show();
+}
 // ComplimentUI.validateSenderNotReceiver(<%= current_user.id %>);

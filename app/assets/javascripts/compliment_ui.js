@@ -30,7 +30,9 @@ var ComplimentUI = {
 				ComplimentUI.hideNewComplimentPanel();
 			}
 		});
+		$('input#compliment_receiver').off('blur');
 		$('input#compliment_receiver').blur(function(userId) {
+			$('#compliment-receiver-results-container').hide();
 			ComplimentUI.validateSenderNotReceiver();
 		})
 	},
@@ -60,6 +62,11 @@ var ComplimentUI = {
 		if(ComplimentUI.userId == receiverUserId) {
 			errorMsg = "I think you are talking to yourself again";
 		}
+		var emailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i;
+		if( !ComplimentUI.validateEmail(element.val()) && 
+				(receiverUserId == null || receiverUserId.length == 0) ) {
+			errorMsg = "invalid email address";
+		}
 		if(element.val() == null || element.val().length == 0) {
 			errorMsg = "can't be blank";
 		}
@@ -73,5 +80,12 @@ var ComplimentUI = {
 		if($('#validation-error').not(':visible')) {
 			$('#validation-error').show();
 		}
+	},
+	validateEmail: function(email) {
+		if(email == null || email.length == 0) {
+			return false;
+		}
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 	}
 }

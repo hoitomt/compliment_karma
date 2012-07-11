@@ -1,4 +1,4 @@
-<% if users %>
+<% if users && !users.blank? %>
 	<div id="compliment-receiver-results" class="clearfix">
 		<ul>
 			<% users.each do |user| %>
@@ -21,5 +21,9 @@
 			<% end %>
 		</ul>
 		<div class="clear"></div>
+	</div>
+<% else %>
+	<div id="compliment-receiver-results" class="clearfix">
+		<p><strong>No Matching User</strong><br />Please enter the receiver's email address</p>
 	</div>
 <% end %>
