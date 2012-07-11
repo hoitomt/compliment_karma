@@ -11,10 +11,12 @@ class ComplimentsController < ApplicationController
   end
 
   def create
-    logger.info("Request " + request.fullpath)
-    @compliment = Compliment.new(params[:compliment])
+    @compliment = Compliment.new
+    @compliment.comment = params[:compliment][:comment]
+    @compliment.compliment_type_id = params[:compliment][:compliment_type_id]
     @compliment.skill_id = params[:skill_id_result]
-    @compliment.sender_email = sender_email(params)
+    set_sender
+    set_receiver
     if @compliment.save
       respond_to do |format|
         format.html{
@@ -25,18 +27,34 @@ class ComplimentsController < ApplicationController
     else
       respond_to do |format|
         format.html {
-          flash[:error] = "Your compliment could not be sent #{@compliment.errors.messages.to_s}"
+          error_msg = ""
+          @compliment.errors.messages.each do |k,v|
+            v.each do |error_str|
+              error_msg += "#{k} #{error_str}<br />"
+            end
+          end
+          flash[:error] = "Your compliment could not be sent<br />#{error_msg}".html_safe
           process_redirect("failure")
         }
       end
     end
   end
   
-  def sender_email(params)
+  def set_receiver
+    receiver_id = params[:compliment_receiver_id]
+    if !receiver_id.blank?
+      @compliment.receiver_user_id = receiver_id
+      @compliment.receiver_email = User.find(receiver_id).email
+    else
+      @compliment.receiver_email = params[:compliment][:receiver]
+    end
+  end
+
+  def set_sender
     if params[:compliment][:sender_email]
-      return params[:compliment][:sender_email]
+      @compliment.sender_email = params[:compliment][:sender_email]
     elsif current_user
-      return current_user.email
+      @compliment.sender_email = current_user.email
     else
       return nil
     end

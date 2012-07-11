@@ -1,5 +1,6 @@
-<% if view_state(@user) == view_state_user_manager ||
-			view_state(@user) == view_state_company_manager %>
+<% if (view_state(@user) == view_state_user_manager ||
+			view_state(@user) == view_state_company_manager) &&
+			@confirmed %>
 	<%= form_tag(upload_photo_path, :multipart => true, 
 																	:id => "photo-upload-form", 
 																	:remote => true) do %>

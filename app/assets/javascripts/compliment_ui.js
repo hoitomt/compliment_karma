@@ -1,5 +1,7 @@
 var ComplimentUI = {
-	init: function() {
+	userId: 0,
+	init: function(userId) {
+		this.userId = userId
 		this.setNewComplimentHandlers();
 		this.stickyNewCompliment();
 	},
@@ -27,6 +29,9 @@ var ComplimentUI = {
 			if(!isAnchor/* && !isInContainer*/) {
 				ComplimentUI.hideNewComplimentPanel();
 			}
+		});
+		$('input#compliment_receiver').blur(function(userId) {
+			ComplimentUI.validateSenderNotReceiver();
 		})
 	},
 	showNewComplimentPanel: function() {
@@ -46,5 +51,27 @@ var ComplimentUI = {
 				complimentContainer.toggleClass('sticky', direction=='down');
 			}
 		});
+	},
+	validateSenderNotReceiver: function() {
+		var element = $('input#compliment_receiver');
+		var receiverUserId = $('input#compliment_receiver_id').val();
+		console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);
+		var errorMsg = "";
+		if(ComplimentUI.userId == receiverUserId) {
+			errorMsg = "I think you are talking to yourself again";
+		}
+		if(element.val() == null || element.val().length == 0) {
+			errorMsg = "can't be blank";
+		}
+		var elementContainer = element.parents('#field');
+		var existingError = elementContainer.find('#validation-error');
+		if(existingError && existingError.length > 0) {
+			existingError.html(errorMsg);
+		} else {
+			elementContainer.append('<div id="validation-error">' + errorMsg + '</div>');
+		}
+		if($('#validation-error').not(':visible')) {
+			$('#validation-error').show();
+		}
 	}
 }

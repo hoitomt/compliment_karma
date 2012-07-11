@@ -6,12 +6,9 @@ var UserProfile = {
 		$('#infinite-scroll-processing').hide();
 		
 		this.setDocState(userId, perPage);
-		// this.infiniteScrolling();
 		this.feed_items_filters(userId);
 		this.formValidation();
 		this.reinitialize();
-		// this.setValidateSenderNotReceiver(userEmail);
-		this.validateSenderNotReceiver(userEmail);
 	},
 	reinitialize: function() {
 		this.stripeTable();
@@ -201,22 +198,6 @@ var UserProfile = {
 		$('#compliment_receiver').blur(function() {
 			UserProfile.validateSenderNotReceiver(userEmail);
 		});
-	},
-  validateSenderNotReceiver: function(userEmail) {
-	  element = $('#compliment_receiver');
-		if(element.val() == userEmail) {
-			var errorMsg = "I think you are talking to yourself again";
-			var elementContainer = element.parents('#field');
-			var existingError = elementContainer.find('#validation-error');
-			if(existingError && existingError.length > 0) {
-				existingError.html(errorMsg);
-			} else {
-				elementContainer.append('<div id="validation-error">' + errorMsg + '</div>');
-			}
-			if($('#validation-error').not(':visible')) {
-				$('#validation-error').show();
-			}
-		}
 	},
 	showCommentButtonOnClick: function() {
 		$('#popup-compliment-comment').off('focus');

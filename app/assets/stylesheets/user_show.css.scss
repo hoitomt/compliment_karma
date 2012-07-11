@@ -39,10 +39,11 @@
 		padding-left: 0px;
 	}
 	.background-image-company {
-		background: url('user_profile/default_company_image.png'), no-repeat;
+		background-image: url('user_profile/default_company_image.png'), no-repeat;
 	}
 	.background-image-user {
 		background: url('user_profile/default_people_image.png'), no-repeat;
+		background-size: 150px 150px;
 	}
 	.name-location {
 		width: 200px;
@@ -90,6 +91,8 @@
 		// background: #DCF1EF;
 		border-top: 1px solid #ffffff;
 		border-bottom: 2px solid #e9e9e9;
+		border-left: 1px #c9e6ee;
+		margin-left: -2px;
 		height: 70px;
 	}
 	li.search-result:hover {

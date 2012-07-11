@@ -1,7 +1,6 @@
 @import "common";
 
-#skill-auto-complete,
-#skill-auto-complete-pop {
+#skill-auto-complete {
 	@include page-box-shadow;
 	// @include border-radius;
 	padding: 5px;
@@ -17,4 +16,5 @@
 		cursor: pointer;
 		background: $main-menu-color;
 	}
+	z-index: 10;
 }

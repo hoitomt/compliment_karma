@@ -13,3 +13,7 @@ if(results && results.length > 0) {
 } else {
 	container.hide();
 }
+
+$("input#compliment_skill_id").trigger("change");
+formValidationSettings = window['compliment-form'];
+$('form').isValid(formValidationSettings.validators);

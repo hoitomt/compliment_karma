@@ -2,7 +2,7 @@
 	$(function() {
 		FormHelpers.init();
 		SkillAutoComplete.init();
-		ComplimentUI.init();
+		ComplimentUI.init(<%= current_user.id %>);
 		ComplimentReceiver.init();
 	});
 </script>
@@ -20,16 +20,17 @@
 			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
 				<%= hidden_field_tag 'request_page', "user" %>
 				<%= hidden_field_tag 'skill_id_result' %>
-				<%= hidden_field_tag "new_compliment_user_id_result" %>
+				<%= hidden_field_tag "compliment_receiver_id" %>
 
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= label_tag 'receiver', "To", :class => "new-compliment" %></div>
 					<div id="field"><%= text_field 'compliment', 'receiver', 
-																					 :placeholder => "receiver's email address",
+																					 :placeholder => "receiver's name or email",
 																					 :autocomplete => 'off',
 																					 :class =>"new-compliment-input" %>
 					  <div id="compliment-receiver-results-container" 
 					  		 class="compliment-receiver-search drop-box-white"></div>
+						<div id="compliment_receiver_error"></div>
 					</div>
 				</div>
 				<div class="hide-me">
@@ -40,7 +41,6 @@
 																						 :autocomplete => 'off',
 																						 :class =>"new-compliment-input" %>
 							<div id="skill-auto-complete" class="skill-auto-complete box-no-padding"></div>
-							<div id="compliment_skill_id_error"></div>
 						</div>
 					</div>
 

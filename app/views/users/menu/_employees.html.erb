@@ -1,9 +1,6 @@
 <div id="user-profile">
 	<div id="content-container">
 		<div id="karma-live-updates" class="right-two-thirds">
-			<div class="top-box" style="border-bottom: 2px solid #E9E9E9;">
-				<h1><%= @company.name %> Employees</h1>
-			</div>
 			<ul id="feed-items">
 				<% @count = @page * @per_page - @per_page %>
 				<% if @results %>
