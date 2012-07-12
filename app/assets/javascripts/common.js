@@ -36,8 +36,8 @@ $.fn.inputStyle = function() {
 		});
 		$(this).blur(function() {
 			if(!this.value || this.value.length == 0) {
-				$(this).css('text-align', 'center');
-				$(this).css('color', '#999999');
+				// $(this).css('text-align', 'center');
+				// $(this).css('color', '#999999');
 				$(this).attr('placeholder', $(this).data('holder'));
 			}
 		});

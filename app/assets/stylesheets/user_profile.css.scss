@@ -68,12 +68,12 @@ $top-row-height: 225px;
 	.center { text-align: center; }
 	.first { padding-left: 5px;}
 }
-#scroll-sticky { margin-top: 10px; }
+#scroll-sticky { margin-top: 10px; z-index: 20;}
 #new-compliment-container {
-	// margin-top: 10px;
+	@include user-profile-form-styling;
 	background: #dbeef4;
 	border: 1px solid #c9e6ee;
-	// float: right;
+	z-index: 20;
 	#new-compliment {
 		float: left;
 		padding: 10px;
@@ -83,7 +83,7 @@ $top-row-height: 225px;
 		font-weight: normal;
 		margin-right: 10px;
 	}
-	.new-compliment-heading { font-size: 16px; margin: 0 0 10px 0; }
+	.new-compliment-heading { font-size: 16px; margin: 0 0 10px 10px; }
 	.send-new-compliment-button {
 		display: block;
 		width: 150px;

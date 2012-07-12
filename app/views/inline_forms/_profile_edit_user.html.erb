@@ -1,0 +1,38 @@
+<div class="edit-form">
+	<%= form_for user do |f| %>
+		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :first_name, "First" %></div>
+			<div id="field">
+				<%= f.text_field :first_name %>
+			</div>
+		</div>
+		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :middle_name, "Middle" %></div>
+			<div id="field">
+				<%= f.text_field :middle_name %>
+			</div>
+		</div>
+		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :last_name, "Last" %></div>
+			<div id="field">
+				<%= f.text_field :last_name %>
+			</div>
+		</div>
+		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :city %></div>
+			<div id="field">
+				<%= f.text_field :city %>
+			</div>
+		</div>
+		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :state_cd, "State" %></div>
+			<div id="field">
+				<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
+										 {:style => "width: 100px; height: 30px;"} %>
+			</div>
+		</div>
+		<div>
+			<button class="button-location" type=submit>Update</button>
+		</div>
+	<% end %>
+</div>

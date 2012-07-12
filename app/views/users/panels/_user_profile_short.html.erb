@@ -1,3 +1,19 @@
+<script>
+	$(function() {
+		$('.js-click-update-user').off('click');
+		$('.js-click-update-user').click(function(event) {
+			$('.edit-form').slideDown();
+			event.stopPropagation();
+		});
+		$('html').click(function(event) {
+			var clickSource = event.srcElement;
+			if($(clickSource).parents('#user-profile-short') == null ||
+				 $(clickSource).parents('#user-profile-short').length == 0) {
+				$('.edit-form').slideUp();
+			}
+		});
+	})
+</script>
 <div id="user-profile-short" 
 		 class="box-no-padding <%= account_status_display(@confirmed, @pending_items) %>">
 	<%= render 'users/panels/account_confirmation', :flash => flash %>
@@ -8,16 +24,17 @@
 			<%= image_tag(@user.photo.url(:small))%>
 		<% end %>
 	</div>
-	<%= link_to user_professional_profile_path(@user) do %>
-		<div class="name-location">
-			<h1><%= @user.full_name %></h1>
+	<div class="name-location">
+		<h1><%= @user.full_name %></h1>
+		<p style="color: #606060; font-size: 14px;"><%= location(@user) %></p>
+	</div>
+	<% if view_state(@user) == view_state_company_manager ||
+				view_state(@user) == view_state_user_manager %>
+		<div class="edit-link">
+			<%= link_to 'Edit', '#', :class => 'js-click-update-user' %>
 		</div>
-		<% if view_state(@user) == view_state_company_manager ||
-					view_state(@user) == view_state_user_manager %>
-			<div class="edit-link">
-				<%= link_to 'Edit', '#' %>
-			</div>
-		<% end %>
+		<div class="clear"></div>
+		<%= render 'inline_forms/profile_edit_user', :user => @user %>
 	<% end %>
 	<% if current_user?(@user) %>
 		<div style="float: right">

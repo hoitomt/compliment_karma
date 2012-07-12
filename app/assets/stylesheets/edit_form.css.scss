@@ -1,0 +1,64 @@
+@import "common";
+
+$input-width: 140px;
+
+.edit-form {
+	display: none;
+	padding-bottom: 10px;
+	#data-entry {
+		display: block;
+		margin-bottom: 10px;
+	}
+	#label {
+		float: left;
+		padding-top: 5px;
+	}
+	#field {
+		float: left;
+	}
+	label {
+		display: inline-block;
+		font-size: 13px;
+		font-weight: bold;
+		width: 50px;
+		color: #000;
+		text-align: right;
+		margin-right: 5px;
+		padding-top: 3px;
+	}
+	input,
+	textarea,
+	select {
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		// border: 0px;
+//		border: $border-gray 2px solid;
+		background-color:#FFFFFF;
+		color:#999;
+		font-size: 13px;
+		padding-left: 5px;
+		margin-bottom: 0px;
+	}
+	select { color: #000; font-size: 13px; width: $input-width}
+	input, select { height: 25px;}
+	input, textarea {	width: $input-width; }
+
+	button {
+		@include gradient-bg;
+		border: none;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 12px;
+		padding: 7px 10px;
+		font-weight: normal;
+		text-shadow: none;
+	}
+	button:hover {
+		background: $blue;
+		cursor: pointer;
+	}
+	.button-location { display: block; width: 150px; margin: 5px auto 0 auto; text-align: center; }
+}

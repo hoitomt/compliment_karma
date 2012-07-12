@@ -111,4 +111,8 @@ module ApplicationHelper
     return "#{site_url}recognition/#{recognition_type_id}/#{recognition_id}".html_safe
   end
 
+  def state_list
+    ListOfStates.list
+  end
+
 end

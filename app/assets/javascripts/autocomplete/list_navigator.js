@@ -30,7 +30,6 @@ var ListNavigator = {
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 13) { // enter key
 				var listElement = list[ListNavigator.index];
-
 				// Make sure we only care about enter for the appropriate results
 				var skillAutoCompleteContainer = $(listElement).parents('#skill-auto-complete');
 				var complimentReceiverContainer = $(listElement).parents('#compliment-receiver-results');
@@ -47,7 +46,9 @@ var ListNavigator = {
 		});
 		$('li.register-me').off('click');
 		$('li.register-me').click(function() {
+			console.log("clicky register");
 			ListNavigator.setInputAndClose($(this)[0])
+			ComplimentUI.validateSenderNotReceiver();
 		})
 		$(list).on({
 			hover: function() {

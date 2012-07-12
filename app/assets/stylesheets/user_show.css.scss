@@ -9,7 +9,6 @@
 	text-align: center;
 }
 #user-profile-short {
-	color: #ffffff;
 	background: #ffffff;
 	font: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
 	a { color: #606060; }
@@ -333,7 +332,6 @@
 
 #user-profile {
 	li { margin-left: 0px; }
-	@include user-profile-form-styling;
 }
 
 #account-confirmation {

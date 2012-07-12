@@ -23,6 +23,7 @@ var ComplimentUI = {
 			event.stopPropagation();
 		});
 		$('html').click(function(event) {
+			console.log('clicky');
 			var isAnchor = $(event.srcElement).is('a');
 			// var isInContainer = $(event.srcElement).parents('#new-compliment-container');
 			// console.log(isInContainer);
@@ -31,10 +32,13 @@ var ComplimentUI = {
 			}
 		});
 		$('input#compliment_receiver').off('blur');
-		$('input#compliment_receiver').blur(function(userId) {
-			$('#compliment-receiver-results-container').hide();
+		$('input#compliment_receiver').change(function(event) {
+			console.log("Input Change");
 			ComplimentUI.validateSenderNotReceiver();
-		})
+			setTimeout( function() {
+				$('#compliment-receiver-results-container').hide();
+			}, 200);
+		});
 	},
 	showNewComplimentPanel: function() {
 		$('.hide-me').slideDown();
@@ -55,9 +59,10 @@ var ComplimentUI = {
 		});
 	},
 	validateSenderNotReceiver: function() {
+		console.log("Validate");
 		var element = $('input#compliment_receiver');
 		var receiverUserId = $('input#compliment_receiver_id').val();
-		console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);
+		// console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);
 		var errorMsg = "";
 		if(ComplimentUI.userId == receiverUserId) {
 			errorMsg = "I think you are talking to yourself again";
