@@ -115,6 +115,12 @@ $total-width: 992px;
 	border-radius: 8px;
 }
 
+@mixin border-radius-15 {
+   -moz-border-radius: 15px;
+   -webkit-border-radius: 15px;
+   border-radius: 15px;
+}
+
 @mixin top-border-radius {
 	-moz-border-radius-topleft: 8px;
 	-moz-border-radius-topright: 8px;

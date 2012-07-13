@@ -1,4 +1,6 @@
 Ck::Application.routes.draw do
+  resources :experiences
+
   resources :company_department_users
 
   resources :company_departments
@@ -63,7 +65,7 @@ Ck::Application.routes.draw do
   match "users/:id/employees" => "users#employees", :as => :user_employees
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
   match "users/:id/rewards" => "users#rewards", :as => :user_rewards
-  match "users/:id/update" => "users#update"
+  match "users/:id/edit_from_profile" => "users#edit_from_profile", :as => :edit_from_profile
 
   resources :follows
   resources :recognition_comments, :only => [:create]

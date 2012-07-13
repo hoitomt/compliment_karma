@@ -1,0 +1,26 @@
+<% unless @professional_experiences.blank? %>
+	<ul>
+		<% @professional_experiences.each do |exp| %>
+			<li class="pro-exp">
+				<div class="left-column">
+					<p><strong><%= exp.title %></strong></p>
+					<p><strong><%= exp.company %></strong></p>
+					<p><%= location(exp) %></p>
+					<p><%= date_range(exp) %></p>
+					<p><%= date_math(exp) %></p>
+				</div>
+				<div class="right-column">
+					<p>
+						<strong>Responsibilities</strong>
+						<%= link_to 'Edit', 
+								edit_experience_path(:experience_id => exp.id, :id => user.id),
+								:style => "margin-left: 10px;",
+								:remote => true %>
+					</p>
+					<p><%= display_responsibilities(exp.responsibilities) %></p>
+				</div>
+				<div class="clear"></div>
+			</li>
+		<% end %>
+	</ul>
+<% end %>

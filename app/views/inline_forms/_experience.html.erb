@@ -1,0 +1,68 @@
+<script>
+	$(function() {
+		$('input#experience_start_date').datepicker();
+		$('input#experience_end_date').datepicker();
+	});
+</script>
+<div class="popup-form professional-experience">
+	<h2 style="margin-bottom: 10px;">New Professional Experience</h2>
+	<%= form_for experience, :validate => true, :remote => true do |f| %>
+		<%= hidden_field_tag 'id', user.id %>
+		<div id="data-entry" style="float: left; margin-right: 10px;">
+			<div id="label"><%= f.label :company, "Company" %></div>
+			<div id="field">
+				<%= f.text_field :company %>
+			</div>
+		</div>
+		<div id="data-entry" style="float: left;">
+			<div id="label"><%= f.label :title, "Position" %></div>
+			<div id="field">
+				<%= f.text_field :title %>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="data-entry" style="float: left; margin-right: 10px;">
+			<div id="label"><%= f.label :start_date, "Start Date" %></div>
+			<div id="field">
+				<%= f.text_field :start_date, :class => "date-input" %>
+			</div>
+		</div>
+		<div id="data-entry" style="float: left;">
+			<div id="label"><%= f.label :end_date, "End Date" %></div>
+			<div id="field">
+				<%= f.text_field :end_date, :class => "date-input" %>
+			</div>
+		</div>
+		<div id="end-date-helper" style="margin:30px 0 0 10px; color: #606060; float: left;">
+			Leave blank for your current position</div>
+		<div class="clear"></div>
+		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :responsibilities, "Responsibilities" %></div>
+			<div id="field">
+				<%= f.text_area :responsibilities, :rows => 10, :class => "responsibilities" %>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="data-entry" style="float: left; margin-right: 15px;">
+			<div id="label"><%= f.label :city %></div>
+			<div id="field">
+				<%= f.text_field :city %>
+			</div>
+		</div>
+		<div id="data-entry" style="float: left;">
+			<div id="label"><%= f.label :state_cd, "State" %></div>
+			<div id="field">
+				<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
+										 {:style => "width: 145px; height: 29px;"} %>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div>
+			<% if user.id %>
+				<button class="button-location" type=submit>Update</button>
+			<% else %>
+				<button class="button-location" type=submit>Create</button>
+			<% end %>
+		</div>
+	<% end %>
+</div>

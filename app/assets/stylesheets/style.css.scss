@@ -90,6 +90,14 @@ br.small { display: block; height: 1px;}
 	background: $main-menu-color;
 	padding:10px;
 }
+.box-no-radius {
+	border: 1px solid #F0F8F8;
+	background: $main-menu-color;
+}
+.box-no-radius-white {
+	border: 1px solid #F0F8F8;
+	background: #ffffff;
+}
 .drop-box {
 	@include bottom-border-radius;
 	border: 1px solid #F0F8F8;

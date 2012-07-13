@@ -1,4 +1,5 @@
-<div class="edit-form">
+<div class="popup-form">
+	<h2 style="margin-bottom: 10px;">Demographic Data</h2>
 	<%= form_for user do |f| %>
 		<div id="data-entry" class="clearfix">
 			<div id="label"><%= f.label :first_name, "First" %></div>
@@ -28,7 +29,7 @@
 			<div id="label"><%= f.label :state_cd, "State" %></div>
 			<div id="field">
 				<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
-										 {:style => "width: 100px; height: 30px;"} %>
+										 {:style => "width: 145px; height: 30px;"} %>
 			</div>
 		</div>
 		<div>

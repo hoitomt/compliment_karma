@@ -31,12 +31,10 @@ $item-height: 100px;
 #user-profile.box-no-padding {background: #ffffff;}
 #user-profile {
 	h1 { font-size: 18px; font-weight: bold; font-family: inherit; }
-	h1.section-title { display: block; font-size: 20px; border-bottom: $border-bottom;}
 	h2 { font-size: 12px; font-weight: bold; font-family: inherit; color: #606060;}
 	p { font-size: 12px; font-family: inherit; }
 	.small-gray { font-size: 12px; color: #606060; font-family: inherit;}
 }
-
 
 .popup-button {
 	@include active-button-gradient;
@@ -126,9 +124,9 @@ $item-height: 100px;
 		-webkit-border-radius: 5px;
 		border-radius: 5px;
 		// border: 0px;
-//		border: $border-gray 2px solid;
+		// border: $border-gray 2px solid;
+		// color:#999;
 		background-color:#FFFFFF;
-		color:#999;
 		font-size: 13px;
 		padding-left: 5px;
 		margin-bottom: 0px;

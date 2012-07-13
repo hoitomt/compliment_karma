@@ -51,8 +51,13 @@
 				</table>
 			</div>
 		</div>
-		<div id="user-achievements" class="second-row clearfix container">
-			<h1 class="section-title">Achievements by Skill</h1>
+		<div id="user-achievements" class="clearfix">
+			<div class="section-line">
+				<div class="center-me">
+					<div class="section-title">Achievements by Skill</div>
+				</div>
+				<div class="clear"></div>
+			</div>
 			<table id="achievements-by-skill" class="stripe-me">
 				<tr class="header">
 					<th class="left first">Skills</th>
@@ -70,8 +75,23 @@
 				<% end %>
 			</table>
 		</div>
-<!-- 		<div id="user-experience" class="third-row container">
-			<h1 class="section-title">Professional Experience</h1>
-		</div> -->
+		<div id="user-experience" class="third-row container">
+			<div class="section-line">
+				<div class="center-me">
+					<div class="section-title">Professional Experience</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="add-position">
+				<%= link_to '+ Add a Position', new_experience_path(:id => @user.id), :remote => true %>
+			</div>
+			<div class="clear"></div>
+			<div class="professional-experience">
+				<%= render :partial => 'experiences/professional_experiences', 
+									 :locals => {:professional_experiences => @professional_experiences,
+									 						 :user => @user } %>
+				<div class="clear"></div>
+			</div>
+		</div>
 	</div>
 </div>

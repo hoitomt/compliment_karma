@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     logger.info("Confirmation status - Unconfirmed?: #{@unconfirmed}")
   end
 
+  def edit_from_profile
+    @user = User.find(params[:id])
+  end
+
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
@@ -57,6 +61,7 @@ class UsersController < ApplicationController
 
   def professional_profile
     @user = User.find_by_id(params[:id])
+    @professional_experiences = @user.experiences
     set_this_week_compliments
     sent_compliments = Compliment.sent_professional_compliments(@user)
     received_compliments = Compliment.received_professional_compliments(@user)

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :ck_likes
   has_many :company_department_users
   has_many :company_departments, :through => :company_department_users
+  has_many :experiences
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned

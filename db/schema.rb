@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707214515) do
+ActiveRecord::Schema.define(:version => 20120713024912) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -102,6 +102,19 @@ ActiveRecord::Schema.define(:version => 20120707214515) do
     t.integer  "compliment_status_id"
     t.integer  "compliment_type_id"
     t.integer  "skill_id"
+  end
+
+  create_table "experiences", :force => true do |t|
+    t.string   "company"
+    t.string   "title"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "responsibilities"
+    t.string   "city"
+    t.string   "state_cd"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "follows", :force => true do |t|
