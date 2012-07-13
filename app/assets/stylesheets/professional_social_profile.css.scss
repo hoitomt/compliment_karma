@@ -23,6 +23,10 @@ $color-blue: #466fac;
 	font-size: 18px;
 	font-weight: bold;
 }
+.edit-position {
+	float:left; margin-left: 10px;
+	a { font-size: 12px; color: $color-blue;}
+}
 .add-position {
 	float: right; 
 	margin: 0 5px 5px 0;

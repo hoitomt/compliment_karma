@@ -5,10 +5,21 @@
 			<div class="personal-container clearfix">
 				<div class="demographics-container">
 					<div class="demographics">
-						<h1><%= link_to 'Add Current Position' %></h1>
-						<p class="small-gray" style="margin: 0 0 10px 0;">
-							<%= location(@user) %>
-						</p>
+						<% if @current_experience %>
+							<div style="float: left;">
+								<h1 style="font-size: 20px;"><%= @current_experience.title %></h1>
+								<h2 style="font-size: 20px; color: #606060; font-weight: normal;">
+									<%= @current_experience.company %>
+								</h2>
+								<p style="font-size: 14px; color: #606060;"><%= date_range(@current_experience) %></p>
+							</div>
+							<div class="edit-position">
+								<%= link_to 'Edit', edit_experience_path(:id => @user.id, 
+																												 :experience_id => @current_experience.id) %>
+							</div>
+						<% else %>
+							<h1><%= link_to 'Add Current Position', new_experience_path(:id => @user.id) %></h1>
+						<% end %>
 						<%= render 'follows/follows_button', :user => @user %>
 					</div>
 				</div>

@@ -5,6 +5,8 @@ class Experience < ActiveRecord::Base
 	validates :title, :presence => true
 	validate :start_date_is_before_end_date
 
+  default_scope :order => 'end_date DESC'
+
   def start_date_is_before_end_date
   	return if self.start_date.blank? && self.end_date.blank? #it's ok if they are both blank
   	if self.start_date.blank? && !self.end_date.blank?
