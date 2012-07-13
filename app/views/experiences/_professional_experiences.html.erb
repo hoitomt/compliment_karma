@@ -12,10 +12,10 @@
 				<div class="right-column">
 					<p>
 						<strong>Responsibilities</strong>
-						<%= link_to 'Edit', 
-								edit_experience_path(:experience_id => exp.id, :id => user.id),
+						<span style="margin-left:10px;"><%= link_to 'Edit', 
+								edit_experience_path(exp, :experience_id => exp.id, :user_id => user.id),
 								:class => "margin-left: 10px;",
-								:remote => true %>
+								:remote => true %></span>
 					</p>
 					<p><%= display_responsibilities(exp.responsibilities) %></p>
 				</div>

@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   def professional_profile
     @user = User.find_by_id(params[:id])
     @professional_experiences = @user.experiences
-    @current_experience = @user.experiences.last
+    @current_experience = @user.experiences.first
     set_this_week_compliments
     sent_compliments = Compliment.sent_professional_compliments(@user)
     received_compliments = Compliment.received_professional_compliments(@user)

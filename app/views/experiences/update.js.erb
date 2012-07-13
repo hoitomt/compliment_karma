@@ -1,3 +1,11 @@
+console.log('updating 1');
+console.log('updating');
+$('#professional-experience-container').html('<%=j render :partial => "experiences/professional_experiences", 
+									 :locals => {:professional_experiences => @professional_experiences,
+									 						 :user => @user } %>');
+$('#current-experience-container').html('<%=j render :partial => "experiences/current_experience", 
+										:locals => {:current_experience => @current_experience,
+																:user => @user } %>');
+
+console.log('updating post');
 $.fancybox().close();
-$('#professional-experience').html('<%=j render "experiences/professional_experiences", 
-									 :professional_experiences => @professional_experiences %>')

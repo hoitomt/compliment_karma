@@ -2,6 +2,7 @@
 @import "user_common";
 
 $input-width: 140px;
+$color-blue: #466fac;
 
 .popup-form { 
 	@include user-profile-form-styling;
@@ -29,6 +30,8 @@ $input-width: 140px;
 
 .professional-experience {
 	// width: 320px;
+	padding-bottom: 15px;
+	a { font-size: 12px; color: $color-blue;}
 	#label {
 		display: block;
 		float: none;

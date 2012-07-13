@@ -1,25 +1,12 @@
 <div id="user-profile">
 	<div id="user-overview" class="right-two-thirds drop-box-white clearfix">
 		<div id="user-profile-details" class="first-row clearfix container">
-
 			<div class="personal-container clearfix">
 				<div class="demographics-container">
 					<div class="demographics">
-						<% if @current_experience %>
-							<div style="float: left;">
-								<h1 style="font-size: 20px;"><%= @current_experience.title %></h1>
-								<h2 style="font-size: 20px; color: #606060; font-weight: normal;">
-									<%= @current_experience.company %>
-								</h2>
-								<p style="font-size: 14px; color: #606060;"><%= date_range(@current_experience) %></p>
-							</div>
-							<div class="edit-position">
-								<%= link_to 'Edit', edit_experience_path(:id => @user.id, 
-																												 :experience_id => @current_experience.id) %>
-							</div>
-						<% else %>
-							<h1><%= link_to 'Add Current Position', new_experience_path(:id => @user.id) %></h1>
-						<% end %>
+						<div id="current-experience-container">
+							<%= render 'experiences/current_experience', :current_experience => @current_experience %>
+						</div>
 						<%= render 'follows/follows_button', :user => @user %>
 					</div>
 				</div>
@@ -94,10 +81,10 @@
 				<div class="clear"></div>
 			</div>
 			<div class="add-position">
-				<%= link_to '+ Add a Position', new_experience_path(:id => @user.id), :remote => true %>
+				<%= link_to '+ Add a Position', new_experience_path(:user_id => @user.id), :remote => true %>
 			</div>
 			<div class="clear"></div>
-			<div class="professional-experience">
+			<div id="professional-experience-container">
 				<%= render :partial => 'experiences/professional_experiences', 
 									 :locals => {:professional_experiences => @professional_experiences,
 									 						 :user => @user } %>

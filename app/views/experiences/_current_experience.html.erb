@@ -1,0 +1,17 @@
+<% if @current_experience %>
+	<div style="float: left;">
+		<h1 style="font-size: 20px;"><%= @current_experience.title %></h1>
+		<h2 style="font-size: 20px; color: #606060; font-weight: normal;">
+			<%= @current_experience.company %>
+		</h2>
+		<p style="font-size: 14px; color: #606060;"><%= date_range(@current_experience) %></p>
+	</div>
+	<div class="edit-position">
+		<%= link_to 'Edit', edit_experience_path(@current_experience,
+																						 :user_id => @user.id, 
+																						 :experience_id => @current_experience.id),
+																						 :remote => true %>
+	</div>
+<% else %>
+	<h1><%= link_to 'Add Current Position', new_experience_path(:user_id => @user.id), :remote => true %></h1>
+<% end %>

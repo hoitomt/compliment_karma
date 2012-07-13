@@ -7,7 +7,9 @@
 <div class="popup-form professional-experience">
 	<h2 style="margin-bottom: 10px;">New Professional Experience</h2>
 	<%= form_for experience, :validate => true, :remote => true do |f| %>
-		<%= hidden_field_tag 'id', user.id %>
+		<%= hidden_field_tag 'user_id', user.id %>
+		<% exp_id = experience.id.to_s if experience.id %>
+		<%= hidden_field_tag 'experience_id', exp_id %>
 		<div id="data-entry" style="float: left; margin-right: 10px;">
 			<div id="label"><%= f.label :company, "Company" %></div>
 			<div id="field">
@@ -21,12 +23,14 @@
 			</div>
 		</div>
 		<div class="clear"></div>
+		<% experience.start_date = experience.start_date_display if experience.start_date %>
 		<div id="data-entry" style="float: left; margin-right: 10px;">
 			<div id="label"><%= f.label :start_date, "Start Date" %></div>
 			<div id="field">
 				<%= f.text_field :start_date, :class => "date-input" %>
 			</div>
 		</div>
+		<% experience.end_date = experience.end_date_display if experience.end_date %>
 		<div id="data-entry" style="float: left;">
 			<div id="label"><%= f.label :end_date, "End Date" %></div>
 			<div id="field">
