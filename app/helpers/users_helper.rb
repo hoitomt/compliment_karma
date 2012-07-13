@@ -454,13 +454,17 @@ module UsersHelper
 
   def location(user)
     city = ""
-    city = "#{user.city}, " unless user.city.blank?
+    city = "#{user.city}" unless user.city.blank?
     state_cd = ""
     state_cd = user.state_cd unless user.state_cd.blank?
     if city.blank? && state_cd.blank?
       return link_to 'Add location', '#', :class => 'js-click-update-user'
     end
-    return "#{city}#{state_cd}"
+    separator = ', '
+    if city.blank? || state_cd.blank?
+      separator = ''
+    end
+    return "#{city}#{separator}#{state_cd}"
   end
 
   def stats_label(count, label)

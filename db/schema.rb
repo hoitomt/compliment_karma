@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713024912) do
+ActiveRecord::Schema.define(:version => 20120713195504) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20120713024912) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "follows", :force => true do |t|
@@ -258,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20120713024912) do
     t.string   "domain"
     t.string   "new_account_confirmation_token"
     t.integer  "company_id"
+    t.string   "country"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

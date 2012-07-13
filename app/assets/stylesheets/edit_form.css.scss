@@ -27,7 +27,11 @@ $color-blue: #466fac;
 	}
 	select { border: 1px solid #4f81bd; width: 100px;}
 }
-
+#user-information {
+	#data-entry {
+		margin-bottom: 10px;
+	}
+}
 .professional-experience {
 	// width: 320px;
 	padding-bottom: 15px;

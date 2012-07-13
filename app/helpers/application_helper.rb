@@ -115,4 +115,8 @@ module ApplicationHelper
     ListOfStates.list
   end
 
+  def country_list
+    ListOfCountries.list
+  end
+
 end

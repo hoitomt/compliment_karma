@@ -1,6 +1,5 @@
 var ShowFancybox = {
 	init: function(view, width) {
-		console.log(width);
 		if(width == null) {
 			width = 0;
 		}

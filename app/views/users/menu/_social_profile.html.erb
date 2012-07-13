@@ -4,9 +4,6 @@
 			<div class="personal-container clearfix">
 				<div class="demographics-container">
 					<div class="demographics">
-						<p class="small-gray" style="margin: 0 0 10px 0;">
-							<%= location(@user) %>
-						</p>
 						<%= render 'follows/follows_button', :user => @user %>
 					</div>
 				</div>
@@ -42,7 +39,12 @@
 			</div>
 		</div>
 		<div id="user-achievements" class="second-row clearfix container">
-			<h1 class="section-title">Achievements by Skill</h1>
+			<div class="section-line">
+				<div class="center-me">
+					<div class="section-title">Achievements by Skill</div>
+				</div>
+				<div class="clear"></div>
+			</div>
 			<table id="achievements-by-skill" class="stripe-me">
 				<tr class="header">
 					<th class="left first">Skills</th>

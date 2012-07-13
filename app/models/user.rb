@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
                   :first_name, :middle_name, :last_name, :domain, :job_title,
                   :account_status_id, :account_status, :address_line_1, :address_line_2, 
                   :city, :state_cd, :zip_cd, :profile_url, :profile_headline, 
-                  :industry_id, :company_id
+                  :industry_id, :company_id, :country
   
   has_attached_file  :photo, 
                      :styles => { :mini => "40x40>",

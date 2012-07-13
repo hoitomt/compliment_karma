@@ -23,7 +23,6 @@ var ComplimentUI = {
 			event.stopPropagation();
 		});
 		$('html').click(function(event) {
-			console.log('clicky');
 			var isAnchor = $(event.srcElement).is('a');
 			// var isInContainer = $(event.srcElement).parents('#new-compliment-container');
 			// console.log(isInContainer);

@@ -1,4 +1,4 @@
-<div class="popup-form">
+<div id="user-information" class="popup-form">
 	<h2 style="margin-bottom: 10px;">Demographic Data</h2>
 	<%= form_for user do |f| %>
 		<div id="data-entry" class="clearfix">
@@ -26,6 +26,14 @@
 			</div>
 		</div>
 		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :country, "Country" %></div>
+			<div id="field">
+				<% selected_value = user.country || "United States" %>
+				<%= f.select :country, country_list, {:selected => selected_value}, 
+										 {:style => "width: 205px; height: 30px;"} %>
+			</div>
+		</div>
+		<div id="data-entry" class="user-state-code clearfix">
 			<div id="label"><%= f.label :state_cd, "State" %></div>
 			<div id="field">
 				<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
