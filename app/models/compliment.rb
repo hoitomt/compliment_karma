@@ -37,6 +37,7 @@ class Compliment < ActiveRecord::Base
   after_create :send_fulfillment
   after_create :set_relationship
   after_create :update_history
+  after_create :metrics_send_new_compliment
   
   # return the compliments that are pending for an email address
   # intent is to notify a potential user that there are compliments waiting for them
@@ -304,4 +305,7 @@ class Compliment < ActiveRecord::Base
     Compliment.where('receiver_user_id = ? AND compliment_type_id in (?)', user.id, types)
   end  
 
+  def metrics_send_new_compliment
+    DashkuMetrics.send_new_compliment    
+  end
 end

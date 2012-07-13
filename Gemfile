@@ -12,6 +12,10 @@ gem 'newrelic_rpm'
 # Email - HTTP to mailgun
 gem 'rest-client', '1.6.7'
 
+# Metrics
+gem 'json'
+gem 'em-http-request'
+
 # Photo Support
 gem 'paperclip', '~>3.0.2'
 gem 'aws-sdk', '1.4.1'

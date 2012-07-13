@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   after_create :associate_received_compliments
   after_create :associate_sent_compliments
   after_create :create_relationships
+  after_create :metrics_send_new_user
   
   # Return true if the user's password matches the submitted password
   def has_password?(submitted_password)
@@ -316,6 +317,10 @@ class User < ActiveRecord::Base
     CompanyUser.administers_company?(self.id, company_id)
   end
   
+  def metrics_send_new_user
+    DashkuMetrics.send_new_user
+  end
+
   private
     def encrypt(password)
       BCrypt::Engine.hash_secret(password, self.salt)
