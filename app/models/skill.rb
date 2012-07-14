@@ -47,4 +47,13 @@ class Skill < ActiveRecord::Base
 		Skill.find_by_name('User Defined')
 	end
 
+	def self.find_or_create_skill(skill_id, skill_text)
+		if skill_id.blank?
+			s = Skill.create(:name => skill_text, :parent_skill_id => Skill.USER_DEFINED.id)
+			return s
+		else
+			return Skill.find(skill_id)
+		end
+	end
+
 end

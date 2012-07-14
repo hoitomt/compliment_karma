@@ -14,7 +14,8 @@ class ComplimentsController < ApplicationController
     @compliment = Compliment.new
     @compliment.comment = params[:compliment][:comment]
     @compliment.compliment_type_id = params[:compliment][:compliment_type_id]
-    @compliment.skill_id = params[:skill_id_result]
+    skill = Skill.find_or_create_skill(params[:skill_id_result], params[:compliment][:skill_id])
+    @compliment.skill_id = skill.id
     set_sender
     set_receiver
     if @compliment.save
