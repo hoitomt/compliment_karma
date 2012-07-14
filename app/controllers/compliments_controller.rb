@@ -26,6 +26,7 @@ class ComplimentsController < ApplicationController
         }
       end
     else
+      # @receiver_field = params[:compliment][:receiver]
       respond_to do |format|
         format.html {
           error_msg = ""
