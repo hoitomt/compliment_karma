@@ -1,9 +1,11 @@
 @import "common";
 
 a.login-links {
-	display: block; text-align: left;
+	// display: block; 
+	text-align: left;
 	font-size: 12px;
 }
+a.login-links:hover { text-decoration: underline; }
 form#login-form{
 	margin-bottom: 0px;
 	fieldset {

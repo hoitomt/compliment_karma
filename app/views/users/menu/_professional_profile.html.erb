@@ -81,7 +81,10 @@
 				<div class="clear"></div>
 			</div>
 			<div class="add-position">
-				<%= link_to '+ Add a Position', new_experience_path(:user_id => @user.id), :remote => true %>
+				<%= link_to '+ Add a Position', 
+										new_experience_path(:user_id => @user.id), 
+										:class => "ul_hover",
+										:remote => true %>
 			</div>
 			<div class="clear"></div>
 			<div id="professional-experience-container">

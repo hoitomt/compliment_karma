@@ -41,8 +41,11 @@
 				<fieldset>
 					<div class="log-in-button">
 						<button type=submit class="log-in">Log In</button>
-						<%= link_to '- Forgot Password?', new_password_reset_path, :class => "login-links" %>
-						<%= link_to '- Create a Free Account', signup_path, :class => "login-links" %>
+						<div style="text-align: left;">
+							<%= link_to '- Forgot Password?', new_password_reset_path, :class => "login-links" %>
+							<br />
+							<%= link_to '- Create a Free Account', signup_path, :class => "login-links" %>
+						</div>
 					</div>
 				</fieldset>
 			<% end %>	

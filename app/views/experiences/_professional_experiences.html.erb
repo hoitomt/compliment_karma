@@ -14,7 +14,8 @@
 						<strong>Responsibilities</strong>
 						<span style="margin-left:10px;"><%= link_to 'Edit', 
 								edit_experience_path(exp, :experience_id => exp.id, :user_id => user.id),
-								:class => "margin-left: 10px;",
+								:style => "margin-left: 10px;",
+								:class => "ul_hover",
 								:remote => true %></span>
 					</p>
 					<p><%= display_responsibilities(exp.responsibilities) %></p>

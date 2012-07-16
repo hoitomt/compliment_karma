@@ -10,6 +10,7 @@
 		<%= link_to 'Edit', edit_experience_path(@current_experience,
 																						 :user_id => @user.id, 
 																						 :experience_id => @current_experience.id),
+																						 :class => "ul_hover",
 																						 :remote => true %>
 	</div>
 <% else %>

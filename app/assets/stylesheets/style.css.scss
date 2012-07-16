@@ -138,7 +138,8 @@ h2.box-header {
 }
 
 a { text-decoration: none; }
-a:hover { text-decoration: underline; }
+a.ul_hover:hover{text-decoration: underline;}
+// a:hover { text-decoration: underline; }
 .sticky {
   position: fixed;
   top: 0;

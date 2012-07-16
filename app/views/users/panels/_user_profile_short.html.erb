@@ -15,7 +15,7 @@
 	<% if view_state(@user) == view_state_company_manager ||
 				view_state(@user) == view_state_user_manager %>
 		<div class="edit-link">
-			<%= link_to 'Edit', edit_from_profile_path(@user), :remote => true %>
+			<%= link_to 'Edit', edit_from_profile_path(@user), :class => "ul_hover", :remote => true %>
 		</div>
 		<div class="clear"></div>
 	<% end %>
