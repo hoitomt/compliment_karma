@@ -26,13 +26,12 @@ class ComplimentsController < ApplicationController
         }
       end
     else
-      # @receiver_field = params[:compliment][:receiver]
       respond_to do |format|
         format.html {
           error_msg = ""
           @compliment.errors.messages.each do |k,v|
             v.each do |error_str|
-              error_msg += "#{k} #{error_str}<br />"
+              error_msg += "#{error_str}<br />"
             end
           end
           flash[:error] = "Your compliment could not be sent<br />#{error_msg}".html_safe
@@ -48,7 +47,7 @@ class ComplimentsController < ApplicationController
       @compliment.receiver_user_id = receiver_id
       @compliment.receiver_email = User.find(receiver_id).email
     else
-      @compliment.receiver_email = params[:compliment][:receiver]
+      @compliment.receiver_email = params[:compliment][:receiver_display]
     end
   end
 

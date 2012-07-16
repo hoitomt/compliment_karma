@@ -79,11 +79,11 @@ var UserProfile = {
 	formValidation: function() {
 		this.hideAllHelpers();
 
-		$('#compliment_receiver').focus(function() {
+		$('#compliment_receiver_display').focus(function() {
 			SkillAutoComplete.hideResults();
 			$('#compliment_receiver_helper').show(200);
 		});
-		$('#compliment_receiver').blur(function() {
+		$('#compliment_receiver_display').blur(function() {
 			$('#compliment_receiver_helper').hide(200);
 		});
 
@@ -195,7 +195,7 @@ var UserProfile = {
 		docState.totalCount = parseInt($('#feed_items_count').val());
 	},
 	setValidateSenderNotReceiver: function(userEmail) {
-		$('#compliment_receiver').blur(function() {
+		$('#compliment_receiver_display').blur(function() {
 			UserProfile.validateSenderNotReceiver(userEmail);
 		});
 	},

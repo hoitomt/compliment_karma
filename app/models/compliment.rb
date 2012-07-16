@@ -9,7 +9,7 @@ class Compliment < ActiveRecord::Base
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  attr_accessor :suppress_fulfillment # for seeding data only
+  attr_accessor :receiver_display, :suppress_fulfillment # for seeding data only
   
   validates :receiver_email, :presence => true,
                              :format => { :with => email_regex }
@@ -47,7 +47,8 @@ class Compliment < ActiveRecord::Base
   
   def compliment_cannot_be_to_self
     if(self.sender_email == self.receiver_email)
-      errors.add(:receiver_email, "The compliment must not be from the sender") 
+      errors.add(:receiver_email, 
+                  "We think you are wonderful too but you cannot compliment yourself") 
     end
   end
 

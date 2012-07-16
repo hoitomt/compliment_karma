@@ -9,8 +9,8 @@ var ComplimentUI = {
 		$('#new-compliment').effect("highlight", {color: "#006791"}, 2500);
 	},
 	setNewComplimentHandlers: function() {
-		$('input#compliment_receiver').off('click, change');
-		$('input#compliment_receiver').click(function() {
+		$('input#compliment_receiver_display').off('click, change');
+		$('input#compliment_receiver_display').click(function() {
 			ComplimentUI.showNewComplimentPanel();
 			// event.stopPropagation();
 		});
@@ -30,10 +30,17 @@ var ComplimentUI = {
 				ComplimentUI.hideNewComplimentPanel();
 			}
 		});
-		$('input#compliment_receiver').off('blur');
-		$('input#compliment_receiver').change(function(event) {
-			console.log("Input Change");
-			ComplimentUI.validateSenderNotReceiver();
+		$('input#compliment_receiver_display').off('change blur');
+		$('input#compliment_receiver_display').change(function(event) {
+			// console.log("Input Change");
+			ComplimentUI.validateComplimentReceiver();
+			setTimeout( function() {
+				$('#compliment-receiver-results-container').hide();
+			}, 200);
+		});
+		$('input#compliment_receiver_display').blur(function(event) {
+			// console.log("Input Blur");
+			ComplimentUI.validateComplimentReceiver();
 			setTimeout( function() {
 				$('#compliment-receiver-results-container').hide();
 			}, 200);
@@ -57,9 +64,12 @@ var ComplimentUI = {
 			}
 		});
 	},
+	validateComplimentReceiver: function() {
+		ComplimentUI.validateSenderNotReceiver();
+	},
 	validateSenderNotReceiver: function() {
-		console.log("Validate");
-		var element = $('input#compliment_receiver');
+		// console.log("Validate");
+		var element = $('input#compliment_receiver_display');
 		var receiverUserId = $('input#compliment_receiver_id').val();
 		// console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);
 		var errorMsg = "";

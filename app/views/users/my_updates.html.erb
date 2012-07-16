@@ -1,7 +1,7 @@
 <%= content_for :javascript do %>
 	<script type="text/javascript">
 		$(function() {
-			var flashMsg = '<%= flash[:error] %>';
+			var flashMsg = "<%= flash[:error] %>";
 			if(flashMsg.length > 0) {
 				$('#field label').hide();
 			}

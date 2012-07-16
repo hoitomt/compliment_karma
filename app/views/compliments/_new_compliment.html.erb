@@ -17,6 +17,8 @@
 		<% end %>
 		<div id="new-compliment">
 			<p class="new-compliment-heading"><%= new_compliment_heading(@user) %></p>
+					<% receiver_display_val = @receiver_display || nil %>
+					rcv: <%= receiver_display_val %>
 			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
 				<%= hidden_field_tag 'request_page', "user" %>
 				<%= hidden_field_tag 'skill_id_result' %>
@@ -24,7 +26,8 @@
 
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= label_tag 'receiver', "To", :class => "new-compliment" %></div>
-					<div id="field"><%= text_field 'compliment', 'receiver', 
+					<div id="field"><%= text_field 'compliment', 'receiver_display', 
+																					 :value => receiver_display_val,
 																					 :placeholder => "receiver's name or email",
 																					 :autocomplete => 'off',
 																					 :class =>"new-compliment-input" %>

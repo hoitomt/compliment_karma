@@ -46,7 +46,7 @@ var ListNavigator = {
 		});
 		$('li.register-me').off('click');
 		$('li.register-me').click(function() {
-			console.log("clicky register");
+			// console.log("clicky register");
 			ListNavigator.setInputAndClose($(this)[0])
 			ComplimentUI.validateSenderNotReceiver();
 		})

@@ -3,8 +3,9 @@ var ComplimentReceiver = {
 		this.registerHandler();
 	},
 	registerHandler: function() {
-		$('input#compliment_receiver').unbind('input');
-		$('input#compliment_receiver').bind('input', function(event) {
+		$('input#compliment_receiver_display').unbind('input');
+		$('input#compliment_receiver_display').bind('input', function(event) {
+			$('#compliment_receiver_id').val('');
 			setTimeout("ComplimentReceiver.searchFx()", 400);
 			event.stopPropagation();
 		});
@@ -13,7 +14,7 @@ var ComplimentReceiver = {
 		});
 	},
 	searchFx: function() {
-		var searchString = $('input#compliment_receiver').val();
+		var searchString = $('input#compliment_receiver_display').val();
 		var results = ComplimentReceiver.ajaxSearch(searchString);
 	},
 	hideResults: function() {

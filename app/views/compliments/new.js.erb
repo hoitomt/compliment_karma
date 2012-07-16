@@ -1,5 +1,5 @@
 var updateNewCompliment = function() {
-	$('input#compliment_receiver').val('<%=j @recipient_email %>');
+	$('input#compliment_receiver_display').val('<%=j @recipient_email %>');
 	$.fn.inputStyle();
 	ComplimentUI.flashBlue();
 }

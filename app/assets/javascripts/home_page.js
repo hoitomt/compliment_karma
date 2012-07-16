@@ -57,7 +57,7 @@ var HomePage = {
 			HomePage.showComplimentFormNoSlide();
 		} else {
 			setTimeout(HomePage.showComplimentForm, 10000);
-			$('#compliment_receiver').click(function() {
+			$('#compliment_receiver_display').click(function() {
 				HomePage.showComplimentForm();
 			}).focus(function() {
 				HomePage.showComplimentForm();
