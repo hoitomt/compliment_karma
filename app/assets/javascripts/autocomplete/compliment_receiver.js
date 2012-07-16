@@ -5,7 +5,7 @@ var ComplimentReceiver = {
 	registerHandler: function() {
 		$('input#compliment_receiver_display').unbind('input');
 		$('input#compliment_receiver_display').bind('input', function(event) {
-			$('#compliment_receiver_id').val('');
+			// $('#compliment_receiver_id').val('');
 			setTimeout("ComplimentReceiver.searchFx()", 400);
 			event.stopPropagation();
 		});

@@ -200,5 +200,10 @@ describe User do
     end
 
   end
+
+  describe "valid email returns correct true or false" do
+    it "should return true for a valid email"
+    it "should return false for an invalid email"
+  end
   
 end

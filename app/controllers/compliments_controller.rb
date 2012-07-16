@@ -41,13 +41,19 @@ class ComplimentsController < ApplicationController
     end
   end
   
+  # if an email address was entered in the input field and it is valid, use it
+  # Otherwise use the input id that was selected via the drop down
   def set_receiver
     receiver_id = params[:compliment_receiver_id]
-    if !receiver_id.blank?
+    receiver_display = params[:compliment][:receiver_display]
+    input_user = User.find_by_email(receiver_display) if User.valid_email?(receiver_display)
+    if !input_user.blank?
+      @compliment.receiver_email = params[:compliment][:receiver_display]
+    elsif !receiver_id.blank?
       @compliment.receiver_user_id = receiver_id
       @compliment.receiver_email = User.find(receiver_id).email
     else
-      @compliment.receiver_email = params[:compliment][:receiver_display]
+      # invalid email address
     end
   end
 

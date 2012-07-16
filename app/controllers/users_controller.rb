@@ -167,6 +167,10 @@ class UsersController < ApplicationController
   def set_compliment_panel(params)
     @compliment = Compliment.new(params[:compliment])
     @compliment.sender_email = current_user.email
+    unless current_user?(@user)
+      @compliment.receiver_display = @user.search_result_display
+      @compliment.receiver_user_id = @user.id
+    end
     # @skills = Skill.list_for_autocomplete
     if flash[:compliment]
       @compliment = Compliment.new(flash[:compliment].attributes)

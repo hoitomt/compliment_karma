@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
                      :path => "/:id/:style/:filename"
                      
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  @@email_regex_loc = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name, :presence => true,
                    :length => { :maximum => 50 },
@@ -319,6 +320,10 @@ class User < ActiveRecord::Base
   
   def metrics_send_new_user
     DashkuMetrics.send_new_user
+  end
+
+  def self.valid_email?(email)
+    return !email.match(@@email_regex_loc).nil?
   end
 
   private

@@ -20,7 +20,7 @@
 			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
 				<%= hidden_field_tag 'request_page', "user" %>
 				<%= hidden_field_tag 'skill_id_result' %>
-				<%= hidden_field_tag "compliment_receiver_id" %>
+				<%= hidden_field_tag "compliment_receiver_id", @compliment.receiver_user_id %>
 
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= label_tag 'receiver', "To", :class => "new-compliment" %></div>
