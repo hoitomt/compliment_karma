@@ -329,8 +329,9 @@ module UsersHelper
 
   def my_update_image(item)
     case item.update_history_type_id
-    when UpdateHistoryType.Received_Compliment.id,
-         UpdateHistoryType.Comment_on_Received_Compliment.id, 
+    when UpdateHistoryType.Received_Compliment.id
+         return image_tag('my_updates/icon_24x24_compliment.png')
+    when UpdateHistoryType.Comment_on_Received_Compliment.id, 
          UpdateHistoryType.Comment_on_Sent_Compliment.id,
          UpdateHistoryType.Comment_on_Reward.id,
          UpdateHistoryType.Comment_on_Accomplishment.id

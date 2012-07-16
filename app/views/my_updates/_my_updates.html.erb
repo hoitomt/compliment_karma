@@ -8,7 +8,7 @@
 		<ul id="my-update-content">
 			<% @my_update_items.each do |item| %>
 				<% originator = User.find_by_id(item.originating_user_id) %>
-				<% if item.recognition_type_id.nil? %>
+				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
 					<%= link_to originator do %>
 						<li class="clearfix" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-item-image">
@@ -18,6 +18,8 @@
 								<p class="originator-note">
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
+								<%= render 'my_updates/update_compliments', :item => item %>
+								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
 						</li>
 					<% end %>

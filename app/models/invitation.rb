@@ -4,9 +4,10 @@ class Invitation < ActiveRecord::Base
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :invite_email, :presence => true,
-                           :format => { :with => email_regex }
-  validates :from_email, :presence => true,
-                         :format => { :with => email_regex }
+                           :format => { :with => email_regex, 
+                                        :message => "This is not a valid email address" }
+  # validates :from_email, :presence => true,
+  #                        :format => { :with => email_regex }
   validate :invite_email_should_not_equal_from_email
   
   def invite_email_should_not_equal_from_email
@@ -25,7 +26,7 @@ class Invitation < ActiveRecord::Base
     # end
   end
   
-  def self.create_invitation(to, from)
+  def self.create_invitation(to, from=nil)
     logger.info("create_invitation to #{to} from #{from}")
     time_frame = 0.25
     if no_recent_invitation?(to, time_frame)

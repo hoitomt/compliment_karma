@@ -8,7 +8,7 @@
 		$(function(){
 			var showFlash = <%= flash && !flash.empty? %>;
 			HomePage.init(showFlash);
-			$.fn.inputStyle();
+			CommonScripts.init();
 		});
 	</script>
 <% end %>
@@ -26,12 +26,16 @@
 					<%= image_tag 'certificate.png', :style => "margin: 0 0 -4px -5px"%>
 				</p>
 				<div id="sub-title">
-					Sign up for your free account
+					Request an invitation for a free account
 				</div>
-				<%= link_to "Let's Get Started!", signup_path, :class => 'sign-up-button' %>
-				<div id='learn-more'>
-					<%= link_to "Learn more", '#overview', :class => 'fancybox' %>
-				</div>
+				<%#= link_to "Let's Get Started!", signup_path, :class => 'sign-up-button' %>
+				<%= form_for(@invitation, :validate => true, :html => {:id => 'main-page-invitation'}) do |f| %>
+					<div id="data-entry" class="clearfix">
+						<div id="field">
+							<%= f.text_field :invite_email, :align => 'middle', :placeholder => 'Enter your email'  %>
+						</div>
+					</div>
+				<% end %>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -45,11 +49,14 @@
 					<div id="slider-state-1"></div>
 					<div id="slider-state-2"></div>
 				</div>
-				<div id="slider" style="height: 330px;">
+				<div id="slider" style="height: 300px;">
 					<%= render 'pages/slides/slide_employee' %>
 					<%= render 'pages/slides/slide_employer' %>
 				</div>
 				<div class="clear"></div>
+				<div id='learn-more'>
+					<%= link_to "Learn more", learn_path %>
+				</div>
 			</div>
 		</div
 	</div>	

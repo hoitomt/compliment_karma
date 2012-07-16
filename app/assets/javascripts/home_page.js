@@ -4,7 +4,6 @@ var HomePage = {
 		// this.setStatusHandlers();
 		// this.resetStatus();
 		this.displayComplimentForm(showFlash);
-		$('#learn-more').fancybox();
 	},
 	slider: function() {
 		$('#slider').cycle({

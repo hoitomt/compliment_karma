@@ -1,27 +1,7 @@
 class PagesController < ApplicationController
   def index
     @title = "Welcome"
-    flash.each do |k,v|
-      if(v.class == Compliment)
-        logger.info("Flash Compliment: #{k}: #{v}")
-        v.attributes.each do |field, value|
-          logger.info("Flash Compliment Values: #{field}: #{value}")
-        end
-      else
-        logger.info("Flash: #{k}: #{v}")
-      end
-    end
-    @compliment = Compliment.new
-    if flash[:compliment]
-      @compliment = Compliment.new(flash[:compliment].attributes)
-      flash[:compliment].errors.each do |attr, msg|
-        @compliment.errors.add(attr, msg)
-      end
-      @compliment.errors.full_messages.each do |msg|
-        logger.info("Error: #{msg}")
-      end
-    end
-    flash.delete(:compliment)
+    @invitation = Invitation.new
     if current_user
       redirect_to current_user
     end
@@ -43,6 +23,10 @@ class PagesController < ApplicationController
   
   def demo
     @title = "Demo"
+  end
+
+  def learn
+    @title = "Learn"
   end
 
   def search

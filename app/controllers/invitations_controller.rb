@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_filter :authenticate
+  # before_filter :authenticate
   
   def new
     @invitation = Invitation.new
@@ -10,7 +10,6 @@ class InvitationsController < ApplicationController
     if params[:multi_invitation]
       send_multiple_invitations(params[:multi_invitation])
     else
-      
       if current_user
         logger.info("Current User")
         if Invitation.create_invitation(params[:invitation][:invite_email], 
@@ -20,10 +19,13 @@ class InvitationsController < ApplicationController
         end
       else
         logger.info("Not Current User")
-        if @invitation = Inviation.create_invitation(params[:invitation][:invite_email],
-                                                     params[:invitation][:from_email])
-          flash[:error] = "There was an error when sending your invitation"
-          render 'new'
+        if @invitation = Invitation.create_invitation(params[:invitation][:invite_email])
+          flash[:notice] = "An invitation has been sent to #{params[:invitation][:invite_email]}" + 
+                          "<br />Thank you for your interest in ComplimentKarma"
+          redirect_to root_path
+        else
+          flash[:notice] = "There was an error when sending your invitation"
+          redirect_to root_path
         end
       end
       

@@ -18,6 +18,7 @@ Ck::Application.routes.draw do
   match "/logout" => "sessions#destroy", :as => "logout"
   match "/pricing" => "pages#pricing"
   match "/demo" => "pages#demo"
+  match "/learn" => "pages#learn"
   match "/founder_signout" => "shells#destroy"
   match "/invite_coworkers" => "pages#invite_coworkers"
   match "/invite_others" => "pages#invite_others"

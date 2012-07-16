@@ -66,7 +66,7 @@ class UpdateHistory < ActiveRecord::Base
     subject = User.find_by_id(follow.subject_user_id)
     follower = User.find_by_id(follow.follower_user_id)
     add_update_history( follow.subject_user_id,
-                        UpdateHistoryType.Following_You,
+                        UpdateHistoryType.Following_You.id,
                         nil,
                         nil,
                         "is following you", follow.follower_user_id)
@@ -75,7 +75,7 @@ class UpdateHistory < ActiveRecord::Base
   def self.Comment_on_Sent_Compliment(recognition_comment, current_user_id)
     c = Compliment.find_by_id(recognition_comment.recognition_id)
     add_update_history( c.sender_user_id,
-                        UpdateHistoryType.Comment_on_Sent_Compliment,
+                        UpdateHistoryType.Comment_on_Sent_Compliment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
                         "commented on your compliment to #{c.get_receiver.full_name}", current_user_id)
@@ -84,7 +84,7 @@ class UpdateHistory < ActiveRecord::Base
   def self.Comment_on_Received_Compliment(recognition_comment, current_user_id)
     c = Compliment.find_by_id(recognition_comment.recognition_id)
     add_update_history( c.receiver_user_id,
-                        UpdateHistoryType.Comment_on_Received_Compliment,
+                        UpdateHistoryType.Comment_on_Received_Compliment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
                         "commented on your compliment from #{c.get_sender.full_name}", current_user_id)
@@ -96,7 +96,7 @@ class UpdateHistory < ActiveRecord::Base
     note = "commented on your #{r.value} reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
     add_update_history( r.receiver_id,
-                        UpdateHistoryType.Comment_on_Reward,
+                        UpdateHistoryType.Comment_on_Reward.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
                         note, current_user_id)
@@ -105,7 +105,7 @@ class UpdateHistory < ActiveRecord::Base
   def self.Comment_on_Accomplishment(recognition_comment, current_user_id)
     a = UserAccomplishment.find_by_accomplishment_id(recognition_comment.recognition_id)
     add_update_history( a.user_id,
-                        UpdateHistoryType.Comment_on_Accomplishment,
+                        UpdateHistoryType.Comment_on_Accomplishment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
                         "commented on your #{a.accomplishment.name}", current_user_id)
@@ -114,7 +114,7 @@ class UpdateHistory < ActiveRecord::Base
   def self.Earned_an_Accomplishment(user_accomplishment)
     a = user_accomplishment.accomplishment
     add_update_history( user_accomplishment.user_id,
-                        UpdateHistoryType.Earned_an_Accomplishment,
+                        UpdateHistoryType.Earned_an_Accomplishment.id,
                         RecognitionType.ACCOMPLISHMENT,
                         user_accomplishment.accomplishment_id,
                         "earned a #{a.name}", user_accomplishment.user_id)
@@ -127,28 +127,24 @@ class UpdateHistory < ActiveRecord::Base
     note = "received a #{value} reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
     add_update_history( reward.receiver_id,
-                        UpdateHistoryType.Received_Reward,
+                        UpdateHistoryType.Received_Reward.id,
                         RecognitionType.REWARD.id,
                         reward.id,
                         note, reward.receiver_id)
   end
 
   def self.Accepted_Compliments_Receiver(relationship)
-    s_r_compliments = Compliment.get_compliments_to_be_updated_to_visible(relationship)
-    s_r_compliments.each do |c|
-      c.update_attributes(:visibility_id => relationship.visibility.id)
-      add_update_history(c.sender_user_id,
-                         UpdateHistoryType.Accepted_Compliment_Receiver,
-                         RecognitionType.COMPLIMENT,
-                         c.id,
-                         "accepted your compliment", c.receiver_user_id)
-    end
+    add_update_history(relationship.user_1_id,
+                       UpdateHistoryType.Accepted_Compliment_Receiver.id,
+                       nil,
+                       nil,
+                       "accepted your compliment", relationship.user_2_id)
   end
 
   def self.Rejected_Compliment_Receiver(relationship)
     add_update_history(relationship.user_1_id,
-                       UpdateHistoryType.Rejected_Compliment_Receiver,
-                       RecognitionType.COMPLIMENT,
+                       UpdateHistoryType.Rejected_Compliment_Receiver.id,
+                       nil,
                        nil,
                        "rejected your compliment", relationship.user_2_id)
   end
