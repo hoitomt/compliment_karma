@@ -1,6 +1,8 @@
 class FollowsController < ApplicationController
 
 	def create
+		referrer = request.referrer
+		logger.info("Referrer: #{@referrer}")
 		@subject_id = params[:subject_user_id]
 		@follower_id = params[:follower_user_id]
 		if Follow.follow_exists?(@subject_id, @follower_id)
@@ -16,7 +18,9 @@ class FollowsController < ApplicationController
 
 		respond_to do |format|
 			format.js{ render 'create_follow' }
-			format.html { redirect_to current_user }
+			format.html {
+				redirect_to referrer
+			}
 		end
 	end
 

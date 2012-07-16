@@ -9,6 +9,7 @@ var UserProfile = {
 		this.feed_items_filters(userId);
 		this.formValidation();
 		this.reinitialize();
+		this.setUnconfirmedUserPanelHeight();
 	},
 	reinitialize: function() {
 		this.stripeTable();
@@ -226,7 +227,14 @@ var UserProfile = {
 				};
 			}
 		});
-	}
+	},
+	setUnconfirmedUserPanelHeight: function() {
+		var unclickable = $('.unclickable');
+		if(unclickable != null) {
+			var height = $('#new-compliment-container').height();
+			unclickable.height(height);
+		}
+ 	}
 }
 
 
