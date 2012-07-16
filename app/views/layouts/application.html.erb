@@ -20,7 +20,6 @@
 	<![endif]-->
 	<script type="text/javascript">
 		$(function() {
-			console.log('<%=j flash.to_json %>');
 			if(<%= flash && !flash.empty? %>) {
 				$('#explanation').slideDown(200);
 			}

@@ -40,13 +40,3 @@ var CommonScripts = {
 
 }
 
-// $(function() {
-// 	// CommonScripts.inputStyle();
-// 	var inputs = $.merge($('input'), $('textarea'));
-// 	$.each(inputs, function() {
-// 		$(this).blur(function() {
-// 			CommonScripts.inputStyle()
-// 		});
-// 	});
-// 	CommonScripts.toggleScrolling();
-// });
