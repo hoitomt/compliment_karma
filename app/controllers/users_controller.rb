@@ -167,9 +167,12 @@ class UsersController < ApplicationController
   def set_compliment_panel(params)
     @compliment = Compliment.new(params[:compliment])
     @compliment.sender_email = current_user.email
+    @sender_is_a_company = sender_is_a_company?
+    @receiver_is_a_company = false
     unless current_user?(@user)
       @compliment.receiver_display = @user.search_result_display
       @compliment.receiver_user_id = @user.id
+      @receiver_is_company = @user.is_a_company?
     end
     # @skills = Skill.list_for_autocomplete
     if flash[:compliment]
@@ -182,6 +185,12 @@ class UsersController < ApplicationController
       end
     end
     flash.delete(:compliment)
+  end
+
+  def sender_is_a_company?
+    return false if current_user.blank?
+    return true if @user.is_a_company? && current_user.is_company_administrator?(@user.company)
+    return false
   end
   
   def set_karma_live_panel(params)

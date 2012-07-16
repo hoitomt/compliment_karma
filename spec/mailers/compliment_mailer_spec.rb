@@ -10,7 +10,7 @@ describe ComplimentMailer do
                                     :sender_email => user.email,
                                     :receiver_email => user3.email,
                                     :comment => "I like your sewing",
-                                    :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER)
+                                    :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL)
   end
 
   describe "send_compliment" do

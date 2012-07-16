@@ -2,11 +2,13 @@ var ListNavigator = {
 	index: 0,
 	inputTextField: null,
 	inputIdField: 0,
+	receiverIsACompanyField: false,
 	container: null,
-	init: function(list, inputTextField, inputIdField, container) {
+	init: function(list, inputTextField, inputIdField, receiverIsACompanyField, container) {
 		this.index = 0;
 		this.inputTextField = inputTextField;
 		this.inputIdField = inputIdField;
+		this.receiverIsACompanyField = receiverIsACompanyField;
 		this.container = container;
 		this.highlightElement(list);
 		this.addListHandlers(list);
@@ -59,8 +61,10 @@ var ListNavigator = {
 	setInputAndClose: function(listElement) {
 		var inputValue = $(listElement).find('.value-for-input-field');
 		var inputId = $(listElement).find('.id-for-input-field');
+		var receiverIsACompany = $(listElement).find('.is_a_company');
 		$(ListNavigator.inputTextField).val($(inputValue).html());
 		$(ListNavigator.inputIdField).val($(inputId).html());
+		$(ListNavigator.receiverIsACompanyField).val($(receiverIsACompany).html());
 		$(ListNavigator.container).hide();
 	},
 	retrieveUserAndClose: function(listElement) {

@@ -39,8 +39,10 @@ var ComplimentUI = {
 			}, 200);
 		});
 		$('input#compliment_receiver_display').blur(function(event) {
-			// console.log("Input Blur");
+			console.log("Input Blur");
 			ComplimentUI.validateComplimentReceiver();
+			ComplimentUI.updateReceiverType();
+			ComplimentUI.updateComplimentType();
 			setTimeout( function() {
 				$('#compliment-receiver-results-container').hide();
 			}, 200);
@@ -77,7 +79,7 @@ var ComplimentUI = {
 			errorMsg = "I think you are talking to yourself again";
 		}
 		var emailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i;
-		if( !ComplimentUI.validateEmail(element.val()) && 
+		if( !ComplimentUI.isValidEmail(element.val()) && 
 				(receiverUserId == null || receiverUserId.length == 0) ) {
 			errorMsg = "invalid email address";
 		}
@@ -95,11 +97,28 @@ var ComplimentUI = {
 			$('#validation-error').show();
 		}
 	},
-	validateEmail: function(email) {
+	isValidEmail: function(email) {
 		if(email == null || email.length == 0) {
 			return false;
 		}
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
+	},
+	updateReceiverType: function() {
+		if( ComplimentUI.isValidEmail($('input#compliment_receiver_display').val()) ) {
+			$('#receiver_is_a_company').val('false');
+		}
+	},
+	updateComplimentType: function() {
+		var receiverIsACompany = $('#receiver_is_a_company').val();
+		var senderIsACompany = $('#sender_is_a_company').val();
+		console.log("update drop down| rcv: " + receiverIsACompany + ' snd: ' + senderIsACompany);
+		$.ajax({
+			url: '/compliments/set_compliment_types.js',
+			type: 'GET',
+			data: {sender_is_a_company: senderIsACompany,	
+						 receiver_is_a_company: receiverIsACompany }
+		});
 	}
+
 }

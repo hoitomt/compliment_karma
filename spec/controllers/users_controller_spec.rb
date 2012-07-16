@@ -45,7 +45,7 @@ describe UsersController do
                             :receiver_email => user3.email,
                             :skill_id => Skill.first.id,
                             :comment => "Nice work on my sweater",
-                            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER )
+                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL )
         end
         Follow.create(:subject_user_id => user3.id, :follower_user_id => user2.id)
 
@@ -55,7 +55,7 @@ describe UsersController do
                             :receiver_email => unconfirmed_user.email,
                             :skill_id => Skill.first.id,
                             :comment => "Nice work on my sweater",
-                            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER )
+                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL )
         end
         Compliment.all.count.should eq(20)
         test_sign_in(user2)

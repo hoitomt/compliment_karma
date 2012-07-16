@@ -16,7 +16,7 @@ describe ComplimentsController do
           :sender_email => "",
           :skill_id => "",
           :comment => "",
-          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+          :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
         }
       end
 
@@ -58,7 +58,7 @@ describe ComplimentsController do
           :sender_email => user.email,
           :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
-          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+          :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
         }
       end
       
@@ -105,7 +105,7 @@ describe ComplimentsController do
           :sender_email => user.email,
           :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
-          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+          :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
         }
       end
       
@@ -154,7 +154,7 @@ describe ComplimentsController do
           :sender_email => user.email,
           :skill_id => Skill.first.id,
           :comment => "I love what you did with our application",
-          :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+          :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
         }
       end
       
@@ -204,7 +204,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
           }
         end
         
@@ -226,7 +226,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
           }
         end
         
@@ -253,7 +253,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
           }
         end
         
@@ -273,7 +273,7 @@ describe ComplimentsController do
             :sender_email => company1_user2.email,
             :skill_id => Skill.first.id,
             :comment => "I love what you did with our application",
-            :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
           }
         end
         

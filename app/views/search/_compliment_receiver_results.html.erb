@@ -17,6 +17,7 @@
 					<%= search_result_info(user) %>
 					<span class="value-for-input-field"><%= user.search_result_display.html_safe %></span>
 					<span class="id-for-input-field"><%= user.id %></span>
+					<span class="is_a_company"><%= user.is_a_company? %></span>
 				</li>
 			<% end %>
 		</ul>

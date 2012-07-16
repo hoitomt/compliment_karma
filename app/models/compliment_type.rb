@@ -3,10 +3,6 @@ class ComplimentType < ActiveRecord::Base
   
   validates_uniqueness_of :name
   
-  def self.COWORKER_TO_COWORKER
-    find_by_name('Coworker to Coworker')
-  end
-  
   def self.PROFESSIONAL_TO_PROFESSIONAL
     find_by_name('Professional to Professional (across companies)')
   end
@@ -24,14 +20,12 @@ class ComplimentType < ActiveRecord::Base
   end
 
   def self.is_professional?(compliment_type_id)
-    return compliment_type_id == ComplimentType.COWORKER_TO_COWORKER.id ||
-           compliment_type_id == ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id ||
+    return compliment_type_id == ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id ||
            compliment_type_id == ComplimentType.PROFESSIONAL_TO_PERSONAL.id
   end
 
   def self.professional_send_ids
     return [
-      self.COWORKER_TO_COWORKER.id, 
       self.PROFESSIONAL_TO_PROFESSIONAL.id, 
       self.PROFESSIONAL_TO_PERSONAL.id
     ]
@@ -39,7 +33,6 @@ class ComplimentType < ActiveRecord::Base
 
   def self.professional_receive_ids
     return [
-      self.COWORKER_TO_COWORKER.id, 
       self.PROFESSIONAL_TO_PROFESSIONAL.id,
       self.PERSONAL_TO_PROFESSIONAL.id
     ]

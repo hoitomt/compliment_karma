@@ -10,7 +10,7 @@ describe CkLike do
   																	:sender_email => user2.email,
   																	:receiver_email => user3.email,
   																	:comment => "Great job testing",
-  																	:compliment_type_id => ComplimentType.COWORKER_TO_COWORKER)
+  																	:compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL)
     @attr = { 
     	:recognition_id => @compliment.id,
     	:recognition_type_id => RecognitionType.COMPLIMENT.id,

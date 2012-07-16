@@ -32,7 +32,7 @@ namespace :ck do
     puts "Add compliments from Homer to Dummy"
     # Compliments from Dummy to coworker
     r = Relation.find_by_name('Coworker').id
-    t = ComplimentType.COWORKER_TO_COWORKER
+    t = ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
     tp = ComplimentType.PERSONAL_TO_PERSONAL
     501.times do |index|
       count += 1

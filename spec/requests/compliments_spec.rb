@@ -62,7 +62,7 @@ describe "Compliments" do
       end.should change(Compliment, :count).by(1)
       c = Compliment.last
       c.sender_user_id.should eq(@user.id)
-      c.compliment_type.should eq(ComplimentType.COWORKER_TO_COWORKER)
+      c.compliment_type.should eq(ComplimentType.PROFESSIONAL_TO_PROFESSIONAL)
     end
 
     it "should return to the user profile" do
@@ -317,7 +317,7 @@ describe "Compliments" do
         :receiver_email => @receiver,
         :skill_id => Skill.first.id,
         :comment => "awesome job",
-        :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
       }
       
       visit signup_path

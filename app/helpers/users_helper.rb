@@ -433,8 +433,6 @@ module UsersHelper
       c = Compliment.find_by_id(feed_item.item_object.id)
       logger.info("Compliment Type Id #{c.compliment_type_id}")
       case c.compliment_type_id.to_i
-      when ComplimentType.COWORKER_TO_COWORKER.id
-        return "blue"
       when ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
         return "blue"
       when ComplimentType.PROFESSIONAL_TO_PERSONAL.id

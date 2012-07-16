@@ -5,9 +5,9 @@ var FooterResize = {
 		var footerTop = $('#footer').offset().top;
 		var footerBottom = $('#footer').offset().top + footerHeight;
 		var mainContainerBottom = $('#main-container').offset().top + $('#main-container').height();
-		console.log("Footer Bottom: " + footerBottom + 
-			'| View Port Height: ' +  viewportHeight +
-			'| Main Container Bottom: ' + mainContainerBottom);
+		// console.log("Footer Bottom: " + footerBottom + 
+		// 	'| View Port Height: ' +  viewportHeight +
+		// 	'| Main Container Bottom: ' + mainContainerBottom);
 		if(footerBottom < mainContainerBottom) {
 			// The page is missing the footer
 			return;

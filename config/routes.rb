@@ -24,6 +24,7 @@ Ck::Application.routes.draw do
   match "/invite_others" => "pages#invite_others"
   match "/admin" => "admin#index", :as => :admin
   
+  match "compliments/set_compliment_types" => "compliments#set_compliment_types"
   match "/recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
   match "/rewards/add_to_cart" => "rewards#add_to_cart"

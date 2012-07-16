@@ -15,7 +15,7 @@ describe RecognitionCommentsController do
 	    :sender_email => user2.email,
 	    :skill_id => @skill.id,
 	    :comment => "Great Job",
-      :compliment_type_id => ComplimentType.COWORKER_TO_COWORKER
+      :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
     )
 	  @attr = {
     	:recognition_id => @compliment.id,
