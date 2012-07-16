@@ -3,27 +3,32 @@
 		Admin.init();
 	});
 </script>
+<% if view_state(@user) == view_state_company_manager %>
+	<% active_user = @user %>
+	<% inactive_user = current_user %>
+<% else %>
+	<% active_user = current_user %>
+	<% inactive_user = @user %>
+<% end %>
 <div id="admin-menu" class="drop-box">
-	<div class="am-help-link">
-		<%= link_to 'Help', '#' %>
-	</div>
-	<div class="clearfix"></div>
 	<div class="am-current-user">
 		<ul>
-			<li>
-				<%= link_to current_user, :class => 'company_profile' do %>
-					<div class="am-user-image">
-						<%= image_tag(current_user.photo.url(:mini)) %>
-					</div>
-					<div class="am-user-info">
-						<span class="am-name"><%= current_user.first_last %></span><br />
-						<span class="am-email"><%= current_user.email %></span>
-					</div>
-					<div class="clear"></div>
-				<% end %>
-				<div class="am-current-user-links">
-					<%= link_to "Settings", '#' %>
+			<li class="active-user no-hover">
+				<div class="am-user-image">
+					<%= image_tag(current_user.photo.url(:thumb)) %>
 				</div>
+				<% if active_user.is_a_company? %>
+					<div class="am-user-info">
+						<span class="am-name"><%= active_user.company.name %></span><br />
+						<%= link_to "Settings", '#', :class => 'ul_hover am-current-user-links' %>
+					</div>
+				<% else %>
+					<div class="am-user-info">
+						<span class="am-name"><%= active_user.first_last %></span><br />
+						<span class="am-email"><%= active_user.email %></span><br />
+						<%= link_to "Settings", '#', :class => 'ul_hover am-current-user-links' %>
+					</div>
+				<% end %>
 				<div class="clear"></div>
 			</li>
 		</ul>
@@ -33,18 +38,33 @@
 		<div class="am-profile-list">
 			<div class="am-profile-title">Manage Company Profile</div>
 			<ul>
-				<% current_user.companies.each do |company| %>
-					<% c_user = company.user %>
-					<%= link_to c_user, :class => 'company_profile' do %>
+				<% if active_user.id != current_user.id %>
+					<%= link_to current_user, :class => 'company_profile' do %>
 						<li>
 							<div class="am-user-profile-image">
-								<%= image_tag(c_user.photo.url(:mini)) %>
+								<%= image_tag(current_user.photo.url(:thumb)) %>
 							</div>
 							<div class="am-user-profile-info">
-								<%= company.name %>
+								<%= current_user.first_last %>
 							</div>
 							<div class="clear"></div>
 						</li>
+					<% end %>
+				<% end %>
+				<% current_user.companies.each do |company| %>
+					<% c_user = company.user %>
+					<% if c_user.id != active_user.id %>
+						<%= link_to c_user, :class => 'company_profile' do %>
+							<li>
+								<div class="am-user-profile-image">
+									<%= image_tag(c_user.photo.url(:thumb)) %>
+								</div>
+								<div class="am-user-profile-info">
+									<%= company.name %>
+								</div>
+								<div class="clear"></div>
+							</li>
+						<% end %>
 					<% end %>
 				<% end %>
 			</ul>
@@ -53,6 +73,7 @@
 	<% end %>
 	<div class="am-button-container">
 		<%= link_to 'Log Out', logout_path, :class => "button" %>
+		<%= link_to 'Help', '#', :class => "button" %>
 		<div class="clear"></div>
 	</div>
 </div>

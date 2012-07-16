@@ -7,14 +7,15 @@
 		<%= render 'rewards/shopping_cart' %>
 		<div id="nav-upper-right">
 			<ul>
-				<li style="width: 70px;">
-				</li>
 				<li>
-					<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
+					<% if view_state(@user) == view_state_company_manager %>
+						<%= link_to @user.company.name, @user, :id => "am-hover-me" %>
+					<% else %>
+						<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
+					<% end %>
 					<%= render 'admin/header/admin_menu' %>
 				</li>
 				<li><%= link_to 'Pricing', pricing_path %></li>
-				<li><%= link_to 'Help', '#' %></li>
 			</ul>				
 		</div>
 		<div id="menu-bar-container">
