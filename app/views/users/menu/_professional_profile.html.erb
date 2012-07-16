@@ -65,7 +65,7 @@
 				<% if @compliments_received_by_skill %>
 					<% @compliments_received_by_skill.each do |k,v| %>
 					<tr>
-						<td class="non-image first"><%= skill_autocomplete_key(k) %></td>
+						<td class="non-image first"><%= skill_name(k) %></td>
 						<td class="non-image center"><%= v %></td>
 						<td class="center"><%= badge_image(v) %></td>
 					</tr>
