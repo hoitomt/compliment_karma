@@ -17,8 +17,6 @@
 		<% end %>
 		<div id="new-compliment">
 			<p class="new-compliment-heading"><%= new_compliment_heading(@user) %></p>
-					<% receiver_display_val = @receiver_display || nil %>
-					rcv: <%= receiver_display_val %>
 			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
 				<%= hidden_field_tag 'request_page', "user" %>
 				<%= hidden_field_tag 'skill_id_result' %>

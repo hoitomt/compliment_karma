@@ -1,5 +1,10 @@
 <div id="earned-compliment">
-	<p style="font-size: 14px; color: #6c6c6c; text-align: center;">You complimented this week</p>
+	<% if view_state(@user) == view_state_user_visitor ||
+				view_state(@user) == view_state_company_visitor %>
+		<p style="font-size: 14px; color: #6c6c6c; text-align: center;">They complimented this week</p>
+	<% else %>
+		<p style="font-size: 14px; color: #6c6c6c; text-align: center;">You complimented this week</p>
+	<% end %>
 	<div class="sent-compliment-indicator">
 		<% 7.times do |index| %>
 			<div class="no-recent-compliment">
