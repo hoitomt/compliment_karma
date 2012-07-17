@@ -1,7 +1,6 @@
 var currentAction = "<%= @current_action %>";
 CommonScripts.toggleScrolling();
 UserMenu.setCurrentMenuItem(currentAction);
-$('body,html').animate({scrollTop: 0});
 ComplimentUI.removeStickyCompliment();
 
 switch(currentAction) {

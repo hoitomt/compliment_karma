@@ -4,7 +4,7 @@ class ComplimentType < ActiveRecord::Base
   validates_uniqueness_of :name
   
   def self.PROFESSIONAL_TO_PROFESSIONAL
-    find_by_name('Professional to Professional (across companies)')
+    find_by_name('Professional to Professional')
   end
   
   def self.PROFESSIONAL_TO_PERSONAL
