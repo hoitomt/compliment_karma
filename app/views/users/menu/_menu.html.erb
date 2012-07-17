@@ -1,6 +1,9 @@
 <script type="text/javascript">
 	$(function() {
 		UserMenu.init();
+		$('#user-menu li').click(function() {
+			$('body,html').animate({scrollTop: 0});
+		})
 	});
 </script>
 <div id="user-menu" class="box-no-padding">
