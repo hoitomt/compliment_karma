@@ -33,7 +33,7 @@ var SiteSearch = {
 		});
 	},
 	retrieveUser: function(userId) {
-		console.log("User: " + userId);
+		// console.log("User: " + userId);
 		var userPath = '/users/' + userId.toString();
 		window.location.href = userPath;
 	}

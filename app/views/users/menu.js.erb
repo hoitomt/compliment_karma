@@ -1,0 +1,43 @@
+var currentAction = "<%= @current_action %>";
+CommonScripts.toggleScrolling();
+UserMenu.setCurrentMenuItem(currentAction);
+ComplimentUI.removeStickyCompliment();
+
+switch(currentAction) {
+	case "professional_profile":
+		$('#content-container').html('<%= j(render "users/menu/professional_profile") %>');
+		UserProfile.stripeTable();
+		break;
+	case "social_profile":
+		$('#content-container').html('<%= j(render "users/menu/social_profile") %>');
+		break;
+	case "received_compliments":
+		$('#content-container').html('<%= j(render "users/menu/received_compliments") %>');
+		break;
+	case "sent_compliments":
+		$('#content-container').html('<%= j(render "users/menu/sent_compliments") %>');
+		break;
+	case "achievements":
+		$('#content-container').html('<%= j(render "users/menu/achievements") %>');
+		break;
+	case "contacts":
+		$('#content-container').html('<%= j(render "users/menu/contacts") %>');
+		break;
+	case "settings":
+		$('#content-container').html('<%= j(render "users/menu/settings") %>');
+		break;
+	case "employees":
+		$('#content-container').html('<%= j(render "users/menu/employees") %>');
+		break;
+	case "show":
+		$('#content-container').html('<%= j(render "users/menu/karma_live") %>');
+		var userId = '<%= current_user.id %>';
+		var perPage = '<%= @per_page %>';
+		var userEmail = '<%= current_user.email %>';
+		UserProfile.init(userId, perPage, userEmail);
+		ComplimentUI.stickyNewCompliment();
+		break;
+	default:
+		// console.log("default");
+}
+FooterResize.init();

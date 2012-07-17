@@ -62,9 +62,9 @@ var ListNavigator = {
 		var inputValue = $(listElement).find('.value-for-input-field');
 		var inputId = $(listElement).find('.id-for-input-field');
 		var receiverIsACompany = $(listElement).find('.is_a_company');
-		$(ListNavigator.inputTextField).val($(inputValue).html());
-		$(ListNavigator.inputIdField).val($(inputId).html());
-		$(ListNavigator.receiverIsACompanyField).val($(receiverIsACompany).html());
+		$(ListNavigator.inputTextField).val($(inputValue).text());
+		$(ListNavigator.inputIdField).val($(inputId).text());
+		$(ListNavigator.receiverIsACompanyField).val($(receiverIsACompany).text());
 		$(ListNavigator.container).hide();
 	},
 	retrieveUserAndClose: function(listElement) {

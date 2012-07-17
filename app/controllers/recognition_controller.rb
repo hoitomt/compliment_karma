@@ -75,6 +75,7 @@ class RecognitionController < ApplicationController
   
   def set_update_history_read
     update_history_id = params[:update_history_id]
+    return if update_history_id.blank?
     update_history = UpdateHistory.find(update_history_id)
     update_history.set_read
   end

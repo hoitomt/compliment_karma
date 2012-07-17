@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     my_updates
     set_update_history_read
     logger.info("Confirmation status - Unconfirmed?: #{@unconfirmed}")
+    menu_response_handler
   end
 
   def edit_from_profile
@@ -67,6 +68,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def menu_response_handler
+    respond_to do |format| 
+      format.html { }
+      format.js { render 'menu' }
+    end
+  end
+
   def professional_profile
     @user = User.find_by_id(params[:id])
     @professional_experiences = @user.experiences
@@ -82,6 +90,7 @@ class UsersController < ApplicationController
     @followers = Follow.followers(@user.id)
     @following = Follow.following(@user.id)
     @compliments_received_by_skill = compliment_count_by_skill(received_compliments)
+    menu_response_handler
   end
 
   def social_profile
@@ -94,27 +103,33 @@ class UsersController < ApplicationController
     @followers = Follow.followers(@user.id)
     @following = Follow.following(@user.id)
     @compliments_received_by_skill = compliment_count_by_skill(received_compliments)
+    menu_response_handler
   end
 
   def received_compliments
+    menu_response_handler
     
   end
 
   def sent_compliments
+    menu_response_handler
     
   end
 
   def achievements
+    menu_response_handler
     
   end
 
   def contacts
+    menu_response_handler
     
   end
 
   def settings
     @company = @user.company
     @departments = @company.departments if @company
+    menu_response_handler
   end
 
   def employees
@@ -181,7 +196,6 @@ class UsersController < ApplicationController
       @compliment.receiver_display = @user.search_result_display
       @compliment.receiver_user_id = @user.id
       @receiver_is_a_company = @user.is_a_company?
-      # console.log("is a company: #{@receiver_is_a_company}")
     end
     # @skills = Skill.list_for_autocomplete
     @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)

@@ -6,11 +6,15 @@ var ComplimentUI = {
 		this.stickyNewCompliment();
 	},
 	flashBlue: function() {
-		$('#new-compliment').effect("highlight", {color: "#006791"}, 2500);
+		$('#new-compliment-container').effect("highlight", {color: "#006791"}, 2500);
 	},
 	setNewComplimentHandlers: function() {
-		$('input#compliment_receiver_display').off('click, change');
+		$('input#compliment_receiver_display').off('click, change, focus');
 		$('input#compliment_receiver_display').click(function() {
+			ComplimentUI.showNewComplimentPanel();
+			// event.stopPropagation();
+		});		
+		$('input#compliment_receiver_display').focus(function() {
 			ComplimentUI.showNewComplimentPanel();
 			// event.stopPropagation();
 		});
@@ -39,7 +43,7 @@ var ComplimentUI = {
 			}, 200);
 		});
 		$('input#compliment_receiver_display').blur(function(event) {
-			console.log("Input Blur");
+			// console.log("Input Blur");
 			ComplimentUI.validateComplimentReceiver();
 			ComplimentUI.updateReceiverType();
 			ComplimentUI.updateComplimentType();
@@ -65,6 +69,10 @@ var ComplimentUI = {
 				complimentContainer.toggleClass('sticky', direction=='down');
 			}
 		});
+	},
+	removeStickyCompliment: function() {
+		var stickMe = $('#scroll-sticky');
+		stickMe.waypoint('destroy');
 	},
 	validateComplimentReceiver: function() {
 		ComplimentUI.validateSenderNotReceiver();
@@ -112,7 +120,7 @@ var ComplimentUI = {
 	updateComplimentType: function() {
 		var receiverIsACompany = $('#receiver_is_a_company').val();
 		var senderIsACompany = $('#sender_is_a_company').val();
-		console.log("update drop down| rcv: " + receiverIsACompany + ' snd: ' + senderIsACompany);
+		// console.log("update drop down| rcv: " + receiverIsACompany + ' snd: ' + senderIsACompany);
 		$.ajax({
 			url: '/compliments/set_compliment_types.js',
 			type: 'GET',

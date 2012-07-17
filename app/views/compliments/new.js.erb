@@ -1,6 +1,6 @@
+$('input#compliment_receiver_display').focus();
 var updateNewCompliment = function() {
 	$('input#compliment_receiver_display').val('<%=j @recipient_email %>');
-	$.fn.inputStyle();
 	ComplimentUI.flashBlue();
 }
 var popupOpen = $('.fancybox-skin').is(':visible');
