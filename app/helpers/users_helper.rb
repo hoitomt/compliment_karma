@@ -526,4 +526,10 @@ module UsersHelper
       return "Who deserves our compliment today?"
     end
   end
+
+  def set_read_status_css(update_history)
+    return "unread" if update_history.unread?
+    return ""
+  end
+
 end

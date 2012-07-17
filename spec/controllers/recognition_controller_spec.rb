@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe RecognitionController do
+	it "should set the update history to read"
 	# let(:user){FactoryGirl.create(:user)}
 	# let(:user2){FactoryGirl.create(:user2)}
 	# let(:user3){FactoryGirl.create(:user3)}

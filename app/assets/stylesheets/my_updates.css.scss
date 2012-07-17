@@ -80,6 +80,12 @@
 		background-color: #FFFC7F;
 		// cursor: pointer;
 	}
+	li.unread {
+		background-color: $main-menu-color;
+	}	
+	li.unread:hover {
+		background-color: #FFFC7F;
+	}
 	a { color: #000000; }
 	a:visited { color: #000000; }
 }

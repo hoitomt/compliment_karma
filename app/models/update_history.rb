@@ -13,6 +13,14 @@ class UpdateHistory < ActiveRecord::Base
     UpdateHistory.where('user_id = ?', user.id).first(5)
   end
 
+  def unread?
+    return self.read != "true"
+  end
+
+  def set_read
+    self.update_attributes(:read => "true")
+  end
+
   def self.add_update_history(user_id, update_history_type_id, recognition_type_id, 
                               recognition_id, note, current_user_id)
   	unless(current_user_id == user_id)

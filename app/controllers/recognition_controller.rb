@@ -4,6 +4,7 @@ class RecognitionController < ApplicationController
   def show
   	@recognition_type_id = params[:recognition_type_id].to_i
   	@recognition_id = params[:recognition_id].to_i
+    set_update_history_read
     @recognition_type_compliment_id = RecognitionType.COMPLIMENT.id
     @recognition_type_reward_id = RecognitionType.REWARD.id
     @recognition_type_accomplishment_id = RecognitionType.ACCOMPLISHMENT.id
@@ -72,6 +73,12 @@ class RecognitionController < ApplicationController
     return likes_users
   end
   
+  def set_update_history_read
+    update_history_id = params[:update_history_id]
+    update_history = UpdateHistory.find(update_history_id)
+    update_history.set_read
+  end
+
   private
     
     def authenticate

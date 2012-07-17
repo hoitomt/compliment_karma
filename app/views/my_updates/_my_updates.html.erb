@@ -14,8 +14,8 @@
 			<% @my_update_items.each do |item| %>
 				<% originator = User.find_by_id(item.originating_user_id) %>
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
-					<%= link_to originator do %>
-						<li class="clearfix" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
+					<%= link_to user_path(:id => originator.id, :update_history_id => item.id) do %>
+						<li class="clearfix <%= set_read_status_css(item) %>" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
@@ -30,9 +30,11 @@
 					<% end %>
 				<% else %>
 					<%= link_to show_recognition_path(:recognition_type_id => item.recognition_type_id, 
-																						:recognition_id => item.recognition_id),
+																						:recognition_id => item.recognition_id,
+																						:update_history_id => item.id),
 																						:remote => true do %>
-						<li class="clearfix" style="border-left: 2px solid #DCF1EF; margin-left: -2px">
+						<li class="clearfix <%= set_read_status_css(item) %>" 
+								style="border-left: 2px solid #DCF1EF; margin-left: -2px">
 							<div class="my-update-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>

@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(:version => 20120717013809) do
     t.integer  "recognition_type_id"
     t.integer  "recognition_id"
     t.integer  "originating_user_id"
-    t.string   "read"
+    t.string   "read",                   :default => "false"
   end
 
   create_table "update_history_types", :force => true do |t|

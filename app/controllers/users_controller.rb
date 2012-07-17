@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
                                            :professional_profile, :social_profile, 
                                            :achievements, :contacts, :employees, 
-                                           :rewards, :settings ]
+                                           :rewards, :settings, :my_updates ]
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :set_static_vars
     
@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     set_pending_items
     set_this_week_compliments
     my_updates
+    set_update_history_read
     logger.info("Confirmation status - Unconfirmed?: #{@unconfirmed}")
   end
 
@@ -47,10 +48,16 @@ class UsersController < ApplicationController
   end
 
   def my_updates
+    user = current_user
+    logger.info("User: #{@user.name}")
+    logger.info("View State: #{view_state(@user)}")
+    if view_state(@user) == view_state_company_manager
+      user = @user
+    end
     # @user ||= User.find(params[:id])
-    @my_update_items_count = UpdateHistory.get_recent_item_count(current_user)
-    @my_update_items = UpdateHistory.get_recent_update_history(current_user)
-    current_user.update_attributes(:last_read_notification_date => DateTime.now)
+    @my_update_items_count = UpdateHistory.get_recent_item_count(user)
+    @my_update_items = UpdateHistory.get_recent_update_history(user)
+    user.update_attributes(:last_read_notification_date => DateTime.now)
     set_this_week_compliments
     respond_to do |format|
       format.html {}
@@ -372,6 +379,15 @@ class UsersController < ApplicationController
   end
 
   def account_settings
+  end
+
+  # There is a path through which a user is retrieved from the update history.
+  # in those cases we need to set the update history read status
+  def set_update_history_read
+    update_history_id = params[:update_history_id]
+    return if update_history_id.blank?
+    update_history = UpdateHistory.find(update_history_id)
+    update_history.set_read
   end
 
   private
