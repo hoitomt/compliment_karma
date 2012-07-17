@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716210411) do
+ActiveRecord::Schema.define(:version => 20120717013809) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(:version => 20120716210411) do
     t.integer  "recognition_type_id"
     t.integer  "recognition_id"
     t.integer  "originating_user_id"
+    t.string   "read"
   end
 
   create_table "update_history_types", :force => true do |t|

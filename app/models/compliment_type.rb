@@ -52,4 +52,22 @@ class ComplimentType < ActiveRecord::Base
     ]
   end
 
+  def self.compliment_type_list(sender_is_a_company, receiver_is_a_company)
+    logger.info("Sender is a company: #{sender_is_a_company} \n" +
+                "Receiver is a company: #{receiver_is_a_company}")
+    compliment_types = []
+    if sender_is_a_company.to_s == "true" && receiver_is_a_company.to_s == "true"
+      compliment_types = [ComplimentType.PROFESSIONAL_TO_PROFESSIONAL]
+    elsif sender_is_a_company.to_s == "true"
+      compliment_types = [ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+                           ComplimentType.PROFESSIONAL_TO_PERSONAL]
+    elsif receiver_is_a_company.to_s == "true"
+      compliment_types = [ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+                           ComplimentType.PERSONAL_TO_PROFESSIONAL]
+    else
+      compliment_types = ComplimentType.all
+    end
+    return compliment_types
+  end
+
 end

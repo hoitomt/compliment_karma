@@ -60,7 +60,7 @@
 						<div id="field">
 							<div id="compliment-type-select">
 								<%= f.collection_select :compliment_type_id, 
-																				ComplimentType.all, 
+																				@compliment_types, 
 																				:id, 
 																				:name, 
 																				{:prompt => "select compliment type"},

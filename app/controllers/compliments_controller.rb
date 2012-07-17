@@ -100,17 +100,7 @@ class ComplimentsController < ApplicationController
   def set_compliment_types
     sender_is_a_company = params[:sender_is_a_company]
     receiver_is_a_company = params[:receiver_is_a_company]
-    if sender_is_a_company == "true" && receiver_is_a_company == "true"
-      @compliment_types = [ComplimentType.PROFESSIONAL_TO_PROFESSIONAL]
-    elsif sender_is_a_company == "true"
-      @compliment_types = [ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
-                           ComplimentType.PROFESSIONAL_TO_PERSONAL]
-    elsif receiver_is_a_company == "true"
-      @compliment_types = [ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
-                           ComplimentType.PERSONAL_TO_PROFESSIONAL]
-    else
-      @compliment_types = ComplimentType.all
-    end
+    @compliment_types = ComplimentType.compliment_type_list(sender_is_a_company, receiver_is_a_company)
     logger.info(@compliment_types)
   end
 

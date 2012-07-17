@@ -3,8 +3,8 @@
 
 .photo-small { 
 	display: block; 
-	width: 150px;
-	height: 150px; 
+	width: 180px;
+	// height: 200px;
 	margin: 20px auto 10px auto;
 	text-align: center;
 }
@@ -16,9 +16,9 @@
 	h1 {display: block; text-align:center;}
 	h2 {display: block; text-align:center;}
 	.photo-upload {
-		height: 150px;
-		width: 150px;
-		background: #A7DBD8;
+		height: 180px;
+		width: 180px;
+		// background: #A7DBD8;
 		text-align: center;
 		p {
 			font-size: 14px;
@@ -30,22 +30,23 @@
 	#photo-upload-input {
 		opacity: 0;
 		// background: #000;
-		height: 150px; 
-		width: 150px;
+		height: 180px; 
+		width: 180px;
 		position: absolute; 
 		cursor: pointer; 
 		z-index: 9999; 
 		padding-left: 0px;
 	}
 	.background-image-company {
-		background-image: url('user_profile/default_company_image.png'), no-repeat;
+		background: url(user_profile/default_company_image.png), no-repeat;
+		background-size: 180px 180px;
 	}
 	.background-image-user {
-		background: url('user_profile/default_people_image_dk.png'), no-repeat;
-		background-size: 150px 150px;
+		background: url(user_profile/default_people_image_dk.png), no-repeat;
+		background-size: 180px 180px;
 	}
 	.name-location {
-		width: 200px;
+		width: 180px;
 		margin: 0 auto 10px auto;
 		h1 { color: #000; text-align: left; }
 	}

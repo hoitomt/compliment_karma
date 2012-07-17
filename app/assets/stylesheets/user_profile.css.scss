@@ -71,7 +71,7 @@ $top-row-height: 225px;
 #scroll-sticky { margin-top: 10px; z-index: 20;}
 #new-compliment-container {
 	@include user-profile-form-styling;
-	background: #dbeef4;
+	background: $main-menu-color;
 	border: 1px solid #c9e6ee;
 	z-index: 20;
 	#new-compliment {

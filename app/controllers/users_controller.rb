@@ -170,12 +170,14 @@ class UsersController < ApplicationController
     @compliment.sender_email = current_user.email
     @sender_is_a_company = sender_is_a_company?
     @receiver_is_a_company = false
-    unless current_user?(@user)
+    if !current_user?(@user) #&& current_user.is_company_administrator?(@user.company.id)
       @compliment.receiver_display = @user.search_result_display
       @compliment.receiver_user_id = @user.id
-      @receiver_is_company = @user.is_a_company?
+      @receiver_is_a_company = @user.is_a_company?
+      # console.log("is a company: #{@receiver_is_a_company}")
     end
     # @skills = Skill.list_for_autocomplete
+    @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)
     if flash[:compliment]
       @compliment = Compliment.new(flash[:compliment].attributes)
       flash[:compliment].errors.each do |attr, msg|
@@ -185,6 +187,7 @@ class UsersController < ApplicationController
         logger.info("Error: #{msg}")
       end
     end
+    logger.info("Compliment Types: #{@compliment_types}")
     flash.delete(:compliment)
   end
 

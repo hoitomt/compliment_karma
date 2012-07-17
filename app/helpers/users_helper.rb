@@ -463,7 +463,7 @@ module UsersHelper
     if city.blank? || state_cd.blank?
       separator = ''
     end
-    return "#{city}#{separator}#{state_cd}"
+    return "(#{city}#{separator}#{state_cd})"
   end
 
   def stats_label(count, label)

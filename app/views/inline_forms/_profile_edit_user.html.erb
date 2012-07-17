@@ -2,6 +2,13 @@
 	<h2 style="margin-bottom: 10px;">Demographic Data</h2>
 	<%= form_for user do |f| %>
 		<div id="data-entry" class="clearfix">
+			<div id="label"><%= f.label :photo, "New Photo" %></div>
+			<div id="field">
+				<%= f.file_field :photo, 
+												 :style => "height: 25px; padding-top: 8px; background: none; border: none;" %>
+			</div>
+		</div>
+		<div id="data-entry" class="clearfix">
 			<div id="label"><%= f.label :first_name, "First" %></div>
 			<div id="field">
 				<%= f.text_field :first_name %>
