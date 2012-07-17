@@ -12,6 +12,7 @@ var ShowMyUpdateFancyBox = {
 				$('body').removeClass('lock-screen');
 			},
 			minWidth: 550,
+			minHeight: 50,	
 			topRatio: 0,
 			padding: 0,
 			helpers: {

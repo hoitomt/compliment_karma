@@ -2,6 +2,17 @@ class UpdateHistory < ActiveRecord::Base
 	belongs_to :update_history_type
   default_scope :order => 'created_at DESC'
 
+  def self.get_recent_item_count(user)
+    as_of_date = user.last_read_notification_date || DateTime.new(2012, 1, 1)
+    items = UpdateHistory.where('user_id = ? AND created_at > ?', 
+                                user.id, as_of_date)
+    return items.count
+  end
+
+  def self.get_recent_update_history(user)
+    UpdateHistory.where('user_id = ?', user.id).first(5)
+  end
+
   def self.add_update_history(user_id, update_history_type_id, recognition_type_id, 
                               recognition_id, note, current_user_id)
   	unless(current_user_id == user_id)

@@ -12,11 +12,15 @@
 				<div class="right-column">
 					<p>
 						<strong>Responsibilities</strong>
-						<span style="margin-left:10px;"><%= link_to 'Edit', 
-								edit_experience_path(exp, :experience_id => exp.id, :user_id => user.id),
-								:style => "margin-left: 10px;",
-								:class => "ul_hover",
-								:remote => true %></span>
+						<span style="margin-left:10px;">
+							<% if page_owner?(@user) %>
+								<%= link_to 'Edit', 
+									edit_experience_path(exp, :experience_id => exp.id, :user_id => user.id),
+									:style => "margin-left: 10px;",
+									:class => "ul_hover",
+									:remote => true %>
+							<% end %>
+						</span>
 					</p>
 					<p><%= display_responsibilities(exp.responsibilities) %></p>
 				</div>

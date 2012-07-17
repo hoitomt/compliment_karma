@@ -10,7 +10,7 @@
 }
 #user-profile-short {
 	background: #ffffff;
-	font: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
+	padding-bottom: 10px;
 	a { color: #606060; }
 	img { }
 	h1 {display: block; text-align:center;}
@@ -49,7 +49,7 @@
 		margin: 0 auto 10px auto;
 		h1 { color: #000; text-align: left; }
 	}
-	.edit-link { float:right; margin: 0 10px 5px 0; font-size: 11px;}
+	.edit-link { float:right; margin: 0 10px 0 0; font-size: 11px;}
 }
 #user-profile-short.not-confirmed {
 	background: $inline-error-red;

@@ -4,17 +4,13 @@
 															 :class => 'header-update-link', 
 															 :remote => true do %>
 			<div class="header-updates clearfix">
-				<div class="header-update-indicator">
-					<%= image_tag('user_profile/my_updates_with_items.png') %>
-				</div>
+				<div class="header-update-indicator"></div>
 				<div id="update-history-count" class="header-update-count" >
-					<%= update_history_count %>
+					<%= @my_update_items_count %>
 				</div>
 			</div>
 		<% end %>
 	<% else %>
-		<div class="header-update-indicator">
-			<%= image_tag('user_profile/my_updates_no_items.png') %>
-		</div>
+		<div class="header-update-indicator"></div>
 	<% end %>
 <% end %>

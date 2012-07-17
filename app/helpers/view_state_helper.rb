@@ -41,4 +41,10 @@ module ViewStateHelper
   	return "Company Visitor"
   end
 
+  def page_owner?(user)
+    return false if user.blank?
+    return view_state(@user) == view_state_company_manager ||
+           view_state(@user) == view_state_user_manager
+  end
+
 end

@@ -37,7 +37,7 @@
 	<% if customer_admin_user? %>
 		<div class="am-profile-list">
 			<div class="am-profile-title">Manage Company Profile</div>
-			<ul>
+			<ul class="am-user-list">
 				<% if active_user.id != current_user.id %>
 					<%= link_to current_user, :class => 'company_profile' do %>
 						<li>

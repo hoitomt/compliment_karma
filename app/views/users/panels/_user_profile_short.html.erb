@@ -8,18 +8,17 @@
 			<%= image_tag(@user.photo.url(:small))%>
 		<% end %>
 	</div>
-	<div class="name-location">
+	<div class="name-location" style="margin-bottom: 0px;">
 		<h1><%= @user.full_name %></h1>
-		<p style="color: #606060; font-size: 14px;"><%= location(@user) %></p>
 	</div>
-	<% if view_state(@user) == view_state_company_manager ||
-				view_state(@user) == view_state_user_manager %>
+	<% if page_owner?(@user) && current_user.confirmed? %>
+		<div class="name-location">
+			<p style="color: #606060; font-size: 14px;"><%= location(@user) %></p>
+		</div>
 		<div class="edit-link">
 			<%= link_to 'Edit', edit_from_profile_path(@user), :class => "ul_hover", :remote => true %>
 		</div>
 		<div class="clear"></div>
-	<% end %>
-	<% if current_user?(@user) %>
 		<div style="float: right">
 			<% if current_user?(@user) && @pending_items_count && @pending_items_count > 0 %>
 				<p><%= link_to "pending (#{@pending_items_count})", '#pending-items', 

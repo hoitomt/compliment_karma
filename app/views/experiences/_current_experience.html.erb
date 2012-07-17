@@ -7,12 +7,18 @@
 		<p style="font-size: 14px; color: #606060;"><%= date_range(@current_experience) %></p>
 	</div>
 	<div class="edit-position">
-		<%= link_to 'Edit', edit_experience_path(@current_experience,
-																						 :user_id => @user.id, 
-																						 :experience_id => @current_experience.id),
-																						 :class => "ul_hover",
-																						 :remote => true %>
+		<% if page_owner?(@user) %>
+			<%= link_to 'Edit', edit_experience_path(@current_experience,
+																							 :user_id => @user.id, 
+																							 :experience_id => @current_experience.id),
+																							 :class => "ul_hover",
+																							 :remote => true %>
+		<% end %>
 	</div>
 <% else %>
-	<h1><%= link_to 'Add Current Position', new_experience_path(:user_id => @user.id), :remote => true %></h1>
+	<% if page_owner?(@user) %>
+		<h1>
+			<%= link_to 'Add Current Position', new_experience_path(:user_id => @user.id), :remote => true %>
+		</h1>
+	<% end %>
 <% end %>

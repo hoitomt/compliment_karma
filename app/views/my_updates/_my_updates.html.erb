@@ -1,10 +1,15 @@
 <div id="my-updates">
 	<% if @show_header_link %>
-		<span class="my-notification-header_link">
-			<%= link_to 'See All', my_updates_path(@user) %>
-		</span>
+		<div id="my-updates-header">
+			<h1 style="float: left; margin-left: 10px;">My Notifications</h1>
+			<span class="my-notification-header_link">
+				<%= link_to 'See All', my_updates_path(@user), :class => "ul_hover" %>
+			</span>
+			<div class="clear"></div>
+		</div>
 	<% end %>
-	<% if @my_update_items %>
+	<div class="clear"></div>
+	<% if @my_update_items && current_user.confirmed? %>
 		<ul id="my-update-content">
 			<% @my_update_items.each do |item| %>
 				<% originator = User.find_by_id(item.originating_user_id) %>
@@ -43,5 +48,11 @@
 				<% end %>
 			<% end %>
 		</ul>
+	<% elsif !@user.confirmed? && !@my_update_items.blank? %>
+		<div style="margin: 10px 0 0 10px;">
+			<strong>
+				Please confirm your account to view your notifications (<%= @my_update_items.count %>)
+			</strong>
+		</div>
 	<% end %>
 </div>

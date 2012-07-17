@@ -48,7 +48,12 @@
 	li ul li:hover {
 		background: $nav-main-font-color;
 		color: $main-menu-color;
-	}	
+	}
+	li ul.am-user-list li:hover {
+		background: #FFFC7F;
+		color: #000000;
+		// font-weight: bold;
+	}
 	li ul li.no-hover:a:hover {color: $nav-main-font-color; font-weight:normal; }
 	li ul li.no-hover:hover {
 		background: #fff;

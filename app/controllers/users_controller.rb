@@ -47,14 +47,15 @@ class UsersController < ApplicationController
   end
 
   def my_updates
-    @user ||= User.find(params[:id])
-    @my_update_items = UpdateHistory.where('user_id = ?', @user.id)
+    # @user ||= User.find(params[:id])
+    @my_update_items_count = UpdateHistory.get_recent_item_count(current_user)
+    @my_update_items = UpdateHistory.get_recent_update_history(current_user)
+    current_user.update_attributes(:last_read_notification_date => DateTime.now)
     set_this_week_compliments
     respond_to do |format|
       format.html {}
       format.js {
         @show_header_link = true
-        @my_update_items = @my_update_items.limit(5)
       }
     end
   end

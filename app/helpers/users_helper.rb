@@ -457,7 +457,7 @@ module UsersHelper
     state_cd = ""
     state_cd = user.state_cd unless user.state_cd.blank?
     if city.blank? && state_cd.blank?
-      return link_to 'Add location', '#', :class => 'js-click-update-user'
+      return link_to 'Add location', '#', :class => 'js-click-update-user ul_hover'
     end
     separator = ', '
     if city.blank? || state_cd.blank?
