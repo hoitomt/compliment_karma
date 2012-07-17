@@ -25,7 +25,7 @@ RewardStatus.create(:name => 'Pending')
 RewardStatus.create(:name => 'Complete')
 
 # ComplimentType.create(:name => 'Coworker to Coworker')
-ComplimentType.create(:name => 'Professional to Professional (across companies)')
+ComplimentType.create(:name => 'Professional to Professional')
 ComplimentType.create(:name => 'Professional to Personal')
 ComplimentType.create(:name => 'Personal to Professional')
 ComplimentType.create(:name => 'Personal to Personal')
