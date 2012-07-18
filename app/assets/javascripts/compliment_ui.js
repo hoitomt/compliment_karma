@@ -72,9 +72,8 @@ var ComplimentUI = {
 	},
 	removeStickyCompliment: function() {
 		var stickMe = $('#scroll-sticky');
-		stickMe.waypoint('destroy');
-		stickMe.hide();
-		stickMe.show();
+		stickMe.unbind('waypoint');
+		$('#new-compliment-container').removeClass('sticky');
 	},
 	validateComplimentReceiver: function() {
 		ComplimentUI.validateSenderNotReceiver();
