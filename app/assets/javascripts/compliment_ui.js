@@ -73,6 +73,8 @@ var ComplimentUI = {
 	removeStickyCompliment: function() {
 		var stickMe = $('#scroll-sticky');
 		stickMe.waypoint('destroy');
+		stickMe.hide();
+		stickMe.show();
 	},
 	validateComplimentReceiver: function() {
 		ComplimentUI.validateSenderNotReceiver();
