@@ -2,6 +2,7 @@ class ComplimentType < ActiveRecord::Base
   has_many :compliments
   
   validates_uniqueness_of :name
+  default_scope :order => 'id ASC'
   
   def self.PROFESSIONAL_TO_PROFESSIONAL
     find_by_name('Professional to Professional')
