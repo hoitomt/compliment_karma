@@ -2,8 +2,9 @@
 	$(function() {
 		UserMenu.init();
 		$('#user-menu li').click(function(event) {
+			$('#new-complient-container').hide();
 			$('body,html').animate({scrollTop: 0}, 500);
-			setTimeout(function() {}, 500);
+			// setTimeout(function() {}, 500);
 		});
 	});
 </script>
