@@ -56,12 +56,12 @@
 	}
 	li ul li.no-hover:a:hover {color: $nav-main-font-color; font-weight:normal; }
 	li ul li.no-hover:hover {
-		background: #fff;
+		// background: #fff;
 		color: #000000;
 		a {color: $nav-main-font-color; font-weight:normal; }
 	}	
 	li ul li.active-user {
-		background: #ffffff;
+		background: $main-menu-color;
 		color: #000000;
 		border-bottom: none;
 		-moz-box-shadow: 0px 2px 2px #888;
