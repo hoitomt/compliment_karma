@@ -17,6 +17,12 @@ body {
 	height: 90px;
 	color: #ffffff;
 }
+#main-container {
+	padding-bottom: 20px;
+}
+#home-page-bottom {
+	margin-top: 70px;
+}
 .login-box {
 	@include border-radius;
 	background-color: $box-background;

@@ -4,7 +4,7 @@
 	<% else %>
 		<% x_user = current_user %>
 	<% end %>
-	<% if update_history_count > 0 %>
+	<% if @my_update_items_count > 0 %>
 		<%= link_to my_updates_path(:id => x_user.id), 
 															 :class => 'header-update-link', 
 															 :remote => true do %>
@@ -16,6 +16,10 @@
 			</div>
 		<% end %>
 	<% else %>
-		<div class="header-update-indicator"></div>
+		<%= link_to my_updates_path(:id => x_user.id), 
+															 :class => 'header-update-link', 
+															 :remote => true do %>
+			<div class="header-update-indicator"></div>
+		<% end %>
 	<% end %>
 <% end %>

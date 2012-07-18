@@ -1,3 +1,11 @@
+<script>
+	$(function() {
+		$('#photo-upload-link').click(function(){
+			console.log("click");
+			$('#photo-upload-input').click();
+		});
+	})
+</script>
 <% if (view_state(@user) == view_state_user_manager ||
 			view_state(@user) == view_state_company_manager) &&
 			@confirmed %>
@@ -5,13 +13,12 @@
 																	:id => "photo-upload-form", 
 																	:remote => true) do %>
 		<%= file_field 'user', 'photo', :id => 'photo-upload-input' %>
-		<!-- <input type="file" id="photo-upload-input"> -->
 		<div class="photo-upload <%= upload_background_photo(@user) %>">
-			<p style="color: #000000;">+ Add Photo</p>
+			<div class="upload-link-container">
+				<%= link_to '+ Add Photo', '#', :class => 'ul_hover', :id => 'photo-upload-link' %>
+			</div>
 		</div>
 	<% end %>
 <% else %>
-	<div class="photo-upload <%= upload_background_photo(@user) %>">
-		<!-- <p>Click to add a<br/>Profile Image</p> -->
-	</div>
+	<div class="photo-upload <%= upload_background_photo(@user) %>"></div>
 <% end %>

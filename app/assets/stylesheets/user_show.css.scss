@@ -20,18 +20,22 @@
 		width: 180px;
 		// background: #A7DBD8;
 		text-align: center;
-		p {
+		.upload-link-container {
+			padding-top: 50px;
+			text-align: center;
+		}
+		a {
 			font-size: 14px;
 			font-weight: bold;
-			color: $nav-main-font-color;
-			padding: 25px 10px 0 10px;
+			color: #000000;
+			// padding: 25px 10px 0 10px;
 		}
 	}
 	#photo-upload-input {
 		opacity: 0;
 		// background: #000;
-		height: 180px; 
-		width: 180px;
+		height: 5px; 
+		width: 5px;
 		position: absolute; 
 		cursor: pointer; 
 		z-index: 9999; 
