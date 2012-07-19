@@ -1,0 +1,19 @@
+<div class="comment-photo">
+	<%= image_tag(current_user.photo.url(:mini)) %>
+</div>
+<div class="comment-text-new">
+	<% @comment_new ||= RecognitionComment.new %>
+	<%= form_for @comment_new, :remote => true do |f| %>
+		<%= f.hidden_field :recognition_id, :value => recognition_id %>
+		<%= f.hidden_field :recognition_type_id, :value => recognition_type_id %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.text_area :comment, 
+										:class => "comment-text-new-text", 
+										:id => "popup-compliment-comment",
+								    :placeholder => "Add a Comment..." %>
+		<div class="comment-text-new-submit clearfix">
+			<button type=submit class="submit-comment">Add Comment</button>
+		</div>
+		<div class="clear"></div>
+	<% end %>
+</div>

@@ -392,7 +392,7 @@ class UsersController < ApplicationController
 
     def hide_unconfirmed_user
       if !current_user?(@user) && !@user.confirmed?
-        flash[:error] = "You cannot view the profile of an unconfirmed user"
+        flash[:error] = "Sorry, Page not Found"
         redirect_to root_path
       end
     end

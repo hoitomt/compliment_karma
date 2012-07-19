@@ -164,12 +164,10 @@ module UsersHelper
     label = "Comment"
     count = get_comments_count(feed_item.item_object, feed_item.item_type_id)
     return link_to "#{label}#{count}",
-                   show_recognition_detail_path(:recognition_type_id => feed_item.item_type_id,
-                                                :recognition_id => feed_item.item_object.id,
-                                                :count => @count,
-                                                :user_id => current_user.id),
+                   show_recognition_path(:recognition_type_id => feed_item.item_type_id,
+                                                :recognition_id => feed_item.item_object.id),
                    :remote => true,
-                   :id => "comment-count-#{@count}"
+                   :id => "comment-count-#{feed_item.item_type_id}_#{feed_item.item_object.id}"
   end
 
   def compliments_link(feed_item, link_text)

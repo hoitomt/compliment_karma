@@ -201,12 +201,26 @@ var UserProfile = {
 		});
 	},
 	showCommentButtonOnClick: function() {
-		$('#popup-compliment-comment').off('focus');
+		$('#popup-compliment-comment').off('focus blur');
 		$('#popup-compliment-comment').on({
 			focus: function() {
 				$('.comment-text-new-submit').slideDown();
 			}
 		});
+		$('html').click(function(event) {
+			var clickSrc = event.srcElement;
+			var parent = $(clickSrc).parents('.comment-text-new');
+			// console.log(parent);
+			if(parent.length == 0) {
+				UserProfile.hideCommentSubmitButton();
+			}
+		})
+	},
+	hideCommentSubmitButton: function() {
+		$('.comment-text-new-submit').slideUp();
+	},
+	clearComment: function() {
+		$('textarea#popup-compliment-comment').val('');
 	},
 	stripeTable: function() {
 		$('.stripe-me tr:odd').addClass('alt');

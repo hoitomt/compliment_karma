@@ -2,6 +2,8 @@ class RecognitionComment < ActiveRecord::Base
 
   validates_presence_of :comment, :recognition_id, :recognition_type_id
   
+  default_scope :order => 'created_at DESC'
+
   def update_history(current_user)
     if self.recognition_type_id == RecognitionType.COMPLIMENT.id
       UpdateHistory.Comment_on_Sent_Compliment(self, current_user.id)

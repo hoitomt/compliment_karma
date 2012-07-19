@@ -1,0 +1,14 @@
+<% if comments %>
+	<% comments.each do |comment| %>
+		<% u = User.find_by_id(comment.user_id)%>
+		<li class="clearfix">
+			<div class="comment-photo">
+				<%= get_user_photo_link_mini(u) %>
+			</div>
+			<div class="comment-text">
+				<h4><%= get_user_full_name(u) %></h4>
+				<p><%= comment.comment %></p>
+			</div>
+		</li>
+	<% end %>
+<% end %>

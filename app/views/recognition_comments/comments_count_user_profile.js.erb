@@ -1,13 +1,14 @@
-var id = '<%= @count %>';
+var id = '<%= "#{@recognition_type_id}_#{@recognition_id}" %>';
 var commentsCount = '<%= @comments_count %>';
 var updateId = "#comment-count-" + id;
 var containerId = '#feed-item-social-' + id;
+var newComment = '<%=j render "recognition_comments/comment_list", :comments => @comments %>';
 
-$(updateId).html("Comment (" + commentsCount + ")");
-$.fancybox.close();
+$('#detail-comments-list-js').hide().html(newComment).fadeIn(1000);
+UserProfile.hideCommentSubmitButton();
+UserProfile.clearComment();
 
-$(containerId).show();
-$(updateId).effect("highlight", {}, 3000);
+$(updateId).html("Comment(" + commentsCount + ")");
 
 <% unless flash[:recognition_comment_errors].blank? %>
 	var errors = "<%= flash[:recognition_comment_errors] %>"

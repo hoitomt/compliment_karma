@@ -3,7 +3,8 @@ class RecognitionCommentsController < ApplicationController
   
   def create
     @rc = RecognitionComment.new(params[:recognition_comment])
-    @count = params[:count]
+    @recognition_id = params[:recognition_comment][:recognition_id]
+    @recognition_type_id = params[:recognition_comment][:recognition_type_id]
     if @rc.save
       logger.info("Current User: #{current_user}")
       @rc.update_history(current_user)
@@ -15,6 +16,7 @@ class RecognitionCommentsController < ApplicationController
   
   def handle_redirect
     @comments_count = RecognitionComment.get_count(@rc.recognition_id, @rc.recognition_type_id)
+    @comments = RecognitionComment.get_all_comments(@recognition_id, @recognition_type_id)
     render 'comments_count_user_profile'
   end
   
