@@ -5,6 +5,7 @@ class UsersController < ApplicationController
                                            :achievements, :contacts, :employees, 
                                            :rewards, :settings, :my_updates ]
   before_filter :get_confirmation_status, :except => [:new, :create]
+  before_filter :hide_unconfirmed_user
   before_filter :set_static_vars
     
   def new
@@ -32,7 +33,8 @@ class UsersController < ApplicationController
     set_karma_live_panel(params)
     set_pending_items
     set_this_week_compliments
-    my_updates
+    @my_update_items_count = UpdateHistory.get_recent_item_count(my_updates_user)
+    # my_updates
     set_update_history_read
     logger.info("Confirmation status - Unconfirmed?: #{@unconfirmed}")
     menu_response_handler
@@ -48,18 +50,19 @@ class UsersController < ApplicationController
     redirect_to @user
   end
 
-  def my_updates
+  def my_updates_user
     user = current_user
-    logger.info("User: #{@user.name}")
-    logger.info("View State: #{view_state(@user)}")
-    if view_state(@user) == view_state_company_manager
-      user = @user
-    end
-    # @user ||= User.find(params[:id])
+    user = @user if view_state(@user) == view_state_company_manager
+    return user
+  end
+
+  def my_updates
+    user = my_updates_user
     @my_update_items_count = UpdateHistory.get_recent_item_count(user)
     @my_update_items = UpdateHistory.get_recent_update_history(user)
     user.update_attributes(:last_read_notification_date => DateTime.now)
     set_this_week_compliments
+    set_compliment_panel(params)
     respond_to do |format|
       format.html {}
       format.js {
@@ -411,12 +414,23 @@ class UsersController < ApplicationController
     
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      good_user = current_user?(@user)
+      if @user && @user.is_a_company?
+        good_user = current_user.is_company_administrator?(@user.company.id)
+      end
+      redirect_to(root_path) unless good_user
     end
 
     def get_confirmation_status
       @user = User.find(params[:id])
       @confirmed = @user.confirmed? if @user
+    end
+
+    def hide_unconfirmed_user
+      if !current_user?(@user) && !@user.confirmed?
+        flash[:error] = "You cannot view the profile of an unconfirmed user"
+        redirect_to root_path
+      end
     end
 
     def set_static_vars

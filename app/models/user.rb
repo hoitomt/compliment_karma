@@ -249,65 +249,28 @@ class User < ActiveRecord::Base
     return [] if search_string.blank?
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
     sa = search_string.downcase.split(' ')
+    confirmed = AccountStatus.CONFIRMED
     search_array = []
     search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
-                               'lower(city) in (?) AND lower(email) in (?)',
-                                sa, sa, sa, sa)
+                               'lower(city) in (?) AND lower(email) in (?) AND account_status_id = ?',
+                                sa, sa, sa, sa, confirmed)
     search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' + 
-                               'lower(city) in (?)', 
-                                sa, sa, sa)
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?)', 
-                                sa, sa)
-    search_array << User.where('lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
-                               'lower(city) in (?) OR lower(email) in (?)',
-                                sa, sa, sa, sa)
+                               'lower(city) in (?) AND account_status_id = ?', 
+                                sa, sa, sa, confirmed)
+    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND account_status_id = ?', 
+                                sa, sa, confirmed)
+    search_array << User.where('(lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
+                               'lower(city) in (?) OR lower(email) in (?)) AND account_status_id = ?',
+                                sa, sa, sa, sa, confirmed)
     if search_array.length < 10
       sa.each do |s|
         term = "%#{s}%"
-        search_array << User.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
-                                   'lower(city) LIKE ? OR lower(email) LIKE ?',
-                                    term, term, term, term)
+        search_array << User.where('(lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
+                                   'lower(city) LIKE ? OR lower(email) LIKE ?) AND account_status_id = ?',
+                                    term, term, term, term, confirmed)
       end
     end
     return search_array.flatten.uniq
-  end
-
-  def self.searchx(search_string)
-    return [] if search_string.nil?
-    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
-    sa = search_string.downcase.split(' ')
-    search_array = []
-    select_fields = 'id, first_name, last_name, city'
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
-                               'lower(city) in (?) AND lower(email) in (?)',
-                                sa, sa, sa, sa).select(select_fields)
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' + 
-                               'lower(city) in (?)', 
-                                sa, sa, sa).select(select_fields)
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?)', 
-                                sa, sa).select(select_fields)
-    search_array << User.where('lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
-                               'lower(city) in (?) OR lower(email) in (?)',
-                                sa, sa, sa, sa).select(select_fields)
-    if search_array.length < 10
-      sa.each do |s|
-        term = "%#{s}%"
-        search_array << User.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
-                                   'lower(city) LIKE ? OR lower(email) LIKE ?',
-                                    term, term, term, term).select(select_fields)
-      end
-    end
-    result_array = []
-    logger.info("size: #{search_array.flatten.uniq.size}")
-    unless search_array.blank?
-      search_array.flatten.uniq.each do |user|
-        result_array << {:id => user.id,
-                         :first_name => user.first_name, 
-                         :last_name => user.last_name,
-                         :city => user.city}
-      end
-    end
-    return result_array
   end
 
   def is_a_company?

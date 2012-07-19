@@ -1,7 +1,11 @@
 <div id="header">
 	<div class="container_16">
 		<div id="logo">
-			<%= link_to image_tag('ck_logo.png'), current_user %>
+			<% if view_state(@user) == view_state_company_manager %>
+				<%= link_to image_tag('ck_logo.png'), @user %>
+			<% else %>
+				<%= link_to image_tag('ck_logo.png'), current_user %>
+			<% end %>
 		</div>
 		<%= render 'my_updates/my_updates_indicator' %>
 		<%= render 'rewards/shopping_cart' %>

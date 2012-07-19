@@ -22,6 +22,7 @@ class CkLikesController < ApplicationController
     end
     @like_status = CkLike.get_like_status(@recognition_id, @recognition_type_id, @user_id)
     @likes_count = CkLike.get_count(@recognition_id, @recognition_type_id)
+    @my_update_items_count = UpdateHistory.get_recent_item_count(User.find_by_id(@user_id))
     handle_redirect
   end
   

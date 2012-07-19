@@ -267,6 +267,8 @@ describe UsersController do
         get :show, :id => @user
         response.should be_success
       end
+
+      it "should now show pages for unconfirmed users"
     end
     
   end

@@ -16,5 +16,4 @@ $('.like-button-container').html(updatedPopupLikeButton);
 // }
 
 // Update my updates status
-var updateCountDisplay = '<%= update_history_count_display %>';
-$('#update-history-count').html(updateCountDisplay);
+MyUpdates.updateCount('<%= @my_update_items_count %>');

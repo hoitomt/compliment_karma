@@ -18,8 +18,8 @@ module SearchHelper
       html += '</div>'
     else
       html = '<div class="search-result-info">'
-      html += "<span class='user-name'>#{user.full_name}</span>"
-      html += "<span class='email'>#{user.email}</span>"
+      html += "<span class='user-name padded'>#{user.full_name}</span>"
+      # html += "<span class='email'>#{user.email}</span>"
       html += '</div>'
     end
     return html.html_safe
