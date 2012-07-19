@@ -74,6 +74,7 @@ class UsersController < ApplicationController
 
   def professional_profile
     @user = User.find_by_id(params[:id])
+    @user_is_a_company = @user.is_a_company?
     @professional_experiences = @user.experiences
     @current_experience = @user.experiences.first
     sent_compliments = Compliment.sent_professional_compliments(@user)

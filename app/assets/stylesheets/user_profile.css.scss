@@ -39,32 +39,60 @@ $top-row-height: 225px;
 		color: #6c6c6c
 	}
 }
-table#achievements-by-skill {
+.bordered {
 	@include top-border-radius;
+	border: 2px #e4e4e4 solid;
+  border-spacing: 0; 
+}
+table#achievements-by-skill {
+	border-collapse: separate;
 }
 #achievements-by-skill {
 	width: 90%;
-	margin: 25px 0 25px 35px;	
+	margin: 25px auto;	
 	tr {
 		height: 30px;
 	}
 	tr.badge { height: 80px; }
 	tr.header {
-		background: #7f7f7f;
 		// height: 30px;
 	}
 	th {
+		@include gradient-gray;
 		width: 31%;
-		color: #ffffff;
+		color: #313131;
+		text-shadow: 0.1em 0 0.1em #ffffff;
 		font-size: 14px;
 		font-weight: bold;
 		text-align: center;
 		padding: 5px 0 0 0;
 	}
-	tr.alt { background: #f3f3f3; }
+	th:first-child {
+	  -moz-border-radius: 6px 0 0 0;
+	  -webkit-border-radius: 6px 0 0 0;
+	  border-radius: 6px 0 0 0;
+	  border: none;
+	}
+	th:last-child {
+	  -moz-border-radius: 0 6px 0 0;
+	  -webkit-border-radius: 0 6px 0 0;
+	  border-radius: 0 6px 0 0;
+	  border: none;
+	}
+	th:only-child{
+	  -moz-border-radius: 6px 6px 0 0;
+	  -webkit-border-radius: 6px 6px 0 0;
+	  border-radius: 6px 6px 0 0;
+	  border-top: none;
+	}
+	tr.alt { background: #e4e4e4; }
 	td { 
 		font-weight: bold;
 		color: #1e5faf;
+		vertical-align: middle;
+	}
+	td.padded {
+		padding-top: 5px;
 	}
 	td.non-image {padding-top: 5px; }
 	.left { text-align: left; }

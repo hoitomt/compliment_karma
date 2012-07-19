@@ -10,7 +10,9 @@
 				<div class="demographics-container">
 					<div class="demographics">
 						<div id="current-experience-container">
-							<%= render 'experiences/current_experience', :current_experience => @current_experience %>
+							<% unless @user_is_a_company %>
+								<%= render 'experiences/current_experience', :current_experience => @current_experience %>
+							<% end %>
 						</div>
 						<%= render 'follows/follows_button', :user => @user %>
 					</div>
@@ -28,6 +30,8 @@
 		</div>
 		<%= render 'users/menu/profile/achievements', 
 							 :compliments_received_by_skill => @compliments_received_by_skill %>
-		<%= render 'users/menu/profile/experience.html.erb' %>
+		<% unless @user_is_a_company %>
+			<%= render 'users/menu/profile/experience.html.erb' %>
+		<% end %>
 	</div>
 </div>

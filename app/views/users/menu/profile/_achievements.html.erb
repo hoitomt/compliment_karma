@@ -5,9 +5,9 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<table id="achievements-by-skill" class="stripe-me">
+	<table id="achievements-by-skill" class="stripe-me bordered">
 		<tr class="header">
-			<th class="left first">Skills</th>
+			<th>Skills</th>
 			<th>Compliments Received</th>
 			<th>Badges</th>
 		</tr>
@@ -16,7 +16,7 @@
 				<tr id="<%= k %>">
 					<td class="non-image first"><%= skill_name(k) %></td>
 					<td class="non-image center"><%= v %></td>
-					<td class="center"><%= badge_image(v) %></td>
+					<td class="center padded"><%= badge_image(v) %></td>
 				</tr>
 			<% end %>
 		<% end %>
