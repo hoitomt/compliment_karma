@@ -1,0 +1,23 @@
+<div id="user-experience" class="third-row container">
+	<div class="section-line">
+		<div class="center-me">
+			<div class="section-title">Professional Experience</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="add-position">
+		<% if page_owner?(@user) %>
+			<%= link_to '+ Add a Position', 
+									new_experience_path(:user_id => @user.id), 
+									:class => "ul_hover",
+									:remote => true %>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+	<div id="professional-experience-container">
+		<%= render :partial => 'experiences/professional_experiences', 
+							 :locals => {:professional_experiences => @professional_experiences,
+							 						 :user => @user } %>
+		<div class="clear"></div>
+	</div>
+</div>

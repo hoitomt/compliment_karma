@@ -103,7 +103,7 @@
 	}
 }
 #rewards-results { padding: 10px 0 0 0; }
-table {
+table#select-reward-results {
 	@include top-border-radius;
 	font-size: 13px;
 	margin: 0 0 10px 10px;

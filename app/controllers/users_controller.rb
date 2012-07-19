@@ -7,6 +7,10 @@ class UsersController < ApplicationController
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :hide_unconfirmed_user
   before_filter :set_static_vars
+  before_filter :set_compliment_panel, 
+                :only => [:show, :my_updates, :professional_profile,
+                          :social_profile, :received_compliments, :sent_compliments,
+                          :achievements, :contacts, :settings, :employees ]
     
   def new
     @user = User.new
@@ -29,10 +33,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     logger.info("User Name: " + @user.full_name)
     set_title
-    set_compliment_panel(params)
     set_karma_live_panel(params)
     set_pending_items
-    set_this_week_compliments
     @my_update_items_count = UpdateHistory.get_recent_item_count(my_updates_user)
     # my_updates
     set_update_history_read
@@ -50,19 +52,11 @@ class UsersController < ApplicationController
     redirect_to @user
   end
 
-  def my_updates_user
-    user = current_user
-    user = @user if view_state(@user) == view_state_company_manager
-    return user
-  end
-
   def my_updates
     user = my_updates_user
     @my_update_items_count = UpdateHistory.get_recent_item_count(user)
     @my_update_items = UpdateHistory.get_recent_update_history(user)
     user.update_attributes(:last_read_notification_date => DateTime.now)
-    set_this_week_compliments
-    set_compliment_panel(params)
     respond_to do |format|
       format.html {}
       format.js {
@@ -82,7 +76,6 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @professional_experiences = @user.experiences
     @current_experience = @user.experiences.first
-    set_this_week_compliments
     sent_compliments = Compliment.sent_professional_compliments(@user)
     received_compliments = Compliment.received_professional_compliments(@user)
     @compliments_sent = sent_compliments.count
@@ -98,7 +91,6 @@ class UsersController < ApplicationController
 
   def social_profile
     @user = User.find_by_id(params[:id])
-    set_this_week_compliments
     sent_compliments = Compliment.sent_social_compliments(@user)
     received_compliments = Compliment.received_social_compliments(@user)
     @compliments_sent = sent_compliments.count
@@ -111,22 +103,18 @@ class UsersController < ApplicationController
 
   def received_compliments
     menu_response_handler
-    
   end
 
   def sent_compliments
     menu_response_handler
-    
   end
 
   def achievements
     menu_response_handler
-    
   end
 
   def contacts
     menu_response_handler
-    
   end
 
   def settings
@@ -188,31 +176,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
     redirect_to @user
-  end
-
-  def set_compliment_panel(params)
-    @compliment = Compliment.new(params[:compliment])
-    @compliment.sender_email = current_user.email
-    @sender_is_a_company = sender_is_a_company?
-    @receiver_is_a_company = false
-    if !current_user?(@user) #&& current_user.is_company_administrator?(@user.company.id)
-      @compliment.receiver_display = @user.search_result_display
-      @compliment.receiver_user_id = @user.id
-      @receiver_is_a_company = @user.is_a_company?
-    end
-    # @skills = Skill.list_for_autocomplete
-    @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)
-    if flash[:compliment]
-      @compliment = Compliment.new(flash[:compliment].attributes)
-      flash[:compliment].errors.each do |attr, msg|
-        @compliment.errors.add(attr, msg)
-      end
-      @compliment.errors.full_messages.each do |msg|
-        logger.info("Error: #{msg}")
-      end
-    end
-    logger.info("Compliment Types: #{@compliment_types}")
-    flash.delete(:compliment)
   end
 
   def sender_is_a_company?
@@ -437,6 +400,39 @@ class UsersController < ApplicationController
       @page = (params[:page] || 1).to_i
       @per_page = 10
       @compliment = Compliment.new
+      @my_update_items_count = UpdateHistory.get_recent_item_count(my_updates_user)
+    end
+
+    def my_updates_user
+      user = current_user
+      user = @user if view_state(@user) == view_state_company_manager
+      return user
+    end
+
+    def set_compliment_panel
+      @compliment = Compliment.new(params[:compliment])
+      @compliment.sender_email = current_user.email
+      @sender_is_a_company = sender_is_a_company?
+      @receiver_is_a_company = false
+      set_this_week_compliments
+      if !current_user?(@user) #&& current_user.is_company_administrator?(@user.company.id)
+        @compliment.receiver_display = @user.search_result_display
+        @compliment.receiver_user_id = @user.id
+        @receiver_is_a_company = @user.is_a_company?
+      end
+      # @skills = Skill.list_for_autocomplete
+      @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)
+      if flash[:compliment]
+        @compliment = Compliment.new(flash[:compliment].attributes)
+        flash[:compliment].errors.each do |attr, msg|
+          @compliment.errors.add(attr, msg)
+        end
+        @compliment.errors.full_messages.each do |msg|
+          logger.info("Error: #{msg}")
+        end
+      end
+      logger.info("Compliment Types: #{@compliment_types}")
+      flash.delete(:compliment)
     end
     
     def get_karma_live_items(feed_item_type_id, relation_type_id)

@@ -39,9 +39,12 @@ $top-row-height: 225px;
 		color: #6c6c6c
 	}
 }
+table#achievements-by-skill {
+	@include top-border-radius;
+}
 #achievements-by-skill {
 	width: 90%;
-	margin: 15px 20px;	
+	margin: 25px 0 25px 35px;	
 	tr {
 		height: 30px;
 	}
