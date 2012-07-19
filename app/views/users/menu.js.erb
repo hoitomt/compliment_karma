@@ -10,6 +10,7 @@ switch(currentAction) {
 		break;
 	case "social_profile":
 		$('#content-container').html('<%= j(render "users/menu/social_profile") %>');
+		UserProfile.stripeTable();
 		break;
 	case "received_compliments":
 		$('#content-container').html('<%= j(render "users/menu/received_compliments") %>');

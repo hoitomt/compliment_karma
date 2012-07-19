@@ -499,7 +499,7 @@ module UsersHelper
   def skill_name(id)
     skill = Skill.find_by_id(id)
     logger.info("Skill ID: #{id} - Skill Name: #{skill}")
-    skill.name if skill
+    skill ? skill.name : "Undefined"
   end
 
   def skill_autocomplete_key(id)
