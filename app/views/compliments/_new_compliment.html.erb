@@ -4,6 +4,9 @@
 		SkillAutoComplete.init();
 		ComplimentUI.init(<%= current_user.id %>);
 		ComplimentReceiver.init();
+		$('label.new-compliment').tooltip({
+			delay: 0
+		});
 	});
 </script>
 <div id="scroll-sticky" class="right-two-thirds">

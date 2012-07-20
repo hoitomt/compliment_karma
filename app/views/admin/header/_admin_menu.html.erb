@@ -15,7 +15,7 @@
 		<ul>
 			<li class="active-user no-hover">
 				<div class="am-user-image">
-					<%= image_tag(current_user.photo.url(:thumb)) %>
+					<%= image_tag(active_user.photo.url(:thumb)) %>
 				</div>
 				<% if active_user.is_a_company? %>
 					<div class="am-user-info">
