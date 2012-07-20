@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   before_filter :hide_unconfirmed_user
   before_filter :set_static_vars
   before_filter :set_compliment_panel, 
-                :only => [:show, :my_updates, :professional_profile,
+                :only => [:show, :my_updates, :my_updates_all, :professional_profile,
                           :social_profile, :received_compliments, :sent_compliments,
                           :achievements, :contacts, :settings, :employees ]
     
@@ -35,7 +35,6 @@ class UsersController < ApplicationController
     set_title
     set_karma_live_panel(params)
     set_pending_items
-    @my_update_items_count = UpdateHistory.get_recent_item_count(my_updates_user)
     # my_updates
     set_update_history_read
     logger.info("Confirmation status - Unconfirmed?: #{@unconfirmed}")
@@ -54,7 +53,6 @@ class UsersController < ApplicationController
 
   def my_updates
     user = my_updates_user
-    @my_update_items_count = UpdateHistory.get_recent_item_count(user)
     @my_update_items = UpdateHistory.get_recent_update_history(user)
     user.update_attributes(:last_read_notification_date => DateTime.now)
     respond_to do |format|
@@ -63,6 +61,11 @@ class UsersController < ApplicationController
         @show_header_link = true
       }
     end
+  end
+
+  def my_updates_all
+    @my_update_items = UpdateHistory.find_all_by_user_id(my_updates_user.id)
+    render 'my_updates'
   end
 
   def menu_response_handler

@@ -54,6 +54,7 @@ Ck::Application.routes.draw do
         :as => :show_recognition_detail
   match "users/:id/dev_popup" => "users#dev_popup"
   match "users/:id/my_updates" => "users#my_updates", :as => :my_updates
+  match "users/:id/my_updates_all" => "users#my_updates_all", :as => :my_updates_all
   match "users/:id/professional_profile" => "users#professional_profile", 
         :as => :user_professional_profile
   match "users/:id/social_profile" => "users#social_profile", :as => :user_social_profile

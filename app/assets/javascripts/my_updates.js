@@ -20,5 +20,11 @@ var MyUpdates = {
 				myUpdateCountContainer.removeClass('header-update-count');
 			}
 		}
+	},
+	markAsRead: function() {
+		$('ul#my-update-content li').click(function() {
+			$(this).removeClass('unread');
+			// console.log(this);
+		});
 	}
 }

@@ -12,6 +12,7 @@
 			var unconfirmed = '<%= @unconfirmed %>';
 			var pendingItems = '<%= @pending_items_count %>';
 			UserProfile.init(userId, perPage, userEmail, unconfirmed, pendingItems);
+			MyUpdates.markAsRead();
 		});
 	</script>
 <% end %>
