@@ -3,8 +3,10 @@ var commentsCount = '<%= @comments_count %>';
 var updateId = "#comment-count-" + id;
 var containerId = '#feed-item-social-' + id;
 var newComment = '<%=j render "recognition_comments/comment_list", :comments => @comments %>';
+var scrollPosition = $('#comment-text-new').scrollTop();
 
-$('#detail-comments-list-js').hide().html(newComment).fadeIn(1000);
+$('ul#detail-comments-list-js').html(newComment);
+$('ul#detail-comments-list-js li').last().hide().fadeIn(1000);
 UserProfile.hideCommentSubmitButton();
 UserProfile.clearComment();
 

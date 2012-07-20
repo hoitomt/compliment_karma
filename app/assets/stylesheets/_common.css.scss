@@ -89,7 +89,11 @@ $total-width: 992px;
   -webkit-box-shadow: 0px 2px 2px #8EBAB8;
   box-shadow:         0px 2px 2px #8EBAB8;
 }
-
+@mixin tooltip-box-shadow {
+  -moz-box-shadow:    0px 0px 2px #8EBAB8;
+  -webkit-box-shadow: 0px 0px 2px #8EBAB8;
+  box-shadow:         0px 0px 2px #8EBAB8;
+}
 @mixin page-box-shadow {
   -moz-box-shadow:    0px 0px 5px #8EBAB8;
   -webkit-box-shadow: 0px 0px 5px #8EBAB8;
@@ -120,7 +124,11 @@ $total-width: 992px;
    -webkit-border-radius: 15px;
    border-radius: 15px;
 }
-
+@mixin border-radius-5 {
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+}
 @mixin top-border-radius {
 	-moz-border-radius-topleft: 8px;
 	-moz-border-radius-topright: 8px;

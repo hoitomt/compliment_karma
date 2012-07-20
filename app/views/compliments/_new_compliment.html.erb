@@ -4,9 +4,7 @@
 		SkillAutoComplete.init();
 		ComplimentUI.init(<%= current_user.id %>);
 		ComplimentReceiver.init();
-		$('label.new-compliment').tooltip({
-			delay: 0
-		});
+		$('label.new-compliment').tooltip();
 	});
 </script>
 <div id="scroll-sticky" class="right-two-thirds">
@@ -28,9 +26,12 @@
 				<%= hidden_field_tag "sender_is_a_company", @sender_is_a_company %>
 
 				<div id="data-entry" class="clearfix">
-					<div id="label" 
-							 title="The name or email address of the person or company that should receive the compliment. Start typing for a list">
-						<%= label_tag 'receiver', "To", :class => "new-compliment" %></div>
+					<div id="label">
+						<%= label_tag 'receiver', 
+													"To", 
+													:class => "new-compliment", 
+													:title => "Enter the name or email address of the person/company that should receive the compliment" %>
+					</div>
 					<div id="field"><%= text_field 'compliment', 'receiver_display', 
 																					 :placeholder => "receiver's name or email",
 																					 :autocomplete => 'off',
@@ -42,9 +43,12 @@
 				</div>
 				<div class="hide-me">
 					<div id="data-entry" class="clearfix">
-						<div id="label"
-								 title="The skill for which the person or company is being complimented. Start typing to select an option or create your own">
-							<%= f.label :skill_id, "Skill", :class => "new-compliment" %></div>
+						<div id="label">
+							<%= f.label :skill_id, 
+													"Skill", 
+													:class => "new-compliment",
+													:title => "Enter the skill for which the person/company is being complimented. Start typing and select an option or create your own" %>
+						</div>
 						<div id="field"><%= f.text_field :skill_id,
 																						 :placeholder => "start typing for a list", 
 																						 :autocomplete => 'off',
@@ -54,18 +58,24 @@
 					</div>
 
 					<div id="data-entry" class="clearfix">
-						<div id="label"
-								 title="The text of your compliment">
-							<%= f.label :comment, "Comment", :class => "new-compliment" %></div>
+						<div id="label">
+							<%= f.label :comment, 
+													"Comment", 
+													:class => "new-compliment",
+													:title => "The text of your compliment" %>
+						</div>
 						<div id="field"><%= f.text_area :comment, :rows => 2, :class => 'new-compliment-textarea' %>
 							<div id="compliment_comment_error"></div>
 						</div>
 					</div>
 							
 					<div id="data-entry" class="clearfix" style="margin-bottom: 0px;">
-						<div id="label" style="padding-top: 0px;"
-								 title="Select based on your relationship with the person/company that you are complimenting">
-							<%= f.label :compliment_type, "Type", :class => "new-compliment", :style => "padding-top: 0px;" %>
+						<div id="label" style="padding-top: 0px;">
+							<%= f.label :compliment_type, 
+													"Type", 
+													:class => "new-compliment", 
+													:style => "padding-top: 0px;",
+													:title => "Select a compliment type based on your relationship with the person/company that you are complimenting" %>
 						</div>
 						<div id="field">
 							<div id="compliment-type-select">

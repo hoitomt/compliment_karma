@@ -2,7 +2,7 @@ class RecognitionComment < ActiveRecord::Base
 
   validates_presence_of :comment, :recognition_id, :recognition_type_id
   
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'created_at ASC'
 
   def update_history(current_user)
     if self.recognition_type_id == RecognitionType.COMPLIMENT.id
