@@ -10,8 +10,7 @@ module ViewStateHelper
     if user.nil?
       return view_state_user_visitor
   	elsif user.is_a_company?
-  		company_id = user.company_id
-  		if current_user.is_company_administrator?(company_id)
+  		if current_user?(user)
   			return view_state_company_manager
   		else
   			return view_state_company_visitor

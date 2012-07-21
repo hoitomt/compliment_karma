@@ -3,6 +3,7 @@ CommonScripts.toggleScrolling();
 UserMenu.setCurrentMenuItem(currentAction);
 ComplimentUI.removeStickyCompliment();
 
+console.log(currentAction);
 switch(currentAction) {
 	case "professional_profile":
 		$('#content-container').html('<%= j(render "users/menu/professional_profile") %>');
@@ -35,7 +36,8 @@ switch(currentAction) {
 		var userId = '<%= current_user.id %>';
 		var perPage = '<%= @per_page %>';
 		var userEmail = '<%= current_user.email %>';
-		UserProfile.init(userId, perPage, userEmail);
+		var totalCount = '<%= @karma_live_items_count %>';
+		UserProfile.init(userId, perPage, totalCount, userEmail);
 		ComplimentUI.stickyNewCompliment();
 		break;
 	default:

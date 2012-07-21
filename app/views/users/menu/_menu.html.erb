@@ -7,6 +7,16 @@
 		});
 	});
 </script>
+<%
+	individual_page = view_state(@user) == view_state_user_manager ||
+									  view_state(@user) == view_state_user_visitor
+	company_page = view_state(@user) == view_state_company_visitor ||
+								 view_state(@user) == view_state_company_manager
+	manager = view_state(@user) == view_state_user_manager ||
+					  view_state(@user) == view_state_company_manager
+	visitor = view_state(@user) == view_state_company_visitor ||
+					  view_state(@user) == view_state_user_visitor
+%>
 <div id="user-menu" class="box-no-padding">
 	<ul>
 		<li id="menu-karma-live">
@@ -15,20 +25,17 @@
 		<li id="menu-professional-profile">
 			<%= link_to 'Professional Profile', user_professional_profile_path(@user), :remote => true %>
 		</li>
-		<% if view_state(@user) == view_state_user_manager ||
-					view_state(@user) == view_state_user_visitor %>
+		<% if individual_page %>
 			<li id="menu-social-profile">
 				<%= link_to 'Social Profile', user_social_profile_path(@user), :remote => true %>
 			</li>
 		<% end %>
-		<% if view_state(@user) == view_state_user_manager ||
-					view_state(@user) == view_state_company_manager %>
+		<% if manager %>
 			<li id="menu-received-compliments">
 				<%= link_to 'Received Compliments', user_received_compliments_path(@user), :remote => true %>
 			</li>
 		<% end %>
-		<% if view_state(@user) == view_state_user_manager ||
-					view_state(@user) == view_state_company_manager %>
+		<% if manager %>
 			<li id="menu-sent-compliments">
 				<%= link_to 'Sent Compliments', user_sent_compliments_path(@user), :remote => true %>
 			</li>
@@ -36,20 +43,17 @@
 		<li id="menu-achievements">
 			<%= link_to 'Achievements', user_achievements_path(@user), :remote => true %>
 		</li>
-		<% if view_state(@user) == view_state_user_manager ||
-					view_state(@user) == view_state_user_visitor %>
+		<% if individual_page %>
 			<li id="menu-contacts">
 				<%= link_to 'Contacts', user_contacts_path(@user), :remote => true %>
 			</li>
 		<% end %>
-		<% if view_state(@user) == view_state_user_manager ||
-					view_state(@user) == view_state_company_manager %>
+		<% if individual_page %>
 			<li id="menu-settings">
 				<%= link_to 'Settings', user_settings_path(@user), :remote => true %>
 			</li>
 		<% end %>
-		<% if view_state(@user) == view_state_company_visitor ||
-					view_state(@user) == view_state_company_manager %>
+		<% if company_page %>
 			<li id="menu-employees">
 				<%= link_to 'Employees', user_employees_path(@user), :remote => true %>
 			</li>

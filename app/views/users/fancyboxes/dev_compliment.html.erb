@@ -4,9 +4,7 @@
 			var userEmail = '<%= current_user.email %>';
 			var userId = '<%= current_user.id %>';
 			var perPage = '<%= @per_page %>';
-			var unconfirmed = '<%= @unconfirmed %>';
-			var pendingItems = '<%= @pending_items_count %>';
-			UserProfile.init(userId, perPage, userEmail, unconfirmed, pendingItems);
+			UserProfile.init(userId, perPage, null, userEmail);
 			$.fancybox('<%= j(render "users/fancyboxes/compliment") %>');
 		});
 	</script>

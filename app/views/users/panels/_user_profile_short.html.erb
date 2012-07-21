@@ -14,7 +14,7 @@
 			<%= @user.last_name %>
 		</h2>
 	</div>
-	<% if page_owner?(@user) && current_user.confirmed? %>
+	<% if page_owner?(@user) && @confirmed %>
 		<div class="name-location">
 			<p style="color: #606060; font-size: 14px;"><%= location(@user) %></p>
 		</div>

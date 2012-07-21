@@ -10,7 +10,7 @@
 				<div class="demographics-container">
 					<div class="demographics">
 						<div id="current-experience-container">
-							<% unless @user_is_a_company %>
+							<% unless company_user? %>
 								<%= render 'experiences/current_experience', :current_experience => @current_experience %>
 							<% end %>
 						</div>

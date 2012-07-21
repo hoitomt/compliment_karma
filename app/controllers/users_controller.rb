@@ -224,7 +224,7 @@ class UsersController < ApplicationController
   
   def get_more_karma_live_records
     @replace_content = params[:replace] == "true"
-    set_karma_live_panel(params)
+    set_karma_live_panel
   end
   
   def show_recognition_detail
@@ -393,9 +393,9 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       good_user = current_user?(@user)
-      if @user && @user.is_a_company?
-        good_user = current_user.is_company_administrator?(@user.company.id)
-      end
+      # if company_user?
+      #   good_user = current_user.is_company_administrator?(@user.company.id)
+      # end
       redirect_to(root_path) unless good_user
     end
 
