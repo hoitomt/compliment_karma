@@ -12,7 +12,7 @@
 		<div id="nav-upper-right">
 			<ul>
 				<li>
-					<% if view_state(@user) == view_state_company_manager %>
+					<% if company_user? %>
 						<%= link_to @user.company.name, @user, :id => "am-hover-me" %>
 					<% else %>
 						<%= link_to current_user.email, current_user, :id => "am-hover-me" %>

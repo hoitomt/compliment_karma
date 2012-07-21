@@ -1,8 +1,0 @@
-var currentAction = "<%= @current_action %>";
-UserMenu.setCurrentMenuItem(currentAction);
-$('#content-container').html('<%= j(render "users/menu/karma_live") %>');
-
-var userId = '<%= current_user.id %>';
-var perPage = '<%= @per_page %>';
-var userEmail = '<%= current_user.email %>';
-UserProfile.init(userId, perPage, userEmail);

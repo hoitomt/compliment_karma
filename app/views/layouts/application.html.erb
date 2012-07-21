@@ -33,7 +33,7 @@
 <body>
 	<%#= render 'social/facebook_javascript' %>
 	<%= render 'social/twitter_javascript' %>
-	<% if view_state(@user) == view_state_company_manager %>
+	<% if company_user? %>
 		<%= render 'layouts/admin_header' %>
 	<% else %>
 		<%= render 'layouts/header' %>

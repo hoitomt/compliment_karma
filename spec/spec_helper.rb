@@ -38,7 +38,7 @@ Spork.prefork do
     # SeedData.create_data
     
     def logger
-      Rails.logger
+      # Rails.logger
     end
     
     def test_sign_in(user)

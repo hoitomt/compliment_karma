@@ -8,8 +8,7 @@
 			<div class="profile-button" style="margin-right: 10px;">
 				<%= compliment_button_medium(@sender) %>
 			</div>
-			<%= render :partial => 'follows/follows_button', 
-								 :locals => { :user => @user, :subject_user => @sender } %>
+			<%= render 'follows/follows_button', :user => @sender %>
 		</div>
 	</div>
 </div>
@@ -30,8 +29,7 @@
 			<div class="profile-button" style="margin-right: 10px;">
 				<%= compliment_button_medium(@receiver) %>
 			</div>
-			<%= render :partial => 'follows/follows_button', 
-								 :locals => {:user => @user, :subject_user => @receiver} %>
+			<%= render 'follows/follows_button', :user => @receiver %>
 		</div>
 	</div>
 </div>

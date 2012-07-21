@@ -3,29 +3,22 @@
 		Admin.init();
 	});
 </script>
-<% if view_state(@user) == view_state_company_manager %>
-	<% active_user = @user %>
-	<% inactive_user = current_user %>
-<% else %>
-	<% active_user = current_user %>
-	<% inactive_user = @user %>
-<% end %>
 <div id="admin-menu" class="drop-box">
 	<div class="am-current-user">
 		<ul>
 			<li class="active-user no-hover">
 				<div class="am-user-image">
-					<%= image_tag(active_user.photo.url(:thumb)) %>
+					<%= image_tag(current_user.photo.url(:thumb)) %>
 				</div>
-				<% if active_user.is_a_company? %>
+				<% if current_user.is_a_company? %>
 					<div class="am-user-info">
-						<span class="am-name"><%= active_user.company.name %></span><br />
+						<span class="am-name"><%= current_user.company.name %></span><br />
 						<%= link_to "Settings", '#', :class => 'ul_hover am-current-user-links' %>
 					</div>
 				<% else %>
 					<div class="am-user-info">
-						<span class="am-name"><%= active_user.first_last %></span><br />
-						<span class="am-email"><%= active_user.email %></span><br />
+						<span class="am-name"><%= current_user.first_last %></span><br />
+						<span class="am-email"><%= current_user.email %></span><br />
 						<%= link_to "Settings", '#', :class => 'ul_hover am-current-user-links' %>
 					</div>
 				<% end %>
@@ -35,41 +28,41 @@
 		<div class="clear"></div>
 	</div>
 	<% if customer_admin_user? %>
-		<div class="am-profile-list">
-			<div class="am-profile-title">Manage Company Profile</div>
-			<ul class="am-user-list">
-				<% if active_user.id != current_user.id %>
-					<%= link_to current_user, :class => 'company_profile' do %>
+		<ul>
+			<% current_user.companies.each do |company| %>
+				<% c_user = company.user %>
+				<% if c_user.id != current_user.id %>
+					<%= link_to switch_accounts_path(c_user), :class => 'company_profile' do %>
 						<li>
 							<div class="am-user-profile-image">
-								<%= image_tag(current_user.photo.url(:thumb)) %>
+								<%= image_tag(c_user.photo.url(:thumb)) %>
 							</div>
 							<div class="am-user-profile-info">
-								<%= current_user.first_last %>
+								<%= company.name %>
 							</div>
 							<div class="clear"></div>
 						</li>
 					<% end %>
 				<% end %>
-				<% current_user.companies.each do |company| %>
-					<% c_user = company.user %>
-					<% if c_user.id != active_user.id %>
-						<%= link_to c_user, :class => 'company_profile' do %>
-							<li>
-								<div class="am-user-profile-image">
-									<%= image_tag(c_user.photo.url(:thumb)) %>
-								</div>
-								<div class="am-user-profile-info">
-									<%= company.name %>
-								</div>
-								<div class="clear"></div>
-							</li>
-						<% end %>
-					<% end %>
-				<% end %>
-			</ul>
-			<div class="clear"></div>
-		</div>
+			<% end %>
+		</ul>
+		<div class="clear"></div>
+	<% elsif current_user_2 %>
+		<ul>
+			<%= link_to switch_accounts_path(current_user_2), :class => 'company_profile' do %>
+				<li>
+					<div class="am-user-profile-image">
+						<%= image_tag(current_user_2.photo.url(:thumb)) %>
+					</div>
+					<div class="am-user-profile-info">
+						<span class="am-name"><%= current_user_2.first_last %></span><br />
+						<span class="am-email"><%= current_user_2.email %></span><br />
+					</div>
+					<div class="clear"></div>
+				</li>
+			<% end %>
+		</ul>
+		<div class="clear"></div>
 	<% end %>
 	<div class="am-button-container">
 		<%= link_to 'Log Out', logout_path, :class => "button" %>

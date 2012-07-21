@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
                                            :professional_profile, :social_profile, 
                                            :achievements, :contacts, :employees, 
-                                           :rewards, :settings, :my_updates ]
+                                           :rewards, :settings, :my_updates, :switch_accounts ]
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :hide_unconfirmed_user
   before_filter :set_static_vars
@@ -189,14 +189,14 @@ class UsersController < ApplicationController
   end
   
   def set_karma_live_panel
-    karma_live_items = get_karma_live_items(params[:feed_item_type], params[:relation_type])
+    @all_karma_live_items = get_karma_live_items(params[:feed_item_type], params[:relation_type])
     @recognition_type_compliment = RecognitionType.COMPLIMENT
     @recognition_type_reward = RecognitionType.REWARD
     @recognition_type_accomplishment = RecognitionType.ACCOMPLISHMENT
-    @karma_live_items_count = karma_live_items.count
+    @karma_live_items_count = @all_karma_live_items.count
     @current_count = @page * @per_page
     @current_count = @karma_live_items_count if @current_count > @karma_live_items_count
-    @karma_live_items = Paging.page(karma_live_items, @page, @per_page)
+    @karma_live_items = Paging.page(@all_karma_live_items, @page, @per_page)
     logger.info("Karma Live Item Count: #{@karma_live_items_count}")
   end
 
@@ -372,6 +372,17 @@ class UsersController < ApplicationController
     return if update_history_id.blank?
     update_history = UpdateHistory.find(update_history_id)
     update_history.set_read
+  end
+
+  def switch_accounts
+    logger.info("Before Current User " + current_user.name)
+    logger.info("Before Current User 2 " + current_user_2.name) if current_user_2
+    new_user = User.find(params[:id])
+    set_current_user_2(current_user) #move the current user to user 2
+    sign_in(new_user, false) # sign in the new user
+    logger.info("Current User " + current_user.name)
+    logger.info("Current User 2 " + current_user_2.name)
+    redirect_to current_user
   end
 
   private

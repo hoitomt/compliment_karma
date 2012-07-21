@@ -14,8 +14,7 @@
 								<%= render 'experiences/current_experience', :current_experience => @current_experience %>
 							<% end %>
 						</div>
-						<%= render :partial => 'follows/follows_button', 
-											 :locals => {:user => @user, :subject_user => @user } %>
+						<%= render 'follows/follows_button', :user => @user %>
 					</div>
 				</div>
 				<div class="rank-buttons">

@@ -69,6 +69,7 @@ Ck::Application.routes.draw do
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
   match "users/:id/rewards" => "users#rewards", :as => :user_rewards
   match "users/:id/edit_from_profile" => "users#edit_from_profile", :as => :edit_from_profile
+  match "users/:id/switch_accounts" => "users#switch_accounts", :as => :switch_accounts
 
   resources :follows
   resources :recognition_comments, :only => [:create]

@@ -7,6 +7,16 @@
 			<% end %>
 			<% if Rails.env.development? %>
 				<div class="container">
+					<% if current_user %>
+						Current User: (<%= current_user.id %> - <%= current_user.name %>)<br />
+					<% else %>
+						No Current User<br />
+					<% end %>
+					<% if current_user_2 %>
+						Current User 2: (<%= current_user_2.id %> - <%= current_user_2.name %>)
+					<% else %>
+						No Current User 2
+					<% end %>
 					<%#= debug(params)  %>
 				</div>
 			<% end %>

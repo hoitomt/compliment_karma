@@ -94,6 +94,7 @@ describe UsersController do
           # should see followed
           get :show, :id => user2
           assigns(:karma_live_items_count).should eq(20)
+          # karma_live_items = controller.instance_variable_get(:all_karma_live_items)
           c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
           c.count.should eq(10)
           cx = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user.email)
@@ -139,6 +140,18 @@ describe UsersController do
         it "should have the correct number of compliments after paging" do
           
         end
+      end
+
+      # Rule to test:
+      # user is following user 2
+      # user 3 is following user 2
+      # When user 3 visit user's page, they should not see user 2's items unless
+      # user 2's items are directly to/from user
+      describe "should not show cross follows: User 3 view User 2s page" do
+        before(:each) do
+          test_sign_in(user3)
+        end
+
       end
     end
     

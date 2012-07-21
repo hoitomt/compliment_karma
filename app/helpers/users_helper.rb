@@ -117,7 +117,7 @@ module UsersHelper
     return CkLike.get_like_status(recognition_id, recognition_type_id, current_user.id)
   end
 
-  def like_button(recognition_id, recognition_type_id, user)
+  def like_button(recognition_id, recognition_type_id)
     return if recognition_id.nil? || recognition_type_id.nil?
     status = get_like_status(recognition_id, recognition_type_id)
     logger.info("Like Status: #{status}")
@@ -142,20 +142,20 @@ module UsersHelper
     return link_to button_text.html_safe, ck_likes_path(:recognition_type_id => recognition_type_id,
                                       :recognition_id => recognition_id,
                                       :count => @count,
-                                      :user_id => ui_user(user).id),
+                                      :user_id => current_user.id),
                         :method => :post,
                         :remote => true,
                         :class => button_class
   end
 
-  def likes_link(recognition_id, recognition_type_id, user)
+  def likes_link(recognition_id, recognition_type_id)
     label = get_like_status(recognition_id, recognition_type_id)
     count = get_likes_count(recognition_id, recognition_type_id)
     return link_to "#{label}#{count}", 
                     ck_likes_path(:recognition_type_id => recognition_type_id,
                                   :recognition_id => recognition_id,
                                   :count => @count,
-                                  :user_id => ui_user(user).id),
+                                  :user_id => current_user.id),
                     :method => :post,
                     :remote => true
   end
@@ -218,19 +218,19 @@ module UsersHelper
     end
   end
 
-  def follows_button_medium(user, subject_user=nil)
+  def follows_button_medium(subject_user=nil)
     return "" if subject_user.nil?
     # follows_button(user.id, "medium-button")
-    follows_button(user, subject_user.id)
+    follows_button(subject_user.id)
   end
 
-  def follows_button_large(user, subject_user=nil)
+  def follows_button_large(subject_user=nil)
     return "" if subject_user.nil?
     # follows_button(user.id, "large-button")
-    follows_button(user, subject_user.id)
+    follows_button(subject_user.id)
   end
 
-  def follows_button(user, subject_user_id=nil, button_size_class=nil)
+  def follows_button(subject_user_id=nil, button_size_class=nil)
     return "" if subject_user_id == current_user.id
     if subject_user_id
       button_class = "popup-button #{button_size_class}"
@@ -239,35 +239,35 @@ module UsersHelper
         button_class = "popup-button popup-button-following #{button_size_class}"
         button_text = "Following"
       end
-      return follows_button_link(user, subject_user_id, button_text, button_class)
+      return follows_button_link(subject_user_id, button_text, button_class)
     end
   end
 
-  def follows_button_link(user, subject_user_id, button_text, button_class=nil)
+  def follows_button_link(subject_user_id, button_text, button_class=nil)
     return link_to button_text, follows_path(:subject_user_id => subject_user_id,
-                                         :follower_user_id => ui_user(user).id),
+                                         :follower_user_id => current_user.id),
                                 :method => :post,
                                 :class => 'follow-button',
                                 :remote => true
   end
 
-  def follows_link(feed_item, user, link_text=nil)
+  def follows_link(feed_item, link_text=nil)
     if feed_item.item_type_id == @recognition_type_compliment.id
       if link_text =~ /Sender/
-        return follow_single_link(feed_item.item_object.sender_user_id, "Sender", user)
+        return follow_single_link(feed_item.item_object.sender_user_id, "Sender")
       elsif link_text =~ /Receiver/
-        return follow_single_link(feed_item.item_object.receiver_user_id, "Receiver", user)
+        return follow_single_link(feed_item.item_object.receiver_user_id, "Receiver")
       else
         return "Follow"
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
-      return follow_single_link(feed_item.item_object.receiver_id, "Follow", user)
+      return follow_single_link(feed_item.item_object.receiver_id, "Follow")
     else
-      return follow_single_link(feed_item.item_object.user_id, "Follow", user)
+      return follow_single_link(feed_item.item_object.user_id, "Follow")
     end
   end
 
-  def follow_single_link(subject_id, link_text, user)
+  def follow_single_link(subject_id, link_text)
     unfollow = link_text
     if follow_exists?(subject_id)
       unfollow = "Following #{link_text}"
@@ -276,7 +276,7 @@ module UsersHelper
     end
     link_to unfollow, 
             follows_path(:subject_user_id => subject_id,
-                         :follower_user_id => ui_user(user).id),
+                         :follower_user_id => current_user.id),
                          :method => :post
   end
 
@@ -531,12 +531,6 @@ module UsersHelper
   def set_read_status_css(update_history)
     return "unread" if update_history.unread?
     return ""
-  end
-
-  def ui_user(user)
-    u = current_user
-    u = user if view_state(user) == view_state_company_manager
-    return u
   end
 
 end

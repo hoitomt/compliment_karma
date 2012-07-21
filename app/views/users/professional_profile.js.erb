@@ -1,7 +1,0 @@
-var currentAction = "<%= @current_action %>";
-UserMenu.setCurrentMenuItem(currentAction);
-var proProfile = '<%= j(render "users/menu/professional_profile") %>';
-$('#content-container').html(proProfile);
-UserProfile.stripeTable();
-CommonScripts.toggleScrolling();
-

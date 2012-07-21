@@ -10,6 +10,11 @@ module SessionsHelper
     end
     self.current_user = user
   end
+
+  def set_current_user_2(user)
+    cookies.signed[:remember_token_2] = { :value => [user.id, user.salt], :expires => 6.hours.from_now.utc}
+    self.current_user_2 = user
+  end
   
   def current_user=(user)
     @current_user = user
@@ -17,6 +22,18 @@ module SessionsHelper
   
   def current_user
     @current_user ||= user_from_remember_token
+  end
+
+  def current_user_2=(user)
+    @current_user_2 = user
+  end
+  
+  def current_user_2
+    @current_user_2 ||= user_2_from_remember_token
+  end
+
+  def company_user?
+    return current_user.is_a_company?
   end
 
   def customer_admin_user?
@@ -33,7 +50,9 @@ module SessionsHelper
   
   def sign_out
     cookies.delete(:remember_token)
+    cookies.delete(:remember_token_2)
     self.current_user = nil
+    self.current_user_2 = nil
   end
   
   def current_user?(user)
@@ -59,9 +78,17 @@ module SessionsHelper
     def user_from_remember_token
       User.authenticate_with_salt(*remember_token)
     end
+
+    def user_2_from_remember_token
+      User.authenticate_with_salt(*remember_token_2)
+    end
     
     def remember_token
       cookies.signed[:remember_token] || [nil, nil]
+    end
+
+    def remember_token_2
+      cookies.signed[:remember_token_2] || [nil, nil]
     end
 
     def clear_return_to

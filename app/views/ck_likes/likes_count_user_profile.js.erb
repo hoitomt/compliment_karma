@@ -3,11 +3,11 @@ var likesStatus = "<%= @like_status %>";
 var likesBool = "<%= @liked %>";
 
 var updateMe = "#social-like-" + "<%= @count %>";
-var updatedLikeLink = '<%= likes_link(@recognition_id, @recognition_type_id, @user) %>';
+var updatedLikeLink = '<%= likes_link(@recognition_id, @recognition_type_id) %>';
 $(updateMe).html(updatedLikeLink);
 
 var popupLikeButton = "#like-button-container";
-var updatedPopupLikeButton = '<%= like_button(@recognition_id, @recognition_type_id, @user) %>';
+var updatedPopupLikeButton = '<%= like_button(@recognition_id, @recognition_type_id) %>';
 $('.like-button-container').html(updatedPopupLikeButton);
 
 // Update my updates status
