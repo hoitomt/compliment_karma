@@ -1,11 +1,11 @@
 var UserProfile = {
-	init: function(userId, perPage, userEmail) {
+	init: function(userId, perPage, totalCount, userEmail) {
 		$('#processing').hide();
 		$('#end-of-list').hide();
 		$('#select-processing').hide();
 		$('#infinite-scroll-processing').hide();
 		
-		this.setDocState(userId, perPage);
+		this.setDocState(userId, perPage, totalCount);
 		this.feed_items_filters(userId);
 		this.formValidation();
 		this.reinitialize();
@@ -26,8 +26,10 @@ var UserProfile = {
 		totalCount: 0,
 		userId: 0
 	},
-	setDocState: function(userId, perPage) {
-		this.docState.totalCount = parseInt($('#feed_items_count').val());
+	setDocState: function(userId, perPage, totalCount) {
+		if(totalCount != null) {
+			this.docState.totalCount = parseInt(totalCount);
+		}
 		this.docState.perPage = parseInt(perPage);
 		this.docState.userId = userId;
 	},
