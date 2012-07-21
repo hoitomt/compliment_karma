@@ -33,7 +33,7 @@ module SessionsHelper
   end
 
   def company_user?
-    return current_user.is_a_company?
+    return current_user && current_user.is_a_company?
   end
 
   def customer_admin_user?
