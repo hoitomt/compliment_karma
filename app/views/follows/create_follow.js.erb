@@ -1,4 +1,4 @@
 var userId = '<%= @subject_id %>'
-var followsButton = '<%= follows_button_medium(User.find_by_id(@subject_id)) %>'
+var followsButton = '<%= follows_button_medium(@user, User.find_by_id(@subject_id)) %>'
 $('#follows-button-' + userId).html(followsButton);
 UserProfile.followButtonHover();

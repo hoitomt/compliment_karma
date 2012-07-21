@@ -4,7 +4,8 @@
 			<div class="personal-container clearfix">
 				<div class="demographics-container">
 					<div class="demographics">
-						<%= render 'follows/follows_button', :user => @user %>
+						<%= render :partial => 'follows/follows_button', 
+											 :locals => {:user => @user, :subject_user => @user } %>
 					</div>
 				</div>
 				<div class="rank-buttons">

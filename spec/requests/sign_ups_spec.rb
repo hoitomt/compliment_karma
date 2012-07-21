@@ -18,7 +18,7 @@ describe "SignUps" do
     
     it "should sign up a user and display the invite coworkers page" do
       visit signup_path
-      fill_in "Work Email", :with => "test_user@example.com"
+      fill_in "Email", :with => "test_user@example.com"
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
       click_button
@@ -27,7 +27,7 @@ describe "SignUps" do
     
     it "should sign up a user and skip to display the invite others page" do
       visit signup_path
-      fill_in "Work Email", :with => "test_user@example.com"
+      fill_in "Email", :with => "test_user@example.com"
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
       click_button
@@ -38,7 +38,7 @@ describe "SignUps" do
     
     it "should sign up a user and skip to display the users profile page" do
       visit signup_path
-      fill_in "Work Email", :with => "test_user@example.com"
+      fill_in "Email", :with => "test_user@example.com"
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
       click_button
@@ -54,7 +54,7 @@ describe "SignUps" do
     before(:each) do
       @user = FactoryGirl.create(:user)
       visit login_path
-      fill_in "Work Email", :with => @user.email
+      fill_in "Email", :with => @user.email
       fill_in "password", :with => @user.password
       click_button
       response.should have_selector('title', :content => "Profile")
@@ -106,7 +106,7 @@ describe "SignUps" do
     before(:each) do
       @user = FactoryGirl.create(:user)
       visit login_path
-      fill_in "Work Email", :with => @user.email
+      fill_in "Email", :with => @user.email
       fill_in "password", :with => @user.password
       click_button
       response.should have_selector('title', :content => "Profile")
@@ -147,7 +147,7 @@ describe "SignUps" do
   describe "sign up confirmation" do
     before(:each) do
       visit signup_path
-      fill_in "Work Email", :with => "test_user@example.com"
+      fill_in "Email", :with => "test_user@example.com"
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
       click_button

@@ -5,6 +5,7 @@ class UserAccomplishment < ActiveRecord::Base
   after_create :update_history
 
   def update_history
+    logger.info("Create Update History")
     UpdateHistory.Earned_an_Accomplishment(self)
   end
 

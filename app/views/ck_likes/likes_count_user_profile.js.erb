@@ -3,17 +3,12 @@ var likesStatus = "<%= @like_status %>";
 var likesBool = "<%= @liked %>";
 
 var updateMe = "#social-like-" + "<%= @count %>";
-var updatedLikeLink = '<%= likes_link(@recognition_id, @recognition_type_id) %>';
+var updatedLikeLink = '<%= likes_link(@recognition_id, @recognition_type_id, @user) %>';
 $(updateMe).html(updatedLikeLink);
 
 var popupLikeButton = "#like-button-container";
-var updatedPopupLikeButton = '<%= like_button(@recognition_id, @recognition_type_id) %>';
+var updatedPopupLikeButton = '<%= like_button(@recognition_id, @recognition_type_id, @user) %>';
 $('.like-button-container').html(updatedPopupLikeButton);
-// if(likesBool == "true") {
-// 	$('#like-button').html('<%= j(image_tag "buttons/Button_Unlike.png") %>');
-// } else {
-// 	$('#like-button').html('<%= j(image_tag "buttons/Button_Like.png") %>');
-// }
 
 // Update my updates status
 MyUpdates.updateCount('<%= @my_update_items_count %>');

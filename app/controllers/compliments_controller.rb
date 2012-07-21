@@ -10,7 +10,8 @@ class ComplimentsController < ApplicationController
     @recipient_email = @recipient.email if @recipient
   end
 
-  def create
+  def create    
+    referrer = request.referrer
     @compliment = Compliment.new
     @compliment.comment = params[:compliment][:comment]
     @compliment.compliment_type_id = params[:compliment][:compliment_type_id]
@@ -18,14 +19,18 @@ class ComplimentsController < ApplicationController
     @compliment.skill_id = skill.id
     set_sender
     set_receiver
+    logger.info(@compliment.inspect)
     if @compliment.save
+      logger.info("compliment saved")
       respond_to do |format|
         format.html{
           set_success_notice
-          process_redirect("success")
+          process_redirect("success", referrer)
         }
       end
     else
+      logger.info("compliment NOT saved")
+      logger.info(@compliment.errors.messages)
       respond_to do |format|
         format.html {
           error_msg = ""
@@ -35,10 +40,17 @@ class ComplimentsController < ApplicationController
             end
           end
           flash[:error] = "Your compliment could not be sent<br />#{error_msg}".html_safe
-          process_redirect("failure")
+          process_redirect("failure", referrer)
         }
       end
     end
+  end
+    
+  def process_redirect(result, referrer)
+    # Don't send the compliment back to the screen
+    flash[:compliment] = @compliment if result == "failure"
+    user = User.find_by_email(@compliment.sender_email)
+    redirect_to referrer
   end
   
   # if an email address was entered in the input field and it is valid, use it
@@ -47,13 +59,14 @@ class ComplimentsController < ApplicationController
     receiver_id = params[:compliment_receiver_id]
     receiver_display = params[:compliment][:receiver_display]
     input_user = User.find_by_email(receiver_display) if User.valid_email?(receiver_display)
-    if !input_user.blank?
-      @compliment.receiver_email = params[:compliment][:receiver_display]
-    elsif !receiver_id.blank?
+    if !receiver_id.blank?
       @compliment.receiver_user_id = receiver_id
       @compliment.receiver_email = User.find(receiver_id).email
+    elsif !input_user.blank?
+      @compliment.receiver_user_id = input_user.id
+      @compliment.receiver_email = input_user.email
     else
-      # invalid email address
+      @compliment.receiver_email = params[:compliment][:receiver_display]
     end
   end
 
@@ -64,27 +77,6 @@ class ComplimentsController < ApplicationController
       @compliment.sender_email = current_user.email
     else
       return nil
-    end
-  end
-  
-  def process_redirect(result)
-    # Don't send the compliment back to the screen
-    flash[:compliment] = @compliment if result == "failure"
-    user = User.find_by_email(@compliment.sender_email)
-    
-    if params[:request_page] =~ /user/
-      redirect_to user
-    elsif params[:request_page] =~ /main/
-      if result == "failure"
-        redirect_to root_path
-      elsif user.blank?
-        redirect_to signup_path
-        flash[:new_user] = true
-      else
-        redirect_to root_path
-      end
-    else
-      redirect_to root_path
     end
   end
   

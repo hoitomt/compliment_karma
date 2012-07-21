@@ -3,6 +3,7 @@ class UpdateHistory < ActiveRecord::Base
   default_scope :order => 'created_at DESC'
 
   def self.get_recent_item_count(user)
+    return 0 if user.nil?
     as_of_date = user.last_read_notification_date || DateTime.new(2012, 1, 1)
     items = UpdateHistory.where('user_id = ? AND created_at > ?', 
                                 user.id, as_of_date)
@@ -23,6 +24,7 @@ class UpdateHistory < ActiveRecord::Base
 
   def self.add_update_history(user_id, update_history_type_id, recognition_type_id, 
                               recognition_id, note, current_user_id)
+    logger.info("Add Update History: #{current_user_id}|#{user_id}")
   	unless(current_user_id == user_id)
       self.create(:user_id => user_id,
                   :update_history_type_id => update_history_type_id,
@@ -134,9 +136,9 @@ class UpdateHistory < ActiveRecord::Base
     a = user_accomplishment.accomplishment
     add_update_history( user_accomplishment.user_id,
                         UpdateHistoryType.Earned_an_Accomplishment.id,
-                        RecognitionType.ACCOMPLISHMENT,
+                        RecognitionType.ACCOMPLISHMENT.id,
                         user_accomplishment.accomplishment_id,
-                        "earned a #{a.name}", user_accomplishment.user_id)
+                        "earned a #{a.name}", nil)
   end
 
   def self.Received_Reward(reward)
@@ -149,7 +151,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Received_Reward.id,
                         RecognitionType.REWARD.id,
                         reward.id,
-                        note, reward.receiver_id)
+                        note, reward.presenter_id)
   end
 
   def self.Accepted_Compliments_Receiver(relationship)

@@ -213,10 +213,13 @@ describe Compliment do
     
   end
   
-  describe "accomplishment" do
-    it "should create 10 compliments" do
-      Compliment.create(@attr)
-      Compliment.count.should eq(10)
+  describe "update history" do
+    it "should create update history for receiver" do
+      UpdateHistory.delete_all
+      c = Compliment.create(@attr)
+      uh = UpdateHistory.find_by_user_id(c.receiver_user_id)
+      uh.should_not be_nil
+      uh.update_history_type_id.should eq(UpdateHistoryType.Received_Compliment.id)
     end
   end
 

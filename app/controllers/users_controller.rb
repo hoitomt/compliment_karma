@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     logger.info("User Name: " + @user.full_name)
     set_title
-    set_karma_live_panel(params)
+    set_karma_live_panel
     set_pending_items
     # my_updates
     set_update_history_read
@@ -188,7 +188,7 @@ class UsersController < ApplicationController
     return false
   end
   
-  def set_karma_live_panel(params)
+  def set_karma_live_panel
     karma_live_items = get_karma_live_items(params[:feed_item_type], params[:relation_type])
     @recognition_type_compliment = RecognitionType.COMPLIMENT
     @recognition_type_reward = RecognitionType.REWARD

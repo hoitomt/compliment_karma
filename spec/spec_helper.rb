@@ -36,7 +36,11 @@ Spork.prefork do
     config.include(MailerMacros)
     # config.include(SeedData)
     # SeedData.create_data
-        
+    
+    def logger
+      Rails.logger
+    end
+    
     def test_sign_in(user)
       controller.sign_in(user, false)
     end

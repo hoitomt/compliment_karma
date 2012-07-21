@@ -2,7 +2,7 @@
 	<div id="feed-item-social-<%= @count %>" class="social-hide-me">
 		<ul id="social-links-list">
 			<li id="social-like-<%= @count %>" class="social-like social-link-style">
-				<%= likes_link(feed_item.item_object.id, feed_item.item_type_id) %>
+				<%= likes_link(feed_item.item_object.id, feed_item.item_type_id, @user) %>
 			</li>
 			<li class="social-comment social-link-style">
 				<%= comments_link(feed_item) %>
@@ -16,11 +16,11 @@
 					</ul>
 				<% end %>
 			</li>
-			<li class="social-follow social-link-style"><%= follows_link(feed_item) %>
+			<li class="social-follow social-link-style"><%= follows_link(feed_item, @user) %>
 				<% if feed_item.item_type_id == @recognition_type_compliment.id %>
 					<ul class="sub-menu medium">
-						<li class="social-follow-sender medium"><%= follows_link(feed_item, "Sender") %></li>
-						<li class="social-follow-receiver medium"><%= follows_link(feed_item, "Receiver") %></li>
+						<li class="social-follow-sender medium"><%= follows_link(feed_item, @user, "Sender") %></li>
+						<li class="social-follow-receiver medium"><%= follows_link(feed_item, @user, "Receiver") %></li>
 					</ul>
 				<% end %>
 			</li>

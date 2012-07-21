@@ -23,7 +23,7 @@ describe "Compliments" do
     before(:each) do
       @user = FactoryGirl.create(:unconfirmed_user)
       visit login_path
-      fill_in "Work Email", :with => @user.email
+      fill_in "Email", :with => @user.email
       fill_in "Password", :with => @user.password
       click_button
       response.should have_selector("title", :content => "Profile")
@@ -32,10 +32,10 @@ describe "Compliments" do
 
     it "should not generate a compliment from an unconfirmed user" do
       lambda do
-        fill_in "To", :with => "attaboy@goodjob.com" 
+        fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => "tennis"
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
-        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+        select "Professional to Professional", :from => "compliment_compliment_type_id"
         click_button
       end.should_not change(Compliment, :count).by(1)
     end
@@ -46,7 +46,7 @@ describe "Compliments" do
     before(:each) do
       @user = FactoryGirl.create(:user2)
       visit login_path
-      fill_in "Work Email", :with => @user.email
+      fill_in "Email", :with => @user.email
       fill_in "Password", :with => @user.password
       click_button
       response.should have_selector("title", :content => "Profile")
@@ -54,10 +54,10 @@ describe "Compliments" do
 
     it "should should generate a compliment from a signed in user profile" do
       lambda do
-        fill_in "To", :with => "attaboy@goodjob.com" 
+        fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => "tennis"
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
-        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+        select "Professional to Professional", :from => "compliment_compliment_type_id"
         click_button
       end.should change(Compliment, :count).by(1)
       c = Compliment.last
@@ -67,10 +67,10 @@ describe "Compliments" do
 
     it "should return to the user profile" do
       r = Relation.first
-      fill_in "To", :with => "attaboy@goodjob.com"
+      fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com"
       fill_in "Skill", :with => "tennis"
       fill_in "Comment", :with => "Awesome job at the meet yesterday"
-      select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+      select "Professional to Professional", :from => "compliment_compliment_type_id"
       click_button
       response.should have_selector('title', :content => 'Profile')
     end
@@ -79,10 +79,10 @@ describe "Compliments" do
       before(:each) do
         @receiver_email = "attaboy@goodjob.com" 
         lambda do
-          fill_in "To", :with => @receiver_email
+          fill_in "compliment_receiver_display", :with => @receiver_email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+          select "Professional to Professional", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -102,10 +102,10 @@ describe "Compliments" do
       let(:receiver) {FactoryGirl.create(:unconfirmed_user3)}
       before(:each) do
         lambda do
-          fill_in "To", :with => receiver.email
+          fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+          select "Professional to Professional", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -125,10 +125,10 @@ describe "Compliments" do
       let(:receiver) {FactoryGirl.create(:unconfirmed_user)}
       before(:each) do
         lambda do
-          fill_in "To", :with => receiver.email
+          fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+          select "Professional to Professional", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -148,10 +148,10 @@ describe "Compliments" do
       let(:receiver) {FactoryGirl.create(:user)}
       before(:each) do
          lambda do
-           fill_in "To", :with => receiver.email
+           fill_in "compliment_receiver_display", :with => receiver.email
            fill_in "Skill", :with => "tennis"
            fill_in "Comment", :with => "Awesome job at the meet yesterday"
-           select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+           select "Professional to Professional", :from => "compliment_compliment_type_id"
            click_button
          end.should change(Compliment, :count).by(1)
          @compliment = Compliment.last
@@ -181,10 +181,10 @@ describe "Compliments" do
                                             :user_2_id => receiver.id,
                                             :relationship_status_id => RelationshipStatus.ACCEPTED.id)
         lambda do
-          fill_in "To", :with => receiver.email
+          fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+          select "Professional to Professional", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -208,10 +208,10 @@ describe "Compliments" do
                                             :relationship_status_id => RelationshipStatus.ACCEPTED.id,
                                             :default_visibility_id => Visibility.EVERYBODY.id)
         lambda do
-          fill_in "To", :with => receiver.email
+          fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+          select "Professional to Professional", :from => "compliment_compliment_type_id"
           click_button
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
@@ -231,10 +231,10 @@ describe "Compliments" do
       let(:receiver) {FactoryGirl.create(:user3)}
       before(:each) do
          lambda do
-           fill_in "To", :with => receiver.email
+           fill_in "compliment_receiver_display", :with => receiver.email
            fill_in "Skill", :with => "tennis"
            fill_in "Comment", :with => "Awesome job at the meet yesterday"
-           select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+           select "Professional to Professional", :from => "compliment_compliment_type_id"
            click_button
          end.should change(Compliment, :count).by(1)
          @compliment = Compliment.last
@@ -261,20 +261,20 @@ describe "Compliments" do
       it "should not create a new compliment" do
         r = Relation.first
         lambda do
-          fill_in "To", :with => "attaboy@goodjob.com" 
+          fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
           fill_in "Skill", :with => ""
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+          select "Professional to Professional", :from => "compliment_compliment_type_id"
           click_button
         end.should_not change(Compliment, :count)
       end
       
       it "should return to the user profile" do
         r = Relation.first
-        fill_in "To", :with => "attaboy@goodjob.com" 
+        fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => ""
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
-        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+        select "Professional to Professional", :from => "compliment_compliment_type_id"
         click_button
         response.should have_selector('title', :content => 'Profile')
       end
@@ -287,16 +287,16 @@ describe "Compliments" do
     
     it "should associate a compliment with a user when logged in" do
       visit login_path
-      fill_in "Work Email", :with => userx.email
+      fill_in "Email", :with => userx.email
       fill_in "Password", :with => userx.password
       click_button
       response.should have_selector("title", :content => "Profile")
       
       lambda do
-        fill_in "To", :with => "jimbob@godaddy.com"
+        fill_in "compliment_receiver_display", :with => "jimbob@godaddy.com"
         fill_in "Skill", :with => "Ruby on Rails"
         fill_in "Comment", :with => "You are awesome"
-        select "Coworker to Coworker", :from => "compliment_compliment_type_id"
+        select "Professional to Professional", :from => "compliment_compliment_type_id"
         click_button
       end.should change(Compliment, :count).by(1)
       c = Compliment.last
@@ -321,7 +321,7 @@ describe "Compliments" do
       }
       
       visit signup_path
-      fill_in "Work Email", :with => @receiver
+      fill_in "Email", :with => @receiver
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
     end

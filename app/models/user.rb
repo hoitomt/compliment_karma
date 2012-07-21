@@ -286,6 +286,7 @@ class User < ActiveRecord::Base
   end
 
   def self.valid_email?(email)
+    return false if email.nil?
     return !email.match(@@email_regex_loc).nil?
   end
 

@@ -10,11 +10,11 @@
 		</div>
 		<div class="like-button-container">
 			<% if @recognition_type_id == @recognition_type_compliment_id && @compliment_popup %>
-				<%= like_button(@compliment_popup.id, @recognition_type_id) %>
+				<%= like_button(@compliment_popup.id, @recognition_type_id, @user) %>
 			<% elsif @recognition_type_id == @recognition_type_reward_id %>
-				<%= like_button(@reward.id, @recognition_type_id) %>
+				<%= like_button(@reward.id, @recognition_type_id, @user) %>
 			<% elsif @recognition_type_id == @recognition_type_accomplishment_id %>
-				<%= like_button(@accomplishment.id, @recognition_type_id) %>
+				<%= like_button(@accomplishment.id, @recognition_type_id, @user) %>
 			<% end %>
 		</div>
 	</div>	

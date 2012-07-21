@@ -32,6 +32,7 @@ describe UsersController do
   end
     
   describe "User SHOW view variables" do
+    let(:user) { FactoryGirl.create(:user) }
     let(:user2) { FactoryGirl.create(:user2) }
     let(:user3) { FactoryGirl.create(:user3) }
     let(:unconfirmed_user) { FactoryGirl.create(:unconfirmed_user) }
@@ -40,14 +41,37 @@ describe UsersController do
       before(:each) do
         UpdateHistory.delete_all
         # Confirmed compliment
+        # 10 compliments from User 2 to User 3
         10.times do |index|
           Compliment.create(:sender_email => user2.email,
                             :receiver_email => user3.email,
                             :skill_id => Skill.first.id,
                             :comment => "Nice work on my sweater",
-                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL )
+                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+                            :suppress_fulfillment => true )
         end
+        # User 2 is following User 3
         Follow.create(:subject_user_id => user3.id, :follower_user_id => user2.id)
+
+        # 10 compliments from User 3 to User
+        10.times do |index|
+          Compliment.create(:sender_email => user3.email,
+                            :receiver_email => user.email,
+                            :skill_id => Skill.first.id,
+                            :comment => "Nice work on my sweater",
+                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+                            :suppress_fulfillment => true )
+        end
+
+        # 10 compliments from User 3 to User 2
+        10.times do |index|
+          Compliment.create(:sender_email => user3.email,
+                            :receiver_email => user2.email,
+                            :skill_id => Skill.first.id,
+                            :comment => "Nice work on my sweater",
+                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+                            :suppress_fulfillment => true )
+        end
 
         # Unconfirmed compliment
         10.times do |index|
@@ -55,43 +79,96 @@ describe UsersController do
                             :receiver_email => unconfirmed_user.email,
                             :skill_id => Skill.first.id,
                             :comment => "Nice work on my sweater",
-                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL )
+                            :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+                            :suppress_fulfillment => true )
         end
-        Compliment.all.count.should eq(20)
-        test_sign_in(user2)
+        Compliment.all.count.should eq(40)
       end
 
-      it "should have the correct number of Compliments in Karma Live" do
-        get :show, :id => user2
-        assigns(:karma_live_items_count).should eq(10)
+      describe "as viewed by page owner: User 2 viewing User 2s page" do
+        before(:each) do
+          test_sign_in(user2)
+        end
+
+        it "should have the correct number of Compliments in Karma Live" do
+          # should see followed
+          get :show, :id => user2
+          assigns(:karma_live_items_count).should eq(20)
+          c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
+          c.count.should eq(10)
+          cx = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user.email)
+          cx.count.should eq(10)
+        end
+
+        it "should create the correct number of Update Histories" do
+          uh2 = UpdateHistory.find_all_by_user_id(user2.id)
+          uh2.count.should eq(10)
+          uh3 = UpdateHistory.find_all_by_user_id(user3.id)
+          uh3.count.should eq(11)
+        end
+
+        it "should have the correct number of compliments after paging" do
+
+        end
       end
 
-      it "should create the correct number of Update Histories" do
-        UpdateHistory.count.should eq(21)
+      describe "as viewed by visitor: User 3 viewing User 2s page" do
+        before(:each) do
+          test_sign_in(user3)
+        end
+
+        it "should have the correct number of Compliments in Karma Live" do
+          # should see followed
+          get :show, :id => user2
+          assigns(:karma_live_items_count).should eq(20)
+          c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
+          c.count.should eq(10)
+          cu = Compliment.where('sender_email = ? and receiver_email = ? and compliment_status_id = ?', 
+                                 user2.email, unconfirmed_user.email, 
+                                 ComplimentStatus.PENDING_RECEIVER_CONFIRMATION.id)
+          cu.count.should eq(10)
+        end
+
+        it "should create the correct number of Update Histories" do
+          uh2 = UpdateHistory.find_all_by_user_id(user2.id)
+          uh2.count.should eq(10)
+          uh3 = UpdateHistory.find_all_by_user_id(user3.id)
+          uh3.count.should eq(11)
+        end
+
+        it "should have the correct number of compliments after paging" do
+          
+        end
       end
     end
     
     describe "rewards" do
       before(:each) do
         Reward.delete_all
+        rs_id = RewardStatus.complete.id
         4.times do |index|
-          value = index * 25 +25
-          Reward.create(:receiver_id => user2.id, :presenter_id => user3.id, :value => value)
+          value = index * 25 + 25
+          Reward.create(:receiver_id => user2.id, :presenter_id => user3.id, 
+                        :value => value, :reward_status_id => rs_id)
+        end
+        3.times do |index|
+          value = index * 25 + 25
+          Reward.create(:receiver_id => user3.id, :presenter_id => user2.id, 
+                        :value => value, :reward_status_id => rs_id)
         end
         Follow.create(:subject_user_id => user3.id, :follower_user_id => user2.id)
         test_sign_in(user2)
       end
       
       it "should have the correct number of Rewards in Karma Live for Followed user" do
-        Reward.count.should eq(4)
-        r = Reward.last
-        r.receiver.should eq(user2)
+        Reward.count.should eq(7)
         get :show, :id => user2
-        assigns(:karma_live_items_count).should eq(4)
+        assigns(:karma_live_items_count).should eq(3)
       end
 
       it "should have entered Update History" do
-        UpdateHistory.find_all_by_user_id(user3.id).count.should eq(5)
+        UpdateHistory.find_all_by_user_id(user2.id).count.should eq(4)
+        UpdateHistory.find_all_by_user_id(user3.id).count.should eq(4)
       end
     end
     
@@ -268,7 +345,7 @@ describe UsersController do
         response.should be_success
       end
 
-      it "should now show pages for unconfirmed users"
+      it "should not show pages for unconfirmed users"
     end
     
   end
