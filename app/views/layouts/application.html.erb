@@ -21,7 +21,10 @@
 	<script type="text/javascript">
 		$(function() {
 			if(<%= flash && !flash.empty? %>) {
-				$('#explanation').slideDown(200);
+				$('#flash-container').slideDown();
+				setTimeout(function() {
+					$('#flash-container').slideUp();
+				}, 5000);
 			}
 			FooterResize.init();
 			
@@ -33,12 +36,12 @@
 <body>
 	<%#= render 'social/facebook_javascript' %>
 	<%= render 'social/twitter_javascript' %>
+	<%= render 'shared/flash', :flash => flash %>
 	<% if company_user? %>
 		<%= render 'layouts/admin_header' %>
 	<% else %>
 		<%= render 'layouts/header' %>
 	<% end %>
-	<%= yield :flash_container %>
 	<%= yield :home_page %>
 	<div id="main-container" class="container_16">
 		<%= yield %>

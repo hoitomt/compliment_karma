@@ -23,9 +23,6 @@
 <% end %>
 <%= hidden_field_tag 'current_action', @current_action %>
 <%= hidden_field_tag :feed_items_count, @karma_live_items_count %>
-<div id="explanation">
-	<%= render 'shared/flash', :flash => flash %>
-</div>
 <div id="user-profile">
 	<div class="left-one-third">
 		<%= render 'users/panels/user_profile_short', :flash => flash %>

@@ -3,15 +3,6 @@
 		#header, #footer { display: none; }
 	</style>
 <% end %>
-<%= content_for :javascript do %>
-	<script>
-		$(function() {
-			if(<%= flash && !flash.empty? %>) {
-				$('#explanation').slideDown(200);
-			}
-		});
-	</script>
-<% end %>
 <div class="grid_16">
 	<div style="width: 570px; margin: 0 auto 0 auto;">
 		<div id="login-logo" style="margin: 100px 0 10px 0;">

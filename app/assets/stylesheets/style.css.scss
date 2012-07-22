@@ -38,9 +38,15 @@ body {
 	float: left;
 	width: 300px;
 }
+#flash-container {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 20;
+	display: none;
+}
 #explanation {
 	margin: 0px auto;
-	display: none; 
 	width: 400px;
 }
 #flash {
