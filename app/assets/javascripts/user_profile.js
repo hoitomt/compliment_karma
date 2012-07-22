@@ -38,6 +38,7 @@ var UserProfile = {
 		var userId = docState.userId;
 		var perPage = docState.perPage;
 		var retrieveFlag = false;
+		$(document).off('scroll');
 		$(document).scroll(function() {
 			var feed_item_type_id = $('#feed_item_type').val();
 			var relation_type_id = $('#relation_type').val();
@@ -66,6 +67,9 @@ var UserProfile = {
 				// jGrowl("Thats all of them");
 			}
 		});
+	},
+	removeInfiniteScroll: function() {
+		$(document).unbind('scroll');
 	},
 	feed_items_filters: function(userId) {
 		$('#feed_item_type').change(function() {

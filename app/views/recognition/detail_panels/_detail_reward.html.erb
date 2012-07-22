@@ -1,10 +1,14 @@
 <div class="left-column">
 	<div class="image-function">
-		<%= get_user_photo_link_small(@receiver) %>
-		<div class="functions">
-			<h3><%= get_user_full_name(@receiver) %></h3>
-			<%= compliment_button(@receiver) %>
-			<%= follows_button_medium(@receiver) %>
+		<div class="photo-small">
+			<%= get_user_photo_link_small(@presenter) %>
+		</div>
+		<h3><%= @presenter.full_name %></h3>
+		<div class="functions clearfix">
+			<div class="profile-button" style="margin-right: 10px;">
+				<%= compliment_button_medium(@presenter) %>
+			</div>
+			<%= render 'follows/follows_button', :user => @presenter %>
 		</div>
 	</div>
 </div>
@@ -13,10 +17,22 @@
 </div>
 <div class="right-column">
 	<div class="image-function">
-		<%= image_tag 'reward_money.png' %>
-		<div class="functions">
-			<h3><%= number_to_currency(@reward.value) %></h3>
+		<div class="photo-small">
+			<%= get_user_photo_link_small(@receiver) %>
+		</div>
+		<h3><%= get_user_full_name(@receiver) %></h3>
+		<div class="functions clearfix">
+			<div class="profile-button" style="margin-right: 10px;">
+				<%= compliment_button_medium(@receiver) %>
+			</div>
+			<%= render 'follows/follows_button', :user => @receiver %>
 		</div>
 	</div>
+</div><div class="clear"></div>
+<div class="item-details clearfix">
+	<div class="item-details-label">Reward Amount</div>
+	<div class="item-details-comment money"><%= number_to_currency(@reward.value) %></div>
+	<div class="clear"></div>
+	<div class="item-details-label">Reward Funded By</div>
+	<div class="item-details-comment"><%= @presenter.full_name %></div>
 </div>
-<div class="clear"></div>

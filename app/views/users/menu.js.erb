@@ -2,6 +2,7 @@ var currentAction = "<%= @current_action %>";
 CommonScripts.toggleScrolling();
 UserMenu.setCurrentMenuItem(currentAction);
 ComplimentUI.removeStickyCompliment();
+UserProfile.removeInfiniteScroll();
 
 console.log(currentAction);
 switch(currentAction) {
@@ -38,6 +39,7 @@ switch(currentAction) {
 		var userEmail = '<%= current_user.email %>';
 		var totalCount = '<%= @karma_live_items_count %>';
 		UserProfile.init(userId, perPage, totalCount, userEmail);
+		UserProfile.infiniteScrolling();
 		ComplimentUI.stickyNewCompliment();
 		break;
 	default:

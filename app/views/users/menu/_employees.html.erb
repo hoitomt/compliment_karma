@@ -1,7 +1,7 @@
 <div id="user-profile">
 	<div id="content-container">
-		<div id="karma-live-updates" class="right-two-thirds">
-			<ul id="feed-items">
+		<div id="employee-list" class="right-two-thirds">
+			<ul id="list-items">
 				<% @count = @page * @per_page - @per_page %>
 				<% if @results %>
 					<% @results.each do |user| %>
@@ -13,7 +13,7 @@
 								</div>
 								<div class="feed-item-center">
 									<h1><%= user.full_name %></h1>
-									<h2><%= location(user) %></h2>
+									<h2><%= location_display(user) %></h2>
 								</div>
 							</li>
 						<% end %>

@@ -28,7 +28,7 @@
 						    <%= label 'filter', "activity_type", "Activity Type" %>
 								<%= select_tag 'filter[activity_type_id]', 
 															 options_from_collection_for_select(@activity_types, :id, :name),
-															 :prompt => 'All Activity Types' %>
+															 :selected => 'Compliments Received' %>
 						    <div class="clear"></div>
 						  </li>
 							<li>

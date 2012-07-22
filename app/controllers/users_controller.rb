@@ -130,6 +130,7 @@ class UsersController < ApplicationController
   def employees
     @company = @user.company
     @results = @company.employees
+    menu_response_handler
   end
 
   def rewards

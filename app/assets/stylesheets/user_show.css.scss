@@ -70,7 +70,8 @@
 
 .social-hide-me { display: none; }
 #karma-live-updates.box { padding: 0;}
-#karma-live-updates {
+#karma-live-updates,
+#employee-list {
 	font-size: 12px;
 	#up-header {
 		border-bottom: $border-bottom;

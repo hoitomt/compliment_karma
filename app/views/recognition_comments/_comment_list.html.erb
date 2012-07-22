@@ -9,6 +9,9 @@
 				<h4><%= get_user_full_name(u) %></h4>
 				<p><%= comment.comment %></p>
 			</div>
+			<div class="comment-timestamp">
+				<%= timestamp(comment.updated_at) %>
+			</div>
 		</li>
 	<% end %>
 <% end %>

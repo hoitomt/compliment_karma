@@ -6,7 +6,7 @@
 <div class="popup-box">
 	<div class="popup-header clearfix">
 		<div class="date">
-			<%= date_format_month_day(@updated_at) %>
+			<%= timestamp(@updated_at) %>
 		</div>
 		<div class="like-button-container">
 			<% if @recognition_type_id == @recognition_type_compliment_id && @compliment_popup %>

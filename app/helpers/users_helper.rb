@@ -496,6 +496,17 @@ module UsersHelper
     return "(#{city}#{separator}#{state_cd})"
   end
 
+  def location_display(user)    city = ""
+    city = "#{user.city}" unless user.city.blank?
+    state_cd = ""
+    state_cd = user.state_cd unless user.state_cd.blank?
+    separator = ', '
+    if city.blank? || state_cd.blank?
+      separator = ''
+    end
+    return "#{city}#{separator}#{state_cd}"
+  end
+
   def stats_label(count, label)
     return label.pluralize if count && count > 1 && label
     return label
