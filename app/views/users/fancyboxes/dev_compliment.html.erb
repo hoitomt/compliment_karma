@@ -1,7 +1,7 @@
 <%= content_for :javascript do %>
 	<script type="text/javascript">
 		$(function() {
-			var userEmail = '<%= current_user.email %>';
+			var userEmail = '<%= @user.email %>';
 			var userId = '<%= current_user.id %>';
 			var perPage = '<%= @per_page %>';
 			UserProfile.init(userId, perPage, null, userEmail);

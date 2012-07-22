@@ -5,11 +5,6 @@
 			if(flashMsg.length > 0) {
 				$('#field label').hide();
 			}
-
-			var userEmail = '<%= current_user.email %>';
-			var userId = '<%= current_user.id %>';
-			var perPage = '<%= @per_page %>';
-			UserProfile.init(userId, perPage, null, userEmail);
 			MyUpdates.markAsRead();
 		});
 	</script>
