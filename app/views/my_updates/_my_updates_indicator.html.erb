@@ -1,11 +1,6 @@
-<% if page_owner?(@user) %>
-	<% if @user.is_a_company? && current_user.is_company_administrator?(@user.company.id) %>
-		<% x_user = @user %>
-	<% else %>
-		<% x_user = current_user %>
-	<% end %>
-	<% if @my_update_items_count > 0 %>
-		<%= link_to my_updates_path(:id => x_user.id), 
+<% if current_user %>
+	<% if @my_update_items_count && @my_update_items_count > 0 %>
+		<%= link_to my_updates_path(:id => current_user.id), 
 															 :class => 'header-update-link', 
 															 :remote => true do %>
 			<div class="header-updates clearfix">
@@ -16,7 +11,7 @@
 			</div>
 		<% end %>
 	<% else %>
-		<%= link_to my_updates_path(:id => x_user.id), 
+		<%= link_to my_updates_path(:id => current_user.id), 
 															 :class => 'header-update-link', 
 															 :remote => true do %>
 			<div class="header-updates clearfix">

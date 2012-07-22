@@ -183,6 +183,12 @@ a.sign-up-button:hover {
 }
 .header-update-indicator:hover {
 	background: url(my_updates/my_updates_with_items.png), no-repeat;
+	width: 30px;
+	height: 30px;	
+	margin-top: 10px;
+	margin-left: 5px;
+	float: left;
+	z-index: 1;
 }
 .header-update-count {
 	// background: url(/assets/user_profile/my_update_item_count.png) no-repeat;
