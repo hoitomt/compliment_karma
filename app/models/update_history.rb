@@ -23,21 +23,37 @@ class UpdateHistory < ActiveRecord::Base
   end
 
   def self.add_update_history(user_id, update_history_type_id, recognition_type_id, 
-                              recognition_id, note, current_user_id)
-    logger.info("Add Update History: #{current_user_id}|#{user_id}")
-  	unless(current_user_id == user_id)
+                              recognition_id, note, originating_user_id)
+    logger.info("Add Update History: #{originating_user_id}|#{user_id}")
+  	unless(originating_user_id == user_id)
       self.create(:user_id => user_id,
                   :update_history_type_id => update_history_type_id,
     							:recognition_type_id => recognition_type_id,
     							:recognition_id => recognition_id,
     							:note => note,
-                  :originating_user_id => current_user_id)
+                  :originating_user_id => originating_user_id)
+    end
+  end
+
+  def self.add_update_history_no_duplicates (user_id, update_history_type_id, 
+                                            recognition_type_id, recognition_id, 
+                                            note, originating_user_id)
+    logger.info("Add Update History: #{originating_user_id}|#{user_id}")
+    return if is_duplicate?(user_id, update_history_type_id, recognition_type_id,
+                            recognition_id, originating_user_id)
+    unless(originating_user_id == user_id)
+      self.create(:user_id => user_id,
+                  :update_history_type_id => update_history_type_id,
+                  :recognition_type_id => recognition_type_id,
+                  :recognition_id => recognition_id,
+                  :note => note,
+                  :originating_user_id => originating_user_id)
     end
   end
 
   def self.Like_Sent_Compliment(ck_like, current_user_id)
     c = Compliment.find_by_id(ck_like.recognition_id)
-    add_update_history( c.sender_user_id,
+    add_update_history_no_duplicates( c.sender_user_id,
                         UpdateHistoryType.Like_Sent_Compliment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
@@ -46,7 +62,7 @@ class UpdateHistory < ActiveRecord::Base
 
   def self.Like_Received_Compliment(ck_like, current_user_id)
     c = Compliment.find_by_id(ck_like.recognition_id)
-	  add_update_history( c.receiver_user_id,
+	  add_update_history_no_duplicates( c.receiver_user_id,
                         UpdateHistoryType.Like_Received_Compliment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
@@ -58,7 +74,7 @@ class UpdateHistory < ActiveRecord::Base
     reward_presenter = User.find_by_id(r.presenter_id).full_name unless r.presenter_id.blank?
     note = "liked your reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
-    add_update_history( r.receiver_id,
+    add_update_history_no_duplicates( r.receiver_id,
                         UpdateHistoryType.Like_Reward.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
@@ -68,7 +84,7 @@ class UpdateHistory < ActiveRecord::Base
 
   def self.Like_Accomplishment(ck_like, current_user_id)
     a = UserAccomplishment.find_by_id(ck_like.recognition_id)
-    add_update_history( a.user_id,
+    add_update_history_no_duplicates( a.user_id,
                         UpdateHistoryType.Like_Accomplishment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
@@ -170,5 +186,15 @@ class UpdateHistory < ActiveRecord::Base
                        "rejected your compliment", relationship.user_2_id)
   end
 
+  def self.is_duplicate?(user_id, update_history_type_id, recognition_type_id, 
+                              recognition_id, originating_user_id)
+    existing_update_history = UpdateHistory.where('user_id = ? and update_history_type_id = ? ' +
+                                                  'and recognition_type_id = ? and recognition_id = ? ' +
+                                                  'and originating_user_id = ?',
+                                                  user_id, update_history_type_id, recognition_type_id,
+                                                  recognition_id, originating_user_id)
+    logger.info("Update History is Duplicate") unless existing_update_history.blank?
+    return !existing_update_history.blank?
+  end
 
 end
