@@ -115,12 +115,6 @@
 	.orange { border-right-color: #F79646; }
 	.yellow { border-right-color: #00ffff; }
 	.black { border-right-color: #000000; }
-	// .red { background-color: #C0504D; }
-	// .green { background-color: #00B050; }
-	// .blue { background-color: #4F81BD; }
-	// .orange { background-color: #F79646; }
-	// .yellow { background-color: #00ffff; }
-	// .black { background-color: #000000; }
 	.item-click-me {
 		background: none;
 		// background-color: #ff0000;
@@ -223,6 +217,7 @@
 		$default: 7em;
 		$small: 5em;
 		$medium: 9em;
+		$large: 15em;
 		li ul {
 			position: absolute;
 			width: $default;
@@ -239,14 +234,20 @@
 		}
 		li ul li {
 			display: block;
+			float: none;
 			margin: 0 0 0 0;
-			width: $default;
+			width: auto;
+			// width: $default;
 			z-index: 200;
 		}
+		li ul {width: auto;}
 		li ul.small { width: $small }
 		li ul.medium { width: $medium }
+		li ul.large { width: $large }
+		li ul li {width: auto;}
 		li ul li.small { width: $small}
 		li ul li.medium { width: $medium}
+		li ul li.large { width: $large}
 		li ul li a { display: block; color: $nav-main-font-color; }
 		li ul li a:hover {color: $main-menu-color; }
 		li ul li:hover {

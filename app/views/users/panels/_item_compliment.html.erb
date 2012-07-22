@@ -15,7 +15,7 @@
 	<%= link_to show_recognition_path(:recognition_type_id => feed_item.item_type_id, 
 																		:recognition_id => feed_item.item_object.id),
 																		:remote => true do %>
-		<div class="feed-item" title="<%= tooltip(compliment) %>">
+		<div class="feed-item">
 			<div class="comment-text">
 				<%= compliment_text(compliment) %>
 			</div>

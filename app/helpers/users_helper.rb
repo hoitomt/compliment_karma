@@ -173,19 +173,32 @@ module UsersHelper
   def compliments_link(feed_item, link_text)
     if feed_item && feed_item.item_type_id == @recognition_type_compliment.id
       if link_text =~ /Sender/
-        return link_to link_text, 
-                       new_compliment_path(:recipient_id => feed_item.item_object.sender_user_id),
+        sender = User.find(feed_item.item_object.sender_user_id)
+        return link_to sender.full_name, 
+                       new_compliment_path(:recipient_id => sender.id),
                                            :remote => true
       elsif link_text =~ /Receiver/
-        return link_to link_text, 
-                        new_compliment_path(:recipient_id => feed_item.item_object.receiver_user_id),
+        receiver = User.find(feed_item.item_object.receiver_user_id)
+        return link_to receiver.full_name, 
+                        new_compliment_path(:recipient_id => receiver.id),
                                             :remote => true
       else
         link_to link_text, new_compliment_path, :remote => true
       end
     elsif feed_item && feed_item.item_type_id == @recognition_type_reward.id
-      return link_to link_text, new_compliment_path(:recipient_id => feed_item.item_object.receiver_id),
-                                                    :remote => true
+      if link_text =~ /Presenter/
+        presenter = User.find(feed_item.item_object.presenter_id)
+        return link_to presenter.full_name, 
+                       new_compliment_path(:recipient_id => presenter.id),
+                                           :remote => true
+      elsif link_text =~ /Receiver/
+        receiver = User.find(feed_item.item_object.receiver_id)
+        return link_to receiver.full_name, 
+                       new_compliment_path(:recipient_id => receiver.id),
+                                           :remote => true
+      else
+        link_to link_text, new_compliment_path, :remote => true
+      end
     else
       return link_to link_text, new_compliment_path(:recipient_id => feed_item.item_object.user_id),
                                                     :remote => true
@@ -254,14 +267,24 @@ module UsersHelper
   def follows_link(feed_item, link_text=nil)
     if feed_item.item_type_id == @recognition_type_compliment.id
       if link_text =~ /Sender/
-        return follow_single_link(feed_item.item_object.sender_user_id, "Sender")
+        sender = User.find(feed_item.item_object.sender_user_id)
+        return follow_single_link(sender.id, sender.full_name)
       elsif link_text =~ /Receiver/
-        return follow_single_link(feed_item.item_object.receiver_user_id, "Receiver")
+        receiver = User.find(feed_item.item_object.receiver_user_id)
+        return follow_single_link(receiver.id, receiver.full_name)
       else
         return "Follow"
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
-      return follow_single_link(feed_item.item_object.receiver_id, "Follow")
+      if link_text =~ /Presenter/
+        presenter = User.find(feed_item.item_object.presenter.id)
+        return follow_single_link(presenter.id, presenter.full_name)
+      elsif link_text =~ /Receiver/
+        receiver = User.find(feed_item.item_object.receiver.id)
+        return follow_single_link(receiver.id, receiver.full_name)
+      else
+        return "Follow"
+      end
     else
       return follow_single_link(feed_item.item_object.user_id, "Follow")
     end
@@ -385,14 +408,20 @@ module UsersHelper
 
   def presenter_name(reward)
     unless reward.presenter_id.blank?
-      return " from #{reward.presenter.full_name}"
+      return "#{reward.presenter.first_last}"
+    end
+  end
+
+  def receiver_name(reward)
+    unless reward.receiver_id.blank?
+      return "#{reward.receiver.first_last}"
     end
   end
 
   def recognition_left_side(feed_item)
     if feed_item.item_type_id == @recognition_type_compliment.id
       unless feed_item.item_object.sender_user_id.blank?
-        return User.find_by_id(feed_item.item_object.sender_user_id).full_name
+        u = User.find_by_id(feed_item.item_object.sender_user_id).first_last
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
       unless feed_item.item_object.presenter_id.blank?

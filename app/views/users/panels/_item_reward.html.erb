@@ -1,9 +1,10 @@
 <% reward = feed_item.item_object %>
 <% receiver = reward.receiver %>
+<% presenter = reward.presenter %>
 <div class="image">
-	<% if receiver %>
-		<%= link_to receiver do %>
-			<%= image_tag(receiver.photo.url(:thumb)) %>
+	<% if presenter %>
+		<%= link_to presenter do %>
+			<%= image_tag(presenter.photo.url(:thumb)) %>
 		<% end %>
 	<% else %>
 		<%= image_tag('/photos/thumb/missing.png') %>
@@ -14,15 +15,24 @@
 	<%= link_to show_recognition_path(:recognition_type_id => feed_item.item_type_id, 
 																		:recognition_id => feed_item.item_object.id),
 																		:remote => true do %>
-	<div class="feed-item">
-		<p>Rewards with <%= number_to_currency(reward.value) %>
-			 <%= presenter_name(feed_item.item_object) %></p>
-	</div>
+		<div class="feed-item">
+			<div class="comment-text">
+				<strong><%= presenter_name(feed_item.item_object) %></strong> 
+			  presented a reward of <%= number_to_currency(reward.value) %> to
+				<%= receiver_name(feed_item.item_object) %>
+			</div>
+		</div>
 	<% end %>
 	<%= render 'users/panels/item_social', :feed_item => feed_item %>	
 </div>
 <div class="image">
-	<%= image_tag('reward_money.png') %>
+	<% if receiver %>
+		<%= link_to receiver do %>
+			<%= image_tag(receiver.photo.url(:thumb)) %>
+		<% end %>
+	<% else %>
+		<%= image_tag('/photos/thumb/missing.png') %>
+	<% end %>
 </div>
 <div class="timestamp">
 	<%= timestamp(reward.updated_at) %>

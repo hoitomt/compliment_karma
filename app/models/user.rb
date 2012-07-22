@@ -124,11 +124,15 @@ class User < ActiveRecord::Base
   end
   
   def full_name
-    name = []
-    name << self.first_name if self.first_name
-    name << self.middle_name if self.middle_name
-    name << self.last_name if self.last_name
-    return name.join(' ')
+    if self.is_a_company?
+      return self.company.name
+    else
+      name = []
+      name << self.first_name if self.first_name
+      name << self.middle_name if self.middle_name
+      name << self.last_name if self.last_name
+      return name.join(' ')
+    end
   end
   
   def first_last_initial
@@ -137,10 +141,14 @@ class User < ActiveRecord::Base
   end
 
   def first_last
-    if self.last_name
-      return "#{self.first_name} #{self.last_name}"
+    if self.is_a_company?
+      return self.company.name
     else
-      return "#{self.first_name}"
+      if self.last_name
+        return "#{self.first_name} #{self.last_name}"
+      else
+        return "#{self.first_name}"
+      end
     end
   end
 
