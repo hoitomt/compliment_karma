@@ -6,7 +6,8 @@ class ComplimentMailer < ActionMailer::Base
     @compliment = compliment
     @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.receiver_email,
-         subject: "You have received a compliment"
+         subject: "You have received a compliment",
+         from: "new_compliment@complimentkarma.com"
   end
   
   # PENDING_RECEIVER_CONFIRMATION
@@ -16,7 +17,8 @@ class ComplimentMailer < ActionMailer::Base
     @compliment = compliment
     @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.receiver_email,
-         subject: "You have received a compliment"
+         subject: "You have received a compliment",
+         from: "new_compliment@complimentkarma.com"
   end
 
   # PENDING_RECEIVER_REGISTRATION
@@ -24,7 +26,8 @@ class ComplimentMailer < ActionMailer::Base
     @compliment = compliment
     @skill= Skill.find_by_id(@compliment.skill_id)
     mail to: compliment.receiver_email,
-         subject: "You have received a compliment"
+         subject: "You have received a compliment",
+         from: "new_compliment@complimentkarma.com"
   end
   
   # PENDING_SENDER_CONFIRMATION

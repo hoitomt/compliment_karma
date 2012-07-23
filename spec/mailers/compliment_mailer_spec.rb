@@ -20,7 +20,7 @@ describe ComplimentMailer do
       c.sender_user_id.should eq(user.id)
       last_email.subject.should eq("You have received a compliment")
       last_email.to.should eq([@compliment.receiver_email])
-      last_email.from.should eq(['no-reply@complimentkarma.com'])
+      last_email.from.should eq(['new_compliment@complimentkarma.com'])
     end
 
     it "renders the body" do

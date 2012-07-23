@@ -94,7 +94,7 @@ describe ComplimentsController do
         lambda do
           post :create, @attr
         end.should change(Compliment, :count).from(0).to(1)
-        last_email.from.should eq(["no-reply@complimentkarma.com"])
+        last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq([user2.email])
         last_email.subject.should eq("You have received a compliment")
       end
@@ -145,7 +145,7 @@ describe ComplimentsController do
         lambda do
           post :create, @attr
         end.should change(Compliment, :count).from(0).to(1)
-        last_email.from.should eq(["no-reply@complimentkarma.com"])
+        last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq([user2.email])
         last_email.subject.should eq("You have received a compliment")
         last_email.body.should have_selector('body', 
@@ -206,7 +206,7 @@ describe ComplimentsController do
         lambda do
           post :create, @attr
         end.should change(Compliment, :count).from(0).to(1)
-        last_email.from.should eq(["no-reply@complimentkarma.com"])
+        last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq(["imastranger@example.com"])
         last_email.subject.should eq("You have received a compliment")
         last_email.body.should have_selector('a', :content => "Sign Up")
