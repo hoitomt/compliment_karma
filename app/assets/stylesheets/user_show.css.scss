@@ -5,7 +5,15 @@
 	display: block; 
 	width: 180px;
 	// height: 180px;
-	margin: 20px auto 10px auto;
+	margin: 10px auto 10px auto;
+	text-align: center;
+}
+.photo-medium { 
+	display: block; 
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	margin: 0 auto;
 	text-align: center;
 }
 #user-profile-short {

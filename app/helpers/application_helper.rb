@@ -61,7 +61,10 @@ module ApplicationHelper
 
   def get_user_photo_link_mini(user)
     if user
-      link_to image_tag(user.photo.url(:mini)), user_path(user.id)
+      link_to image_tag(user.photo.url(:mini)), 
+              user_path(user.id), 
+              :class => "popup-like-item",
+              :title => "#{user.full_name}"
     else
       image_tag('/photos/mini/missing.png')
     end 
@@ -72,6 +75,14 @@ module ApplicationHelper
       link_to image_tag(user.photo.url(:small)), user_path(user.id)
     else
       image_tag('/photos/small/missing.png')
+    end 
+  end
+
+  def get_user_photo_link_medium(user)
+    if user
+      link_to image_tag(user.photo.url(:medium), :width => '200'), user_path(user.id)
+    else
+      image_tag('/photos/medium/missing.png', :width => '200')
     end 
   end
 

@@ -1,9 +1,12 @@
 <div class="left-column">
 	<div class="image-function">
-		<div class="photo-small">
-			<%= get_user_photo_link_small(@presenter) %>
+		<div class="photo-medium">
+			<%= get_user_photo_link_medium(@presenter) %>
 		</div>
 		<h3><%= @presenter.full_name %></h3>
+		<%= render :partial => 'recognition/popup_user_info', 
+								 :locals => {:user => @presenter,
+								 						 :professional => true } %>
 		<div class="functions clearfix">
 			<div class="profile-button" style="margin-right: 10px;">
 				<%= compliment_button_medium(@presenter) %>
@@ -17,10 +20,13 @@
 </div>
 <div class="right-column">
 	<div class="image-function">
-		<div class="photo-small">
-			<%= get_user_photo_link_small(@receiver) %>
+		<div class="photo-medium">
+			<%= get_user_photo_link_medium(@receiver) %>
 		</div>
 		<h3><%= get_user_full_name(@receiver) %></h3>
+		<%= render :partial => 'recognition/popup_user_info', 
+								 :locals => {:user => @receiver,
+								 						 :professional => true } %>
 		<div class="functions clearfix">
 			<div class="profile-button" style="margin-right: 10px;">
 				<%= compliment_button_medium(@receiver) %>
