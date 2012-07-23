@@ -248,10 +248,10 @@ module UsersHelper
   def follows_button(subject_user_id=nil, button_size_class=nil)
     return "" if subject_user_id == current_user.id
     if subject_user_id
-      button_class = "popup-button #{button_size_class}"
+      button_class = "follow-button #{button_size_class}"
       button_text = "Follow"
       if follow_exists?(subject_user_id)
-        button_class = "popup-button popup-button-following #{button_size_class}"
+        button_class = "following-button #{button_size_class}"
         button_text = "Following"
       end
       return follows_button_link(subject_user_id, button_text, button_class)
@@ -262,7 +262,7 @@ module UsersHelper
     return link_to button_text, follows_path(:subject_user_id => subject_user_id,
                                          :follower_user_id => current_user.id),
                                 :method => :post,
-                                :class => 'follow-button',
+                                :class => button_class,
                                 :remote => true
   end
 
