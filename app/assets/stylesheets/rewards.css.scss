@@ -48,13 +48,16 @@
 		-webkit-border-radius: 5px;
 		border-radius: 5px;
 		color: #ffffff;
-		font-size: 12px;
-		padding: 7px 10px;
-		font-weight: normal;
+		font-size: 14px;
+		padding: 7px 15px;
+		font-weight: bold;
 		text-shadow: none;
 	}
+	button:hover { 
+		// @include button-gradient-gray;
+		background: #173371;
+	}
 	.hasDatePicker{ color: #000; }
-	button:hover { @include button-gradient-gray; }
 	li { margin: 5px 0 15px 0;}
 	.reward-add-to-cart {
 		margin: 10px 0 10px 260px;
@@ -77,7 +80,7 @@
 	.user-filter-submit {
 		// float: right;
 		// padding: 20px 10px 0 0;
-		margin: 10px 0 0 260px;
+		margin: 10px 0 0 255px;
 	}
 }
 #reward-add-to-cart-form {
@@ -104,13 +107,31 @@
 		padding-top: 0;
 	}
 }
-#rewards-results { padding: 10px 0 0 0; }
+#rewards-results { 
+	padding: 10px 0 0 0;
+	button {
+		@include button-gradient-green;
+		border: 1px solid gray;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 14px;
+		padding: 7px 20px;
+		font-weight: bold;
+		text-shadow: none;
+	 }
+	button:hover {
+		// @include button-gradient-gray;
+		background: #00781c;
+	 }
+}
 table#select-reward-results {
 	@include top-border-radius;
 	font-size: 13px;
 	margin: 0 0 10px 10px;
 	th {
-		padding: 10px 0 0 0; 
+		padding: 10px 0 0 15px; 
 		height: 25px;
 		color: #313131;
 		text-shadow: 0.1em 0 0.1em #ffffff;
@@ -144,12 +165,11 @@ table#select-reward-results {
 	    border-radius: 8px 8px 0 0;
 	}
 	.white-bg{ background-color: #ffffff; }
-	.col1 { width: 60px; text-align: center; }
-	.col2 { width: 150px; }
-	.col3 { width: 150px; }
-	.col4 { width: 150px; text-align: center; }
-	.col5 { width: 150px; text-align: center; }
-	.col6 { width: 125px; text-align: center; }
+	.col1 { width: 45px; text-align: center; margin: 0 0 0 -5px; }
+	.col2 { width: 135px; }
+	.col4 { width: 155px; text-align: center; margin: 0 0 0 5px; }
+	.col5 { width: 145px; text-align: center; }
+	.col6 { width: 120px; text-align: center; }
 }
 td.centered {
 	text-align: center;
@@ -158,25 +178,23 @@ td.centered {
 	float: right;
 	margin: 10px 10px 0 0;
 }
-.add-to-cart-button {
-	@include button-gradient-green;
-	border: 1px solid gray;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	color: #ffffff;
-	font-size: 12px;
-	padding: 7px 10px;
-	font-weight: normal;
-	text-shadow: none;
- }
-.add-to-cart-button:hover {
-	@include button-gradient-gray;
- }
-.add-to-cart-button:active {
-   border: 1px solid #005B15;
-   background: #005B15;
- }
+.reward-amount-header {
+	cursor: default;
+}
 .reward-amount {
 	margin: 0 0 0 25px;
+}
+
+$position: 5px center;
+table.tablesorter thead tr .header {
+	background: url(/assets/tablesorter/bg.gif) no-repeat;
+	background-position: $position;
+}
+table.tablesorter thead tr .headerSortUp {
+	background: url(/assets/tablesorter/asc.gif) no-repeat;
+	background-position: $position;
+}
+table.tablesorter thead tr .headerSortDown {
+	background: url(/assets/tablesorter/desc.gif) no-repeat;
+	background-position: $position;	
 }
