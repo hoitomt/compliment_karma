@@ -11,6 +11,27 @@ var CommonScripts = {
 			return;
 		}
 	},
+	showFlash: function(flashContent) {
+		// console.log(flashContent);
+		// console.log("Flash Null: " + flashContent.length > 0);
+		if(flashContent.length > 0) {
+			$('#explanation').slideDown();
+			$('#explanation').html(flashContent);
+			setTimeout(function() {
+				$('#explanation').slideUp();
+			}, 7500);
+		}
+
+	},
+	stickyFlashContainer: function() {
+		var stickMe = $('#flash-container');
+		var flashContainer = $('#explanation');
+		stickMe.waypoint({
+			handler: function(event, direction) {
+				flashContainer.toggleClass('sticky', direction=='down');
+			}
+		});
+	},
 	inputStyle: function() {
 		// Deal with the placeholder text
 		var inputs = $.merge($('input'), $('textarea'));

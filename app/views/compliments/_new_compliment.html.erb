@@ -18,7 +18,10 @@
 		<% end %>
 		<div id="new-compliment">
 			<p class="new-compliment-heading"><%= new_compliment_heading(@user) %></p>
-			<%= form_for(@compliment, :validate => true, :html => {:id => 'compliment-form'}) do |f| %>
+			<%= form_for(@compliment, 
+									 :validate => true, 
+									 :html => {:id => 'compliment-form'}, 
+									 :remote => true) do |f| %>
 				<%= hidden_field_tag 'request_page', "user" %>
 				<%= hidden_field_tag 'skill_id_result' %>
 				<%= hidden_field_tag "compliment_receiver_id", @compliment.receiver_user_id %>
@@ -93,10 +96,9 @@
 						<div style="float: left;">
 							<button class="send-new-compliment-button" type=submit>Send Compliment</button>
 						</div>
-						<div style="float: right; padding-top: 15px;">
-							<%#= link_to "&#8593; minimize".html_safe, '#', 
-													:style => "font-size: 11px;",
-													:id => 'minimize-me' %>
+						<div id="sending-compliment-spinner" style="display: none; float: right; padding: 15px 5px 0 0;">
+							Sending Compliment...
+							<%= image_tag 'ajax-loader.gif' %>
 						</div>
 					</div>
 				</div>

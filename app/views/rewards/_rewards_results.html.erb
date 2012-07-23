@@ -1,41 +1,54 @@
 <script type="text/javascript">
 	$(function() {
 		Reward.init();
+		$('#select-reward-results').tablesorter({
+			headers: {
+				6: {
+					sorter: false
+				}
+			}
+		});
   	var results = <%=raw @employees.to_json %>;
 	})
 </script>
 	<%= form_tag "/rewards/add_to_cart", :id => 'reward-add-to-cart-form' do %>
 		<%= hidden_field_tag 'company_user_id', @user.id %>
-		<table id="select-reward-results">
-			<tr class="header-row">
-				<th><div class="col1">Rank</div></th>
-				<th><div class="col2">Full Name</div></th>
-				<th><div class="col3">Department</div></th>
-				<th><div class="col4">Compliments Received</div></th>
-				<th><div class="col5">Compliments Sent</div></th>
-				<th><div class="col6">Reward Amount</div></th>
-			</tr>
-			<% unless employees.blank? %>
-				<% employees.each_with_index do |employee, index| %>
-					<tr>
-						<td><div class="col1"><%= index + 1 %></td>
-						<td><div class="col2"><%= employee[:full_name] %></div></td>
-						<td><div class="col3"><%= employee[:department] %></div></td>
-						<td><div class="col4"><%= employee[:compliments_received] %></div></td>
-						<td><div class="col5"><%= employee[:compliments_sent] %></div></td>
-						<td><div class="col6">
-							<%= text_field 'reward', 
-														 employee[:id], 
-														 :size => 7, 
-														 :class=> 'reward-amount', 
-														 :style => "background: #ffffff;" %>
-						</div></td>
-					</tr>
+		<table id="select-reward-results" class="tablesorter">
+			<thead>
+				<tr class="header-row">
+					<th><div class="col1">Rank</div></th>
+					<th><div class="col2">Full Name</div></th>
+					<th><div class="col3">Department</div></th>
+					<th><div class="col3">Manager</div></th>
+					<th><div class="col3">User Type</div></th>
+					<th><div class="col4"><%= activity_type.name %></div></th>
+					<th><div class="col6">Reward Amount</div></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% unless employees.blank? %>
+					<% employees.each_with_index do |employee, index| %>
+						<tr>
+							<td class="centered"><%= index + 1 %></td>
+							<td><%= employee[:full_name] %></td>
+							<td><%= employee[:department] %></td>
+							<td class="centered"><%= employee[:manager] %></td>
+							<td class="centered"><%= employee[:user_type] %></td>
+							<td class="centered"><%= employee[:activity_type] %></td>
+							<td>
+								<%= text_field 'reward', 
+															 employee[:id], 
+															 :size => 7, 
+															 :class=> 'reward-amount', 
+															 :style => "background: #ffffff;" %>
+							</td>
+						</tr>
+					<% end %>
 				<% end %>
-			<% end %>
+			</tbody>
 			<tr class="footer-row">
-				<td colspan="4"></td>
-				<td style="font-weight: bold; font-size: 14px; text-align: right;">Total</td>
+				<td colspan="5"></td>
+				<td style="font-weight: bold; font-size: 14px; text-align: right;">Total Reward Amount</td>
 				<td id="total-reward-amount" style="font-weight: bold; font-size: 14px; padding-left: 5px;"></td>
 			</tr>
 		</table>

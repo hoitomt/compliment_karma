@@ -39,7 +39,11 @@ class ComplimentsController < ApplicationController
               error_msg += "#{error_str}<br />"
             end
           end
-          flash[:error] = "Your compliment could not be sent<br />#{error_msg}".html_safe
+          if request.format.js?
+            flash.now[:error] = "Your compliment could not be sent. #{error_msg}".html_safe
+          else
+            flash[:error] = "Your compliment could not be sent. #{error_msg}".html_safe
+          end
           process_redirect("failure", referrer)
         }
       end
@@ -50,7 +54,10 @@ class ComplimentsController < ApplicationController
     # Don't send the compliment back to the screen
     flash[:compliment] = @compliment if result == "failure"
     user = User.find_by_email(@compliment.sender_email)
-    redirect_to referrer
+    respond_to do |format|
+      format.html {redirect_to referrer}
+      format.js { render :nothing => true }
+    end
   end
   
   # if an email address was entered in the input field and it is valid, use it
@@ -82,10 +89,15 @@ class ComplimentsController < ApplicationController
   
   def set_success_notice
     if @compliment.compliment_status == ComplimentStatus.ACTIVE
-      flash[:notice] = "Your compliment has been sent"
+      msg = "Your compliment has been sent"
     elsif @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION ||
           @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_REGISTRATION
-      flash[:notice] = "Your compliment has been saved"
+      msg = "Your compliment has been saved"
+    end
+    if request.format.js?
+      flash.now[:notice] = msg
+    else
+      flash[:notice] = msg
     end
   end
 

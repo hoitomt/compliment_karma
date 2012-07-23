@@ -20,12 +20,8 @@
 	<![endif]-->
 	<script type="text/javascript">
 		$(function() {
-			if(<%= flash && !flash.empty? %>) {
-				$('#flash-container').slideDown();
-				setTimeout(function() {
-					$('#flash-container').slideUp();
-				}, 7500);
-			}
+			var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
+			CommonScripts.showFlash(flashContent);
 			FooterResize.init();
 			
 			$('.fancybox').fancybox();
@@ -36,7 +32,11 @@
 <body>
 	<%#= render 'social/facebook_javascript' %>
 	<%= render 'social/twitter_javascript' %>
-	<%= render 'shared/flash', :flash => flash %>
+	<div id="flash-container">
+		<div id="explanation">
+			<%= render 'shared/flash', :flash => flash %>
+		</div>
+	</div>
 	<% if company_user? %>
 		<%= render 'layouts/admin_header' %>
 	<% else %>

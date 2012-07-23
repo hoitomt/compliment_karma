@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :except => [:new, :create, :new_account_confirmation]
-  before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, :show, 
+  before_filter :correct_user, :except => [:new, :create, :new_account_confirmation, 
+                                           :show, :get_more_karma_live_records,
                                            :professional_profile, :social_profile, 
                                            :achievements, :contacts, :employees, 
                                            :rewards, :settings, :my_updates, :switch_accounts ]
@@ -136,9 +137,18 @@ class UsersController < ApplicationController
   def rewards
     @company = @user.company
     @departments = @company.departments
+    @managers = []
     @activity_types = ActivityType.list
+    activity_type_id = set_reward_activity_type
+    @user_types = []
     employees = set_employees
-    build_employee_vo(employees)
+    build_employee_vo(employees, activity_type_id)
+  end
+
+  def set_reward_activity_type
+    activity_type_id = params[:activity_type_id] || ActivityType.compliments_received.id
+    @activity_type = ActivityType.find(activity_type_id)
+    return activity_type_id || @activity_type.id
   end
 
   def set_employees
@@ -162,17 +172,24 @@ class UsersController < ApplicationController
     end
   end
 
-  def build_employee_vo(employees)
+  def build_employee_vo(employees, activity_type_id)
     @employees = []
     employees.each do |user|
       e = {}
       e[:id] = user.id
       e[:full_name] = user.first_last
+      e[:manager] = ''
+      e[:user_type] = ''
       e[:department] = user.company_departments.first
-      e[:compliments_sent] = Compliment.sent_professional_compliments(user).count
-      e[:compliments_received] = Compliment.received_professional_compliments(user).count
-      # e[:trophies_earned] = 
-      # e[:badges_earned] = 
+      case activity_type_id
+        when ActivityType.compliments_received.id
+          e[:activity_type] = Compliment.sent_professional_compliments(user).count
+        when ActivityType.compliments_sent.id
+          e[:activity_type] = Compliment.received_professional_compliments(user).count
+        when ActivityType.trophies_earned.id
+        when ActivityType.badges_earned.id
+        else
+      end
       @employees << e
     end
   end

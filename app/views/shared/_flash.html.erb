@@ -1,12 +1,8 @@
-<div id="flash-container">
-	<div id="explanation">
-		<% if flash && !flash.empty? %>
-			<section id="flash">
-			  <% flash.each do |key, value| %>
-			    <div class="flash <%= key %>"><%= value %></div>
-			  <% end %>
-			</section>
-			<div class="clear"></div>
-		<% end %>
-	</div>
-</div>
+<% if flash && !flash.empty? %>
+	<section id="flash">
+	  <% flash.each do |key, value| %>
+	    <div class="flash <%= key %>"><%= value %></div>
+	  <% end %>
+	</section>
+	<div class="clear"></div>
+<% end %>

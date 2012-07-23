@@ -27,7 +27,7 @@
 		border-radius: 5px;
 		border: 0px;
 		border: $border-gray 2px solid;
-		background-color:#f0f0f0;
+		background-color:#ffffff;
 		color:#000;
 		font-size: 14px;
 		padding-left: 5px;
@@ -39,6 +39,7 @@
 	select {
 		font-size: 14px;
 		padding-top: 0;
+		width: 300px;
 	}
 	button {
 		@include gradient-bg;
@@ -64,7 +65,8 @@
 		.reward-radio-btn { margin: 10px 0 0 0; display: block;}
 	}
 	.user-filter-info {
-		float: left; width: 700px;
+		float: left; 
+		width: 900px;
 		label { 
 			float: left; 
 			width: 250px; 
@@ -107,8 +109,17 @@ table#select-reward-results {
 	@include top-border-radius;
 	font-size: 13px;
 	margin: 0 0 10px 10px;
-	th { padding: 10px 0 0 0; height: 25px; font-weight: bold; }
-	td { height: 30px; padding: 10px 0 0 0; }
+	th {
+		padding: 10px 0 0 0; 
+		height: 25px;
+		color: #313131;
+		text-shadow: 0.1em 0 0.1em #ffffff;
+		font-weight: bold;
+		cursor: pointer;
+		// font-size: 14px;
+		// padding: 5px 0 0 0;
+	}
+	td { height: 30px; padding: 10px 0 0 0; color: #1e5faf; font-weight: bold; }
 	tr.header-row {
 		@include top-border-radius;
 		@include gradient-gray;
@@ -139,6 +150,9 @@ table#select-reward-results {
 	.col4 { width: 150px; text-align: center; }
 	.col5 { width: 150px; text-align: center; }
 	.col6 { width: 125px; text-align: center; }
+}
+td.centered {
+	text-align: center;
 }
 .add-to-cart-submit { 
 	float: right;

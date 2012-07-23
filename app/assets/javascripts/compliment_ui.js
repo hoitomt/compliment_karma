@@ -4,6 +4,7 @@ var ComplimentUI = {
 		this.userId = userId
 		this.setNewComplimentHandlers();
 		this.stickyNewCompliment();
+		this.setAjaxCallbacks();
 	},
 	flashBlue: function() {
 		$('#new-compliment-container').effect("highlight", {color: "#006791"}, 2500);
@@ -128,6 +129,27 @@ var ComplimentUI = {
 			data: {sender_is_a_company: senderIsACompany,	
 						 receiver_is_a_company: receiverIsACompany }
 		});
-	}
+	},
+	setAjaxCallbacks: function() {
+		$('#compliment-form').unbind('ajax:beforeSend');
+		$('#compliment-form').bind('ajax:beforeSend', function(evt, data, status, xhr){
+			$('#sending-compliment-spinner').show();
+		});
+		$('#compliment-form').bind('ajax:success', function(evt, data, status, xhr){
+			$('#sending-compliment-spinner').hide();
+			alert("Your compliment was successfully sent");
+			ComplimentUI.resetNewComplimentValues();
+		});
+	},
+	resetNewComplimentValues: function() {
+		$('#compliment_receiver_display').val('');
+		$('#compliment_skill_id').val('');
+		$('#compliment_comment').val('');
+		$('#compliment_compliment_type_id').val('select compliment type');
 
+		$('#receiver_is_a_company').val('false');
+		$('#skill_id_result').val('');
+		$('#compliment_receiver_id').val('');
+		ComplimentUI.hideNewComplimentPanel();
+	}
 }
