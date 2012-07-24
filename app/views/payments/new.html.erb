@@ -1,0 +1,85 @@
+<div id="content-container">
+	<div class="payments-header">
+		<p class="title">Secure Checkout</p>
+	</div>
+	<div id="new-payment-container">
+		<%= form_for(@payment, :validate => true ) do |f| %>
+			<div class="left-one-third">
+				<div id="data-entry" class="clearfix">
+					<p style="margin-bottom: 10px;">How would you like to pay?</p>
+					<%= f.radio_button :payment_type, "credit_card", :checked => true, :class => "radio" %>
+					<div id="label" class="radio">Check/Debit card</div>
+					<div class="clear"></div>
+					<%= f.radio_button :payment_type, "check", :class => "radio" %>
+					<div id="label" class="radio">Check (reduced fee)</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= f.label :cc_holder_name, "Cardholder Name" %></div>
+					<div id="field"><%= f.text_field :cc_holder_name %>
+						<div id="payment_cc_holder_name_error"></div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div style="float: left;">
+						<div id="label"><%= f.label :cc_number, "Card Number" %></div>
+						<div class="clear"></div>
+						<div id="field"><%= f.text_field :cc_number, :style=>"width: 205px;" %>
+							<div id="payment_cc_number_error"></div>
+						</div>
+					</div>
+					<div style="float: left; margin-left: 20px;">
+						<div id="label"><%= f.label :cc_cvv, "CVV" %></div>
+						<div class="clear"></div>
+						<div id="field"><%= f.text_field :cc_cvv, :style=>"width: 50px;" %>
+							<div id="payment_cc_cvv_error"></div>
+						</div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= label_tag "Expiration Date (MM/YY)" %></div>
+					<div class="clear"></div>
+					<div id="field" style="width: 300px;">
+						<%= f.text_field :cc_expiration_month, :style=>"width: 50px;float: left; " %>
+						<span style="font-size: 24px; margin: 0 5px; float: left;">/</span> 
+						<%= f.text_field :cc_expiration_year, :style=>"width: 50px;float: left; " %>
+						<div id="payment_cc_cvv_error"></div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= f.label :cc_billing_address, "Billing Address" %></div>
+					<div id="field"><%= f.text_field :cc_billing_address %>
+						<div id="payment_cc_billing_address_error"></div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div style="float: left;">
+						<div id="label"><%= f.label :cc_billing_city, "City" %></div>
+						<div class="clear"></div>
+						<div id="field"><%= f.text_field :cc_billing_city, :style=>"width: 205px;" %>
+							<div id="payment_cc_billing_city_error"></div>
+						</div>
+					</div>
+					<div style="float: left; margin-left: 20px;">
+						<div id="label"><%= f.label :cc_billing_state_cd, "State" %></div>
+						<div class="clear"></div>
+						<div id="field"><%= f.text_field :cc_billing_state_cd, :style=>"width: 50px;" %>
+							<div id="payment_cc_cvv_error"></div>
+						</div>
+					</div>
+				</div>
+				<div id="data-entry" class="clearfix">
+					<div id="label"><%= f.label :cc_billing_zip_cd, "Zip Code" %></div>
+					<div class="clear"></div>
+					<div id="field"><%= f.text_field :cc_billing_zip_cd, :style=>"width: 100px;" %>
+						<div id="payment_cc_billing_zip_cd_error"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="place-order-container">
+				<button type="submit" class="place-order-button">Place Order</button>
+			</div>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+</div>

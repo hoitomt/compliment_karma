@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717013809) do
+ActiveRecord::Schema.define(:version => 20120724040412) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -128,6 +128,23 @@ ActiveRecord::Schema.define(:version => 20120717013809) do
   create_table "invitations", :force => true do |t|
     t.string   "invite_email"
     t.string   "from_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", :force => true do |t|
+    t.string   "cc_holder_name"
+    t.string   "cc_number"
+    t.string   "cc_cvv"
+    t.string   "cc_expiration_month"
+    t.string   "cc_expiration_year"
+    t.string   "cc_billing_address"
+    t.string   "cc_billing_city"
+    t.string   "cc_billing_state_cd"
+    t.string   "cc_billing_zip_cd"
+    t.string   "cc_card_type"
+    t.string   "amount"
+    t.string   "payment_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

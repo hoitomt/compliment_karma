@@ -1,0 +1,81 @@
+@import "common";
+@import "user_common";
+
+.payments-header {
+	@include top-border-radius;
+	margin: 10px 0 0 0;
+	background: #ffffff;
+	border-bottom: solid 1px #D9D9D9;
+	.title { 
+		font-size: 18px;
+		font-weight: bold;
+		padding: 15px 0 0 25px;
+	}
+}
+#new-payment-container {
+	@include bottom-border-radius;
+	background: #ffffff;
+	padding: 20px 0;
+}
+
+#new_payment { 
+	@include user-profile-form-styling;
+	@include border-radius;
+	padding: 20px;
+	margin: 0 0 0 20px;
+	background: #f0f0f0;
+	width: 400px;
+	#data-entry {
+		// float: left;
+		margin-bottom: 0;
+		width: 400px;;
+	}
+	label {
+		text-align: left;
+		float: left;
+		padding-top: 5px;
+		width: auto;
+		font-size: 14px;
+	}
+	#label.radio {
+		padding-top: 0;
+	}
+	#field {
+		float: left;
+	}
+	input,
+  textarea {
+		// border: 1px solid #4f81bd;
+		// background: #ffffff;
+		width: 300px;
+		background: white !important;
+		padding: 3px 13px !important;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		border: 0 !important;
+		-webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
+		-moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);
+		box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
+		outline: 0;
+		// width: 55%;
+		margin: 0 1% 5px 0;
+		float: left;
+	}
+	input.radio { float: left; width: 25px; height: 20px;}
+	select { border: 1px solid #4f81bd; width: 100px;}
+	button.place-order-button {
+		@include button-gradient-green;
+		padding: 7px 30px;
+		margin: 20px 0 0 75px;
+		border: 1px solid gray;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		color: #ffffff;
+		font-size: 13px;
+		font-weight: bold;
+		// text-shadow: none;
+	  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+	}
+}

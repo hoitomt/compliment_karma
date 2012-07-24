@@ -16,4 +16,8 @@ module RewardsHelper
 		end
 	end
 
+	def employee_vo(employee)
+		Reward.get_individual_employee_vo(employee)
+	end
+
 end

@@ -1,4 +1,6 @@
 Ck::Application.routes.draw do
+  resources :payments
+
   resources :experiences
 
   resources :company_department_users

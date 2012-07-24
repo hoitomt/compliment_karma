@@ -1,5 +1,7 @@
+console.log('ttlk');
 $('#rewards-results').html('<%= j(render :partial => "rewards/rewards_results", 
 																				 :locals => {:departments => @departments,
 																				 						 :department => @department, 
 																						 				 :user => @user, 
-																						 				 :employees => @employees}) %>');
+																						 				 :employees => @employees,
+																						 				 :activity_type => @activity_type}) %>');

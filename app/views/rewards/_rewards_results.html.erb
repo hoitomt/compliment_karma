@@ -20,8 +20,8 @@
 					<th><div class="col2">Department</div></th>
 					<th><div class="col2">Manager</div></th>
 					<th><div class="col2">User Type</div></th>
-					<th><div class="col4"><%= activity_type.name %></div></th>
-					<th><div class="col6 reward-amount-header">Reward Amount</div></th>
+					<th><div class="col5"><%= activity_type.name unless employees.blank? %></div></th>
+					<th><div class="col6c reward-amount-header">Reward Amount</div></th>
 				</tr>
 			</thead>
 			<tbody>

@@ -30,14 +30,7 @@ var Reward = {
 			})
 		});
 		$('input.reward-amount').change(function() {
-			var sum = 0;
-			$('input.reward-amount').each(function() {
-				var fieldAmount = $(this).val();
-				if(fieldAmount.length > 0 && !isNaN(fieldAmount)) {
-					sum += parseFloat(fieldAmount);
-				}
-			});
-			$('#total-reward-amount').html('$' + sum.toFixed(2));
+			Reward.setCartTotalAmount();
 		});
 		$('#ajax-submit').unbind('click');
 		$('#ajax-submit').click(function(event) {
@@ -58,5 +51,24 @@ var Reward = {
 	updateCartCount: function(countContent) {
 		console.log(countContent);
 		$('#shopping-cart').html(countContent);
+	},
+	setCartTotalAmount: function() {
+		console.log("Get total");
+		var sum = Reward.cartTotalAmount();
+		$('#total-reward-amount').html('$' + sum.toFixed(2));
+	},
+	cartTotalAmount: function() {
+		var sum = 0;
+		$('.reward-amount').each(function() {
+			var fieldAmount = $(this).val();
+			if(fieldAmount == undefined || fieldAmount == null || fieldAmount.length == 0) {
+				fieldAmount = $(this).text();
+			}
+			if(fieldAmount.length > 0 && !isNaN(fieldAmount)) {
+				sum += parseFloat(fieldAmount);
+			}
+		});
+		return sum;
 	}
+
 }

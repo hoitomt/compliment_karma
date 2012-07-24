@@ -1,6 +1,20 @@
 <script type="text/javascript">
 	$(function() {
 		Reward.setAlternatingRows();
+		Reward.setCartTotalAmount();
+		$('#select-reward-results').tablesorter({
+			// headers: {
+			// 	6: { sorter: false },
+			// 	7: { sorter: false }
+			// }
+		});
+		$('#proceed-to-payment-button').unbind('click');
+		$('#proceed-to-payment-button').click(function(event) {
+			window.location.href = '/payments/new.html';
+			// event.stopPropagation();
+			// $.get('/payments/new.html');
+			return false;
+		})
 	})
 </script>
 <div id="content-container">
@@ -10,39 +24,52 @@
 	<div class="send-reward">
 		<div class="clear"></div>
 		<div id="rewards-results">
-
-			<%= form_tag "/rewards/payment", :id => 'reward-add-to-cart-form' do %>
+			<%= form_tag "/rewards/cart", :id => 'reward-add-to-cart-form' do %>
 				<%= hidden_field_tag 'company_user_id', @user.id %>
 				<table id="select-reward-results">
 					<tr class="header-row">
-						<th><div class="col1">Rank</div></th>
 						<th><div class="col2">Full Name</div></th>
-						<th><div class="col3">Department</div></th>
-						<th><div class="col4">Compliments Received</div></th>
-						<th><div class="col5">Reward Amount</div></th>
+						<th><div class="col2">Employee Type</div></th>
+						<th><div class="col2">Department</div></th>
+						<th><div class="col2">Manager</div></th>
+						<th><div class="col4">Reward Sponsor</div></th>
+						<th><div class="col3">Reward</div></th>
 						<th><div class="col1"></div></th>
 					</tr>
 					<% unless @rewards.blank? %>
-						<% @rewards.each_with_index do |reward, index| %>
+						<% @rewards.each_with_index do |reward_hash, index| %>
+							<% employee = employee_vo(reward_hash[:employee]) %>
+							<% reward = reward_hash[:reward] %>
 							<tr>
-								<td><div class="col1"><%= index + 1 %></td>
-								<td><div class="col2"><%= reward.receiver.first_last %></div></td>
-								<td><div class="col3"><%= department(reward.receiver) %></div></td>
-								<td><div class="col4"><%= compliments_received(reward.receiver) %></div></td>
-								<td><div class="col5"><%= number_to_currency(reward.value) %></td>
-								<td><div class="col1">
+								<td style="padding: 5px;"><%= employee[:full_name] %></td>
+								<td class="centered"><%= employee[:user_type] %></td>
+								<td><%= employee[:department] %></td>
+								<td class="centered"><%= employee[:manager] %></td>
+								<td></td>
+								<td>
+									<span class="reward-amount" style="display: none;"><%= reward.value %></span>
+									<%= number_to_currency(reward.value) %>
+								</td>
+								<td>
 									<%= link_to 'delete', 
 															remove_from_cart_path(:reward_id => reward.id, :user_id => @user.id), 
 															:confirm => "Are you sure you want to remove this item from your cart" %>
-								</div></td>
+								</td>
 							</tr>
 						<% end %>
 					<% end %>
+					<tr class="footer-row">
+						<td colspan="4"></td>
+						<td style="font-weight: bold; font-size: 14px; text-align: right; padding-right: 5px;">Total Reward Amount</td>
+						<td id="total-reward-amount" style="font-weight: bold; font-size: 14px; padding-left: 5px;"></td>
+						<td></td>
+					</tr>					
 				</table>
 				<div class="add-to-cart-submit">
 					<button type=submit class="add-to-cart-button">
-						<span style="margin-left: 5px;">Proceed to Payment</span>
+						<span style="margin-left: 5px;">Update</span>
 					</button>
+					<button id="proceed-to-payment-button" class="add-to-cart-button">Proceed to Payment</button>
 				</div>
 				<div class="clear"></div>
 			<% end %>

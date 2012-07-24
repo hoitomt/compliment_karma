@@ -41,4 +41,31 @@ class Reward < ActiveRecord::Base
                   user.id, user.id, RewardStatus.complete.id)
   end
 
+  def self.build_employee_vo(employees, activity_type_id)
+    employees_result = []
+    employees.each do |user|
+      employees_result << get_individual_employee_vo(user, activity_type_id)
+    end
+    return employees_result
+  end
+
+  def self.get_individual_employee_vo(user, activity_type_id=nil)
+    e = {}
+    e[:id] = user.id
+    e[:full_name] = user.first_last
+    e[:manager] = ''
+    e[:user_type] = ''
+    e[:department] = user.company_departments.first
+    case activity_type_id
+      when ActivityType.compliments_received.id
+        e[:activity_type] = Compliment.sent_professional_compliments(user).count
+      when ActivityType.compliments_sent.id
+        e[:activity_type] = Compliment.received_professional_compliments(user).count
+      when ActivityType.trophies_earned.id
+      when ActivityType.badges_earned.id
+      else
+    end
+    return e
+  end
+
 end

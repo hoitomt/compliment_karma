@@ -17,7 +17,7 @@ class RewardsController < ApplicationController
 				else
 					if reward_created == 1
 						flash[:notice] = "1 new reward has been created"
-					else
+					elsif reward_created > 1
 						flash[:notice] = "#{reward_created} new rewards have been created"
 					end
 					redirect_to cart_path(:user_id => @user.id)
@@ -59,7 +59,11 @@ class RewardsController < ApplicationController
 		@rewards = []
 		unless session[:cart].blank?
 			session[:cart].each do |reward_id|
-				@rewards << Reward.find(reward_id)
+				h = {}
+				reward = Reward.find(reward_id)
+				h[:reward] = reward
+				h[:employee] = reward.receiver
+				@rewards << h
 			end
 		end
 	end

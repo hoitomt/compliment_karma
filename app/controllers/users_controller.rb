@@ -142,13 +142,18 @@ class UsersController < ApplicationController
     activity_type_id = set_reward_activity_type
     @user_types = []
     employees = set_employees
-    build_employee_vo(employees, activity_type_id)
+    @employees = Reward.build_employee_vo(employees, activity_type_id)
+    # build_employee_vo(employees, activity_type_id)
+    logger.info("Activity Type #{@activity_type}")
   end
 
   def set_reward_activity_type
-    activity_type_id = params[:activity_type_id] || ActivityType.compliments_received.id
+    activity_type_id_filter = params[:filter][:activity_type_id] if params[:filter]
+    activity_type_id = activity_type_id_filter || ActivityType.compliments_received.id
+    logger.info("Activity Type ID: #{activity_type_id}")
     @activity_type = ActivityType.find(activity_type_id)
-    return activity_type_id || @activity_type.id
+    # logger.info("Activity Type #{@activity_type}")
+    return @activity_type.blank? ? activity_type_id : @activity_type.id
   end
 
   def set_employees
