@@ -135,11 +135,11 @@ var ComplimentUI = {
 		$('#compliment-form').bind('ajax:beforeSend', function(evt, data, status, xhr){
 			$('#sending-compliment-spinner').show();
 		});
-		$('#compliment-form').bind('ajax:success', function(evt, data, status, xhr){
-			$('#sending-compliment-spinner').hide();
-			alert("Your compliment was successfully sent");
-			ComplimentUI.resetNewComplimentValues();
-		});
+		// $('#compliment-form').bind('ajax:success', function(evt, data, status, xhr){
+		// 	$('#sending-compliment-spinner').hide();
+		// 	// alert("Your compliment was successfully sent");
+		// 	// ComplimentUI.resetNewComplimentValues();
+		// });
 	},
 	resetNewComplimentValues: function() {
 		$('#compliment_receiver_display').val('');

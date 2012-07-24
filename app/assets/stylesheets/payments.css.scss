@@ -17,14 +17,19 @@
 	background: #ffffff;
 	padding: 20px 0;
 }
-
-#new_payment { 
-	@include user-profile-form-styling;
+#new-payment-form-container {
 	@include border-radius;
 	padding: 20px;
 	margin: 0 0 0 20px;
 	background: #f0f0f0;
-	width: 400px;
+	width: 600px;
+}
+#credit-card-img {
+	float: left;
+}
+#new_payment { 
+	@include user-profile-form-styling;
+	float: left;
 	#data-entry {
 		// float: left;
 		margin-bottom: 0;

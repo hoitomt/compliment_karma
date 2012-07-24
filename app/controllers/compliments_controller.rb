@@ -22,12 +22,8 @@ class ComplimentsController < ApplicationController
     logger.info(@compliment.inspect)
     if @compliment.save
       logger.info("compliment saved")
-      respond_to do |format|
-        format.html{
-          set_success_notice
-          process_redirect("success", referrer)
-        }
-      end
+      set_success_notice
+      process_redirect("success", referrer)
     else
       logger.info("compliment NOT saved")
       logger.info(@compliment.errors.messages)
@@ -51,12 +47,17 @@ class ComplimentsController < ApplicationController
   end
     
   def process_redirect(result, referrer)
+    logger.info("Redirect")
     # Don't send the compliment back to the screen
     flash[:compliment] = @compliment if result == "failure"
     user = User.find_by_email(@compliment.sender_email)
     respond_to do |format|
       format.html {redirect_to referrer}
-      format.js { render :nothing => true }
+      format.js { 
+        logger.info("Javascript Render")
+        render :create_compliment 
+      }
+      # format.js { render :nothing => true }
     end
   end
   

@@ -1,0 +1,8 @@
+console.log('render create');
+
+var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
+CommonScripts.showFlash(flashContent);
+
+$('#sending-compliment-spinner').hide();
+ComplimentUI.resetNewComplimentValues();
+

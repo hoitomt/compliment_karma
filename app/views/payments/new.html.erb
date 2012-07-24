@@ -3,8 +3,8 @@
 		<p class="title">Secure Checkout</p>
 	</div>
 	<div id="new-payment-container">
-		<%= form_for(@payment, :validate => true ) do |f| %>
-			<div class="left-one-third">
+		<div id="new-payment-form-container">
+			<%= form_for(@payment, :validate => true ) do |f| %>
 				<div id="data-entry" class="clearfix">
 					<p style="margin-bottom: 10px;">How would you like to pay?</p>
 					<%= f.radio_button :payment_type, "credit_card", :checked => true, :class => "radio" %>
@@ -35,6 +35,8 @@
 						</div>
 					</div>
 				</div>
+				<%= image_tag "http://www.creditcardimagelogos.com/credit_card_logos_10.gif", :width => '200px' %>
+
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= label_tag "Expiration Date (MM/YY)" %></div>
 					<div class="clear"></div>
@@ -74,12 +76,14 @@
 						<div id="payment_cc_billing_zip_cd_error"></div>
 					</div>
 				</div>
+				<div class="clear"></div>
+				<div class="place-order-container">
+					<button type="submit" class="place-order-button">Place Order</button>
+				</div>
+			<% end %>
+			<div id="credit-card-img">
 			</div>
 			<div class="clear"></div>
-			<div class="place-order-container">
-				<button type="submit" class="place-order-button">Place Order</button>
-			</div>
-		<% end %>
-		<div class="clear"></div>
+		</div>
 	</div>
 </div>

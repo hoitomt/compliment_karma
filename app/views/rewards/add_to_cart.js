@@ -1,4 +1,4 @@
-console.log("add to cart")
+// console.log("add to cart")
 var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
 CommonScripts.showFlash(flashContent);
 

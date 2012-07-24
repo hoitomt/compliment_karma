@@ -1,12 +1,4 @@
 <div id="my-updates">
-	<div id="my-updates-header">
-		<h1 style="float: left; margin-left: 10px;">My Notifications</h1>
-		<span class="my-notification-header_link">
-			<%= link_to 'See All', my_updates_all_path(@user), :class => "ul_hover" %>
-		</span>
-		<div class="clear"></div>
-	</div>
-	<div class="clear"></div>
 	<% if @my_update_items && current_user.confirmed? %>
 		<ul id="my-update-content">
 			<% @my_update_items.each do |item| %>
@@ -14,14 +6,14 @@
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
 					<%= link_to user_path(:id => originator.id, :update_history_id => item.id) do %>
 						<li class="clearfix <%= set_read_status_css(item) %>" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
-							<div class="my-update-item-image">
+							<div class="my-update-all-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
-							<div class="my-update-item-note clearfix">
+							<div class="my-update-all-item-note clearfix">
 								<p class="originator-note">
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
-								<%= render 'my_updates/update_compliments', :item => item %>
+								<%= render 'my_updates/update_compliments_all', :item => item %>
 								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
 						</li>
@@ -33,14 +25,14 @@
 																						:remote => true do %>
 						<li class="clearfix <%= set_read_status_css(item) %>" 
 								style="border-left: 2px solid #DCF1EF; margin-left: -2px">
-							<div class="my-update-item-image">
+							<div class="my-update-all-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
-							<div class="my-update-item-note clearfix">
+							<div class="my-update-all-item-note clearfix">
 								<p class="originator-note">
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
-								<%= render 'my_updates/update_compliments', :item => item %>
+								<%= render 'my_updates/update_compliments_all', :item => item %>
 								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
 						</li>

@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js {
-        @show_header_link = true
+        @popup_box = true
       }
     end
   end
@@ -206,8 +206,7 @@ class UsersController < ApplicationController
   end
 
   def sender_is_a_company?
-    return false if current_user.blank?
-    return true if @user.is_a_company? && current_user.is_company_administrator?(@user.company)
+    return true if current_user.is_a_company?
     return false
   end
   

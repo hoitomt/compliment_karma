@@ -232,11 +232,9 @@ var UserProfile = {
 		$('.stripe-me tr:odd').addClass('alt');
 	},
 	followButtonHover: function() {
-		console.log("Set Follow Button Hover");
 		$('.follow-button').off('mouseover mouseout');
 		$('.follow-button').on({
 			mouseover: function(event) {
-				console.log("mouse over");
 				var followText = $(this).html();
 				if(followText == "Following") {
 					$(this).html('Unfollow');
@@ -252,7 +250,6 @@ var UserProfile = {
 		$('.following-button').off('mouseover mouseout');
 		$('.following-button').on({
 			mouseover: function(event) {
-				console.log("mouse over");
 				var followText = $(this).html();
 				if(followText == "Following") {
 					$(this).html('Unfollow');

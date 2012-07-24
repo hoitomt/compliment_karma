@@ -15,9 +15,10 @@ module UsersHelper
 
   def compliment_type(compliment)
     if compliment && compliment.compliment_type
-      html = '<span style="margin-right: 15px">'
-      html << compliment.compliment_type.name
-      html << '</span>'
+      # html = '<span style="margin-right: 15px">'
+      # html << compliment.compliment_type.name
+      # html << '</span>'
+      html = compliment.compliment_type.name
       return html.html_safe
     end
   end
