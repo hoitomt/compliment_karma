@@ -4,9 +4,21 @@
 $input-width: 140px;
 $color-blue: #466fac;
 
+#user-information {
+	width: 700px;
+	.header {
+		@include gradient-gray;
+		padding: 10px;
+		text-align: center;
+	}
+	h2 {
+		color: #313131;
+		text-shadow: 0.1em 0 0.1em #ffffff;
+	}
+}
 .popup-form { 
 	@include user-profile-form-styling;
-	background: #DBEEF4; 
+	background: #ffffff; 
 	padding: 20px;
 	#data-entry {
 		display: block;
@@ -16,18 +28,29 @@ $color-blue: #466fac;
 		float: left;
 		padding-top: 5px;
 	}
+	label {
+		width: 125px;
+		font-size: 14px;
+	}
 	#field {
 		float: left;
 	}
 	input,
   textarea {
-		border: 1px solid #4f81bd;
+		border: 2px solid #a6a6a6;
 		background: #ffffff;
 		width: 200px;
 	}
-	select { border: 1px solid #4f81bd; width: 100px;}
+	textarea {
+		width: 500px;
+	}
+	select { border: 1px solid #a6a6a6; width: 100px;}
+	button {
+		font-size: 14px;
+		font-weight: bold;
+	}
 }
-#user-information {
+#user-info-form-container {
 	#data-entry {
 		margin-bottom: 10px;
 	}

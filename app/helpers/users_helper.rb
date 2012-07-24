@@ -177,11 +177,13 @@ module UsersHelper
     if feed_item && feed_item.item_type_id == @recognition_type_compliment.id
       if link_text =~ /Sender/
         sender = User.find(feed_item.item_object.sender_user_id)
+        return "" if current_user?(sender)
         return link_to sender.full_name, 
                        new_compliment_path(:recipient_id => sender.id),
                                            :remote => true
       elsif link_text =~ /Receiver/
         receiver = User.find(feed_item.item_object.receiver_user_id)
+        return "" if current_user?(receiver)
         return link_to receiver.full_name, 
                         new_compliment_path(:recipient_id => receiver.id),
                                             :remote => true
@@ -191,11 +193,13 @@ module UsersHelper
     elsif feed_item && feed_item.item_type_id == @recognition_type_reward.id
       if link_text =~ /Presenter/
         presenter = User.find(feed_item.item_object.presenter_id)
+        return "" if current_user?(presenter)
         return link_to presenter.full_name, 
                        new_compliment_path(:recipient_id => presenter.id),
                                            :remote => true
       elsif link_text =~ /Receiver/
         receiver = User.find(feed_item.item_object.receiver_id)
+        return "" if current_user?(receiver)
         return link_to receiver.full_name, 
                        new_compliment_path(:recipient_id => receiver.id),
                                            :remote => true

@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
                   :first_name, :middle_name, :last_name, :domain, :job_title,
                   :account_status_id, :account_status, :address_line_1, :address_line_2, 
                   :city, :state_cd, :zip_cd, :profile_url, :profile_headline, 
-                  :industry_id, :company_id, :country, :last_read_notification_date
+                  :industry_id, :company_id, :country, :last_read_notification_date,
+                  :professional_intro, :social_intro
   
   has_attached_file  :photo, 
                      :styles => { :mini => "40x40>",
@@ -112,14 +113,14 @@ class User < ActiveRecord::Base
   def set_name
     name_array = self.name.split(' ')
     if name_array.size == 1
-      self.first_name = name_array[0].capitalize
+      self.first_name = name_array[0]
     elsif name_array.size == 2
-      self.first_name = name_array[0].capitalize
-      self.last_name = name_array[1].capitalize
+      self.first_name = name_array[0]
+      self.last_name = name_array[1]
     elsif name_array.size > 2
-      self.first_name = name_array[0].capitalize
-      self.middle_name = name_array[1].capitalize
-      self.last_name = name_array[2].capitalize
+      self.first_name = name_array[0]
+      self.middle_name = name_array[1]
+      self.last_name = name_array[2]
     end    
   end
   

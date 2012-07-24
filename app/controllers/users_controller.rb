@@ -48,6 +48,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.name = params[:user][:name]
+    @user.set_name
     @user.update_attributes(params[:user])
     redirect_to @user
   end

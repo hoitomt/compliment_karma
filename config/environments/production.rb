@@ -3,6 +3,7 @@ Ck::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = true
+  config.action_dispatch.rack_cache =  {:metastore=>"rails:/", :entitystore=>"rails:/", :verbose=>false}
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false

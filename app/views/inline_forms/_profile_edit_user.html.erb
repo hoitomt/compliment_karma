@@ -1,54 +1,65 @@
-<div id="user-information" class="popup-form">
-	<h2 style="margin-bottom: 10px;">Demographic Data</h2>
-	<%= form_for user do |f| %>
-		<div id="data-entry" class="clearfix">
-			<div id="label"><%= f.label :photo, "New Photo" %></div>
-			<div id="field">
-				<%= f.file_field :photo, 
-												 :style => "height: 25px; padding-top: 8px; background: none; border: none;" %>
+<div id="user-information">
+	<div class="header">
+		<h2>My Information</h2>
+	</div>
+	<div id="user-info-form-container" class="popup-form">
+		<%= form_for user do |f| %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :photo, "New Photo" %></div>
+				<div id="field">
+					<%= f.file_field :photo,
+													 :style => "height: 25px; padding-top: 8px; background: none; border: none;" %>
+				</div>
 			</div>
-		</div>
-		<div id="data-entry" class="clearfix">
-			<div id="label"><%= f.label :first_name, "First" %></div>
-			<div id="field">
-				<%= f.text_field :first_name %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :name, "Full Name" %></div>
+				<div style="display: inline-block; padding: 5px 0 0 5px;">e.g. Homer Simpson, Homer J Simpson</div>
+				<div id="field">
+					<%= f.text_field :name %>
+				</div>
 			</div>
-		</div>
-		<div id="data-entry" class="clearfix">
-			<div id="label"><%= f.label :middle_name, "Middle" %></div>
-			<div id="field">
-				<%= f.text_field :middle_name %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :country, "Country" %></div>
+				<div id="field">
+					<% selected_value = user.country || "United States" %>
+					<%= f.select :country, country_list, {:selected => selected_value}, 
+											 {:style => "width: 205px; height: 30px;"} %>
+				</div>
 			</div>
-		</div>
-		<div id="data-entry" class="clearfix">
-			<div id="label"><%= f.label :last_name, "Last" %></div>
-			<div id="field">
-				<%= f.text_field :last_name %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :zip_cd, "Zip / Pin code" %></div>
+				<div id="field">
+					<%= f.text_field :zip_cd %>
+				</div>
 			</div>
-		</div>
-		<div id="data-entry" class="clearfix">
-			<div id="label"><%= f.label :city %></div>
-			<div id="field">
-				<%= f.text_field :city %>
+			<div id="data-entry" class="user-state-code clearfix">
+				<div id="label"><%= f.label :state_cd, "State / Province" %></div>
+				<div id="field">
+					<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
+											 {:style => "width: 145px; height: 30px;"} %>
+				</div>
 			</div>
-		</div>
-		<div id="data-entry" class="clearfix">
-			<div id="label"><%= f.label :country, "Country" %></div>
-			<div id="field">
-				<% selected_value = user.country || "United States" %>
-				<%= f.select :country, country_list, {:selected => selected_value}, 
-										 {:style => "width: 205px; height: 30px;"} %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :city %></div>
+				<div id="field">
+					<%= f.text_field :city %>
+				</div>
 			</div>
-		</div>
-		<div id="data-entry" class="user-state-code clearfix">
-			<div id="label"><%= f.label :state_cd, "State" %></div>
-			<div id="field">
-				<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
-										 {:style => "width: 145px; height: 30px;"} %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :professional_intro %></div>
+				<div id="field">
+					<%= f.text_area :professional_intro, :rows => 15 %>
+				</div>
 			</div>
-		</div>
-		<div>
-			<button class="button-location" type=submit>Update</button>
-		</div>
-	<% end %>
+			<div id="data-entry" class="clearfix">
+				<div id="label"><%= f.label :social_intro %></div>
+				<div id="field">
+					<%= f.text_area :social_intro, :rows => 15 %>
+				</div>
+			</div>
+			<div>
+				<button class="button-location" type=submit>Update</button>
+			</div>
+		<% end %>
+	</div>
 </div>
