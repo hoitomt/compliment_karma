@@ -102,6 +102,9 @@ class UpdateHistory < ActiveRecord::Base
   def self.Following_You(follow)
     subject = User.find_by_id(follow.subject_user_id)
     follower = User.find_by_id(follow.follower_user_id)
+    return if is_duplicate_uh_follow?(follow.subject_user_id, 
+                                      UpdateHistoryType.Following_You.id,
+                                      follow.follower_user_id)
     add_update_history( follow.subject_user_id,
                         UpdateHistoryType.Following_You.id,
                         nil,
@@ -193,6 +196,14 @@ class UpdateHistory < ActiveRecord::Base
                                                   'and originating_user_id = ?',
                                                   user_id, update_history_type_id, recognition_type_id,
                                                   recognition_id, originating_user_id)
+    logger.info("Update History is Duplicate") unless existing_update_history.blank?
+    return !existing_update_history.blank?
+  end
+
+  def self.is_duplicate_uh_follow?(subject_user_id, update_history_type_id, originating_user_id)
+    existing_update_history = UpdateHistory.where('user_id = ? and update_history_type_id = ? ' +
+                                                  'and originating_user_id = ?',
+                                                  subject_user_id, update_history_type_id, originating_user_id)
     logger.info("Update History is Duplicate") unless existing_update_history.blank?
     return !existing_update_history.blank?
   end
