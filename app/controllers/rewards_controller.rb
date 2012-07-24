@@ -1,28 +1,40 @@
 class RewardsController < ApplicationController
+
+	# This handles both add to cart and checkout.
+	# An html request is a checkout request
+	# A Javascript request is an add to cart request
 	def add_to_cart
 		@user = User.find(params[:company_user_id])
 		rewards = params[:reward]
-		reward_created = false
-		if rewards
-			session[:cart] ||= []
-			rewards.each do |k, v|
-				r = Reward.new(:value => v, 
-											 :receiver_id => k, 
-											 :presenter_id => @user.id, 
-											 :reward_status_id => RewardStatus.pending.id)
-				if r.save
-					reward_created = true
-					session[:cart] << r.id
-				end
-			end
-		end
-		unless reward_created
-			logger.info("Error creating reward")
-			flash.now[:error] = "Please specify a valid reward amount for at least one of the employees"
-		end
+		reward_created = add_reward_to_cart(rewards)
 		respond_to do |format|
-			format.html { redirect_to @user }
-			format.js {  }
+			format.html {
+				if session[:cart].blank?
+					flash[:error] = "Your cart is empty"
+					redirect_to user_rewards_path(@user)
+				elsif @user.blank?
+					redirect_to root_path
+				else
+					if reward_created == 1
+						flash[:notice] = "1 new reward has been created"
+					else
+						flash[:notice] = "#{reward_created} new rewards have been created"
+					end
+					redirect_to cart_path(:user_id => @user.id)
+				end
+			}
+			format.js { 
+				unless reward_created > 0
+					logger.info("Error creating reward")
+					flash.now[:error] = "Please specify a valid reward amount for at least one of the employees"
+				else
+					if reward_created == 1
+						flash.now[:notice] = "1 new reward has been added to the cart"
+					else
+						flash.now[:notice] = "#{reward_created} new rewards have been added to the cart"
+					end
+				end
+			}
 		end
 	end
 
@@ -34,7 +46,6 @@ class RewardsController < ApplicationController
 	end
 
 	def checkout
-		@user = User.find(params[:user_id])
 		if session[:cart].blank?
 			flash[:error] = "Your cart is empty"
 			redirect_to user_rewards_path(@user)
@@ -51,6 +62,23 @@ class RewardsController < ApplicationController
 				@rewards << Reward.find(reward_id)
 			end
 		end
-
 	end
+
+	private
+		def add_reward_to_cart(rewards)
+			return if @user.blank? || rewards.blank?
+			reward_created = 0
+			session[:cart] ||= []
+			rewards.each do |k, v|
+				r = Reward.new(:value => v, 
+											 :receiver_id => k, 
+											 :presenter_id => @user.id, 
+											 :reward_status_id => RewardStatus.pending.id)
+				if r.save
+					reward_created += 1
+					session[:cart] << r.id
+				end
+			end
+			return reward_created
+		end
 end

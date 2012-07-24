@@ -39,6 +39,18 @@ var Reward = {
 			});
 			$('#total-reward-amount').html('$' + sum.toFixed(2));
 		});
+		$('#ajax-submit').unbind('click');
+		$('#ajax-submit').click(function(event) {
+			console.log('ajax');
+			event.stopPropagation();
+			var formData = $("#reward-add-to-cart-form").serialize()
+			$.ajax({
+				url: "/rewards/add_to_cart.js",
+				type: "POST",
+				data: formData
+			});
+			return false;
+		});
 	},
 	setAlternatingRows: function() {
 		$('#select-reward-results tr:nth-child(even)').addClass('alternate');

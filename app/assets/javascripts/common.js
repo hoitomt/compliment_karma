@@ -12,8 +12,8 @@ var CommonScripts = {
 		}
 	},
 	showFlash: function(flashContent) {
-		console.log(flashContent);
-		console.log("Flash Null: " + flashContent.length > 0);
+		// console.log(flashContent);
+		// console.log("Flash Null: " + flashContent.length > 0);
 		if(flashContent.length > 0) {
 			$('#explanation').slideDown();
 			$('#explanation').html(flashContent);
