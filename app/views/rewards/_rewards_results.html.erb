@@ -11,7 +11,7 @@
   	var results = <%=raw @employees.to_json %>;
 	})
 </script>
-	<%= form_tag "/rewards/add_to_cart", :id => 'reward-add-to-cart-form' do %>
+	<%= form_tag "/rewards/add_to_cart", :id => 'reward-add-to-cart-form', :remote => true do %>
 		<%= hidden_field_tag 'company_user_id', @user.id %>
 		<table id="select-reward-results" class="tablesorter">
 			<thead>
@@ -53,10 +53,11 @@
 			</tr>
 		</table>
 		<div class="add-to-cart-submit">
-			<button type=submit class="add-to-cart-button">
+			<%= link_to '#', :onclick => "$(this).closest('form').submit()", :class => "button-link" do %>
 				<%= image_tag 'shopping_cart.png', :height => '20' %>
 				<span style="margin-left: 5px;">Add to Cart</span>
-			</button>
+			<% end %>
+			<%= link_to 'Checkout', checkout_path(:user_id => @user.id), :class => 'button-link' %>
 		</div>
 		<div class="clear"></div>
 	<% end %>

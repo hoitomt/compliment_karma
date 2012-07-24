@@ -1,6 +1,19 @@
 @import 'common';
 @import 'user_common';
 
+
+@mixin button-style {
+	border: 1px solid gray;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	// text-shadow: none;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+}
+
 .rewards-header {
 	@include top-border-radius;
 	margin: 10px 0 0 0;
@@ -43,15 +56,8 @@
 	}
 	button {
 		@include gradient-bg;
-		border: 1px solid gray;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radius: 5px;
-		color: #ffffff;
-		font-size: 14px;
+		@include button-style;
 		padding: 7px 15px;
-		font-weight: bold;
-		text-shadow: none;
 	}
 	button:hover { 
 		// @include button-gradient-gray;
@@ -105,26 +111,48 @@
 	select {
 		font-size: 12px;
 		padding-top: 0;
-	}
+	}	
 }
 #rewards-results { 
 	padding: 10px 0 0 0;
 	button {
 		@include button-gradient-green;
-		border: 1px solid gray;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radius: 5px;
-		color: #ffffff;
-		font-size: 14px;
+	  @include button-style;
 		padding: 7px 20px;
-		font-weight: bold;
-		text-shadow: none;
+		height: 35px;
 	 }
 	button:hover {
 		// @include button-gradient-gray;
 		background: #00781c;
-	 }
+	}
+	.button-link {
+	  @include button-gradient-green;
+	  @include button-style;
+	  width: 155px;
+	  height: 33px;
+	  margin-left: 25px;
+	  font-size: 100%;
+	  display: inline-block;
+	  text-decoration: none;
+	  vertical-align: middle;
+	  text-align:center;
+	}
+	.button-link {
+	  @include button-gradient-green;
+	  @include button-style;
+	  width: 155px;
+	  height: 30px;
+	  padding: 5px 0 0 0;
+	  margin-left: 25px;
+	  font-size: 16px;
+	  display: inline-block;
+	  text-decoration: none;
+	  text-align:center;
+	}
+	.button-link:hover {
+		background: #00781c;
+		cursor: default;
+	}
 }
 table#select-reward-results {
 	@include top-border-radius;
@@ -177,6 +205,7 @@ td.centered {
 .add-to-cart-submit { 
 	float: right;
 	margin: 10px 10px 0 0;
+	height: 35px;
 }
 .reward-amount-header {
 	cursor: default;

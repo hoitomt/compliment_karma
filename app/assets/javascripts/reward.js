@@ -42,5 +42,9 @@ var Reward = {
 	},
 	setAlternatingRows: function() {
 		$('#select-reward-results tr:nth-child(even)').addClass('alternate');
+	},
+	updateCartCount: function(countContent) {
+		console.log(countContent);
+		$('#shopping-cart').html(countContent);
 	}
 }

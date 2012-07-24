@@ -4,7 +4,10 @@
 			<%= link_to image_tag('ck_logo.png'), current_user %>
 		</div>
 		<%= render 'my_updates/my_updates_indicator' %>
-		<%= render 'rewards/shopping_cart' %>
+		<% count = session[:cart] ? session[:cart].length : 0 %><!-- Needed for javascript rendering -->
+		<div id="shopping-cart">
+			<%= render 'rewards/shopping_cart', :count => count %>
+		</div>
 		<div id="nav-upper-right">
 			<ul>
 				<li>
