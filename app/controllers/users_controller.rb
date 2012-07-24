@@ -429,6 +429,7 @@ class UsersController < ApplicationController
     end
 
     def hide_unconfirmed_user
+      @user ||= User.find(params[:id])
       if !current_user?(@user) && !@user.confirmed?
         flash[:error] = "Sorry, Page not Found"
         redirect_to root_path
