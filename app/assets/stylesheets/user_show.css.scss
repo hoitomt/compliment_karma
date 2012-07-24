@@ -52,10 +52,12 @@
 	.background-image-company {
 		background: url(user_profile/default_company_image.png), no-repeat;
 		background-size: 180px 180px;
+		z-index: 1;
 	}
 	.background-image-user {
 		background: url(user_profile/default_people_image_dk.png), no-repeat;
 		background-size: 180px 180px;
+		z-index: 1;
 	}
 	.name-location {
 		width: 180px;
@@ -299,6 +301,30 @@
 	background-color: rgba(255,0,0,0.5);
 	h1{color: #fff; display: block; text-align: center; margin-top:30px;}
 }
+.unclickable-user-profile {
+	@include border-radius;
+	position: absolute;
+	height: 239px;
+	width: 198px;
+	z-index: 10;
+	margin-top: 0px;
+	background-color: rgba(255,0,0,0.5);
+	color: #ffffff;
+	padding: 10px;
+	font-weight: bold; font-size: 14px;
+	text-align: center;
+	h1{color: #fff; display: block; text-align: center; margin-top:30px;}
+}
+// #account-confirmation {
+// //	display: none;
+// 	background: $inline-error-red;
+// 	color: #ffffff;
+// 	margin: 10px 0 10px 0;
+// 	text-align: center;
+// 	font-weight: bold;
+// 	font-size: 16px;
+// 	a { color: #ffffff; }
+// }
 #compliment-panel {
 	clear: left;
 	margin-top: 10px;
@@ -349,16 +375,6 @@
 	li { margin-left: 0px; }
 }
 
-#account-confirmation {
-//	display: none;
-	background: $inline-error-red;
-	color: #ffffff;
-	margin: 10px 0 10px 0;
-	text-align: center;
-	font-weight: bold;
-	font-size: 16px;
-	a { color: #ffffff; }
-}
 #infinite-scroll-processing { float: right; margin: 0 5px 5px 0;}
 
 .fancybox-skin {

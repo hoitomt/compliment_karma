@@ -1,5 +1,5 @@
 <div id="user-profile-short" 
-		 class="box-no-padding <%= account_status_display(@confirmed, @pending_items) %>">
+		 class="box-no-padding">
 	<%= render 'users/panels/account_confirmation', :flash => flash %>
 	<div class="photo-small">
 		<% if @user && @user.photo_file_name.nil? %>

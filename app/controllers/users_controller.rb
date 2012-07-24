@@ -6,7 +6,7 @@ class UsersController < ApplicationController
                                            :achievements, :contacts, :employees, 
                                            :rewards, :settings, :my_updates, :switch_accounts ]
   before_filter :get_confirmation_status, :except => [:new, :create]
-  before_filter :hide_unconfirmed_user, :except => [:switch_accounts]
+  before_filter :hide_unconfirmed_user, :only => [:show]
   before_filter :set_static_vars
   before_filter :set_compliment_panel, 
                 :only => [:show, :my_updates, :my_updates_all, :professional_profile,
