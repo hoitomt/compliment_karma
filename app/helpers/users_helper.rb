@@ -486,16 +486,20 @@ module UsersHelper
   end
 
   def location(user)
-    entity = user.is_a_company? ? user.company : user
+    entity = user.is_a?(User) && user.is_a_company? ? user.company : user
     city = ""
     city = "#{entity.city}" unless entity.city.blank?
     state_cd = ""
     state_cd = entity.state_cd unless entity.state_cd.blank?
     if city.blank? && state_cd.blank?
-      return link_to 'Add location', 
-                     edit_from_profile_path(user), 
-                     :class => 'js-click-update-user ul_hover',
-                     :remote => true
+      if entity.country
+        return entity.country
+      else
+        return link_to 'Add location', 
+                       edit_from_profile_path(user), 
+                       :class => 'js-click-update-user ul_hover',
+                       :remote => true
+      end
     end
     separator = ', '
     if city.blank? || state_cd.blank?
@@ -505,7 +509,7 @@ module UsersHelper
   end
 
   def location_display(user)
-    entity = user.is_a_company? ? user.company : user
+    entity = user.is_a?(User) && user.is_a_company? ? user.company : user
     city = ""
     city = "#{entity.city}" unless entity.city.blank?
     state_cd = ""
