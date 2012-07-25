@@ -109,10 +109,12 @@ class UsersController < ApplicationController
   end
 
   def received_compliments
+    @compliments = @user.compliments_received
     menu_response_handler
   end
 
   def sent_compliments
+    @compliments = @user.compliments_sent
     menu_response_handler
   end
 

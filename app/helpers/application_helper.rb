@@ -80,7 +80,7 @@ module ApplicationHelper
 
   def get_user_photo_link_medium(user)
     if user
-      link_to image_tag(user.photo.url(:medium), :width => '200'), user_path(user.id)
+      link_to image_tag(user.photo.url(:medium), :style => "max-width: 200"), user_path(user.id)
     else
       image_tag('/photos/medium/missing.png', :width => '200')
     end 
