@@ -53,19 +53,26 @@
 				<%= f.text_field :city %>
 			</div>
 		</div>
-		<div id="data-entry" style="float: left; margin-right: 15px;">
+		<div id="data-entry" style="float: left;">
 			<div id="label"><%= f.label :country, "Country" %></div>
 			<div id="field">
 				<% selected_value = experience.country || "United States" %>
 				<%= f.select :country, country_list, {:selected => selected_value}, 
-										 {:style => "width: 145px; height: 29px;"} %>
+										 {:style => "width: 305px; height: 29px;"} %>
 			</div>
 		</div>
-		<div id="data-entry" class="experience-state-code" style="float: left;">
+		<div class="clear"></div>
+		<div id="data-entry" class="experience-state-code-select" style="float: left;">
 			<div id="label"><%= f.label :state_cd, "State" %></div>
 			<div id="field">
 				<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
 										 {:style => "width: 145px; height: 29px;"} %>
+			</div>
+		</div>
+		<div id="data-entry" class="experience-state-code-text" style="float: left;">
+			<div id="label"><%= f.label :state_cd, "State" %></div>
+			<div id="field">
+				<%= f.text_field :state_cd %>
 			</div>
 		</div>
 		<div class="clear"></div>

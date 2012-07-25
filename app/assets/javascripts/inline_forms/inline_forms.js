@@ -15,9 +15,11 @@ var InlineForms = {
 	setExperienceStateVisibility: function() {
 		var selectedValue = $('select#experience_country').val();
 		if(selectedValue == "United States") {
-			$('.experience-state-code').show();
+			$('.experience-state-code-select').show();
+			$('.experience-state-code-text').hide();
 		} else {
-			$('.experience-state-code').hide();
+			$('.experience-state-code-select').hide();
+			$('.experience-state-code-text').show();
 		}
 	},
 	setUserStateVisibility: function() {

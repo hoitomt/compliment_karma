@@ -491,9 +491,11 @@ module UsersHelper
     city = "#{entity.city}" unless entity.city.blank?
     state_cd = ""
     state_cd = entity.state_cd unless entity.state_cd.blank?
+    country = ""
+    country = entity.country
     if city.blank? && state_cd.blank?
-      if entity.country
-        return entity.country
+      unless country.blank?
+        return country
       else
         return link_to 'Add location', 
                        edit_from_profile_path(user), 
@@ -514,11 +516,11 @@ module UsersHelper
     city = "#{entity.city}" unless entity.city.blank?
     state_cd = ""
     state_cd = entity.state_cd unless entity.state_cd.blank?
-    separator = ', '
-    if city.blank? || state_cd.blank?
-      separator = ''
-    end
-    return "#{city}#{separator}#{state_cd}"
+    country = ""
+    country = entity.country unless entity.country.blank?
+    separator = city.blank? || state_cd.blank? ? '' : ', '
+    c_separator = city.blank? && state_cd.blank? ? '' : ' '
+    return "#{city}#{separator}#{state_cd}#{c_separator}#{country}"
   end
 
   def stats_label(count, label)
