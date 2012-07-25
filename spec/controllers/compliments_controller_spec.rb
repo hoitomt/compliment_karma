@@ -317,7 +317,8 @@ describe ComplimentsController do
             post :create, @attr
           end.should change(Compliment, :count).from(0).to(1)
           c = Compliment.last
-          c.visibility.should eq(Visibility.SENDER_AND_RECEIVER)            
+          c.visibility.should eq(Visibility.EVERYBODY)
+          # c.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
         end
       end
 

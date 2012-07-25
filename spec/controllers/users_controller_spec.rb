@@ -93,7 +93,7 @@ describe UsersController do
         it "should have the correct number of Compliments in Karma Live" do
           # should see followed
           get :show, :id => user2
-          assigns(:karma_live_items_count).should eq(20)
+          assigns(:karma_live_items_count).should eq(30)
           # karma_live_items = controller.instance_variable_get(:all_karma_live_items)
           c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
           c.count.should eq(10)
@@ -297,18 +297,18 @@ describe UsersController do
         @attr[:name] = "joe the plumber"
         post :create, :user => @attr
         u = User.last
-        u.first_name.should == 'Joe'
-        u.middle_name.should == 'The'
-        u.last_name.should == 'Plumber'
+        u.first_name.should == 'joe'
+        u.middle_name.should == 'the'
+        u.last_name.should == 'plumber'
       end
 
       it "should parse more than three names" do
         @attr[:name] = "thurston monroe howell the third"
         post :create, :user => @attr
         u = User.last
-        u.first_name.should == 'Thurston'
-        u.middle_name.should == 'Monroe'
-        u.last_name.should == 'Howell'
+        u.first_name.should == 'thurston'
+        u.middle_name.should == 'monroe'
+        u.last_name.should == 'howell'
       end
     end
     

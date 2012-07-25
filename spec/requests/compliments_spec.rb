@@ -94,7 +94,8 @@ describe "Compliments" do
         @compliment.sender_user_id.should eq(@user.id)
         @compliment.receiver_user_id.should eq(nil)
         @compliment.compliment_status.should eq(ComplimentStatus.PENDING_RECEIVER_REGISTRATION)
-        @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
+        @compliment.visibility.should eq(Visibility.EVERYBODY)
+        # @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
       end
     end
     
@@ -117,7 +118,8 @@ describe "Compliments" do
         @compliment.sender_user_id.should eq(@user.id)
         @compliment.receiver_user_id.should eq(receiver.id)
         @compliment.compliment_status.should eq(ComplimentStatus.PENDING_RECEIVER_CONFIRMATION)
-        @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
+        @compliment.visibility.should eq(Visibility.EVERYBODY)
+        # @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
       end
     end
     
@@ -163,7 +165,8 @@ describe "Compliments" do
          @compliment.sender_user_id.should eq(@user.id)
          @compliment.receiver_user_id.should eq(receiver.id)
          @compliment.compliment_status.should eq(ComplimentStatus.ACTIVE)
-         @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
+         @compliment.visibility.should eq(Visibility.EVERYBODY)
+         # @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
        end
        
        it "should create a NOT_ACCEPTED relationship" do
@@ -196,7 +199,8 @@ describe "Compliments" do
        @compliment.sender_user_id.should eq(@user.id)
        @compliment.receiver_user_id.should eq(receiver.id)
        @compliment.compliment_status.should eq(ComplimentStatus.ACTIVE)
-       @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
+       @compliment.visibility.should eq(Visibility.EVERYBODY)
+       # @compliment.visibility.should eq(Visibility.SENDER_AND_RECEIVER)
       end
     end
     
