@@ -486,10 +486,11 @@ module UsersHelper
   end
 
   def location(user)
+    entity = user.is_a_company? ? user.company : user
     city = ""
-    city = "#{user.city}" unless user.city.blank?
+    city = "#{entity.city}" unless entity.city.blank?
     state_cd = ""
-    state_cd = user.state_cd unless user.state_cd.blank?
+    state_cd = entity.state_cd unless entity.state_cd.blank?
     if city.blank? && state_cd.blank?
       return link_to 'Add location', 
                      edit_from_profile_path(user), 
@@ -504,10 +505,11 @@ module UsersHelper
   end
 
   def location_display(user)
+    entity = user.is_a_company? ? user.company : user
     city = ""
-    city = "#{user.city}" unless user.city.blank?
+    city = "#{entity.city}" unless entity.city.blank?
     state_cd = ""
-    state_cd = user.state_cd unless user.state_cd.blank?
+    state_cd = entity.state_cd unless entity.state_cd.blank?
     separator = ', '
     if city.blank? || state_cd.blank?
       separator = ''

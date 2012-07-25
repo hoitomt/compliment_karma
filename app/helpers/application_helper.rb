@@ -94,6 +94,21 @@ module ApplicationHelper
     end
   end
 
+  def date_time_format(date)
+    today = DateTime.now
+    if date
+      if date.day == today.day && date.month == today.month && date.year == today.year
+        return date.strftime("Today %I:%M %P")
+      elsif date.year == today.year
+        return date.strftime("%-m/%d")
+      else
+        return date.strftime("%-m/%d/%Y")
+      end
+    else
+      return ""
+    end
+  end
+
   def update_history_count_display
     html = ""
     count = update_history_count

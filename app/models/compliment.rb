@@ -38,6 +38,8 @@ class Compliment < ActiveRecord::Base
   after_create :set_relationship
   after_create :update_history
   after_create :metrics_send_new_compliment
+
+  default_scope :order => "created_at DESC"
   
   # return the compliments that are pending for an email address
   # intent is to notify a potential user that there are compliments waiting for them
@@ -143,21 +145,24 @@ class Compliment < ActiveRecord::Base
   
   def set_visibility
     if self.visibility_id.blank?
-      # Look up the visibility from the relationship
-      receiver = User.find_by_id(self.receiver_user_id)
-      sender = User.find_by_id(self.sender_user_id)
-      relationship = Relationship.get_relationship(sender, receiver)
-      if relationship
-        self.visibility = relationship.visibility
-      end
+      # Set this for now
+      self.visibility = Visibility.EVERYBODY
+
+      # # Look up the visibility from the relationship
+      # receiver = User.find_by_id(self.receiver_user_id)
+      # sender = User.find_by_id(self.sender_user_id)
+      # relationship = Relationship.get_relationship(sender, receiver)
+      # if relationship
+      #   self.visibility = relationship.visibility
+      # end
       
-      if self.visibility.nil?
-        if self.sender_domain == self.receiver_domain
-          self.visibility = Visibility.EVERYBODY
-        else
-          self.visibility = Visibility.SENDER_AND_RECEIVER
-        end
-      end
+      # if self.visibility.nil?
+      #   if self.sender_domain == self.receiver_domain
+      #     self.visibility = Visibility.EVERYBODY
+      #   else
+      #     self.visibility = Visibility.SENDER_AND_RECEIVER
+      #   end
+      # end
     end
   end
   

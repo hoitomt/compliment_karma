@@ -1,3 +1,10 @@
-var view = '<%= j(render "inline_forms/profile_edit_user", :user => @user) %>';
+var is_a_company = '<%= @is_a_company %>';
+var view = ''
+if(is_a_company == "true") {
+	view = '<%= j(render "inline_forms/profile_edit_company", :company => @company) %>';
+} else {
+	view = '<%= j(render "inline_forms/profile_edit_user", :user => @user) %>';
+}
+
 ShowFancybox.init(view);
 InlineForms.init();

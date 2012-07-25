@@ -1,3 +1,9 @@
-<div id="user-received-compliments" class="right-two-thirds drop-box-white">
-	<h1>Received Compliments</h1>
-</div>
+<script type="text/javascript">
+	$(function() {
+		$('#compliment-display tr:nth-child(even)').addClass('alternate');
+		$('#compliment_display').tablesorter();
+	});
+</script>
+<%= render :partial => 'users/menu/compliment_list', 
+					 :locals => {:sent_compliments => false,
+					 						 :compliments => @compliments } %>

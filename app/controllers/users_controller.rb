@@ -44,6 +44,36 @@ class UsersController < ApplicationController
 
   def edit_from_profile
     @user = User.find(params[:id])
+    @is_a_company = @user.is_a_company?
+    @company = @user.company if @is_a_company
+    @industries = temp_industries
+    @company_types = ["Private", "Public"]
+    @company_sizes = ['1 - 50', '51 - 100', '101 - 500', '501 - 5,000', '5,001 - 10,000', 'over 10,000']
+    @company_operating_statuses = ["Startup", "Operating"]
+  end
+
+  def temp_industries
+    [ 'Agriculture, Forestry, Fishing and Hunting',
+      'Mining, Quarrying, and Oil and Gas Extraction',
+      'Utilities',
+      'Construction',
+      'Manufacturing',
+      'Wholesale Trade',
+      'Retail Trade',
+      'Transportation and Warehousing',
+      'Information',
+      'Finance and Insurance',
+      'Real Estate and Rental and Leasing',
+      'Professional, Scientific, and Technical Services',
+      'Management of Companies and Enterprises',
+      'Administrative and Support and Waste Management and Remediation Services',
+      'Educational Services',
+      'Health Care and Social Assistance',
+      'Arts, Entertainment, and Recreation',
+      'Accommodation and Food Services',
+      'Other Services (except Public Administration)',
+      'Public Administration'
+    ]
   end
 
   def update

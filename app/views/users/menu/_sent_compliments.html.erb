@@ -1,46 +1,9 @@
-<div id="content-container">
-	<div class="header">
-		<p class="title">Sent Compliments</p>
-	</div>
-	<div class="send-reward">
-	<h1>Sent Compliments</h1>
-			<table id="compliment-display" class="tablesorter">
-			<thead>
-				<tr class="header-row">
-					<th><div class="col1">Date</div></th>
-					<th><div class="col2">Full Name</div></th>
-					<th><div class="col2">Department</div></th>
-					<th><div class="col2">Manager</div></th>
-					<th><div class="col2">User Type</div></th>
-					<th><div class="col5"><%= activity_type.name unless employees.blank? %></div></th>
-					<th><div class="col6c reward-amount-header">Reward Amount</div></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% unless employees.blank? %>
-					<% employees.each_with_index do |employee, index| %>
-						<tr>
-							<td class="centered"><%= index + 1 %></td>
-							<td><%= employee[:full_name] %></td>
-							<td><%= employee[:department] %></td>
-							<td class="centered"><%= employee[:manager] %></td>
-							<td class="centered"><%= employee[:user_type] %></td>
-							<td class="centered"><%= employee[:activity_type] %></td>
-							<td>
-								<%= text_field 'reward', 
-															 employee[:id], 
-															 :size => 7, 
-															 :class=> 'reward-amount', 
-															 :style => "background: #ffffff;" %>
-							</td>
-						</tr>
-					<% end %>
-				<% end %>
-			</tbody>
-			<tr class="footer-row">
-				<td colspan="5"></td>
-				<td style="font-weight: bold; font-size: 14px; text-align: right;">Total Reward Amount</td>
-				<td id="total-reward-amount" style="font-weight: bold; font-size: 14px; padding-left: 5px;"></td>
-			</tr>
-		</table>
-</div>
+<script type="text/javascript">
+	$(function() {
+		$('#compliment-display tr:nth-child(even)').addClass('alternate');
+		$('#compliment_display').tablesorter();
+	});
+</script>
+<%= render :partial => 'users/menu/compliment_list', 
+					 :locals => {:sent_compliments => true,
+					 						 :compliments => @compliments } %>

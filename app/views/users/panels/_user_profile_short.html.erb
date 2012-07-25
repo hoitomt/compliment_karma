@@ -9,10 +9,14 @@
 		<% end %>
 	</div>
 	<div class="name-location" style="margin-bottom: 0px;">
-		<h1 style="font-size: 20px;"><%= @user.first_name %></h1>
-		<h2 style="text-align: left; font-size: 16px; font-weight: normal; color: #000; margin-top: -5px;">
-			<%= @user.last_name %>
-		</h2>
+		<% if @user.is_a_company? %>
+			<h1 style="font-size: 20px;"><%= @user.company.name %></h1>
+		<% else %>
+			<h1 style="font-size: 20px;"><%= @user.first_name %></h1>
+			<h2 style="text-align: left; font-size: 16px; font-weight: normal; color: #000; margin-top: -5px;">
+				<%= @user.last_name %>
+			</h2>
+		<% end %>
 	</div>
 	<% if page_owner?(@user) && @confirmed %>
 		<div class="name-location">
@@ -20,13 +24,13 @@
 		</div>
 		<div class="edit-link">
 			<%= link_to 'Edit', edit_from_profile_path(@user), :class => "ul_hover", :remote => true %>
-		</div>
-		<div class="clear"></div>
-		<div style="float: right">
-			<% if current_user?(@user) && @pending_items_count && @pending_items_count > 0 %>
-				<p><%= link_to "pending (#{@pending_items_count})", '#pending-items', 
-											:class => 'fancybox' %>
-			<% end %>
+			<div class="clear"></div>
+			<div style="float: right">
+				<% if current_user?(@user) && @pending_items_count && @pending_items_count > 0 %>
+					<p><%= link_to "pending (#{@pending_items_count})", '#pending-items', 
+												:class => 'fancybox' %>
+				<% end %>
+			</div>
 		</div>
 	<% end %>
 	<div class="clear"></div>

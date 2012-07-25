@@ -1,0 +1,41 @@
+<div id="user-profile">
+	<div id="content-container" class="right-two-thirds drop-box-white clearfix">
+		<div class="send-reward">
+			<table id="compliment-display" class="tablesorter">
+				<thead>
+					<%
+						header = "Sender"
+						header = "Recipient" if sent_compliments
+					%>
+					<tr class="header">
+						<th><div class="col1">Date</div></th>
+						<th><div class="col2"><%= header %></div></th>
+						<th><div class="col2">Skill</div></th>
+						<th><div class="col3">Type</div></th>
+						<th><div class="col3">Status</div></th>
+						<th><div class="col7c">Visibility</div></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% unless compliments.blank? %>
+						<% compliments.each_with_index do |compliment| %>
+							<% 
+								user = compliment.sender
+								user = compliment.receiver if sent_compliments
+								skill = Skill.find_by_id(compliment.skill_id)
+							%>
+							<tr>
+								<td style="text-align: center;"><%= date_time_format(compliment.created_at) %></td>
+								<td><%= user.first_last if user %></td>
+								<td><%= skill.name if skill %></td>
+								<td><%= compliment.compliment_type.name if compliment.compliment_type %></td>
+								<td><%= compliment.compliment_status.name if compliment.compliment_status %></td>
+								<td><%= compliment.visibility.name if compliment.visibility %></td>
+							</tr>
+						<% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
