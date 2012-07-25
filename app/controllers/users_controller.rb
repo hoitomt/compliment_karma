@@ -44,12 +44,16 @@ class UsersController < ApplicationController
 
   def edit_from_profile
     @user = User.find(params[:id])
-    @is_a_company = @user.is_a_company?
-    @company = @user.company if @is_a_company
-    @industries = temp_industries
-    @company_types = ["Private", "Public"]
-    @company_sizes = ['1 - 50', '51 - 100', '101 - 500', '501 - 5,000', '5,001 - 10,000', 'over 10,000']
-    @company_operating_statuses = ["Startup", "Operating"]
+    if @user.is_a_company?
+      @company = @user.company 
+      @industries = temp_industries
+      @company_types = ["Private", "Public"]
+      @company_sizes = ['1 - 50', '51 - 100', '101 - 500', '501 - 5,000', '5,001 - 10,000', 'over 10,000']
+      @company_operating_statuses = ["Startup", "Operating"]
+      render 'edit_company_from_profile'
+    else
+      render 'edit_user_from_profile'
+    end
   end
 
   def temp_industries
