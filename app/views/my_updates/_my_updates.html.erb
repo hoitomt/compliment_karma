@@ -14,14 +14,14 @@
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
 					<%= link_to user_path(:id => originator.id, :update_history_id => item.id) do %>
 						<li class="clearfix <%= set_read_status_css(item) %>" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
-							<div class="my-update-item-image">
+							<div class="my-update-all-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
 							<div class="my-update-item-note clearfix">
 								<p class="originator-note">
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
-								<%= render 'my_updates/update_compliments', :item => item %>
+								<%= render 'my_updates/update_compliments_all', :item => item %>
 								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
 						</li>
@@ -33,14 +33,14 @@
 																						:remote => true do %>
 						<li class="clearfix <%= set_read_status_css(item) %>" 
 								style="border-left: 2px solid #DCF1EF; margin-left: -2px">
-							<div class="my-update-item-image">
+							<div class="my-update-all-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
 							<div class="my-update-item-note clearfix">
 								<p class="originator-note">
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
-								<%= render 'my_updates/update_compliments', :item => item %>
+								<%= render 'my_updates/update_compliments_all', :item => item %>
 								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
 						</li>

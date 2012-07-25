@@ -154,7 +154,7 @@ module UsersHelper
   def likes_link(recognition_id, recognition_type_id)
     label = get_like_status(recognition_id, recognition_type_id)
     count = get_likes_count(recognition_id, recognition_type_id)
-    return link_to "#{label}#{count}", 
+    return link_to "#{label} #{count}", 
                     ck_likes_path(:recognition_type_id => recognition_type_id,
                                   :recognition_id => recognition_id,
                                   :count => @count,
@@ -166,7 +166,7 @@ module UsersHelper
   def comments_link(feed_item)
     label = "Comment"
     count = get_comments_count(feed_item.item_object, feed_item.item_type_id)
-    return link_to "#{label}#{count}",
+    return link_to "#{label} #{count}",
                    show_recognition_path(:recognition_type_id => feed_item.item_type_id,
                                                 :recognition_id => feed_item.item_object.id),
                    :remote => true,
@@ -280,7 +280,7 @@ module UsersHelper
         receiver = User.find(feed_item.item_object.receiver_user_id)
         return follow_single_link(receiver.id, receiver.full_name)
       else
-        return "Follow"
+        return link_to "Follow", '#'
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
       if link_text =~ /Presenter/
@@ -428,27 +428,31 @@ module UsersHelper
   def recognition_left_side(feed_item)
     if feed_item.item_type_id == @recognition_type_compliment.id
       unless feed_item.item_object.sender_user_id.blank?
-        u = User.find_by_id(feed_item.item_object.sender_user_id).first_last
+        u = User.find_by_id(feed_item.item_object.sender_user_id)
+        return link_to u.first_last, u
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
       unless feed_item.item_object.presenter_id.blank?
         presenter = User.find_by_id(feed_item.item_object.presenter_id)
-        return presenter.full_name
+        return link_to presenter.first_last, presenter
       else
         return "Secret Santa"
       end
     elsif feed_item.item_type_id == @recognition_type_accomplishment.id
-      return User.find_by_id(feed_item.item_object.user_id).full_name
+      user = User.find_by_id(feed_item.item_object.user_id)
+      return link_to user.first_last, user
     end
   end
 
   def recognition_right_side(feed_item)
     if feed_item.item_type_id == @recognition_type_compliment.id
       unless feed_item.item_object.receiver_user_id.blank?
-        return User.find_by_id(feed_item.item_object.receiver_user_id).full_name
+        user = User.find_by_id(feed_item.item_object.receiver_user_id)
+        return link_to user.first_last, user
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
-      return User.find_by_id(feed_item.item_object.receiver_id).full_name
+      user = User.find_by_id(feed_item.item_object.receiver_id).full_name
+      return link_to user.first_last, user
     elsif feed_item.item_type_id == @recognition_type_accomplishment.id
       # Nothing
     end

@@ -10,7 +10,7 @@ $('ul#detail-comments-list-js li').last().hide().fadeIn(1000);
 UserProfile.hideCommentSubmitButton();
 UserProfile.clearComment();
 
-$(updateId).html("Comment(" + commentsCount + ")");
+$(updateId).html("Comment (" + commentsCount + ")");
 
 <% unless flash[:recognition_comment_errors].blank? %>
 	var errors = "<%= flash[:recognition_comment_errors] %>"

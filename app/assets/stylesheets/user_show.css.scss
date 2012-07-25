@@ -206,6 +206,12 @@
 			float: left;
 			display: inline-block;
 			list-style: none;
+			color: #4F81BD; 
+			a { color: #4F81BD; }
+			a:active { color: #4F81BD; }
+			a:hover { color: #4F81BD; background: none; text-decoration: underline;}
+			li ul li a:hover { color: #4F81BD; background: none; text-decoration: underline; }
+			li ul li:hover { background: none; }
 		}
 		ul {
 			padding: 0;
@@ -238,9 +244,9 @@
 			-moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
 			border-radius: 5px;
-			background: $main-menu-color;
+			background: #F3F3F3;
 			color: $nav-main-font-color;
-			font-weight: bold;
+			// font-weight: bold;
 			padding: 5px;
 		}
 		li ul li {
@@ -259,12 +265,12 @@
 		li ul li.small { width: $small}
 		li ul li.medium { width: $medium}
 		li ul li.large { width: $large}
-		li ul li a { display: block; color: $nav-main-font-color; }
-		li ul li a:hover {color: $main-menu-color; }
-		li ul li:hover {
-			background: $nav-main-font-color;
-			color: $main-menu-color;
-		}
+		// li ul li a { display: block; color: $nav-main-font-color; }
+		// li ul li a:hover {color: $main-menu-color; }
+		// li ul li:hover {
+		// 	background: $nav-main-font-color;
+		// 	color: $main-menu-color;
+		// }
 		ul li.no-hover a:hover {color: #000000; }
 		ul li.no-hover:hover {
 			background: inherit;
@@ -286,6 +292,7 @@
 			float: left;
 			width: 8%;
 		}
+		a:hover {color: #4F81BD; }
 	}
 }
 #send-compliment-form {
