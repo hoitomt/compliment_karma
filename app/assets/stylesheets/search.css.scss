@@ -19,7 +19,7 @@
 		// height: 20px;
 	}
 	input {
-		@include border-radius;
+		@include border-radius-5;
 		outline: none;
 		display: block;
 		width: 250px;
