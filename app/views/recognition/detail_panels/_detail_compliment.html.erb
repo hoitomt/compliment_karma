@@ -3,7 +3,7 @@
 		<div class="photo-profile">
 			<%= get_user_photo_link_profile(@sender) %>
 		</div>
-		<h3><%= get_user_full_name(@sender) %></h3>
+		<h3><%= link_to get_user_full_name(@sender), @sender, :class => "black hover-blue"  %></h3>
 		<%= render :partial => 'recognition/popup_user_info', 
 								 :locals => {:user => @sender, 
 								 						 :professional => ComplimentType.is_professional?(@compliment_type_id) } %>
@@ -27,7 +27,7 @@
 		<div class="photo-profile">
 			<%= get_user_photo_link_profile(@receiver) %>
 		</div>
-		<h3><%= get_user_full_name(@receiver) %></h3>
+		<h3><%= link_to get_user_full_name(@receiver), @receiver, :class => "black hover-blue" %></h3>
 		<%= render :partial => 'recognition/popup_user_info', 
 								 :locals => {:user => @receiver, 
 								 						 :professional => ComplimentType.is_professional?(@compliment_type_id) } %>

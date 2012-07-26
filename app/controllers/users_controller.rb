@@ -32,6 +32,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @skills = Skill.all
     logger.info("User Name: " + @user.full_name)
     set_title
     set_karma_live_panel

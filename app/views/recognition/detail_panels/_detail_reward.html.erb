@@ -3,7 +3,7 @@
 		<div class="photo-profile">
 			<%= get_user_photo_link_profile(@presenter) %>
 		</div>
-		<h3><%= @presenter.full_name %></h3>
+		<h3><%= link_to @presenter.full_name, @presenter, :class => "black hover_blue"  %></h3>
 		<%= render :partial => 'recognition/popup_user_info', 
 								 :locals => {:user => @presenter,
 								 						 :professional => true } %>
@@ -23,7 +23,7 @@
 		<div class="photo-profile">
 			<%= get_user_photo_link_profile(@receiver) %>
 		</div>
-		<h3><%= get_user_full_name(@receiver) %></h3>
+		<h3><%= link_to get_user_full_name(@receiver), @receiver, :class => "black hover_blue"  %></h3>
 		<%= render :partial => 'recognition/popup_user_info', 
 								 :locals => {:user => @receiver,
 								 						 :professional => true } %>

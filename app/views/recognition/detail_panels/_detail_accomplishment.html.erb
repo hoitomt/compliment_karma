@@ -3,7 +3,7 @@
 		<div class="photo-profile">
 			<%= get_user_photo_link_profile(@user) %>
 		</div>
-		<h3><%= @user.full_name %></h3>
+		<h3><%= link_to @user.full_name, @user, :class => "hover-blue" %></h3>
 		<%= render :partial => 'recognition/popup_user_info', 
 								 :locals => {:user => @user,
 								 						 :professional => true } %>
