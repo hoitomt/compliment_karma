@@ -12,7 +12,6 @@
 			<div id="explanation">
 				<%= render 'shared/flash', :flash => flash %>
 			</div>
-			Email: <%= @email %>
 			<%= form_for(:session, 
 									 :url => { :action => :create, :email => @email}, 
 									 :html => {:id => 'login-form'}) do |f| %>
