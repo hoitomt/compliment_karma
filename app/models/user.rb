@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   
   has_attached_file  :photo, 
                      :styles => { :mini => "40x40>",
-                                  :thumb => "60x60>",
+                                  :thumb => "60>x60",
                                   :small => "180>x180",
                                   :profile => "200>x200",
                                   :medium => "300x300>" },

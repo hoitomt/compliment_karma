@@ -143,6 +143,8 @@
 	.image {
 		float: left;
 		width: 100px;
+		height: 60px;
+		overflow: hidden;
 		margin: 20px 0 0 0;
 		text-align: center;
 		p { font-size: 12px; color: #606060; font-weight: bold;}
