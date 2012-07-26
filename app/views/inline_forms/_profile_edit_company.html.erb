@@ -51,13 +51,21 @@
 					<%= f.text_field :zip_cd %>
 				</div>
 			</div>
-			<div id="data-entry" class="user-state-code clearfix">
-				<div id="label"><%= f.label :state_cd, "State / Province" %></div>
+			<div id="data-entry" class="company-state-code-select clearfix">
+				<div id="label"><%= f.label :state_cd, "State" %></div>
 				<div id="field">
 					<%= f.select :state_cd, state_list, {:prompt => 'Select State', :include_blank => true}, 
 											 {:style => "width: 145px; height: 30px;"} %>
 				</div>
 			</div>
+			<div id="data-entry" class="company-state-code-text clearfix" style="float: left;">
+				<div id="label"><%= f.label :state_cd, "State / Province" %></div>
+				<% state_cd_value = company.state_cd if company.country != "United States" %>
+				<div id="field">
+					<%= text_field '', :state_cd_txt, :value => state_cd_value %>
+				</div>
+			</div>
+			<div class="clear"></div>
 			<div id="data-entry" class="clearfix">
 				<div id="label"><%= f.label :city %></div>
 				<div id="field">

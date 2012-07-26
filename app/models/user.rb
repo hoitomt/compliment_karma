@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
                      :styles => { :mini => "40x40>",
                                   :thumb => "60x60>",
                                   :small => "180>x180",
+                                  :profile => "200>x200",
                                   :medium => "300x300>" },
                      :convert_options => { :all => '-auto-orient' },
                      :storage => :s3,

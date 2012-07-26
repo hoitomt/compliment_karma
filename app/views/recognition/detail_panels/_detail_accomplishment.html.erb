@@ -1,7 +1,7 @@
 <div class="left-column">
 	<div class="image-function">
-		<div class="photo-medium">
-			<%= get_user_photo_link_medium(@user) %>
+		<div class="photo-profile">
+			<%= get_user_photo_link_profile(@user) %>
 		</div>
 		<h3><%= @user.full_name %></h3>
 		<%= render :partial => 'recognition/popup_user_info', 

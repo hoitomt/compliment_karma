@@ -451,7 +451,7 @@ module UsersHelper
         return link_to user.first_last, user
       end
     elsif feed_item.item_type_id == @recognition_type_reward.id
-      user = User.find_by_id(feed_item.item_object.receiver_id).full_name
+      user = User.find_by_id(feed_item.item_object.receiver_id)
       return link_to user.first_last, user
     elsif feed_item.item_type_id == @recognition_type_accomplishment.id
       # Nothing

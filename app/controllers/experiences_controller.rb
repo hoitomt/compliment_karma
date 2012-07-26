@@ -12,6 +12,7 @@ class ExperiencesController < ApplicationController
 		@experience.user = @user
 		@experience.start_date = parse_date(params[:experience][:start_date])
 		@experience.end_date = parse_date(params[:experience][:end_date])
+		@experience.state_cd = params[:state_cd_txt] if @experience.country != "United States"
 		if @experience.save
 			@professional_experiences = @user.experiences
 			@current_experience = @user.experiences.first
@@ -31,6 +32,7 @@ class ExperiencesController < ApplicationController
 
 		@experience.start_date = parse_date(params[:experience][:start_date])
 		@experience.end_date = parse_date(params[:experience][:end_date])
+		@experience.state_cd = params[:state_cd_txt] if @experience.country != "United States"
 		@experience.save
 
 		@professional_experiences = @user.experiences

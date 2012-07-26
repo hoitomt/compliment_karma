@@ -70,9 +70,10 @@
 			</div>
 		</div>
 		<div id="data-entry" class="experience-state-code-text" style="float: left;">
-			<div id="label"><%= f.label :state_cd, "State" %></div>
+			<div id="label"><%= f.label :state_cd, "State / Province", :style=>"width: 200px;" %></div>
+			<% state_cd_value = experience.state_cd if experience.country != "United States" %>
 			<div id="field">
-				<%= f.text_field :state_cd %>
+				<%= text_field '', :state_cd_txt, :value => state_cd_value %>
 			</div>
 		</div>
 		<div class="clear"></div>

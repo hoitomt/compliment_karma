@@ -6,7 +6,7 @@
 				<%= get_user_photo_link_mini(u) %>
 			</div>
 			<div class="comment-text">
-				<h4><%= get_user_full_name(u) %></h4>
+				<h4><%= link_to get_user_full_name(u), u, :class => "ul_hover" %></h4>
 				<p><%= comment.comment %></p>
 			</div>
 			<div class="comment-timestamp">
