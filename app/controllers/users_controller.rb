@@ -23,7 +23,8 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_account_confirmation
       sign_in(@user, false)
-      redirect_to invite_coworkers_path
+      # redirect_to invite_coworkers_path
+      redirect_to @user
     else
       @title = "Sign up"
       render 'new'

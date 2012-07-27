@@ -2,18 +2,18 @@ var ShowRecognitionFancyBox = {
 	init: function(view, socialPopup) {
 		$.fancybox(view, {
 			beforeLoad: function() {
-				// $('body').addClass('lock-screen');
+				$('body').addClass('lock-screen');
 				this.title = String(socialPopup);
 			},
 			afterShow: function() {
 				UserProfile.reinitialize();
 			},
 			beforeClose: function() {
-				// $('body').removeClass('lock-screen');
+				$('body').removeClass('lock-screen');
 			},
-			fitToView: false,
-			scrolling: 'no',
-			autoSize: true,
+			// fitToView: false,
+			// scrolling: 'no',
+			// autoSize: true,
 			minWidth: 675,
 			padding: 10,
 			helpers: {

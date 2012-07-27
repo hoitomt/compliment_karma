@@ -5,14 +5,14 @@ var ShowFancybox = {
 		}
 		$.fancybox(view, {
 			beforeLoad: function() {
-				// $('body').addClass('lock-screen');
+				$('body').addClass('lock-screen');
 			},
 			beforeClose: function() {
-				// $('body').removeClass('lock-screen');
+				$('body').removeClass('lock-screen');
 			},
-			fitToView: false,
-			scrolling: 'no',
-			autoSize: true,
+			// fitToView: false,
+			// scrolling: 'no',
+			// autoSize: true,
 			minWidth: width,
 			padding: 0,
 			helpers: {

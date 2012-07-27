@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.5'
+gem 'rails', '3.1.7'
 gem 'thin', '1.3.1'
 gem 'pg', '0.13.2'
 gem 'heroku'
