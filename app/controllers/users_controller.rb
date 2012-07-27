@@ -6,6 +6,7 @@ class UsersController < ApplicationController
                                            :achievements, :contacts, :employees, 
                                            :rewards, :settings, :my_updates, :switch_accounts ]
   before_filter :get_confirmation_status, :except => [:new, :create]
+  before_filter :confirmed_user, :except => [:new, :create, :new_account_confirmation]
   before_filter :hide_unconfirmed_user, :only => [:show]
   before_filter :set_static_vars
   before_filter :set_compliment_panel, 
@@ -468,6 +469,16 @@ class UsersController < ApplicationController
     def get_confirmation_status
       @user = User.find(params[:id])
       @confirmed = @user.confirmed? if @user
+    end
+
+    def confirmed_user
+      if @user.blank? || current_user.blank?
+        redirect_to root_path
+      end
+      if !current_user?(@user) && !current_user.confirmed?
+        flash[:error] = "Please confirm your account before using ComplimentKarma"
+        redirect_to current_user
+      end
     end
 
     def hide_unconfirmed_user
