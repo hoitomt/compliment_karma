@@ -1,9 +1,28 @@
-Welcome to Compliment Karma. Please click the link below to confirm your account
+<table cellpadding="0px" cellspacing="0px" style="font-family:Helvetica Neue,Helvetica,Arial,Verdana,sans-serif; background-color:#DCF1EF; border-radius:8px;">
+  <tr>
+    <td style="width:270px; padding:30px 0 0 30px;"></td>
+		<td style="width:270px; padding:30px 30px 0 0;">
+			<%= image_tag 'https://s3.amazonaws.com/compliment_karma_dev/logo/ck_logo.png' %>
+		</td>
+  </tr>
+  <tr>
+    <td colspan=2 style="width:540px; padding:0 30px 30px 30px;">
+		  Hi <%= @user.first_last %>,
+			<br/><br/>
+			Thank you for joining. Please click or paste the following url in your browser to activate your account:
+			<br/><br/>
+			<%= link_to new_account_confirmation_url(@user.new_account_confirmation_token), 
+									new_account_confirmation_url(@user.new_account_confirmation_token),
+								  :style => "font-size:14px;" %>
+			<br/><br/>  
+			We highly value your time &amp; strive hard to provide real tangible benefits, which will help you throughout your professional career.
+			<br/><br/>
+			Sincerely,
+			<br/><br/>
+			Customer Service Team<br/>
+			ComplimentKarma.com<br/>
+			info@ComplimentKarma.com<br/>
+		</td>
+	</tr>
 
-<%= new_account_confirmation_url(@user.new_account_confirmation_token) %>
-
-If a browser window does not open when you click the link, 
-copy and paste the link into your browser
-
-Thank You for Signing Up,
-Compliment Karma
+</table>
