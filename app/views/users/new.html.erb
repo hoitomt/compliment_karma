@@ -56,6 +56,10 @@
 				</div>
 			</fieldset>
 			<fieldset>
+				<p style="margin: 20px 0 10px 130px; color: #000000;">
+					By clicking Sign Up Free, you agree to our 
+					<%= link_to 'Terms', '#terms-and-conditions', :class => 'fancybox' %>
+					</p>
 				<div>
 					<button class="sign-up" type=submit>Sign Up Free</button>
 				</div>
@@ -72,4 +76,17 @@
 	  Once you have confirmed your account we will send your compliment and you 
 		can use ComplimentKarma to Share Compliments and Earn Rewards!</p>
 	<h2>Thanks!</h2>
+</div>
+
+<div id="terms-and-conditions" style="display: none;">
+	<%= image_tag 'ck_logo.png' %>
+	<h1>Compliment Karma Terms</h1>
+	<p>"All living beings have actions (Karma) as their own, their inheritance, <br />
+		their congenital cause, their kinsman, their refuge. It is Karma that <br />
+		differentiates beings into low and high states."</p>
+	<p><i>Buddha</i></p>
+	<br />
+	<%= link_to 'http://www.buddhanet.net/e-learning/karma.htm', 
+							'http://www.buddhanet.net/e-learning/karma.htm',
+							:style => "font-size: 10px;" %>
 </div>
