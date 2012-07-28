@@ -1,5 +1,6 @@
 class Experience < ActiveRecord::Base
 	belongs_to :user
+  belongs_to :employment_type
 
 	validates :company, :presence => true
 	validates :title, :presence => true

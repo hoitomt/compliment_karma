@@ -140,6 +140,10 @@ UpdateHistoryType.create(:name => 'Share Accomplishment on Facebook',
 UpdateHistoryType.create(:name => 'Share Accomplishment on Twitter', 
   :text => 'shared your accomplishment on Twitter')
 
+EmploymentType.create(:name => "Employee")
+EmploymentType.create(:name => "Contractor")
+EmploymentType.create(:name => "Intern")
+
 if Skill.find_by_name('User Defined').nil?
   s = Skill.create(:name => 'User Defined')
   s.update_attributes(:parent_skill_id => s.id)

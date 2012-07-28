@@ -41,31 +41,91 @@ class Reward < ActiveRecord::Base
                   user.id, user.id, RewardStatus.complete.id)
   end
 
-  def self.build_employee_vo(employees, activity_type_id)
+  def self.build_employee_vo(company, activity_type_id, params)
+    number_of_employees, department, start_date, stop_date = nil
+    if params[:filter]
+      number_of_employees = params[:filter][:number_of_employees]
+      department = CompanyDepartment.find_by_id(params[:filter][:department_id])
+      start_date = params[:filter][:as_of_date]
+      stop_date = params[:filter][:stop_date]
+      logger.info("#{number_of_employees} | #{department}")
+    end
+    employees = Reward.employee_universe(company, department)
     employees_result = []
     employees.each do |user|
-      employees_result << get_individual_employee_vo(user, activity_type_id)
+      employees_result << get_individual_employee_vo(user, activity_type_id, 
+                                                     number_of_employees, start_date, 
+                                                     stop_date)
     end
-    return employees_result
+    employees_result = employees_result.sort { |x, y| y[:activity_type] <=> x[:activity_type] }
+    return limit(employees_result, number_of_employees.to_i)
   end
 
-  def self.get_individual_employee_vo(user, activity_type_id=nil)
+  def self.get_individual_employee_vo(user, activity_type_id,
+                                      number_of_employees, start_date, 
+                                      stop_date)
     e = {}
     e[:id] = user.id
     e[:full_name] = user.first_last
     e[:manager] = ''
     e[:user_type] = ''
     e[:department] = user.company_departments.first
-    case activity_type_id
+    compliments = nil
+    case activity_type_id.to_i
       when ActivityType.compliments_received.id
-        e[:activity_type] = Compliment.sent_professional_compliments(user).count
+        compliments = Compliment.received_professional_compliments(user)
       when ActivityType.compliments_sent.id
-        e[:activity_type] = Compliment.received_professional_compliments(user).count
+        compliments = Compliment.sent_professional_compliments(user)
       when ActivityType.trophies_earned.id
       when ActivityType.badges_earned.id
       else
     end
+    e[:activity_type] = date_range(compliments, start_date, stop_date).count
     return e
   end
+
+  def self.limit(employees_result, number_of_employees)
+    return employees_result if number_of_employees.blank?
+    if employees_result.size <= number_of_employees
+      return employees_result.size
+    else
+      return employees_result[0..(number_of_employees - 1)]
+    end
+  end
+
+  def self.employee_universe(company, department)
+    logger.info("Set Universe")
+    if department.blank?
+      return company.users
+    else
+      return department.users
+    end
+  end
+
+  def self.date_range(c, start_date, stop_date)
+    logger.info("Set Date Range")
+    return [] if c.blank?
+    if !start_date.blank? && !stop_date.blank?
+      return c.where('created_at >= ? and created_at <= ?', start_date, stop_date)
+    elsif !start_date.blank?
+      return c.where('created_at >= ?', start_date)
+    elsif !stop_date.blank?
+      return c.where('created_at <= ?', stop_date)
+    else
+      return c
+    end
+  end
+
+  # def self.activity_type_rank(employees, activity_type, number_of_employees)
+  #   logger.info("Set Activity Type")
+  #   case activity_type.id
+  #     when ActivityType.compliments_received.id
+  #       return User.list_of_users_ordered_by_professional_compliments_received(employees, number_of_employees)
+  #     when ActivityType.compliments_sent.id
+  #       return User.list_of_users_ordered_by_professional_compliments_sent(employees, number_of_employees)
+  #     else
+  #       return employees
+  #   end
+  # end
 
 end

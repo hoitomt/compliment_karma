@@ -300,6 +300,28 @@ class User < ActiveRecord::Base
     return !email.match(@@email_regex_loc).nil?
   end
 
+  def self.list_of_users_ordered_by_professional_compliments_sent(universe, amount=nil)
+    list = User.joins("join compliments on compliments.sender_user_id = users.id")
+               .select('count(compliments.id), users.*')
+               .where('users.id in (?) and compliment_type_id in (?)', 
+                       universe, ComplimentType.professional_send_ids)
+               .group('users.id')
+               .reorder('count(users.id) DESC')
+    list = list.limit(amount) unless amount.blank?
+    return list
+  end
+
+  def self.list_of_users_ordered_by_professional_compliments_received(universe, amount=nil)
+    list = User.joins("join compliments on compliments.receiver_user_id = users.id")
+               .select('count(compliments.id), users.*')
+               .where('users.id in (?) and compliment_type_id in (?)', 
+                       universe, ComplimentType.professional_receive_ids)
+               .group('users.id')
+               .reorder('count(users.id) DESC')
+    list = list.limit(amount) unless amount.blank?
+    return list
+  end
+
   private
     def encrypt(password)
       BCrypt::Engine.hash_secret(password, self.salt)

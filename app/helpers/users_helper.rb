@@ -81,7 +81,7 @@ module UsersHelper
     if (index + 1 <= compliments_since_last_monday.size)
       receiver = compliments_since_last_monday[index].get_receiver
       if receiver
-        html = link_to image_tag(receiver.photo.url(:mini), :size => "30x30"), 
+        html = link_to image_tag(receiver.photo.url(:mini), :width => "30"), 
                        receiver,
                        :title => "#{receiver.full_name}"
       else

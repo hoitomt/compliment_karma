@@ -26,9 +26,7 @@
 						  </li>
 							<li>
 						    <%= label 'filter', "manager", "Manager" %>
-								<%= select_tag 'filter[manager_id]',
-															 options_from_collection_for_select(@managers, :id, :name),
-															 :prompt => 'All Managers' %>
+								<%= text_field 'filter', 'manager_id', :style => "width: 290px;" %>
 						    <div class="clear"></div>
 						  </li>
 							<li>
@@ -48,7 +46,7 @@
 							<li>
 						    <%= label 'filter', "time_period", "Time Period" %>
 						    <%= select_tag 'filter[time_period]', 
-						    							 options_for_select(['Before', 'Between', 'After']),
+						    							 options_for_select(['After', 'Before', 'Between']),
 						    							 :style => 'width: 170px; margin-right: 5px;' %>
 						    <%= text_field 'filter', 'as_of_date', :size => 15 %>
 						    <div id="show-stop-date" style="display: none; float:left;">

@@ -302,11 +302,13 @@ class Compliment < ActiveRecord::Base
   end
 
   def self.received_professional_compliments(user)
+    logger.info("Received Professional")
     types = ComplimentType.professional_receive_ids
     Compliment.where('receiver_user_id = ? AND compliment_type_id in (?)', user.id, types)
   end
 
   def self.received_social_compliments(user)
+    logger.info("Sent Professional")
     types = ComplimentType.social_receive_ids
     Compliment.where('receiver_user_id = ? AND compliment_type_id in (?)', user.id, types)
   end  

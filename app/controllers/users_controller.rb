@@ -182,66 +182,16 @@ class UsersController < ApplicationController
   def rewards
     @company = @user.company
     @departments = @company.departments
-    @managers = []
     @activity_types = ActivityType.list
     activity_type_id = set_reward_activity_type
-    @user_types = []
-    employees = set_employees
-    @employees = Reward.build_employee_vo(employees, activity_type_id)
-    # build_employee_vo(employees, activity_type_id)
-    logger.info("Activity Type #{@activity_type}")
+    @activity_type = ActivityType.find(activity_type_id)
+    @user_types = EmploymentType.all
+    @employees = Reward.build_employee_vo(@company, activity_type_id, params)
   end
 
   def set_reward_activity_type
     activity_type_id_filter = params[:filter][:activity_type_id] if params[:filter]
-    activity_type_id = activity_type_id_filter || ActivityType.compliments_received.id
-    logger.info("Activity Type ID: #{activity_type_id}")
-    @activity_type = ActivityType.find(activity_type_id)
-    # logger.info("Activity Type #{@activity_type}")
-    return @activity_type.blank? ? activity_type_id : @activity_type.id
-  end
-
-  def set_employees
-    unless params[:filter]
-      employees = @company.users
-      return employees
-    end
-    number_of_employees = params[:filter][:number_of_employees]
-    department = CompanyDepartment.find_by_id(params[:filter][:department_id])
-    activity_type = ActivityType.find(params[:filter][:activity_type_id])
-    @start_date = params[:filter][:as_of_date]
-    @stop_date = params[:filter][:stop_date]
-    if !department.blank? && !number_of_employees.blank?
-      return department.users.limit(number_of_employees.to_i)
-    elsif !department.blank? && number_of_employees.blank?
-      return department.users
-    elsif department.blank? && !number_of_employees.blank?
-      return @company.users.limit(number_of_employees.to_i)
-    else
-      return @company.users
-    end
-  end
-
-  def build_employee_vo(employees, activity_type_id)
-    @employees = []
-    employees.each do |user|
-      e = {}
-      e[:id] = user.id
-      e[:full_name] = user.first_last
-      e[:manager] = ''
-      e[:user_type] = ''
-      e[:department] = user.company_departments.first
-      case activity_type_id
-        when ActivityType.compliments_received.id
-          e[:activity_type] = Compliment.sent_professional_compliments(user).count
-        when ActivityType.compliments_sent.id
-          e[:activity_type] = Compliment.received_professional_compliments(user).count
-        when ActivityType.trophies_earned.id
-        when ActivityType.badges_earned.id
-        else
-      end
-      @employees << e
-    end
+    return activity_type_id_filter || ActivityType.compliments_received.id
   end
 
   def upload_photo
