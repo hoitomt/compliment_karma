@@ -8,13 +8,21 @@
 			// 	7: { sorter: false }
 			// }
 		});
+		$('#back-button').unbind('click');
+		$('#back-button').click(function(event) {
+			var userId = $('#user_id').val();
+			window.location.href = '/users/' + userId + '/rewards.html';
+			// event.stopPropagation();
+			// $.get('/payments/new.html');
+			return false;
+		});
 		$('#proceed-to-payment-button').unbind('click');
 		$('#proceed-to-payment-button').click(function(event) {
 			window.location.href = '/payments/new.html';
 			// event.stopPropagation();
 			// $.get('/payments/new.html');
 			return false;
-		})
+		});
 	})
 </script>
 <div id="content-container">
@@ -25,7 +33,7 @@
 		<div class="clear"></div>
 		<div id="rewards-results">
 			<%= form_tag "/rewards/cart", :id => 'reward-add-to-cart-form' do %>
-				<%= hidden_field_tag 'company_user_id', @user.id %>
+				<%= hidden_field_tag 'user_id', @user.id %>
 				<table id="select-reward-results">
 					<tr class="header-row">
 						<th><div class="col2">Full Name</div></th>
@@ -66,9 +74,12 @@
 					</tr>					
 				</table>
 				<div class="add-to-cart-submit">
-					<button type=submit class="add-to-cart-button">
-						<span style="margin-left: 5px;">Update</span>
+					<button id="back-button" class="add-to-cart-button">
+						<span style="margin-left: 5px;">Back</span>
 					</button>
+<!-- 					<button type=submit class="add-to-cart-button">
+						<span style="margin-left: 5px;">Update</span>
+					</button> -->
 					<button id="proceed-to-payment-button" class="add-to-cart-button">Proceed to Payment</button>
 				</div>
 				<div class="clear"></div>

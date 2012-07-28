@@ -13,15 +13,22 @@
 					<fieldset style="padding: 20px 0 0 0;">
 						<ol>
 							<li>
-								<%= label 'filter', 'number_of_employees', 'Number of Employees to Show' %>
+								<%= label 'filter', 'number_of_employees', 'Number of Users' %>
 								<%= text_field 'filter', 'number_of_employees', :size => 7 %>
 						    <div class="clear"></div>
 							</li>
 							<li>
+						    <%= label 'filter', "user_type", "User Type" %>
+								<%= select_tag 'filter[user_type_id]',
+															 options_from_collection_for_select(@user_types, :id, :name),
+															 :prompt => 'All' %>
+						    <div class="clear"></div>
+						  </li>
+							<li>
 						    <%= label 'filter', "department", "Department" %>
 								<%= select_tag 'filter[department_id]',
 															 options_from_collection_for_select(@departments, :id, :name),
-															 :prompt => 'All Departments' %>
+															 :prompt => 'All' %>
 						    <div class="clear"></div>
 						  </li>
 							<li>
@@ -34,13 +41,6 @@
 								<%= select_tag 'filter[activity_type_id]', 
 															 options_from_collection_for_select(@activity_types, :id, :name),
 															 :selected => 'Compliments Received' %>
-						    <div class="clear"></div>
-						  </li>
-							<li>
-						    <%= label 'filter', "user_type", "User Type" %>
-								<%= select_tag 'filter[user_type_id]',
-															 options_from_collection_for_select(@user_types, :id, :name),
-															 :prompt => 'All' %>
 						    <div class="clear"></div>
 						  </li>
 							<li>
