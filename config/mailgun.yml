@@ -18,5 +18,6 @@ production:
   MAILGUN_DOMAIN: app5024011.mailgun.org
 
 MAILGUN_API_KEY: key-0-zv0demvph1krkk9ctbws9vd17xsyb5
+MAILGUN_HOST: app5024011.mailgun.org
 MAILGUN_API_URL: https://api.mailgun.net/v2
 MAILGUN_API_FULL_URL: https://api:key-0-zv0demvph1krkk9ctbws9vd17xsyb5@api.mailgun.net/v2/app5024011.mailgun.org/messages

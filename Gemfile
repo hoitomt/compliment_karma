@@ -12,6 +12,7 @@ gem 'marginalia', "~> 1.1.0"
 
 # Email - HTTP to mailgun
 gem 'rest-client', '1.6.7'
+gem 'mailgun-rails', "~> 0.1.1"
 
 # Metrics
 gem 'json'
