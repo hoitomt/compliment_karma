@@ -27,6 +27,12 @@ Ck::Application.routes.draw do
   match "/admin" => "admin#index", :as => :admin
   
   match "compliments/set_compliment_types" => "compliments#set_compliment_types"
+  match "/email_api/new_account_confirmation" => "email_api#new_account_confirmation",
+        :as => :new_account_confirmation
+  match "/email_api/invitation_acceptance" => "email_api#invitation_acceptance",
+        :as => :invitation_acceptance
+  match "/email_api/compliment_new" => "email_api#compliment_new",
+        :as => :compliment_new_user
   match "/recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
   match "/rewards/add_to_cart" => "rewards#add_to_cart"
@@ -37,12 +43,6 @@ Ck::Application.routes.draw do
   match "/search/skills" => "search#skills"
   match "/search/site" => "search#site"
   match "/search/compliment_receiver" => "search#compliment_receiver"
-  match "/email_api/new_account_confirmation" => "email_api#new_account_confirmation",
-        :as => :new_account_confirmation
-  match "/email_api/invitation_acceptance" => "email_api#invitation_acceptance",
-        :as => :invitation_acceptance
-  match "/email_api/compliment_new_user" => "email_api#compliment_new_user",
-        :as => :compliment_new_user
   match "/ck_likes/like_compliment_from_user_profile" => "ck_likes#like_compliment_from_user_profile",
         :as => :like_compliment_from_user_profile
   match "/user/:id/resend_new_account_confirmation" => "users#resend_new_account_confirmation",
