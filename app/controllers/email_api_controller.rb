@@ -35,12 +35,14 @@ class EmailApiController < ApplicationController
     receiver_array.each do |receiver|
       unless receiver == "new@ck.mailgun.org"
         compliment = Compliment.new
-        compliment.create_from_api(receiver, params)
-        logger.info("Created compliment from incoming email\n" +
+        created = compliment.create_from_api(receiver, params)
+        if created
+          logger.info("Created compliment from incoming email\n" +
                     "receiver: #{compliment.receiver_email}\n" +
                     "sender: #{compliment.sender_email}\n" +
                     "skill: #{compliment.skill_id}"
                     )
+        end
       end
     end
     render :nothing => true

@@ -106,7 +106,7 @@ module ApplicationHelper
     today = DateTime.now
     if date
       if date.day == today.day && date.month == today.month && date.year == today.year
-        return date.strftime("Today %I:%M %P")
+        return date.strftime("Today <br />%I:%M %P").html_safe
       elsif date.year == today.year
         return date.strftime("%-m/%d")
       else

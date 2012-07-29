@@ -44,11 +44,11 @@ class Compliment < ActiveRecord::Base
 
   def create_from_api(recipient_email, params)
     begin
-      sender_email = params['from'].scan(/<.*>/)[0].gsub(/<|>/, '') if params['from']
+      sender_email = clean_email_address(params['from']) if params['from']
       user = User.find_by_email!(sender_email)
       self.sender_user_id = user.id
       self.sender_email = sender_email
-      self.receiver_email = recipient_email
+      self.receiver_email = clean_email_address(recipient_email)
       self.skill_id = api_skill(params['body-plain'])
       self.comment = api_comment(params['stripped-text'])
       self.compliment_type_id = api_compliment_type_id
@@ -62,6 +62,10 @@ class Compliment < ActiveRecord::Base
       logger.info("Sender Not Found")
       # notify_ck_of_unregistered_sender(params)
     end
+  end
+
+  def clean_email_address(email)
+    email.scan(/<.*>/)[0].gsub(/<|>/, '') unless email.blank?
   end
 
   def self.notify_ck_of_unregistered_sender
