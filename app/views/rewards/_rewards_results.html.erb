@@ -17,10 +17,10 @@
 				<tr class="header-row">
 					<th><div class="col1">Rank</div></th>
 					<th><div class="col2">Full Name</div></th>
-					<th><div class="col2">Department</div></th>
-					<th><div class="col2">Manager</div></th>
 					<th><div class="col2">User Type</div></th>
-					<th><div class="col5"><%= activity_type.name unless employees.blank? %></div></th>
+					<th><div class="col2c">Department</div></th>
+					<th><div class="col2c">Manager</div></th>
+					<th><div class="col5c"><%= activity_type.name unless employees.blank? %></div></th>
 					<th><div class="col6c reward-amount-header">Reward Amount</div></th>
 				</tr>
 			</thead>
@@ -30,9 +30,9 @@
 						<tr>
 							<td class="centered"><%= index + 1 %></td>
 							<td><%= employee[:full_name] %></td>
-							<td><%= employee[:department] %></td>
+							<td><%= employee[:user_type] %></td>
+							<td class="centered"><%= employee[:department] %></td>
 							<td class="centered"><%= employee[:manager] %></td>
-							<td class="centered"><%= employee[:user_type] %></td>
 							<td class="centered"><%= employee[:activity_type] %></td>
 							<td>
 								<%= text_field 'reward', 

@@ -37,7 +37,7 @@
 				<table id="select-reward-results">
 					<tr class="header-row">
 						<th><div class="col2">Full Name</div></th>
-						<th><div class="col2">Employee Type</div></th>
+						<th><div class="col2">User Type</div></th>
 						<th><div class="col2">Department</div></th>
 						<th><div class="col2">Manager</div></th>
 						<th><div class="col4">Reward Sponsor</div></th>
@@ -59,7 +59,7 @@
 									<%= number_to_currency(reward.value) %>
 								</td>
 								<td>
-									<%= link_to 'delete', 
+									<%= link_to 'remove', 
 															remove_from_cart_path(:reward_id => reward.id, :user_id => @user.id), 
 															:confirm => "Are you sure you want to remove this item from your cart" %>
 								</td>
