@@ -14,6 +14,10 @@ class ComplimentStatus < ActiveRecord::Base
   def self.PENDING_RECEIVER_REGISTRATION
     find_by_name('Pending Receiver Registration')
   end
+
+  def self.MISSING_INFORMATION
+    find_by_name('Missing Information')
+  end
   
   def self.WITHDRAWN
     find_by_name('Withdrawn')

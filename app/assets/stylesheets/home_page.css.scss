@@ -50,7 +50,7 @@
 		letter-spacing: -4px; line-height: 65px;}
 }
 #main-page-invitation {
-	width: 250px;
+	width: 275px;
 	margin: 0 auto;
 	ol li {
 		display: block;
@@ -91,7 +91,7 @@
 	}
 	input,
 	textarea { 
-		width: 250px; 
+		width: 270px; 
 		// color:#999; 
 		font: $san-serif-font-family; 
 	}
@@ -118,6 +118,11 @@
 	}
 	.center-button { display: block; width: 150px; margin: 10px 0 20px 125px; text-align: center; }
 	#validation-error { color: $inline-error-red; font-weight: bold;}
+	#home-page-button {
+		position: absolute;
+		margin: 1px 0 0 218px;
+	}
+	.home-page-btn { height: 33px; }
 }
 .home-footer {
 	height:200px;

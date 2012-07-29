@@ -2,7 +2,7 @@ class Skill < ActiveRecord::Base
 
 	validates :name, :presence => true
 
-  validates_uniqueness_of :name, :scope => [:parent_skill_id],
+  validates_uniqueness_of :name,
                           :message => "This skill already exists"
 
 	# returns a hash of {k,v} => {parent name, skill name}
@@ -46,14 +46,19 @@ class Skill < ActiveRecord::Base
 	def self.USER_DEFINED
 		Skill.find_by_name('User Defined')
 	end
+	
+	def self.UNDEFINED
+		return Skill.find_by_name('Undefined')
+	end
 
 	def self.find_or_create_skill(skill_id, skill_text)
 		if skill_id.blank?
-			s = Skill.create(:name => skill_text, :parent_skill_id => Skill.USER_DEFINED.id)
+			s = Skill.find_by_name(skill_text)
+			s = Skill.create(:name => skill_text, :parent_skill_id => Skill.USER_DEFINED.id) if s.blank?
 			return s
 		else
 			return Skill.find(skill_id)
 		end
 	end
-
+	
 end

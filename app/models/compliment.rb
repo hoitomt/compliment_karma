@@ -41,6 +41,64 @@ class Compliment < ActiveRecord::Base
 
   default_scope :order => "created_at DESC"
   
+
+  def create_from_api(recipient_email, params)
+    begin
+      sender_email = params['from'].scan(/<.*>/)[0].gsub(/<|>/, '') if params['from']
+      user = User.find_by_email!(sender_email)
+      self.sender_user_id = user.id
+      self.sender_email = sender_email
+      self.receiver_email = recipient_email
+      self.skill_id = api_skill(params['body-plain'])
+      self.comment = api_comment(params['stripped-text'])
+      self.compliment_type_id = api_compliment_type_id
+      if self.save
+        return true
+      else
+        logger.info(self.errors.messages)
+        return false
+      end
+    rescue ActiveRecord::RecordNotFound
+      logger.info("Sender Not Found")
+      # notify_ck_of_unregistered_sender(params)
+    end
+  end
+
+  def self.notify_ck_of_unregistered_sender
+    ComplimentMailer.unregistered_user_api_access(params).deliver
+  end
+
+  def api_skill(body)
+    body_regex = /(\\n#|\A#).*(\\r|$)/
+    dirty_skill = body.match(body_regex) { |m| m[0] } if body
+    skill = dirty_skill.gsub(/\\n|#/, '').strip if dirty_skill
+    unless skill.blank?
+      return Skill.find_or_create_skill(nil, skill)
+    else
+      self.compliment_status = ComplimentStatus.MISSING_INFORMATION
+      return Skill.UNDEFINED
+    end
+  end
+
+  def api_comment(stripped_body)
+    # strip the greeting
+    stripped_body.gsub!(/\A[^,|\\r|\\n|;|:|-]*/, '')
+    stripped_body.gsub!(/\A[,|\\r|\\n|;|:|-]*/, '')
+    return stripped_body.strip[0..139]
+  end
+
+  def api_compliment_type_id
+    if parse_receiver_domain == parse_sender_domain && 
+       Domain.whitelist.includes(parse_sender_domain)
+      return ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
+    elsif Company.find_by_email(self.receiver_email) && 
+          User.find_by_email(self.sender_email)
+      return ComplimentType.PERSONAL_TO_PROFESSIONAL.id
+    else
+      return ComplimentType.PERSONAL_TO_PERSONAL.id
+    end
+  end
+
   # return the compliments that are pending for an email address
   # intent is to notify a potential user that there are compliments waiting for them
   def self.get_pending_compliments(receiver_email)

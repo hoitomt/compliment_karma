@@ -148,6 +148,10 @@ if Skill.find_by_name('User Defined').nil?
   s = Skill.create(:name => 'User Defined')
   s.update_attributes(:parent_skill_id => s.id)
 end
+if Skill.find_by_name('Undefined').nil?
+  s = Skill.create(:name => 'Undefined')
+  s.update_attributes(:parent_skill_id => s.id)
+end
 
 mike = User.find_by_email("mike@hoitomt.com")
 mike_attr = {:email => "mike@hoitomt.com", 

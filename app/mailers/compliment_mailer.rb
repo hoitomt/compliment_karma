@@ -47,5 +47,12 @@ class ComplimentMailer < ActionMailer::Base
     mail to: compliment.sender_email,
          subject: "Please register for an account to send your compliment"
   end
+
+  # Unregistered user is attempting to use our api
+  def unregistered_user_api_access(params)
+    @params = params
+    mail to: 'admin@complimentkarma.com',
+         subject: 'Attempted unauthorized access of the New Compliment Email API'
+  end
   
 end
