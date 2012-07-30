@@ -20,7 +20,7 @@ table#compliment-display {
 	font-size: 13px;
 	margin: 20px 20px 10px 20px;
 	th {
-		padding: 10px 5px 0 0; 
+		padding: 10px 5px 0 2px; 
 		height: 25px;
 		color: #313131;
 		text-shadow: 0.1em 0 0.1em #ffffff;
@@ -29,7 +29,7 @@ table#compliment-display {
 		// font-size: 14px;
 		// padding: 5px 0 0 0;
 	}
-	td { height: 30px; padding: 10px 0 0 0; color: #1e5faf; font-weight: bold; }
+	td { padding: 2px 5px 2px 2px; color: #1e5faf; }
 	tr.header {
 		@include top-border-radius;
 		@include gradient-gray;
