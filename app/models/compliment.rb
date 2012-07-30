@@ -98,7 +98,7 @@ class Compliment < ActiveRecord::Base
 
   def api_compliment_type_id
     if parse_receiver_domain == parse_sender_domain && 
-       Domain.whitelist.includes(parse_sender_domain)
+       Domain.whitelist.include?(parse_sender_domain)
       return ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
     elsif Company.find_by_email(self.receiver_email) && 
           User.find_by_email(self.sender_email)
