@@ -50,7 +50,7 @@
 		letter-spacing: -4px; line-height: 65px;}
 }
 #main-page-invitation {
-	width: 275px;
+	width: 300px;
 	margin: 0 auto;
 	ol li {
 		display: block;
@@ -91,13 +91,14 @@
 	}
 	input,
 	textarea { 
-		width: 270px; 
+		width: 250px; 
 		// color:#999; 
-		font: $san-serif-font-family; 
+		font: $san-serif-font-family;  
+		padding-right: 45px; 
 	}
 	::-webkit-input-placeholder { font-family: $san-serif-font-family; }
 	:-moz-placeholder { font-family: $san-serif-font-family; }
-	select { width: 265px; color: #000000; }
+	select { width: 265px; color: #000000;}
 	input, select { height:30px; margin-bottom: 5px; }
 	textarea { margin: 0 0 5px 0; }
 	button {
@@ -120,7 +121,7 @@
 	#validation-error { color: $inline-error-red; font-weight: bold;}
 	#home-page-button {
 		position: absolute;
-		margin: 1px 0 0 218px;
+		margin: 1px 0 0 237px;
 	}
 	.home-page-btn { height: 33px; }
 }
