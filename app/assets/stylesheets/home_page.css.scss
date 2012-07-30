@@ -50,7 +50,7 @@
 		letter-spacing: -4px; line-height: 65px;}
 }
 #main-page-invitation {
-	width: 300px;
+	width: 400px;
 	margin: 0 auto;
 	ol li {
 		display: block;
@@ -93,8 +93,7 @@
 	textarea { 
 		width: 250px; 
 		// color:#999; 
-		font: $san-serif-font-family;  
-		padding-right: 45px; 
+		font: $san-serif-font-family;
 	}
 	::-webkit-input-placeholder { font-family: $san-serif-font-family; }
 	:-moz-placeholder { font-family: $san-serif-font-family; }
@@ -119,11 +118,11 @@
 	}
 	.center-button { display: block; width: 150px; margin: 10px 0 20px 125px; text-align: center; }
 	#validation-error { color: $inline-error-red; font-weight: bold;}
-	#home-page-button {
-		position: absolute;
-		margin: 1px 0 0 237px;
+	.home-page-invite { float: left; }
+	#home-page-button { float: left; margin-left: 5px;
+		
 	}
-	.home-page-btn { height: 33px; }
+	.home-page-btn { height: 32px; }
 }
 .home-footer {
 	height:200px;
