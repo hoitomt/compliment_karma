@@ -169,9 +169,13 @@ class User < ActiveRecord::Base
   end
   
   def send_account_confirmation
+    account_confirmation_token
+    UserMailer.account_confirmation(self).deliver
+  end
+
+  def account_confirmation_token
     generate_token(:new_account_confirmation_token)
     save!
-    UserMailer.account_confirmation(self).deliver
   end
   
   def set_account_status

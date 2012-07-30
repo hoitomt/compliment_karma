@@ -43,51 +43,56 @@ class Compliment < ActiveRecord::Base
   
 
   def create_from_api(recipient_email, params)
-    begin
-      sender_email = clean_email_address(params['from']) if params['from']
-      user = User.find_by_email!(sender_email)
-      self.sender_user_id = user.id
-      self.sender_email = sender_email
-      self.receiver_email = clean_email_address(recipient_email)
-      self.skill_id = api_skill(params['body-plain'])
-      self.comment = api_comment(params['stripped-text'])
-      self.compliment_type_id = api_compliment_type_id
-      if self.save
-        return true
-      else
-        logger.info(self.errors.messages)
-        return false
-      end
-    rescue ActiveRecord::RecordNotFound
-      logger.info("Sender Not Found")
-      # notify_ck_of_unregistered_sender(params)
+    sender_email = clean_email_address(params['from']) if params['from']
+    user = User.find_by_email(sender_email)
+    if user.blank?
+      Compliment.notify_unrecognized_sender(params, sender_email)
+      Compliment.notify_ck_of_unregistered_sender(params)
+      return
+    elsif !user.confirmed?
+      user.account_confirmation_token
+      Compliment.notify_sender_unconfirmed_sender(params, user)
+      return
     end
+    self.sender_user_id = user.id
+    self.sender_email = sender_email
+    self.receiver_email = clean_email_address(recipient_email)
+    logger.info("Receiver Email: #{self.receiver_email}")
+    self.skill_id = api_skill(params['body-plain']).id
+    self.comment = api_comment(params['stripped-text'])
+    self.compliment_type_id = api_compliment_type_id
+    if self.save
+      return true
+    else
+      logger.info(self.errors.messages)
+      return false
+    end
+
   end
 
   def clean_email_address(email)
-    email.scan(/<.*>/)[0].gsub(/<|>/, '') unless email.blank?
-  end
-
-  def self.notify_ck_of_unregistered_sender
-    ComplimentMailer.unregistered_user_api_access(params).deliver
+    combo = email.scan(/<.*>/)
+    email = combo[0].gsub(/<|>/, '') unless email.blank? || combo.blank?
+    return email
   end
 
   def api_skill(body)
-    body_regex = /(\\n#|\A#).*(\\r|$)/
+    body_regex = /\^[^\^]*\^/
     dirty_skill = body.match(body_regex) { |m| m[0] } if body
-    skill = dirty_skill.gsub(/\\n|#/, '').strip if dirty_skill
+    skill = dirty_skill.gsub(/\\n|\\t|\^/, '').strip if dirty_skill
     unless skill.blank?
       return Skill.find_or_create_skill(nil, skill)
     else
       self.compliment_status = ComplimentStatus.MISSING_INFORMATION
+      Compliment.notify_sender_unknown_skill(sender, self)
       return Skill.UNDEFINED
     end
   end
 
   def api_comment(stripped_body)
     # strip the greeting
-    stripped_body.gsub!(/\A[^,|\\r|\\n|;|:|-]*/, '')
-    stripped_body.gsub!(/\A[,|\\r|\\n|;|:|-]*/, '')
+    stripped_body.gsub!(/.*(,|:|;|-)[\r\n]+/, '')
+    stripped_body.gsub!(/\^/, '')
     return stripped_body.strip[0..139]
   end
 
@@ -101,6 +106,22 @@ class Compliment < ActiveRecord::Base
     else
       return ComplimentType.PERSONAL_TO_PERSONAL.id
     end
+  end
+
+  def self.notify_ck_unrecognized_sender(params)
+    ComplimentMailer.unregistered_user_api_access(params).deliver
+  end
+
+  def self.notify_sender_unrecognized_sender(params, sender_email)
+    ComplimentMailer.notify_sender_unrecognized_sender(params, sender_email)
+  end
+
+  def self.notify_sender_unconfirmed_sender(params, sender)
+    ComplimentMailer.notify_sender_unconfirmed_sender(params, sender)
+  end
+
+  def self.notify_sender_unknown_skill(sender, compliment)
+    ComplimentMailer.notify_sender_unknown_skill(sender, compliment)
   end
 
   # return the compliments that are pending for an email address

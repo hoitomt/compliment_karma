@@ -30,10 +30,11 @@ class EmailApiController < ApplicationController
     logger.info("Subject: #{params['subject']}")
     logger.info("Body Plain: #{params['body-plain']}")
     logger.info("Body Stripped: #{params['stripped-text']}")
-    receiver = params['To']
-    receiver_array = receiver.blank? ? [] : receiver.split(',')
+    to_param = params['To']
+    receiver_array = to_param.blank? ? [] : to_param.split(',')
     receiver_array.each do |receiver|
-      unless receiver == "new@ck.mailgun.org"
+      receiver.strip!
+      if receiver != "new@ck.mailgun.org" && receiver != "new_local@ck.mailgun.org"
         compliment = Compliment.new
         created = compliment.create_from_api(receiver, params)
         if created

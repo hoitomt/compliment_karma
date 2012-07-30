@@ -49,10 +49,29 @@ class ComplimentMailer < ActionMailer::Base
   end
 
   # Unregistered user is attempting to use our api
-  def unregistered_user_api_access(params)
+  def notify_ck_unrecognized_sender(params)
     @params = params
     mail to: 'admin@complimentkarma.com',
-         subject: 'Attempted unauthorized access of the New Compliment Email API'
+         subject: 'Attempted unrecognized access of the New Compliment Email API'
+  end
+
+  def notify_sender_unrecognized_sender(params, sender_email)
+    @params = params
+    mail to: sender_email,
+         subject: 'Unrecognized access of ComplimentKarma'
   end
   
+  def notify_sender_unconfirmed_sender(params, user)
+    @params = params
+    @user = user
+    mail to: user.email,
+         subject: 'Please confirm your account before using ComplimentKarma'
+  end
+
+  def notify_sender_unknown_skill(user, compliment)
+    @user = user
+    @compliment = compliment
+    mail to: user.email,
+         subject: 'Your recent compliment did not specify a skill'
+  end
 end
