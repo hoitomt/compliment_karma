@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :current_view
   
   def shell_authenticate
-    unless Rails.env.development?
+    if Rails.env.development?
       logger.info("Founder Signed In: #{founder_signed_in?}")
       deny_shell_access unless founder_signed_in?
     end
