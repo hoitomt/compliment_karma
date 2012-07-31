@@ -17,7 +17,7 @@
 						<td class="od-label">Service Fee:</td>
 						<td>$</td>
 						<td class="od-data"><%= number_to_currency(@service_fee) %></td>
-						<td><%= link_to '?', '#', :class=> 'fancybox' %></td>
+						<td><%= link_to '?', '#service-fee-description', :class=> 'fancybox' %></td>
 					</tr>
 					<tr>
 						<td class="od-label bold">Total Cost:</td>
@@ -37,6 +37,6 @@
 		<%= render 'payments/paypal_iframe' %>
 	</div>
 </div>
-<div id="service-fee-description">
-
+<div id="service-fee-description" style="display: none;">
+	The service fee is an 8% + $1 fee assesed on every rewards transation.
 </div>
