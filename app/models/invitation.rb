@@ -19,7 +19,7 @@ class Invitation < ActiveRecord::Base
                          
   def send_invitation
     logger.info("Invitation sent to #{self.invite_email}")
-    InvitationMailer.send_invitation(self).deliver
+    InvitationMailer.beta_invitation(self).deliver
     # don't invite a current member to re-join
     # u = User.find_by_email(self.invite_email)
     # if u.nil?

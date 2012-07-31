@@ -16,6 +16,15 @@
 					maxHeight: 400
 				});
 			}
+			var errors = <%=raw @user.errors.to_json %>;
+			console.log(errors);
+			if(errors.domain != null) {				
+				$.fancybox('#non-whitelist-user',{
+					// maxWidth: 400,
+					// minHeight: 220,
+					// maxHeight: 400
+				});
+			}
 			FormHelpers.init();
 		});
 	</script>
@@ -64,7 +73,10 @@
 </div>
 
 <div id="new-user" style="display: none;">
-	<%= image_tag 'ck_logo.png' %>
+	<div style="float: right;">
+		<%= image_tag 'ck_logo_blue_green.png' %>
+	</div>
+	<div class="clear"></div>
 	<h1>Welcome to ComplimentKarma</h1>
 	<p>Thank you for using ComplimentKarma to send a compliment. Please fill in the 
 		sign up form to create your account.
@@ -73,15 +85,14 @@
 	<h2>Thanks!</h2>
 </div>
 
-<div id="terms-and-conditions" style="display: none;">
-	<%= image_tag 'ck_logo.png' %>
-	<h1>Compliment Karma Terms</h1>
-	<p>"All living beings have actions (Karma) as their own, their inheritance, <br />
-		their congenital cause, their kinsman, their refuge. It is Karma that <br />
-		differentiates beings into low and high states."</p>
-	<p><i>Buddha</i></p>
-	<br />
-	<%= link_to 'http://www.buddhanet.net/e-learning/karma.htm', 
-							'http://www.buddhanet.net/e-learning/karma.htm',
-							:style => "font-size: 10px;" %>
+<div id="terms-and-conditions" style="display: none; ">
+	<div style="float: right;">
+		<%= image_tag 'ck_logo_blue_green.png' %>
+	</div>
+	<div class="clear"></div>
+	<%= render 'shared/terms_and_conditions' %>
+</div>
+
+<div id="non-whitelist-user" style="display: none;">
+	<%= render 'shared/non_whitelist_user_signup' %>
 </div>

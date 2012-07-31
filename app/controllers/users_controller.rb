@@ -21,15 +21,26 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    # if !is_on_whitelist?
+    #   @whitelist = false
+    #   flash.now[:popup] = 'You are not on the whitelist'
+    #   render 'new'
+    # els
     if @user.save
       @user.send_account_confirmation
       sign_in(@user, false)
       # redirect_to invite_coworkers_path
       redirect_to @user
     else
+      logger.info(@user.errors.messages)
       @title = "Sign up"
       render 'new'
     end
+  end
+
+  def is_on_whitelist?
+    user_domain = @user.set_domain
+    return Domain.whitelist.include?(user_domain)
   end
   
   def show

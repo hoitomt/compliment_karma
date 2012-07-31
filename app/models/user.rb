@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true,
                        :length => { :within => 6..40 },
                        :on => :create
+  validate :user_on_whitelist
 
   before_create :encrypt_password
   before_create :set_name
@@ -109,6 +110,12 @@ class User < ActiveRecord::Base
       logger.info("Generate Token: #{column}")
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  def user_on_whitelist
+    unless Domain.whitelist.include?(self.set_domain)
+      errors.add(:domain, "Must be on whitelist")
+    end
   end
   
   def set_name

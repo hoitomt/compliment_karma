@@ -24,7 +24,9 @@
 			CommonScripts.showFlash(flashContent);
 			FooterResize.init();
 			
-			$('.fancybox').fancybox();
+			$('.fancybox').fancybox({
+				maxWidth: 600
+			});
 			SiteSearch.init();
 		});
 	</script>

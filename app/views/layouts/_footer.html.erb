@@ -1,11 +1,11 @@
 <div id="footer">
 	<div class="container_16">
 		<div class="grid_5 prefix_11">
-			<% if current_founder %>
-				Welcome <%= current_founder.name %> 
-				(<%= link_to "Founder Sign Out", founder_signout_path %>)
-			<% end %>
 			<% if Rails.env.development? %>
+				<% if current_founder %>
+					Welcome <%= current_founder.name %> 
+					(<%= link_to "Founder Sign Out", founder_signout_path %>)
+				<% end %>
 				<div class="container">
 					<% if current_user %>
 						Current User: (<%= current_user.id %> - <%= current_user.name %>)<br />
