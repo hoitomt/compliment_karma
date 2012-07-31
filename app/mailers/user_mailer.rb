@@ -8,6 +8,6 @@ class UserMailer < ActionMailer::Base
   
   def account_confirmation(user)
     @user = user
-    mail :to => user.email, :subject => "Welcome to Compliment Karma! Please confirm your account"
+    mail :to => user.email, :subject => "Welcome to Compliment Karma! Please confirm your email"
   end
 end

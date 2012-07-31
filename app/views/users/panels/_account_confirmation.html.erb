@@ -1,7 +1,7 @@
 <% unless @confirmed || !current_user?(@user) %>
 	<div id="account-confirmation" class="unclickable-user-profile">
 		<h1 style="color:#ffff00;">Unconfirmed Account</h1>
-			Please check your email to confirm your account.<br /><br />
+			Please check your email to activate your account.<br /><br />
 			<% if flash[:notice].blank? %>
 				<%= link_to 'Resend Link', 
 										resend_new_account_confirmation_path,

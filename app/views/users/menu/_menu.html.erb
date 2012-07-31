@@ -47,11 +47,6 @@
 				<%= link_to 'Contacts', user_contacts_path(@user), :remote => true %>
 			</li>
 		<% end %>
-		<% if individual_page %>
-			<li id="menu-settings">
-				<%= link_to 'Settings', user_settings_path(@user), :remote => true %>
-			</li>
-		<% end %>
 		<% if company_page %>
 			<li id="menu-employees">
 				<%= link_to 'Employees', user_employees_path(@user), :remote => true %>

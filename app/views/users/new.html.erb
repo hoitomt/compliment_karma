@@ -1,7 +1,8 @@
 <%= content_for :stylesheets do %>
 	<style type="text/css">
 		#nav-upper-right, #nav-main-menu, #menu-bar-search-form { display: none; }
-		#menu-bar-container {height: 42px;}
+		#menu-bar-container { display: none; }
+		#header { height: 50px;}
 	</style>
 <% end %>
 <%= content_for :javascript do %>
@@ -21,10 +22,9 @@
 <% end %>
 <div class="grid_16 main">
 	<div id="signup" class="grid_10">
-		<%= render 'users/signup_progress', :active => "slide1" %>
 		<div id="form-heading">
 			<p class="signup-title">
-				Sign Up for 100% free account
+				<strong>Sign Up</strong> for a 100% free account
 			</p>
 			<p class="medium">happy complimenting</p>
 		</div>
