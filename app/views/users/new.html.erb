@@ -21,12 +21,12 @@
 	</script>
 <% end %>
 <div class="grid_16 main">
-	<div id="signup" class="grid_10">
+	<div id="signup" class="grid_12">
 		<div id="form-heading">
 			<p class="signup-title">
 				<strong>Sign Up</strong> for a 100% free account
 			</p>
-			<p class="medium">happy complimentingx</p>
+			<p class="medium">happy complimenting</p>
 		</div>
 		<div class="clear"></div>
 		<%= form_for(@user, :validate => true, 
@@ -34,24 +34,19 @@
 			<fieldset>
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= f.label :email, "Email" %></div>
-					<div id="field"><%= f.text_field :email %>
-						<div id="user_email_error"></div>
+					<div id="field"><%= f.text_field :email, :autocomplete => 'off' %>
 					</div>
 				</div>
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= f.label :name, "Full Name" %></div>
-					<div id="field"><%= f.text_field :name %>
-						<div id="user_name_helper" class="helper">
-							e.g. jake sully or jake m sully
-						</div>
+					<div id="field"><%= f.text_field :name, :autocomplete => 'off' %>
+						<span class="field-helper">e.g. Bruce Wayne or Bruce A Wayne</span>
 					</div>
 				</div>
 				<div id="data-entry" class="clearfix">
 					<div id="label"><%= f.label :password %></div>
-					<div id="field"><%= f.password_field :password %>
-						<div id="user_password_helper" class="helper">
-							must be 6 characters or more
-						</div>
+					<div id="field"><%= f.password_field :password, :autocomplete => 'off'  %>
+						<span class="field-helper">6 characters or more</span>
 					</div>
 				</div>
 			</fieldset>
