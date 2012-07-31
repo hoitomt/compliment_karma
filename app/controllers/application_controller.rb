@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
   before_filter :current_view
   
   def shell_authenticate
-    logger.info("Founder Signed In: #{founder_signed_in?}")
-    deny_shell_access unless founder_signed_in?
+    unless Rails.env.development?
+      logger.info("Founder Signed In: #{founder_signed_in?}")
+      deny_shell_access unless founder_signed_in?
+    end
   end
 
   # This is used for setting UI effects based on the current page - user menu
