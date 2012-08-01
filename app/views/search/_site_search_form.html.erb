@@ -3,7 +3,7 @@
 		SiteSearch.init();
 	});
 </script>
-<% if @show_search_bar %>
+<% unless @hide_search_bar %>
 	<div id="menu-bar-search-form">
 		<span id="search-icon"></span>
 		<div class="search-input">

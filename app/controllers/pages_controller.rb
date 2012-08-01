@@ -49,7 +49,7 @@ class PagesController < ApplicationController
   private
 
     def hide_search_bar
-      @show_search_bar = false
+      @hide_search_bar = true
     end
 
 end
