@@ -39,13 +39,15 @@
 				<%= link_to 'Sent Compliments', user_sent_compliments_path(@user), :remote => true %>
 			</li>
 		<% end %>
-		<li id="menu-achievements">
-			<%= link_to 'Achievements', user_achievements_path(@user), :remote => true %>
-		</li>
-		<% if individual_page %>
-			<li id="menu-contacts">
-				<%= link_to 'Contacts', user_contacts_path(@user), :remote => true %>
+		<% if @hide_me %>
+			<li id="menu-achievements">
+				<%= link_to 'Achievements', user_achievements_path(@user), :remote => true %>
 			</li>
+			<% if individual_page %>
+				<li id="menu-contacts">
+					<%= link_to 'Contacts', user_contacts_path(@user), :remote => true %>
+				</li>
+			<% end %>
 		<% end %>
 		<% if company_page %>
 			<li id="menu-employees">
