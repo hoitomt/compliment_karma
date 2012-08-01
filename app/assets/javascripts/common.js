@@ -57,6 +57,15 @@ var CommonScripts = {
 				}
 			});
 		});
+	},
+	jsonTest: function() {
+		console.log('JSON TEST');
+		$.getJSON('http://sour-spade.showoff.io/compliments/count.json', function(data){
+			console.log(data)
+			// $.each(data, function(key, val) {
+			// 	console.log(key + " | " + val);
+		 //  });
+		})
 	}
 
 }

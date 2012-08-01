@@ -79,6 +79,9 @@ Ck::Application.routes.draw do
   match "users/:id/edit_from_profile" => "users#edit_from_profile", :as => :edit_from_profile
   match "users/:id/switch_accounts" => "users#switch_accounts", :as => :switch_accounts
 
+  # Metrics
+  match "compliments/count" => "compliments#count"
+
   resources :follows
   resources :recognition_comments, :only => [:create]
   resources :ck_likes, :only => [:new, :create]

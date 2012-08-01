@@ -109,4 +109,13 @@ class ComplimentsController < ApplicationController
     logger.info(@compliment_types)
   end
 
+  def count
+    @compliments_count = Compliment.count
+    respond_to do |format|
+      format.html {}
+      format.js {}
+      format.json { render :json => @compliments_count }
+    end
+  end
+
 end
