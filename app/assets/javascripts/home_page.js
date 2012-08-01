@@ -7,8 +7,8 @@ var HomePage = {
 	slider: function() {
 		$('#slider').cycle({
 			fx: 'fade',
-			timeout: 0,
-			pause: true,
+			timeout: 12000,
+			pause: 1,
 			next: '#slider-state-1',
 			prev: '#slider-state-2',
 			before: HomePage.resetStatus

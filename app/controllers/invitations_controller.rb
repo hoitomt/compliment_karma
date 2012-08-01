@@ -20,8 +20,9 @@ class InvitationsController < ApplicationController
       else
         logger.info("Not Current User")
         if @invitation = Invitation.create_invitation(params[:invitation][:invite_email])
-          flash[:notice] = "An invitation has been sent to #{params[:invitation][:invite_email]}. " + 
-                          "Thank you for your interest in ComplimentKarma" 
+          flash[:notice] = "Thanks a lot for your interest. We 
+          have added you to our priority invite list. Once we have 
+          more invitations available, we will gladly email you one."
           redirect_to root_path
         else
           flash[:notice] = "There was an error when sending your invitation"

@@ -10,7 +10,7 @@ class InvitationMailer < ActionMailer::Base
   def beta_invitation(invitation)
     @invitation = invitation
     mail :to => invitation.invite_email,
-         :subject => "Compliment Karma is inviting you to join"
+         :subject => "Thank you for your interest in ComplimentKarma"
   end
   
 end

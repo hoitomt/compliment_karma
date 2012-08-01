@@ -42,23 +42,23 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	z-index: 21;
+	z-index: 101;
 	// display: none;
 }
 #explanation {
 	margin: 0px auto;
-	width: 400px;
+	width: 600px;
 	display: none;
 }
 #flash {
 	margin: 0 auto;
-	width: 400px;
+	width: 600px;
 }
 .flash {
 	@include explanation-radius;
 	padding: 5px;
 	display: block;
-	font-weight: bold;
+	// font-weight: bold;
 	font-size: 16px;
 	text-align: center;
 }

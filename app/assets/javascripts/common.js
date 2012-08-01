@@ -19,7 +19,7 @@ var CommonScripts = {
 			$('#explanation').html(flashContent);
 			setTimeout(function() {
 				$('#explanation').slideUp();
-			}, 7500);
+			}, 17500);
 		}
 
 	},

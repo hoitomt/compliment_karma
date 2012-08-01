@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_filter :hide_search_bar
+
   def index
     @title = "Welcome"
     @invitation = Invitation.new
@@ -43,5 +45,11 @@ class PagesController < ApplicationController
 
   def help
   end
+
+  private
+
+    def hide_search_bar
+      @show_search_bar = false
+    end
 
 end

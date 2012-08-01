@@ -20,6 +20,7 @@
 	margin-top: 20px;
 }
 .main-content {
+	@include border-radius;
 	background-color: #ffffff;
 	border-top-left-radius:8px; 
 	border-top-right-radius:8px;
@@ -50,7 +51,7 @@
 		letter-spacing: -4px; line-height: 65px;}
 }
 #main-page-invitation {
-	width: 340px;
+	width: 390px;
 	margin: 0 auto;
 	padding-left: 5px;
 	ol li {
@@ -259,7 +260,6 @@ a.header-update-link:visited { color: #ffffff }
 	}
 }
 @mixin container-font {
-	font-family:Verdana;
 	font-weight: normal;
 	color:#076191;	
 }
@@ -278,23 +278,50 @@ a.header-update-link:visited { color: #ffffff }
 	h3 { 
 		@include container-font;
 		font-size:11pt;
-		font-weight: bold;
+		// font-weight: bold;
 		margin: 5px 0 5px 0;
 	}
 }
 .about-content {
-	width: 600px;
+	width: 800px;
 	float: left;
 	ul {
 		li {
 			list-style: disc;
 		}
 	}
+	.picture-container {
+		width: 200px;
+		height: 200px;
+		overflow: hidden;
+		float: left;
+	}
+	.info-container {
+		width: 140px;
+		float: right
+	}
+	.personal-team-container {
+		width: 350px; 
+		float: left; 
+	}
+	.map-container {
+		// float: left;
+	}
+	.address-container {
+		margin: 0 0 20px 0;
+		// float: left;
+	}
 }
 .about-menu {
-	width: 180px; 
+	width: 120px; 
 	float: left;
 	li {
 		margin: 0 0 5px 0px;
 	}
+}
+.signup-logo-container {
+	@include border-radius;
+	background: $main-menu-color;
+	padding: 5px;
+	float: right;
 }

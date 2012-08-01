@@ -16,20 +16,20 @@
 					maxHeight: 400
 				});
 			}
-			var errors = <%=raw @user.errors.to_json %>;
-			console.log(errors);
-			if(errors.domain != null) {				
-				$.fancybox('#non-whitelist-user',{
-					// maxWidth: 400,
-					// minHeight: 220,
-					// maxHeight: 400
-				});
-			}
+			// var errors = <%=raw @user.errors.to_json %>;
+			// console.log(errors);
+			// if(errors.domain != null) {				
+			// 	$.fancybox('#non-whitelist-user',{
+			// 		// maxWidth: 400,
+			// 		// minHeight: 220,
+			// 		// maxHeight: 400
+			// 	});
+			// }
 			FormHelpers.init();
 		});
 	</script>
 <% end %>
-<div class="grid_16 main">
+<div class="grid_16 main-content">
 	<div id="signup" class="grid_12">
 		<div id="form-heading">
 			<p class="signup-title">
@@ -86,8 +86,8 @@
 </div>
 
 <div id="terms-and-conditions" style="display: none; ">
-	<div style="float: right;">
-		<%= image_tag 'ck_logo_blue_green.png' %>
+	<div class="signup-logo-container">
+		<%= image_tag 'ck_logo.png' %>
 	</div>
 	<div class="clear"></div>
 	<%= render 'shared/terms_and_conditions' %>
@@ -95,4 +95,12 @@
 
 <div id="non-whitelist-user" style="display: none;">
 	<%= render 'shared/non_whitelist_user_signup' %>
+</div>
+
+<div id="privacy-policy" style="display: none;">
+	<div class="signup-logo-container">
+		<%= image_tag 'ck_logo.png' %>
+	</div>
+	<div class="clear"></div>
+	<%= render 'shared/privacy_policy' %>
 </div>

@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true,
                        :length => { :within => 6..40 },
                        :on => :create
-  validate :user_on_whitelist
+  # validate :on_whitelist
 
   before_create :encrypt_password
   before_create :set_name
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
-  def user_on_whitelist
+  def on_whitelist
     unless Domain.whitelist.include?(self.set_domain)
       errors.add(:domain, "Must be on whitelist")
     end
