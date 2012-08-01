@@ -258,11 +258,29 @@ a.header-update-link:visited { color: #ffffff }
 		}
 	}
 }
+@mixin container-font {
+	font-family:Verdana;
+	font-weight: normal;
+	color:#076191;	
+}
 .about-container {
 	padding: 20px;
-	h2 {margin-bottom: 10px;}
-	h3 { margin: 10px 0 5px 0;}
-	h4 { margin: 4px 0 5px 0;}
+	h1 { 
+		@include container-font;
+		font-size:24.5pt;
+		margin-bottom: 10px;
+	}
+	h2 {
+		@include container-font;
+		font-size:15.5pt;
+		margin: 10px 0 5px 0;
+	}
+	h3 { 
+		@include container-font;
+		font-size:11pt;
+		font-weight: bold;
+		margin: 5px 0 5px 0;
+	}
 }
 .about-content {
 	width: 600px;
