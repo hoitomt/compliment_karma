@@ -29,9 +29,8 @@
 				<% if current_user.nil? %>
 					<ul>
 						<li><%= home_link('Home') %></li>
-						<li><%= link_to 'People', '#' %></li>
-						<li><%= link_to 'Companies', '#' %></li>
-						<li style="border-right: none;"><%= link_to 'Top', '#' %></li>
+						<li><%= link_to 'About', about_path %></li>
+						<li style="border-right: none;"><%= link_to 'Learn', learn_path %></li>
 					</ul>
 				<% else %>
 					<ul>

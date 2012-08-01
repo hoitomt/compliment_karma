@@ -29,8 +29,19 @@ class PagesController < ApplicationController
     @title = "Learn"
   end
 
-  def search
-    
+  def about
+  end
+
+  def team
+  end
+
+  def guidelines
+  end
+
+  def contact
+  end
+
+  def help
   end
 
 end

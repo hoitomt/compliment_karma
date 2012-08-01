@@ -250,12 +250,33 @@ a.header-update-link:visited { color: #ffffff }
 	z-index: 2;
 }
 #learn-content {
-	width: 600px; 
+	width: 600px;
 	margin: 10px auto 0 auto;
-	// font-size: 12px;
 	ul {
 		li {
 			list-style: disc;
 		}
+	}
+}
+.about-container {
+	padding: 20px;
+	h2 {margin-bottom: 10px;}
+	h3 { margin: 10px 0 5px 0;}
+	h4 { margin: 4px 0 5px 0;}
+}
+.about-content {
+	width: 600px;
+	float: left;
+	ul {
+		li {
+			list-style: disc;
+		}
+	}
+}
+.about-menu {
+	width: 180px; 
+	float: left;
+	li {
+		margin: 0 0 5px 0px;
 	}
 }
