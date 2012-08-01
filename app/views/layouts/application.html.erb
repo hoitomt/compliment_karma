@@ -30,7 +30,9 @@
 			SiteSearch.init();
 		});
 	</script>
-	<%= render 'layouts/google_analytics' %>
+	<% if Rails.env.production? %>
+		<%= render 'layouts/google_analytics' %>
+	<% end %>
 </head>
 <body>
 	<%#= render 'social/facebook_javascript' %>
