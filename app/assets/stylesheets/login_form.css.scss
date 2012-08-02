@@ -14,6 +14,7 @@ form#login-form{
 	ol { margin-bottom: 10px; }
 	ol li {
 	 list-style: none;
+	 margin-bottom: 5px;
 	}
 	label {
 		float: left;
@@ -25,26 +26,28 @@ form#login-form{
 		color: #000;
 		text-align: right;
 		margin-right: 10px;
-		padding-top: 3px;
+		padding-top: 6px;
 	}
+
 	input,
 	textarea {
 		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 		border-radius: 5px;
-		border: $border-gray 1px solid;
+		border: $background-color 2px solid;
 		background-color:#FFFFFF;
 		// color:#999;
 		font-size: 18px;
 		width: 300px;
 		height: 30px;
-		margin-bottom: 5px;
+		margin-bottom: 4px;
 		padding-left: 4px;
 	}
 	.checkbox-div {
 		margin-left: 90px;
 		float: left;
 		width: 30px;
+		padding: 3px 0 0 0;
 	}
 	.checkbox-label {
 		text-align: left;

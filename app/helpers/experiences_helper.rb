@@ -24,18 +24,17 @@ module ExperiencesHelper
 		year_diff = end_date.year - start_date.year 
 		month_diff = 0
 		if start_date.month > end_date.month
-			month_diff = 12 - (start_date.month - end_date.month)
+			month_diff = year_diff * 12 - (start_date.month - end_date.month)
+			# month_diff = 12 - (start_date.month - end_date.month)
 		else
-			month_diff = end_date.month - start_date.month
+			month_diff = year_diff * 12 + (end_date.month - start_date.month)
 		end
 
 		end_date.month - start_date.month
-
-
-
-		if year_diff > 2
+		logger.info("Year Diff: #{year_diff}, Month Diff: #{month_diff}")
+		if month_diff > 23
 			return "#{year_diff} years #{month_display(month_diff)}"
-		elsif year_diff > 1
+		elsif month_diff > 12
 			return "1 year #{month_display(month_diff)}"
 		elsif month_diff == 12
 			return "1 year"
