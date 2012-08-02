@@ -24,6 +24,8 @@ class ExperiencesController < ApplicationController
 
 	def edit
 		@experience = Experience.find(params[:experience_id])
+		logger.info("Start Date: #{@experience.start_date}")
+		logger.info("End Date: #{@experience.end_date}")
 	end
 
 	def update
@@ -47,7 +49,11 @@ class ExperiencesController < ApplicationController
 
     def parse_date(d)
       return nil if d.blank?
-      return DateTime.strptime(d, @@date_format)
+      x = DateTime.strptime(d, @@date_format)
+      logger.info("Date before #{d} | Date after #{x}")
+      local_dt = x.new_offset
+      logger.info("Local Date #{local_dt}")
+      return x
     end
 
 end

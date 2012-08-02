@@ -14,33 +14,46 @@ module ExperiencesHelper
 
 	def date_math(exp)
 		return "" if exp.start_date.blank?
+		start_date = exp.start_date
 		if exp.end_date.blank?
 			end_date = DateTime.now
 		else
 			end_date = exp.end_date
 		end
-		year_diff = end_date.year - exp.start_date.year 
+
+		year_diff = end_date.year - start_date.year 
 		month_diff = 0
-		if exp.start_date.month > end_date.month
-			month_diff = 12 - (exp.start_date.month - end_date.month)
+		if start_date.month > end_date.month
+			month_diff = 12 - (start_date.month - end_date.month)
 		else
-			month_diff = end_date.month - exp.start_date.month
+			month_diff = end_date.month - start_date.month
 		end
 
-			end_date.month - exp.start_date.month
+		end_date.month - start_date.month
 
 
 
-		if month_diff > 24
-			return "#{month_diff / 12} years #{month_diff % 12} months"
-		elsif month_diff > 12
-			return "1 year #{month_diff % 12} months"
+		if year_diff > 2
+			return "#{year_diff} years #{month_display(month_diff)}"
+		elsif year_diff > 1
+			return "1 year #{month_display(month_diff)}"
 		elsif month_diff == 12
 			return "1 year"
 		elsif month_diff > 1
-			return "#{month_diff} months"
+			return "#{month_display(month_diff)}"
 		else
 			return "1 month"
+		end
+	end
+
+	def month_display(m)
+		diff = m % 12
+		if diff > 1
+			return "#{diff} months"
+		elsif diff == 1
+			return "1 month"
+		else
+			return ""
 		end
 	end
 

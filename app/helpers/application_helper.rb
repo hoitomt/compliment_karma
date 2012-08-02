@@ -22,10 +22,6 @@ module ApplicationHelper
   def length_of_comment
     return 200
   end
-
-  def timestamp(date)
-    return DateUtil.get_time_gap(date)
-  end
   
   def get_image(path)
     if path
@@ -95,6 +91,7 @@ module ApplicationHelper
   end
 
   def date_format_month_day(date)
+    date = DateUtil.get_local(date)
     if date
       return date.strftime("%b %-d")
     else
@@ -103,6 +100,7 @@ module ApplicationHelper
   end
 
   def date_time_format(date)
+    date = DateUtil.get_local(date)
     today = DateTime.now
     if date
       if date.day == today.day && date.month == today.month && date.year == today.year
@@ -115,6 +113,11 @@ module ApplicationHelper
     else
       return ""
     end
+  end
+
+  def timestamp(date)
+    # DateUtil.get_local(date)
+    return DateUtil.get_time_gap(date)
   end
 
   def update_history_count_display

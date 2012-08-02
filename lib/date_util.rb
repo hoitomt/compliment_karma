@@ -1,4 +1,13 @@
 class DateUtil
+
+  def self.get_local(d)
+    n = DateTime.now
+    if d.utc_offset != n.utc_offset
+      return d + n.utc_offset
+    else
+      return d
+    end
+  end
   
   def self.get_previous_monday_at_zero_time
     d = DateTime.now
@@ -6,6 +15,7 @@ class DateUtil
   end
   
   def self.get_monday_at_zero_time(date)
+    date = get_local(date)
     if date.monday?
       return get_zero_time(date)
     else
@@ -14,10 +24,12 @@ class DateUtil
   end
   
   def self.get_zero_time(date)
+    date = get_local(date)
     DateTime.new(date.year, date.month, date.day, 0, 0, 0)
   end
   
   def self.get_monday_with_zero_time(date)
+    date = get_local(date)
     while !date.monday?
       date = date - 1.day
     end
@@ -25,6 +37,7 @@ class DateUtil
   end
   
   def self.get_time_gap(d)
+    # d = get_local(d)
     t1 = Time.now.localtime
     t2 = d.to_time.localtime
     time_gap(t1, t2)
