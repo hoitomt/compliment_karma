@@ -21,7 +21,7 @@
 }
 .main-content {
 	@include border-radius;
-	background-color: #ffffff;
+	background-color: $main-menu-color;
 	border-top-left-radius:8px; 
 	border-top-right-radius:8px;
 	border:solid 1px #F0F8F8; 

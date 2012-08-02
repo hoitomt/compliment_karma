@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :hide_search_bar
 
   def index
-    @title = "Welcome"
+    @title = "Send Compliments, Earn Rewards | ComplimentKarma"
     @invitation = Invitation.new
     if current_user
       redirect_to current_user

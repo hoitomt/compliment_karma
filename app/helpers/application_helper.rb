@@ -1,7 +1,11 @@
 module ApplicationHelper
 
   def site_url
-    return "http://fierce-sunset-4672.herokuapp.com/"
+    return "http://www.complimentkarma.com/"
+  end
+
+  def title(title)
+    return title || "ComplimentKarma"
   end
 
   def home_link(text, admin_ind=nil)
