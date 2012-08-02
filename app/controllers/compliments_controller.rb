@@ -115,6 +115,7 @@ class ComplimentsController < ApplicationController
       format.html {}
       format.js {}
       format.json { render :json => @compliments_count }
+      format.xml { render :xml => @compliments_count }
     end
   end
 

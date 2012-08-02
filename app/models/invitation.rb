@@ -8,14 +8,14 @@ class Invitation < ActiveRecord::Base
                                         :message => "This is not a valid email address" }
   # validates :from_email, :presence => true,
   #                        :format => { :with => email_regex }
-  validate :invite_email_should_not_equal_from_email
+  # validate :invite_email_should_not_equal_from_email
   
-  def invite_email_should_not_equal_from_email
-    errors.add(:from_email, "The invitation must not be from the sender") unless
-      !self.from_email.blank? && 
-      !self.invite_email.blank? &&
-      self.from_email != self.invite_email
-  end
+  # def invite_email_should_not_equal_from_email
+  #   errors.add(:from_email, "The invitation must not be from the sender") if
+  #     !self.from_email.blank? && 
+  #     !self.invite_email.blank? &&
+  #     self.from_email == self.invite_email
+  # end
                          
   def send_invitation
     logger.info("Invitation sent to #{self.invite_email}")
@@ -30,7 +30,9 @@ class Invitation < ActiveRecord::Base
     logger.info("create_invitation to #{to} from #{from}")
     time_frame = 0.25
     if no_recent_invitation?(to, time_frame)
+      logger.info("No Recent Invitations")
       invite = Invitation.create(:invite_email => to, :from_email => from) 
+      logger.info(invite.errors.messages)
       invite.send_invitation
       return true
     else

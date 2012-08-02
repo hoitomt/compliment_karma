@@ -6,7 +6,7 @@
 		<div class="clear"></div>
 	</div>
 	<div class="add-position">
-		<% if page_owner?(@user) %>
+		<% if page_owner?(@user) && current_user.confirmed? %>
 			<%= link_to '+ Add a Position', 
 									new_experience_path(:user_id => @user.id), 
 									:class => "ul_hover",

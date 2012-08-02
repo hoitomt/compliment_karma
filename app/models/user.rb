@@ -112,12 +112,16 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
-  def on_whitelist
-    unless Domain.whitelist.include?(self.set_domain)
-      errors.add(:domain, "Must be on whitelist")
-    end
-  end
+  # def on_whitelist
+  #   unless Domain.whitelist.include?(self.set_domain)
+  #     errors.add(:domain, "Must be on whitelist")
+  #   end
+  # end
   
+  def on_whitelist
+    Domain.whitelist.include?(self.set_domain)
+  end
+
   def set_name
     name_array = self.name.split(' ')
     if name_array.size == 1

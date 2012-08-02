@@ -60,13 +60,27 @@ var CommonScripts = {
 	},
 	jsonTest: function() {
 		console.log('JSON TEST');
-		$.getJSON('http://sour-spade.showoff.io/compliments/count.json', function(data){
+
+// $().ready(function(){ 
+//     var url = 'http://www.panoramio.com/wapi/data/get_photos?callback=?';
+//     $.get(url, function(data) {
+//         // can use 'data' in here...
+//     });
+// });
+
+		var url = 'http://www.complimentkarma.com/compliments/count?callback=?'
+		$.getJSON(url, function(data){
 			console.log(data)
 			// $.each(data, function(key, val) {
 			// 	console.log(key + " | " + val);
 		 //  });
 		})
+		// var url = "http://www.complimentkarma.com/compliments/count.json";
+		// var client = new XMLHttpRequest();
+		// client.open("GET", url, false);
+		// client.setRequestHeader("Content-Type", "application/json");
+		// client.send();
+		// console.log(client.responseText);
 	}
-
 }
 
