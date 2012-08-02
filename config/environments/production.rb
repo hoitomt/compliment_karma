@@ -60,4 +60,11 @@ Ck::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Configure Mailgun to use http, rather than smtp
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+      :api_key  => 'key-1ed8ophkrawc5969zsvmff02w1f0fiv2',
+      :api_host => 'ck-prod.mailgun.org'
+  }
 end

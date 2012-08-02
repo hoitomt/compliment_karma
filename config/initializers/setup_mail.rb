@@ -11,7 +11,7 @@ ActionMailer::Base.smtp_settings = {
   :address        => config['MAILGUN_SMTP_SERVER'],
   :user_name      => config['MAILGUN_SMTP_LOGIN'],
   :password       => config['MAILGUN_SMTP_PASSWORD'],
-  :domain         => config['MAILGUN_DOMAIN'],
+  :domain         => config['MAILGUN_HOST'],
   :authentication => :plain
 }
 # ActionMailer::Base.delivery_method = :smtp

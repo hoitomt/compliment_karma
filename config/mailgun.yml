@@ -1,9 +1,12 @@
 development:
   MAILGUN_SMTP_PORT: '587'
   MAILGUN_SMTP_SERVER: smtp.mailgun.org
-  MAILGUN_SMTP_LOGIN: postmaster@app5024011.mailgun.org
-  MAILGUN_SMTP_PASSWORD: 62jp2h0bmg31
-  MAILGUN_DOMAIN: app5024011.mailgun.org
+  MAILGUN_SMTP_LOGIN: postmaster@ck-dev.mailgun.org
+  MAILGUN_SMTP_PASSWORD: 1-k4h-mfhd66
+  MAILGUN_API_KEY: key-7lwbeg42hlokus-qaamysf8zt-ne7ds9
+  MAILGUN_HOST: ck-dev.mailgun.org
+  MAILGUN_API_URL: https://api.mailgun.net/v2
+  MAILGUN_API_FULL_URL: https://api:key-7lwbeg42hlokus-qaamysf8zt-ne7ds9@api.mailgun.net/v2/ck-dev.mailgun.org/messages
 test:
   MAILGUN_SMTP_PORT: '587'
   MAILGUN_SMTP_SERVER: smtp.mailgun.org
@@ -13,11 +16,9 @@ test:
 production:
   MAILGUN_SMTP_PORT: '587'
   MAILGUN_SMTP_SERVER: smtp.mailgun.org
-  MAILGUN_SMTP_LOGIN: postmaster@app5024011.mailgun.org
-  MAILGUN_SMTP_PASSWORD: 62jp2h0bmg31
-  MAILGUN_DOMAIN: app5024011.mailgun.org
-
-MAILGUN_API_KEY: key-0-zv0demvph1krkk9ctbws9vd17xsyb5
-MAILGUN_HOST: app5024011.mailgun.org
-MAILGUN_API_URL: https://api.mailgun.net/v2
-MAILGUN_API_FULL_URL: https://api:key-0-zv0demvph1krkk9ctbws9vd17xsyb5@api.mailgun.net/v2/app5024011.mailgun.org/messages
+  MAILGUN_SMTP_LOGIN: postmaster@ck-prod.mailgun.org
+  MAILGUN_SMTP_PASSWORD: 9rr3y-oa1rc0
+  MAILGUN_API_KEY: key-1ed8ophkrawc5969zsvmff02w1f0fiv2
+  MAILGUN_HOST: ck-prod.mailgun.org
+  MAILGUN_API_URL: https://api.mailgun.net/v2
+  MAILGUN_API_FULL_URL: https://api:key-1ed8ophkrawc5969zsvmff02w1f0fiv2@api.mailgun.net/v2/ck-prod.mailgun.org/messages
