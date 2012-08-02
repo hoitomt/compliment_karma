@@ -20,6 +20,17 @@
 	margin-top: 20px;
 }
 .main-content {
+	@include top-border-radius;
+	background-color: #ffffff;
+	border-top-left-radius:8px; 
+	border-top-right-radius:8px;
+	border:solid 1px #F0F8F8; 
+	border-bottom:0; 
+	box-shadow: 0px 0px 5px #8EBAB8;
+	z-index: 100;
+	margin-top: 20px;
+}
+.signup-content {
 	@include border-radius;
 	background-color: $main-menu-color;
 	border-top-left-radius:8px; 
