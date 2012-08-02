@@ -22,6 +22,7 @@
 	<script type="text/javascript">
 		$(function() {
 			var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
+			console.log(flashContent);
 			CommonScripts.showFlash(flashContent);
 			FooterResize.init();
 			

@@ -4,7 +4,7 @@ class PasswordResetsController < ApplicationController
   
   def create
     user = User.find_by_email(params[:email])
-    note = ""
+    note = nil
     if user
       logger.info("Found User")
       user.send_password_reset
@@ -14,6 +14,7 @@ class PasswordResetsController < ApplicationController
               However you cannot reset your password at this time. We will
               let you know once the site is ready to go."
     end
+    logger.info(flash.each {|k, v| "#{k}: #{v}"})
     redirect_to login_path, :notice => note
   end
   
