@@ -9,13 +9,17 @@ class PasswordResetsController < ApplicationController
       logger.info("Found User")
       user.send_password_reset
       note = "An email has been sent with password reset instructions"
+      redirect_to login_path, :notice => note
     elsif Invitation.find_by_invite_email(params[:email])
       note = "We love it that you are impatient to use ComplimentKarma. 
               However you cannot reset your password at this time. We will
               let you know once the site is ready to go."
+      redirect_to login_path, :notice => note
+    else
+      flash.now[:error] = "Oh Snap! We couldn't find you using the 
+                           information you entered. Please try again."
+      render :new
     end
-    logger.info(flash.each {|k, v| "#{k}: #{v}"})
-    redirect_to login_path, :notice => note
   end
   
   def edit
