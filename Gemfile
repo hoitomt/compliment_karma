@@ -6,10 +6,10 @@ gem 'pg', '0.13.2'
 gem 'heroku'
 gem 'bcrypt-ruby', '3.0.1', :require => "bcrypt"
 gem 'jquery-rails'
-# gem 'rails-asset-jqueryui'
 gem 'client_side_validations', '3.1.4'
 gem 'newrelic_rpm'
 gem 'marginalia', "~> 1.1.0"
+gem 'restful_metrics'
 
 # Email - HTTP to mailgun
 gem 'rest-client', '1.6.7'
