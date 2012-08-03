@@ -363,4 +363,31 @@ describe UsersController do
     
   end
 
+  describe "private beta" do
+    before(:each) do
+      @attr = {:name => "Nicole",
+               :email => 'nicole@bancbox.com',
+               :password => 'bancbox'}
+    end
+
+    it "should allow signup" do
+      lambda do
+        post :create, :user => @attr
+      end.should change(User, :count).by(1)
+    end
+
+    it "should allow signup for capital letter domain" do
+      lambda do
+        post :create, :user => @attr.merge(:email => 'nicole@Bancbox.com')
+      end.should_not change(User, :count).by(1)
+    end
+
+    it "should not allow signup for non-whitelist" do
+      lambda do
+        post :create, :user => @attr.merge(:email => 'nicole@gmail.com')
+      end.should_not change(User, :count)
+    end
+    
+  end
+
 end

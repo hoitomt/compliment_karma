@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def is_on_whitelist?
     user_domain = @user.set_domain
-    return Domain.whitelist.include?(user_domain)
+    return Domain.on_whitelist?(user_domain)
   end
   
   def show

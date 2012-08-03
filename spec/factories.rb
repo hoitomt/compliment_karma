@@ -9,33 +9,33 @@ FactoryGirl.define do
 
   factory :user2, class: User do
     name "Guest User"
-    email "factory_user2@example.com"
+    email "factory_user2@complimentkarma.com"
     password "foobar"
-    domain "example.com"
+    domain "complimentkarma.com"
     account_status_id 2
   end
 
   factory :user3, class: User do
     name "Another User"
-    email "factory_user3@example.com"
+    email "factory_user3@complimentkarma.com"
     password "foobar"
-    domain "example.com"
+    domain "complimentkarma.com"
     account_status_id 2
   end
   
   factory :unconfirmed_user, class: User do
     name "Unconfirmed User"
-    email "unconfirmed_user@example.com"
+    email "unconfirmed_user@complimentkarma.com"
     password "foobar"
-    domain "example.com"
+    domain "complimentkarma.com"
     account_status_id 1
   end
 
   factory :unconfirmed_user2, class: User do
     name "Unconfirmed User2"
-    email "unconfirmed_user2@example.com"
+    email "unconfirmed_user2@complimentkarma.com"
     password "foobar"
-    domain "example.com"
+    domain "complimentkarma.com"
     account_status_id 1
   end
   
@@ -43,20 +43,20 @@ FactoryGirl.define do
     name "Unconfirmed User3"
     email "unconfirmed_user3@simpsons.com"
     password "foobar"
-    domain "example.com"
+    domain "complimentkarma.com"
     account_status_id 1
   end
   
   factory :founder, class: User do
     name "Guest User"
-    email "founder@example.com"
+    email "founder@complimentkarma.com"
     password "foobar"
-    domain "example.com"
+    domain "complimentkarma.com"
     founder true
   end
 
   factory :invitation, class: Invitation do
-    invite_email "invited_user@example.com"
-    from_email "nonfounder@example.com"
+    invite_email "invited_user@complimentkarma.com"
+    from_email "nonfounder@complimentkarma.com"
   end
 end
