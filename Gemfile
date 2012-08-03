@@ -18,6 +18,9 @@ gem 'mailgun-rails', "~> 0.1.1"
 gem 'json'
 gem 'em-http-request'
 
+# Bancbox
+gem 'httparty'
+
 # Photo Support
 gem 'paperclip', '~>3.0.2'
 gem 'aws-sdk', '1.4.1'

@@ -196,6 +196,7 @@ DEPENDENCIES
   em-http-request
   factory_girl_rails (~> 3.0)
   heroku
+  httparty
   jquery-rails
   json
   mailgun-rails (~> 0.1.1)
