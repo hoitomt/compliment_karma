@@ -16,11 +16,9 @@ var HomePage = {
 	},
 	setStatusHandlers: function() {
 		$('#slider-state-1').click(function() {
-			// console.log("click state 1");
 			HomePage.resetStatus();
 		});
 		$('#slider-state-2').click(function(){
-			// console.log("click state 2");
 			HomePage.resetStatus();
 		})
 	},

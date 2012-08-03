@@ -7,7 +7,6 @@ var MyUpdates = {
 		})
 	},
 	updateCount: function(myUpdateCount) {
-		// console.log(myUpdateCount);
 		var myUpdateCountContainer = $('#update-history-count');
 		if(myUpdateCount > 0 ) {
 			myUpdateCountContainer.html(myUpdateCount);
@@ -24,7 +23,6 @@ var MyUpdates = {
 	markAsRead: function() {
 		$('ul#my-update-content li').click(function() {
 			$(this).removeClass('unread');
-			// console.log(this);
 		});
 	}
 }

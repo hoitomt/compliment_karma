@@ -21,14 +21,12 @@ var ListNavigator = {
 				if(ListNavigator.index < 0) {
 					ListNavigator.index = 0;
 				}
-				// console.log("Up: " + ListNavigator.index);
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 40) { // down arrow
 				ListNavigator.index += 1;
 				if(ListNavigator.index >= list.length) {
 					ListNavigator.index = list.length - 1;
 				}
-				// console.log("Down: " + ListNavigator.index);
 				ListNavigator.highlightElement(list);
 			} else if(e.keyCode == 13) { // enter key
 				var listElement = list[ListNavigator.index];

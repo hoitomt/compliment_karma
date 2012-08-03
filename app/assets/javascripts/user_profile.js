@@ -216,7 +216,6 @@ var UserProfile = {
 		$('html').click(function(event) {
 			var clickSrc = event.srcElement;
 			var parent = $(clickSrc).parents('.comment-text-new');
-			// console.log(parent);
 			if(parent.length == 0) {
 				UserProfile.hideCommentSubmitButton();
 			}

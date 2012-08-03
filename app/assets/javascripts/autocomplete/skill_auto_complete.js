@@ -18,12 +18,9 @@ var SkillAutoComplete = {
 	searchLocal: function() {
 		var searchString = $('input#compliment_skill_id').val();
 		var searchEx = new RegExp(searchString, "i");
-		console.log(searchEx);
 		var results = []
 		$.each(SkillAutoComplete.skillList, function(key, value) {
-			if(value.match(searchEx)) {
-				console.log("match: " + value);
-			}
+			if(value.match(searchEx)) {}
 		});
 		var results = SkillAutoComplete.ajaxSearch(searchString);
 	},
@@ -57,7 +54,6 @@ var SkillAutoComplete = {
 			url: '/search/skills',
 			dataType: "json",
 			success: function(data) {
-				console.log(data);
 				SkillAutoComplete.skillList = data;
 			}
 		});

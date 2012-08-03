@@ -12,8 +12,6 @@ var CommonScripts = {
 		}
 	},
 	showFlash: function(flashContent) {
-		// console.log(flashContent);
-		// console.log("Flash Null: " + flashContent.length > 0);
 		if(flashContent.length > 0) {
 			$('#explanation').slideDown();
 			$('#explanation').html(flashContent);
@@ -59,7 +57,6 @@ var CommonScripts = {
 		});
 	},
 	jsonTest: function() {
-		console.log('JSON TEST');
 
 // $().ready(function(){ 
 //     var url = 'http://www.panoramio.com/wapi/data/get_photos?callback=?';
@@ -70,9 +67,7 @@ var CommonScripts = {
 
 		var url = 'http://www.complimentkarma.com/compliments/count?callback=?'
 		$.getJSON(url, function(data){
-			console.log(data)
 			// $.each(data, function(key, val) {
-			// 	console.log(key + " | " + val);
 		 //  });
 		})
 		// var url = "http://www.complimentkarma.com/compliments/count.json";
@@ -80,7 +75,6 @@ var CommonScripts = {
 		// client.open("GET", url, false);
 		// client.setRequestHeader("Content-Type", "application/json");
 		// client.send();
-		// console.log(client.responseText);
 	}
 }
 

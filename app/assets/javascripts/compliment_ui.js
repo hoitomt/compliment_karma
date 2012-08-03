@@ -29,22 +29,18 @@ var ComplimentUI = {
 		});
 		$('html').click(function(event) {
 			var isAnchor = $(event.srcElement).is('a');
-			// var isInContainer = $(event.srcElement).parents('#new-compliment-container');
-			// console.log(isInContainer);
 			if(!isAnchor/* && !isInContainer*/) {
 				ComplimentUI.hideNewComplimentPanel();
 			}
 		});
 		$('input#compliment_receiver_display').off('change blur');
 		$('input#compliment_receiver_display').change(function(event) {
-			// console.log("Input Change");
 			ComplimentUI.validateComplimentReceiver();
 			setTimeout( function() {
 				$('#compliment-receiver-results-container').hide();
 			}, 200);
 		});
 		$('input#compliment_receiver_display').blur(function(event) {
-			// console.log("Input Blur");
 			ComplimentUI.validateComplimentReceiver();
 			ComplimentUI.updateReceiverType();
 			ComplimentUI.updateComplimentType();
@@ -80,7 +76,6 @@ var ComplimentUI = {
 		ComplimentUI.validateSenderNotReceiver();
 	},
 	validateSenderNotReceiver: function() {
-		// console.log("Validate");
 		var element = $('input#compliment_receiver_display');
 		var receiverUserId = $('input#compliment_receiver_id').val();
 		// console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);

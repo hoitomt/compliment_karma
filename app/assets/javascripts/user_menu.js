@@ -5,7 +5,6 @@ var UserMenu = {
 		// this.setMenuChangeHandler();
 	},
 	setMenuChangeHandler: function() {
-		console.log("Set the Menu Change Handler")
 		var menuList = $('#user-menu-list li')
 
 		// UserMenu.setCurrentMenuItem(currentAction);
@@ -40,7 +39,6 @@ var UserMenu = {
 		}
 	},
 	switchView: function(currentAction, view) {
-		console.log(currentAction);
 		switch(currentAction) {
 			case "professional_profile":
 				$('#content-container').html('<%= j(render "users/menu/professional_profile") %>');
@@ -79,7 +77,6 @@ var UserMenu = {
 				ComplimentUI.stickyNewCompliment();
 				break;
 			default:
-				// console.log("default");
 		}
 	}
 }

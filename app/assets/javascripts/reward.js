@@ -34,7 +34,6 @@ var Reward = {
 		});
 		$('#ajax-submit').unbind('click');
 		$('#ajax-submit').click(function(event) {
-			console.log('ajax');
 			event.stopPropagation();
 			var formData = $("#reward-add-to-cart-form").serialize()
 			$.ajax({
@@ -49,11 +48,9 @@ var Reward = {
 		$('#select-reward-results tr:nth-child(even)').addClass('alternate');
 	},
 	updateCartCount: function(countContent) {
-		console.log(countContent);
 		$('#shopping-cart').html(countContent);
 	},
 	setCartTotalAmount: function() {
-		console.log("Get total");
 		var sum = Reward.cartTotalAmount();
 		$('#total-reward-amount').html('$' + sum.toFixed(2));
 	},
