@@ -65,6 +65,6 @@ Ck::Application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
       :api_key  => 'key-1ed8ophkrawc5969zsvmff02w1f0fiv2',
-      :api_host => 'ck-prod.mailgun.org'
+      :api_host => 'ck.mailgun.org'
   }
 end
