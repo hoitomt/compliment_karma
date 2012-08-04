@@ -7,12 +7,12 @@
   </tr>
   <tr>
     <td colspan=2 style="width:540px; padding:0 30px 30px 30px;">
-			A request was received at <%= params['Date'] %> attempting to use the 
+			A request was received at <%= @params['Date'] %> attempting to use the 
 			Compliment Karma email API to send a compliment. This may be an innocent
 			mistake or it may have malicious intent. Please review the request below
 			for further information
 
-			<%= params.inspect %>
+			<%= @params.inspect %>
 
 			<br/><br/>
 			Sincerely,

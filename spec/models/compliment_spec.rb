@@ -223,4 +223,65 @@ describe Compliment do
     end
   end
 
+  describe "compliment from api" do
+    let(:user) {FactoryGirl.create(:user)}
+    let(:user2) {FactoryGirl.create(:user2)}
+    let(:user3) {FactoryGirl.create(:user3)}
+    let(:dummy) {User.find_by_email('dummy@example.org')}
+
+    before(:each) do
+      @params = {
+        'from' => user2.email,
+        'To' => user3.email,
+        'body-plain' => "Great Job \r\n^ruby on rails^\r\nThanks, Mike",
+        'stripped-text' => "Great Job ^ruby on rails^ Thanks, Mike"
+      }
+    end
+
+    it "should create a Pro to Pro compliment with the correct attributes" do
+      c = Compliment.new
+      receiver_email = user3.email
+      lambda do
+        c.create_from_api(receiver_email, @params)
+      end.should change(Compliment, :count).by(1)
+      c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
+      c.compliment_type_id.should eq(ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id)
+    end
+
+    it "should create a Pro to Personal compliment with the correct attributes" do
+      @params['To'] = user.email
+      c = Compliment.new
+      receiver_email = user.email
+      lambda do
+        c.create_from_api(receiver_email, @params)
+      end.should change(Compliment, :count).by(1)
+      c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
+      c.compliment_type_id.should eq(ComplimentType.PROFESSIONAL_TO_PERSONAL.id)
+    end
+
+    it "should create a Personal to Pro compliment with the correct attributes" do
+      @params['from'] = user.email
+      c = Compliment.new
+      receiver_email = user3.email
+      lambda do
+        c.create_from_api(receiver_email, @params)
+      end.should change(Compliment, :count).by(1)
+      c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
+      c.compliment_type_id.should eq(ComplimentType.PERSONAL_TO_PROFESSIONAL.id)
+    end
+
+    it "should create a Personal to Personal compliment with the correct attributes" do
+      @params['from'] = user.email
+      @params['To'] = dummy.email
+      c = Compliment.new
+      receiver_email = dummy.email
+      lambda do
+        c.create_from_api(receiver_email, @params)
+      end.should change(Compliment, :count).by(1)
+      c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
+      c.compliment_type_id.should eq(ComplimentType.PERSONAL_TO_PERSONAL.id)
+    end
+
+  end
+
 end

@@ -7,4 +7,10 @@ class Domain
 		return false if domain.blank?
 		whitelist.include?(domain.downcase)
 	end
+
+	def self.email_on_whitelist?(email)
+		e = email.split(/@/)
+		return false unless e.length == 2
+		return on_whitelist?(e[1])
+	end
 end

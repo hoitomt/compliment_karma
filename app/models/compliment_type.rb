@@ -71,4 +71,26 @@ class ComplimentType < ActiveRecord::Base
     return compliment_types
   end
 
+  def self.auto_assign(compliment)
+    sender = compliment.sender
+    receiver = compliment.receiver
+    if sender && receiver
+      if sender.on_whitelist? && receiver.on_whitelist?
+        return ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
+      elsif sender.on_whitelist?
+        return ComplimentType.PROFESSIONAL_TO_PERSONAL.id
+      elsif receiver.on_whitelist?
+        return ComplimentType.PERSONAL_TO_PROFESSIONAL.id
+      else
+        return ComplimentType.PERSONAL_TO_PERSONAL.id
+      end
+    else
+      if sender.on_whitelist?
+        return ComplimentType.PROFESSIONAL_TO_PERSONAL.id
+      else
+        return ComplimentType.PERSONAL_TO_PERSONAL.id
+      end
+    end
+  end
+
 end

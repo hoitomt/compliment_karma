@@ -33,7 +33,7 @@ Ck::Application.configure do
   # Configure Mailgun to use http, rather than smtp
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-      :api_key  => 'key-7lwbeg42hlokus-qaamysf8zt-ne7ds9',
-      :api_host => 'ck-dev.mailgun.org'
+      :api_key  => 'key-1ed8ophkrawc5969zsvmff02w1f0fiv2',
+      :api_host => 'ck-local.mailgun.org'
   }
 end

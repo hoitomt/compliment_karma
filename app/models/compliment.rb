@@ -46,8 +46,8 @@ class Compliment < ActiveRecord::Base
     sender_email = clean_email_address(params['from']) if params['from']
     user = User.find_by_email(sender_email)
     if user.blank?
-      Compliment.notify_unrecognized_sender(params, sender_email)
-      Compliment.notify_ck_of_unregistered_sender(params)
+      Compliment.notify_ck_unrecognized_sender(params)
+      Compliment.notify_sender_unrecognized_sender(params, sender_email)
       return
     elsif !user.confirmed?
       user.account_confirmation_token
@@ -57,10 +57,12 @@ class Compliment < ActiveRecord::Base
     self.sender_user_id = user.id
     self.sender_email = sender_email
     self.receiver_email = clean_email_address(recipient_email)
+    receiver = User.find_by_email(self.receiver_email)
+    self.receiver = receiver
     logger.info("Receiver Email: #{self.receiver_email}")
     self.skill_id = api_skill(params['body-plain']).id
     self.comment = api_comment(params['stripped-text'])
-    self.compliment_type_id = api_compliment_type_id
+    self.compliment_type_id = ComplimentType.auto_assign(self)
     if self.save
       return true
     else
@@ -97,19 +99,10 @@ class Compliment < ActiveRecord::Base
   end
 
   def api_compliment_type_id
-    if parse_receiver_domain == parse_sender_domain && 
-       Domain.on_whitelist?(parse_sender_domain)
-      return ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
-    elsif Company.find_by_email(self.receiver_email) && 
-          User.find_by_email(self.sender_email)
-      return ComplimentType.PERSONAL_TO_PROFESSIONAL.id
-    else
-      return ComplimentType.PERSONAL_TO_PERSONAL.id
-    end
   end
 
   def self.notify_ck_unrecognized_sender(params)
-    ComplimentMailer.unregistered_user_api_access(params).deliver
+    ComplimentMailer.notify_ck_unrecognized_sender(params).deliver
   end
 
   def self.notify_sender_unrecognized_sender(params, sender_email)

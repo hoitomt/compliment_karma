@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   #   end
   # end
   
-  def on_whitelist
+  def on_whitelist?
     Domain.whitelist.include?(self.set_domain)
   end
 

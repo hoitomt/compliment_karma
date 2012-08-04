@@ -34,7 +34,8 @@ class EmailApiController < ApplicationController
     receiver_array = to_param.blank? ? [] : to_param.split(',')
     receiver_array.each do |receiver|
       receiver.strip!
-      if receiver != "new@ck.mailgun.org" && receiver != "new_local@ck.mailgun.org"
+      # Don't create compliments to our email forwarders (Mailgun)
+      if !IncomingComplimentDomain.email_from_forwarder?(receiver)
         compliment = Compliment.new
         created = compliment.create_from_api(receiver, params)
         if created

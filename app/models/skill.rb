@@ -53,7 +53,7 @@ class Skill < ActiveRecord::Base
 
 	def self.find_or_create_skill(skill_id, skill_text)
 		if skill_id.blank?
-			s = Skill.find_by_name(skill_text)
+			s = Skill.where('lower(name) = ?', skill_text.downcase).first
 			s = Skill.create(:name => skill_text, :parent_skill_id => Skill.USER_DEFINED.id) if s.blank?
 			return s
 		else
