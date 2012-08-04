@@ -304,11 +304,15 @@ a.header-update-link:visited { color: #ffffff }
 	.picture-container {
 		width: 200px;
 		height: 200px;
+		padding: 5px;
 		overflow: hidden;
 		float: left;
+		-moz-box-shadow: inset 0 0 5px #888;
+		-webkit-box-shadow: inset 0 0 5px#888;
+		box-shadow: inner 0 0 5px #888;
 	}
 	.info-container {
-		width: 140px;
+		width: 130px;
 		float: right
 	}
 	.personal-team-container {
