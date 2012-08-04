@@ -22,6 +22,7 @@ Ck::Application.routes.draw do
   match "/demo" => "pages#demo"
   match "/learn" => "pages#learn"
   match "/about" => "pages#about"
+  match "/bad_words" => "pages#bad_words"
   match "/team" => "pages#team"
   match "/guidelines" => "pages#guidelines"
   match "/help" => "pages#help"

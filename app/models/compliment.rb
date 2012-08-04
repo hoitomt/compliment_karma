@@ -82,12 +82,13 @@ class Compliment < ActiveRecord::Base
     body_regex = /\^[^\^]*\^/
     dirty_skill = body.match(body_regex) { |m| m[0] } if body
     skill = dirty_skill.gsub(/\\n|\\t|\^/, '').strip if dirty_skill
-    unless skill.blank?
-      return Skill.find_or_create_skill(nil, skill)
-    else
+    logger.info "Skill: #{skill}"
+    if Skill.matches_compliment_type?(skill) || skill.blank?
       self.compliment_status = ComplimentStatus.MISSING_INFORMATION
       Compliment.notify_sender_unknown_skill(sender, self)
       return Skill.UNDEFINED
+    else
+      return Skill.find_or_create_skill(nil, skill)
     end
   end
 

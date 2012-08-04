@@ -236,13 +236,13 @@ describe Compliment do
         'body-plain' => "Great Job \r\n^ruby on rails^\r\nThanks, Mike",
         'stripped-text' => "Great Job ^ruby on rails^ Thanks, Mike"
       }
+      @receiver_email = user3.email
     end
 
     it "should create a Pro to Pro compliment with the correct attributes" do
       c = Compliment.new
-      receiver_email = user3.email
       lambda do
-        c.create_from_api(receiver_email, @params)
+        c.create_from_api(@receiver_email, @params)
       end.should change(Compliment, :count).by(1)
       c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
       c.compliment_type_id.should eq(ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id)
@@ -251,9 +251,9 @@ describe Compliment do
     it "should create a Pro to Personal compliment with the correct attributes" do
       @params['To'] = user.email
       c = Compliment.new
-      receiver_email = user.email
+      @receiver_email = user.email
       lambda do
-        c.create_from_api(receiver_email, @params)
+        c.create_from_api(@receiver_email, @params)
       end.should change(Compliment, :count).by(1)
       c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
       c.compliment_type_id.should eq(ComplimentType.PROFESSIONAL_TO_PERSONAL.id)
@@ -262,9 +262,8 @@ describe Compliment do
     it "should create a Personal to Pro compliment with the correct attributes" do
       @params['from'] = user.email
       c = Compliment.new
-      receiver_email = user3.email
       lambda do
-        c.create_from_api(receiver_email, @params)
+        c.create_from_api(@receiver_email, @params)
       end.should change(Compliment, :count).by(1)
       c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
       c.compliment_type_id.should eq(ComplimentType.PERSONAL_TO_PROFESSIONAL.id)
@@ -274,12 +273,24 @@ describe Compliment do
       @params['from'] = user.email
       @params['To'] = dummy.email
       c = Compliment.new
-      receiver_email = dummy.email
+      @receiver_email = dummy.email
       lambda do
-        c.create_from_api(receiver_email, @params)
+        c.create_from_api(@receiver_email, @params)
       end.should change(Compliment, :count).by(1)
       c.skill_id.should eq(Skill.find_by_name('ruby on rails').id)
       c.compliment_type_id.should eq(ComplimentType.PERSONAL_TO_PERSONAL.id)
+    end
+
+    it "should not create a compliment where the skill matches a compliment type" do
+      c = Compliment.new
+      @params['body-plain'] = "Great Job ^professional to professional^ Thanks, Mike"
+      lambda do
+        c.create_from_api(@receiver_email, @params)
+      end.should change(Compliment, :count).by(1)
+      s = Skill.where('lower(name) = ?', 'professional to professional')
+      s.length.should eq(0)
+      c.skill_id.should eq(Skill.UNDEFINED.id)
+      c.compliment_type_id.should eq(ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id)
     end
 
   end

@@ -60,5 +60,14 @@ class Skill < ActiveRecord::Base
 			return Skill.find(skill_id)
 		end
 	end
+
+	def self.matches_compliment_type?(skill_name)
+		return false if skill_name.blank?
+		ComplimentType.all.each do |type|
+			logger.info "Matching: #{type.name} | #{skill_name}"
+			return true if type.name.downcase == skill_name.downcase
+		end
+		return false
+	end
 	
 end

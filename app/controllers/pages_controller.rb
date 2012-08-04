@@ -46,6 +46,10 @@ class PagesController < ApplicationController
   def help
   end
 
+  def bad_words
+    @words = Blacklist.words
+  end
+
   private
 
     def hide_search_bar
