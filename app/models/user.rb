@@ -307,7 +307,7 @@ class User < ActiveRecord::Base
   end
   
   def metrics_send_new_user
-    DashkuMetrics.send_new_user
+    Metrics.new_user
   end
 
   def self.valid_email?(email)

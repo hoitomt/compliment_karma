@@ -397,6 +397,6 @@ class Compliment < ActiveRecord::Base
   end  
 
   def metrics_send_new_compliment
-    DashkuMetrics.send_new_compliment    
+    Metrics.new_compliment
   end
 end

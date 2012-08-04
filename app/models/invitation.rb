@@ -6,6 +6,8 @@ class Invitation < ActiveRecord::Base
   validates :invite_email, :presence => true,
                            :format => { :with => email_regex, 
                                         :message => "This is not a valid email address" }
+  after_create :send_new_invitation_metric
+  
   # validates :from_email, :presence => true,
   #                        :format => { :with => email_regex }
   # validate :invite_email_should_not_equal_from_email
@@ -16,12 +18,15 @@ class Invitation < ActiveRecord::Base
   #     !self.invite_email.blank? &&
   #     self.from_email == self.invite_email
   # end
-                         
+  
+  def send_new_invitation_metric
+    Metrics.new_invitation                 
+  end
+
   def send_invitation
     logger.info("Invitation sent to #{self.invite_email}")
     InvitationMailer.beta_invitation(self).deliver
     logger.info("Send Metric")
-    Metrics.send_metric
     # don't invite a current member to re-join
     # u = User.find_by_email(self.invite_email)
     # if u.nil?
