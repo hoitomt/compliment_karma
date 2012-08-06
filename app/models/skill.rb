@@ -5,6 +5,12 @@ class Skill < ActiveRecord::Base
   validates_uniqueness_of :name,
                           :message => "This skill already exists"
 
+  before_create :remove_naughty_words
+
+  def remove_naughty_words
+  	self.name = Blacklist.clean_string(self.name)
+  end
+
 	# returns a hash of {k,v} => {parent name, skill name}
 	def self.list_for_autocomplete
 		skills = Skill.where('id <> parent_skill_id')

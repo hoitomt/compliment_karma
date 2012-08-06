@@ -4,6 +4,12 @@ class RecognitionComment < ActiveRecord::Base
   
   default_scope :order => 'created_at ASC'
 
+  before_create :remove_naughty_words
+
+  def remove_naughty_words
+    self.comment = Blacklist.clean_string(self.comment)
+  end
+
   def update_history(current_user)
     if self.recognition_type_id == RecognitionType.COMPLIMENT.id
       UpdateHistory.Comment_on_Sent_Compliment(self, current_user.id)

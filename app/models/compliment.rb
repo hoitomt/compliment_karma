@@ -33,6 +33,7 @@ class Compliment < ActiveRecord::Base
   before_save :parse_receiver_domain
   before_save :set_sender_user_id
   before_save :set_receiver_user_id
+  before_save :remove_naughty_words
   before_create :set_visibility
   after_create :send_fulfillment
   after_create :set_relationship
@@ -218,6 +219,10 @@ class Compliment < ActiveRecord::Base
   def set_receiver_user_id
     u = User.find_by_email(self.receiver_email)
     self.receiver_user_id = u.id if u
+  end
+
+  def remove_naughty_words
+    self.comment = Blacklist.clean_string(self.comment)
   end
   
   def set_visibility
