@@ -2,8 +2,93 @@
 	<div class="about-container">
 		<%= render 'pages/about_menu' %>
 		<div class="about-content">
-			<div>
-				<h2>Help</h2>
+			<div style="margin-bottom: 20px;">
+				<h1>What is ComplimentKarma?</h1>
+				<p>
+					ComplimentKarma is a cloud based application to Send / Receive Compliments (e.g. Thanks, Kudos, Good Job, Recommendation etc.) To / From your Professional and Personal (i.e. Social) contacts.
+			  </p><br />
+			  <p>
+					Based on the compliments you Send / Receive from your coworkers and other job related external contacts (such as Company Clients, Vendors and Suppliers etc.), your Employer / Manager can reward you with monetary Rewards.
+				</p><br />
+				<p>
+					Based on the number of compliments, you also earn various Level Badges, Trophies and Certificates for different Skills and build your Proof of Experience, to help you with your future job endeavors, as you own your profile even if you switch employers. 
+				</p><br />
+				<p>
+					You can exchange compliments not only with your Professional contacts for day to day job related tasks, but also with your Personal/Social contacts for personal reasons. That is why you have 2 types of Profiles to keep your Professional and Social activity separate, and let you easily manage the visibility/privacy options of each.
+				</p><br />
+				<p>
+					Employers / Managers can sign-up for advanced functionality to administer employee professional accounts, in addition to advanced analytics and reward programs.
+				</p>
+				<h2>Is it Free to use ComplimentKarma?</h2>
+				<p>
+					Yes, ComplimentKarma is 100% Free to use for all Individuals accounts. You don’t need Credit/Debit card to use your personal account.
+				</p><br />
+				<p>
+					Only those Employers / Managers who want to gain extra functionality to Administer their Employees / Teams, need to pay a nominal monthly fee, based on the number of Users they want to Administer.
+				</p>
+				<h2>What does each field in Compliment Module mean?</h2>
+				<table>
+					<tr>
+						<td class="faq-label">To</td>
+						<td class="faq-text">Name or Email of the Receiving User or Company. Yes, you can also send compliments to your favorite Companies, as each Company also has its own profile.</td>
+					</tr>
+					<tr>
+						<td class="faq-label">Skill</td>
+						<td class="faq-text">Particular Skill of the Receiver using which they performed some task/activity, for which you want to compliment them.</td>
+					</tr>
+					<tr>
+						<td class="faq-label">Comment</td>
+						<td class="faq-text">Short comment. Up to 100 characters. Must not contain any Employer sensitive information.</td>
+					</tr>
+					<tr>
+						<td class="faq-label">Compliment Type</td>
+						<td class="faq-text">
+							<ul>
+								<li>Professional to Professional- From Your Professional Profile to Receiver’s Professional Profile</li>
+								<li class="eg-text">e.g. Coworker to Coworker, Employee to Company’s Corporate Client / Vendor / Supplier etc.</li>
+								<br />
+								<li>Professional to Personal- From Your Professional Profile to Receiver’s Personal Profile</li>
+								<li class="eg-text">e.g. Employee to Individual Consumer, Company to Individual Consumer</li>
+								<br />
+								<li>Personal to Professional - From Your Personal Profile to Receiver’s Professional Profile</li>
+								<li class="eg-text">e.g. Individual Consumer to a Company Employee, Individual to Company</li>
+								<br />
+								<li>Personal to Personal - From Your Personal Profile to Receiver’s Personal Profile</li>
+								<li class="eg-text">e.g. Friend to Friend, Relative to Relative</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+				<h2>How can I send a Compliment?</h2>
+				<p>Following are the currently available ways to send compliments:</p>
+				<ol>
+					<li>From the drop-down Compliment Module available on most pages.</li>
+					<li>By copying <strong><%= receiving_email %></strong> in an email you are sending to the Compliment Receiver.
+						
+						<p><br />
+							- Skill of the Receiver you want to compliment must be entered in caret sign 
+							(by pressing “shift + 6” on your keyboard), e.g.
+						</p>
+						<p class="eg-text">^Sales^</p>
+						<p class="eg-text">^Customer Service^</p>
+						<p class="eg-text">^Project Management^</p>
+						<br />
+						<p>
+							- The compliment type must also be entered in caret sign, e.g. 
+						</p>
+						<p class="eg-text">^Professional to Professional^ OR ^Pro to Pro^</p>
+						<p class="eg-text">^Professional to Personal^ OR ^Pro to Per^</p>
+						<p class="eg-text">^Personal to Professional^ OR ^Per to Pro^</p>
+						<p class="eg-text">^Personal to Personal^ OR ^Per to Per^</p>
+						<br />
+						<p>- Following is an example compliment sent by email:</p>
+						<p><strong>To:</strong> Mike@complimentKarma.com, <%= receiving_email %></p>
+						<p><strong>Subject:</strong> Any subject</p>
+						<p><strong>Comment:</strong> Mike, Thanks a lot for all the help with ^Ruby on Rails^ web development. ^Pro to Pro^.</p>
+					</li>
+
+				</ol>
+
 			</div>
 		</div>
 	</div>

@@ -35,7 +35,7 @@ class EmailApiController < ApplicationController
     receiver_array.each do |receiver|
       receiver.strip!
       # Don't create compliments to our email forwarders (Mailgun)
-      if !IncomingComplimentDomain.email_from_forwarder?(receiver)
+      if !Domain.email_from_forwarder?(receiver)
         compliment = Compliment.new
         created = compliment.create_from_api(receiver, params)
         if created

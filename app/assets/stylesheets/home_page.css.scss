@@ -326,6 +326,32 @@ a.header-update-link:visited { color: #ffffff }
 		margin: 0 0 20px 0;
 		// float: left;
 	}
+	table {
+		margin: 10px 0px;
+	}
+	table, th, td {
+		border: 1px solid;
+		ul li {
+			list-style: none;
+			margin-left: 0px;
+		}
+	}
+	td.faq-label {
+		font-weight: bold;
+		vertical-align: middle;
+		text-align: center;
+		width: 100px;
+	}
+	td.faq-text{
+		padding: 10px;
+		vertical-align: middle;
+	}
+	ol, ol li {
+		list-style: decimal;
+	}
+	.eg-text {
+		color: red;			
+	}
 }
 .about-menu {
 	width: 120px; 
