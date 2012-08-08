@@ -69,7 +69,7 @@ var ComplimentUI = {
 	},
 	removeStickyCompliment: function() {
 		var stickMe = $('#scroll-sticky');
-		stickMe.unbind('waypoint');
+		stickMe.off('waypoint');
 		$('#new-compliment-container').removeClass('sticky');
 	},
 	validateComplimentReceiver: function() {
@@ -126,15 +126,10 @@ var ComplimentUI = {
 		});
 	},
 	setAjaxCallbacks: function() {
-		$('#compliment-form').unbind('ajax:beforeSend');
-		$('#compliment-form').bind('ajax:beforeSend', function(evt, data, status, xhr){
+		$('#compliment-form').off('ajax:beforeSend');
+		$('#compliment-form').on('ajax:beforeSend', function(evt, data, status, xhr){
 			$('#sending-compliment-spinner').show();
 		});
-		// $('#compliment-form').bind('ajax:success', function(evt, data, status, xhr){
-		// 	$('#sending-compliment-spinner').hide();
-		// 	// alert("Your compliment was successfully sent");
-		// 	// ComplimentUI.resetNewComplimentValues();
-		// });
 	},
 	resetNewComplimentValues: function() {
 		$('#compliment_receiver_display').val('');

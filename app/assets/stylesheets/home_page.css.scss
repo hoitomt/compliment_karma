@@ -191,7 +191,7 @@ a.sign-up-button:hover {
 	float:left;
 }
 .header-update-indicator {
-	background: url(my_updates/my_updates_no_items.png), no-repeat;
+	background: url(my_updates/my_updates_no_items.png) no-repeat;
 	width: 30px;
 	height: 30px;
 	margin-top: 10px;
@@ -200,7 +200,7 @@ a.sign-up-button:hover {
 	z-index: 1;
 }
 .header-update-indicator:hover {
-	background: url(my_updates/my_updates_with_items.png), no-repeat;
+	background: url(my_updates/my_updates_with_items.png) no-repeat;
 	width: 30px;
 	height: 30px;	
 	margin-top: 10px;
@@ -325,6 +325,16 @@ a.header-update-link:visited { color: #ffffff }
 	.address-container {
 		margin: 0 0 20px 0;
 		// float: left;
+	}
+	table.team-table {
+		margin-left: 30px;
+		li {
+			list-style: disc;
+	  	margin-left: 20px;
+	  }
+	  td {
+	  	width: 50%;
+	  }
 	}
 	table {
 		margin: 10px 0px;

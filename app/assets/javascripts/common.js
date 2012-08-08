@@ -56,6 +56,9 @@ var CommonScripts = {
 			});
 		});
 	},
+	testIe: function() {
+		alert('working');
+	},
 	jsonTest: function() {
 
 // $().ready(function(){ 

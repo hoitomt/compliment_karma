@@ -3,10 +3,12 @@ var SiteSearch = {
 		this.registerHandler();
 	},
 	registerHandler: function() {
-		$('input#search_string').unbind('input');
-		$('input#search_string').bind('input', function(event) {
-			setTimeout("SiteSearch.searchFx()", 400);
-			event.stopPropagation();
+		$('input#search_string').off('keyup');
+		$('input#search_string').on({
+			keyup: function(event) {
+				setTimeout("SiteSearch.searchFx()", 400);
+				event.stopPropagation();
+			}
 		});
 		$('html').click(function() {
 			SiteSearch.hideResults();

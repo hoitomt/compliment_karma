@@ -8,7 +8,7 @@
 			// 	7: { sorter: false }
 			// }
 		});
-		$('#back-button').unbind('click');
+		$('#back-button').off('click');
 		$('#back-button').click(function(event) {
 			var userId = $('#user_id').val();
 			window.location.href = '/users/' + userId + '/rewards.html';
@@ -16,7 +16,7 @@
 			// $.get('/payments/new.html');
 			return false;
 		});
-		$('#proceed-to-payment-button').unbind('click');
+		$('#proceed-to-payment-button').off('click');
 		$('#proceed-to-payment-button').click(function(event) {
 			window.location.href = '/payments/new.html';
 			// event.stopPropagation();

@@ -5,11 +5,13 @@ var SkillAutoComplete = {
 		// this.setSkillList();
 	},
 	registerHandler: function() {
-		$('input#compliment_skill_id').unbind('input');
-		$('input#compliment_skill_id').bind('input', function(event) {
-			setTimeout("SkillAutoComplete.searchFx()", 400);
-			// SkillAutoComplete.searchLocal();
-			event.stopPropagation();
+		$('input#compliment_skill_id').off('keyup');
+		$('input#compliment_skill_id').on({
+			keyup: function(event) {
+				setTimeout("SkillAutoComplete.searchFx()", 400);
+				// SkillAutoComplete.searchLocal();
+				event.stopPropagation();
+			}
 		});
 		$('html').click(function() {
 			SkillAutoComplete.hideResults();

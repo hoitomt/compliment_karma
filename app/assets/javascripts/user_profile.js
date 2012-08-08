@@ -34,12 +34,14 @@ var UserProfile = {
 		this.docState.userId = userId;
 	},
 	infiniteScrolling: function() {
+		console.log("Init infiniteScrolling");
 		docState = this.docState
 		var userId = docState.userId;
 		var perPage = docState.perPage;
 		var retrieveFlag = false;
-		$(document).off('scroll');
-		$(document).scroll(function() {
+		$(window).off('scroll');
+		$(window).scroll(function() {
+			console.log("scroll");
 			var feed_item_type_id = $('#feed_item_type').val();
 			var relation_type_id = $('#relation_type').val();
 			var distanceFromBottom = $(document).height() - ($(window).scrollTop() + $(window).height());
@@ -69,7 +71,7 @@ var UserProfile = {
 		});
 	},
 	removeInfiniteScroll: function() {
-		$(document).unbind('scroll');
+		$(document).off('scroll');
 	},
 	feed_items_filters: function(userId) {
 		$('#feed_item_type').change(function() {

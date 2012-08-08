@@ -32,7 +32,7 @@ var Reward = {
 		$('input.reward-amount').change(function() {
 			Reward.setCartTotalAmount();
 		});
-		$('#ajax-submit').unbind('click');
+		$('#ajax-submit').off('click');
 		$('#ajax-submit').click(function(event) {
 			event.stopPropagation();
 			var formData = $("#reward-add-to-cart-form").serialize()

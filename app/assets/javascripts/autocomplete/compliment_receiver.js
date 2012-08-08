@@ -3,11 +3,13 @@ var ComplimentReceiver = {
 		this.registerHandler();
 	},
 	registerHandler: function() {
-		$('input#compliment_receiver_display').unbind('input');
-		$('input#compliment_receiver_display').bind('input', function(event) {
-			// $('#compliment_receiver_id').val('');
-			setTimeout("ComplimentReceiver.searchFx()", 400);
-			event.stopPropagation();
+		$('input#compliment_receiver_display').off('keyup');
+		$('input#compliment_receiver_display').on({
+			keyup: function(event) {
+				// $('#compliment_receiver_id').val('');
+				setTimeout("ComplimentReceiver.searchFx()", 400);
+				event.stopPropagation();
+			}
 		});
 		$('html').click(function() {
 			ComplimentReceiver.hideResults();
