@@ -34,14 +34,12 @@ var UserProfile = {
 		this.docState.userId = userId;
 	},
 	infiniteScrolling: function() {
-		console.log("Init infiniteScrolling");
 		docState = this.docState
 		var userId = docState.userId;
 		var perPage = docState.perPage;
 		var retrieveFlag = false;
 		$(window).off('scroll');
 		$(window).scroll(function() {
-			console.log("scroll");
 			var feed_item_type_id = $('#feed_item_type').val();
 			var relation_type_id = $('#relation_type').val();
 			var distanceFromBottom = $(document).height() - ($(window).scrollTop() + $(window).height());
