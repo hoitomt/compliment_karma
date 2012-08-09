@@ -7,10 +7,15 @@
 																			{:recognition_id => @recognition_id,
 																			 :recognition_type_id => @recognition_type_id,
 																			 :iframe => true}) %>';
-			$('#show-fancybox').click();
 			ShowRecognitionFancyBox.init(view, socialPopup);
+			
+			UserProfile.showCommentButtonOnClick();
+			UserProfile.followButtonHover();
 		});
 	</script>
 <% end %>
 
-<%= link_to 'test', '#', :id => "show-fancybox", :class => 'fancybox' %>
+<%= link_to 'test', '#test', :id => "show-fancybox", :class => 'fancybox' %>
+<div id="test" style="display: none;">
+	testing
+</div>

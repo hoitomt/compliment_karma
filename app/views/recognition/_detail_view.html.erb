@@ -1,9 +1,9 @@
 <script type="text/javascript">
-	$(function() {
-		UserProfile.showCommentButtonOnClick();
-		UserProfile.followButtonHover();
-		// $('.popup-like-item').tooltip();
-	})
+	// $(function() {
+	// 	// UserProfile.showCommentButtonOnClick();
+	// 	// UserProfile.followButtonHover();
+	// 	// $('.popup-like-item').tooltip();
+	// })
 </script>
 <div class="popup-box">
 	<div class="popup-header clearfix">
@@ -46,4 +46,10 @@
 		</div>
 	</div>
 </div>
-<%#= render 'recognition/social_popup_links' %>
+<script type="text/javascript">
+	(function() {
+	  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	  po.src = 'https://apis.google.com/js/plusone.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	})();
+</script>

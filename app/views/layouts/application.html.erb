@@ -10,6 +10,7 @@
   <%= csrf_meta_tags %>
 	<%= yield :stylesheets %>
 	<%= yield :javascript %>
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 	<!--[if gte IE 9]>
 	  <style type="text/css">
 	    .gradient {
@@ -26,7 +27,19 @@
 			$('.fancybox').fancybox({
 				maxWidth: 800
 			});
+			$('.google-fancybox').fancybox({
+				'padding': 0,
+        'autoScale': false,
+        'transitionIn': 'none',
+        'transitionOut': 'none',
+        // 'title': 'Upload Video',
+        'minWidth': 430,
+        'minHeight': 300,
+        'type':'iframe'
+			})
+
 			SiteSearch.init();
+
 		});
 	</script>
 	<% if Rails.env.production? %>

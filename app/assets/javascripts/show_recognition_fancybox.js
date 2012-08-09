@@ -3,7 +3,7 @@ var ShowRecognitionFancyBox = {
 		$.fancybox(view, {
 			beforeLoad: function() {
 				$('body').addClass('lock-screen');
-				this.title = String(socialPopup);
+				this.title = socialPopup;// String(socialPopup);
 			},
 			afterShow: function() {
 				UserProfile.reinitialize();
@@ -14,7 +14,7 @@ var ShowRecognitionFancyBox = {
 			// fitToView: false,
 			// scrolling: 'no',
 			// autoSize: true,
-			minWidth: 675,
+			minWidth: 680,
 			padding: 10,
 			helpers: {
 				overlay: {
