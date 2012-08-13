@@ -16,6 +16,7 @@ class RelationshipsController < ApplicationController
 	private
 	
     def authenticate
+      store_location
       deny_access unless signed_in?
     end
 

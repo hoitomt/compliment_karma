@@ -1,10 +1,80 @@
-Hi!<br />
-You have received a compliment from <%= @compliment.sender_email %>
+<p class="content-greeting">Congratulations!</p>
+<div>
+	<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
+		<%= image_tag @sender.photo.url(:small), :height => '100' %>
+	</div>
+	<div style="float: left; margin-left: 10px; width: 400px;">
+		<p><strong><%= @sender.first_last %></strong> sent you a compliment</p><br />
+		<p><%= @compliment.comment %></p><br />
+		<p>
+			<span style="color:#606060;">Skill: </span>
+			<strong><%= @compliment.try(:skill).name %></strong>
+		</p>
+		<p>
+			<span style="color:#606060;">Compliment Type: </span>
+			<strong><%= @compliment.try(:compliment_type).name %></strong>
+		</p>
+	</div>
+	<div style="float: right; margin-left: 10px; width: 60px;">
+		<p style="text-align: right; margin-top: 40px;"><%= timestamp(@compliment.created_at) %></p>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="message-buttons" style="margin: 30px 110px;">
+	<%= link_to 'Sign Up Free', 
+							signup_url, 
+							:class => "button green-gradient" %>
+	<span style="margin-left: 5px;">to claim/review this compliment</span>
+</div>
+<div class="clear"></div>
+<div style="margin: 30px 40px 40px 40px;">
+	<table>
 
-<h2><%= @compliment.comment %></h2>
-for
-<h2><%= @skill.name if @skill %></h2>
+  <tr>
+    <td colspan=2 style="width:540px; padding:0 30px 30px 30px;">
+			We value your time & we strive to provide real tangible benefits, which will help you throughout your professional career. For 100% free you can:
+			<br/><br/>
+			- <strong>Exchange Compliments</strong> with your colleagues
+			<br/>
+			- Earn employer sponsored <strong>Cash Rewards</strong>and build <strong>Proof of Experience</strong>
+			<br/>
+			- Earn <strong>Certificates, Trophies & Badges</strong> for your skills
+			<br/>
+			- <strong>Share your Achievements </strong> on any Professional, Social Network or Website
+			<br/><br/><br/>
+			<font style="font-size:30px; padding-left:40px;">Send Compliments Earn Rewards</font>
+		</td>
+  </tr>
+  <tr>
+	  <td style="width:240px; padding:0 0 0 60px;">
+     <font style="font-weight:bold; padding-left:10px;">Benefits for Employees</font><br/>
+		 - 100% Free <br/>
+		 - Build Proof of Experience <br/>
+		 - Earn Cash Rewards <br/>
+		 - Earn Trophies & Badges <br/>
+		 - Grow your reputation <br/>
+		 - Share your achievements <br/>
+		 - Stand out of the crowd <br/>
+		 - Make work more fun
 
-Please sign up for an account to receive your compliments by clicking on the following link <br />
-
-<%= link_to 'Sign Up', signup_url %>
+	  </td>
+	  <td style="width:240px; padding:0 30px 0 20px;">
+	    <font style="font-weight:bold; padding-left:10px;">Benefits for Employers</font> <br/>
+			- Improve employee satisfaction <br/>
+			- Grow company reputation <br/>
+			- Reward employees <br/>
+			- Highly positive work culture <br/>
+			- Reduce brain drain <br/>
+			- Attract top talent <br/>
+			- Simplified employee rewards <br/>
+			- Performance tracking & reporting
+		  </td>
+	  </tr>
+	</table>
+</div>
+<div>
+	<p>Sincerely,</p><br />
+	<p>Customer Service Team</p>
+	<p><%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %></p>
+	<p><%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %></p>
+</div>

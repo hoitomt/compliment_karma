@@ -22,6 +22,13 @@ class Admin::MailerController < Admin::ApplicationController
 		render :file => 'compliment_mailer/receiver_confirmation_reminder.html.erb'
 	end
 
+	def receiver_registration_invitation
+		@compliment = Compliment.last
+		@sender = @compliment.sender
+    @skill= Skill.find_by_id(@compliment.skill_id)
+		render :file => 'compliment_mailer/receiver_registration_invitation.html.erb'
+	end
+
 	def notify_ck_unrecognized_sender
 		@params = Hash.new("")
     @params['Date'] = DateTime.now

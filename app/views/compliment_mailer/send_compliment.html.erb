@@ -1,8 +1,12 @@
 <% if @confirmed_relationship %>
-	<p style="margin-bottom: 10px;">Congratulations - You have received your first compliment from 
+	<p class="content-greeting">
+		Congratulations <%= @receiver.first_name %> - 
+		You have received your first compliment from 
 		<strong><%= @sender.first_last %></strong>!</p>
 <% else %>
-	<p style="margin-bottom: 20px; font-size: 16px; font-weight: bold;">Congratulations!</p>
+	<p class="content-greeting">
+		Congratulations <%= @receiver.first_name %>!
+	</p>
 <% end %>
 <div>
 	<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">

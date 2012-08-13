@@ -18,7 +18,8 @@ class SessionsController < ApplicationController
     else
       remember_me = params[:session][:remember_me] == "1"
       sign_in(user, remember_me)
-      redirect_to user
+      logger.info("Session Return To: #{session[:return_to]}")
+      redirect_back_or user
     end
   end
   
