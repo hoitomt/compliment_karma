@@ -1,10 +1,7 @@
 Ck::Application.routes.draw do
   root :to => "pages#index"
   
-  namespace :admin do
-    match 'mailer(/:action(/:id(.:format)))' => 'mailer#:action'
-  end
-
+  match 'mailer(/:action(/:id(.:format)))' => 'mailer#:action'
   match "follows/multi_create_new" => "follows#multi_create", :as => :multi_create_follows
   match "follows/create_new" => "follows#create_new", :as => :create_follow
   match "/signup" => "users#new"
