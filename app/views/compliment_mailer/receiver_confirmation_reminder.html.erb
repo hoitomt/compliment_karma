@@ -1,90 +1,17 @@
-<% if @confirmed_relationship %>
-	<p class="content-greeting">
-		Congratulations <%= @receiver.first_name %> - 
-		You have received your first compliment from 
-		<strong><%= @sender.first_last %></strong>!
-	</p>
-<% else %>
-	<p class="content-greeting">
-		Congratulations <%= @receiver.first_name %>!
-	</p>
+<%= content_for :greeting do %>
+	<% if @confirmed_relationship %>
+			Congratulations <%= @receiver.first_name %> - 
+			You have received your first compliment from 
+			<strong><%= @sender.first_last %></strong>!
+	<% else %>
+			Congratulations <%= @receiver.first_name %>!
+	<% end %>
 <% end %>
-<div>
-	<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
-		<%= image_tag @sender.photo.url(:small), :height => '100' %>
-	</div>
-	<div style="float: left; margin-left: 10px; width: 310px;">
-		<p><strong><%= @sender.first_last %></strong> sent you a compliment</p><br />
-		<p><%= @compliment.comment %></p><br />
-		<p>
-			<span style="color:#606060;">Skill: </span>
-			<strong><%= @compliment.try(:skill).name %></strong>
-		</p>
-		<p>
-			<span style="color:#606060;">Compliment Type: </span>
-			<strong><%= @compliment.try(:compliment_type).name %></strong>
-		</p>
-	</div>
-	<div style="float: left; margin-left: 10px; width: 60px;">
-		<p style="text-align: right; margin-top: 40px;"><%= @timestamp %></p>
-	</div>
-</div>
-<div class="clear"></div>
-<div class="message-buttons">
-	<%= link_to 'Confirm Your Email', 
-							new_account_confirmation_url(@receiver.new_account_confirmation_token), 
-							:class => "button green-gradient" %>
-	<span style="margin-left: 5px;">to claim/review this compliment</span>
-</div>
-<div class="clear"></div>
-<div style="margin: 30px 0 40px 0;">
-	<table>
 
-  <tr>
-    <td colspan=2 style="width:500px;">
-			We value your time & we strive to provide real tangible benefits, which will help you throughout your professional career. For 100% free you can:
-			<br/><br/>
-			- <strong>Exchange Compliments</strong> with your colleagues
-			<br/>
-			- Earn employer sponsored <strong>Cash Rewards</strong>and build <strong>Proof of Experience</strong>
-			<br/>
-			- Earn <strong>Certificates, Trophies & Badges</strong> for your skills
-			<br/>
-			- <strong>Share your Achievements </strong> on any Professional, Social Network or Website
-			<br/><br/><br/>
-			<span style="display: block; text-align: center; font-size:30px;">Send Compliments Earn Rewards</span>
-		</td>
-  </tr>
-  <tr>
-	  <td style="width:240px; padding:0 0 0 20px;">
-     <font style="font-weight:bold; padding-left:10px;">Benefits for Employees</font><br/>
-		 - 100% Free <br/>
-		 - Build Proof of Experience <br/>
-		 - Earn Cash Rewards <br/>
-		 - Earn Trophies & Badges <br/>
-		 - Grow your reputation <br/>
-		 - Share your achievements <br/>
-		 - Stand out of the crowd <br/>
-		 - Make work more fun
+<%= content_for :buttons do %>
+	<%= render 'compliment_mailer/buttons/confirm_email_button' %>
+<% end %>
 
-	  </td>
-	  <td style="width:240px; padding:0 0 0 20px;">
-	    <font style="font-weight:bold; padding-left:10px;">Benefits for Employers</font> <br/>
-			- Improve employee satisfaction <br/>
-			- Grow company reputation <br/>
-			- Reward employees <br/>
-			- Highly positive work culture <br/>
-			- Reduce brain drain <br/>
-			- Attract top talent <br/>
-			- Simplified employee rewards <br/>
-			- Performance tracking & reporting
-		  </td>
-	  </tr>
-	</table>
-</div>
-<div>
-	<p>Sincerely,</p><br />
-	<p>Customer Service Team</p>
-	<p><%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %></p>
-	<p><%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %></p>
-</div>
+<%= content_for :bottom_content do %>
+	<%= render 'compliment_mailer/partials/bottom_content' %>
+<% end %>

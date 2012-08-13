@@ -1,53 +1,26 @@
-<% if @confirmed_relationship %>
-	<p class="content-greeting">
+<%= content_for :greeting do %>
+	<% if @confirmed_relationship %>
 		Congratulations <%= @receiver.first_name %> - 
 		You have received your first compliment from 
-		<strong><%= @sender.first_last %></strong>!</p>
-<% else %>
-	<p class="content-greeting">
+		<strong><%= @sender.first_last %></strong>!
+	<% else %>
 		Congratulations <%= @receiver.first_name %>!
-	</p>
+	<% end %>
 <% end %>
-<div>
-	<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
-		<%= image_tag @sender.photo.url(:small), :height => '100' %>
-	</div>
-	<div style="float: left; margin-left: 10px; width: 310px;">
-		<p><strong><%= @sender.first_last %></strong> sent you a compliment</p><br />
-		<p><%= @compliment.comment %></p><br />
-		<p>
-			<span style="color:#606060;">Skill: </span>
-			<strong><%= @compliment.try(:skill).name %></strong>
-		</p>
-		<p>
-			<span style="color:#606060;">Compliment Type: </span>
-			<strong><%= @compliment.try(:compliment_type).name %></strong>
-		</p>
-	</div>
-	<div style="float: right; margin-left: 10px; width: 60px;">
-		<p style="text-align: right; margin-top: 40px;"><%= @timestamp %></p>
-	</div>
-</div>
-<div class="clear"></div>
-<div class="message-buttons" style="margin: 20px 110px;">
+
+<%= content_for :buttons do %>
 	<% if @confirmed_relationship %>
 		<span>
-			<%= link_to 'Accept', accept_relationship_url(:id => @relationship.id), :class => "button green-gradient" %>
+			<%= render 'compliment_mailer/buttons/accept_button', :relationship => @reationship %>
 		</span>
 		<span style="margin-left: 40px;">
-			<%= link_to 'Decline', decline_relationship_url(:id => @relationship.id), :class => "button red-gradient" %>
+			<%= render 'compliment_mailer/buttons/decline_button', :relationship => @reationship %>
 		</span>
 	<% else %>
-			<%= link_to 'View Details', 
-									show_recognition_url(:recognition_type_id => RecognitionType.COMPLIMENT.id,
-																			 :recognition_id => @compliment.id), 
-									:class => "button green-gradient" %>
+		<%= render :partial => 'compliment_mailer/buttons/view_details_button',
+							 :locals => {:recognition_type_id => RecognitionType.COMPLIMENT.id,
+													 :recognition_id => @compliment.id} %>
 	<% end %>
-</div>
-<div class="clear"></div>
-<div>
-	<p>Sincerely,</p><br />
-	<p>Customer Service Team</p>
-	<p><%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %></p>
-	<p><%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %></p>
-</div>
+<% end %>
+
+
