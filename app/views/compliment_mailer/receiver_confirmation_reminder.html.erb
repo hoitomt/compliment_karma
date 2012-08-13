@@ -13,7 +13,7 @@
 	<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
 		<%= image_tag @sender.photo.url(:small), :height => '100' %>
 	</div>
-	<div style="float: left; margin-left: 10px; width: 400px;">
+	<div style="float: left; margin-left: 10px; width: 310px;">
 		<p><strong><%= @sender.first_last %></strong> sent you a compliment</p><br />
 		<p><%= @compliment.comment %></p><br />
 		<p>
@@ -25,23 +25,23 @@
 			<strong><%= @compliment.try(:compliment_type).name %></strong>
 		</p>
 	</div>
-	<div style="float: right; margin-left: 10px; width: 60px;">
+	<div style="float: left; margin-left: 10px; width: 60px;">
 		<p style="text-align: right; margin-top: 40px;"><%= @timestamp %></p>
 	</div>
 </div>
 <div class="clear"></div>
-<div class="message-buttons" style="margin: 30px 110px;">
+<div class="message-buttons">
 	<%= link_to 'Confirm Your Email', 
 							new_account_confirmation_url(@receiver.new_account_confirmation_token), 
 							:class => "button green-gradient" %>
 	<span style="margin-left: 5px;">to claim/review this compliment</span>
 </div>
 <div class="clear"></div>
-<div style="margin: 30px 40px 40px 40px;">
+<div style="margin: 30px 0 40px 0;">
 	<table>
 
   <tr>
-    <td colspan=2 style="width:540px; padding:0 30px 30px 30px;">
+    <td colspan=2 style="width:500px;">
 			We value your time & we strive to provide real tangible benefits, which will help you throughout your professional career. For 100% free you can:
 			<br/><br/>
 			- <strong>Exchange Compliments</strong> with your colleagues
@@ -52,11 +52,11 @@
 			<br/>
 			- <strong>Share your Achievements </strong> on any Professional, Social Network or Website
 			<br/><br/><br/>
-			<font style="font-size:30px; padding-left:40px;">Send Compliments Earn Rewards</font>
+			<span style="display: block; text-align: center; font-size:30px;">Send Compliments Earn Rewards</span>
 		</td>
   </tr>
   <tr>
-	  <td style="width:240px; padding:0 0 0 60px;">
+	  <td style="width:240px; padding:0 0 0 20px;">
      <font style="font-weight:bold; padding-left:10px;">Benefits for Employees</font><br/>
 		 - 100% Free <br/>
 		 - Build Proof of Experience <br/>
@@ -68,7 +68,7 @@
 		 - Make work more fun
 
 	  </td>
-	  <td style="width:240px; padding:0 30px 0 20px;">
+	  <td style="width:240px; padding:0 0 0 20px;">
 	    <font style="font-weight:bold; padding-left:10px;">Benefits for Employers</font> <br/>
 			- Improve employee satisfaction <br/>
 			- Grow company reputation <br/>

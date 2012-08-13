@@ -10,6 +10,7 @@ class MailerController < ApplicationController
 		@confirmed_relationship = @relationship.accepted?
 		@first_compliment = Compliment.first_compliment?(@compliment.receiver_email)
     @skill= Skill.find_by_id(@compliment.skill_id)
+    @timestamp = DateUtil.get_time_gap(@compliment.created_at)
 		render :file => 'compliment_mailer/send_compliment.html.erb'
 	end
 
@@ -19,6 +20,7 @@ class MailerController < ApplicationController
     @receiver = User.find_by_email(@compliment.receiver_email)
     @receiver.generate_token(:new_account_confirmation_token) if @receiver
     @skill= Skill.find_by_id(@compliment.skill_id)
+    @timestamp = DateUtil.get_time_gap(@compliment.created_at)
 		render :file => 'compliment_mailer/receiver_confirmation_reminder.html.erb'
 	end
 
@@ -26,6 +28,7 @@ class MailerController < ApplicationController
 		@compliment = Compliment.last
 		@sender = @compliment.sender
     @skill= Skill.find_by_id(@compliment.skill_id)
+    @timestamp = DateUtil.get_time_gap(@compliment.created_at)
 		render :file => 'compliment_mailer/receiver_registration_invitation.html.erb'
 	end
 
