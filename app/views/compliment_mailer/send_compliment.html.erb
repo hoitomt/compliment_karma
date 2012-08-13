@@ -1,6 +1,49 @@
-Hi!<br />
-You have received a compliment from <%= @compliment.sender_email %>
-
-<h2><%= @compliment.comment %></h2>
-for
-<h2><%= @skill.name if @skill %></h2>
+<% if @confirmed_relationship %>
+	<p style="margin-bottom: 10px;">Congratulations - You have received your first compliment from 
+		<strong><%= @sender.first_last %></strong>!</p>
+<% else %>
+	<p style="margin-bottom: 20px; font-size: 16px; font-weight: bold;">Congratulations!</p>
+<% end %>
+<div>
+	<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
+		<%= image_tag @sender.photo.url(:small), :height => '100' %>
+	</div>
+	<div style="float: left; margin-left: 10px; width: 400px;">
+		<p><strong><%= @sender.first_last %></strong> sent you a compliment</p><br />
+		<p><%= @compliment.comment %></p><br />
+		<p>
+			<span style="color:#606060;">Skill: </span>
+			<strong><%= @compliment.try(:skill).name %></strong>
+		</p>
+		<p>
+			<span style="color:#606060;">Compliment Type: </span>
+			<strong><%= @compliment.try(:compliment_type).name %></strong>
+		</p>
+	</div>
+	<div style="float: right; margin-left: 10px; width: 60px;">
+		<p style="text-align: right; margin-top: 40px;"><%= timestamp(@compliment.created_at) %></p>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="message-buttons" style="margin: 20px 110px;">
+	<% if @confirmed_relationship %>
+		<span>
+			<%= link_to 'Accept', accept_relationship_url(:id => @relationship.id), :class => "button green-gradient" %>
+		</span>
+		<span style="margin-left: 40px;">
+			<%= link_to 'Decline', decline_relationship_url(:id => @relationship.id), :class => "button red-gradient" %>
+		</span>
+	<% else %>
+			<%= link_to 'View Details', 
+									show_recognition_url(:recognition_type_id => RecognitionType.COMPLIMENT.id,
+																			 :recognition_id => @compliment.id), 
+									:class => "button green-gradient" %>
+	<% end %>
+</div>
+<div class="clear"></div>
+<div>
+	<p>Sincerely,</p><br />
+	<p>Customer Service Team</p>
+	<p><%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %></p>
+	<p><%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %></p>
+</div>

@@ -1,5 +1,7 @@
 class Skill < ActiveRecord::Base
 
+	has_many :compliments
+	
 	validates :name, :presence => true
 
   validates_uniqueness_of :name,

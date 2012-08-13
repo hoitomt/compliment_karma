@@ -1,10 +1,30 @@
-Hi!<br />
-You have received a compliment from <%= @compliment.sender_email %>
+<% if @first_time %>
+	<p style="margin-bottom: 10px;">Congratulations - You have received your first compliment!</p>
+<% else %>
+	<p style="margin-bottom: 10px;">Congratulations!</p>
+<% end %>
+<div>
+	<div style="float: left; overflow: hidden; width: 180px;">
+		<%= image_tag @sender.photo.url(:small) %>
+	</div>
+	<div style="float: left; margin-left: 10px; width: 400px;">
+		<p><strong><%= @sender.first_last %></strong> send you a compliment</p>
+		<p><%= @compliment.comment %></p>
+		<p>
+			<span style="color:#606060;">Skill: </span>
+			<strong><%= @compliment.try(:skill).name %></strong>
+		</p>
+		<p>
+			<span style="color:#606060;">Compliment Type: </span>
+			<strong><%= @compliment.try(:compliment_type).name %></strong>
+		</p>
+	</div>
+	<div style="float: left; margin-left: 10px; width: 60px;">
 
-<h2><%= @compliment.comment %></h2>
-for
-<h2><%= @skill.name if @skill %></h2>
+	</div>
+</div>
+<div class="clear"></div>
 
-Please confirm your account to receive you compliments by clicking on the following link <br />
+
 
 <%= new_account_confirmation_url(@receiver.new_account_confirmation_token) %>

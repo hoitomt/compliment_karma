@@ -1,5 +1,5 @@
 var ShowRecognitionFancyBox = {
-	init: function(view, socialPopup) {
+	init: function(view, socialPopup, userId) {
 		$.fancybox(view, {
 			beforeLoad: function() {
 				$('body').addClass('lock-screen');
@@ -10,6 +10,11 @@ var ShowRecognitionFancyBox = {
 			},
 			beforeClose: function() {
 				$('body').removeClass('lock-screen');
+			},
+			afterClose: function() {
+				if(userId != null && userId > 0) {
+					window.location.href = 'http://www.complimentkarma.com/users/' + userId;
+				}
 			},
 			// fitToView: false,
 			// scrolling: 'no',

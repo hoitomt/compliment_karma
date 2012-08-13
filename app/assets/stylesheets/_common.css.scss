@@ -223,6 +223,17 @@ $total-width: 992px;
    color: #ffffff;   
 }
 
+@mixin button-gradient-red {
+  background: #b80404;
+  background: -moz-linear-gradient(top,  #b80404 0%, #6d0019 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b80404), color-stop(100%,#6d0019));
+  background: -webkit-linear-gradient(top,  #b80404 0%,#6d0019 100%);
+  background: -o-linear-gradient(top,  #b80404 0%,#6d0019 100%);
+  background: -ms-linear-gradient(top,  #b80404 0%,#6d0019 100%);
+  background: linear-gradient(to bottom,  #b80404 0%,#6d0019 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b80404', endColorstr='#6d0019',GradientType=0 );
+}
+
 .compliment-button {
    @include button-gradient-gray;
    width: 105px;

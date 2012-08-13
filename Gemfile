@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.7'
+gem 'rails', '3.1.8'
 gem 'thin', '1.3.1'
 gem 'pg', '0.13.2'
 gem 'heroku'
@@ -11,7 +11,7 @@ gem 'newrelic_rpm'
 gem 'marginalia', "~> 1.1.0"
 gem 'restful_metrics'
 
-# Email - HTTP to mailgun
+# Email - HTTP to mailgun and Bancbox
 gem 'rest-client', '1.6.7'
 gem 'mailgun-rails', "~> 0.1.1"
 
@@ -19,15 +19,13 @@ gem 'mailgun-rails', "~> 0.1.1"
 gem 'json'
 gem 'em-http-request'
 
-# Bancbox
-gem 'httparty'
-
 # Photo Support
 gem 'paperclip', '~>3.0.2'
 gem 'aws-sdk', '1.4.1'
 
 group :development do
 	gem 'rspec-rails', '2.6.1'
+  gem 'rack-mini-profiler'
 end
 
 group :test do

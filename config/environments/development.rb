@@ -28,8 +28,8 @@ Ck::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  # config.assets.debug = true
-  config.assets.debug = false # Use for IE testing only
+  config.assets.debug = true
+  # config.assets.debug = false # Use for IE testing only
 
   # Configure Mailgun to use http, rather than smtp
   config.action_mailer.delivery_method = :mailgun
@@ -37,4 +37,7 @@ Ck::Application.configure do
       :api_key  => 'key-1ed8ophkrawc5969zsvmff02w1f0fiv2',
       :api_host => 'ck-local.mailgun.org'
   }
+
+  # Reposition Mini-Profiler
+  Rack::MiniProfiler.config.position = 'right'
 end

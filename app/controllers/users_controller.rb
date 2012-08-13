@@ -227,20 +227,6 @@ class UsersController < ApplicationController
     @karma_live_items = Paging.page(@all_karma_live_items, @page, @per_page)
     logger.info("Karma Live Item Count: #{@karma_live_items_count}")
   end
-
-  def accept_relationship
-    sender = User.find_by_id(params[:sender_id])
-    relationship = Relationship.get_relationship(sender, current_user)
-    relationship.accept_relationship
-    redirect_to current_user
-  end
-  
-  def decline_relationship
-    sender = User.find_by_id(params[:sender_id])
-    relationship = Relationship.get_relationship(sender, current_user)
-    relationship.decline_relationship
-    redirect_to current_user  
-  end
   
   def resend_new_account_confirmation
     @user = User.find(params[:id])
@@ -360,19 +346,17 @@ class UsersController < ApplicationController
   end
   
   def set_pending_relationships
-    @pending_items = {}
-    @pending_items_count = 0
-    pending_relationships = Relationship.get_pending_relationships(@user)
-    @pending_items_count = pending_relationships.count if pending_relationships
-    logger.info("Pending Items Count: #{@pending_items_count}")
-    if(pending_relationships && pending_relationships.size > 0)
-      users = []
-      pending_relationships.each do |r|
-        u = User.find(r.user_1_id)
-        users << u
-      end
-      @pending_items[:relationships] = users
-    end
+    @pending_items = Relationship.get_pending_relationships(@user)
+    # @pending_items_count = pending_relationships.size if pending_relationships
+    # logger.info("Pending Items Count: #{@pending_items_count}")
+    # if(pending_relationships && pending_relationships.size > 0)
+    #   users = []
+    #   pending_relationships.each do |r|
+    #     u = User.find(r.user_1_id)
+    #     users << u
+    #   end
+    #   @pending_items[:relationships] = users
+    # end
   end
   
   def set_this_week_compliments

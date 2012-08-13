@@ -26,8 +26,8 @@
 			<%= link_to 'Edit', edit_from_profile_path(@user), :class => "ul_hover", :remote => true %>
 			<div class="clear"></div>
 			<div style="float: right">
-				<% if current_user?(@user) && @pending_items_count && @pending_items_count > 0 %>
-					<p><%= link_to "pending (#{@pending_items_count})", '#pending-items', 
+				<% if current_user?(@user) && @pending_items && @pending_items.size > 0 %>
+					<p><%= link_to "pending (#{@pending_items.size})", '#pending-items', 
 												:class => 'fancybox' %>
 				<% end %>
 			</div>
@@ -39,17 +39,17 @@
 <% if current_user?(@user) %>
 	<div id="pending-items" style="display:none;">
 		<h2>Pending Items</h2>
-		<% if @pending_items && @pending_items[:relationships] %>
+		<% unless @pending_items.blank? %>
 			<ul>
-			<% @pending_items[:relationships].each do |user| %>
+			<% @pending_items.each do |relationship| %>
 				<li>
 					<% if @confirmed %>
-						<%= link_to 'Accept', accept_relationship_path(:sender_id => user.id) %> | 
-						<%= link_to 'Decline', decline_relationship_path(:sender_id => user.id) %>
+						<%= link_to 'Accept', accept_relationship_path(relationship) %> | 
+						<%= link_to 'Decline', decline_relationship_path(relationship) %>
 					<% else %>
 						<span style="color: #B0B0B0;">Please confirm your account to accept/decline</span>
 					<% end %>
-					<%= pending_relationship_display(user) %>
+					<%= pending_relationship_display(relationship) %>
 				</li>
 			<% end %>
 			</ul>

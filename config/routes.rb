@@ -1,18 +1,10 @@
 Ck::Application.routes.draw do
-  resources :payments
-
-  resources :experiences
-
-  resources :company_department_users
-
-  resources :company_departments
-
-  resources :company_users
-
-  resources :companies
-
   root :to => "pages#index"
   
+  namespace :admin do
+    match 'mailer(/:action(/:id(.:format)))' => 'mailer#:action'
+  end
+
   match "follows/multi_create_new" => "follows#multi_create", :as => :multi_create_follows
   match "follows/create_new" => "follows#create_new", :as => :create_follow
   match "/signup" => "users#new"
@@ -41,6 +33,8 @@ Ck::Application.routes.draw do
         :as => :compliment_new_user
   match "/recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
+  match "/relationships/:id/accept" => "relationships#accept", :as => :accept_relationship
+  match "/relationships/:id/decline" => "relationships#decline", :as => :decline_relationship
   match "/rewards/add_to_cart" => "rewards#add_to_cart"
   match "/rewards/filter_rewards_results" => "rewards#filter_rewards_results"
   match "/rewards/cart" => "rewards#cart", :as => :cart
@@ -55,10 +49,6 @@ Ck::Application.routes.draw do
         :as => :resend_new_account_confirmation
   match "/users/:id/get_more_karma_live_records" => "users#get_more_karma_live_records",
         :as => :get_more_karma_live_records
-  match "/users/:id/accept_relationship" => "users#accept_relationship",
-        :as => :accept_relationship
-  match "/users/:id/decline_relationship" => "users#decline_relationship",
-        :as => :decline_relationship
   match "users/:id/show_recognition_detail" => "users#show_recognition_detail", 
         :as => :show_recognition_detail
   match "users/:id/dev_popup" => "users#dev_popup"
@@ -95,6 +85,11 @@ Ck::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :shells, :only => [:new, :create, :destroy]
   resources :password_resets
-  
+  resources :payments
+  resources :experiences
+  resources :company_department_users
+  resources :company_departments
+  resources :company_users
+  resources :companies
 
 end

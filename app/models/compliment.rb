@@ -3,6 +3,7 @@ class Compliment < ActiveRecord::Base
   belongs_to :compliment_status
   belongs_to :visibility
   belongs_to :compliment_type
+  belongs_to :skill
 
   belongs_to :receiver, :class_name => 'User', :foreign_key => 'receiver_user_id'
   belongs_to :sender, :class_name => 'User', :foreign_key => 'sender_user_id'
@@ -397,5 +398,10 @@ class Compliment < ActiveRecord::Base
 
   def metrics_send_new_compliment
     Metrics.new_compliment
+  end
+
+  def self.first_compliment?(email)
+    c = Compliment.find_by_receiver_email(email)
+    return c.blank?
   end
 end

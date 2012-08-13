@@ -49,7 +49,8 @@ module UsersHelper
     end
   end
 
-  def pending_relationship_display(user)
+  def pending_relationship_display(relationship)
+    user = User.find(relationship.user_1_id)
     html = "Compliment from #{user.full_name}"
     html += " #{user.city}," if user.city
     html += " #{user.state_cd}" if user.state_cd

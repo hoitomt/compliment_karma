@@ -36,6 +36,10 @@ class Relationship < ActiveRecord::Base
   
   def is_internal?
   end
+
+  def accepted?
+    self.relationship_status == RelationshipStatus.ACCEPTED
+  end
   
   def relationship_does_not_exist
     r = Relationship.where('(user_1_id = ? AND user_2_id = ?) OR (user_1_id = ? AND user_2_id = ?)',
@@ -54,14 +58,12 @@ class Relationship < ActiveRecord::Base
   def accept_relationship
     self.update_attributes(:relationship_status_id => RelationshipStatus.ACCEPTED.id,
                            :default_visibility_id => Visibility.EVERYBODY.id)
-    
-    # Update compliments between the two parties and update the visibility
-    # to the specified value
     UpdateHistory.Accepted_Compliments_Receiver(self)
   end
   
   def decline_relationship
-    relationship.update_attributes(:relationship_status_id => RelationshipStatus.NOT_ACCEPTED)
+    self.update_attributes(:relationship_status_id => RelationshipStatus.NOT_ACCEPTED.id,
+                           :default_visibility_id => Visibility.SENDER_AND_RECEIVER.id)
     UpdateHistory.Rejected_Compliment_Receiver(self)
   end
   
@@ -69,7 +71,12 @@ class Relationship < ActiveRecord::Base
     return nil if user_1.nil? || user_2.nil?
     r = Relationship.where('(user_1_id = ? AND user_2_id = ?) OR (user_1_id = ? AND user_2_id = ?)',
                             user_1.id, user_2.id, user_2.id, user_1.id)
-    return r[0] if r.length == 1
+    return r[0] #if r.length == 1
+  end
+
+  def self.accepted_relationship?(user_1, user_2)
+    r = get_relationship(user_1, user_2)
+    return !r.blank? && r.relationship_status == RelationshipStatus.ACCEPTED
   end
   
   def self.get_pending_relationships(user)
