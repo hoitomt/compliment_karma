@@ -299,6 +299,20 @@ class User < ActiveRecord::Base
     return search_array.flatten.uniq
   end
 
+  def self.search_compliment_receiver(search_string)
+    return [] if search_string.blank?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    s = "%#{escaped_search_string}%"
+    confirmed = AccountStatus.CONFIRMED
+    search_array = []
+    search_array << User.where('lower(first_name) LIKE ? OR ' +
+                               'lower(last_name) LIKE ? OR ' +
+                               'lower(city) LIKE ?OR ' + 
+                               'lower(email) LIKE ?',
+                               s, s, s, s).include(:photo)
+    return search_array.flatten.uniq
+  end
+
   def is_a_company?
     return !self.company.nil?
   end
