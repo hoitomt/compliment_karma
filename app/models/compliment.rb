@@ -27,6 +27,7 @@ class Compliment < ActiveRecord::Base
 
   validate :compliment_cannot_be_to_self
   validate :sender_is_confirmed_user
+  validate :not_short_term_duplicate
   
   before_save :set_sender
   before_save :set_compliment_status
@@ -137,6 +138,20 @@ class Compliment < ActiveRecord::Base
     user = User.find_by_email(self.sender_email)
     if(!user || !user.confirmed?)
       errors.add(:sender_email, "Please confirm your account prior to complimenting") 
+    end
+  end
+
+  def not_short_term_duplicate
+    t = DateTime.now - 1.minute
+    c = Compliment.where('(sender_email = ? OR sender_user_id = ?) AND 
+                          (receiver_email = ? OR receiver_user_id = ?) AND
+                          skill_id = ? AND comment = ? AND compliment_type_id = ? AND
+                          created_at > ?',
+                          self.sender_email, self.sender_user_id,
+                          self.receiver_email, self.receiver_user_id,
+                          self.skill_id, self.comment, self.compliment_type_id, t)
+    unless c.blank?
+      errors.add(:comment, "Duplicate compliment with recent compliment")
     end
   end
   
@@ -258,7 +273,7 @@ class Compliment < ActiveRecord::Base
       # end
     end
   end
-  
+
   def get_sender
     User.find(self.sender_user_id) unless self.sender_user_id.blank?
   end
