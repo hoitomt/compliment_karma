@@ -10,7 +10,6 @@ class ComplimentMailer < ActionMailer::Base
     @first_compliment = Compliment.first_compliment?(@sender, @receiver)
     @relationship = Relationship.get_relationship(@sender, @receiver)
     @confirmed_relationship = @relationship.accepted?
-    @first_compliment = Compliment.first_compliment?(@compliment.receiver_email)
     @timestamp = DateUtil.get_time_gap(@compliment.created_at)
     mail to: compliment.receiver_email,
          subject: "You have received a compliment",
