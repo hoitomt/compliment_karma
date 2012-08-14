@@ -10,6 +10,7 @@ gem 'client_side_validations', '3.1.4'
 gem 'newrelic_rpm'
 gem 'marginalia', "~> 1.1.0"
 gem 'restful_metrics'
+gem 'rack-mini-profiler'
 
 # Email - HTTP to mailgun and Bancbox
 gem 'rest-client', '1.6.7'
@@ -25,7 +26,6 @@ gem 'aws-sdk', '1.4.1'
 
 group :development do
 	gem 'rspec-rails', '2.6.1'
-  gem 'rack-mini-profiler'
 end
 
 group :test do
