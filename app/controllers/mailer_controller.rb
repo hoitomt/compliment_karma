@@ -3,7 +3,7 @@ class MailerController < ApplicationController
 	before_filter :is_founder_signed_in?
 
 	def send_compliment
-		@compliment = Compliment.last
+		@compliment = Compliment.find(1264)
 		@sender = @compliment.sender
 		@receiver = @compliment.receiver
 		@relationship = Relationship.get_relationship(@sender, @receiver)

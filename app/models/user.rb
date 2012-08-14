@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
                                   :profile => "200>x200",
                                   :medium => "300x300>" },
                      :convert_options => { :all => '-auto-orient' },
+                     :default_url => 'https://s3.amazonaws.com/compliment_karma_prod/missing/missing_:style.png',
                      :storage => :s3,
                      :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
                      :path => "/:id/:style/:filename"
