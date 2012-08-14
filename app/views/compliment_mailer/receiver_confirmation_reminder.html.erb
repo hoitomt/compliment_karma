@@ -9,7 +9,10 @@
 <% end %>
 
 <%= content_for :buttons do %>
-	<%= render 'compliment_mailer/buttons/confirm_email_button' %>
+	<%= link_to new_account_confirmation_url(@receiver.new_account_confirmation_token) do %>
+		<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/confirm_email.png',
+				:height => '30' %>
+	<% end %>
 <% end %>
 
 <%= content_for :bottom_content do %>

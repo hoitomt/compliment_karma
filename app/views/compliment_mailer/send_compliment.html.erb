@@ -11,15 +11,23 @@
 <%= content_for :buttons do %>
 	<% if @confirmed_relationship %>
 		<span>
-			<%= render 'compliment_mailer/buttons/accept_button', :relationship => @reationship %>
+			<%= link_to accept_relationship_url(:id => @relationship.id) do %>
+				<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/accept.png',
+						:height => '30' %>
+			<% end %>
 		</span>
 		<span style="margin-left: 40px;">
-			<%= render 'compliment_mailer/buttons/decline_button', :relationship => @reationship %>
+			<%= link_to  decline_relationship_url(:id => @relationship.id) do %>
+				<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/decline.png', 
+						:height => '30' %>
+			<% end %>
 		</span>
 	<% else %>
-		<%= render :partial => 'compliment_mailer/buttons/view_details_button',
-							 :locals => {:recognition_type_id => RecognitionType.COMPLIMENT.id,
-													 :recognition_id => @compliment.id} %>
+		<%= link_to show_recognition_url(:recognition_type_id => RecognitionType.COMPLIMENT.id,
+																 		 :recognition_id => @compliment.id) do %>
+			<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/view_details.png',
+										:height => '30' %>
+		<% end %>
 	<% end %>
 <% end %>
 
