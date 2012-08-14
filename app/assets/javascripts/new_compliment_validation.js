@@ -4,19 +4,58 @@ var NewComplimentValidation = {
 
 	},
 	validateNewComplimentForm: function() {
+		var allErrors = [];
 		this.validateComplimentReceiver();
-
+		allErrors = allErrors.concat(this.errors);
+		this.validateComplimentSkill();
+		allErrors = allErrors.concat(this.errors);
+		this.validateComplimentComment();
+		allErrors = allErrors.concat(this.errors);
+		this.validateComplimentType();
+		allErrors = allErrors.concat(this.errors);
+		return allErrors.length == 0;
 	},
 	validateComplimentReceiver: function() {
-		this.errors = [];
 		var element = $('input#compliment_receiver_display');
+		this.errors = [];
 		this.clearErrorMessage(element);
 		// Sender is not the same as the receiver
 		this.validateSenderNotReceiver();
 		// Receiver email is valid
 		this.validateEmail();
 		// Field is blank
-		this.validatePresence();
+		this.validatePresence(element);
+		$(this.errors).each(function() {
+			NewComplimentValidation.showErrorMessage(this.element, this.errorMsg);
+		});
+	},
+	validateComplimentSkill: function() {
+		var element = $('input#compliment_skill_id');
+		this.errors = [];
+		this.clearErrorMessage(element);
+		// Field is blank
+		this.validatePresence(element);
+		$(this.errors).each(function() {
+			NewComplimentValidation.showErrorMessage(this.element, this.errorMsg);
+		});
+	},
+	validateComplimentComment: function() {
+		var element = $('#compliment_comment');
+		this.errors = [];
+		this.clearErrorMessage(element);
+		// Field is blank
+		this.validatePresence(element);
+		this.validateCommentLength(element);
+		$(this.errors).each(function() {
+			NewComplimentValidation.showErrorMessage(this.element, this.errorMsg);
+		});
+	},
+	validateComplimentType: function() {
+		var element = $('#compliment_compliment_type_id');
+		this.errors = [];
+		this.clearErrorMessage(element);
+		// Field is blank
+		this.validatePresence(element);
 		$(this.errors).each(function() {
 			NewComplimentValidation.showErrorMessage(this.element, this.errorMsg);
 		});
@@ -31,7 +70,6 @@ var NewComplimentValidation = {
 			this.errors.push({element: element, 
 									 errorMsg: "I think you are talking to yourself again"});
 			receiverError = true;
-			console.log("Sender == receiver");
 		}
 		return receiverError;
 	},
@@ -54,15 +92,24 @@ var NewComplimentValidation = {
 		}
 		return emailError;
 	},
-	validatePresence: function() {
+	validatePresence: function(element) {
 		var receiverError = false;
-		var element = $('input#compliment_receiver_display');
 		if(element.val() == null || element.val().length == 0) {
 			this.errors.push({element: element, 
 									 errorMsg: "can't be blank"});
 			receiverError = true;
 		}
 		return receiverError;
+	},
+	validateCommentLength: function(element) {
+		var commentError = false;
+		var content = element.val();
+		if(content && content.length > 140) {
+			this.errors.push({element: element,
+												errorMsg: "is too long - 140 character limit"});
+			commentError = true;
+		}
+		return commentError;
 	},
 	// element should be in the form of $('input#field_name')
 	showErrorMessage: function(element, errorMsg) {
@@ -73,14 +120,16 @@ var NewComplimentValidation = {
 		} else {
 			elementContainer.append('<div id="validation-error">' + errorMsg + '</div>');
 		}
-		if($('#validation-error').not(':visible')) {
-			$('#validation-error').show();
+		// Now that it has been set, go get it again
+		var errorContainer = elementContainer.find('#validation-error');
+		if($(errorContainer).not(':visible')) {
+			$(errorContainer).show();
 		}
 	},
 	clearErrorMessage: function(element) {
 		var elementContainer = element.parents('#field');
-		var existingError = elementContainer.find('#validation-error');
-		existingError.html('');
-		$('#validation-error').hide();
+		var errorContainer = elementContainer.find('#validation-error');
+		errorContainer.html('');
+		$(errorContainer).hide();
 	}
 }

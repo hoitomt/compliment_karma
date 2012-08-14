@@ -34,6 +34,24 @@ var ComplimentUI = {
 				}, 200);
 			}
 		});
+		$('input#compliment_skill_id').off('blur');
+		$('input#compliment_skill_id').on({
+			blur: function(event) {
+				NewComplimentValidation.validateComplimentSkill();
+			}
+		});
+		$('#compliment_comment').off('blur');
+		$('#compliment_comment').on({
+			blur: function(event) {
+				NewComplimentValidation.validateComplimentComment();
+			}
+		});
+		$('#compliment_compliment_type_id').off('blur');
+		$('#compliment_compliment_type_id').on({
+			blur: function(event) {
+				NewComplimentValidation.validateComplimentType();
+			}
+		});
 		$('#minimize-me').off('click');
 		$('#minimize-me').click(function() {
 			ComplimentUI.hideNewComplimentPanel();
@@ -92,6 +110,10 @@ var ComplimentUI = {
 	setAjaxCallbacks: function() {
 		$('#compliment-form').off('ajax:beforeSend');
 		$('#compliment-form').on('ajax:beforeSend', function(evt, data, status, xhr){
+			var isValid = NewComplimentValidation.validateNewComplimentForm();
+			if(!isValid) {
+				return false;
+			}
 			$('#sending-compliment-spinner').show();
 			// Shut off spinner if running for 10 seconds, something went wrong
 			setTimeout($('#sending-compliment-spinner').hide(), 10000);

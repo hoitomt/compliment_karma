@@ -8,8 +8,13 @@ var SkillAutoComplete = {
 		$('input#compliment_skill_id').off('keyup');
 		$('input#compliment_skill_id').on({
 			keyup: function(event) {
-				setTimeout("SkillAutoComplete.searchFx()", 400);
-				// SkillAutoComplete.searchLocal();
+				// Don't search if an arror key, enter(13), shift (9), or tab(16) is selected
+				if(event.keyCode != 37 && event.keyCode != 38 && 
+					 event.keyCode != 39 && event.keyCode != 40 && 
+					 event.keyCode != 13 && event.keyCode != 16 &&
+					 event.keyCode != 9 && ComplimentReceiver.performSearch) {
+					setTimeout("SkillAutoComplete.searchFx()", 400);
+				}
 				event.stopPropagation();
 			}
 		});
