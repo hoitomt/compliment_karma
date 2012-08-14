@@ -7,6 +7,7 @@ class ComplimentMailer < ActionMailer::Base
     @skill= Skill.find_by_id(@compliment.skill_id)
     @sender = @compliment.sender
     @receiver = @compliment.receiver
+    @first_compliment = Compliment.first_compliment?(@sender, @receiver)
     @relationship = Relationship.get_relationship(@sender, @receiver)
     @confirmed_relationship = @relationship.accepted?
     @first_compliment = Compliment.first_compliment?(@compliment.receiver_email)

@@ -400,8 +400,10 @@ class Compliment < ActiveRecord::Base
     Metrics.new_compliment
   end
 
-  def self.first_compliment?(email)
-    c = Compliment.find_by_receiver_email(email)
-    return c.blank?
+  def self.first_compliment?(sender, receiver)
+    return true if sender.blank? || receiver.blank?
+    c = Compliment.where('sender_user_id = ? and receiver_user_id = ?',
+                          sender.id, receiver.id).count
+    return c == 1
   end
 end

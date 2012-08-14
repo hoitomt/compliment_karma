@@ -8,7 +8,6 @@ class MailerController < ApplicationController
 		@receiver = @compliment.receiver
 		@relationship = Relationship.get_relationship(@sender, @receiver)
 		@confirmed_relationship = @relationship.accepted?
-		@first_compliment = Compliment.first_compliment?(@compliment.receiver_email)
     @skill= Skill.find_by_id(@compliment.skill_id)
     @timestamp = DateUtil.get_time_gap(@compliment.created_at)
 		render :file => 'compliment_mailer/send_compliment.html.erb'

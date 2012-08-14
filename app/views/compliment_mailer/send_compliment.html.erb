@@ -1,8 +1,9 @@
 <%= content_for :greeting do %>
-	<% if @confirmed_relationship %>
+	<% if @first_compliment %>
 		Congratulations <%= @receiver.first_name %> - 
-		You have received your first compliment from 
-		<strong><%= @sender.first_last %></strong>!
+		<span style="font-weight: normal;">
+			You have received your first compliment from 
+			<%= @sender.first_last %>!</span>
 	<% else %>
 		Congratulations <%= @receiver.first_name %>!
 	<% end %>
