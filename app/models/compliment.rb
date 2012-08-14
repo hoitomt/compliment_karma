@@ -225,6 +225,16 @@ class Compliment < ActiveRecord::Base
   def remove_naughty_words
     self.comment = Blacklist.clean_string(self.comment)
   end
+
+  def self.user_confirmation(user)
+    c = Compliment.where('receiver_user_id = ? AND 
+                          (compliment_status_id = ? OR compliment_status_id = ?)',
+                          user.id, ComplimentStatus.PENDING_RECEIVER_CONFIRMATION,
+                          ComplimentStatus.PENDING_RECEIVER_REGISTRATION)
+    c.each do |compliment| 
+      compliment.update_attributes(:compliment_status => ComplimentStatus.ACTIVE)
+    end
+  end
   
   def set_visibility
     if self.visibility_id.blank?

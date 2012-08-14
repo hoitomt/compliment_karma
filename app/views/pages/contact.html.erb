@@ -5,10 +5,13 @@
 			<h1>Contact Us</h1>
 			<div class="address-container">
 				<p>ComplimentKarma LLC</p>
-				<p>1316 White Pine Dr.</p>
 				<p>Eau Claire, WI 54701</p>
 				<p style="margin-top: 5px;">email: <%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com', :class => 'ul_hover' %></p>
-			</div>			
+			</div>
+			<div class="address-container" style="margin-left: 20px;">
+				<p>ComplimentKarma LLC</p>
+				<p>Chicago, IL 60192</p>
+			</div>
 			<div class="map-container">
 				<%= link_to 'https://maps.google.com/maps/ms?msid=207536715040387622638.0004c72e4086ab0bfd95d&msa=0&ll=37.926868,-81.914062&spn=54.622956,62.841797' do %>
 					<%= image_tag 'map.png' %>

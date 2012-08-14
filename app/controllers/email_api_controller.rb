@@ -5,14 +5,14 @@ class EmailApiController < ApplicationController
     @title = "Account Confirmation"
     if current_user
       logger.info("User is logged in")
-      current_user.account_status = AccountStatus.CONFIRMED
-      current_user.save
+      current_user.update_attributes(:account_status => AccountStatus.CONFIRMED)
+      Compliment.user_confirmation(current_user)
     else
       logger.info("User is not logged in")
-      @user = User.find_by_new_account_confirmation_token(params[:confirm_id])      
+      @user = User.find_by_new_account_confirmation_token(params[:confirm_id])
       if @user
-        @user.account_status = AccountStatus.CONFIRMED
-        @user.save
+        Compliment.user_confirmation(@user)
+        @user.update_attributes(:account_status => AccountStatus.CONFIRMED)
       else
         redirect_to root_path
       end
