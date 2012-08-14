@@ -21,7 +21,7 @@ var ComplimentReceiver = {
 				}
 				// Start Search again if backspace, delete, or v (as in Control-v) is hit
 				if(event.keyCode == 8 || event.keyCode == 91 ||
-					 event.keyCode == 86 || $('#compliment_receiver_id').val().length == 0) {
+					 event.keyCode == 86 || $('input#compliment_receiver_display').val().length == 0) {
 					ComplimentReceiver.performSearch = true;
 				}
 				event.stopPropagation();

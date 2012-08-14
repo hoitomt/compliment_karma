@@ -8,8 +8,11 @@ if(results && results.length > 0) {
 	var list = container.find('li');
 	var inputTextField = $('input#compliment_skill_id');
 	var inputIdField = $('input#skill_id_result')
-	container.show();
-	ListNavigator.init(list, inputTextField, inputIdField, null, container);
+	container.show();	if(inputTextField.is(":focus")) {
+		ListNavigator.init(list, inputTextField, inputIdField, null, container);
+	} else {
+		container.hide();
+	}
 } else {
 	container.hide();
 }

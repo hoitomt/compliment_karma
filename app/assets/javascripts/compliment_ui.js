@@ -116,7 +116,7 @@ var ComplimentUI = {
 			}
 			$('#sending-compliment-spinner').show();
 			// Shut off spinner if running for 10 seconds, something went wrong
-			setTimeout($('#sending-compliment-spinner').hide(), 10000);
+			setTimeout($('#sending-compliment-spinner').hide, 10000);
 		});
 	},
 	resetNewComplimentValues: function() {

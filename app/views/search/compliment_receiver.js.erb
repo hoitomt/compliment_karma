@@ -8,7 +8,11 @@ if(results && results.length > 0) {
 	var inputTextField = $('input#compliment_receiver_display');
 	var inputIdField = $('input#compliment_receiver_id');
 	var receiverIsACompanyField = $('input#receiver_is_a_company');
-	ListNavigator.init(list, inputTextField, inputIdField, receiverIsACompanyField, container);
+	if(inputTextField.is(":focus")) {
+		ListNavigator.init(list, inputTextField, inputIdField, receiverIsACompanyField, container);
+	} else {
+		container.hide();
+	}
 } else {
 	ComplimentReceiver.setPerformSearch(false);
 }

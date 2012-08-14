@@ -12,7 +12,7 @@ var SkillAutoComplete = {
 				if(event.keyCode != 37 && event.keyCode != 38 && 
 					 event.keyCode != 39 && event.keyCode != 40 && 
 					 event.keyCode != 13 && event.keyCode != 16 &&
-					 event.keyCode != 9 && ComplimentReceiver.performSearch) {
+					 event.keyCode != 9) {
 					setTimeout("SkillAutoComplete.searchFx()", 400);
 				}
 				event.stopPropagation();
