@@ -8,12 +8,11 @@ if(results && results.length > 0) {
 	var inputTextField = $('input#compliment_receiver_display');
 	var inputIdField = $('input#compliment_receiver_id');
 	var receiverIsACompanyField = $('input#receiver_is_a_company');
-	// container.show();
 	ListNavigator.init(list, inputTextField, inputIdField, receiverIsACompanyField, container);
 } else {
-	// container.hide();
+	ComplimentReceiver.setPerformSearch(false);
 }
+
 if($('input#compliment_receiver_display').is(':focus')) {
 	container.show();
 }
-// ComplimentUI.validateSenderNotReceiver(<%= current_user.id %>);

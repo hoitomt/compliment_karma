@@ -10,14 +10,29 @@ var ComplimentUI = {
 		$('#new-compliment-container').effect("highlight", {color: "#006791"}, 2500);
 	},
 	setNewComplimentHandlers: function() {
-		$('input#compliment_receiver_display').off('click, change, focus');
-		$('input#compliment_receiver_display').click(function() {
-			ComplimentUI.showNewComplimentPanel();
+		$('input#compliment_receiver_display').off('click, change, focus, blur');
+		$('input#compliment_receiver_display').on({
+			click: function() {
+				ComplimentUI.showNewComplimentPanel();
 			// event.stopPropagation();
-		});		
-		$('input#compliment_receiver_display').focus(function() {
-			ComplimentUI.showNewComplimentPanel();
-			// event.stopPropagation();
+			},
+			focus: function() {
+				ComplimentUI.showNewComplimentPanel();
+				// event.stopPropagation();
+			},
+			change: function(event) {
+				// setTimeout( function() {
+				// 	$('#compliment-receiver-results-container').hide();
+				// }, 200);
+			},
+			blur: function(event) {
+				NewComplimentValidation.validateComplimentReceiver();
+				ComplimentUI.updateReceiverType();
+				ComplimentUI.updateComplimentType();
+				setTimeout( function() {
+					$('#compliment-receiver-results-container').hide();
+				}, 200);
+			}
 		});
 		$('#minimize-me').off('click');
 		$('#minimize-me').click(function() {
@@ -32,21 +47,6 @@ var ComplimentUI = {
 			if(!isAnchor/* && !isInContainer*/) {
 				ComplimentUI.hideNewComplimentPanel();
 			}
-		});
-		$('input#compliment_receiver_display').off('change blur');
-		$('input#compliment_receiver_display').change(function(event) {
-			ComplimentUI.validateComplimentReceiver();
-			setTimeout( function() {
-				$('#compliment-receiver-results-container').hide();
-			}, 200);
-		});
-		$('input#compliment_receiver_display').blur(function(event) {
-			ComplimentUI.validateComplimentReceiver();
-			ComplimentUI.updateReceiverType();
-			ComplimentUI.updateComplimentType();
-			setTimeout( function() {
-				$('#compliment-receiver-results-container').hide();
-			}, 200);
 		});
 	},
 	showNewComplimentPanel: function() {
@@ -72,49 +72,13 @@ var ComplimentUI = {
 		stickMe.off('waypoint');
 		$('#new-compliment-container').removeClass('sticky');
 	},
-	validateComplimentReceiver: function() {
-		ComplimentUI.validateSenderNotReceiver();
-	},
-	validateSenderNotReceiver: function() {
-		var element = $('input#compliment_receiver_display');
-		var receiverUserId = $('input#compliment_receiver_id').val();
-		// console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);
-		var errorMsg = "";
-		if(ComplimentUI.userId == receiverUserId) {
-			errorMsg = "I think you are talking to yourself again";
-		}
-		var emailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i;
-		if( !ComplimentUI.isValidEmail(element.val()) && 
-				(receiverUserId == null || receiverUserId.length == 0) ) {
-			errorMsg = "invalid email address";
-		}
-		if(element.val() == null || element.val().length == 0) {
-			errorMsg = "can't be blank";
-		}
-		var elementContainer = element.parents('#field');
-		var existingError = elementContainer.find('#validation-error');
-		if(existingError && existingError.length > 0) {
-			existingError.html(errorMsg);
-		} else {
-			elementContainer.append('<div id="validation-error">' + errorMsg + '</div>');
-		}
-		if($('#validation-error').not(':visible')) {
-			$('#validation-error').show();
-		}
-	},
-	isValidEmail: function(email) {
-		if(email == null || email.length == 0) {
-			return false;
-		}
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-	},
 	updateReceiverType: function() {
-		if( ComplimentUI.isValidEmail($('input#compliment_receiver_display').val()) ) {
+		if( NewComplimentValidation.validateEmail() ) {
 			$('#receiver_is_a_company').val('false');
 		}
 	},
 	updateComplimentType: function() {
+		// Update the compliment types drop down based on the receiver
 		var receiverIsACompany = $('#receiver_is_a_company').val();
 		var senderIsACompany = $('#sender_is_a_company').val();
 		// console.log("update drop down| rcv: " + receiverIsACompany + ' snd: ' + senderIsACompany);
@@ -129,6 +93,8 @@ var ComplimentUI = {
 		$('#compliment-form').off('ajax:beforeSend');
 		$('#compliment-form').on('ajax:beforeSend', function(evt, data, status, xhr){
 			$('#sending-compliment-spinner').show();
+			// Shut off spinner if running for 10 seconds, something went wrong
+			setTimeout($('#sending-compliment-spinner').hide(), 10000);
 		});
 	},
 	resetNewComplimentValues: function() {

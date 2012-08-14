@@ -56,9 +56,9 @@ var ListNavigator = {
 			ListNavigator.setInputAndClose(listElement);
 		} else if (complimentReceiverContainer.length > 0) {
 			ListNavigator.setInputAndClose(listElement);
-			ComplimentUI.validateSenderNotReceiver();
+			// NewComplimentValidation.validateSenderNotReceiver();
 		} else {
-			ComplimentUI.validateSenderNotReceiver();
+			// ComplimentUI.validateSenderNotReceiver();
 		}
 	},
 	setInputAndClose: function(listElement) {
