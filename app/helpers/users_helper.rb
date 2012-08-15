@@ -426,6 +426,14 @@ module UsersHelper
     end
   end
 
+  def recognition_header_name(user)
+    unless user.blank?
+      return link_to user.first_last, user
+    else
+      return ""
+    end
+  end
+
   def recognition_left_side(feed_item)
     if feed_item.item_type_id == @recognition_type_compliment_id
       unless feed_item.item_object.sender_user_id.blank?

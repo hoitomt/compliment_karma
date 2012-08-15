@@ -11,7 +11,10 @@
 	<% end %>
 </div>
 <div class="feed-item-center">
-	<%= render 'users/panels/recognition_participants', :feed_item => feed_item %>
+	<%= render :partial => 'users/panels/recognition_participants', 
+						 :locals => {:left_side_user => presenter,
+						 					   :right_side_user => receiver,
+						 					   :feed_item => feed_item } %>
 	<%= link_to show_recognition_path(:recognition_type_id => feed_item.item_type_id, 
 																		:recognition_id => feed_item.item_object.id),
 																		:remote => true do %>
