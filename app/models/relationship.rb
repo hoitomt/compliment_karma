@@ -56,12 +56,14 @@ class Relationship < ActiveRecord::Base
   end
   
   def accept_relationship
+    return if self.relationship_status != RelationshipStatus.PENDING
     self.update_attributes(:relationship_status_id => RelationshipStatus.ACCEPTED.id,
                            :default_visibility_id => Visibility.EVERYBODY.id)
     UpdateHistory.Accepted_Compliments_Receiver(self)
   end
   
   def decline_relationship
+    return if self.relationship_status != RelationshipStatus.PENDING
     self.update_attributes(:relationship_status_id => RelationshipStatus.NOT_ACCEPTED.id,
                            :default_visibility_id => Visibility.SENDER_AND_RECEIVER.id)
     UpdateHistory.Rejected_Compliment_Receiver(self)
