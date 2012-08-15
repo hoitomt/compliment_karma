@@ -1,43 +1,45 @@
-<div id="message-container" 
-		 style="background: #DCF1EF; font-size: 14px;
-		 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-						-moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px;">
-	<%= render 'layouts/mailer/header' %>
-	<div id="content-container" style="padding: 30px; border-top: 1px solid #ffffff;">
-		<div id="content-greeting" style="margin: 20px 0; font-size: 16px; font-weight: bold;">
-			<%= yield :greeting %>
-		</div>
-		<div id="content-compliment">
-			<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
-				<%= image_tag @sender.photo.url(:small), :height => '100' %>
+<div style="background: #DCF1EF;">
+	<div id="message-container" 
+			 style="background: #A7DBD8; font-size: 14px; width: 600px; margin: 0 auto;
+			 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+							-moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px;">
+		<%= render 'layouts/mailer/header' %>
+		<div id="content-container" style="padding: 30px; border-top: 1px solid #ffffff;">
+			<div id="content-greeting" style="margin: 20px 0; font-size: 16px; font-weight: bold;">
+				<%= yield :greeting %>
 			</div>
-			<div style="float: left; margin-left: 10px;">
-				<strong><%= @sender.first_last %></strong> sent you a compliment<br /><br />
-				<%= @compliment.comment %><br /><br />
-				
-				<span style="color:#606060;">Skill: </span>
-				<strong><%= @compliment.try(:skill).name %></strong>
-				<br />
-				<span style="color:#606060;">Compliment Type: </span>
-				<strong><%= @compliment.try(:compliment_type).name %></strong>
-				<br />
+			<div id="content-compliment">
+				<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
+					<%= image_tag @sender.photo.url(:small), :height => '100' %>
+				</div>
+				<div style="float: left; margin-left: 10px;">
+					<strong><%= @sender.first_last %></strong> sent you a compliment<br /><br />
+					<%= @compliment.comment %><br /><br />
+					
+					<span style="color:#606060;">Skill: </span>
+					<strong><%= @compliment.try(:skill).name %></strong>
+					<br />
+					<span style="color:#606060;">Compliment Type: </span>
+					<strong><%= @compliment.try(:compliment_type).name %></strong>
+					<br />
+				</div>
+				<div style="float: right; margin-left: 10px; width: 60px;">
+					<span style="text-align: right; margin-top: 40px;"><%= @timestamp %></span>
+				</div>
 			</div>
-			<div style="float: right; margin-left: 10px; width: 60px;">
-				<span style="text-align: right; margin-top: 40px;"><%= @timestamp %></span>
-			</div>
-		</div>
-		<div id="clear" style="clear: both;"></div>
+			<div id="clear" style="clear: both;"></div>
 
-		<div id="message-buttons" style="margin: 30px 0px; text-align: center;">
-			<%= yield :buttons %>
-		</div>
-		<div id="clear" style="clear: both;"></div>
-		<%= yield :bottom_content %>
-		<div>
-			Sincerely,<br /><br />
-			Customer Service Team<br />
-			<%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %><br />
-			<%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %><br />
+			<div id="message-buttons" style="margin: 30px 0px; text-align: center;">
+				<%= yield :buttons %>
+			</div>
+			<div id="clear" style="clear: both;"></div>
+			<%= yield :bottom_content %>
+			<div>
+				Sincerely,<br /><br />
+				Customer Service Team<br />
+				<%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %><br />
+				<%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %><br />
+			</div>
 		</div>
 	</div>
 </div>
