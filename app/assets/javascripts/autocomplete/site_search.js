@@ -5,8 +5,15 @@ var SiteSearch = {
 	registerHandler: function() {
 		$('input#search_string').off('keyup');
 		$('input#search_string').on({
-			keyup: function(event) {
-				setTimeout("SiteSearch.searchFx()", 400);
+			keyup: function(event) {				
+				// Don't search if an arror key, enter(13), shift (9), or tab(16) is selected
+				// console.lot(event.keyCode);
+				if(event.keyCode != 37 && event.keyCode != 38 && 
+					 event.keyCode != 39 && event.keyCode != 40 && 
+					 event.keyCode != 13 && event.keyCode != 16 &&
+					 event.keyCode != 9 && ComplimentReceiver.performSearch) {
+					setTimeout("SiteSearch.searchFx()", 400);
+				}
 				event.stopPropagation();
 			}
 		});

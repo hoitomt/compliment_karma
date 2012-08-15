@@ -299,6 +299,39 @@ class User < ActiveRecord::Base
     return search_array.flatten.uniq
   end
 
+  def self.search_with_domain(search_string, domain)
+    return [] if search_string.blank?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    sa = search_string.downcase.split(' ')
+    confirmed = AccountStatus.CONFIRMED.id
+    search_array = []
+    if sa.length == 1
+      term = "%#{sa[0]}%"
+      search_array << User.where('(lower(first_name) like ? OR lower(last_name) like ? OR
+                                  lower(email) like ? OR lower(city) like ?) AND 
+                                  account_status_id = ? AND 
+                                  (lower(domain) = ? OR lower(domain) = ?)',
+                                  term, term, term, term, confirmed, domain, Domain.master_domain)
+    elsif sa.length == 2
+      term1 = "%#{sa[0]}%"
+      term2 = "%#{sa[1]}%"
+      search_array << User.where('((lower(first_name) like ? AND lower(last_name) like ?) OR
+                                  (lower(last_name) like ? AND lower(first_name) like ?) OR
+                                  (lower(first_name) like ? AND lower(city) like ?) OR 
+                                  (lower(city) like ? AND lower(first_name) like ?) OR 
+                                  (lower(last_name) like ? AND lower(city) like ?) OR
+                                  (lower(city) like ? AND lower(last_name) like ?) OR
+                                  (lower(email) like ? AND lower(city) like ?) OR
+                                  (lower(city) like ? AND lower(email) like ?)) AND
+                                  account_status_id = ? AND
+                                  (lower(domain) = ? OR lower(domain) = ?)',
+                                  term1, term2, term1, term2, term1, term2, term1, term2,
+                                  term1, term2, term1, term2, term1, term2, term1, term2,
+                                  confirmed, domain, Domain.master_domain)
+    end
+    return search_array.flatten.uniq
+  end
+
   def self.search_compliment_receiver(search_string)
     return [] if search_string.blank?
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')

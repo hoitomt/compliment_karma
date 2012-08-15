@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :confirmed_user, :except => [:new, :create, :new_account_confirmation]
   before_filter :hide_unconfirmed_user, :only => [:show]
+  before_filter :verify_privacy, :except => [:new, :create, :new_account_confirmation]
   before_filter :set_static_vars
   before_filter :set_compliment_panel, 
                 :only => [:show, :my_updates, :my_updates_all, :professional_profile,
@@ -409,6 +410,15 @@ class UsersController < ApplicationController
       #   good_user = current_user.is_company_administrator?(@user.company.id)
       # end
       redirect_to(root_path) unless good_user
+    end
+
+    def verify_privacy
+      if !Domain.master_domain?(@user.domain) && !Domain.master_domain?(current_user.domain)
+        if current_user.domain != @user.domain
+          flash[:notice] = "You are not authorized to view this users page"
+          redirect_to current_user
+        end
+      end
     end
 
     def get_confirmation_status

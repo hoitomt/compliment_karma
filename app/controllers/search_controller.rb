@@ -32,7 +32,7 @@ class SearchController < ApplicationController
     if @search_string.blank?
       @results = nil
     else
-      @results = User.search(@search_string)
+      @results = User.search_with_domain(@search_string, current_user.try(:domain))
     end
 	end
 
@@ -41,7 +41,7 @@ class SearchController < ApplicationController
     if @search_string.blank?
       @results = nil
     else
-      @results = User.search(@search_string)
+      @results = User.search_with_domain(@search_string, current_user.try(:domain))
     end
   end
 

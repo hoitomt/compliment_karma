@@ -37,4 +37,12 @@ class Domain
 		return false unless e.length == 2
 		return from_forwarder?(e[1])
 	end
+
+	def self.master_domain?(domain)
+		domain == master_domain
+	end
+
+	def self.master_domain
+		"complimentkarma.com"
+	end
 end
