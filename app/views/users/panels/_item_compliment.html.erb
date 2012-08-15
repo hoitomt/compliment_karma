@@ -1,6 +1,6 @@
 <% compliment = feed_item.item_object %>
-<% sender = User.find_by_email(compliment.sender_email) %>
-<% receiver = User.find_by_email(compliment.receiver_email) %>
+<% sender = compliment.sender %>
+<% receiver = compliment.receiver %>
 <div class="image">
 	<% if sender %>
 		<%= link_to sender do %>

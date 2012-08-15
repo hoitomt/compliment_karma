@@ -336,7 +336,8 @@ class Compliment < ActiveRecord::Base
     logger.info("Active Compliments")
     Compliment.where('(sender_user_id = ? OR receiver_user_id = ?) ' +
                      'AND compliment_status_id = ? AND visibility_id = ?',
-                     user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+                     user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id).
+              includes(:compliment_type, :sender, :receiver)
   end
   
   # Sandbox for attempting to reduce the number of queries 

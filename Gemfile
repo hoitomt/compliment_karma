@@ -26,6 +26,7 @@ gem 'aws-sdk', '1.4.1'
 
 group :development do
 	gem 'rspec-rails', '2.6.1'
+  gem 'bullet'
 end
 
 group :test do
