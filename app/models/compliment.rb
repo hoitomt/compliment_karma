@@ -339,6 +339,20 @@ class Compliment < ActiveRecord::Base
                      user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
   end
   
+  # Sandbox for attempting to reduce the number of queries 
+  def self.all_active_compliments_optimize(user_id)
+    type_id = RecognitionType.COMPLIMENT.id
+    Compliment.order(:created_at).
+              # select("compliments.*").
+              select("compliments.*, count(ck_likes.id) as likes_count").
+              joins("left outer join ck_likes on (recognition_id = compliments.id AND 
+                                                   recognition_type_id = #{type_id})").
+              where('(sender_user_id = ? OR receiver_user_id = ?) 
+                     AND compliment_status_id = ? AND visibility_id = ?',
+                     user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id).
+              group("compliments.id")
+  end
+
   def self.all_active_compliments_by_email(user)
     logger.info("Active Compliments")
     Compliment.where('(sender_email = ? OR receiver_email = ?) ' +

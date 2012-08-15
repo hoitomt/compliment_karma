@@ -1,0 +1,116 @@
+User Show Profile (2200 - 2300 ms average / 2400 - 2600 when loading all skills)
+application_controller
+	shell_authenticate
+	        1.SELECT  "users".* FROM "users"  WHERE "users"."id" = 1 LIMIT 1 
+	current_view
+users_controller
+	before_filter
+		authenticate
+	        1.SELECT  "users".* FROM "users"  WHERE "users"."id" = 5 LIMIT 1
+		get confirmation status
+          1.SELECT  "account_statuses".* FROM "account_statuses"  WHERE "account_statuses"."id" = 2 LIMIT 1
+          2.SELECT  "account_statuses".* FROM "account_statuses"  WHERE "account_statuses"."name" = 'Confirmed' LIMIT 1
+		confirmed user
+		hide unconfiremd user
+		verify privacy
+		set static vars
+          1.SELECT COUNT(*) FROM "update_histories"  WHERE (user_id = 5 AND created_at > '2012-08-08 21:43:30.000000')
+		set compliment panel
+          1.SELECT "compliment_types".* FROM "compliment_types"  ORDER BY id ASC 
+	show
+		@user - set (again)
+		@skills - retrieve all skills
+					1.SELECT "skills".* FROM "skills"
+		set_title
+		set karma live panel
+					1.SELECT "follows".* FROM "follows"  WHERE "follows"."follower_user_id" = 5
+					2.SELECT  "compliment_statuses".* FROM "compliment_statuses"  
+						WHERE "compliment_statuses"."name" = 'Active' LIMIT 1
+					3.SELECT  "visibilities".* FROM "visibilities"  WHERE "visibilities"."name" = 'everybody' LIMIT 1
+					4.SELECT "compliments".* FROM "compliments"  WHERE ((sender_user_id = 7 OR receiver_user_id = 7) 
+						AND compliment_status_id = 3 AND visibility_id = 6) ORDER BY created_at DESC
+					5.SELECT  "users".* FROM "users"  WHERE "users"."id" = 7 LIMIT 1
+					6.SELECT "rewards".* FROM "rewards"  WHERE "rewards"."receiver_id" = 7
+					7.SELECT "user_accomplishments".* FROM "user_accomplishments"  WHERE "user_accomplishments"."user_id" = 7 
+					8.SELECT  "recognition_types".* FROM "recognition_types"  
+						WHERE "recognition_types"."name" = 'Compliment' LIMIT 1
+					9.SELECT  "recognition_types".* FROM "recognition_types"  WHERE "recognition_types"."name" = 'Reward' LIMIT 1
+					10. SELECT  "recognition_types".* FROM "recognition_types"  
+							WHERE "recognition_types"."name" = 'Accomplishment' LIMIT 1
+		set pending items
+					1.SELECT  "relationship_statuses".* FROM "relationship_statuses"  
+						WHERE "relationship_statuses"."name" = 'Pending' LIMIT 1
+		set update history read
+		menu response helper
+User Interface
+	_user_profile_short
+					1.SELECT COUNT(*) FROM "relationships"  WHERE (user_2_id = 5 AND relationship_status_id = 2) 
+					2.SELECT "relationships".* FROM "relationships"  WHERE (user_2_id = 5 AND relationship_status_id = 2)
+	_recent_compliments
+		user_helper 82
+					1.SELECT COUNT(*) FROM "compliments"  WHERE (created_at >= '2012-08-13 00:00:00' AND sender_user_id = 5)
+	_karma_live_updates
+					user_helper 472
+					1.SELECT  "compliments".* FROM "compliments"  WHERE "compliments"."id" = 1272 
+						ORDER BY created_at DESC LIMIT 1
+					user_helper 475
+					2.SELECT  "compliment_types".* FROM "compliment_types"  
+						WHERE "compliment_types"."name" = 'Professional to Professional' ORDER BY id ASC LIMIT 1 
+					user_helper 477
+					3.SELECT  "compliment_types".* FROM "compliment_types"  
+						WHERE "compliment_types"."name" = 'Professional to Personal' ORDER BY id ASC LIMIT 1  
+					user_helper 479
+					4.SELECT  "compliment_types".* FROM "compliment_types"  
+						WHERE "compliment_types"."name" = 'Personal to Professional' ORDER BY id ASC LIMIT 1 
+					user_helper 481
+					5.SELECT  "compliment_types".* FROM "compliment_types"  
+						WHERE "compliment_types"."name" = 'Personal to Personal' ORDER BY id ASC LIMIT 1
+					6.SELECT  "users".* FROM "users"  WHERE "users"."email" = 'mike@complimentkarma.com' LIMIT 1 
+					7.SELECT  "users".* FROM "users"  WHERE "users"."email" = 'homerj@springfield.net' LIMIT 1
+					user_helper 432
+					8.SELECT  "users".* FROM "users"  WHERE "users"."id" = 2 LIMIT 1
+					user_helper 17
+					9.SELECT  "compliment_types".* FROM "compliment_types"  
+						WHERE "compliment_types"."id" = 5 ORDER BY id ASC LIMIT 1
+					user_helper 28
+					ck_like 51
+					10.	SELECT  "skills".* FROM "skills"  WHERE "skills"."id" = 35 LIMIT 1
+					ck_like 23
+					11.	SELECT COUNT(*) FROM "ck_likes"  
+							WHERE (recognition_type_id = 1 and recognition_id = 1272 and user_id = 5)
+					recognition_comment 25
+					12. SELECT COUNT(*) FROM "ck_likes"  WHERE (recognition_id = 1272 and recognition_type_id = 1)
+					follow 26
+					13.	SELECT "follows".* FROM "follows"  WHERE (subject_user_id = 2 AND follower_user_id = 5)
+					14. SELECT "follows".* FROM "follows"  WHERE (subject_user_id = 7 AND follower_user_id = 5) 
+					user helper 472
+					15. SELECT  "compliments".* FROM "compliments"  
+							WHERE "compliments"."id" = 1264 ORDER BY created_at DESC LIMIT 1
+					item_compliment 2
+					16.	SELECT  "users".* FROM "users"  WHERE "users"."email" = 'info@complimentkarma.com' LIMIT 1
+					user_helper 432
+					17.	SELECT  "users".* FROM "users"  WHERE "users"."id" = 6 LIMIT 1
+					user 350
+					18.	SELECT  "companies".* FROM "companies"  WHERE "companies"."id" = 1 LIMIT 1
+					user_helper 17
+					19.	SELECT  "compliment_types".* FROM "compliment_types"  
+							WHERE "compliment_types"."id" = 3 ORDER BY id ASC LIMIT 1
+					user_helper 28
+					20. SELECT  "skills".* FROM "skills"  WHERE "skills"."id" = 308 LIMIT 1
+					ck_like 51
+					21.	SELECT COUNT(*) FROM "ck_likes"  
+							WHERE (recognition_type_id = 1 and recognition_id = 1264 and user_id = 5)
+					ck_like 23
+					22.	SELECT COUNT(*) FROM "ck_likes"  WHERE (recognition_id = 1264 and recognition_type_id = 1)
+					recogntition_comment 25
+					23.	SELECT COUNT(*) FROM "recognition_comments"  WHERE (recognition_id = 1264 and recognition_type_id = 1)
+					follow 26
+					24.	SELECT "follows".* FROM "follows"  WHERE (subject_user_id = 6 AND follower_user_id = 5) 
+					user_helper 472
+					25. SELECT  "compliments".* FROM "compliments"  WHERE "compliments"."id" = 1217 
+							ORDER BY created_at DESC LIMIT 1
+					26.	SELECT  "users".* FROM "users"  WHERE "users"."email" = 'dummy@example.org' LIMIT 1
+
+
+
+

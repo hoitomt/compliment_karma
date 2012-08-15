@@ -175,7 +175,7 @@ module UsersHelper
   end
 
   def compliments_link(feed_item, link_text)
-    if feed_item && feed_item.item_type_id == @recognition_type_compliment.id
+    if feed_item && feed_item.item_type_id == @recognition_type_compliment_id
       if link_text =~ /Sender/
         sender = User.find(feed_item.item_object.sender_user_id)
         return "" if current_user?(sender)
@@ -191,7 +191,7 @@ module UsersHelper
       else
         link_to link_text, new_compliment_path, :remote => true
       end
-    elsif feed_item && feed_item.item_type_id == @recognition_type_reward.id
+    elsif feed_item && feed_item.item_type_id == @recognition_type_reward_id
       if link_text =~ /Presenter/
         presenter = User.find(feed_item.item_object.presenter_id)
         return "" if current_user?(presenter)
@@ -273,7 +273,7 @@ module UsersHelper
   end
 
   def follows_link(feed_item, link_text=nil)
-    if feed_item.item_type_id == @recognition_type_compliment.id
+    if feed_item.item_type_id == @recognition_type_compliment_id
       if link_text =~ /Sender/
         sender = User.find(feed_item.item_object.sender_user_id)
         return follow_single_link(sender.id, sender.full_name)
@@ -283,7 +283,7 @@ module UsersHelper
       else
         return link_to "Follow", '#'
       end
-    elsif feed_item.item_type_id == @recognition_type_reward.id
+    elsif feed_item.item_type_id == @recognition_type_reward_id
       if link_text =~ /Presenter/
         presenter = User.find(feed_item.item_object.presenter.id)
         return follow_single_link(presenter.id, presenter.full_name)
@@ -427,40 +427,40 @@ module UsersHelper
   end
 
   def recognition_left_side(feed_item)
-    if feed_item.item_type_id == @recognition_type_compliment.id
+    if feed_item.item_type_id == @recognition_type_compliment_id
       unless feed_item.item_object.sender_user_id.blank?
         u = User.find_by_id(feed_item.item_object.sender_user_id)
         return link_to u.first_last, u
       end
-    elsif feed_item.item_type_id == @recognition_type_reward.id
+    elsif feed_item.item_type_id == @recognition_type_reward_id
       unless feed_item.item_object.presenter_id.blank?
         presenter = User.find_by_id(feed_item.item_object.presenter_id)
         return link_to presenter.first_last, presenter
       else
         return "Secret Santa"
       end
-    elsif feed_item.item_type_id == @recognition_type_accomplishment.id
+    elsif feed_item.item_type_id == @recognition_type_accomplishment_id
       user = User.find_by_id(feed_item.item_object.user_id)
       return link_to user.first_last, user
     end
   end
 
   def recognition_right_side(feed_item)
-    if feed_item.item_type_id == @recognition_type_compliment.id
+    if feed_item.item_type_id == @recognition_type_compliment_id
       unless feed_item.item_object.receiver_user_id.blank?
         user = User.find_by_id(feed_item.item_object.receiver_user_id)
         return link_to user.first_last, user
       end
-    elsif feed_item.item_type_id == @recognition_type_reward.id
+    elsif feed_item.item_type_id == @recognition_type_reward_id
       user = User.find_by_id(feed_item.item_object.receiver_id)
       return link_to user.first_last, user
-    elsif feed_item.item_type_id == @recognition_type_accomplishment.id
+    elsif feed_item.item_type_id == @recognition_type_accomplishment_id
       # Nothing
     end
   end
 
   def recognition_arrow(feed_item)
-    if feed_item.item_type_id == @recognition_type_accomplishment.id
+    if feed_item.item_type_id == @recognition_type_accomplishment_id
       return image_tag('user_profile/left_side_receive_arrow.png')
     else
       return image_tag('user_profile/right_side_receive_arrow.png')
@@ -468,7 +468,7 @@ module UsersHelper
   end
 
   def indicator(feed_item)
-    if feed_item.item_type_id == @recognition_type_compliment.id
+    if feed_item.item_type_id == @recognition_type_compliment_id
       c = Compliment.find_by_id(feed_item.item_object.id)
       logger.info("Compliment Type Id #{c.compliment_type_id}")
       case c.compliment_type_id.to_i
@@ -483,9 +483,9 @@ module UsersHelper
       else
         return "blue"
       end
-    elsif feed_item.item_type_id == @recognition_type_reward.id
+    elsif feed_item.item_type_id == @recognition_type_reward_id
       return "green"
-    elsif feed_item.item_type_id == @recognition_type_accomplishment.id
+    elsif feed_item.item_type_id == @recognition_type_accomplishment_id
       return "orange"
     end
   end

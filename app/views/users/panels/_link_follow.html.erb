@@ -21,8 +21,8 @@
 			</ul>
 		</div>
 	</li>
-<% elsif feed_item.item_type_id == @recognition_type_reward.id || 
-				 feed_item.item_type_id == @recognition_type_accomplishment.id %>
+<% elsif feed_item.item_type_id == @recognition_type_reward_id || 
+				 feed_item.item_type_id == @recognition_type_accomplishment_id %>
 	<li class="social-follow-user social-link-style">
 		<%= link_to 'Follow', 
 								create_follow_path(:subject_user_id => feed_item.item_object.user_id,

@@ -9,10 +9,10 @@
 			</li>
 			<li class="social-compliment social-link-style">
 				<%= compliments_link(feed_item, "Compliment") %>
-				<% if feed_item.item_type_id == @recognition_type_compliment.id || 
-							feed_item.item_type_id == @recognition_type_reward.id %>
+				<% if feed_item.item_type_id == @recognition_type_compliment_id || 
+							feed_item.item_type_id == @recognition_type_reward_id %>
 					<ul class="sub-menu">
-						<% if feed_item.item_type_id == @recognition_type_reward.id %>
+						<% if feed_item.item_type_id == @recognition_type_reward_id %>
 							<li class="social-compliment-sender"><%= compliments_link(feed_item, "Presenter") %></li>
 						<% else %>
 							<li class="social-compliment-sender"><%= compliments_link(feed_item, "Sender") %></li>
@@ -22,10 +22,10 @@
 				<% end %>
 			</li>
 			<li class="social-follow social-link-style"><%= follows_link(feed_item) %>
-				<% if feed_item.item_type_id == @recognition_type_compliment.id ||
-							feed_item.item_type_id == @recognition_type_reward.id %>
+				<% if feed_item.item_type_id == @recognition_type_compliment_id ||
+							feed_item.item_type_id == @recognition_type_reward_id %>
 					<ul class="sub-menu">
-						<% if feed_item.item_type_id == @recognition_type_reward.id %>
+						<% if feed_item.item_type_id == @recognition_type_reward_id %>
 							<li class="social-follow-sender"><%= follows_link(feed_item, "Presenter") %></li>
 						<% else %>
 							<li class="social-follow-sender"><%= follows_link(feed_item, "Sender") %></li>

@@ -219,9 +219,9 @@ class UsersController < ApplicationController
   
   def set_karma_live_panel
     @all_karma_live_items = get_karma_live_items(params[:feed_item_type], params[:relation_type])
-    @recognition_type_compliment = RecognitionType.COMPLIMENT
-    @recognition_type_reward = RecognitionType.REWARD
-    @recognition_type_accomplishment = RecognitionType.ACCOMPLISHMENT
+    @recognition_type_compliment_id = RecognitionType.COMPLIMENT.id
+    @recognition_type_reward_id = RecognitionType.REWARD.id
+    @recognition_type_accomplishment_id = RecognitionType.ACCOMPLISHMENT.id
     @karma_live_items_count = @all_karma_live_items.count
     @current_count = @page * @per_page
     @current_count = @karma_live_items_count if @current_count > @karma_live_items_count
