@@ -389,7 +389,7 @@ module UsersHelper
     when UpdateHistoryType.Earned_an_Accomplishment.id
          return get_accomplishment_image(item.recognition_id)
     when UpdateHistoryType.Following_You.id
-         return image_tag('my_updates/icon_24x24_heart.png')
+         return image_tag('my_updates/icon_following.png')
     end
   end
 
