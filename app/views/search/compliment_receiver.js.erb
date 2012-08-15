@@ -14,7 +14,9 @@ if(results && results.length > 0) {
 		container.hide();
 	}
 } else {
-	ComplimentReceiver.setPerformSearch(false);
+	if(searchString && searchString.length > 1) {
+		ComplimentReceiver.setPerformSearch(false);
+	}
 }
 
 if($('input#compliment_receiver_display').is(':focus')) {

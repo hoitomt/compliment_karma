@@ -10,6 +10,8 @@ var ComplimentReceiver = {
 		$('input#compliment_receiver_display').off('keyup');
 		$('input#compliment_receiver_display').on({
 			keyup: function(event) {
+				console.log('PerformSearch: ' + ComplimentReceiver.performSearch);
+				console.log(event.keyCode);
 				// Don't search if an arror key, enter(13), shift (9), or tab(16) is selected
 				// console.lot(event.keyCode);
 				if(event.keyCode != 37 && event.keyCode != 38 && 
@@ -21,7 +23,7 @@ var ComplimentReceiver = {
 				}
 				// Start Search again if backspace, delete, or v (as in Control-v) is hit
 				if(event.keyCode == 8 || event.keyCode == 91 ||
-					 event.keyCode == 86 || $('input#compliment_receiver_display').val().length == 0) {
+					 $('input#compliment_receiver_display').val().length == 0) {
 					ComplimentReceiver.performSearch = true;
 				}
 				event.stopPropagation();
