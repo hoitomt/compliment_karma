@@ -1,8 +1,10 @@
 <div class="popup-social">
 	<ul>
-		<%= render 'social/share_this_fancybox', {:recognition_type_id => recognition_type_id,
+		<%#= render 'social/share_this_fancybox' %>
+		<%= render 'social/social_links_list', {:recognition_type_id => recognition_type_id,
 																						:recognition_id => recognition_id,
 																						:show_count => true,
 																						:iframe => true } %>
 	</ul>
+	<div class="clear"></div>
 </div>

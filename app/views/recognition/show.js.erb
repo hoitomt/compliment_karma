@@ -1,6 +1,7 @@
+var userId = '<%= current_user.id %>';
 var view = '<%= j(render "recognition/detail_view") %>';
 var socialPopup = '<%= j(render "recognition/social_popup_links",
 																		{:recognition_id => @recognition_id,
 																		 :recognition_type_id => @recognition_type_id,
 																		 :iframe => true}) %>'
-ShowRecognitionFancyBox.init(view, socialPopup);
+ShowRecognitionFancyBox.init(view, socialPopup, 0);
