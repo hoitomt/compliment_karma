@@ -10,7 +10,7 @@
 <% end %>
 
 <%= content_for :buttons do %>
-	<% if @confirmed_relationship %>
+	<% if @confirmed_relationship || @relationship.blank? %>
 		<%= link_to show_recognition_url(:recognition_type_id => RecognitionType.COMPLIMENT.id,
 																 		 :recognition_id => @compliment.id) do %>
 			<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/view_details.png',

@@ -64,7 +64,7 @@ class DateUtil
   end
 
   def self.date_time_format(date)
-    date = DateUtil.get_local(date)
+    date = central_time_zone(date)
     today = DateTime.now
     if date
       if date.day == today.day && date.month == today.month && date.year == today.year
@@ -77,6 +77,15 @@ class DateUtil
     else
       return ""
     end
+  end
+
+  def self.central_time_zone(datetime)
+    datetime.in_time_zone(ctz)
+  end
+
+  #return central time zone string
+  def self.ctz
+    "Central Time (US & Canada)"
   end
   
 end
