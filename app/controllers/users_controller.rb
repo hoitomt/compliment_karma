@@ -17,6 +17,8 @@ class UsersController < ApplicationController
     
   def new
     @user = User.new
+    @user.email = flash[:email]
+    flash[:email] = nil
     @title = "Sign up"
   end
   
