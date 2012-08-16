@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
 
   def is_site_admin?
-    return true # replace with admin lookup later
+    Domain.master_domain?(self.domain)
   end
   
   def self.authenticate(email, submitted_password)
@@ -271,33 +271,33 @@ class User < ActiveRecord::Base
     self.account_status.id == AccountStatus.CONFIRMED.id
   end
 
-  def self.search(search_string)
-    return [] if search_string.blank?
-    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
-    sa = search_string.downcase.split(' ')
-    confirmed = AccountStatus.CONFIRMED
-    search_array = []
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
-                               'lower(city) in (?) AND lower(email) in (?) AND account_status_id = ?',
-                                sa, sa, sa, sa, confirmed)
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' + 
-                               'lower(city) in (?) AND account_status_id = ?', 
-                                sa, sa, sa, confirmed)
-    search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND account_status_id = ?', 
-                                sa, sa, confirmed)
-    search_array << User.where('(lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
-                               'lower(city) in (?) OR lower(email) in (?)) AND account_status_id = ?',
-                                sa, sa, sa, sa, confirmed)
-    if search_array.length < 10
-      sa.each do |s|
-        term = "%#{s}%"
-        search_array << User.where('(lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
-                                   'lower(city) LIKE ? OR lower(email) LIKE ?) AND account_status_id = ?',
-                                    term, term, term, term, confirmed)
-      end
-    end
-    return search_array.flatten.uniq
-  end
+  # def self.search(search_string)
+  #   return [] if search_string.blank?
+  #   escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+  #   sa = search_string.downcase.split(' ')
+  #   confirmed = AccountStatus.CONFIRMED
+  #   search_array = []
+  #   search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' +
+  #                              'lower(city) in (?) AND lower(email) in (?) AND account_status_id = ?',
+  #                               sa, sa, sa, sa, confirmed)
+  #   search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND ' + 
+  #                              'lower(city) in (?) AND account_status_id = ?', 
+  #                               sa, sa, sa, confirmed)
+  #   search_array << User.where('lower(first_name) in (?) AND lower(last_name) in (?) AND account_status_id = ?', 
+  #                               sa, sa, confirmed)
+  #   search_array << User.where('(lower(first_name) in (?) OR lower(last_name) in (?) OR ' +
+  #                              'lower(city) in (?) OR lower(email) in (?)) AND account_status_id = ?',
+  #                               sa, sa, sa, sa, confirmed)
+  #   if search_array.length < 10
+  #     sa.each do |s|
+  #       term = "%#{s}%"
+  #       search_array << User.where('(lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR ' +
+  #                                  'lower(city) LIKE ? OR lower(email) LIKE ?) AND account_status_id = ?',
+  #                                   term, term, term, term, confirmed)
+  #     end
+  #   end
+  #   return search_array.flatten.uniq
+  # end
 
   def self.search_with_domain(search_string, domain)
     return [] if search_string.blank?
@@ -328,6 +328,37 @@ class User < ActiveRecord::Base
                                   term1, term2, term1, term2, term1, term2, term1, term2,
                                   term1, term2, term1, term2, term1, term2, term1, term2,
                                   confirmed, domain, Domain.master_domain)
+    end
+    return search_array.flatten.uniq
+  end
+
+  def self.search(search_string)
+    return [] if search_string.blank?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    sa = search_string.downcase.split(' ')
+    confirmed = AccountStatus.CONFIRMED.id
+    search_array = []
+    if sa.length == 1
+      term = "%#{sa[0]}%"
+      search_array << User.where('(lower(first_name) like ? OR lower(last_name) like ? OR
+                                  lower(email) like ? OR lower(city) like ?) AND 
+                                  account_status_id = ?',
+                                  term, term, term, term, confirmed)
+    elsif sa.length == 2
+      term1 = "%#{sa[0]}%"
+      term2 = "%#{sa[1]}%"
+      search_array << User.where('((lower(first_name) like ? AND lower(last_name) like ?) OR
+                                  (lower(last_name) like ? AND lower(first_name) like ?) OR
+                                  (lower(first_name) like ? AND lower(city) like ?) OR 
+                                  (lower(city) like ? AND lower(first_name) like ?) OR 
+                                  (lower(last_name) like ? AND lower(city) like ?) OR
+                                  (lower(city) like ? AND lower(last_name) like ?) OR
+                                  (lower(email) like ? AND lower(city) like ?) OR
+                                  (lower(city) like ? AND lower(email) like ?)) AND
+                                  account_status_id = ?',
+                                  term1, term2, term1, term2, term1, term2, term1, term2,
+                                  term1, term2, term1, term2, term1, term2, term1, term2,
+                                  confirmed)
     end
     return search_array.flatten.uniq
   end

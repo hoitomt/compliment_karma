@@ -13,13 +13,13 @@
 				<% if current_user.nil? %>
 					<li><%= link_to 'Log In', login_path %></li>
 					<li><%= link_to 'Sign Up', signup_path %></li>
-					<li><%= link_to 'Pricing', pricing_path %>
+					<li><%#= link_to 'Pricing', pricing_path %>
 				<% else %>
 					<li>
 						<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
 						<%= render 'admin/header/admin_menu' %>
 					</li>
-					<li><%= link_to 'Pricing', pricing_path %></li>
+					<li><%#= link_to 'Pricing', pricing_path %></li>
 				<% end %>
 			</ul>				
 		</div>

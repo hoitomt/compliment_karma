@@ -88,7 +88,6 @@ var NewComplimentValidation = {
 			this.errors.push({element: element, 
 									 errorMsg: "invalid email address"});
 			emailError = true;
-			console.log("Invalid Email");
 		}
 		return emailError;
 	},

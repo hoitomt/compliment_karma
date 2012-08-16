@@ -1,6 +1,5 @@
 var ShowRecognitionFancyBox = {
 	init: function(view, socialPopup, userId) {
-		console.log(socialPopup);
 		$.fancybox(view, {
 			beforeLoad: function() {
 				$('body').addClass('lock-screen');
