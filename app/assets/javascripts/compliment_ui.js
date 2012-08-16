@@ -77,15 +77,18 @@ var ComplimentUI = {
 		return $('.hide-me').is(':visible');
 	},
 	stickyNewCompliment: function() {
+		console.log("Add Sticky");
 		var stickMe = $('#scroll-sticky');
 		var complimentContainer = $('#new-compliment-container');
 		stickMe.waypoint({
 			handler: function(event, direction) {
+				console.log("Sticky Fired");
 				complimentContainer.toggleClass('sticky', direction=='down');
 			}
 		});
 	},
 	removeStickyCompliment: function() {
+		console.log("Remove Sticky");
 		var stickMe = $('#scroll-sticky');
 		stickMe.off('waypoint');
 		$('#new-compliment-container').removeClass('sticky');
