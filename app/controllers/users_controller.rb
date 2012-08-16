@@ -420,9 +420,9 @@ class UsersController < ApplicationController
     end
 
     def verify_privacy
-      if !Domain.master_domain?(@user.domain) && !Domain.master_domain?(current_user.domain)
+      if !@user.is_site_admin? && !current_user.is_site_admin?
         if current_user.domain != @user.domain
-          flash[:notice] = "You are not authorized to view this users page"
+          flash[:notice] = "You are not authorized to view this page"
           redirect_to current_user
         end
       end
