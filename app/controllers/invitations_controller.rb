@@ -21,8 +21,8 @@ class InvitationsController < ApplicationController
         logger.info("Not Current User")
         email = params[:invitation][:invite_email]
         if Domain.email_on_whitelist?(email)
-          flash[:notice] = "We noticed that you eligible for signup during our private beta period. " + 
-                            "Please fill out the form below to create your ComplimentKarma account."
+          flash[:notice] = "Congrats! You are already eligible to signup. " + 
+                           "Please fill the form below to create your free account."
           flash[:email] = email
           redirect_to new_user_path
         elsif @invitation = Invitation.create_invitation(params[:invitation][:invite_email])

@@ -17,8 +17,13 @@ class UsersController < ApplicationController
     
   def new
     @user = User.new
-    @user.email = flash[:email]
-    flash[:email] = nil
+    if flash[:email]
+      @user.email = flash[:email]
+      flash[:email] = nil
+      @whitelist_signup = true
+    else
+      @whitelist_signup = false
+    end
     @title = "Sign up"
   end
   
