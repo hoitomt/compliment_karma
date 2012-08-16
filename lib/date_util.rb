@@ -62,5 +62,21 @@ class DateUtil
     end
     return t2.strftime("%b %-d")
   end
+
+  def self.date_time_format(date)
+    date = DateUtil.get_local(date)
+    today = DateTime.now
+    if date
+      if date.day == today.day && date.month == today.month && date.year == today.year
+        return date.strftime("Today <br />%I:%M %P").html_safe
+      elsif date.year == today.year
+        return date.strftime("%b %d")
+      else
+        return date.strftime("%-m/%d/%Y")
+      end
+    else
+      return ""
+    end
+  end
   
 end

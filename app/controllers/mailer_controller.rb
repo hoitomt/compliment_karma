@@ -4,12 +4,13 @@ class MailerController < ApplicationController
 
 	def send_compliment
 		@compliment = Compliment.find(1264)
-		@sender = @compliment.sender
-		@receiver = @compliment.receiver
-		@relationship = Relationship.get_relationship(@sender, @receiver)
-		@confirmed_relationship = @relationship.accepted?
     @skill= Skill.find_by_id(@compliment.skill_id)
-    @timestamp = DateUtil.get_time_gap(@compliment.created_at)
+    @sender = @compliment.sender
+    @receiver = @compliment.receiver
+    @first_compliment = Compliment.first_compliment?(@sender, @receiver)
+    @relationship = Relationship.get_relationship(@sender, @receiver)
+    @confirmed_relationship = @relationship.accepted? if @relationship
+    @timestamp = DateUtil.date_time_format(@compliment.created_at)
 		render :file => 'compliment_mailer/send_compliment.html.erb'
 	end
 
