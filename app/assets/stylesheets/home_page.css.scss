@@ -363,6 +363,13 @@ a.header-update-link:visited { color: #ffffff }
 		color: red;			
 	}
 }
+table.compliment-type-table {
+	border: none;
+	table, th, td {
+		border: none;
+	}
+	td { padding: 0 5px 0 5px; }
+}
 .about-menu {
 	width: 120px; 
 	float: left;
