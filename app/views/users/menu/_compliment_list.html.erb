@@ -20,13 +20,15 @@
 					<% unless compliments.blank? %>
 						<% compliments.each_with_index do |compliment| %>
 							<% 
-								user = compliment.sender
-								user = compliment.receiver if sent_compliments
+								user_display = compliment.try(:sender).try(:first_last)
+								if sent_compliments
+									user_display = compliment.receiver.nil? ? compliment.receiver_email : compliment.receiver.first_last
+								end
 								skill = Skill.find_by_id(compliment.skill_id)
 							%>
 							<tr>
 								<td><%= date_time_format(compliment.created_at) %></td>
-								<td><%= user.first_last if user %></td>
+								<td><%= user_display %></td>
 								<td><%= skill.name if skill %></td>
 								<td><%= compliment.compliment_type.name if compliment.compliment_type %></td>
 								<td class="centered"><%= compliment.compliment_status.name if compliment.compliment_status %></td>

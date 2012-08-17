@@ -299,6 +299,18 @@ class User < ActiveRecord::Base
   #   return search_array.flatten.uniq
   # end
 
+  def self.user_cache
+    Rails.cache.fetch("users") do
+      User.select('first_name, last_name, email, city, domain').all
+    end
+  end
+
+  def self.search_cache_with_domain(search_string, domain)
+    a = Array.new(user_cache)
+    return [] if search_string.blank?
+    a.keep_if{ |x| x.first_name =~ /m/i }
+  end
+
   def self.search_with_domain(search_string, domain)
     return [] if search_string.blank?
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')

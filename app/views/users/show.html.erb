@@ -25,12 +25,15 @@
 <%= hidden_field_tag :feed_items_count, @karma_live_items_count %>
 <div id="user-profile">
 	<div class="left-one-third">
-		<%= render 'users/panels/user_profile_short', :flash => flash %>
-		<%= render 'users/menu/menu' %>
+		<% cache ([@user, 'profile']) do %>
+			<%= render 'users/panels/user_profile_short', :flash => flash %>
+		<% end %>
+		<% cache 'menu' do %>
+			<%= render 'users/menu/menu' %>
+		<% end %>
 	</div>
 	<%= render 'compliments/new_compliment' %>
 	<div id="content-container">
 		<%= render 'users/menu/karma_live' %>
 	</div>
-	<%#= render 'users/panels/new_compliment' %>
 </div>

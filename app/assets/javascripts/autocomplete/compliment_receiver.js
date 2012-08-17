@@ -11,7 +11,6 @@ var ComplimentReceiver = {
 		$('input#compliment_receiver_display').on({
 			keyup: function(event) {
 				// Don't search if an arror key, enter(13), shift (9), or tab(16) is selected
-				// console.lot(event.keyCode);
 				if(event.keyCode != 37 && event.keyCode != 38 && 
 					 event.keyCode != 39 && event.keyCode != 40 && 
 					 event.keyCode != 13 && event.keyCode != 16 &&
