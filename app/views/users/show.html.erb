@@ -28,7 +28,7 @@
 		<% cache ([@user, 'profile']) do %>
 			<%= render 'users/panels/user_profile_short', :flash => flash %>
 		<% end %>
-		<% cache 'menu' do %>
+		<% cache ([@user, 'menu']) do %>
 			<%= render 'users/menu/menu' %>
 		<% end %>
 	</div>
