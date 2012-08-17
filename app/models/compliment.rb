@@ -315,7 +315,7 @@ class Compliment < ActiveRecord::Base
     followed = Follow.find_all_by_follower_user_id(user.id)
     list_of_compliments = []
     followed.each do |follow| 
-      list_of_compliments += all_active_compliments(follow.subject_user_id)
+      list_of_compliments += all_active_compliments(follow.subject_user)
     end
     logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
     return list_of_compliments
@@ -324,19 +324,35 @@ class Compliment < ActiveRecord::Base
   def self.all_compliments_from_followed_and_self(user)
     logger.info("Compliments from everybody user is following and the user")
     followed = Follow.find_all_by_follower_user_id(user.id)
-    list_of_compliments = all_active_compliments(user.id)
+    list_of_compliments = all_active_compliments(user)
     followed.each do |follow| 
-      list_of_compliments += all_active_compliments(follow.subject_user_id)
+      list_of_compliments += all_active_compliments(follow.subject_user)
     end
     logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
     return list_of_compliments
   end
 
-  def self.all_active_compliments(user_id)
+  def self.all_active_compliments(user)
     logger.info("Active Compliments")
     Compliment.where('(sender_user_id = ? OR receiver_user_id = ?) ' +
                      'AND compliment_status_id = ? AND visibility_id = ?',
-                     user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+                     user.id, user.id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+  end
+
+  def self.all_active_compliments_in_visitor_domain(user, visitor)
+    logger.info("Active Compliments")
+    if visitor.domain == Domain.master_domain
+      Compliment.where('(sender_user_id = ? OR receiver_user_id = ?) 
+                       AND compliment_status_id = ? AND visibility_id = ?',
+                       user.id, user.id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+    else
+      domains = [visitor.domain, Domain.master_domain]
+      Compliment.where('( (sender_user_id = ? AND receiver_domain in (?)) OR 
+                          (receiver_user_id = ? AND sender_domain in (?)) ) 
+                       AND compliment_status_id = ? AND visibility_id = ?',
+                       user.id, domains, user.id, domains, 
+                       ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
+    end
   end
   
   # Sandbox for attempting to reduce the number of queries 

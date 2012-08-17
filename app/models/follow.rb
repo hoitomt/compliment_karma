@@ -1,5 +1,8 @@
 class Follow < ActiveRecord::Base
 
+  belongs_to :subject_user, :class_name => 'User', :foreign_key => 'subject_user_id'
+  belongs_to :follower, :class_name => 'User', :foreign_key => 'follower_user_id'
+
   # Can only follow somebody once
   validates_uniqueness_of :subject_user_id, :scope => [:follower_user_id],
                           :message => "You are already following this person"

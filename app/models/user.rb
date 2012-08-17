@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :rewards_received, :class_name => 'Reward', :foreign_key => 'receiver_id'
   has_many :compliments_sent, :class_name => 'Compliment', :foreign_key => 'sender_user_id'
   has_many :compliments_received, :class_name => 'Compliment', :foreign_key => 'receiver_user_id'
+  has_many :followed_users, :class_name => 'Follow', :foreign_key => 'follower_user_id'
+  has_many :followers, :class_name => 'Follow', :foreign_key => 'subject_user_id'
   has_many :user_accomplishments
   has_many :accomplishments, :through => :user_accomplishments
   has_many :ck_likes
@@ -301,14 +303,40 @@ class User < ActiveRecord::Base
 
   def self.user_cache
     Rails.cache.fetch("users") do
-      User.select('first_name, last_name, email, city, domain').all
+      User.select('first_name, last_name, email, city, domain, account_status_id').all
     end
   end
 
   def self.search_cache_with_domain(search_string, domain)
     a = Array.new(user_cache)
-    return [] if search_string.blank?
-    a.keep_if{ |x| x.first_name =~ /m/i }
+    return [] if search_string.blank? || a.blank?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    sa = escaped_search_string.downcase.split(' ')
+    confirmed = AccountStatus.CONFIRMED.id
+
+    if sa.length == 1
+      puts sa[0]
+      ra = Regexp.new(sa[0], true)
+      puts ra
+      a.keep_if{ |x| (x.first_name =~ ra || x.last_name =~ ra ||
+                     x.email =~ ra || x.city =~ ra) && 
+                     x.account_status_id == confirmed &&
+                     (x.domain == domain || x.domain == Domain.master_domain) }
+    elsif sa.length == 2
+      ra = Regexp.new(sa[0], true)
+      rb = Regexp.new(sa[1], true)
+      a.keep_if{ |x| ((x.first_name =~ ra && x.last_name =~ rb) ||
+                     (x.last_name =~ ra && x.first_name =~ rb) ||
+                     (x.first_name =~ ra && x.city =~ rb) ||
+                     (x.city =~ ra && x.first_name =~ rb) ||
+                     (x.last_name =~ ra && x.city =~ rb) ||
+                     (x.city =~ ra && x.last_name =~ rb) ||
+                     (x.email =~ ra && x.city =~ rb) ||
+                     (x.city =~ ra && x.email =~ rb)) &&
+                     x.account_status_id == confirmed &&
+                     (x.domain == domain || x.domain == Domain.master_domain) }
+    end
+    return a
   end
 
   def self.search_with_domain(search_string, domain)

@@ -516,7 +516,8 @@ class UsersController < ApplicationController
         rewards = Reward.rewards_from_followed(@user)
         accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
       else
-        compliments = Compliment.all_active_compliments(@user)
+        compliments = Compliment.all_active_compliments_in_visitor_domain(@user, current_user)
+        # compliments = Compliment.all_active_compliments(@user)
         rewards = Reward.all_completed_rewards(@user)
         accomplishments = @user.accomplishments
       end
