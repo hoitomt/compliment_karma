@@ -518,7 +518,7 @@ class UsersController < ApplicationController
       else
         compliments = Compliment.all_active_compliments_in_visitor_domain(@user, current_user)
         # compliments = Compliment.all_active_compliments(@user)
-        rewards = Reward.all_completed_rewards(@user)
+        rewards = Reward.all_completed_rewards_in_visitor_domain(@user, current_user)
         accomplishments = @user.accomplishments
       end
       FeedItem.construct_items(compliments, rewards, accomplishments)

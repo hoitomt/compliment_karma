@@ -36,6 +36,32 @@ class Reward < ActiveRecord::Base
     return ['All', 'Full Time Employee', 'Part Time Employee', 'Interns', 'Contractors']
   end
 
+  def self.all_completed_rewards_in_visitor_domain(user, visitor)
+    if visitor.domain == Domain.master_domain
+      Reward.where('(receiver_id = ? OR presenter_id = ?) AND reward_status_id = ?',
+                    user.id, user.id, RewardStatus.complete.id)
+    else
+      domains = [visitor.domain, Domain.master_domain]
+      Reward.joins(:receivers, :presenters)
+      Reward.joins('inner join users "receivers" on receivers.id = rewards.receiver_id', 
+                   'inner join users "presenters" on presenters.id = rewards.presenter_id')
+            .where('((rewards.receiver_id = ? AND presenters.domain in (?)) OR 
+                     (rewards.presenter_id = ? AND receivers.domain in (?)))
+                      AND rewards.reward_status_id = ?',
+                   user.id, domains, user.id, domains, RewardStatus.complete.id )
+
+
+      # r = user.rewards_received
+      #         .joins(:users)
+      #         .where('users.domain in (?) AND reward_status_id = ?', 
+      #                domains, RewardStatus.complete.id)
+      # rx = user.rewards_presented
+      #         .joins('users on users.id = presenter_id')
+      #         # .where('users.domain in (?) AND reward_status_id = ?', 
+      #         #        domains, RewardStatus.complete.id)
+    end
+  end
+
   def self.all_completed_rewards(user)
     Reward.where('(receiver_id = ? OR presenter_id = ?) AND reward_status_id = ?',
                   user.id, user.id, RewardStatus.complete.id)
