@@ -11,7 +11,10 @@ gem 'newrelic_rpm'
 gem 'marginalia', "~> 1.1.0"
 gem 'restful_metrics'
 gem 'rack-mini-profiler'
+
+# Memcached Client - Memcachier
 gem 'dalli'
+gem 'memcachier'
 
 # Email - HTTP to mailgun and Bancbox
 gem 'rest-client', '1.6.7'
