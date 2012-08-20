@@ -59,4 +59,10 @@ FactoryGirl.define do
     invite_email "invited_user@complimentkarma.com"
     from_email "nonfounder@complimentkarma.com"
   end
+
+  factory :skill, class: Skill do
+    name "testing"
+    parent_skill_id 1
+  end
 end
+

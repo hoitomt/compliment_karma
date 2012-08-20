@@ -10,7 +10,9 @@ describe EmailApiController do
 
   before(:each) do
     controller.class.skip_before_filter :shell_authenticate
+  end
 
+  before(:each) do
     @params = {
       'from' => user2.email,
       'To' => user3.email,

@@ -3,13 +3,13 @@ class EmailApiController < ApplicationController
 
   def new_account_confirmation
     @title = "Account Confirmation"
-    if current_user
+    @user = User.find_by_new_account_confirmation_token(params[:confirm_id])
+    if current_user?(@user)
       logger.info("User is logged in")
       current_user.update_attributes(:account_status => AccountStatus.CONFIRMED)
       Compliment.user_confirmation(current_user)
     else
       logger.info("User is not logged in")
-      @user = User.find_by_new_account_confirmation_token(params[:confirm_id])
       if @user
         Compliment.user_confirmation(@user)
         @user.update_attributes(:account_status => AccountStatus.CONFIRMED)

@@ -97,6 +97,8 @@ describe ComplimentsController do
         last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq([user2.email])
         last_email.subject.should eq("You have received a compliment")
+        # response.should render_template("layouts/mailer/compliment_mailer")
+        last_email.body.should have_selector('img', :src => user2.photo.url(:small))
       end
 
     end
@@ -109,7 +111,7 @@ describe ComplimentsController do
         @attr = {
           :compliment => {
             :sender_email => user.email,
-            :comment => "Line 111: I love what you did with our application",
+            :comment => "I love what you did with our application",
             :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
           },
           :compliment_receiver_id => user2.id,
@@ -142,14 +144,16 @@ describe ComplimentsController do
       end
       
       it "should create an outbound email" do
-        lambda do
-          post :create, @attr
-        end.should change(Compliment, :count).from(0).to(1)
+        # lambda do
+        # end.should change(Compliment, :count).from(0).to(1)
+        post :create, @attr
+        u = Compliment.last.receiver
+        u.new_account_confirmation_token.should_not be_nil
         last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq([user2.email])
         last_email.subject.should eq("You have received a compliment")
-        last_email.body.should have_selector('body', 
-                  :content => "new_account_confirmation#{user2.new_account_confirmation_token}")
+        last_email.body.should have_selector('a', 
+                  :href => "#{new_account_confirmation_url(:confirm_id => u.new_account_confirmation_token)}")
       end
 
       it "should create an update history to the receiver" do
@@ -209,7 +213,7 @@ describe ComplimentsController do
         last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq(["imastranger@example.com"])
         last_email.subject.should eq("You have received a compliment")
-        last_email.body.should have_selector('a', :content => "Sign Up")
+        last_email.body.should have_selector('a', :href => "#{signup_url}")
       end
     end
 

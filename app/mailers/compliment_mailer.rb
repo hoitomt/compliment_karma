@@ -1,6 +1,10 @@
 class ComplimentMailer < ActionMailer::Base
   default :from => 'no-reply@complimentkarma.com'
 
+  layout 'compliment_mailer', :only => [:send_compliment, 
+                                        :receiver_confirmation_reminder, 
+                                        :receiver_registration_invitation]
+
   # ACTIVE
   def send_compliment(compliment)
     @compliment = compliment
@@ -21,9 +25,9 @@ class ComplimentMailer < ActionMailer::Base
     @compliment = compliment
     @sender = @compliment.sender
     @receiver = @compliment.receiver
-    @receiver.generate_token(:new_account_confirmation_token)
+    @receiver.account_confirmation_token
     @skill= Skill.find_by_id(@compliment.skill_id)
-    @timestamp = DateUtil.get_time_gap(@compliment.created_at)
+    @timestamp = DateUtil.date_time_format(@compliment.created_at)
     mail to: compliment.receiver_email,
          subject: "You have received a compliment",
          from: "new_compliment@complimentkarma.com"
@@ -34,7 +38,7 @@ class ComplimentMailer < ActionMailer::Base
     @compliment = compliment
     @sender = @compliment.sender
     @skill= Skill.find_by_id(@compliment.skill_id)
-    @timestamp = DateUtil.get_time_gap(@compliment.created_at)
+    @timestamp = DateUtil.date_time_format(@compliment.created_at)
     mail to: @compliment.receiver_email,
          subject: "You have received a compliment",
          from: "new_compliment@complimentkarma.com"

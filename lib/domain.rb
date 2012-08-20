@@ -33,7 +33,7 @@ class Domain
 
 	def self.email_from_forwarder?(email)
 		e = email.split(/@/)
-		puts "#{email} | #{e}"
+		# puts "#{email} | #{e}"
 		return false unless e.length == 2
 		return from_forwarder?(e[1])
 	end
