@@ -11,8 +11,8 @@
 			<br/><br/>
 			Thank you for joining. Please click or paste the following url in your browser to activate your account:
 			<br/><br/>
-			<%= link_to new_account_confirmation_url(@user.new_account_confirmation_token), 
-									new_account_confirmation_url(@user.new_account_confirmation_token),
+			<%= link_to new_account_confirmation_url(:confirm_id => @user.new_account_confirmation_token), 
+									new_account_confirmation_url(:confirm_id => @user.new_account_confirmation_token),
 								  :style => "font-size:14px;" %>
 			<br/><br/>  
 			We highly value your time &amp; strive hard to provide real tangible benefits, which will help you throughout your professional career.
