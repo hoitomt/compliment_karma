@@ -2,11 +2,9 @@
 	<div id="account-confirmation" class="unclickable-user-profile">
 		<h1 style="color:#ffff00;">Unconfirmed Account</h1>
 			Please check your email to activate your account.<br /><br />
-			<% if flash[:notice].blank? %>
-				<%= link_to 'Resend Link', 
-										resend_new_account_confirmation_path,
-										:style => "color: #ffffff; text-decoration: underline;" %>
-			<% end %><br />
+			<%= link_to 'Resend Link', 
+									resend_new_account_confirmation_path,
+									:style => "color: #ffffff; text-decoration: underline;" %><br />
 			<%= link_to 'Change Email Address', '#',
 									:style => "color: #ffffff; text-decoration: underline;" %>
 	</div>
