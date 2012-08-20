@@ -1,6 +1,6 @@
 module ViewStateHelper
   # possible states:
-  # 1. user managing thier own page
+  # 1. user managing their own page
   # 2. user viewing somebody else's page
   # 3. user viewing a company's page
   # 4. user managing somebody else's page
@@ -42,8 +42,8 @@ module ViewStateHelper
 
   def page_owner?(user)
     return false if user.blank?
-    return view_state(@user) == view_state_company_manager ||
-           view_state(@user) == view_state_user_manager
+    return view_state(user) == view_state_company_manager ||
+           view_state(user) == view_state_user_manager
   end
 
 end

@@ -10,8 +10,8 @@ Ck::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false # Comment out for local dev. Set to false (uncomment) for Heroku
-  # config.serve_static_assets = true
+  # config.serve_static_assets = false # Comment out for local dev. Set to false (uncomment) for Heroku
+  config.serve_static_assets = true
 
   # See everything in the log (default is :info)
   # config.log_level = :debug # Comment out this line before pushing to Heroku

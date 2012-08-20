@@ -38,13 +38,15 @@ describe UsersController do
     let(:unconfirmed_user) { FactoryGirl.create(:unconfirmed_user) }
     
     describe "compliments" do
-      before(:all) do
+      before(:each) do
         UpdateHistory.delete_all
         # Confirmed compliment
         # 10 compliments from User 2 to User 3
-        s = []
-        40.times do |index|
-          s << Skill.create!(:name => "skill #{index}")
+        s = Skill.all
+        if s.size < 40
+          40.times do |index|
+            s << Skill.create!(:name => "skill #{index}")
+          end
         end
         compliment_id = ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
         10.times do |index|
@@ -106,58 +108,58 @@ describe UsersController do
           cx.count.should eq(10)
         end
 
-        # it "should create the correct number of Update Histories" do
-        #   uh2 = UpdateHistory.find_all_by_user_id(user2.id)
-        #   uh2.count.should eq(10)
-        #   uh3 = UpdateHistory.find_all_by_user_id(user3.id)
-        #   uh3.count.should eq(11)
-        # end
+        it "should create the correct number of Update Histories" do
+          uh2 = UpdateHistory.find_all_by_user_id(user2.id)
+          uh2.count.should eq(10)
+          uh3 = UpdateHistory.find_all_by_user_id(user3.id)
+          uh3.count.should eq(11)
+        end
 
-        # it "should have the correct number of compliments after paging" do
+        it "should have the correct number of compliments after paging" do
 
-        # end
+        end
       end
 
-      # describe "as viewed by visitor: User 3 viewing User 2s page" do
-      #   before(:each) do
-      #     test_sign_in(user3)
-      #   end
+      describe "as viewed by visitor: User 3 viewing User 2s page" do
+        before(:each) do
+          test_sign_in(user3)
+        end
 
-      #   it "should have the correct number of Compliments in Karma Live" do
-      #     # should see followed
-      #     get :show, :id => user2
-      #     assigns(:karma_live_items_count).should eq(20)
-      #     c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
-      #     c.count.should eq(10)
-      #     cu = Compliment.where('sender_email = ? and receiver_email = ? and compliment_status_id = ?', 
-      #                            user2.email, unconfirmed_user.email, 
-      #                            ComplimentStatus.PENDING_RECEIVER_CONFIRMATION.id)
-      #     cu.count.should eq(10)
-      #   end
+        it "should have the correct number of Compliments in Karma Live" do
+          # should see followed
+          get :show, :id => user2
+          assigns(:karma_live_items_count).should eq(20)
+          c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
+          c.count.should eq(10)
+          cu = Compliment.where('sender_email = ? and receiver_email = ? and compliment_status_id = ?', 
+                                 user2.email, unconfirmed_user.email, 
+                                 ComplimentStatus.PENDING_RECEIVER_CONFIRMATION.id)
+          cu.count.should eq(10)
+        end
 
-      #   it "should create the correct number of Update Histories" do
-      #     uh2 = UpdateHistory.find_all_by_user_id(user2.id)
-      #     uh2.count.should eq(10)
-      #     uh3 = UpdateHistory.find_all_by_user_id(user3.id)
-      #     uh3.count.should eq(11)
-      #   end
+        it "should create the correct number of Update Histories" do
+          uh2 = UpdateHistory.find_all_by_user_id(user2.id)
+          uh2.count.should eq(10)
+          uh3 = UpdateHistory.find_all_by_user_id(user3.id)
+          uh3.count.should eq(11)
+        end
 
-      #   it "should have the correct number of compliments after paging" do
+        it "should have the correct number of compliments after paging" do
           
-      #   end
-      # end
+        end
+      end
 
-      # # Rule to test:
-      # # user is following user 2
-      # # user 3 is following user 2
-      # # When user 3 visit user's page, they should not see user 2's items unless
-      # # user 2's items are directly to/from user
-      # describe "should not show cross follows: User 3 view User 2s page" do
-      #   before(:each) do
-      #     test_sign_in(user3)
-      #   end
+      # Rule to test:
+      # user is following user 2
+      # user 3 is following user 2
+      # When user 3 visit user's page, they should not see user 2's items unless
+      # user 2's items are directly to/from user
+      describe "should not show cross follows: User 3 view User 2s page" do
+        before(:each) do
+          test_sign_in(user3)
+        end
 
-      # end
+      end
     end
     
     describe "rewards" do
@@ -241,18 +243,22 @@ describe UsersController do
       
       it "should have the right title" do
         post :create, :user => @attr
-        response.should have_selector("title", :content => @new_title)
+        # response.should have_selector("title", :content => @new_title)
+        # Private Beta redirects to root
+        response.should redirect_to(root_url)
       end
       
       it "should render the 'new' page" do
         post :create, :user => @attr
-        response.should render_template('new')
+        # response.should render_template('new')
+        # Private Beta
+        response.should render_template('invitation_mailer/beta_invitation')
       end
     end
     
     describe "success" do
       before(:each) do
-        @attr = { :name => "New User", :email => "user@example.com", 
+        @attr = { :name => "New User", :email => "user@complimentkarma.com", 
                   :password => "foobar" }
       end
       
@@ -264,7 +270,7 @@ describe UsersController do
       
       it "should redirect to the user show page" do
         post :create, :user => @attr
-        response.should redirect_to(invite_coworkers_path)
+        response.should redirect_to(User.last)
       end
       
       # it "should have a welcome message" do
@@ -287,7 +293,7 @@ describe UsersController do
     
     describe "name parsing" do
       before(:each) do
-        @attr = { :name => "New User", :email => "user@example.com", 
+        @attr = { :name => "New User", :email => "user@complimentkarma.com", 
                   :password => "foobar" }
       end
       
@@ -319,14 +325,14 @@ describe UsersController do
     
     describe "domain parsing" do
       before(:each) do
-        @attr = { :name => "New User", :email => "user@example.com", 
+        @attr = { :name => "New User", :email => "user@complimentkarma.com", 
                   :password => "foobar" }
       end
       
       it "should parse the domain name into the domain name field" do
         post :create, :user => @attr
         u = User.last
-        u.domain.should == 'example.com'
+        u.domain.should == 'complimentkarma.com'
       end
       
     end
@@ -336,7 +342,7 @@ describe UsersController do
   describe "authentication of user pages" do
     
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:user2)
     end
     
     describe "for non-signed-in users" do
@@ -354,7 +360,7 @@ describe UsersController do
     describe "for signed-in users" do
       
       before(:each) do
-        wrong_user = FactoryGirl.create(:user, :email => "user@example.net")
+        wrong_user = FactoryGirl.create(:user, :email => "user@groupon.com")
         test_sign_in(wrong_user)
       end
       

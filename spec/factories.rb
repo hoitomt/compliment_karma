@@ -64,5 +64,26 @@ FactoryGirl.define do
     name "testing"
     parent_skill_id 1
   end
+
+  compliment_id = ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
+
+  factory :compliment, class: Compliment do
+    f.sender_email user2.email
+    f.receiver_email user3.email
+    f.comment "Ima test comment"
+    f.compliment_type_id compliment_id
+    f.suppress_fulfillment true
+    f.sequence(:skill_id){ |n| Skill.create("name #{n}").id }
+  end
+  
 end
+
+# FactoryGirl.define :compliment do |f|
+#   f.sender_email user2.email
+#   f.receiver_email user3.email
+#   f.comment "Ima test comment"
+#   f.compliment_type_id compliment_id
+#   f.suppress_fulfillment true
+#   f.sequence(:skill_id){ |n| Skill.create("name #{n}").id }
+# end
 
