@@ -17,13 +17,13 @@
 							<div class="my-update-all-item-image">
 								<%= get_user_photo_thumb(originator) %>
 							</div>
-							<div class="my-update-item-note clearfix">
+							<div class="my-update-item-note">
 								<p class="originator-note">
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
 								<%= render 'my_updates/update_compliments_all', :item => item %>
-								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
+							<%= render 'my_updates/update_indicator_time', :item => item %>
 						</li>
 					<% end %>
 				<% else %>
@@ -41,8 +41,8 @@
 									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
 								</p>
 								<%= render 'my_updates/update_compliments_all', :item => item %>
-								<%= render 'my_updates/update_indicator_time', :item => item %>
 							</div>
+							<%= render 'my_updates/update_indicator_time', :item => item %>
 						</li>
 					<% end %>
 				<% end %>

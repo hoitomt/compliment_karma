@@ -16,7 +16,9 @@
 					<li><%#= link_to 'Pricing', pricing_path %>
 				<% else %>
 					<li>
-						<%= link_to current_user.email, current_user, :id => "am-hover-me" %>
+						<%= link_to current_user, :id => "am-hover-me", :style => "inline-block;" do %>
+							<%= current_user.email %> &#9660;
+						<% end %>
 						<%= render 'admin/header/admin_menu' %>
 					</li>
 					<li><%#= link_to 'Pricing', pricing_path %></li>
