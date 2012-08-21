@@ -55,6 +55,22 @@ FactoryGirl.define do
     founder true
   end
 
+  factory :sears_user, class: User do
+    name "Another User"
+    email "factory_user3@searshc.com"
+    password "foobar"
+    domain "searshc.com"
+    account_status_id 2
+  end
+
+  factory :groupon_user, class: User do
+    name "Another User"
+    email "factory_user3@groupon.com"
+    password "foobar"
+    domain "groupon.com"
+    account_status_id 2
+  end
+
   factory :invitation, class: Invitation do
     invite_email "invited_user@complimentkarma.com"
     from_email "nonfounder@complimentkarma.com"
@@ -63,17 +79,6 @@ FactoryGirl.define do
   factory :skill, class: Skill do
     name "testing"
     parent_skill_id 1
-  end
-
-  compliment_id = ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
-
-  factory :compliment, class: Compliment do
-    f.sender_email user2.email
-    f.receiver_email user3.email
-    f.comment "Ima test comment"
-    f.compliment_type_id compliment_id
-    f.suppress_fulfillment true
-    f.sequence(:skill_id){ |n| Skill.create("name #{n}").id }
   end
   
 end

@@ -242,6 +242,7 @@ class Compliment < ActiveRecord::Base
   end
 
   def self.user_confirmation(user)
+    logger.info("Confirm account for #{user.first_last if user}")
     c = Compliment.where('receiver_user_id = ? AND 
                           (compliment_status_id = ? OR compliment_status_id = ?)',
                           user.id, ComplimentStatus.PENDING_RECEIVER_CONFIRMATION,
@@ -314,8 +315,19 @@ class Compliment < ActiveRecord::Base
     logger.info("Compliments from everybody user is following")
     followed = Follow.find_all_by_follower_user_id(user.id)
     list_of_compliments = []
-    followed.each do |follow| 
+    followed.each do |follow|
       list_of_compliments += all_active_compliments(follow.subject_user)
+    end
+    logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
+    return list_of_compliments
+  end
+
+  def self.all_compliments_from_followed_in_domain(user)
+    logger.info("Compliments from everybody user is following")
+    followed = Follow.find_all_by_follower_user_id(user.id)
+    list_of_compliments = []
+    followed.each do |follow|
+      list_of_compliments += all_active_compliments_in_domain(follow.subject_user, user)
     end
     logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
     return list_of_compliments
@@ -339,7 +351,7 @@ class Compliment < ActiveRecord::Base
                      user.id, user.id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
   end
 
-  def self.all_active_compliments_in_visitor_domain(user, visitor)
+  def self.all_active_compliments_in_domain(user, visitor)
     logger.info("Active Compliments")
     if visitor.domain == Domain.master_domain
       Compliment.where('(sender_user_id = ? OR receiver_user_id = ?) 

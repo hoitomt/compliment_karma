@@ -103,8 +103,11 @@ describe Compliment do
 
     it "should return the correct number of compliments for other sender/receiver" do
       lambda do
-        10.times do
-          Compliment.create(@attr.merge(:sender_email => user.email, :receiver_email => user3.email))
+        10.times do |index|
+          s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
+          Compliment.create(@attr.merge(:sender_email => user.email, 
+                                        :receiver_email => user3.email,
+                                        :skill_id => s.id))
         end
       end.should change(Compliment, :count).by(10)
       
@@ -115,8 +118,9 @@ describe Compliment do
     end
     
     it "should return the correct number of compliments for user as sender" do
-      5.times do
-        Compliment.create(@attr.merge(:sender_email => user.email))
+      5.times do|index|
+        s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
+        Compliment.create(@attr.merge(:sender_email => user.email, :skill_id => s.id))
       end
       my_company = Compliment.internal_coworkers(user)
       only_mine = Compliment.only_mine(user)
@@ -129,8 +133,9 @@ describe Compliment do
     let(:user) {FactoryGirl.create(:user2)}
 
     it "should return the correct number of compliments for other sender/receiver" do
-      10.times do
-        Compliment.create(@attr.merge(:sender_email => user.email))
+      10.times do |index|
+        s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
+        Compliment.create(@attr.merge(:sender_email => user.email, :skill_id => s.id))
       end
       my_company = Compliment.internal_coworkers(user)
       only_mine = Compliment.only_mine(user)
@@ -139,8 +144,11 @@ describe Compliment do
     end
     
     it "should return the correct number of compliments for user as sender" do
-      5.times do
-        Compliment.create(@attr.merge(:sender_email => user.email, :receiver_email => "mycoworker@examplex.com"))
+      5.times do |index|
+        s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
+        Compliment.create(@attr.merge(:sender_email => user.email, 
+                                      :receiver_email => "mycoworker@examplex.com",
+                                      :skill_id => s.id))
       end
       my_company = Compliment.internal_coworkers(user)
       only_mine = Compliment.only_mine(user)
@@ -154,8 +162,9 @@ describe Compliment do
     let(:user) {FactoryGirl.create(:user)}
     
     it "should return 0 compliments for unaccepted relationship" do
-      10.times do
-        Compliment.create(@attr.merge(:sender_email => user.email))
+      10.times do |index|
+        s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
+        Compliment.create(@attr.merge(:sender_email => user.email, :skill_id => s.id))
       end
       external = Compliment.external_colleagues(user)
       external.count.should eq(0) # Visibility is Sender and Receiver
@@ -165,9 +174,11 @@ describe Compliment do
       Relationship.create(:user_1_id => external_user.id, :user_2_id => user.id, 
                           :relationship_status_id => RelationshipStatus.ACCEPTED.id,
                           :default_visibility_id => Visibility.EVERYBODY.id)
-      10.times do
+      10.times do |index|
+        s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
         Compliment.create(@attr.merge(:receiver_email => user.email, 
-                                      :sender_email => external_user.email))
+                                      :sender_email => external_user.email,
+                                      :skill_id => s.id))
       end
       external = Compliment.external_colleagues(user)
       external.count.should eq(10) # Visibility is Everybody after accept
@@ -291,6 +302,53 @@ describe Compliment do
       s.length.should eq(0)
       c.skill_id.should eq(Skill.UNDEFINED.id)
       c.compliment_type_id.should eq(ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id)
+    end
+
+  end
+
+  describe "Karma Live compliments" do
+    let(:ck) {FactoryGirl.create(:user2)}
+    let(:groupon) {FactoryGirl.create(:groupon_user)}
+    let(:sears) {FactoryGirl.create(:sears_user)}
+    let(:dummy) {User.find_by_email('dummy@example.org')}
+
+    before(:each) do
+      Compliment.create(:receiver_email => ck.email,
+                        :sender_email => groupon.email,
+                        :skill_id => Skill.first.id,
+                        :comment => "ComplimentKarma to Groupon",
+                        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      )
+      Compliment.create(:receiver_email => ck.email,
+                        :sender_email => sears.email,
+                        :skill_id => Skill.first.id,
+                        :comment => "ComplimentKarma to Sears",
+                        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      )
+      Compliment.create(:receiver_email => sears.email,
+                        :sender_email => ck.email,
+                        :skill_id => Skill.first.id,
+                        :comment => "Sears to ComplimentKarma",
+                        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      )
+      Compliment.create(:receiver_email => groupon.email,
+                        :sender_email => ck.email,
+                        :skill_id => Skill.first.id,
+                        :comment => "Gropuon to ComplimentKarma",
+                        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      )
+    end
+
+    it "should not show sears compliments to groupon users through ComplimentKarma Follow" do
+      # Scenario from production with Aman, Shahed, and Sheela
+      Follow.create(:subject_user_id => sears.id, :follower_user_id => ck.id)
+      Follow.create(:subject_user_id => ck.id, :follower_user_id => groupon.id)
+      c = Compliment.all_compliments_from_followed_in_domain(groupon)
+      c.size.should == 2
+      c.first.sender_email.should_not match(/searshc.com/)
+      c.first.receiver_email.should_not match(/searshc.com/)
+      c.last.sender_email.should_not match(/searshc.com/)
+      c.last.receiver_email.should_not match(/searshc.com/)
     end
 
   end
