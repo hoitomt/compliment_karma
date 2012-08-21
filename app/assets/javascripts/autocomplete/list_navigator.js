@@ -56,6 +56,7 @@ var ListNavigator = {
 			ListNavigator.setInputAndClose(listElement);
 		} else if (complimentReceiverContainer.length > 0) {
 			ListNavigator.setInputAndClose(listElement);
+			NewComplimentValidation.validateComplimentReceiver();
 			// NewComplimentValidation.validateSenderNotReceiver();
 		} else {
 			// ComplimentUI.validateSenderNotReceiver();

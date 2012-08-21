@@ -11,6 +11,7 @@
 <%= content_for :buttons do %>
 	<%= link_to new_account_confirmation_url(:confirm_id => @receiver.new_account_confirmation_token) do %>
 		<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/confirm_email.png',
+				:alt => "Confirm Email"
 				:height => '30' %>
 	<% end %>
 <% end %>

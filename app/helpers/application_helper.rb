@@ -104,8 +104,8 @@ module ApplicationHelper
   end
 
   def date_time_format(date)
-    date = DateUtil.get_local(date)
-    today = DateTime.now
+    date = DateUtil.get_central_time(date)
+    today = DateUtil.get_central_time(DateTime.now)
     if date
       if date.day == today.day && date.month == today.month && date.year == today.year
         return date.strftime("Today <br />%I:%M %P").html_safe

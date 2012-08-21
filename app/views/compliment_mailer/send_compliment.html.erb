@@ -14,17 +14,20 @@
 		<%= link_to show_recognition_url(:recognition_type_id => RecognitionType.COMPLIMENT.id,
 																 		 :recognition_id => @compliment.id) do %>
 			<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/view_details.png',
+										:alt => "View Details",
 										:height => '30' %>
 		<% end %>
 	<% else %>
 		<span>
 			<%= link_to accept_relationship_url(:id => @relationship.id) do %>
 				<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/accept.png',
+						:alt => "Accept Compliment",
 						:height => '30' %><% end %>
 		</span>
 		<span style="margin-left: 40px;">
 			<%= link_to  decline_relationship_url(:id => @relationship.id) do %>
-				<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/decline.png', 
+				<%= image_tag 'https://s3.amazonaws.com/compliment_karma_prod/buttons/decline.png',
+						:alt => "Decline Compliment",
 						:height => '30' %><% end %>
 		</span>
 	<% end %>

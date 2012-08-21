@@ -8,6 +8,15 @@ class DateUtil
       return d
     end
   end
+
+  def self.get_central_time(d)
+    d.in_time_zone(ctz)
+  end
+
+  #return central time zone string
+  def self.ctz
+    "Central Time (US & Canada)"
+  end
   
   def self.get_previous_monday_at_zero_time
     d = DateTime.now
