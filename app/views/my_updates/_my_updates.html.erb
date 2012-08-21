@@ -51,7 +51,7 @@
 	<% elsif !@user.confirmed? && !@my_update_items.blank? %>
 		<div style="margin: 10px 0 0 10px;">
 			<strong>
-				Please confirm your account to view your notifications (<%= @my_update_items.count %>)
+				Please confirm your account to view your notifications (<%= @my_update_items_total %>)
 			</strong>
 		</div>
 	<% end %>

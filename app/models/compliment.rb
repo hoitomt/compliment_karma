@@ -327,7 +327,9 @@ class Compliment < ActiveRecord::Base
     followed = Follow.find_all_by_follower_user_id(user.id)
     list_of_compliments = []
     followed.each do |follow|
-      if [user.domain, Domain.master_domain].include?(follow.subject_user.domain)
+      if user.domain == Domain.master_domain
+        list_of_compliments += all_active_compliments_in_domain(follow.subject_user, user)
+      elsif [user.domain, Domain.master_domain].include?(follow.subject_user.domain)
         list_of_compliments += all_active_compliments_in_domain(follow.subject_user, user)
       end
     end

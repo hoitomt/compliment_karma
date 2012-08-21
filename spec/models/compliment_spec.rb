@@ -351,6 +351,15 @@ describe Compliment do
       c.last.receiver_email.should_not match(/searshc.com/)
     end
 
+    it "should show sears and groupon compliments to ComplimentKarma" do
+      # Scenario from production with Aman, Shahed, and Sheela
+      Follow.create(:subject_user_id => sears.id, :follower_user_id => ck.id)
+      Follow.create(:subject_user_id => groupon.id, :follower_user_id => ck.id)
+      Follow.create(:subject_user_id => ck.id, :follower_user_id => groupon.id)
+      c = Compliment.all_compliments_from_followed_in_domain(ck)
+      c.size.should == 4
+    end
+
   end
 
 end

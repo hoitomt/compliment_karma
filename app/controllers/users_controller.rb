@@ -116,6 +116,7 @@ class UsersController < ApplicationController
 
   def my_updates
     user = my_updates_user
+    @my_update_items_total = UpdateHistory.find_all_by_user_id(user.id).size
     @my_update_items = UpdateHistory.get_recent_update_history(user)
     user.update_attributes(:last_read_notification_date => DateTime.now)
     respond_to do |format|
