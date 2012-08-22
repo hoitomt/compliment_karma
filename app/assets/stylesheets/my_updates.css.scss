@@ -38,16 +38,16 @@
 	.my-update-item-note {
 		position: relative;
 		float: left;
-		width: 550px;
+		width: 500px;
 		height: 75px;
-		margin: 0 0 0 10px;
+		margin: 0 10px 0 10px;
 	}
 	.my-update-all-item-note {
 		position: relative;
 		float: left;
-		width: 600px;
+		width: 575px;
 		height: 75px;
-		margin: 0 0 0 10px;
+		margin: 0 10px 0 10px;
 	}
 	.my-update-compliment {
 		float: left;
@@ -85,7 +85,11 @@
 			padding: 5px 0 0 0;
 		}
 	}
+	li.my-updates-list {
+		width: 690px;
+	}
 	li {
+		// width: 675px;
 		display: block;
 		margin: 0 0 0 0;
 		padding: 5px;
