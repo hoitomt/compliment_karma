@@ -13,7 +13,7 @@ describe "Users" do
   describe "signup" do
     it "should be at the application root" do
       get '/'
-      response.should have_selector("title", :content => "Compliment Karma Application")
+      response.should have_selector("title", :content => "Send Compliments, Earn Rewards | ComplimentKarma")
     end
     
     describe "failure" do
@@ -35,10 +35,10 @@ describe "Users" do
         lambda do
           visit signup_path
           fill_in "Full Name", :with => "Example User"
-          fill_in "Email", :with => "user@example.com"
+          fill_in "Email", :with => "user@complimentkarma.com"
           fill_in "Password", :with => "foobar"
           click_button
-          response.should render_template('pages/invite_coworkers')
+          response.should render_template('users/show')
         end.should change(User, :count).by(1)
       end
     end

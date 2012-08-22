@@ -27,7 +27,7 @@ class Compliment < ActiveRecord::Base
 
   validate :compliment_cannot_be_to_self
   validate :sender_is_confirmed_user
-  validate :not_short_term_duplicate
+  validate :not_short_term_duplicate, :on => :create
   
   before_save :set_sender
   before_save :set_compliment_status
@@ -431,8 +431,8 @@ class Compliment < ActiveRecord::Base
                      external_relationships.keys, sender_v, external_relationships.keys, receiver_v)
   end
   
-  def self.get_compliments_to_be_updated_to_visible(relationship)
-    logger.info("Compliments: Update visiblity")
+  def self.get_compliments_by_relationship(relationship)
+    logger.info("Compliments: Get by Relationship")
     c = Compliment.where('(sender_user_id = ? AND receiver_user_id = ?) OR ' + 
                      '(sender_user_id = ? and receiver_user_id = ?)',
                      relationship.user_1_id, relationship.user_2_id, 

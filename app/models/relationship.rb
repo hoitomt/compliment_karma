@@ -56,6 +56,7 @@ class Relationship < ActiveRecord::Base
   end
   
   def accept_relationship
+    logger.info("Accept the relationship")
     return if self.relationship_status != RelationshipStatus.PENDING
     self.update_attributes(:relationship_status_id => RelationshipStatus.ACCEPTED.id,
                            :default_visibility_id => Visibility.EVERYBODY.id)
@@ -63,9 +64,16 @@ class Relationship < ActiveRecord::Base
   end
   
   def decline_relationship
+    logger.info("Decline the relationship")
     return if self.relationship_status != RelationshipStatus.PENDING
     self.update_attributes(:relationship_status_id => RelationshipStatus.NOT_ACCEPTED.id,
                            :default_visibility_id => Visibility.SENDER_AND_RECEIVER.id)
+    compliments_to_be_updated = Compliment.get_compliments_by_relationship(self)
+    logger.info("Number of compliments to be updated: #{compliments_to_be_updated.count}")
+    compliments_to_be_updated.each do |c|
+      logger.info("Decline: Update compliment visibility #{c.visibility_id}")
+      c.update_attributes(:visibility_id => Visibility.SENDER_AND_RECEIVER.id)
+    end
     UpdateHistory.Rejected_Compliment_Receiver(self)
   end
   
