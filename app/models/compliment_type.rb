@@ -16,17 +16,17 @@ class ComplimentType < ActiveRecord::Base
   end
   
   def self.PROFESSIONAL_TO_PERSONAL
-    find_by_name("Professional to Personal") || 
+    find_by_name("Professional to Social") || 
     find_by_name("from my PROFESSIONAL to receivers SOCIAL profile")
   end
   
   def self.PERSONAL_TO_PROFESSIONAL
-    find_by_name("Personal to Professional") || 
+    find_by_name("Social to Professional") || 
     find_by_name("from my SOCIAL to receivers PROFESSIONAL profile")
   end
   
   def self.PERSONAL_TO_PERSONAL
-    find_by_name("Personal to Personal") || 
+    find_by_name("Social to Social") || 
     find_by_name("from my SOCIAL to receivers SOCIAL profile")
   end
 

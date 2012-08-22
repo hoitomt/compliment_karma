@@ -29,6 +29,9 @@
 
 				<div id="data-entry" class="clearfix" style="padding-right: 10px;">
 					<div id="label">
+						<span class="ul_hover" style="font-size: 11px; float:none;">
+							<%#= link_to '(?)', '#compliment-type-helper', :class => "fancybox", :style=>"color:#606060;" %>
+						</span>
 						<%= label_tag 'receiver', 
 													"To", 
 													:class => "new-compliment" %>
@@ -104,4 +107,7 @@
 		<div class="clear"></div>
 	</div>
 	<div class="clear"></div>
+</div>
+<div id="compliment-type-helper" style="display: none;">
+	<%= render 'pages/help' %>
 </div>
