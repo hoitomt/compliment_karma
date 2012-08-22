@@ -4,7 +4,7 @@ describe PagesController do
   render_views
   
   before(:each) do
-    @title = "Compliment Karma Application"
+    @title = "ComplimentKarma"
     controller.class.skip_before_filter :shell_authenticate
   end
   
@@ -16,7 +16,7 @@ describe PagesController do
     
     it "index should have the correct title" do
       get 'index'
-      response.should have_selector("title", :content => @title + " | Welcome")
+      response.should have_selector("title", :content => "Send Compliments, Earn Rewards | #{@title}")
     end
   end
   

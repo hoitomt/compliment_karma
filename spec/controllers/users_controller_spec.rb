@@ -290,6 +290,80 @@ describe UsersController do
         u.last_name.should == 'User'
       end
     end
+
+    describe "whitelist test" do
+      before(:each) do
+        @attr = { :name => "New User", :email => "user@complimentkarma.com", 
+                  :password => "foobar" }
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@groupon.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@bancbox.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@centro.net")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@searshc.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@acquitygroup.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@us.mcd.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@visa.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@gap.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@cat.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@sanofipasteur.com")
+        end.should change(User, :count).by(1)
+      end
+      
+    end
     
     describe "name parsing" do
       before(:each) do
