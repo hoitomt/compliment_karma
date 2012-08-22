@@ -7,7 +7,8 @@ class Domain
 	def self.whitelist
 		[
 			'groupon.com', 'bancbox.com', 'centro.net', 'complimentkarma.com', 'searshc.com',
-			'acquitygroup.com', 'us.mcd.com', 'visa.com', 'gap.com', 'cat.com', 'sanofipasteur.com', 'gmail.com'
+			'acquitygroup.com', 'us.mcd.com', 'visa.com', 'gap.com', 'cat.com', 'sanofipasteur.com',
+			'ca.ibm.com'
 		]
 	end
 

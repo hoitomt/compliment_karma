@@ -7,16 +7,14 @@ class InvitationsController < ApplicationController
   
   def create
     logger.info("Send Invitation")
+    user = current_user || User.find_by_email(params[:invitation][:invite_email])
     if params[:multi_invitation]
       send_multiple_invitations(params[:multi_invitation])
     else
-      if current_user
+      if user
         logger.info("Current User")
-        if Invitation.create_invitation(params[:invitation][:invite_email], 
-                                        current_user.email)
-          flash[:notice] = "Your invitation has been sent to #{params[:invitation][:invite_email]}"
-          redirect_to current_user
-        end
+        flash[:notice] = "Welcome back to ComplimentKarma #{user.first_last}. Please log in"
+        redirect_to current_user || login_path
       else
         logger.info("Not Current User")
         email = params[:invitation][:invite_email]

@@ -1,10 +1,11 @@
 <script type="text/javascript">
 	$(function() {
-		FormHelpers.init();
-		SkillAutoComplete.init();
-		ComplimentUI.init(<%= current_user.id %>);
-		ComplimentReceiver.init();
-		// $('label.new-compliment').tooltip({position: "center left"});
+		// FormHelpers.init();
+		// ComplimentUI.stickyNewCompliment();
+	// 	ComplimentReceiver.init();
+	// 	SkillAutoComplete.init();
+	// 	ComplimentUI.init(<%= current_user.id %>);
+	// 	// $('label.new-compliment').tooltip({position: "center left"});
 	});
 </script>
 <div id="scroll-sticky" class="right-two-thirds">
@@ -109,5 +110,7 @@
 	<div class="clear"></div>
 </div>
 <div id="compliment-type-helper" style="display: none;">
-	<%= render 'pages/help' %>
+	<div class="about-content">
+		<%= render 'pages/help' %>
+	</div>
 </div>

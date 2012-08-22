@@ -20,8 +20,8 @@
 																		:remote => true do %>
 		<div class="feed-item">
 			<div class="comment-text">
-				<strong>Rewarded with <%= number_to_currency(reward.value) %> 
-					funded by <%= presenter_name(feed_item.item_object) %>
+				Rewarded with <%= number_to_currency(reward.value) %> 
+					funded by <strong><%= presenter_name(feed_item.item_object) %></strong>
 			</div>
 		</div>
 	<% end %>

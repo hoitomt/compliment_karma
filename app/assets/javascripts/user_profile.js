@@ -34,6 +34,42 @@ var UserProfile = {
 		this.docState.userId = userId;
 	},
 	infiniteScrolling: function() {
+		// var $loading = $('#infinite-scroll-processing');
+		// var $loading = $("<div class='loading'><p>Loading more items&hellip;</p></div>"),
+		docState = this.docState
+		$footer = $('#footer');
+		var userId = docState.userId;
+		var feed_item_type_id = $('#feed_item_type').val();
+		var relation_type_id = $('#relation_type').val();
+		opts = {
+			offset: '100%'
+			// offset: 'bottom-in-view'
+			// function() {
+			// 	return $.waypoints('viewportHeight') - $(this).outerHeight() - 100;
+			// }
+		};
+		
+		$footer.waypoint(function(event, direction) {
+			console.log("Ima footer");
+			$footer.waypoint('remove');
+			$.ajax({
+				url: '/users/' + userId + '/get_more_karma_live_records',
+				type: 'POST',
+				data: { page: docState.page, feed_item_type: feed_item_type_id, relation_type: relation_type_id},
+				beforeSend: function() {
+					// $.jGrowl("Let's get more records!");
+					$('#infinite-scroll-processing').show();
+				},
+				complete: function() {
+					retrieveFlag = false;
+					$('#infinite-scroll-processing').hide();
+					$footer.waypoint(opts);
+				}
+			});
+		}, opts);
+	},
+
+	infiniteScrolling_x: function() {
 		docState = this.docState
 		var userId = docState.userId;
 		var perPage = docState.perPage;
