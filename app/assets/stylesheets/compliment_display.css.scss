@@ -17,6 +17,7 @@
 }
 table#compliment-display {
 	@include top-border-radius;
+	width: 710px;
 	font-size: 13px;
 	margin: 20px 20px 10px 20px;
 	th {
