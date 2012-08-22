@@ -31,8 +31,7 @@
 					<div id="label">
 						<%= label_tag 'receiver', 
 													"To", 
-													:class => "new-compliment", 
-													:title => "Enter the name or email address of the person/company that should receive the compliment" %>
+													:class => "new-compliment" %>
 					</div>
 					<div id="field"><%= text_field 'compliment', 'receiver_display', 
 																					 :placeholder => "receiver's name or email",
@@ -48,8 +47,7 @@
 						<div id="label">
 							<%= f.label :skill_id, 
 													"Skill", 
-													:class => "new-compliment",
-													:title => "Enter the skill for which the person/company is being complimented. Start typing and select an option or create your own" %>
+													:class => "new-compliment" %>
 						</div>
 						<div id="field"><%= f.text_field :skill_id,
 																						 :placeholder => "start typing for a list", 
@@ -63,8 +61,7 @@
 						<div id="label">
 							<%= f.label :comment, 
 													"Comment", 
-													:class => "new-compliment",
-													:title => "The text of your compliment" %>
+													:class => "new-compliment" %>
 						</div>
 						<div id="field"><%= f.text_area :comment, :rows => 2, :class => 'new-compliment-textarea' %>
 							<div id="compliment_comment_error"></div>
@@ -76,8 +73,7 @@
 							<%= f.label :compliment_type, 
 													"Type", 
 													:class => "new-compliment", 
-													:style => "padding-top: 0px;",
-													:title => "Select a compliment type based on your relationship with the person/company that you are complimenting" %>
+													:style => "padding-top: 0px;"%>
 						</div>
 						<div id="field">
 							<div id="compliment-type-select">
@@ -86,7 +82,7 @@
 																				:id, 
 																				:name, 
 																				{:prompt => "select compliment type"},
-																				{:style => "width: 338px; height: 38px;"} %>
+																				{:class => "new-compliment-select"} %>
 							</div>
 							<div id="compliment_compliment_type_error"></div>
 						</div>
