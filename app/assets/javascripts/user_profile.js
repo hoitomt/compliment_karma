@@ -36,16 +36,20 @@ var UserProfile = {
 	infiniteScrolling: function() {
 		docState = this.docState
 		$footer = $('#footer');
+		$mainContainer = $('#main-container');
 		var userId = docState.userId;
 		var feed_item_type_id = $('#feed_item_type').val();
 		var relation_type_id = $('#relation_type').val();
-		opts = {
-			offset: '98%'
+		var opts = {
+			offset: $.waypoints('viewportHeight') + 40
 		};
-		
-		$footer.waypoint(function(event, direction) {
+		// console.log(opts);
+		// $.waypoints('refresh')
+
+		$('#footer').waypoint(function(event, direction) {
 			docState.currentCount = docState.page * docState.perPage;
 			docState.page++;
+			console.log("Waypoint");
 			if(docState.currentCount < docState.totalCount) {
 				$footer.waypoint('remove');
 				$.ajax({
@@ -59,7 +63,8 @@ var UserProfile = {
 					complete: function() {
 						retrieveFlag = false;
 						$('#infinite-scroll-processing').hide();
-						$footer.waypoint(opts);
+						$('#footer').waypoint(opts);
+						$.waypoints('refresh')
 					}
 				});
 			}
