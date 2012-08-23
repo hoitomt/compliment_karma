@@ -30,9 +30,10 @@
 
 				<div id="data-entry" class="clearfix" style="padding-right: 10px;">
 					<div id="label">
-						<span class="ul_hover" style="font-size: 11px; float:none;">
-							<%#= link_to '(?)', '#compliment-type-helper', :class => "fancybox", :style=>"color:#606060;" %>
-						</span>
+						<div class="ul_hover" 
+								 style="position: absolute; margin: 5px 0 0 40px; font-size: 11px; float:none; z-index: 2;">
+							<%= link_to '(?)', '#compliment-type-helper', :class => "fancybox", :style=>"color:#606060;" %>
+						</div>
 						<%= label_tag 'receiver', 
 													"To", 
 													:class => "new-compliment" %>
