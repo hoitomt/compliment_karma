@@ -58,7 +58,7 @@ var ComplimentUI = {
 		});
 		$('#new-compliment-container').off('click');
 		$('#new-compliment-container').click(function(event) {
-			var isAnchor = $(event.srcElement).is('a');
+			var isAnchor = $(event.target).is('a');
 			if(!isAnchor) {
 				event.stopPropagation();
 			}
