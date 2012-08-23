@@ -46,8 +46,6 @@ var UserProfile = {
 		$footer.waypoint(function(event, direction) {
 			docState.currentCount = docState.page * docState.perPage;
 			docState.page++;
-			console.log(docState.totalCount);
-			console.log(docState.currentCount);
 			if(docState.currentCount < docState.totalCount) {
 				$footer.waypoint('remove');
 				$.ajax({
