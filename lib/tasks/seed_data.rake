@@ -36,7 +36,7 @@ namespace :ck do
     tp = ComplimentType.PERSONAL_TO_PERSONAL
     501.times do |index|
       count += 1
-      s = Skill.where('lower(name) like ?', '%ruby%').last.id
+      s = Skill.find(index + 1)
       c = @comments[4]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
@@ -47,7 +47,7 @@ namespace :ck do
     puts "Add compliments from Homer to Dummy2"
     301.times do |index|
       count += 1
-      s = Skill.where('lower(name) like ?', '%marketing%').last.id
+      s = Skill.find(index + 501)
       c = @comments[8]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
@@ -58,7 +58,7 @@ namespace :ck do
     puts "Add compliments from Homer to Dummy3"
     101.times do |index|
       count += 1
-      s = Skill.where('lower(name) like ?', '%cooking%').last.id
+      s = Skill.find(index + 802)
       c = @comments[0]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
@@ -69,7 +69,7 @@ namespace :ck do
     puts "Add compliments from Homer to Dummy4"
     301.times do |index|
       count += 1
-      s = Skill.where('lower(name) like ?', '%project%').last.id
+      s = Skill.find(index + 903)
       c = @comments[1]
       Compliment.create!( :sender_email => homer.email, 
                           :receiver_email => u.email, :skill_id => s, 
