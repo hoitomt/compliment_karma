@@ -40,7 +40,7 @@ var UserProfile = {
 		var feed_item_type_id = $('#feed_item_type').val();
 		var relation_type_id = $('#relation_type').val();
 		opts = {
-			offset: '100%'
+			offset: '98%'
 		};
 		
 		$footer.waypoint(function(event, direction) {
