@@ -1,6 +1,6 @@
 $('#compliment-type-select').html('<%=j collection_select "compliment", "compliment_type_id", 
 																				@compliment_types, 
 																				:id, 
-																				:name, 
+																				:list_name, 
 																				{:prompt => "select compliment type"},
 																				{:class => "new-compliment-select"} %>');
