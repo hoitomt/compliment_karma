@@ -39,7 +39,7 @@ namespace :ck do
       s = Skill.find(index + 1)
       c = @comments[4]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill_id => s, 
+                          :receiver_email => u.email, :skill_id => s.id, 
                           :comment => c, :compliment_type_id => t.id,
                           :suppress_fulfillment => true)
     end
@@ -50,7 +50,7 @@ namespace :ck do
       s = Skill.find(index + 501)
       c = @comments[8]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill_id => s, 
+                          :receiver_email => u.email, :skill_id => s.id, 
                           :comment => c, :compliment_type_id => t.id,
                           :suppress_fulfillment => true)
     end
@@ -61,7 +61,7 @@ namespace :ck do
       s = Skill.find(index + 802)
       c = @comments[0]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill_id => s, 
+                          :receiver_email => u.email, :skill_id => s.id, 
                           :comment => c, :compliment_type_id => tp.id,
                           :suppress_fulfillment => true)
     end
@@ -72,7 +72,7 @@ namespace :ck do
       s = Skill.find(index + 903)
       c = @comments[1]
       Compliment.create!( :sender_email => homer.email, 
-                          :receiver_email => u.email, :skill_id => s, 
+                          :receiver_email => u.email, :skill_id => s.id, 
                           :comment => c, :compliment_type_id => t.id,
                           :suppress_fulfillment => true)
     end
