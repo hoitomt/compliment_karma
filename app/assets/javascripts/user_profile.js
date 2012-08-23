@@ -33,7 +33,7 @@ var UserProfile = {
 		this.docState.perPage = parseInt(perPage);
 		this.docState.userId = userId;
 	},
-	infiniteScrolling: function() {
+	infiniteScrolling_waypoints: function() {
 		docState = this.docState
 		$footer = $('#footer');
 		$mainContainer = $('#main-container');
@@ -71,7 +71,7 @@ var UserProfile = {
 		}, opts);
 	},
 
-	infiniteScrolling_x: function() {
+	infiniteScrolling: function() {
 		docState = this.docState
 		var userId = docState.userId;
 		var perPage = docState.perPage;
