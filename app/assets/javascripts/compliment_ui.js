@@ -83,12 +83,12 @@ var ComplimentUI = {
 		// console.log("Add Sticky");
 		var stickMe = $('#scroll-sticky');
 		var complimentContainer = $('#new-compliment-container');
-		stickMe.waypoint({
-			handler: function(event, direction) {
-				// console.log("Sticky Fired");
-				complimentContainer.toggleClass('sticky', direction=='down');
-			}
-		});
+		// stickMe.waypoint({
+		// 	handler: function(event, direction) {
+		// 		// console.log("Sticky Fired");
+		// 		complimentContainer.toggleClass('sticky', direction=='down');
+		// 	}
+		// });
 	},
 	removeStickyCompliment: function() {
 		// console.log("Remove Sticky");
