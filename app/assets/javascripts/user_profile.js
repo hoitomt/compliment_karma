@@ -252,7 +252,7 @@ var UserProfile = {
 			}
 		});
 		$('html').click(function(event) {
-			var clickSrc = event.srcElement;
+			var clickSrc = event.target;
 			var parent = $(clickSrc).parents('.comment-text-new');
 			if(parent.length == 0) {
 				UserProfile.hideCommentSubmitButton();

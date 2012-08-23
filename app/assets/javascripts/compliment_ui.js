@@ -64,8 +64,8 @@ var ComplimentUI = {
 			}
 		});
 		$('html').click(function(event) {
-			var isAnchor = $(event.srcElement).is('a');
-			if(!isAnchor/* && !isInContainer*/) {
+			var isAnchor = $(event.target).is('a');
+			if(!isAnchor) {
 				ComplimentUI.hideNewComplimentPanel();
 			}
 		});
