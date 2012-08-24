@@ -83,6 +83,12 @@
 			<% else %>
 				<button class="button-location" type=submit>Create</button>
 			<% end %>
+			<div style="float: right; font-size:12px; color: #808080;">
+				<%= link_to 'Remove this position', experience_path(:user_id => current_user.id, 
+																														:experience_id => experience.id), 
+										:method => :delete, :remote => true %>
+			</div>
 		</div>
 	<% end %>
+	<div class="clear"></div>
 </div>

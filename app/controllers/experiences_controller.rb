@@ -1,4 +1,5 @@
 class ExperiencesController < ApplicationController
+	before_filter :authenticate, :except => [:new, :edit]
 	before_filter :set_user
 
   @@date_format = "%m/%d/%Y"
@@ -42,7 +43,24 @@ class ExperiencesController < ApplicationController
 		@current_experience = @user.experiences.first
 	end
 
+	def destroy
+		logger.info("Remove Experience")
+		@experience = Experience.find(params[:experience_id])
+		if @experience.destroy
+			flash.now[:notice] = "Your work experience with #{@experience.company} has been removed"
+		else
+			flash.now[:error] = "There was an issue when deleting your experience. 
+													Please contact us at info@complimentkarma.com"
+		end
+		@professional_experiences = @user.experiences
+		@current_experience = @user.experiences.first
+	end
+
 	private
+    def authenticate
+      deny_access unless signed_in?
+    end
+
 		def set_user
 			@user = User.find(params[:user_id])
 		end

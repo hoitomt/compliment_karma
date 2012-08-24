@@ -1,0 +1,7 @@
+$('#professional-experience-container').html('<%=j render :partial => "experiences/professional_experiences", 
+									 :locals => {:professional_experiences => @professional_experiences,
+									 						 :user => @user } %>');
+$('#current-experience-container').html('<%=j render :partial => "experiences/current_experience", 
+										:locals => {:current_experience => @current_experience,
+																:user => @user } %>');
+$.fancybox().close();
