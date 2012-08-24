@@ -276,6 +276,10 @@ a.header-update-link:visited { color: #ffffff }
 }
 .about-container {
 	padding: 20px;
+}
+.about-content {
+	width: 800px;
+	float: left;
 	h1 { 
 		@include container-font;
 		font-size:24.5pt;
@@ -292,10 +296,6 @@ a.header-update-link:visited { color: #ffffff }
 		// font-weight: bold;
 		margin: 5px 0 5px 0;
 	}
-}
-.about-content {
-	width: 800px;
-	float: left;
 	ul {
 		li {
 			list-style: disc;
