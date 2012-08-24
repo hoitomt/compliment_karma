@@ -31,16 +31,29 @@ class ExperiencesController < ApplicationController
 
 	def update
 		@experience = Experience.find(params[:experience_id])		
-		@experience.update_attributes(params[:experience])
+		unless @experience.update_attributes(params[:experience])
+			flash.now[:error] = error_display(@experience)
+			render 'error_display'
+		else
+			@experience.start_date = parse_date(params[:experience][:start_date])
+			@experience.end_date = parse_date(params[:experience][:end_date])
+			@experience.state_cd = params[:state_cd_txt] if @experience.country != "United States"
+			if @experience.save
+				@professional_experiences = @user.experiences
+				logger.info("Pro Exp: #{@professional_experiences.count}")
+				@current_experience = @user.experiences.first
+			else
+				flash.now[:error] = error_display(@experience)
+				render 'error_display'
+			end
+		end
+	end
 
-		@experience.start_date = parse_date(params[:experience][:start_date])
-		@experience.end_date = parse_date(params[:experience][:end_date])
-		@experience.state_cd = params[:state_cd_txt] if @experience.country != "United States"
-		@experience.save
-
-		@professional_experiences = @user.experiences
-		logger.info("Pro Exp: #{@professional_experiences.count}")
-		@current_experience = @user.experiences.first
+	def error_display(experience)
+		unless experience.errors.blank?
+			error_list = experience.errors.messages.collect {|k,v| "#{k} #{v.join(',')}" }
+			return error_list.join("\n")
+		end
 	end
 
 	def destroy

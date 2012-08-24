@@ -1,0 +1,5 @@
+var container = $('.professional-experience');
+console.log(container);
+container.prepend('<%=j render "shared/flash", :flash => flash %>');
+console.log('<%= flash[:error] %>');
+$('#flash').show();
