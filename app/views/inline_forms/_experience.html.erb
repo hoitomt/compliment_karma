@@ -4,8 +4,15 @@
 		$('input#experience_end_date').datepicker();
 	});
 </script>
+<% update_ui = user.id && experience && experience.id %>
 <div class="popup-form professional-experience">
-	<h2 style="margin-bottom: 10px;">New Professional Experience</h2>
+	<h2 style="margin-bottom: 10px;">
+		<% if update_ui %>
+			Edit Experience
+		<% else %>
+			New Professional Experience
+		<% end %>
+	</h2>
 	<%= form_for experience, :validate => true, :remote => true do |f| %>
 		<%= hidden_field_tag 'user_id', user.id %>
 		<% exp_id = experience.id.to_s if experience.id %>
@@ -78,16 +85,17 @@
 		</div>
 		<div class="clear"></div>
 		<div>
-			<% if user.id %>
+			<% if update_ui  %>
 				<button class="button-location" type=submit>Update</button>
+				<div style="float: right; font-size:12px; color: #808080;">
+					<%= link_to 'Remove this position', experience_path(:user_id => current_user.id, 
+																															:experience_id => experience.id), 
+											:method => :delete, :remote => true %>
+
+				</div>
 			<% else %>
 				<button class="button-location" type=submit>Create</button>
 			<% end %>
-			<div style="float: right; font-size:12px; color: #808080;">
-				<%= link_to 'Remove this position', experience_path(:user_id => current_user.id, 
-																														:experience_id => experience.id), 
-										:method => :delete, :remote => true %>
-			</div>
 		</div>
 	<% end %>
 	<div class="clear"></div>
