@@ -66,6 +66,7 @@ Ck::Application.routes.draw do
   match "users/:id/rewards" => "users#rewards", :as => :user_rewards
   match "users/:id/edit_from_profile" => "users#edit_from_profile", :as => :edit_from_profile
   match "users/:id/switch_accounts" => "users#switch_accounts", :as => :switch_accounts
+  match "user_emails/set_primary_email" => "user_emails#set_primary_email", :as => :set_primary_email
 
   # Metrics
   match "compliments/count" => "compliments#count"
@@ -88,5 +89,6 @@ Ck::Application.routes.draw do
   resources :company_departments
   resources :company_users
   resources :companies
+  resources :user_emails
 
 end

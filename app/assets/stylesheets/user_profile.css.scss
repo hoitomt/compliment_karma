@@ -182,3 +182,22 @@ table#achievements-by-skill {
 		display: none;
 	}
 }
+#account-settings {
+	margin: 5px 0 0 15px;
+	li {
+		margin: 5px 0 0 0;
+	}
+}
+button.add-email {
+	@include gradient-gray;
+	border: 2px solid #A6A6A6;
+	color: #000000;
+	float: left;
+	width: 100px; 
+	margin: 0 0 0 10px; 
+	text-align: center; 
+	padding: 5px 10px;
+}
+button.add-email:hover {
+	background: #A6A6A6;
+}

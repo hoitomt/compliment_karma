@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
   has_many :company_department_users
   has_many :company_departments, :through => :company_department_users
   has_many :experiences
+  has_many :email_addresses, :class_name => 'UserEmail', :foreign_key => 'user_id'
+  # has_one  :primary_email, :class_name => 'UserEmail', 
+  #                          :foreign_key => 'user_id', 
+  #                          :conditions => "primary = 'Y'"
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned
@@ -62,6 +66,7 @@ class User < ActiveRecord::Base
   after_create :associate_sent_compliments
   after_create :create_relationships
   after_create :metrics_send_new_user
+  after_create :create_user_email
   
   # Return true if the user's password matches the submitted password
   def has_password?(submitted_password)
@@ -427,6 +432,10 @@ class User < ActiveRecord::Base
   
   def metrics_send_new_user
     Metrics.new_user
+  end
+
+  def create_user_email
+    UserEmail.create(:user_id => self.id, :email => self.email)
   end
 
   def self.valid_email?(email)

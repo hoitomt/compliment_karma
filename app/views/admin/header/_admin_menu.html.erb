@@ -13,13 +13,16 @@
 				<% if current_user.is_a_company? %>
 					<div class="am-user-info">
 						<span class="am-name"><%= current_user.company.name %></span><br />
-						<%#= link_to "Settings", '#', :class => 'ul_hover am-current-user-links' %>
+						<%= link_to "Account", '#', :class => 'ul_hover am-current-user-links' %>
 					</div>
 				<% else %>
 					<div class="am-user-info">
 						<span class="am-name"><%= current_user.first_last %></span><br />
 						<span class="am-email"><%= current_user.email %></span><br />
-						<%#= link_to "Settings", '#', :class => 'ul_hover am-current-user-links' %>
+						<%= link_to "Account", 
+												user_settings_path, 
+												:class => 'ul_hover am-current-user-links',
+												:remote => true %>
 					</div>
 				<% end %>
 				<div class="clear"></div>

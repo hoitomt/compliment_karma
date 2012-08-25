@@ -1,0 +1,15 @@
+<%= form_for user_email, :remote => true, 
+						 :html => {:style => "margin: 10px;"} do |f| %>
+	<div id="data-entry" class="clearfix">
+		<div id="field" style="float:left;">
+			<%= f.text_field :email, 
+											 :placeholder => 'add email address', 
+											 :style => "width: 300px; text-align: center; color: #A6A6A6; border: 2px solid #A6A6A6; 
+											 						font-size: 14px;" %>
+		</div>
+		<div>
+			<button class="add-email" type=submit>Add Email</button>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>

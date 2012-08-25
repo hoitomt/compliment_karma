@@ -1,0 +1,16 @@
+<div id="user-information">
+	<div class="header">
+		<h2>Add/Manage Email Addresses</h2>
+	</div>
+	<div id="user-info-form-container" class="popup-form">
+		<h1>Add an Email Address</h1>
+		<p><strong>Please add at least 1 work email and 1 personal email.</strong> After adding the new email, go to that account and click the link in the confirmation email.</p>
+		<br />
+		<%= render 'inline_forms/add_email_address', :user_email => @user_email %>
+		<br />
+		<h1>Choose your Primary Email Address</h1>
+		<p>Click "Make primary" next to the address you want to use for ComplimentKarma emails. Email addresses must be confirmed before they can become primary.</p>
+
+	</div>
+
+</div>
