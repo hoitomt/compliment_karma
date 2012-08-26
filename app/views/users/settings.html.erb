@@ -1,1 +1,10 @@
-<%= render 'users/menu/settings' %>
+<div id="user-profile">
+	<div class="left-one-third">
+		<%= render 'users/panels/user_profile_short', :flash => flash %>
+		<%= render 'users/menu/menu' %>
+	</div>
+	<%= render 'compliments/new_compliment' %>
+	<div id="content-container">
+		<%= render 'users/menu/settings' %>
+	</div>
+</div>
