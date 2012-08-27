@@ -9,7 +9,7 @@ class Domain
 			'groupon.com', 'bancbox.com', 'centro.net', 'complimentkarma.com', 'searshc.com',
 			'acquitygroup.com', 'us.mcd.com', 'visa.com', 'gap.com', 'cat.com', 'sanofipasteur.com',
 			'ca.ibm.com', 'intuit.com', 'microstrategy.com', 'in.fujitsu.com', 'hbc.com', 'oracle.com',
-			'gogoair.com', 'gstann.com'
+			'gogoair.com', 'gspann.com'
 		]
 	end
 
