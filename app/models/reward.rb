@@ -18,8 +18,8 @@ class Reward < ActiveRecord::Base
     followed = Follow.find_all_by_follower_user_id(user.id)
     list_of_rewards = []
     followed.each do |follow|
-      u = User.find_by_id(follow.subject_user_id)
-      list_of_rewards += u.rewards_received
+      u = follow.subject_user
+      list_of_rewards += u.rewards_received.includes(:presenter, :receiver)
     end
     return list_of_rewards
   end
