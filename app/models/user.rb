@@ -83,7 +83,8 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(email, submitted_password)
-    user = find_by_email(email.downcase)
+    user_email = UserEmail.where('email = ? AND confirmed = ?', email, 'Y').first
+    user = user_email.try(:user)
     (user && user.has_password?(submitted_password)) ? user : nil
   end
   
@@ -471,16 +472,21 @@ class User < ActiveRecord::Base
     if $redis.hexists(rh, self.id)
       $redis.hdel(rh, self.id)
     end
-    $redis.hset(rh, self.id, self.document)
+    $redis.hset(rh, self.id, self.attribute_document)
   end
 
-  def document
+  def attribute_document
     email_list_string = self.email_addresses.collect{ |e| e.email }.join(' ')
     return "#{self.first_name} #{self.last_name} #{self.city} #{email_list_string}"
   end
 
   def self.redis_hash_name
     return "users"
+  end
+
+  def confirm_account
+    update_attributes(:account_status => AccountStatus.CONFIRMED)
+    self.primary_email.update_attributes(:confirmed => 'Y')
   end
 
   private

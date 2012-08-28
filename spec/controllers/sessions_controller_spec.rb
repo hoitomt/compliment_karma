@@ -46,10 +46,12 @@ describe SessionsController do
     describe "signin with valid email and password" do
       before(:each) do
         @user = FactoryGirl.create(:user2)
+        @user.confirm_account
         @attr = {:email => @user.email, :password => @user.password }
       end
       
       it "should sign the user in" do
+        @user.primary_email.should be_is_confirmed
         post :create, :session => @attr
         controller.current_user.should == @user
         controller.should be_signed_in
@@ -59,6 +61,24 @@ describe SessionsController do
         post :create, :session => @attr
         response.should redirect_to(user_path(@user))
       end
+
+      it "should log in using a second Confirmed email address" do
+        ue = UserEmail.create(:user_id => @user.id, :email => "testing@hojo.com")
+        ue.update_attributes(:confirmed => 'Y')
+        user = User.find(@user.id)
+        user.email_addresses.length.should == 2
+        post :create, :session => @attr.merge(:email => ue.email)
+        response.should redirect_to(user_path(@user))
+      end
+
+      it "should not log in using a second email, UNconfirmed address" do
+        ue = UserEmail.create(:user_id => @user.id, :email => "testing@hojo.com")
+        user = User.find(@user.id)
+        user.email_addresses.length.should == 2
+        post :create, :session => @attr.merge(:email => ue.email)
+        response.should render_template('new')
+      end
+
     end
   end
   
