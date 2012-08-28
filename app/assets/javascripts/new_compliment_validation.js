@@ -64,7 +64,6 @@ var NewComplimentValidation = {
 		var receiverError = false;
 		var element = $('input#compliment_receiver_display');
 		var receiverUserId = $('input#compliment_receiver_id').val();
-		// console.log("Current User Id: " + ComplimentUI.userId + " Receiver User Id: " + receiverUserId);
 		var errorMsg = "";
 		if(ComplimentUI.userId == receiverUserId) {
 			this.errors.push({element: element, 

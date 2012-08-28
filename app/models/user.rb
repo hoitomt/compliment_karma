@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   has_many :company_departments, :through => :company_department_users
   has_many :experiences
   has_many :email_addresses, :class_name => 'UserEmail', :foreign_key => 'user_id'
-  # has_one  :primary_email, :class_name => 'UserEmail', 
-  #                          :foreign_key => 'user_id', 
-  #                          :conditions => "primary = 'Y'"
+  has_one  :primary_email, :class_name => 'UserEmail', 
+                           :foreign_key => 'user_id', 
+                           :conditions => "primary_email = 'Y'"
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned
@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
   after_create :create_relationships
   after_create :metrics_send_new_user
   after_create :create_user_email
+  after_save :add_to_redis
   
   # Return true if the user's password matches the submitted password
   def has_password?(submitted_password)
@@ -463,6 +464,23 @@ class User < ActiveRecord::Base
                .reorder('count(users.id) DESC')
     list = list.limit(amount) unless amount.blank?
     return list
+  end
+
+  def add_to_redis
+    rh = User.redis_hash_name.to_s
+    if $redis.hexists(rh, self.id)
+      $redis.hdel(rh, self.id)
+    end
+    $redis.hset(rh, self.id, self.document)
+  end
+
+  def document
+    email_list_string = self.email_addresses.collect{ |e| e.email }.join(' ')
+    return "#{self.first_name} #{self.last_name} #{self.city} #{email_list_string}"
+  end
+
+  def self.redis_hash_name
+    return "users"
   end
 
   private

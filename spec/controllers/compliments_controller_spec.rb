@@ -29,7 +29,7 @@ describe ComplimentsController do
       
       it "should post an error message" do
         post :create, :compliment => @attr, :request_page => "main"
-        response.should redirect_to(root_path)
+        response.body.should redirect_to(root_path)
       end
       
       it "should not create an email message" do
@@ -44,7 +44,7 @@ describe ComplimentsController do
         user = FactoryGirl.create(:user)
         @request.env['HTTP_REFERER'] = "/users/#{user.id}"
         post :create, :compliment => @attr.merge(:sender_email => user.email), :request_page => "user"
-        response.should redirect_to(user)
+        response.body.should redirect_to(user)
       end
       
     end
@@ -97,7 +97,6 @@ describe ComplimentsController do
         last_email.from.should eq(["new_compliment@complimentkarma.com"])
         last_email.to.should eq([user2.email])
         last_email.subject.should eq("You have received a compliment")
-        # response.should render_template("layouts/mailer/compliment_mailer")
         last_email.body.should have_selector('img', :src => user2.photo.url(:small))
       end
 

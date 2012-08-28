@@ -40,4 +40,7 @@ Ck::Application.configure do
 
   # Reposition Mini-Profiler
   Rack::MiniProfiler.config.position = 'right'
+
+  # Redis - created a Redis to Go instance specifically for local development
+  ENV["REDISTOGO_URL"] = 'redis://hoitomt:124f63476172c052815d93d14915c6db@clingfish.redistogo.com:9104/' 
 end

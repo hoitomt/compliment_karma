@@ -31,23 +31,23 @@ describe UserEmail do
 
 	it "should set primary" do
 		u = UserEmail.create!(@attr)
-		u.primary.should == "N" # When the factory creates the user, it creates the primary
+		u.primary_email.should == "N" # When the factory creates the user, it creates the primary
 	end
 
 	describe "primary failure" do
 		it "should only default one primary email address" do
 			u = UserEmail.create!(@attr)
 			ux = UserEmail.create!(@attr.merge(:email => "other_email@complimentkarma.com"))
-			u.primary.should == "N"
-			ux.primary.should == "N"
+			u.primary_email.should == "N"
+			ux.primary_email.should == "N"
 		end
 
 		it "should only set one primary email address" do
 			u = UserEmail.create!(@attr)
 			ux = UserEmail.create!(@attr.merge(:email => "other_email@complimentkarma.com",
-																				 :primary => "Y"))
-			u.primary.should == "N"
-			ux.primary.should == "N"
+																				 :primary_email => "Y"))
+			u.primary_email.should == "N"
+			ux.primary_email.should == "N"
 		end
 	end
 

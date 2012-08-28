@@ -43,13 +43,10 @@ var UserProfile = {
 		var opts = {
 			offset: $.waypoints('viewportHeight') + 40
 		};
-		// console.log(opts);
-		// $.waypoints('refresh')
 
 		$('#footer').waypoint(function(event, direction) {
 			docState.currentCount = docState.page * docState.perPage;
 			docState.page++;
-			console.log("Waypoint");
 			if(docState.currentCount < docState.totalCount) {
 				$footer.waypoint('remove');
 				$.ajax({

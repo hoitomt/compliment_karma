@@ -23,8 +23,7 @@ describe InvitationsController do
     
     describe "success" do
       before(:each) do
-        u = FactoryGirl.create(:user)
-        test_sign_in(u)
+        @user = FactoryGirl.create(:user)
         @attr = {:invite_email => "invite_me@example.org", :from_email => "imatest@example.org"}
       end
       
@@ -35,6 +34,7 @@ describe InvitationsController do
       end
       
       it "should create multiple invitations" do
+        test_sign_in(@user)
         params = {:email1 =>"test@example.org", :email2 => "testing@example.org", :email3 =>"",
                   :email4=>"", :email5=>"", :email6=>""}
         lambda do
@@ -43,6 +43,7 @@ describe InvitationsController do
       end
       
       it "should create multiple invitations with missing domain" do
+        test_sign_in(@user)
         params = {:email1 =>"test_nodomain", :email2 => "testing_nodomain", :email3 =>"",
                   :email4=>"", :email5=>"", :email6=>""}
         lambda do
@@ -51,6 +52,7 @@ describe InvitationsController do
       end
       
       it "should not send multiple invitations to the same person in the same request" do
+        test_sign_in(@user)
         params = {:email1 =>"test_nodomain", :email2 => "test_nodomain", :email3 =>"",
                   :email4=>"", :email5=>"", :email6=>""}
         lambda do

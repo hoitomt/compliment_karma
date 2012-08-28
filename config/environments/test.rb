@@ -1,3 +1,5 @@
+require 'mock_redis'
+
 Ck::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -37,4 +39,9 @@ Ck::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  # Redis - created a Redis to Go instance specifically for local development
+  # ENV["REDISTOGO_URL"] = 'redis://hoitomt:124f63476172c052815d93d14915c6db@clingfish.redistogo.com:9104/' 
+
+  $redis = MockRedis.new
 end

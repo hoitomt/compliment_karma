@@ -16,7 +16,7 @@ describe PagesController do
     
     it "index should have the correct title" do
       get 'index'
-      response.should have_selector("title", :content => "Send Compliments, Earn Rewards | #{@title}")
+      response.body.should have_selector("title", :content => "Send Compliments, Earn Rewards | #{@title}")
     end
   end
   
@@ -42,7 +42,7 @@ describe PagesController do
     
     it "should have the correct title" do
       get 'pricing'
-      response.should have_selector('title', :content => "Pricing")
+      response.body.should have_selector('title', :content => "Pricing")
     end
   end
   
@@ -54,7 +54,7 @@ describe PagesController do
     
     it "should have the correct title" do
       get 'demo'
-      response.should have_selector('title', :content => 'Demo')
+      response.body.should have_selector('title', :content => 'Demo')
     end
   end
 

@@ -24,6 +24,8 @@ Ck::Application.routes.draw do
   match "compliments/set_compliment_types" => "compliments#set_compliment_types"
   match "/email_api/new_account_confirmation" => "email_api#new_account_confirmation",
         :as => :new_account_confirmation
+  match "/email_api/new_email_confirmation" => "email_api#new_email_confirmation",
+        :as => :new_email_confirmation
   match "/email_api/invitation_acceptance" => "email_api#invitation_acceptance",
         :as => :invitation_acceptance
   match "/email_api/compliment_new" => "email_api#compliment_new",

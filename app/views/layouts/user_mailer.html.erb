@@ -1,0 +1,20 @@
+<div style="background: #DCF1EF;">
+	<div id="message-container" 
+			 style="background: #A7DBD8; font-size: 14px; width: 600px; margin: 0 auto;
+			 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+							-moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px;">
+		<%= render 'layouts/mailer/header' %>
+		<div id="content-container" style="padding: 30px; border-top: 1px solid #ffffff;">
+			<div id="user-content">
+				<%= yield %>
+			</div>
+			<div id="clear" style="clear: both;"></div>
+			<div>
+				Sincerely,<br /><br />
+				Customer Service Team<br />
+				<%= link_to 'ComplimentKarma.com', 'http://www.complimentkarma.com' %><br />
+				<%= mail_to 'info@complimentkarma.com', 'info@complimentkarma.com' %><br />
+			</div>
+		</div>
+	</div>
+</div>

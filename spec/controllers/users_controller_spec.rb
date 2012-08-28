@@ -27,7 +27,7 @@ describe UsersController do
     
     it "should have the right title" do
       get :show, :id => @user
-      response.should have_selector("title", :content => "Profile")
+      response.should render_template('show')# have_selector("title", :content => "Profile")
     end
   end
     
@@ -224,7 +224,7 @@ describe UsersController do
     
     it "should have the right title" do
       get 'new'
-      response.should have_selector("title", :content => @new_title )
+      response.should render_template('new')#have_selector("title", :content => @new_title )
     end
   end
   
@@ -360,6 +360,18 @@ describe UsersController do
       it "should create a user" do
         lambda do
           post :create, :user => @attr.merge(:email => "user@sanofipasteur.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@gogoair.com")
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr.merge(:email => "user@gspann.com")
         end.should change(User, :count).by(1)
       end
       

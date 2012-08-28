@@ -2,9 +2,18 @@ class TaskRunner
 
 	# Update compliment types 20120822
 	def self.run_task
-		user_email
+		add_user_to_redis
 	end
 
+	# Initialize the Redis instance with user data
+	def self.add_user_to_redis
+		users = User.all
+		users.each do |u|
+			u.add_to_redis
+		end
+	end
+
+	# Copy the email addresses from User to UserEmail and set to Primary
 	def self.user_email
 		users = User.all
 		account_status_confirmed = AccountStatus.CONFIRMED.id
@@ -15,10 +24,11 @@ class TaskRunner
 											 :email => u.email,
 											 :domain => u.domain,
 											 :confirmed => confirmed, 
-											 :primary => 'Y')
+											 :primary_email => 'Y')
 		end
 	end
 
+	# Set the compliment type names
 	def self.compliment_type
 		c = ComplimentType.all
 		c[0].update_attributes(:name => "Professional to Professional", 

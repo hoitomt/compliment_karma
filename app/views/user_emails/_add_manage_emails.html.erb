@@ -6,11 +6,14 @@
 		<h1>Add an Email Address</h1>
 		<p><strong>Please add at least 1 work email and 1 personal email.</strong> After adding the new email, go to that account and click the link in the confirmation email.</p>
 		<br />
-		<%= render 'inline_forms/add_email_address', :user_email => @user_email %>
+		<%= render 'inline_forms/add_email_address', :user_email => user_email %>
 		<br />
 		<h1>Choose your Primary Email Address</h1>
 		<p>Click "Make primary" next to the address you want to use for ComplimentKarma emails. Email addresses must be confirmed before they can become primary.</p>
-
+		<div class="clear"></div>
+	</div>
+	<div id="email-table">
+		<%= render 'user_emails/email_table', :user_emails => @user_emails %>
 	</div>
 
 </div>

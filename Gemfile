@@ -11,6 +11,7 @@ gem 'newrelic_rpm'
 gem 'marginalia', "~> 1.1.0"
 gem 'restful_metrics'
 gem 'rack-mini-profiler'
+gem 'redis'
 
 # Email - HTTP to mailgun and Bancbox
 gem 'rest-client', '1.6.7'
@@ -32,10 +33,12 @@ end
 group :test do
   # Pretty printed test output
 	gem 'rspec-rails', '2.6.1'
-	gem 'webrat', '0.7.1'
+	# gem 'webrat', '0.7.1'
+  gem 'capybara'
 	gem 'spork', '0.9.0'
   gem 'turn', '0.8.2', :require => false
 	gem 'factory_girl_rails', '~> 3.0'
+  gem 'mock_redis'
 end
 
 # Gems used only for assets and not required

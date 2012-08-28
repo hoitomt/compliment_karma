@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+
+    
+    <script type="text/javascript" async="" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/adzerk1_2_4_43,adzerk2_2_17_45,adzerk3_2_4_44"></script><script type="text/javascript" async="" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/ga.js"></script><script type="text/javascript" async="" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/quant.js"></script><script type="text/javascript" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/stub.js"></script>
+    <link rel="stylesheet" type="text/css" href="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/all.css">
+    
+    <meta name="relativepagescore" content="196892">
+    <link rel="canonical" href="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow.html">
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Migrating from Webrat to Capybara...unsuccessfully&#39;" href="http://stackoverflow.com/feeds/question/6085718">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            
+            StackExchange.question.init({votesCast:[],autoShowCommentHelp:true,showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:6085718});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '6085718');
+            
+                
+        });
+    </script>
+
+
+
+        <script type="text/javascript">
+             StackExchange.ready(function () {
+                 StackExchange.realtime.init('ws://sockets.ny.stackexchange.com');
+                StackExchange.realtime.subscribeToInboxNotifications();
+                                 StackExchange.realtime.subscribeToReputationNotifications('1');            
+                         });
+        </script>
+
+    <script type="text/javascript">
+        StackExchange.init({"stackAuthUrl":"https://stackauth.com","serverTime":1346120484,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Stack Overflow","description":"Q\u0026A for professional and enthusiast programmers","isNoticesTabEnabled":true,"enableSocialMediaInSharePopup":true},"user":{"isRegistered":true,"userId":589248,"accountId":288688,"gravatar":"\u003cdiv class=\"\"\u003e\u003cimg src=\"http://www.gravatar.com/avatar/f89f8da0d15954599998e3c2c09894f0?s=32\u0026amp;d=identicon\u0026amp;r=PG\" alt=\"\" width=\"32\" height=\"32\"\u003e\u003c/div\u003e","profileUrl":"http://stackoverflow.com/users/589248/hoitomt","fkey":"9774a889849c5d8532ee0605b9e94352","notificationsUnviewedCount":1,"inboxUnviewedCount":4}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.js":"d1cd9a23171c","js/moderator.js":"c055b6d653e8","js/full-anon.js":"34b439ed78cd","js/full.js":"dee5c4805395","js/wmd.js":"93b92575f8bc","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/mobile.js":"6eb68240242f","js/help.js":"fc9fb0517db2","js/tageditor.js":"c1ba807b32aa","js/tageditornew.js":"bd66fabe1c71","js/inline-tag-editing.js":"be882e188985","js/revisions.js":"8c6bcd93b7fe","js/probes.js":"beb933322ff0","js/review.js":"918218bd748d"});
+        
+    </script>
+<script async="" type="text/javascript" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/full.js"></script><script async="" type="text/javascript" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/prettify-full.js"></script><script async="" type="text/javascript" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/wmd.js"></script><link href="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/sidebar.min.css" type="text/css" rel="stylesheet"></head>
+<body class="question-page">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+    <div class="container">
+        <div id="header">
+            <div id="portalLink">
+                <a class="genu" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+                    <a class="unreadCount" style="margin-top: 3px; opacity: 1; " title="unread messages in your inbox">4</a>
+                        <script type="text/javascript">
+                             StackExchange.ready(function () {
+                                 genuwine.animateInbox();
+                             });
+                        </script>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    <span id="hlinks-user">
+                  <span class="profile-triangle">▾</span><a href="http://stackoverflow.com/users/589248/hoitomt" class="profile-link">hoitomt</a>&nbsp;<a href="http://stackoverflow.com/users/589248/hoitomt?tab=reputation"><span class="reputation-score" title="your reputation; view reputation changes" dir="ltr">71</span></a><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+ <span class="lsep">|</span>
+
+                  </span>
+                  <span id="hlinks-nav">
+                  
+                  </span>
+                  <span id="hlinks-custom">
+                  <a href="http://chat.stackoverflow.com/">chat</a>
+ <span class="lsep">|</span>
+<a href="http://meta.stackoverflow.com/">meta</a>
+ <span class="lsep">|</span>
+<a href="http://stackoverflow.com/about">about</a>
+ <span class="lsep">|</span>
+<a href="http://stackoverflow.com/faq">faq</a>
+                  </span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                    <div>
+                        <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="140" size="28" value="">
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">Stack Overflow</a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/badges">Badges</a></li>
+                        <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope="" itemtype="http://schema.org/Article">
+<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+<div id="question-header">
+    <h1 itemprop="name"><a href="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow.html" class="question-hyperlink">Migrating from Webrat to Capybara…unsuccessfully</a></h1>
+</div>
+<div id="mainbar">
+
+
+
+<div class="question" id="question" data-questionid="6085718">
+    
+    <div class="everyonelovesstackoverflow" id="adzerk1">
+    <iframe frameborder="0" scrolling="no" height="90" width="728" src="javascript:window["contents"]"></iframe></div>
+
+    
+    <table>
+    <tbody><tr>
+    <td class="votecell">
+        
+
+<div class="vote">
+    <input type="hidden" value="6085718">
+    <a class="vote-up-off vote-up-on" title="This question shows research effort; it is useful and clear (click again to undo)">up vote</a>
+    <span class="vote-count-post">7</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful (click again to undo)">down vote</a>
+    <a class="star-off" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+ 
+</div>
+
+    </td>
+    
+<td class="postcell">
+<div>          
+    <div class="post-text" itemprop="description">
+        <p>Hoping someone might see what I've overlooked...</p>
+
+<p>I'm trying to get Capybara working in a small existing application...and I'm not having any luck. </p>
+
+<p>Gemfile:</p>
+
+<pre class="default prettyprint"><code><span class="pln">&nbsp; </span><span class="kwd">group</span><span class="pln"> </span><span class="pun">:</span><span class="pln">development</span><span class="pun">,</span><span class="pln"> </span><span class="pun">:</span><span class="pln">test </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; gem </span><span class="str">'rspec-rails'</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># gem 'webrat'</span><span class="pln"><br>&nbsp; &nbsp; gem </span><span class="str">'capybara'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">:</span><span class="pln">git </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">'git://github.com/jnicklas/capybara.git'</span><span class="pln"><br>&nbsp; </span><span class="kwd">end</span><span class="pln"><br>&nbsp; </span><span class="pun">...</span><span class="pln"><br></span></code></pre>
+
+<p>Similar specs in two places are failing for different reasons. Not sure why?</p>
+
+<p><strong>spec/controllers/pages_controller_spec.rb:</strong></p>
+
+<pre class="default prettyprint"><code><span class="kwd">require</span><span class="pln"> </span><span class="str">'spec_helper'</span><span class="pln"><br><br>describe </span><span class="typ">PagesController</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br><br>&nbsp; describe </span><span class="str">"GET 'about'"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; it </span><span class="str">"should be successful"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com"># get 'about' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #worked w/ webrat</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com"># response.should be_success &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#worked w/ webrat</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; visit pages_about_path<br>&nbsp; &nbsp; &nbsp; </span><span class="com"># page.should have_content('About Us') </span><span class="pln"><br>&nbsp; &nbsp; &nbsp; page</span><span class="pun">.</span><span class="pln">html</span><span class="pun">.</span><span class="pln">should match</span><span class="pun">(</span><span class="str">/About/</span><span class="pln">i</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">end</span><span class="pln"><br><br>&nbsp; &nbsp; it </span><span class="str">"should have title"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com"># get 'about' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #webrat</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com"># response.should have_selector("title", :content =&gt; "About Us") #webrat</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; visit pages_about_path &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; page</span><span class="pun">.</span><span class="pln">should have_selector</span><span class="pun">(</span><span class="str">"title"</span><span class="pun">)</span><span class="pln"> &nbsp; &nbsp;<br>&nbsp; &nbsp; </span><span class="kwd">end</span><span class="pln"><br>&nbsp; </span><span class="kwd">end</span><span class="pln"> &nbsp;<br></span><span class="kwd">end</span><span class="pln"><br></span></code></pre>
+
+<p><strong>Failures:</strong>
+<em>(may be pulling in some generic page as doctype in browser is <code>"&lt;!DOCTYPE html&gt;"</code>)</em></p>
+
+<pre class="default prettyprint"><code><span class="pln">&nbsp; </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="typ">PagesController</span><span class="pln"> GET </span><span class="str">'about'</span><span class="pln"> should be successful<br>&nbsp; &nbsp; &nbsp;</span><span class="typ">Failure</span><span class="pun">/</span><span class="typ">Error</span><span class="pun">:</span><span class="pln"> page</span><span class="pun">.</span><span class="pln">html</span><span class="pun">.</span><span class="pln">should match</span><span class="pun">(</span><span class="str">/About/</span><span class="pln">i</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp;expected </span><span class="str">"&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"&gt;\n\n"</span><span class="pln"> to match </span><span class="pun">/</span><span class="typ">About</span><span class="pun">/</span><span class="pln">i<br>&nbsp; &nbsp; &nbsp;</span><span class="com"># ./spec/controllers/pages_controller_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</span><span class="pln"><br><br>&nbsp; </span><span class="lit">2</span><span class="pun">)</span><span class="pln"> </span><span class="typ">PagesController</span><span class="pln"> GET </span><span class="str">'about'</span><span class="pln"> should have the right title<br>&nbsp; &nbsp; &nbsp;</span><span class="typ">Failure</span><span class="pun">/</span><span class="typ">Error</span><span class="pun">:</span><span class="pln"> page</span><span class="pun">.</span><span class="pln">should have_selector</span><span class="pun">(</span><span class="str">"title"</span><span class="pun">)</span><span class="pln"> <br>&nbsp; &nbsp; &nbsp; &nbsp;expected css </span><span class="str">"title"</span><span class="pln"> to </span><span class="kwd">return</span><span class="pln"> something<br>&nbsp; &nbsp; &nbsp;</span><span class="com"># ./spec/controllers/pages_controller_spec.rb:20:in `block (3 levels) in &lt;top (required)&gt;'</span><span class="pln"><br></span></code></pre>
+
+<p><strong>spec/views/pages/about.html.haml_spec.rb:</strong></p>
+
+<pre class="default prettyprint"><code><span class="kwd">require</span><span class="pln"> </span><span class="str">'spec_helper'</span><span class="pln"><br><br>describe </span><span class="str">"pages/about.html.haml"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; it </span><span class="str">"renders attributes in &lt;p&gt;"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># render #webrat</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># rendered.should match(/About/) #webrat</span><span class="pln"><br>&nbsp; &nbsp; visit pages_about_path<br>&nbsp; &nbsp; page</span><span class="pun">.</span><span class="pln">should have_content</span><span class="pun">(</span><span class="str">"About Us"</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="kwd">end</span><span class="pln"><br><br>&nbsp; it </span><span class="str">"should have the right heading"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"> &nbsp;<br>&nbsp; &nbsp; </span><span class="com"># render #webrat</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># rendered.should have_selector("h2", :content =&gt; "About Us") #webrat</span><span class="pln"><br>&nbsp; &nbsp; visit pages_about_path<br>&nbsp; &nbsp; page</span><span class="pun">.</span><span class="pln">should have_selector</span><span class="pun">(</span><span class="str">"h2"</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="kwd">end</span><span class="pln"><br></span><span class="kwd">end</span><span class="pln"><br></span></code></pre>
+
+<p><strong>Failures:</strong></p>
+
+<pre class="default prettyprint"><code><span class="pln">&nbsp; </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> pages</span><span class="pun">/</span><span class="pln">about</span><span class="pun">.</span><span class="pln">html</span><span class="pun">.</span><span class="pln">haml renders attributes </span><span class="kwd">in</span><span class="pln"> </span><span class="str">&lt;p&gt;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp;</span><span class="typ">Failure</span><span class="pun">/</span><span class="typ">Error</span><span class="pun">:</span><span class="pln"> visit pages_about_path<br>&nbsp; &nbsp; &nbsp;</span><span class="typ">NoMethodError</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">undefined</span><span class="pln"> method </span><span class="str">`visit' for #&lt;RSpec::Core::ExampleGroup::Nested_1:0x00000101dc2970&gt;<br>&nbsp; &nbsp; &nbsp;# ./spec/views/pages/about.html.haml_spec.rb:8:in `</span><span class="pln">block </span><span class="pun">(</span><span class="lit">2</span><span class="pln"> levels</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln">top </span><span class="pun">(</span><span class="pln">required</span><span class="pun">)&gt;</span><span class="str">'<br><br>&nbsp; 2) pages/about.html.haml should have the right heading<br>&nbsp; &nbsp; &nbsp;Failure/Error: visit pages_about_path<br>&nbsp; &nbsp; &nbsp;NoMethodError:<br>&nbsp; &nbsp; &nbsp; &nbsp;undefined method `visit'</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> </span><span class="com">#&lt;RSpec::Core::ExampleGroup::Nested_1:0x000001034b1d98&gt;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp;</span><span class="com"># ./spec/views/pages/about.html.haml_spec.rb:16:in `block (2 levels) in &lt;top (required)&gt;'</span><span class="pln"><br></span></code></pre>
+
+    </div>            
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/ruby-on-rails" class="post-tag" title="show questions tagged &#39;ruby-on-rails&#39;" rel="tag">ruby-on-rails</a> <a href="http://stackoverflow.com/questions/tagged/rspec" class="post-tag" title="show questions tagged &#39;rspec&#39;" rel="tag">rspec</a> <a href="http://stackoverflow.com/questions/tagged/capybara" class="post-tag" title="show questions tagged &#39;capybara&#39;" rel="tag">capybara</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+        <div class="post-menu"><a href="http://stackoverflow.com/q/6085718/589248" title="short permalink to this question" class="short-link" id="link-post-6085718">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/6085718/edit" title="revise and improve this post">edit</a><span class="lsep">|</span><a id="flag-post-6085718" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" title="flag this post for serious problems or moderator attention">flag</a></div>
+    </td>
+    <td class="post-signature owner">
+    <div class="user-info"><div class="user-action-time">asked <span title="2011-05-22 02:44:46Z" class="relativetime">May 22 '11 at 2:44</span></div><div class="user-gravatar32"><a href="http://stackoverflow.com/users/63761/meltemi"><div class=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/b9a099f02437916c0a76f8326966be17" alt="" width="32" height="32"></div></a></div><div class="user-details"><a href="http://stackoverflow.com/users/63761/meltemi">Meltemi</a><br><span class="reputation-score" title="reputation score" dir="ltr">4,815</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="43 silver badges"><span class="badge2"></span><span class="badgecount">43</span></span><span title="106 bronze badges"><span class="badge3"></span><span class="badgecount">106</span></span></div></div>
+        <br class="cbt">
+        <div class="accept-rate cool" title="this user has accepted an answer for 175 of 249 eligible questions">70% accept rate</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>    </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-6085718" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-11048516" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Please mark nigelr (or whomever you think deserves it) as the accepted answer for others who might have this problem and as common courtesy.</span> –&nbsp;<a href="http://stackoverflow.com/users/377366/kobejohn" title="654 reputation" class="comment-user">kobejohn</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(11048516, 0)" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#comment11048516_6085718"><span title="2012-01-13 05:13:07Z">Jan 13 at 5:13</span></a></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-6085718"></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-6085718" class="comments-link" data-comments-count="0" title="ask author for clarification about this post">add comment</a>
+    
+</td>
+</tr>            </tbody></table>    
+</div>
+
+
+
+<div id="answers">
+
+    <a name="tab-top"></a>
+    <div id="answers-header">
+        <div class="subheader answers-subheader">
+            <h2>4 Answers</h2>
+            <div id="tabs">
+                <a class="youarehere" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+<a href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+<a href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+
+            </div>
+        </div>    
+    </div>    
+
+
+
+
+
+  
+    <a name="8075029"></a>
+    <div id="answer-8075029" class="answer accepted-answer" data-answerid="8075029">
+        <table>
+        <tbody><tr>
+        <td class="votecell">
+            
+
+<div class="vote">
+    <input type="hidden" value="8075029">
+    <a class="vote-up-off vote-up-on" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post">13</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+<span class="vote-accepted-on" title="The question owner accepted this as the best answer Jan 13 at 5:34">accepted</span> 
+</div>
+
+        </td>
+        
+
+
+<td class="answercell">
+    <div class="post-text"><p>Just had the same issue and found that capybara needs:</p>
+
+<pre class="default prettyprint"><code><span class="pln">response</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">should have_selector</span><span class="pun">(</span><span class="str">"title"</span><span class="pun">)</span><span class="pln"><br></span></code></pre>
+
+<p>webrat does not need the .body </p>
+
+<p>also, make sure you are rendering views eg:.</p>
+
+<pre class="default prettyprint"><code><span class="pln">describe </span><span class="typ">PagesController</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; render_views<br></span></code></pre>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/8075029/589248" title="short permalink to this answer" class="short-link" id="link-post-8075029">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/8075029/edit" title="revise and improve this post">edit</a><span class="lsep">|</span><a id="flag-post-8075029" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" title="flag this post for serious problems or moderator attention">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info"><div class="user-action-time">answered <span title="2011-11-10 04:34:19Z" class="relativetime">Nov 10 '11 at 4:34</span></div><div class="user-gravatar32"><a href="http://stackoverflow.com/users/1038989/nigelr"><div class=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/56adfa912f4d00a86da076ac9fe97154" alt="" width="32" height="32"></div></a></div><div class="user-details"><a href="http://stackoverflow.com/users/1038989/nigelr">nigelr</a><br><span class="reputation-score" title="reputation score" dir="ltr">146</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span></div></div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-8075029" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-11048507" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">This is the answer. Also, if you are coming from railstutorial.org, I believe you also need to change :content =&gt; "whatever" to :title =&gt; "whatever". Otherwise it passes regardless of the content.</span> –&nbsp;<a href="http://stackoverflow.com/users/377366/kobejohn" title="654 reputation" class="comment-user">kobejohn</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(11048507, 8075029)" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#comment11048507_8075029"><span title="2012-01-13 05:12:15Z">Jan 13 at 5:12</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12811615" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">I think yakiimo means that <code>have_selector("title", :content =&gt; "Home")</code> becomes <code>have_selector("title", :text =&gt; "Home")</code>. I also found that <code>have_selector("a", :href =&gt; "/users?page=2", :content =&gt; "Next")</code> changes to <code>have_link("Next", :href =&gt; "/users?page=2")</code>. I'm finding the before-and-after examples in this blog post helpful:  <a href="http://zadasnotes.blogspot.com/2011/08/migrating-from-webrat-to-capybara.html" rel="nofollow">Migrating from Webrat to Capybara</a>.</span> –&nbsp;<a href="http://stackoverflow.com/users/550712/mark-berry" title="716 reputation" class="comment-user">Mark Berry</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12811615, 8075029)" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#comment12811615_8075029"><span title="2012-04-04 20:54:44Z">Apr 4 at 20:54</span></a></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-8075029"></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-8075029" class="comments-link" data-comments-count="0" title="ask author for clarification about this post">add comment</a>
+    
+</td>
+</tr>            </tbody></table>
+</div>
+
+    <div class="everyonelovesstackoverflow" id="adzerk3"><a href="http://engine.adzerk.net/redirect/0/5918/7472/8277/e8d5065afd69474d8e99c6abeccff0ba/44/1178/10183/634817172848829510/?keywords=ruby-on-rails%2crspec%2ccapybara%2cx-user-registered" rel="nofollow" target="_blank" title=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/030883e15a374ba397b57b8d4bf1033e.png" title="" alt="" border="0" height="90" width="728"></a><img width="0" height="0" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/v.gif"></div>
+
+    
+
+  
+    <a name="8545041"></a>
+    <div id="answer-8545041" class="answer" data-answerid="8545041">
+        <table>
+        <tbody><tr>
+        <td class="votecell">
+            
+
+<div class="vote">
+    <input type="hidden" value="8545041">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post">0</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+ 
+</div>
+
+        </td>
+        
+
+
+<td class="answercell">
+    <div class="post-text"><p>Ensure that your <code>spec_helper.rb</code> file has the following at the top:</p>
+
+<pre class="default prettyprint"><code><span class="pln">ENV</span><span class="pun">[</span><span class="str">"RAILS_ENV"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">||=</span><span class="pln"> </span><span class="str">'test'</span><span class="pln"><br></span><span class="kwd">require</span><span class="pln"> </span><span class="typ">File</span><span class="pun">.</span><span class="pln">expand_path</span><span class="pun">(</span><span class="str">"../../config/environment"</span><span class="pun">,</span><span class="pln"> __FILE__</span><span class="pun">)</span><span class="pln"><br></span><span class="kwd">require</span><span class="pln"> </span><span class="str">'rspec/rails'</span><span class="pln"><br></span><span class="kwd">require</span><span class="pln"> </span><span class="str">'rspec/autorun'</span><span class="pln"><br></span><span class="kwd">require</span><span class="pln"> </span><span class="str">'capybara/rspec'</span><span class="pln"><br></span></code></pre>
+
+<p>I had a similar issue as yours (i.e., <code>undefined method 'visit'</code>) and popping those lines solved the issue.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/8545041/589248" title="short permalink to this answer" class="short-link" id="link-post-8545041">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/8545041/edit" title="revise and improve this post">edit</a><span class="lsep">|</span><a id="flag-post-8545041" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" title="flag this post for serious problems or moderator attention">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info"><div class="user-action-time">answered <span title="2011-12-17 13:24:13Z" class="relativetime">Dec 17 '11 at 13:24</span></div><div class="user-gravatar32"><a href="http://stackoverflow.com/users/171662/john"><div class=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/3ce3894ae8751f6ec76eb21e3766f4dc" alt="" width="32" height="32"></div></a></div><div class="user-details"><a href="http://stackoverflow.com/users/171662/john">John</a><br><span class="reputation-score" title="reputation score" dir="ltr">2,378</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="37 bronze badges"><span class="badge3"></span><span class="badgecount">37</span></span></div></div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-8545041" class="comments dno">
+        <table>
+        <tbody>
+        
+            <tr><td></td><td></td></tr>
+        
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-8545041"></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-8545041" class="comments-link" data-comments-count="0" title="ask author for clarification about this post">add comment</a>
+    
+</td>
+</tr>            </tbody></table>
+</div>
+
+
+  
+    <a name="8208797"></a>
+    <div id="answer-8208797" class="answer" data-answerid="8208797">
+        <table>
+        <tbody><tr>
+        <td class="votecell">
+            
+
+<div class="vote">
+    <input type="hidden" value="8208797">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post">1</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+ 
+</div>
+
+        </td>
+        
+
+
+<td class="answercell">
+    <div class="post-text"><p>You should include capybara DSL in your test file : </p>
+
+<pre class="default prettyprint"><code><span class="kwd">require</span><span class="pln"> </span><span class="str">'spec_helper'</span><span class="pln"><br><br>&nbsp; &nbsp; describe </span><span class="typ">PagesController</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br><br>&nbsp; &nbsp; include </span><span class="typ">Capybara</span><span class="pun">::</span><span class="pln">DSL<br><br>&nbsp; &nbsp; &nbsp; describe </span><span class="str">"GET 'about'"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; it </span><span class="str">"should be successful"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"> <br>&nbsp; &nbsp; &nbsp; </span><span class="pun">...</span><span class="pln"><br></span></code></pre>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/8208797/589248" title="short permalink to this answer" class="short-link" id="link-post-8208797">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/8208797/edit" title="revise and improve this post">edit</a><span class="lsep">|</span><a id="flag-post-8208797" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" title="flag this post for serious problems or moderator attention">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info"><div class="user-action-time">answered <span title="2011-11-21 07:59:30Z" class="relativetime">Nov 21 '11 at 7:59</span></div><div class="user-gravatar32"><a href="http://stackoverflow.com/users/1033770/goldenlink"><div class=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/7dd7816bedd0e32115cd04cca80a3ee4" alt="" width="32" height="32"></div></a></div><div class="user-details"><a href="http://stackoverflow.com/users/1033770/goldenlink">goldenlink</a><br><span class="reputation-score" title="reputation score" dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span></div></div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-8208797" class="comments dno">
+        <table>
+        <tbody>
+        
+            <tr><td></td><td></td></tr>
+        
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-8208797"></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-8208797" class="comments-link" data-comments-count="0" title="ask author for clarification about this post">add comment</a>
+    
+</td>
+</tr>            </tbody></table>
+</div>
+
+
+  
+    <a name="6089761"></a>
+    <div id="answer-6089761" class="answer" data-answerid="6089761">
+        <table>
+        <tbody><tr>
+        <td class="votecell">
+            
+
+<div class="vote">
+    <input type="hidden" value="6089761">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post">0</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+ 
+</div>
+
+        </td>
+        
+
+
+<td class="answercell">
+    <div class="post-text"><p>This won't fix all your problems, but Instead of:</p>
+
+<pre class="default prettyprint"><code><span class="pln">page</span><span class="pun">.</span><span class="pln">html</span><span class="pun">.</span><span class="pln">should match</span><span class="pun">(</span><span class="str">/About/</span><span class="pln">i</span><span class="pun">)</span><span class="pln"><br></span></code></pre>
+
+<p>try:</p>
+
+<pre class="default prettyprint"><code><span class="pln">page</span><span class="pun">.</span><span class="pln">should match</span><span class="pun">(</span><span class="str">/About/</span><span class="pln">i</span><span class="pun">)</span><span class="pln"><br></span></code></pre>
+
+<p>(you might not even need <em>page</em>).</p>
+
+<p>Also, check that you have Capybara set to use CSS queries in env.rb (it defaults to XPath).</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/6089761/589248" title="short permalink to this answer" class="short-link" id="link-post-6089761">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/6089761/edit" title="revise and improve this post">edit</a><span class="lsep">|</span><a id="flag-post-6089761" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" title="flag this post for serious problems or moderator attention">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover"><div class="user-action-time">answered <span title="2011-05-22 18:03:02Z" class="relativetime">May 22 '11 at 18:03</span></div><div class="user-gravatar32"><a href="http://stackoverflow.com/users/119822/andy-waite"><div class=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/72bba73590af831e5ece8522266ac571" alt="" width="32" height="32"></div></a></div><div class="user-details"><a href="http://stackoverflow.com/users/119822/andy-waite">Andy Waite</a><br><span class="reputation-score" title="reputation score" dir="ltr">2,800</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span></div></div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-6089761" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-7093884" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Dropping the 'html.' didn't work. Also, Capybara's read me states: "Capybara does not try to guess what kind of selector you are going to give it, and will <b>always use CSS by default</b>. If you want to use XPath, you’ll need to do..."  Seeing error "<b>undefined method `visit'</b>" makes me think Capybara isn't installed or referenced correctly...but not sure how to confirm!?!</span> –&nbsp;<a href="http://stackoverflow.com/users/63761/meltemi" title="4815 reputation" class="comment-user owner">Meltemi</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(7093884, 6089761)" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#comment7093884_6089761"><span title="2011-05-24 19:19:14Z">May 24 '11 at 19:19</span></a></span><span class="edited-yes" title="this comment was edited"></span></div></td>
+    </tr>
+            
+    <tr id="comment-7094423" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Hmm, the env.rb Cucumber generates says "Capybara defaults to XPath selectors rather than Webrat's default of CSS3". But yeah, it sounds like it's not picking up Capybara. Have you tried running through Bundler? bundle exec cucumber</span> –&nbsp;<a href="http://stackoverflow.com/users/119822/andy-waite" title="2800 reputation" class="comment-user">Andy Waite</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(7094423, 6089761)" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#comment7094423_6089761"><span title="2011-05-24 19:52:01Z">May 24 '11 at 19:52</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-7094660" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">not using Cucumber...don't really want to... is that maybe the problem?</span> –&nbsp;<a href="http://stackoverflow.com/users/63761/meltemi" title="4815 reputation" class="comment-user owner">Meltemi</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(7094660, 6089761)" href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#comment7094660_6089761"><span title="2011-05-24 20:03:21Z">May 24 '11 at 20:03</span></a></span><span class="edited-yes" title="this comment was edited"></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-6089761"></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-6089761" class="comments-link" data-comments-count="0" title="ask author for clarification about this post">add comment</a>
+    
+</td>
+</tr>            </tbody></table>
+</div>
+    <a name="new-answer"></a>
+    <form id="post-form" action="http://stackoverflow.com/questions/6085718/answer/submit" method="post" class="post-form">
+        <h2 class="space">Your Answer</h2>
+
+
+
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: false,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">  
+
+    
+    <div class="wmd-container">
+        <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li class="wmd-button" style="left: 0px; " id="wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B"><span style="background-position: 0px 0px; "></span></li><li class="wmd-button" style="left: 25px; " id="wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I"><span style="background-position: -20px 0px; "></span></li><li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li><li class="wmd-button" style="left: 75px; " id="wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L"><span style="background-position: -40px 0px; "></span></li><li class="wmd-button" style="left: 100px; " id="wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q"><span style="background-position: -60px 0px; "></span></li><li class="wmd-button" style="left: 125px; " id="wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K"><span style="background-position: -80px 0px; "></span></li><li class="wmd-button" style="left: 150px; " id="wmd-image-button" title="Image &lt;img&gt; Ctrl+G"><span style="background-position: -100px 0px; "></span></li><li class="wmd-spacer wmd-spacer2" id="wmd-spacer2"></li><li class="wmd-button" style="left: 200px; " id="wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O"><span style="background-position: -120px 0px; "></span></li><li class="wmd-button" style="left: 225px; " id="wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U"><span style="background-position: -140px 0px; "></span></li><li class="wmd-button" style="left: 250px; " id="wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H"><span style="background-position: -160px 0px; "></span></li><li class="wmd-button" style="left: 275px; " id="wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R"><span style="background-position: -180px 0px; "></span></li><li class="wmd-spacer wmd-spacer3" id="wmd-spacer3"></li><li class="wmd-button" style="left: 325px; " id="wmd-undo-button" title="Undo - Ctrl+Z"><span style="background-position: -200px -20px; "></span></li><li class="wmd-button" style="left: 350px; " id="wmd-redo-button" title="Redo - Ctrl+Shift+Z"><span style="background-position: -220px -20px; "></span></li><li class="wmd-button wmd-help-button active-help" id="wmd-help-button" style="right: 0px; " title="Markdown Editing Help"><span style="background-position: -240px 0px; "></span></li><div id="mdhelp" class="mdhelp" style="right: -8px; width: 668px; top: 25px; ">
+    <ul id="mdhelp-tabs" class="mdhelp-tabs">
+        <li data-tab="mdhelp-links" data-buttons="link">Links</li>
+        <li data-tab="mdhelp-images" data-buttons="image">Images</li>
+        <li data-tab="mdhelp-styles" data-buttons="bold,italic,heading">Styling/Headers</li>
+        <li data-tab="mdhelp-lists" data-buttons="olist,ulist">Lists</li>
+        <li data-tab="mdhelp-blockquotes" data-buttons="quote">Blockquotes</li>
+        <li data-tab="mdhelp-code" data-buttons="code">Code</li>
+        <li data-tab="mdhelp-html">HTML</li>
+        <li style="float:right"><a href="http://stackoverflow.com/editing-help" target="_blank">advanced help »</a></li>
+    </ul>
+    
+    <div class="mdhelp-tab" id="mdhelp-links">
+            <p>
+                In most cases, a plain URL will be recognized as such and automatically linked:
+            </p>
+            <pre>Visit http://area51.stackexchange.com/ regularly!
+Use angle brackets to force linking: Have you seen &lt;http://superuser.com&gt;?
+</pre>
+            <p>
+                To create fancier links, use Markdown:
+            </p>
+                <pre>Here's [a link](http://www.example.com/)! And a reference-style link to [a panda][1].
+References don't have to be [numbers][question].
+
+ [1]: http://notfound.stackexchange.com/
+ [question]: http://english.stackexchange.com/questions/11481
+</pre>
+                <p>You can add tooltips to links:</p>
+<pre>Click [here](http://diy.stackexchange.com<span class="spaces">&nbsp;</span>"this text appears when you mouse over")!
+This works with [reference links][blog] as well.
+
+ [blog]: http://blog.stackoverflow.com/<span class="spaces">&nbsp;</span>"click here for updates"
+</pre>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-images">
+        <p>Images are exactly like links, but they have an exclamation point in front of them:</p>
+        <pre>![a busy cat](http://sstatic.net/stackoverflow/img/error-lolcat-problemz.jpg)
+![two muppets][1]
+
+ [1]: http://i.imgur.com/I5DFV.jpg "tooltip"
+</pre>
+        <p>
+            The word in square brackets is the alt text, which gets displayed if the browser
+            can't show the image. Be sure to include meaningful alt text for screen-reading
+            software.
+        </p>
+   
+    </div>
+    <div class="mdhelp-tab" id="mdhelp-styles">
+        <div class="col1">
+            <p>Be sure to use text styling sparingly; only where it helps readability.</p>
+                <pre>*This is italicized*, and so
+is _this_.
+
+**This is bold**, just like __this__.
+
+You can ***combine*** them
+if you ___really have to___.
+</pre>
+        
+        </div>
+        <div class="col2">
+            <p>
+                To break your text into sections, you can use headers:
+            </p>
+                <pre>A Large Header
+==============
+
+Smaller Subheader
+-----------------
+</pre>
+            <p>
+                Use hash marks if you need several levels of headers:</p>
+    <pre># Header 1 #
+## Header 2 ##
+### Header 3 ###
+</pre>
+
+            
+        </div>
+
+    </div>
+    <div class="mdhelp-tab" id="mdhelp-lists">
+        <p>Both bulleted and numbered lists are possible:</p>
+        <div class="col1">
+<pre>-<span class="spaces">&nbsp;</span>Use a minus sign for a bullet
++<span class="spaces">&nbsp;</span>Or plus sign
+*<span class="spaces">&nbsp;</span>Or an asterisk
+
+1.<span class="spaces">&nbsp;</span>Numbered lists are easy
+2.<span class="spaces">&nbsp;</span>Markdown keeps track of
+   the numbers for you
+7.<span class="spaces">&nbsp;</span>So this will be item 3.
+</pre>
+        </div>
+        <div class="col2">
+<pre>1.<span class="spaces">&nbsp;</span>Lists in a list item:
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>-<span class="spaces">&nbsp;</span>Indented four spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="spaces">&nbsp;</span>indented eight spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>-<span class="spaces">&nbsp;</span>Four spaces again.
+2.<span class="spaces">&nbsp;&nbsp;</span>You can have multiple
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>paragraphs in a list items.
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Just be sure to indent.
+</pre>        
+        </div>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-blockquotes">
+        <div class="col1">
+            <pre>&gt; Create a blockquote by
+&gt; prepending “&gt;” to each line.
+&gt;
+&gt; Other formatting also works here, e.g.
+&gt;
+&gt; 1. Lists or
+&gt; 2. Headings:
+&gt;
+&gt; ## Quoted Heading ##
+            </pre>
+        </div>
+        <div class="col2">
+                <p>
+                    You can even put blockquotes in blockquotes:
+                </p>
+                <pre>&gt; A standard blockquote is indented
+&gt; &gt; A nested blockquote is indented more
+&gt; &gt; &gt; &gt; You can nest to any depth.
+</pre>
+        </div>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-code">
+        <p>
+            To create code blocks or other preformatted text, indent by four spaces:
+        </p>
+        <pre><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>This will be displayed in a monospaced font. The first four spaces
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>will be stripped off, but all other whitespace will be preserved.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Markdown and HTML are turned off in code blocks:
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>&lt;i&gt;This is not italic&lt;/i&gt;, and [this is not a link](http://example.com)
+</pre>
+        <p>
+            To create not a block, but an inline code span, use backticks:
+        </p>
+        <pre>Press the `&lt;Tab&gt;` key, then type a `$`.
+</pre>
+        <p>
+            If you want to have a preformatted block within a list, indent by eight spaces:
+        </p>
+        <pre>1. This is normal text.
+2. So is this, but now follows a code block:
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Skip a line and indent eight spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>That's four spaces for the list
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>and four to trigger the code block.
+</pre>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-html">
+        <p>
+            If you need to do something that Markdown can't handle, use HTML. Note that
+            <a href="http://meta.stackoverflow.com/questions/1777/what-html-tags-are-allowed" target="_blank">we only support a very strict subset of HTML!</a>
+        </p>
+        <pre>Strikethrough humor is &lt;strike&gt;funny&lt;/strike&gt;.
+</pre>
+        <p>
+            Markdown is smart enough not to mangle your span-level HTML:
+        </p>
+        <pre>&lt;b&gt;Markdown works *fine* in here.&lt;/b&gt;
+</pre>
+        <p>
+            Block-level HTML elements have a few restrictions:
+        </p>
+        <ol>
+            <li>They must be separated from surrounding text by blank lines.</li>
+            <li>The begin and end tags of the outermost block element must not be indented.</li>
+            <li>Markdown can't be used within HTML blocks.</li>
+        </ol>
+        <br>
+        <pre>&lt;pre&gt;
+    You can &lt;em&gt;not&lt;/em&gt; use Markdown in here.
+&lt;/pre&gt;
+</pre>
+    </div>
+
+    <div class="cbt"></div>
+</div></ul></div>
+        <div style="clear: both; height: 24px; "></div><textarea id="wmd-input" class="wmd-input processed" name="post-text" cols="92" rows="15" tabindex="101"></textarea>
+    <div class="grippie" style="margin-right: 0px; "></div></div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+    <div class="community-option">
+        <input id="communitymode" name="communitymode" type="checkbox">
+        <label for="communitymode" title="Marking an answer community wiki encourages others to edit it by lowering the reputation barrier required to edit. However, you will not gain any upvote reputation from it. This cannot be undone.">community wiki</label>
+    </div>
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="9774a889849c5d8532ee0605b9e94352">
+        <input id="author" name="author" type="text">
+    </div>
+</div>                   
+            <div class="form-submit cbt">
+            <input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+            <a href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully#" class="discard-answer dno">discard</a>
+        </div>
+    </form>
+
+
+
+        <h2 class="bottom-notice">
+                Not the answer you're looking for? 
+            Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/ruby-on-rails" class="post-tag" title="show questions tagged &#39;ruby-on-rails&#39;" rel="tag">ruby-on-rails</a> <a href="http://stackoverflow.com/questions/tagged/rspec" class="post-tag" title="show questions tagged &#39;rspec&#39;" rel="tag">rspec</a> <a href="http://stackoverflow.com/questions/tagged/capybara" class="post-tag" title="show questions tagged &#39;capybara&#39;" rel="tag">capybara</a> 
+                or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.
+        </h2>
+</div>
+</div>
+<div id="sidebar">
+        <div class="module question-stats">
+        <p class="label-key">tagged</p>
+        <div class="tagged"><a href="http://stackoverflow.com/questions/tagged/ruby-on-rails" class="post-tag" title="show questions tagged &#39;ruby-on-rails&#39;" rel="tag">ruby-on-rails</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">85327</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/rspec" class="post-tag" title="show questions tagged &#39;rspec&#39;" rel="tag">rspec</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">3620</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/capybara" class="post-tag" title="show questions tagged &#39;capybara&#39;" rel="tag">capybara</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">989</span></span><br>
+</div>
+        <table id="qinfo">
+            <tbody><tr>
+                <td><p class="label-key">asked</p></td>
+                <td style="padding-left:10px"><p class="label-key" title="2011-05-22 02:44:46Z"><b>1 year ago</b></p></td>
+            </tr>
+            <tr>
+                <td><p class="label-key">viewed</p></td>
+
+                <td style="padding-left:10px"><p class="label-key"><b>2,259 times</b></p></td>
+            </tr>
+            <tr>
+                <td><p class="label-key">active</p></td>
+                <td style="padding-left:10px"><p class="label-key"><b><a href="http://stackoverflow.com/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully?lastactivity" class="lastactivity-link" title="2011-12-17 13:24:13Z">8 months ago</a></b></p></td>
+            </tr>
+        </tbody></table>
+    </div>
+    
+<div class="module community-bulletin" data-tracker="cb=1">
+    <h4>Community Bulletin</h4>
+    <div class="related">
+        <div class="spacer">
+            <div class="bulletin-item-type event-date">event</div>
+            <div class="bulletin-item-content">
+                <a href="http://meta.stackoverflow.com/questions/58032/how-does-the-spam-flag-work?cb=1" class="question-hyperlink" target="_blank">Please read before flagging as SPAM (a reminder from your moderators)</a> <span class="event-date" style="white-space: nowrap;">– ends <span title="2012-09-05 01:00:00Z" class="relativetime">in 8 days</span></span>
+            </div>
+            <br class="cbt">
+        </div>
+
+    </div>
+</div>
+    
+        <script type="text/javascript">
+            var scriptSrc = "http://engine2.adzerk.net/z/8277/adzerk1_2_4_43,adzerk2_2_17_45,adzerk3_2_4_44?keywords=ruby-on-rails,rspec,capybara,x-user-registered";
+            if (document.referrer) {
+                if (/\?/.test(scriptSrc))
+                    scriptSrc += "&";
+                else
+                    scriptSrc += "?";
+                scriptSrc += "xReferrer=" + document.referrer;
+            }
+            StackExchange.ready(function(){var z = document.createElement("script"); z.type = "text/javascript"; z.async = "true"; z.src = scriptSrc; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);});
+        </script>
+    
+    <div class="everyonelovesstackoverflow" id="adzerk2"><a href="http://engine.adzerk.net/redirect/0/16031/12502/8277/8702ce22b0114745a023702c7eb13eae/45/1178/23667/634817172848755890/?keywords=ruby-on-rails%2crspec%2ccapybara%2cx-user-registered" rel="nofollow" target="_blank" title=""><img src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/526ec15c2cd7463c8de1dc9918ce0c65.png" title="" alt="" border="0" height="250" width="220"></a><img width="0" height="0" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/v(1).gif"></div>
+
+    
+    <div id="hireme"> <a href="http://careers.stackoverflow.com/jobs?a=12" class="top" target="_blank"></a> <ul class="jobs"> <li> <a href="http://careers.stackoverflow.com/jobs/22578/net-software-engineer-agile-centare?a=qFUptE4" target="_blank" title=".Net Software Engineer (Agile) at Centare. Click to learn more."> .Net Software Engineer (Agile)<br> <span class="company">Centare</span> <span class="location">Brookfield, WI; Milwaukee, WI</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/22582/software-developer-c-plus-plus-net-java-penrod-software?a=qGcyBnG" target="_blank" title="Software Developer (C++/.Net/Java) at Penrod Software. Click to learn more."> Software Developer (C++/.Net/Java)<br> <span class="company">Penrod Software</span> <span class="location">Chicago, IL; Madison, WI;…</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/23257/backend-tools-and-automation-engineer-taulia?a=rtE9Ucw" target="_blank" title="Backend, Tools and Automation Engineer at Taulia. Click to learn more."> Backend, Tools and Automation Engineer<br> <span class="company">Taulia</span> <span class="location">San Francisco, CA</span> </a> </li> </ul> <img alt="" class="impression" src="./ruby on rails - Migrating from Webrat to Capybara...unsuccessfully - Stack Overflow_files/qFUptE4-qGcyBnG-rtE9Ucw-12" style="display:none"></div>
+
+        <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('http://cdn.sstatic.net/stackoverflow/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <strong>weekly newsletter!</strong></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter"></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=stackoverflow.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+            <p class="privacy-policy-agreement">
+        By subscribing, you agree to the 
+        <a href="http://stackexchange.com/legal/privacy-policy" target="_blank">privacy policy</a> and 
+        <a href="http://stackexchange.com/legal/terms-of-service" target="_blank">terms of service</a>.
+    </p>
+
+    </div>
+</div>
+
+    </div>
+  
+    
+    <div class="module sidebar-related">
+        <h4 id="h-related">Related</h4>
+        <div class="related" data-tracker="rq=1">
+            <div class="spacer">
+<a href="http://stackoverflow.com/questions/3994786/using-rspec-with-webrat-instead-of-capybara?rq=1" class="question-hyperlink">Using rspec with Webrat instead of Capybara</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5235084/testing-sessions-in-rails-3-with-rspec-capybara?rq=1" class="question-hyperlink">Testing Sessions in Rails 3 with Rspec &amp; Capybara</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5388638/broken-controller-tests-after-installing-capybara?rq=1" class="question-hyperlink">Broken controller tests after installing Capybara?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5614661/capybara-submit-button-incompatible-encoding-regexp-match?rq=1" class="question-hyperlink">Capybara submit button - incompatible encoding regexp match</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6026173/using-both-webrat-and-capybara-together?rq=1" class="question-hyperlink">Using both webrat and capybara together</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6325147/how-can-i-test-that-an-item-is-removed-from-the-page-with-capybara-and-selenium?rq=1" class="question-hyperlink">How can I test that an item is removed from the page, with Capybara and Selenium?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6707984/any-chance-to-dry-capybara-code?rq=1" class="question-hyperlink">Any chance to DRY Capybara code?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/7344089/capybara-fill-in-action-locator?rq=1" class="question-hyperlink">Capybara: fill_in action locator</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/7764388/multiple-calls-to-visit-with-rspec-and-capybara?rq=1" class="question-hyperlink">Multiple Calls to Visit with RSpec and Capybara</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/8371875/problems-matching-class-with-capybara-rspec?rq=1" class="question-hyperlink">Problems matching class with Capybara/RSpec</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9426835/rspec-capybara-subdomain-tests?rq=1" class="question-hyperlink">rspec capybara - subdomain tests</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9689901/undefined-local-variable-or-method-capybara-rspec?rq=1" class="question-hyperlink">undefined local variable or method capybara rspec</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9786899/can-i-use-before-all-with-capybara?rq=1" class="question-hyperlink">Can I use before :all with capybara?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9918913/inconsistent-rspec-capybara-tests?rq=1" class="question-hyperlink">inconsistent Rspec/Capybara tests</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9971388/testing-whether-cancan-authorizes-destroy-method-with-rspec-capybara-and-facto?rq=1" class="question-hyperlink">Testing whether CanCan authorizes destroy method with Rspec, Capybara, and FactoryGirl?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10269445/expected-css-title-with-text-in-capybara?rq=1" class="question-hyperlink">expected css “title” with text in capybara</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10286649/why-is-my-visit-path-producing-a-nameerror-in-rspec-and-capybara?rq=1" class="question-hyperlink">Why is my visit path producing a NameError in rspec and capybara?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10606150/capybaraelementnotfound-unable-to-find-xpath-html?rq=1" class="question-hyperlink">Capybara::ElementNotFound: Unable to find xpath “/html”</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10624483/capybara-is-giving-my-noelementfound-error-from-possible-routing-issue-in-testin?rq=1" class="question-hyperlink">Capybara is giving my NoElementFound error from possible routing issue in testing?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10955474/how-to-test-for-a-redirect-with-rspec-and-capybara?rq=1" class="question-hyperlink">How to test for a redirect with Rspec and Capybara</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11212958/capybara-rspec-something-is-nil-but-what-is-it?rq=1" class="question-hyperlink">capybara / rspec - something is nil… but what is it?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11296682/capybara-rspec-combination-cant-work-together-hanging-on-it-for-2-days?rq=1" class="question-hyperlink">Capybara &amp; rspec combination can't work together, hanging on it for 2 days</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11381801/setting-up-a-new-ror-project-using-rspec-and-capybara?rq=1" class="question-hyperlink">Setting up a new RoR project using Rspec and Capybara</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11702488/capybara-doesnt-follow-redirects-and-changes-database?rq=1" class="question-hyperlink">Capybara doesn't follow redirects and changes database</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11979151/how-to-select-from-multiple-css-selectors-with-capybara?rq=1" class="question-hyperlink">How to select from multiple CSS selectors with Capybara</a>
+</div>
+
+        </div>
+    </div>
+</div>
+
+<div id="feed-link">
+    <div id="feed-link-text"><a href="http://stackoverflow.com/feeds/question/6085718" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/6085718/ivc/f187');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/6085718/ivc/f187" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <a href="http://stackoverflow.com/about">about</a> |
+                <a href="http://stackoverflow.com/faq">faq</a> |
+                <a href="http://blog.stackexchange.com/?blb=1">blog</a> |
+                    <a href="http://chat.stackoverflow.com/">chat</a> |
+                <a href="http://data.stackexchange.com/">data</a> |
+                <a href="http://stackexchange.com/legal">legal</a> |
+                <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a> |
+                <a href="http://stackexchange.com/about/hiring">jobs</a> |
+                <a href="http://engine.adzerk.net/redirect/0/2776/2751/0/4de3c60f719c4dfcb1a57531c7050090/0">advertising info</a> |
+
+                <a onclick="StackExchange.switchMobile(&#39;on&#39;, &#39;/questions/6085718/migrating-from-webrat-to-capybara-unsuccessfully&#39;)">mobile</a> |
+
+                <b><a href="http://stackoverflow.com/help">contact us</a></b>
+                  | <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                <div id="footer-sites">
+                    
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://stackoverflow.com/">stackoverflow.com</a>&nbsp; 
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://stackapps.com/">api/apps</a>&nbsp; 
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://careers.stackoverflow.com/">careers</a>&nbsp; 
+                        <span style="color:#E8272C;font-size:140%">■</span>&nbsp;<a href="http://serverfault.com/">serverfault.com</a>&nbsp; 
+                        <span style="color:#00AFEF;font-size:140%">■</span>&nbsp;<a href="http://superuser.com/">superuser.com</a>&nbsp; 
+                        <span style="color:#969696;font-size:140%">■</span>&nbsp;<a href="http://meta.stackoverflow.com/">meta</a>&nbsp; 
+                        <span style="color:#46937D;font-size:140%">■</span>&nbsp;<a href="http://area51.stackexchange.com/">area&nbsp;51</a>&nbsp; 
+                        <span style="color:#C0D0DC;font-size:140%">■</span>&nbsp;<a href="http://webapps.stackexchange.com/">webapps</a>&nbsp; 
+                        <span style="color:#000000;font-size:140%">■</span>&nbsp;<a href="http://gaming.stackexchange.com/">gaming</a>&nbsp; 
+                        <span style="color:#dd4814;font-size:140%">■</span>&nbsp;<a href="http://askubuntu.com/">ubuntu</a>&nbsp; 
+                        <span style="color:#9ce4fe;font-size:140%">■</span>&nbsp;<a href="http://webmasters.stackexchange.com/">webmasters</a>&nbsp; 
+                        <span style="color:#cf4d3f;font-size:140%">■</span>&nbsp;<a href="http://cooking.stackexchange.com/">cooking</a>&nbsp; 
+                        <span style="color:#f4f28d;font-size:140%">■</span>&nbsp;<a href="http://gamedev.stackexchange.com/">game development</a>&nbsp; 
+                        <span style="color:#0f3559;font-size:140%">■</span>&nbsp;<a href="http://math.stackexchange.com/">math</a>&nbsp; 
+                        <span style="color:#f2f2f2;font-size:140%">■</span>&nbsp;<a href="http://photo.stackexchange.com/">photography</a>&nbsp; 
+                        <span style="color:#037187;font-size:140%">■</span>&nbsp;<a href="http://stats.stackexchange.com/">stats</a>&nbsp; 
+                        <span style="color:#f1e7cc;font-size:140%">■</span>&nbsp;<a href="http://tex.stackexchange.com/">tex</a>&nbsp; 
+                        <span style="color:#e1cdae;font-size:140%">■</span>&nbsp;<a href="http://english.stackexchange.com/">english</a>&nbsp; 
+                        <span style="color:#a2d9f6;font-size:140%">■</span>&nbsp;<a href="http://cstheory.stackexchange.com/">theoretical cs</a>&nbsp; 
+                        <span style="color:#1b3e6c;font-size:140%">■</span>&nbsp;<a href="http://programmers.stackexchange.com/">programmers</a>&nbsp; 
+                        <span style="color:#293a5d;font-size:140%">■</span>&nbsp;<a href="http://unix.stackexchange.com/">unix</a>&nbsp;
+                        <span style="color:#bec0cb;font-size:140%">■</span>&nbsp;<a href="http://apple.stackexchange.com/">apple</a>&nbsp;
+                        <span style="color:#939185;font-size:140%">■</span>&nbsp;<a href="http://wordpress.stackexchange.com/">wordpress</a>&nbsp;
+                        <span style="color:#ebf5f5;font-size:140%">■</span>&nbsp;<a href="http://physics.stackexchange.com/">physics</a>&nbsp;
+                        <span style="color:#4176ab;font-size:140%">■</span>&nbsp;<a href="http://diy.stackexchange.com/">home&nbsp;improvement</a>&nbsp;
+                        <span style="color:#d1d8d7;font-size:140%">■</span>&nbsp;<a href="http://gis.stackexchange.com/">gis</a>&nbsp;
+                        <span style="color:#e5e2d3;font-size:140%">■</span>&nbsp;<a href="http://electronics.stackexchange.com/">electrical&nbsp;engineering</a>&nbsp;
+                        <span style="color:#a4c639;font-size:140%">■</span>&nbsp;<a href="http://android.stackexchange.com/">android</a>&nbsp;
+                        <span style="color:#2e4e60;font-size:140%">■</span>&nbsp;<a href="http://security.stackexchange.com/">security</a>&nbsp;
+                        <span style="color:#45bcb5;font-size:140%">■</span>&nbsp;<a href="http://bicycles.stackexchange.com/">bicycles</a>&nbsp;
+                        <span style="color:#00adee;font-size:140%">■</span>&nbsp;<a href="http://dba.stackexchange.com/">dba</a>&nbsp;
+                        <span style="color:#2edaf0;font-size:140%">■</span>&nbsp;<a href="http://drupal.stackexchange.com/">drupal</a>&nbsp;
+                        <span style="color:#213951;font-size:140%">■</span>&nbsp;<a href="http://sharepoint.stackexchange.com/">sharepoint</a>&nbsp;
+                        <span style="color:#73abb3;font-size:140%">■</span>&nbsp;<a href="http://scifi.stackexchange.com/">scifi &amp; fantasy</a>&nbsp;
+                        <span style="color:#23629F;font-size:140%">■</span>&nbsp;<a href="http://ux.stackexchange.com/">user experience</a>&nbsp;
+                        <span style="color:#faff72;font-size:140%">■</span>&nbsp;<a href="http://skeptics.stackexchange.com/">skeptics</a>&nbsp;
+                        <span style="color:#623121;font-size:140%">■</span>&nbsp;<a href="http://rpg.stackexchange.com/">rpg</a>&nbsp;
+                        <span style="color:#e4be88;font-size:140%">■</span>&nbsp;<a href="http://judaism.stackexchange.com/">judaism</a>&nbsp;
+                        <span style="color:#ffecb1;font-size:140%">■</span>&nbsp;<a href="http://mathematica.stackexchange.com/">mathematica</a>&nbsp;
+                </div>
+            </div>
+            <div id="footer-flair">
+                <a class="peer1" href="http://www.peer1.com/stackoverflow"></a>  
+	            <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+                <div id="svnrev">rev 2012.8.27.3826</div>
+                        </div>
+            <div id="copyright">
+                site design / logo © 2012 stack exchange inc; 
+                user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            
+
+        </div>
+    </div>
+    
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-1']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|ruby-on-rails|rspec|capybara|']); 
+        _gaq.push(['_setCustomVar', 2, 'accountid', '288688',2]); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    (function(){
+        var s=document.getElementsByTagName('script')[0];
+        var ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src='http://www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src='http://edge.quantserve.com/quant.js'; 
+        s.parentNode.insertBefore(sc,s);
+    })();
+    </script>
+    <script type="text/javascript">
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>    
+    
+
+</body></html>

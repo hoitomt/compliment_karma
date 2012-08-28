@@ -7,13 +7,13 @@ describe "Users" do
     visit new_shell_path
     fill_in "Email", :with => u.email
     fill_in "Password", :with => u.password
-    click_button
+    click_button 'Submit'
   end
   
   describe "signup" do
     it "should be at the application root" do
       get '/'
-      response.should have_selector("title", :content => "Send Compliments, Earn Rewards | ComplimentKarma")
+      page.should have_selector("title", :content => "Send Compliments, Earn Rewards | ComplimentKarma")
     end
     
     describe "failure" do
@@ -23,9 +23,9 @@ describe "Users" do
           fill_in "Full Name", :with => ""
           fill_in "Email", :with => ""
           fill_in "Password", :with => ""
-          click_button
-          response.should render_template('users/new')
-          # response.should have_selector('div#error_explanation')
+          click_button 'Sign Up Free'
+          page.should have_selector('title', :content => "Sign up")
+          page.has_content?('div#error_explanation')
         end.should_not change(User, :count)
       end
     end
@@ -37,8 +37,8 @@ describe "Users" do
           fill_in "Full Name", :with => "Example User"
           fill_in "Email", :with => "user@complimentkarma.com"
           fill_in "Password", :with => "foobar"
-          click_button
-          response.should render_template('users/show')
+          click_button 'Sign Up Free'
+          page.should have_selector('title', :content => "Profile")
         end.should change(User, :count).by(1)
       end
     end

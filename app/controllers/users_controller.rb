@@ -242,7 +242,10 @@ class UsersController < ApplicationController
     @user.send_account_confirmation
     sign_in(@user, false)
     flash[:notice] = "Your account confirmation link has been resent"
-    redirect_to @user
+    respond_to do |format|
+      format.html {redirect_to @user}
+      format.js {  }
+    end
   end
   
   def get_more_karma_live_records

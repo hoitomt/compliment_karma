@@ -1,0 +1,11 @@
+Hi <%= @user.first_last %>,
+<br/><br/>
+You have recently added an email address to your ComplimentKarma account. 
+Please click or paste the following url in your browser to confirm your email:
+<br/><br/>
+<%= link_to new_email_confirmation_url(:confirm_id => @user_email.new_email_confirmation_token), 
+						new_email_confirmation_url(:confirm_id => @user_email.new_email_confirmation_token),
+					  :style => "font-size:14px;" %>
+<br/><br/>
+After you confirm your new email address you can use it to log into your account and receive compliments
+<br/><br/>

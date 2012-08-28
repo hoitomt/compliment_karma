@@ -11,17 +11,18 @@ describe EmailApiController do
   before(:each) do
     controller.class.skip_before_filter :shell_authenticate
   end
-
-  before(:each) do
-    @params = {
-      'from' => user2.email,
-      'To' => user3.email,
-      'body-plain' => "Great Job \r\n^ruby on rails^\r\nThanks, Mike",
-      'stripped-text' => "Great Job ^ruby on rails^ Thanks, Mike"
-    }
-  end
   
   describe "POST compliment new" do
+
+    before(:each) do
+      @params = {
+        'from' => user2.email,
+        'To' => user3.email,
+        'body-plain' => "Great Job \r\n^ruby on rails^\r\nThanks, Mike",
+        'stripped-text' => "Great Job ^ruby on rails^ Thanks, Mike"
+      }
+    end
+
   	it "should create a new compliment" do
   		lambda do
 				post :compliment_new, @params

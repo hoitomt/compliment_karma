@@ -25,10 +25,14 @@ RewardStatus.create(:name => 'Pending')
 RewardStatus.create(:name => 'Complete')
 
 # ComplimentType.create(:name => 'Coworker to Coworker')
-ComplimentType.create(:name => 'Professional to Professional')
-ComplimentType.create(:name => 'Professional to Personal')
-ComplimentType.create(:name => 'Personal to Professional')
-ComplimentType.create(:name => 'Personal to Personal')
+ComplimentType.create(:name => "Professional to Professional", 
+                      :list_name => "from my PROFESSIONAL to receivers PROFESSIONAL profile")
+ComplimentType.create(:name => "Professional to Social", 
+                      :list_name => "from my PROFESSIONAL to receivers SOCIAL profile")
+ComplimentType.create(:name => "Social to Professional", 
+                      :list_name => "from my SOCIAL to receivers PROFESSIONAL profile")
+ComplimentType.create(:name => "Social to Social", 
+                      :list_name => "from my SOCIAL to receivers SOCIAL profile")
   
 Visibility.create(:name => 'sender and receiver')
 Visibility.create(:name => 'coworkers from this job')

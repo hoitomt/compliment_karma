@@ -11,7 +11,7 @@ describe ShellsController do
     
     it "should have the correct title" do
       get :new
-      response.should have_selector("title", :content => "Sign in")
+      response.body.should have_selector("title", :content => "Sign in")
     end
   end
 

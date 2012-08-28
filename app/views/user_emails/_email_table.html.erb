@@ -1,0 +1,14 @@
+<script>
+	$(function() {
+		$('#email-addresses tr:nth-child(odd)').addClass('alternate');
+	});
+</script>
+<table id="email-addresses" class="email-addresses">
+	<% user_emails.each do |ue| %>
+		<tr>
+			<td class="email-address <%= email_status_class(ue) %>"><%= ue.email %></td>
+			<td class="primary-status"><%= email_primary_link(ue) %></td>
+			<td class="remove-email"><%= link_to 'Remove', ue, :method => :delete, :remote => true %></td>
+		</tr>
+	<% end %>
+</table>

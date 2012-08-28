@@ -6,16 +6,17 @@ describe "Compliments" do
   
   before(:each) do
     @relation = Relation.COWORKER
+    @type_display = "from my PROFESSIONAL to receivers PROFESSIONAL profile"
     visit new_shell_path
     fill_in "Email", :with => founder.email
     fill_in "Password", :with => founder.password
-    click_button
+    click_button('Submit')
   end
   
   describe "quick validation test" do
     it "should be at application root" do
       get '/'
-      response.should have_selector("title", :content => "Compliment Karma Application")
+      response.body.should have_selector("title", :content => "ComplimentKarma")
     end
   end
 
@@ -25,8 +26,8 @@ describe "Compliments" do
       visit login_path
       fill_in "Email", :with => @user.email
       fill_in "Password", :with => @user.password
-      click_button
-      response.should have_selector("title", :content => "Profile")
+      click_button('Log In')
+      page.should have_selector("title", :content => "Profile")
       @user.account_status.should eq(AccountStatus.UNCONFIRMED)
     end
 
@@ -35,8 +36,8 @@ describe "Compliments" do
         fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => "tennis"
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
-        select "Professional to Professional", :from => "compliment_compliment_type_id"
-        click_button
+        select @type_display, :from => "compliment_compliment_type_id"
+        click_button('Send Compliment')
       end.should_not change(Compliment, :count).by(1)
     end
 
@@ -48,8 +49,8 @@ describe "Compliments" do
       visit login_path
       fill_in "Email", :with => @user.email
       fill_in "Password", :with => @user.password
-      click_button
-      response.should have_selector("title", :content => "Profile")
+      click_button('Log In')
+      page.should have_selector("title", :content => "Profile")
     end
 
     it "should should generate a compliment from a signed in user profile" do
@@ -57,8 +58,8 @@ describe "Compliments" do
         fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => "tennis"
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
-        select "Professional to Professional", :from => "compliment_compliment_type_id"
-        click_button
+        select @type_display, :from => "compliment_compliment_type_id"
+        click_button('Send Compliment')
       end.should change(Compliment, :count).by(1)
       c = Compliment.last
       c.sender_user_id.should eq(@user.id)
@@ -70,9 +71,9 @@ describe "Compliments" do
       fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com"
       fill_in "Skill", :with => "tennis"
       fill_in "Comment", :with => "Awesome job at the meet yesterday"
-      select "Professional to Professional", :from => "compliment_compliment_type_id"
-      click_button
-      response.should have_selector('title', :content => 'Profile')
+      select @type_display, :from => "compliment_compliment_type_id"
+      click_button('Send Compliment')
+      page.should have_selector('title', :content => 'Profile')
     end
     
     describe "to an unregistered user" do
@@ -82,8 +83,8 @@ describe "Compliments" do
           fill_in "compliment_receiver_display", :with => @receiver_email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Professional to Professional", :from => "compliment_compliment_type_id"
-          click_button
+          select @type_display, :from => "compliment_compliment_type_id"
+          click_button('Send Compliment')
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
       end
@@ -106,8 +107,8 @@ describe "Compliments" do
           fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Professional to Professional", :from => "compliment_compliment_type_id"
-          click_button
+          select @type_display, :from => "compliment_compliment_type_id"
+          click_button('Send Compliment')
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
       end
@@ -130,8 +131,8 @@ describe "Compliments" do
           fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Professional to Professional", :from => "compliment_compliment_type_id"
-          click_button
+          select @type_display, :from => "compliment_compliment_type_id"
+          click_button('Send Compliment')
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
       end
@@ -153,8 +154,8 @@ describe "Compliments" do
            fill_in "compliment_receiver_display", :with => receiver.email
            fill_in "Skill", :with => "tennis"
            fill_in "Comment", :with => "Awesome job at the meet yesterday"
-           select "Professional to Professional", :from => "compliment_compliment_type_id"
-           click_button
+           select @type_display, :from => "compliment_compliment_type_id"
+           click_button('Send Compliment')
          end.should change(Compliment, :count).by(1)
          @compliment = Compliment.last
        end
@@ -187,8 +188,8 @@ describe "Compliments" do
           fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Professional to Professional", :from => "compliment_compliment_type_id"
-          click_button
+          select @type_display, :from => "compliment_compliment_type_id"
+          click_button('Send Compliment')
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
       end
@@ -215,8 +216,8 @@ describe "Compliments" do
           fill_in "compliment_receiver_display", :with => receiver.email
           fill_in "Skill", :with => "tennis"
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Professional to Professional", :from => "compliment_compliment_type_id"
-          click_button
+          select @type_display, :from => "compliment_compliment_type_id"
+          click_button('Send Compliment')
         end.should change(Compliment, :count).by(1)
         @compliment = Compliment.last
       end
@@ -238,8 +239,8 @@ describe "Compliments" do
            fill_in "compliment_receiver_display", :with => receiver.email
            fill_in "Skill", :with => "tennis"
            fill_in "Comment", :with => "Awesome job at the meet yesterday"
-           select "Professional to Professional", :from => "compliment_compliment_type_id"
-           click_button
+           select @type_display, :from => "compliment_compliment_type_id"
+           click_button('Send Compliment')
          end.should change(Compliment, :count).by(1)
          @compliment = Compliment.last
        end
@@ -268,8 +269,8 @@ describe "Compliments" do
           fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
           fill_in "Skill", :with => ""
           fill_in "Comment", :with => "Awesome job at the meet yesterday"
-          select "Professional to Professional", :from => "compliment_compliment_type_id"
-          click_button
+          select @type_display, :from => "compliment_compliment_type_id"
+          click_button('Send Compliment')
         end.should_not change(Compliment, :count)
       end
       
@@ -278,9 +279,9 @@ describe "Compliments" do
         fill_in "compliment_receiver_display", :with => "attaboy@goodjob.com" 
         fill_in "Skill", :with => ""
         fill_in "Comment", :with => "Awesome job at the meet yesterday"
-        select "Professional to Professional", :from => "compliment_compliment_type_id"
-        click_button
-        response.should have_selector('title', :content => 'Profile')
+        select @type_display, :from => "compliment_compliment_type_id"
+        click_button('Send Compliment')
+        page.should have_selector('title', :content => 'Profile')
       end
     end
     
@@ -293,15 +294,15 @@ describe "Compliments" do
       visit login_path
       fill_in "Email", :with => userx.email
       fill_in "Password", :with => userx.password
-      click_button
-      response.should have_selector("title", :content => "Profile")
+      click_button('Log In')
+      page.should have_selector("title", :content => "Profile")
       
       lambda do
         fill_in "compliment_receiver_display", :with => "jimbob@godaddy.com"
         fill_in "Skill", :with => "Ruby on Rails"
         fill_in "Comment", :with => "You are awesome"
-        select "Professional to Professional", :from => "compliment_compliment_type_id"
-        click_button
+        select @type_display, :from => "compliment_compliment_type_id"
+        click_button('Send Compliment')
       end.should change(Compliment, :count).by(1)
       c = Compliment.last
       c.sender_user_id.should eq(userx.id)
@@ -312,16 +313,16 @@ describe "Compliments" do
   
   describe "attach compliments to receiver on signup" do
     let(:unconfirmed_user) {FactoryGirl.create(:unconfirmed_user)}
-    let(:user) {FactoryGirl.create(:user)}
+    let(:user) {FactoryGirl.create(:user2)}
     
     before(:each) do
-      @receiver = "test_sender@example.com"
+      @receiver = "test_sender@gogoair.com"
       @compliment_attr = {
         :sender_email => user.email,
         :receiver_email => @receiver,
         :skill_id => Skill.first.id,
         :comment => "awesome job",
-        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
       }
       
       visit signup_path
@@ -334,7 +335,7 @@ describe "Compliments" do
       
       it "should set the receiver id upon confirmation" do
         Compliment.create(@compliment_attr)
-        click_button
+        click_button('Sign Up Free')
         @user = User.last
         c = Compliment.find_all_by_receiver_email(@receiver)
         c.size.should eq(1)
@@ -345,7 +346,7 @@ describe "Compliments" do
         Compliment.create(@compliment_attr.merge(
                           :compliment_status_id => ComplimentStatus.PENDING_RECEIVER_REGISTRATION.id,
                           :sender_email => user.email))
-        click_button
+        click_button('Sign Up Free')
         @user = User.last
         c = Compliment.find_all_by_receiver_email(@receiver)
         c.size.should eq(1)
@@ -357,7 +358,7 @@ describe "Compliments" do
         Compliment.create(@compliment_attr.merge(
                   :compliment_status_id => ComplimentStatus.PENDING_RECEIVER_CONFIRMATION.id,
                   :sender_email => user.email))
-        click_button
+        click_button('Sign Up Free')
         @user = User.last
         c = Compliment.find_all_by_receiver_email(@receiver)
         c.size.should eq(1)

@@ -26,10 +26,4 @@ describe Invitation do
     last_email.to.should include invitation.invite_email
   end
   
-  it "should not have the same to address as the from address" do
-    invalid_invitation = Invitation.new(:invite_email => "user@example.org",
-                                        :from_email => "user@example.org")
-    invalid_invitation.should_not be_valid
-  end
-  
 end

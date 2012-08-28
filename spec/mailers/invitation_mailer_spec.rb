@@ -8,7 +8,7 @@ describe InvitationMailer do
   it "should send invitation in subject and body" do
     mail.subject.should eq("Compliment Karma is inviting you to join")
     mail.to.should eq([invitation.invite_email])
-    mail.from.should eq(['no-reply@complimentkarma.com'])
+    mail.from.should eq(['invitation@complimentkarma.com'])
   end
   
 end

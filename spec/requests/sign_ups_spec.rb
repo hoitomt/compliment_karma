@@ -7,7 +7,7 @@ describe "SignUps" do
     visit new_shell_path
     fill_in "Email", :with => u.email
     fill_in "Password", :with => u.password
-    click_button
+    click_button('Submit')
   end
   
   describe "GET '/signup'" do
@@ -21,8 +21,8 @@ describe "SignUps" do
       fill_in "Email", :with => "test_user@complimentkarma.com"
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
-      click_button
-      response.should have_selector('title', :content => "Profile")
+      click_button('Sign Up Free')
+      page.should have_selector('title', :content => "Profile")
     end
   end
   
@@ -32,8 +32,8 @@ describe "SignUps" do
       visit login_path
       fill_in "Email", :with => @user.email
       fill_in "password", :with => @user.password
-      click_button
-      response.should have_selector('title', :content => "Profile")
+      click_button ("Log In")
+      page.should have_selector('title', :content => "Profile")
     end
     
     # it "should send an invitation to a 'I work with' coworker no domain" do
@@ -84,8 +84,8 @@ describe "SignUps" do
       visit login_path
       fill_in "Email", :with => @user.email
       fill_in "password", :with => @user.password
-      click_button
-      response.should have_selector('title', :content => "Profile")
+      click_button 'Log In'
+      page.should have_selector('title', :content => "Profile")
     end
     
     # it "should send an invitation to other no domain" do
@@ -128,43 +128,48 @@ describe "SignUps" do
       fill_in "Email", :with => "test_user@complimentkarma.com"
       fill_in "Full Name", :with => "test user mcgee"
       fill_in "Password", :with => "1234 on the floor"
-      click_button
-      response.should have_selector('title', :content => "Profile")
+      click_button 'Sign Up Free'
+      page.should have_selector('title', :content => "Profile")
       @user = User.last
     end
     
     it "should have confirmation link" do
-      response.should have_selector('a', :content => "Resend Link")
+      page.should have_selector('a', :content => "Resend Link")
     end
     
     it "should remove the resend link from the profile" do
-      user = User.last
-      visit new_account_confirmation_url(user.new_account_confirmation_token)
-      response.should have_selector('title', :content => 'Account Confirmation')
+      # user = User.last
+      visit new_account_confirmation_url(:confirm_id => @user.new_account_confirmation_token)
+      page.should have_selector('title', :content => 'Account Confirmation')
       click_link 'profile'
-      # user.account_status.should eq(AccountStatus.CONFIRMED)
-      response.should have_selector('title', :content => "Profile")
+      user = User.find(@user.id)
+      user.account_status.should eq(AccountStatus.CONFIRMED)
+      page.should have_selector('title', :content => "Profile")
       response.should_not have_selector('a', :content => "Resend Link")
     end
 
     it "should attach pending compliments the user" do
-      user = User.last
-      user.account_status.should eq(AccountStatus.UNCONFIRMED)
+      @user.account_status.should eq(AccountStatus.UNCONFIRMED)
       c_pre = Compliment.create(:sender_email => user2.email,
-                        :receiver_email => user.email,
+                        :receiver_email => @user.email,
                         :skill_id => Skill.last.id,
-                        :compliment_type_id => ComplimentType.PERSONAL_TO_PERSONAL,
+                        :compliment_type_id => ComplimentType.PERSONAL_TO_PERSONAL.id,
                         :comment => 'Testing')
       c_pre.compliment_status.should eq(ComplimentStatus.PENDING_RECEIVER_CONFIRMATION)
-      visit new_account_confirmation_url(user.new_account_confirmation_token)
-      response.should have_selector('title', :content => 'Account Confirmation')
+      user = User.find(@user.id)
+      visit new_account_confirmation_url(:confirm_id => user.new_account_confirmation_token)
+      page.should have_selector('title', :content => 'Account Confirmation')
       click_link 'profile'
-      response.should have_selector('title', :content => "Profile")
+      page.should have_selector('title', :content => "Profile")
       response.should_not have_selector('a', :content => "Resend Link")
       user = User.last
       user.account_status.should eq(AccountStatus.CONFIRMED)
       c_post = Compliment.find(c_pre.id)
       c_post.compliment_status.should eq(ComplimentStatus.ACTIVE)
+    end
+
+    it "should mark all emails as confirmed" do
+      @user.email_addresses.count.should == 1
     end
     
   end

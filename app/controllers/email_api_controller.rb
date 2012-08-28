@@ -10,9 +10,30 @@ class EmailApiController < ApplicationController
       Compliment.user_confirmation(current_user)
     else
       logger.info("User is not logged in")
+      logger.info("User ID: #{@user.id} ") if @user
       if @user
         Compliment.user_confirmation(@user)
         @user.update_attributes(:account_status => AccountStatus.CONFIRMED)
+      else
+        redirect_to root_path
+      end
+    end
+  end
+
+  def new_email_confirmation
+    @user_email = UserEmail.find_by_new_email_confirmation_token(params[:confirm_id])
+    @user = @user_email.try(:user)
+    if @user_email && current_user?(@user)
+      logger.info("Email Confirmation: User is logged in")
+      logger.info("User Email ID: #{@user_email.id}")
+      @user_email.confirm_email
+      flash[:notice] = "Thanks! Email address #{@user_email.email} has been confirmed. 
+                        You can now log in and receive compliments using this email address"
+      redirect_to current_user
+    else
+      logger.info("Email Confirmation: User is NOT logged in")
+      if @user
+        @user_email.confirm_email
       else
         redirect_to root_path
       end
