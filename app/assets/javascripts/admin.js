@@ -7,6 +7,7 @@ var Admin = {
 		$('#am-hover-me').on({
 			mouseover: function() {
 				$('#admin-menu').show();
+				SiteSearch.hideResults();
 			},
 			mouseout: function() {
 				$('#admin-menu').hide();			
@@ -16,6 +17,7 @@ var Admin = {
 		$('#admin-menu').on({
 			mouseover: function() {
 				$(this).show();
+				SiteSearch.hideResults();
 			},
 			mouseout: function() {
 				$(this).hide();
