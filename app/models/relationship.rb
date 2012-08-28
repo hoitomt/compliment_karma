@@ -81,8 +81,8 @@ class Relationship < ActiveRecord::Base
     return nil if user_1.nil? || user_2.nil?
     r = Relationship.where('(user_1_id = ? AND user_2_id = ?) OR (user_1_id = ? AND user_2_id = ?)',
                             user_1.id, user_2.id, user_2.id, user_1.id)
-    r = r[0] if r.length >= 1
-    return r[0]
+    r = r[0] unless r.blank?
+    return r
   end
 
   def self.accepted_relationship?(user_1, user_2)

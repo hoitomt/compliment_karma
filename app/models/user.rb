@@ -83,7 +83,8 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(email, submitted_password)
-    user_email = UserEmail.where('email = ? AND confirmed = ?', email, 'Y').first
+    # user_email = UserEmail.where('email = ? AND confirmed = ?', email, 'Y').first
+    user_email = UserEmail.where('email = ?', email).first
     user = user_email.try(:user)
     (user && user.has_password?(submitted_password)) ? user : nil
   end

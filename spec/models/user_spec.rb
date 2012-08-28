@@ -94,6 +94,7 @@ describe User do
   describe "password encryption" do
     before(:each) do
       @user = User.create!(@attr)
+      @user.confirm_account
     end
     
     it "should have an encrypted password attribute" do
