@@ -57,7 +57,7 @@ class Relationship < ActiveRecord::Base
   
   def accept_relationship
     logger.info("Accept the relationship")
-    return if self.relationship_status != RelationshipStatus.PENDING
+    return unless self.relationship_status != RelationshipStatus.ACCEPTED
     self.update_attributes(:relationship_status_id => RelationshipStatus.ACCEPTED.id,
                            :default_visibility_id => Visibility.EVERYBODY.id)
     UpdateHistory.Accepted_Compliments_Receiver(self)
@@ -81,12 +81,12 @@ class Relationship < ActiveRecord::Base
     return nil if user_1.nil? || user_2.nil?
     r = Relationship.where('(user_1_id = ? AND user_2_id = ?) OR (user_1_id = ? AND user_2_id = ?)',
                             user_1.id, user_2.id, user_2.id, user_1.id)
-    if r.length < 1
-      r = Relationship.create(:user_1_id => user_1.id, :user_2_id => user_2.id)
-    else
-      r = r[0]
-    end
-    return r #if r.length == 1
+    # if r.length < 1
+    #   r = Relationship.create(:user_1_id => user_1.id, :user_2_id => user_2.id)
+    # else
+    #   r = r[0]
+    # end
+    return r[0] #if r.length == 1
   end
 
   def self.accepted_relationship?(user_1, user_2)

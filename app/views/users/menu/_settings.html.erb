@@ -3,7 +3,7 @@
 		<div id="user-profile-details" class="first-row clearfix container">
 			<h1>Account Settings</h1>
 			<ul id="account-settings">
-				<li><%= link_to 'Privacy Settings', '#' %></li>
+				<li><%#= link_to 'Privacy Settings', '#' %></li>
 				<li><%= link_to 'Email Preferences', user_emails_path, :remote => true %></li>
 			</ul>
 			<% if view_state(@user) == view_state_company_manager %>
