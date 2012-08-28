@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user, class: User do
     name "Guest User"
     email "factory_user@testing.com"
-    password "foobar"
+    password "foobarz"
     domain "testing.com"
     account_status_id 2
   end
@@ -10,7 +10,7 @@ FactoryGirl.define do
   factory :user2, class: User do
     name "Guest User"
     email "factory_user2@complimentkarma.com"
-    password "foobar"
+    password "foobary"
     domain "complimentkarma.com"
     account_status_id 2
   end
@@ -18,7 +18,7 @@ FactoryGirl.define do
   factory :user3, class: User do
     name "Another User"
     email "factory_user3@complimentkarma.com"
-    password "foobar"
+    password "foobarx"
     domain "complimentkarma.com"
     account_status_id 2
   end

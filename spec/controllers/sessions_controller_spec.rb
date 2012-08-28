@@ -79,6 +79,14 @@ describe SessionsController do
         response.should render_template('new')
       end
 
+      it "should not log in with somebody elses email address" do
+        user3 = FactoryGirl.create(:user3)
+        user3.confirm_account
+        # user = User.find(@user.id)
+        post :create, :session => @attr.merge(:email => user3.email)
+        response.body.should have_content('Log in')
+      end
+
     end
   end
   
