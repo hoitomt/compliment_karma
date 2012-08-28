@@ -48,6 +48,28 @@ describe RelationshipsController do
 			c.compliment_status.should == ComplimentStatus.ACTIVE
 			c.visibility.should == Visibility.SENDER_AND_RECEIVER
 		end
+
+		it "should not create a new Approved relationship" do
+			@relationship.relationship_status.should == RelationshipStatus.PENDING
+			get :accept, :id => @relationship.id
+			r = Relationship.find(@relationship.id)
+			r.relationship_status.should == RelationshipStatus.ACCEPTED
+			c = Compliment.find(@compliment.id)
+			c.compliment_status.should == ComplimentStatus.ACTIVE
+			c.visibility.should == Visibility.EVERYBODY
+
+			s = Skill.create(:name => "Test #{DateTime.now}")
+			@compliment = Compliment.create(:sender_email => ck.email,
+																		  :receiver_email => sears.email,
+																		  :comment => "Testing your love for me",
+																		  :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL,
+																		  :skill_id => s.id )
+			r = Relationship.where("user_1_id = ? and user_2_id = ?", ck.id, sears.id)
+			r.length.should == 1
+			r[0].should_not be_nil
+			r[0].relationship_status.should == RelationshipStatus.ACCEPTED
+		end
+
 	end
 
 end
