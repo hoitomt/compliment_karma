@@ -33,7 +33,10 @@ class EmailApiController < ApplicationController
     else
       logger.info("Email Confirmation: User is NOT logged in")
       if @user
+        flash[:notice] = "Thanks! Email address #{@user_email.email} has been confirmed. 
+                          You can now log in and receive compliments using this email address"
         @user_email.confirm_email
+        redirect_to root_path
       else
         redirect_to root_path
       end
