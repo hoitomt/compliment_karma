@@ -4,7 +4,7 @@ class PasswordResetsController < ApplicationController
   end
   
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_user_by_email(params[:email])
     note = nil
     if user
       logger.info("Found User")

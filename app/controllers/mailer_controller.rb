@@ -16,7 +16,7 @@ class MailerController < ApplicationController
 	def receiver_confirmation_reminder
 		@compliment = Compliment.last
 		@sender = @compliment.sender
-    @receiver = User.find_by_email(@compliment.receiver_email)
+    @receiver = User.find_user_by_email(@compliment.receiver_email)
     @receiver.generate_token(:new_account_confirmation_token) if @receiver
     @skill= Skill.find_by_id(@compliment.skill_id)
     @timestamp = DateUtil.get_time_gap(@compliment.created_at)

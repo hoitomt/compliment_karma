@@ -47,7 +47,7 @@ class Compliment < ActiveRecord::Base
 
   def create_from_api(recipient_email, params)
     sender_email = clean_email_address(params['from']) if params['from']
-    user = User.find_by_email(sender_email)
+    user = User.find_user_by_email(sender_email)
     if user.blank?
       Compliment.notify_ck_unrecognized_sender(params)
       Compliment.notify_sender_unrecognized_sender(params, sender_email)
@@ -60,7 +60,7 @@ class Compliment < ActiveRecord::Base
     self.sender_user_id = user.id
     self.sender_email = sender_email
     self.receiver_email = clean_email_address(recipient_email)
-    receiver = User.find_by_email(self.receiver_email)
+    receiver = User.find_user_by_email(self.receiver_email)
     self.receiver = receiver
     logger.info("Receiver Email: #{self.receiver_email}")
     self.skill_id = api_skill(params['body-plain']).id
@@ -135,7 +135,7 @@ class Compliment < ActiveRecord::Base
   end
 
   def sender_is_confirmed_user
-    user = User.find_by_email(self.sender_email)
+    user = User.find_user_by_email(self.sender_email)
     if(!user || !user.confirmed?)
       errors.add(:sender_email, "Please confirm your account prior to complimenting") 
     end
@@ -184,8 +184,8 @@ class Compliment < ActiveRecord::Base
   def set_relationship
     if self.compliment_status == ComplimentStatus.ACTIVE ||
        self.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
-      sender = User.find_by_email(self.sender_email)
-      receiver = User.find_by_email(self.receiver_email)
+      sender = User.find_user_by_email(self.sender_email)
+      receiver = User.find_user_by_email(self.receiver_email)
       new_relationship_status = RelationshipStatus.PENDING
       # Coworkers
       new_relationship_status = RelationshipStatus.ACCEPTED if sender.domain == receiver.domain
@@ -228,12 +228,12 @@ class Compliment < ActiveRecord::Base
   end
   
   def set_sender_user_id
-    u = User.find_by_email(self.sender_email)
+    u = User.find_user_by_email(self.sender_email)
     self.sender_user_id = u.id if u
   end
   
   def set_receiver_user_id
-    u = User.find_by_email(self.receiver_email)
+    u = User.find_user_by_email(self.receiver_email)
     self.receiver_user_id = u.id if u
   end
 

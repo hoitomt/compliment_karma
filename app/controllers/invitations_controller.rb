@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
   
   def create
     logger.info("Send Invitation")
-    user = current_user || User.find_by_email(params[:invitation][:invite_email])
+    user = current_user || User.find_user_by_email(params[:invitation][:invite_email])
     if params[:multi_invitation]
       send_multiple_invitations(params[:multi_invitation])
     else

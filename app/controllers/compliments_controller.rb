@@ -50,7 +50,7 @@ class ComplimentsController < ApplicationController
     logger.info("Redirect")
     # Don't send the compliment back to the screen
     flash[:compliment] = @compliment if result == "failure"
-    user = User.find_by_email(@compliment.sender_email)
+    user = User.find_user_by_email(@compliment.sender_email)
     respond_to do |format|
       format.html {redirect_to referrer}
       format.js { 
@@ -66,7 +66,7 @@ class ComplimentsController < ApplicationController
   def set_receiver
     receiver_id = params[:compliment_receiver_id]
     receiver_display = params[:compliment][:receiver_display] || ""
-    input_user = User.find_by_email(receiver_display.downcase) if User.valid_email?(receiver_display.downcase)
+    input_user = User.find_user_by_email(receiver_display.downcase) if User.valid_email?(receiver_display.downcase)
     if !receiver_id.blank?
       @compliment.receiver_user_id = receiver_id
       @compliment.receiver_email = User.find(receiver_id).email

@@ -42,6 +42,30 @@ describe EmailApiController do
 				post :compliment_new, @params
 	  	end.should_not change(Compliment, :count).by(1)
   	end
+
+    it "should find the senders other email address" do
+      ue = UserEmail.create(:user_id => user2.id, :email => "user2@groupon.com")
+      user = User.find(user2.id)
+      user.email_addresses.length.should == 2
+      @params['from'] = ue.email
+      lambda do
+        post :compliment_new, @params
+      end.should change(Compliment, :count).by(1)
+    end
+
+    it "should find the receivers other email address" do
+      ue = UserEmail.create(:user_id => user3.id, :email => "user3@groupon.com")
+      user = User.find(user3.id)
+      user.email_addresses.length.should == 2
+      @params['To'] = ue.email
+      lambda do
+        post :compliment_new, @params
+      end.should change(Compliment, :count).by(1)
+      c = user2.compliments_sent.first
+      c.receiver_email.should == ue.email
+      c.receiver_user_id.should == ue.user_id
+    end
+
   end
 
 end

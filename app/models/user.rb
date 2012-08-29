@@ -83,10 +83,13 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(email, submitted_password)
-    # user_email = UserEmail.where('email = ? AND confirmed = ?', email, 'Y').first
-    user_email = UserEmail.where('email = ?', email).first
-    user = user_email.try(:user)
+    user = find_user_by_email(email)
     (user && user.has_password?(submitted_password)) ? user : nil
+  end
+
+  def self.find_user_by_email(email)
+    user_email = UserEmail.where('email = ?', email)
+    return user_email.try(:first).try(:user)
   end
   
   def self.authenticate_with_salt(id, cookie_salt)
@@ -95,7 +98,7 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate_founder(email, submitted_password)
-    user = find_by_email(email)
+    user = find_user_by_email(email)
     logger.info("User: #{user.name} | #{user.email} | #{user.founder}") if user
     (user && 
      user.founder &&
@@ -210,7 +213,7 @@ class User < ActiveRecord::Base
   end
   
   def self.get_account_status(email)
-    u = User.find_by_email(email)
+    u = User.find_user_by_email(email)
     if u
       return u.account_status
     else
@@ -225,16 +228,24 @@ class User < ActiveRecord::Base
   end
   
   def associate_received_compliments
+    logger.info("Associate Received Compliments")
     my_received_compliments = Compliment.where('receiver_email = ? AND receiver_user_id is null', self.email)
+    logger.info("Number of received compliments: #{my_received_compliments.length}")
     my_received_compliments.each do |c|
-      c.receiver_user_id = self.id
-      c.compliment_status =  update_receiver_status(c.compliment_status)
-      c.save
+      logger.info("Status = #{c.compliment_status.name}")
+      new_status = update_receiver_status(c.compliment_status)
+      logger.info("New Status = #{new_status.name}")
+      c.update_attributes(:receiver_user_id => self.id, 
+                          :compliment_status_id => new_status.id)
+      # c.receiver_user_id = self.id
+      # c.compliment_status =  update_receiver_status(c.compliment_status)
+      # c.save
       UpdateHistory.Received_Compliment(c)
     end
   end
   
   def associate_sent_compliments
+    logger.info("Associate Sent Compliments")
     my_sent_compliments = Compliment.where('sender_email = ? AND sender_user_id is null', self.email)
     my_sent_compliments.each do |c|
       c.sender_user_id = self.id
@@ -425,6 +436,20 @@ class User < ActiveRecord::Base
     return search_array.flatten.uniq
   end
 
+  def self.redis_search(search_string)
+    return [] if search_string.blank?
+    escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
+    sa = escaped_search_string.downcase.split(' ')
+    search_array = []
+    users = $redis.smembers redis_hash_name
+    sa.each do |search_term|
+      r = Regexp.new(search_term)
+      users = users.find_all do |k, v|
+        user_document(v) =~ r
+      end
+    end
+  end
+
   def is_a_company?
     return !self.company.nil?
   end
@@ -469,16 +494,28 @@ class User < ActiveRecord::Base
   end
 
   def add_to_redis
-    rh = User.redis_hash_name.to_s
-    if $redis.hexists(rh, self.id)
-      $redis.hdel(rh, self.id)
+    if self.confirmed?
+      hash_name = User.redis_hash_name.to_s
+      if $redis.hexists(hash_name, self.id)
+        $redis.hdel(hash_name, self.id)
+      end
+      $redis.hset(hash_name, self.id, self.user_search_hash)
     end
-    $redis.hset(rh, self.id, self.attribute_document)
   end
 
-  def attribute_document
+  def user_search_hash
     email_list_string = self.email_addresses.collect{ |e| e.email }.join(' ')
-    return "#{self.first_name} #{self.last_name} #{self.city} #{email_list_string}"
+    {
+      'first_name' => self.first_name, 
+      'last_name' => self.last_name, 
+      'city' => self.city, 
+      'email_addresses' => email_list_string
+    }
+  end
+
+  # v is a user_search_hash
+  def user_document(v)
+    return "#{v['first_name']} #{v['last_name']} #{v['city']} #{v['email_addresses']}"
   end
 
   def self.redis_hash_name
