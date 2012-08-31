@@ -40,7 +40,6 @@ class Compliment < ActiveRecord::Base
   after_create :send_fulfillment
   after_create :set_relationship
   after_create :update_history
-  after_create :metrics_send_new_compliment
 
   default_scope :order => "created_at DESC"
   
@@ -201,10 +200,13 @@ class Compliment < ActiveRecord::Base
   
   def set_compliment_status
     if receiver_status == AccountStatus.CONFIRMED
+      logger.info("Set Comliment Status - Active")
       self.compliment_status = ComplimentStatus.ACTIVE
     elsif receiver_status == AccountStatus.UNCONFIRMED
+      logger.info("Set Comliment Status - Pending Receiver Confirmation")
       self.compliment_status = ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
     else
+      logger.info("Set Comliment Status - Pending Receiver Registration")
       self.compliment_status = ComplimentStatus.PENDING_RECEIVER_REGISTRATION
     end
   end
@@ -243,13 +245,14 @@ class Compliment < ActiveRecord::Base
 
   def self.user_confirmation(user)
     logger.info("Confirm account for #{user.first_last if user}")
-    c = Compliment.where('receiver_user_id = ? AND 
+    Compliment.where('receiver_user_id = ? AND 
                           (compliment_status_id = ? OR compliment_status_id = ?)',
                           user.id, ComplimentStatus.PENDING_RECEIVER_CONFIRMATION,
                           ComplimentStatus.PENDING_RECEIVER_REGISTRATION)
-    c.each do |compliment| 
-      compliment.update_attributes(:compliment_status => ComplimentStatus.ACTIVE)
-    end
+                  .update_all(:compliment_status_id => ComplimentStatus.ACTIVE.id)
+    # c.each do |compliment| 
+    #   compliment.update_attributes()
+    # end
   end
 
   def self.update_receiver_user_id(user_id, email)

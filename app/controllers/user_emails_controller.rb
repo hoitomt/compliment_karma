@@ -14,6 +14,7 @@ class UserEmailsController < ApplicationController
 		@user_email = UserEmail.new(params[:user_email])
 		@user_email.user_id = current_user.id
 		if @user_email.save
+			@user_email.associate_compliments
 			@user_email.send_email_confirmation
 			respond_to do |format|
 				format.html { redirect_to current_user, :notice => "Your new email address has been added" }

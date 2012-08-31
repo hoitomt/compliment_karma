@@ -43,6 +43,7 @@ describe UserEmailsController do
 			y = @user.compliments_received
 			y.length.should == 1
 			y[0].receiver_user_id.should == @user.id
+			y[0].compliment_status.should == ComplimentStatus.ACTIVE
 		end
 	end
 

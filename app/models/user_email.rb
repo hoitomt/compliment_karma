@@ -21,7 +21,6 @@ class UserEmail < ActiveRecord::Base
   # before_validation :set_confirmed
   # before_validation :set_primary
   after_save :update_redis
-  after_save :associate_compliments
   after_destroy :update_redis
   after_destroy :disassociate_compliments
 
@@ -87,7 +86,10 @@ class UserEmail < ActiveRecord::Base
   end
 
   def associate_compliments
-    Compliment.update_receiver_user_id(self.user_id, self.email)
+    logger.info("User Email - Associate Compliments")
+    Compliment.where(:receiver_email => email)
+              .update_all(:receiver_user_id => user_id,
+                          :compliment_status_id => ComplimentStatus.ACTIVE.id)
   end
 
   def disassociate_compliments

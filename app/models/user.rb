@@ -62,11 +62,11 @@ class User < ActiveRecord::Base
   before_create :set_name
   before_create :set_domain
   before_create :set_account_status
+  after_create :create_user_email
   after_create :associate_received_compliments
   after_create :associate_sent_compliments
   after_create :create_relationships
   after_create :metrics_send_new_user
-  after_create :create_user_email
   after_save :add_to_redis
   
   # Return true if the user's password matches the submitted password
@@ -214,6 +214,7 @@ class User < ActiveRecord::Base
   
   def self.get_account_status(email)
     u = User.find_user_by_email(email)
+    logger.info("User at this email address #{email} is nil: #{u.nil?} ")
     if u
       return u.account_status
     else
@@ -229,7 +230,7 @@ class User < ActiveRecord::Base
   
   def associate_received_compliments
     logger.info("Associate Received Compliments")
-    my_received_compliments = Compliment.where('receiver_email = ? AND receiver_user_id is null', self.email)
+    my_received_compliments = Compliment.where('receiver_email = ?', self.email)
     logger.info("Number of received compliments: #{my_received_compliments.length}")
     my_received_compliments.each do |c|
       logger.info("Status = #{c.compliment_status.name}")
@@ -483,6 +484,7 @@ class User < ActiveRecord::Base
   end
 
   def create_user_email
+    logger.info("Create User Email: #{self.email}")
     UserEmail.create(:user_id => self.id, :email => self.email)
   end
 
@@ -515,11 +517,16 @@ class User < ActiveRecord::Base
 
   def add_to_redis
     if self.confirmed?
-      hash_name = User.redis_hash_name.to_s
-      if $redis.hexists(hash_name, self.id)
-        $redis.hdel(hash_name, self.id)
+      email_list_string = self.email_addresses.collect{ |e| e.email }.join(' ')
+      exists = $redis.exists redis_hash_name
+      if exists
+        $redis.del(self.redis_hash_name)
       end
-      $redis.hset(hash_name, self.id, self.user_search_hash)
+      $redis.hmset(self.redis_hash_name, 'id', self.id,
+                                         'first_name', self.first_name,
+                                         'last_name', self.last_name,
+                                         'city', self.city,
+                                         'email_addresses', email_list_string)
     end
   end
 
@@ -533,8 +540,20 @@ class User < ActiveRecord::Base
     }
   end
 
-  def self.redis_hash_name
-    return "users"
+  def self.redis_user_set_name
+    return "user_ids"
+  end
+
+  def redis_hash_name
+    return "users:#{self.id}"
+  end
+
+  def redis_hash_values
+    email_list_string = self.email_addresses.collect{ |e| e.email }.join(' ')
+    {'first_name' => self.first_name,
+     'last_name' => self.last_name,
+     'city' => self.city,
+     'email_addresses' => email_list_string}
   end
 
   def confirm_account
