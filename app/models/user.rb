@@ -441,13 +441,33 @@ class User < ActiveRecord::Base
     escaped_search_string = search_string.gsub(/%/, '\%').gsub(/_/, '\_')
     sa = escaped_search_string.downcase.split(' ')
     search_array = []
-    users = $redis.smembers redis_hash_name
+    users = $redis.hgetall redis_hash_name
+    # puts sa
     sa.each do |search_term|
-      r = Regexp.new(search_term)
-      users = users.find_all do |k, v|
-        user_document(v) =~ r
+      # r = /search_term/
+      puts users.count
+      r = Regexp.new(search_term, true)
+      puts r
+      users.each do |k,v|
+        d = user_document(v)
+        # puts v
+        # puts "#{v} - #{d}"
+        # puts r =~ d
       end
+      # users = users.keep_if { |k, v| !(r =~ user_document(v)).blank? }
+      # puts users.count
     end
+    return users
+  end
+
+  # v is a user_search_hash
+  def self.user_document(v)
+    puts "Is A Hash #{v.is_a?(Hash)}"
+    puts "#{v.class} #{}"
+    v = v.to_json
+    puts v['first_name']
+    # puts v['first_name']
+    return "#{v['first_name']} #{v['last_name']} #{v['city']} #{v['email_addresses']}".downcase
   end
 
   def is_a_company?
@@ -511,11 +531,6 @@ class User < ActiveRecord::Base
       'city' => self.city, 
       'email_addresses' => email_list_string
     }
-  end
-
-  # v is a user_search_hash
-  def user_document(v)
-    return "#{v['first_name']} #{v['last_name']} #{v['city']} #{v['email_addresses']}"
   end
 
   def self.redis_hash_name

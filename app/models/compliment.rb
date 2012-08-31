@@ -251,6 +251,11 @@ class Compliment < ActiveRecord::Base
       compliment.update_attributes(:compliment_status => ComplimentStatus.ACTIVE)
     end
   end
+
+  def self.update_receiver_user_id(user_id, email)
+    Compliment.where(:receiver_email => email)
+              .update_all(:receiver_user_id => user_id)
+  end
   
   def set_visibility
     if self.visibility_id.blank?

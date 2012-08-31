@@ -3,6 +3,8 @@ require 'spec_helper'
 describe UserEmailsController do
 	render_views
 
+	let(:user3){FactoryGirl.create(:user3)}
+
 	before(:each) do 
     controller.class.skip_before_filter :shell_authenticate
     @user = FactoryGirl.create(:user)
@@ -26,6 +28,21 @@ describe UserEmailsController do
 			user_email = UserEmail.last
 			last_email.to[0].should == user_email.email
 			last_email.body.should have_content(new_email_confirmation_url(:confirm_id => user_email.new_email_confirmation_token))
+		end
+
+		it "should associate previous compliments" do
+			c = Compliment.create(:sender_email => user3.email, :receiver_email => @attr[:email],
+												 :skill_id => Skill.first.id, :comment => "I like Pie",
+												 :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id)
+			c.should be_valid
+			x = user3.compliments_sent
+			x.length.should == 1
+			reset_email
+			post :create, :user_email => @attr
+			# after create, the compliments should be associated (receiver_user_id is updated)
+			y = @user.compliments_received
+			y.length.should == 1
+			y[0].receiver_user_id.should == @user.id
 		end
 	end
 
@@ -69,6 +86,36 @@ describe UserEmailsController do
 			lambda do
 				delete :destroy, :id => user_email.id
 			end.should_not change(UserEmail, :count)
+		end
+
+		it "should be successful" do
+			post :create, :user_email => @attr
+			e = UserEmail.last
+			e.email.should == @attr[:email]
+			lambda do
+				delete :destroy, :id => e.id
+			end.should change(UserEmail, :count).by(-1)
+		end
+
+		it "should disassociate all compliments" do
+			post :create, :user_email => @attr
+			e = UserEmail.last
+			e.email.should == @attr[:email]
+			c = Compliment.create(:sender_email => user3.email, :receiver_email => e.email,
+												 :skill_id => Skill.first.id, :comment => "I like Pie",
+												 :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id)
+			c.should be_valid
+			x = user3.compliments_sent
+			x.length.should == 1
+			reset_email
+			delete :destroy, :id => e.id
+			# after delete, the compliments should be disassociated (receiver_user_id is updated to nil)
+			y = User.find(user3.id).compliments_sent
+			y.length.should == 1
+			y[0].receiver_user_id.should be_nil
+			# after delete the compliment should no longer be associated with the user
+			y = @user.compliments_received
+			y.length.should == 0
 		end
 
 	end

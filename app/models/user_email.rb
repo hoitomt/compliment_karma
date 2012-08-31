@@ -21,7 +21,9 @@ class UserEmail < ActiveRecord::Base
   # before_validation :set_confirmed
   # before_validation :set_primary
   after_save :update_redis
+  after_save :associate_compliments
   after_destroy :update_redis
+  after_destroy :disassociate_compliments
 
   default_scope :order => 'primary_email DESC, confirmed DESC, email ASC'
 
@@ -82,6 +84,14 @@ class UserEmail < ActiveRecord::Base
   def update_redis
     u = self.user
     u.add_to_redis
+  end
+
+  def associate_compliments
+    Compliment.update_receiver_user_id(self.user_id, self.email)
+  end
+
+  def disassociate_compliments
+    Compliment.update_receiver_user_id(nil, self.email)
   end
 
   def send_email_confirmation
