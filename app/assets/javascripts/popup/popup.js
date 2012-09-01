@@ -6,10 +6,10 @@ function Popup(el) {
 Popup.prototype.bindEvents = function() {
 	this.$el.on({
 		mouseover: function() {
-			console.log("Cool");
+			// console.log("Cool");
 		},
 		mouseout: function() {
-			console.log("Not Cool")
+			// console.log("Not Cool")
 		}
 	});
 };
