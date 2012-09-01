@@ -1,0 +1,52 @@
+<div id="my-updates">
+	<div class="clear"></div>
+	<% if action_items && user.confirmed? %>
+		<ul id="my-update-content">
+			<% action_items.limit(5).each do |item| %>
+				<% originator = item.originating_user %>
+				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
+					<%= link_to user_action_item_path(user, item) do %>
+						<li class="clearfix my-updates-list" 
+							  style="border-left: 1px solid #C9E6EE; margin-left: -1px">
+							<div class="my-update-all-item-image">
+								<%= get_user_photo_thumb(originator) %>
+							</div>
+							<div class="my-update-item-note">
+								<p class="originator-note">
+									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+								</p>
+								<%= render 'my_updates/update_compliments_all', :item => item %>
+							</div>
+							<%= render 'action_items/action_item_indicator_time', :item => item %>
+						</li>
+					<% end %>
+				<% else %>
+					<%= link_to show_recognition_path(:recognition_type_id => item.recognition_type_id, 
+																						:recognition_id => item.recognition_id,
+																						:update_history_id => nil),
+																						:remote => true do %>
+						<li class="clearfix my-updates-list" 
+								style="border-left: 2px solid #DCF1EF; margin-left: -2px">
+							<div class="my-update-all-item-image">
+								<%= get_user_photo_thumb(originator) %>
+							</div>
+							<div class="my-update-item-note clearfix">
+								<p class="originator-note">
+									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+								</p>
+								<%= render 'my_updates/update_compliments_all', :item => item %>
+							</div>
+							<%= render 'action_items/action_item_indicator_time', :item => item %>
+						</li>
+					<% end %>
+				<% end %>
+			<% end %>
+		</ul>
+	<% elsif !@user.confirmed? && !@my_update_items.blank? %>
+		<div style="margin: 10px 0 0 10px;">
+			<strong>
+				Please confirm your account to view your action items (<%= @action_items_count %>)
+			</strong>
+		</div>
+	<% end %>
+</div>

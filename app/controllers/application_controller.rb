@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ShellHelper
   include ViewStateHelper
+  include ComplimentsHelper
   
   before_filter :shell_authenticate
   before_filter :current_view

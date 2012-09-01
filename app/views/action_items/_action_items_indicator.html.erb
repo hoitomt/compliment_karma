@@ -1,0 +1,23 @@
+<% if current_user %>
+	<% if @action_items_count && @action_items_count > 0 %>
+		<%= link_to user_action_items_path(current_user), 
+																			 :class => 'header-update-link', 
+																			 :remote => true do %>
+			<div class="header-updates clearfix">
+				<div class="header-action-item-indicator"></div>
+				<div id="update-history-count" class="header-update-count">
+					<%= @action_items_count %>
+				</div>
+			</div>
+		<% end %>
+	<% else %>
+		<%= link_to user_action_items_path(current_user),
+																			 :class => 'header-update-link', 
+																			 :remote => true do %>
+			<div class="header-updates clearfix">
+				<div class="header-action-item-indicator"></div>
+				<div id="update-history-count"></div>
+			</div>
+		<% end %>
+	<% end %>
+<% end %>

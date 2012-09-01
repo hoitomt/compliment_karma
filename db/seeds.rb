@@ -106,6 +106,8 @@ Accomplishment.create(:name => 'Level 5 Rewarder',
                       :image_thumb => 'accomplishment/Badge_Rewarder_5.png',
                       :image_mini => 'accomplishment/badge_mini.png')
 
+ActionItemType.create(:name => 'Authorize Compliment')
+
 RecognitionType.create(:name => 'Compliment')
 RecognitionType.create(:name => 'Reward')
 RecognitionType.create(:name => 'Accomplishment')

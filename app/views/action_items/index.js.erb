@@ -1,0 +1,6 @@
+UserProfile.reinitialize();
+var view = '<%= j(render :partial => "action_items/action_items",
+												 :locals => {:user => @user,
+												 						 :action_items => @action_items,
+												 						 :action_items_count => @action_items_count } ) %>';
+ShowMyUpdateFancyBox.init(view);

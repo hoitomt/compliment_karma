@@ -80,7 +80,9 @@ Ck::Application.routes.draw do
   resources :rewards  
   resources :relations
   resources :compliments
-  resources :users
+  resources :users do
+    resources :action_items
+  end
   resources :invitations
   resources :sessions, :only => [:new, :create, :destroy]
   resources :shells, :only => [:new, :create, :destroy]

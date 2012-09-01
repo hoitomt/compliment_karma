@@ -356,6 +356,13 @@ module UsersHelper
     html += hidden_field_tag "user-id", feed_item.item_object.user_id
   end
 
+  def action_item_image(item)
+    case item.action_item_type_id
+    when ActionItemType.Authorize_Compliment.id
+      return image_tag('my_updates/icon_24x24_compliment.png')
+    end
+  end
+
   def my_update_image(item)
     case item.update_history_type_id
     when UpdateHistoryType.Received_Compliment.id

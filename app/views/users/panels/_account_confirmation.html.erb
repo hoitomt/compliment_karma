@@ -3,7 +3,7 @@
 		<h1 style="color:#ffff00;">Unconfirmed Account</h1>
 			Please check your email to activate your account.<br /><br />
 			<%= link_to 'Resend Link', 
-									resend_new_account_confirmation_path,
+									resend_new_account_confirmation_path(@user),
 									:style => "color: #ffffff; text-decoration: underline;" %><br />
 			<%= link_to 'Change Email Address', '#',
 									:style => "color: #ffffff; text-decoration: underline;" %>

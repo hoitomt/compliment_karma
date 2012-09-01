@@ -35,7 +35,7 @@ module ApplicationHelper
     end 
   end
 
-  def get_user_full_name(user)
+   def get_user_full_name(user)
     if user
       return user.full_name
     else

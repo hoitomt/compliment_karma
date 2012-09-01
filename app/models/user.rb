@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_one  :primary_email, :class_name => 'UserEmail', 
                            :foreign_key => 'user_id', 
                            :conditions => "primary_email = 'Y'"
+  has_many :action_items
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned

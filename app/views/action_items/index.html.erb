@@ -1,0 +1,23 @@
+<%= content_for :javascript do %>
+	<script type="text/javascript">
+		$(function() {
+			var flashMsg = "<%= flash[:error] %>";
+			if(flashMsg.length > 0) {
+				$('#field label').hide();
+			}
+			// MyUpdates.markAsRead();
+		});
+	</script>
+<% end %>
+<div id="user-profile">
+	<div class="left-one-third">
+		<%= render 'users/panels/user_profile_short', :flash => flash %>
+	</div>
+	<%= render 'compliments/new_compliment' %>
+	<div id="karma-live-updates" class="right-two-thirds">
+		<%= render :partial => 'action_items/action_items_all',
+							 :locals => {:user => @user,
+							 						 :action_items => @action_items,
+							 						 :action_items_count => @action_items_count }  %>
+	</div>
+</div>

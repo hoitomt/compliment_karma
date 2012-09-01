@@ -115,7 +115,7 @@ class UsersController < ApplicationController
   end
 
   def my_updates
-    user = my_updates_user
+    user = indicator_user
     @my_update_items_total = UpdateHistory.find_all_by_user_id(user.id).size
     @my_update_items = UpdateHistory.get_recent_update_history(user)
     user.update_attributes(:last_read_notification_date => DateTime.now)
@@ -128,7 +128,7 @@ class UsersController < ApplicationController
   end
 
   def my_updates_all
-    @my_update_items = UpdateHistory.find_all_by_user_id(my_updates_user.id)
+    @my_update_items = UpdateHistory.find_all_by_user_id(indicator_user.id)
     render 'my_updates'
   end
 
@@ -220,10 +220,10 @@ class UsersController < ApplicationController
     redirect_to @user
   end
 
-  def sender_is_a_company?
-    return true if current_user.is_a_company?
-    return false
-  end
+  # def sender_is_a_company?
+  #   return true if current_user.is_a_company?
+  #   return false
+  # end
   
   def set_karma_live_panel
     @all_karma_live_items = get_karma_live_items(params[:feed_item_type], params[:relation_type])
@@ -371,9 +371,9 @@ class UsersController < ApplicationController
     # end
   end
   
-  def set_this_week_compliments
-    @compliments_since_last_monday = Compliment.get_compliments_since_monday(@user)
-  end
+  # def set_this_week_compliments
+  #   @compliments_since_last_monday = Compliment.get_compliments_since_monday(@user)
+  # end
   
   ## return hash of skill and number of occurrences
   def compliment_count_by_skill(compliments)
@@ -459,40 +459,41 @@ class UsersController < ApplicationController
       @page = (params[:page] || 1).to_i
       @per_page = 10
       @compliment = Compliment.new
-      @my_update_items_count = UpdateHistory.get_recent_item_count(my_updates_user)
+      @my_update_items_count = UpdateHistory.get_recent_item_count(indicator_user)
+      @action_items_count = indicator_user.try(:action_items).try(:count)
     end
 
-    def my_updates_user
+    def indicator_user
       user = current_user
       user = @user if view_state(@user) == view_state_company_manager
       return user
     end
 
-    def set_compliment_panel
-      @compliment = Compliment.new(params[:compliment])
-      @compliment.sender_email = current_user.email
-      @sender_is_a_company = sender_is_a_company?
-      @receiver_is_a_company = false
-      set_this_week_compliments
-      if !current_user?(@user) #&& current_user.is_company_administrator?(@user.company.id)
-        @compliment.receiver_display = @user.search_result_display
-        @compliment.receiver_user_id = @user.id
-        @receiver_is_a_company = @user.is_a_company?
-      end
-      # @skills = Skill.list_for_autocomplete
-      @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)
-      if flash[:compliment]
-        @compliment = Compliment.new(flash[:compliment].attributes)
-        flash[:compliment].errors.each do |attr, msg|
-          @compliment.errors.add(attr, msg)
-        end
-        @compliment.errors.full_messages.each do |msg|
-          logger.info("Error: #{msg}")
-        end
-      end
-      logger.info("Compliment Types: #{@compliment_types}")
-      flash.delete(:compliment)
-    end
+    # def set_compliment_panel
+    #   @compliment = Compliment.new(params[:compliment])
+    #   @compliment.sender_email = current_user.email
+    #   @sender_is_a_company = sender_is_a_company?
+    #   @receiver_is_a_company = false
+    #   set_this_week_compliments
+    #   if !current_user?(@user) #&& current_user.is_company_administrator?(@user.company.id)
+    #     @compliment.receiver_display = @user.search_result_display
+    #     @compliment.receiver_user_id = @user.id
+    #     @receiver_is_a_company = @user.is_a_company?
+    #   end
+    #   # @skills = Skill.list_for_autocomplete
+    #   @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)
+    #   if flash[:compliment]
+    #     @compliment = Compliment.new(flash[:compliment].attributes)
+    #     flash[:compliment].errors.each do |attr, msg|
+    #       @compliment.errors.add(attr, msg)
+    #     end
+    #     @compliment.errors.full_messages.each do |msg|
+    #       logger.info("Error: #{msg}")
+    #     end
+    #   end
+    #   logger.info("Compliment Types: #{@compliment_types}")
+    #   flash.delete(:compliment)
+    # end
     
     def get_karma_live_items(feed_item_type_id, relation_type_id)
       # logger.info("User get feed items: #{feed_item_type_id} | #{relation_type_id}")
