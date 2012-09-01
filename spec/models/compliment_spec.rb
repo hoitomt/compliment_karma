@@ -221,6 +221,38 @@ describe Compliment do
                                           :relation_id => 2))
       end.should_not change(Relationship, :count).by(1)
     end
+
+    it "should create an action item if a user sends a compliment to user without existing relationship" do
+      external_user = FactoryGirl.create(:user2)
+      lambda do
+        c = Compliment.create(@attr.merge(:sender_email => user.email, 
+                                          :receiver_email => external_user.email,
+                                          :relation_id => 2))
+      end.should change(Relationship, :count).by(1)
+      r = Relationship.last
+      r.user_1_id.should eq(user.id)
+      r.user_2_id.should eq(external_user.id)
+      r.relationship_status.should eq(RelationshipStatus.PENDING)
+      u = User.find(external_user.id)
+      action_items = u.action_items
+      action_items.should_not be_blank
+    end
+
+    it "should not create an action item if a user sends a compliment to user with existing relationship" do
+      external_user = FactoryGirl.create(:user2)
+      lambda do
+        c = Compliment.create(@attr.merge(:sender_email => user.email, 
+                                          :receiver_email => external_user.email,
+                                          :relation_id => 2))
+      end.should change(Relationship, :count).by(1)
+      r = Relationship.last
+      r.user_1_id.should eq(user.id)
+      r.user_2_id.should eq(external_user.id)
+      r.relationship_status.should eq(RelationshipStatus.PENDING)
+      u = User.find(external_user.id)
+      action_items = user.action_items
+      action_items.should be_blank
+    end
     
   end
   
