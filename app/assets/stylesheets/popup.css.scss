@@ -1,0 +1,44 @@
+@import "common";
+@import "user_common";
+
+.popup {
+	top: 0;
+	left: 0;
+	display: none;
+	position: absolute;
+	z-index: 8031;
+
+	#popup-content {
+		@include bottom-border-radius;
+		@include tooltip-box-shadow;
+		position: relative;
+		margin-top: 18px;
+		width: 200px;
+		background-color: #fff;
+		padding: 10px;
+		// border: 2px solid #333;
+	}
+	$left_arrow_pos: 16px;
+	$top_arrow_pos: -18px;
+	#popup-content:before, #popup-content:after {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		position: absolute;
+		width: 0;
+		top: $top_arrow_pos;
+		left: $left_arrow_pos;
+	}
+	#popup-content:after {
+		border: 13px solid transparent;
+		border-bottom-color: #fff;
+		top: $top_arrow_pos - 6px;
+		left: $left_arrow_pos + 1px;
+	}
+	#popup-content:before {
+		border: 14px solid transparent;
+		border-bottom-color: #e8e8e8;
+		top: $top_arrow_pos - 10px;
+		left: $left_arrow_pos;
+	}
+}

@@ -1,3 +1,32 @@
-// Place all the styles related to the action_items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "common";
+@import "user_common";
+
+#action-item-content {
+	a.handle-action-item {
+		border: 1px solid #005B15;
+		color: #ffffff;
+		font-weight: bold;
+		font-size: 13px;
+	   -webkit-border-radius: 5px;
+	   -moz-border-radius: 5px;
+	   border-radius: 5px;
+		float: left;
+		// width: 100px; 
+		margin: 0 0 0 10px;
+		text-align: center;
+		text-shadow: rgba(0,0,0,.4) 0 1px 0;
+		padding: 2px 10px;
+	}
+	.accept-action-item {
+		@include button-gradient-green;
+	}
+	a.accept-action-item:hover {
+		@include button-gradient-gray;
+	}
+	.decline-action-item {
+		@include button-gradient-red;
+	}
+	a.decline-action-item:hover {
+		@include button-gradient-gray;
+	}
+}

@@ -90,9 +90,9 @@ $total-width: 992px;
   box-shadow:         0px 2px 2px #8EBAB8;
 }
 @mixin tooltip-box-shadow {
-  -moz-box-shadow:    0px 0px 2px #8EBAB8;
-  -webkit-box-shadow: 0px 0px 2px #8EBAB8;
-  box-shadow:         0px 0px 2px #8EBAB8;
+  -moz-box-shadow:    0px 0px 10px #8EBAB8;
+  -webkit-box-shadow: 0px 0px 10px #8EBAB8;
+  box-shadow:         0px 0px 10px #8EBAB8;
 }
 @mixin page-box-shadow {
   -moz-box-shadow:    0px 0px 5px #8EBAB8;

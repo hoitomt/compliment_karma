@@ -12,6 +12,14 @@ class ActionItemsController < ApplicationController
 		@action_items_count = @action_items.count
 	end
 
+  def accept
+
+  end
+
+  def decline
+    
+  end
+
 	private
     def authenticate
       deny_access unless signed_in?

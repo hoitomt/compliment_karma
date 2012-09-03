@@ -1,7 +1,7 @@
 <div id="my-updates">
 	<div class="clear"></div>
 	<% if action_items && user.confirmed? %>
-		<ul id="my-update-content">
+		<ul id="action-item-content">
 			<% action_items.limit(5).each do |item| %>
 				<% originator = item.originating_user %>
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>

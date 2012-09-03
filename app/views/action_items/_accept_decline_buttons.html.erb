@@ -1,0 +1,23 @@
+<script>
+	$(function() {
+		var acceptPopup = new Popup('.accept-action-item', '#action-item-popup');
+	});
+</script>
+<div class="clear"></div>
+<div style="margin: 10px 0 5px 0;">
+	<div style="margin-left: 60px;">
+		<div style="float-left;">
+			<%= link_to 'Accept', 
+									'#', 
+									:id => item.id,
+									:class => 'handle-action-item accept-action-item' %>
+		</div>
+		<div style="float-left; margin-left: 100px;">
+			<%= link_to 'Decline', 
+									'#',
+									:class => 'handle-action-item decline-action-item' %>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="clear"></div>
