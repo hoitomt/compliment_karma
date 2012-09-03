@@ -184,9 +184,23 @@ class UsersController < ApplicationController
   end
 
   def contacts
-    @groups = @user.groups.includes(:group_type)
-    @contacts = @user.contacts.includes(:user)
+    @filter = params[:filter]
+    @groups = @user.groups
+    @group_counts = group_counts
+    if @filter.blank?
+      @contacts = @user.contacts.includes(:user).uniq{|x| x.user_id }
+    else
+      @contacts = @user.contacts.joins(:user, :group).where('groups.id = ?', @filter.to_i)
+    end
     menu_response_handler
+  end
+
+  def group_counts
+    h = Hash.new(0)
+    @user.groups.each do |group|
+      h[group.id] = @user.contacts.joins(:user, :group).where('groups.id = ?', group.id).count
+    end
+    return h
   end
 
   def settings

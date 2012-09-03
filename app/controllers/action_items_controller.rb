@@ -35,6 +35,10 @@ class ActionItemsController < ApplicationController
   end
 
   def decline
+    @action_item = ActionItem.find(params[:id])
+    originator = User.find(params[:originator_id])
+    group = Group.get_declined_group(@user)
+    Contact.create(:group_id => group.id, :user_id => originator.id)
     if @action_item.set_complete
       flash[:notice] = "You have chose not to accept compliments from #{originator.full_name}"
       redirect_to @user

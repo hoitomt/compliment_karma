@@ -1,3 +1,28 @@
-// Place all the styles related to the contacts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "common";
+@import "user_common";
+
+#user-contacts {
+	padding: 10px;
+}
+.contact {
+	@include border-radius;
+	background: $main-menu-color;
+	border: 2px solid $border-gray;
+	width: 200px;
+	// height: 35px;
+	float: left;
+	margin: 10px 10px 0 0;
+	font-size: 12px;
+	.photo {
+		float:left;
+		// width: 30px;
+		height: 60px;
+		margin: 5px;
+		text-align: center;
+		overflow: hidden;
+	}
+	.info {
+		padding: 5px;
+		float:left;
+	}
+}

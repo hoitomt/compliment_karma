@@ -1,3 +1,13 @@
 <% contacts.try(:each) do |contact| %>
-	<%= contact.user.full_name %> - <%= contact.group.name %><br />
+	<% user = contact.user %>
+	<div class="contact">
+		<div class="photo">
+			<%= image_tag user.photo.url(:thumb) %>
+		</div>
+		<div class="info">
+			<%= user.first_name %><br />
+			<%= user.last_name %>
+		</div>
+		<div class="clear"></div>
+	</div>
 <% end %>
