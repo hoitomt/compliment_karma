@@ -1,16 +1,19 @@
 <div id="user-contacts" class="right-two-thirds drop-box-white">
-	<h1 style="display: inline;">Contacts</h1>
-	<% @groups.try(:each) do |group| %>
-		<% if group.id == @filter.to_i %>
-			<span style="font-weight: bold; margin-left: 15px;">
-		<% else %>
-			<span style="margin-left: 15px;">
+	<div style="padding: 10px;">
+		<h1 style="display: inline;">Contacts</h1>
+		<% @groups.try(:each) do |group| %>
+			<% if group.id == @filter.to_i %>
+				<span style="font-weight: bold; margin-left: 15px;">
+			<% else %>
+				<span style="margin-left: 15px;">
+			<% end %>
+			<%= link_to "#{group.name} (#{@group_counts[group.id]})", 
+									user_contacts_path(@user, :filter => group.id),
+									:class => "ul_hover" %>
+			</span>
 		<% end %>
-		<%= link_to "#{group.name} (#{@group_counts[group.id]})", 
-								user_contacts_path(@user, :filter => group.id),
-								:class => "ul_hover" %>
-		</span>
-	<% end %>
-	<div class="clear"></div>
-	<%= render 'contacts/list_with_picture', :contacts => @contacts %>
+		<div class="clear"></div>
+		<%= render 'contacts/list_with_picture', :contacts => @contacts %>
+		<div class="clear"></div>
+	</div>
 </div>
