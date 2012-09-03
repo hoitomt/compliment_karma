@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :action_items
   has_many :groups, :class_name => 'Group', :foreign_key => 'user_id'
   has_many :contacts
-  has_many :groups, :through => :contacts
+  has_many :member_groups, :through => :contacts, :class_name => 'Group', :foreign_key => 'user_id'
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned
