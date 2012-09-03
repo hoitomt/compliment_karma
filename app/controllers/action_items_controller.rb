@@ -29,13 +29,16 @@ class ActionItemsController < ApplicationController
     end
     if @action_item.set_complete
       flash[:notice] = "#{originator.full_name} has been added as a contact in the following groups: 
-                        #{group_names.join(',')}"
+                        #{group_names.join(', ')}"
       redirect_to @user
     end
   end
 
   def decline
-    
+    if @action_item.set_complete
+      flash[:notice] = "You have chose not to accept compliments from #{originator.full_name}"
+      redirect_to @user
+    end
   end
 
 	private

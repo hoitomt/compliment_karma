@@ -1,7 +1,4 @@
 <div id="user-contacts" class="right-two-thirds drop-box-white">
 	<h1>Contacts</h1>
-	<% @groups.try(:each) do |group| %>
-		<%= group.name %> - <%= group.group_type.name %><br />
-	<% end %>
 	<%= render 'contacts/list_with_picture', :contacts => @contacts %>
 </div>
