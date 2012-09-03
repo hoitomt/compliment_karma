@@ -6,6 +6,14 @@ class Group < ActiveRecord::Base
 
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
 
+	def professional?
+		return self.name == 'Professional'
+	end
+
+	def declined?
+		return self.name == "Declined"
+	end
+
 	def self.create_professional(user)
 		create(:name => 'Professional', :user_id => user.id, :group_type => GroupType.Professional)
 	end

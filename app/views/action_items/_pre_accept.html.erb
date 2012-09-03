@@ -1,0 +1,21 @@
+<div class="contact-accept-form">
+	<div id="my-updates-header">
+		<h1 style="float: left;">What type of contact is <%= originator.full_name %></h1>
+		<div class="clear"></div>
+	</div>
+	<%= form_tag accept_action_item_path(:user_id => user.id, :id => action_item.id) do %>
+		<%= hidden_field_tag 'originator_id', originator.id %>
+		<ul>
+			<% groups.try(:each) do |group| %>
+				<% unless group.declined? %>
+					<li><%= check_box_tag "groups[#{group.id}]", 'yes', group.professional? %>
+							<%= group.name %></li>
+				<% end %>
+			<% end %>
+		</ul>
+		<div>
+			<button type=submit>Accept Contact</button>
+		</div>
+	<% end %>
+</div>
+

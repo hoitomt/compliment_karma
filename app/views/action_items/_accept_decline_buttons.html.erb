@@ -8,13 +8,18 @@
 	<div style="margin-left: 60px;">
 		<div style="float-left;">
 			<%= link_to 'Accept', 
-									'#', 
+									pre_accept_action_item_path(:user_id => user.id, 
+																							:id => item.id, 
+																							:originator_user_id => originator.id), 
 									:id => item.id,
-									:class => 'handle-action-item accept-action-item' %>
+									:class => 'handle-action-item accept-action-item',
+									:remote => true %>
 		</div>
 		<div style="float-left; margin-left: 100px;">
 			<%= link_to 'Decline', 
-									'#',
+									decline_action_item_path(:user_id => user.id, 
+																					 :id => item.id, 
+																					 :originator_user_id => originator.id),
 									:class => 'handle-action-item decline-action-item' %>
 		</div>
 		<div class="clear"></div>

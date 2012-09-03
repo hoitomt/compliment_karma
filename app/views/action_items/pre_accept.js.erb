@@ -1,0 +1,23 @@
+var view = '<%=j render :partial => "action_items/pre_accept",
+												:locals => {:groups => @groups, 
+																		:user => @user,
+																		:action_item => @action_item,
+																		:originator => @originator} %>'
+$.fancybox(view, {
+	beforeLoad: function() {
+		$('body').addClass('lock-screen');
+	},
+	beforeClose: function() {
+		$('body').removeClass('lock-screen');
+	},
+	minWidth: 450,
+	minHeight: 50,
+	// padding: 0,
+	helpers: {
+		overlay: {
+			css: {
+				'background': '#A7DBD8'
+			}
+		}
+	}
+});

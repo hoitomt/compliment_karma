@@ -2,7 +2,7 @@ function Popup(el, popup) {
 	this.$el = $(el);
 	this.$popup = $(popup);
 	this.hidePopup();
-	this.bindEvents();
+	// this.bindEvents();
 };
 
 Popup.prototype.showPopup = function() {

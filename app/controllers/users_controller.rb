@@ -185,7 +185,7 @@ class UsersController < ApplicationController
 
   def contacts
     @groups = @user.groups.includes(:group_type)
-    @contacts = @user.contacts.includes(:user, :group)
+    @contacts = @user.contacts.includes(:user)
     menu_response_handler
   end
 
@@ -462,7 +462,7 @@ class UsersController < ApplicationController
       @per_page = 10
       @compliment = Compliment.new
       @my_update_items_count = UpdateHistory.get_recent_item_count(indicator_user)
-      @action_items_count = indicator_user.try(:action_items).try(:count)
+      @action_items_count = ActionItem.incomplete_for_user(indicator_user).try(:count)
     end
 
     def indicator_user

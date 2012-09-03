@@ -1,4 +1,4 @@
- <div id="my-updates">
+<div id="my-updates">
 	<div id="my-updates-header">
 		<h1 style="float: left; margin-left: 10px;">My Action Items</h1>
 		<span class="my-notification-header_link">
@@ -26,7 +26,10 @@
 							</div>
 							<%= render 'action_items/action_item_indicator_time', :item => item %>
 						<% end %>
-						<%= render 'action_items/accept_decline_buttons', :item => item %>
+						<%= render :partial => 'action_items/accept_decline_buttons', 
+											 :locals => {:item => item, 
+											 						 :user => user,
+											 						 :originator => originator} %>
 					</li>
 				<% else %>
 					<li class="clearfix my-updates-list" 
@@ -47,7 +50,10 @@
 							</div>
 							<%= render 'action_items/action_item_indicator_time', :item => item %>
 						<% end %>
-						<%= render 'action_items/accept_decline_buttons', :item => item %>
+						<%= render :partial => 'action_items/accept_decline_buttons', 
+											 :locals => {:item => item, 
+											 						 :user => user,
+											 						 :originator => originator} %>
 					</li>
 				<% end %>
 			<% end %>

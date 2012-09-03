@@ -5,15 +5,33 @@ class ActionItemsController < ApplicationController
   before_filter :get_confirmation_status, :except => [:new, :create]
 
 	def index
-		# Optimized but not a big savings. We need the user object on the UI anyway for the URL
-		# @action_items = @user.action_items.joins("LEFT OUTER JOIN users on originating_user_id = users.id")
-		# 										 .select("action_items.*, users.*")
-		@action_items = @user.action_items
+		@action_items = ActionItem.incomplete_for_user(@user)
 		@action_items_count = @action_items.count
 	end
 
-  def accept
+  def pre_accept
+    @action_item = ActionItem.find(params[:id])
+    @originator = User.find(params[:originator_user_id])
+    @groups = @user.groups
+  end
 
+  def accept
+    @action_item = ActionItem.find(params[:id])
+    originator = User.find(params[:originator_id])
+    groups = params[:groups]
+    group_names = []
+    groups.try(:each) do |k,v|
+      if v.downcase == 'yes'
+        # logger.info("YES")
+        Contact.create(:group_id => k, :user_id => originator.id)
+        group_names << Group.find_by_id(k).try(:name)
+      end
+    end
+    if @action_item.set_complete
+      flash[:notice] = "#{originator.full_name} has been added as a contact in the following groups: 
+                        #{group_names.join(',')}"
+      redirect_to @user
+    end
   end
 
   def decline

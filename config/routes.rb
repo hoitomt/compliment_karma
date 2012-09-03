@@ -68,6 +68,12 @@ Ck::Application.routes.draw do
   match "users/:id/rewards" => "users#rewards", :as => :user_rewards
   match "users/:id/edit_from_profile" => "users#edit_from_profile", :as => :edit_from_profile
   match "users/:id/switch_accounts" => "users#switch_accounts", :as => :switch_accounts
+  match "users/:user_id/action_items/:id/pre_accept" => "action_items#pre_accept", 
+        :as => :pre_accept_action_item
+  match "users/:user_id/action_items/:id/accept" => "action_items#accept", 
+        :as => :accept_action_item
+  match "users/:user_id/action_items/:id/decline" => "action_items#decline", 
+        :as => :decline_action_item
   match "user_emails/set_primary_email" => "user_emails#set_primary_email", :as => :set_primary_email
 
   # Metrics

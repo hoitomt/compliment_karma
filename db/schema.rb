@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903035143) do
+ActiveRecord::Schema.define(:version => 20120903185744) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120903035143) do
     t.datetime "updated_at"
     t.integer  "originating_user_id"
     t.text     "note"
+    t.string   "complete",            :default => "N"
   end
 
   create_table "ck_likes", :force => true do |t|
