@@ -22,9 +22,10 @@ class User < ActiveRecord::Base
                            :foreign_key => 'user_id', 
                            :conditions => "primary_email = 'Y'"
   has_many :action_items
-  has_many :groups, :class_name => 'Group', :foreign_key => 'user_id'
-  has_many :contacts
-  has_many :member_groups, :through => :contacts, :class_name => 'Group', :foreign_key => 'user_id'
+  has_many :groups
+  has_many :contacts, :through => :groups
+
+  has_many :memberships, :class_name => 'Contact', :foreign_key => 'user_id'
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned
@@ -71,6 +72,7 @@ class User < ActiveRecord::Base
   after_create :associate_sent_compliments
   after_create :create_relationships
   after_create :metrics_send_new_user
+  after_create :create_groups
   after_save :add_to_redis
   
   # Return true if the user's password matches the submitted password
@@ -264,6 +266,12 @@ class User < ActiveRecord::Base
       Relationship.create(:user_1_id => compliment.sender_user_id,
                           :user_2_id => compliment.receiver_user_id)
     end
+  end
+
+  def create_groups
+    Group.create_professional(self)
+    Group.create_social(self)
+    Group.create_declined(self)
   end
   
   # Updates the status one level for the receiver

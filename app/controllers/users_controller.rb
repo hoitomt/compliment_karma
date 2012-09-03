@@ -184,6 +184,8 @@ class UsersController < ApplicationController
   end
 
   def contacts
+    @groups = @user.groups.includes(:group_type)
+    @contacts = @user.contacts.includes(:user, :group)
     menu_response_handler
   end
 

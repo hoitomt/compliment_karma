@@ -1,8 +1,4 @@
 Ck::Application.routes.draw do
-  resources :contacts
-
-  resources :groups
-
   root :to => "pages#index"
   
   match 'mailer(/:action(/:id(.:format)))' => 'mailer#:action'
@@ -86,6 +82,8 @@ Ck::Application.routes.draw do
   resources :compliments
   resources :users do
     resources :action_items
+    resources :contacts
+    resources :groups
   end
   resources :invitations
   resources :sessions, :only => [:new, :create, :destroy]

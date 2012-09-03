@@ -1,8 +1,23 @@
 class TaskRunner
 
-	# Update compliment types 20120822
 	def self.run_task
-		add_user_to_redis
+		create_groups_and_migrate
+	end
+
+	# Create the user groups and assign relationships to groups
+	def self.create_groups_and_migrate
+		@users = User.all
+		@users.each do |user|
+			user.create_groups
+			pro_group = Group.get_professional_group(user)
+			relationships = Relationship.get_relationships(user)
+			relationships.each do |r|
+				other_user = r.get_other_user(user)
+				if r.relationship_status != RelationshipStatus.NOT_ACCEPTED && !other_user.blank?
+					Contact.create(:group_id => pro_group.id, :user_id => other_user.id)
+				end
+			end
+		end
 	end
 
 	# Initialize the Redis instance with user data

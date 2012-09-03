@@ -92,6 +92,17 @@ class Relationship < ActiveRecord::Base
     end
     UpdateHistory.Rejected_Compliment_Receiver(self)
   end
+
+  def get_other_user(user)
+    return nil if user.blank?
+    if self.user_1_id == user.id
+      return User.find_by_id(self.user_2_id)
+    elsif self.user_2_id == user.id
+      return User.find_by_id(self.user_1_id)
+    else
+      return nil
+    end
+  end
   
   def self.get_relationship(user_1, user_2)
     return nil if user_1.nil? || user_2.nil?
@@ -99,6 +110,10 @@ class Relationship < ActiveRecord::Base
                             user_1.id, user_2.id, user_2.id, user_1.id)
     r = r[0] unless r.blank?
     return r
+  end
+
+  def self.get_relationships(user)
+    r = Relationship.where('user_1_id = ? OR user_2_id = ?', user.id, user.id)
   end
 
   def self.accepted_relationship?(user_1, user_2)

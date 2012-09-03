@@ -115,9 +115,15 @@ describe UsersController do
           uh3.count.should eq(11)
         end
 
-        it "should have the correct number of compliments after paging" do
-
-        end
+        # it "should have the correct entries in menu" do
+        #   # professional_path
+        #   # social_path
+        #   # received_compliments
+        #   # sent_compliments
+        #   # contacts
+        #   get :show, :id => user2
+        #   response.should have_selector(:a, :href => user_professional_profile_url(user2))
+        # end
       end
 
       describe "as viewed by visitor: User 3 viewing User 2s page" do

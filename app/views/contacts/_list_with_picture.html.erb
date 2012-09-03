@@ -1,0 +1,3 @@
+<% contacts.try(:each) do |contact| %>
+	<%= contact.user.full_name %>
+<% end %>
