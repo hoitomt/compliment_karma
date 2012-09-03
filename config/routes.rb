@@ -1,4 +1,8 @@
 Ck::Application.routes.draw do
+  resources :contacts
+
+  resources :groups
+
   root :to => "pages#index"
   
   match 'mailer(/:action(/:id(.:format)))' => 'mailer#:action'

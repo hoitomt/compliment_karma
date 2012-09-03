@@ -45,7 +45,7 @@ class Relationship < ActiveRecord::Base
       action_item = ActionItem.create(:user_id => self.user_2_id,
                                       :recognition_type_id => RecognitionType.COMPLIMENT.id,
                                       :recognition_id => c.try(:id),
-                                      :action_item_type_id => ActionItemType.Authorize_Compliment,
+                                      :action_item_type_id => ActionItemType.Authorize_Contact.id,
                                       :originating_user_id => self.user_1_id )
     end
   end

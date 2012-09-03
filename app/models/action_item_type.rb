@@ -3,7 +3,7 @@ class ActionItemType < ActiveRecord::Base
 
 	validates_uniqueness_of :name
 
-	def self.Authorize_Compliment
+	def self.Authorize_Contact
 		find_by_name('Authorize Compliment')
 	end
 	

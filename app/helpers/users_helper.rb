@@ -358,7 +358,7 @@ module UsersHelper
 
   def action_item_image(item)
     case item.action_item_type_id
-    when ActionItemType.Authorize_Compliment.id
+    when ActionItemType.Authorize_Contact.id
       return image_tag('my_updates/icon_24x24_compliment.png')
     end
   end
