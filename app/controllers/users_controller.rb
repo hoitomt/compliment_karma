@@ -197,6 +197,7 @@ class UsersController < ApplicationController
 
   def group_counts
     h = Hash.new(0)
+    @user_contacts_count = @user.contacts.count
     @user.groups.each do |group|
       h[group.id] = @user.contacts.joins(:user, :group).where('groups.id = ?', group.id).count
     end

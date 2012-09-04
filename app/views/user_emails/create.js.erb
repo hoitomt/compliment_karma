@@ -1,3 +1,11 @@
 var container = $('#email-table');
 $('input#user_email_email').val('');
 container.html('<%=j render "user_emails/email_table", :user_emails => @user_emails %>')
+
+var container = $('#user-info-form-container');
+var existingFlash = container.find('#flash');
+if(existingFlash != null && existingFlash.length > 0) {
+	container.remove(existingFlash);
+}
+container.prepend('<%=j render "shared/flash", :flash => flash %>');
+$('#flash').slideDown();
