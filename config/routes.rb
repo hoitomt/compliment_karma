@@ -74,7 +74,10 @@ Ck::Application.routes.draw do
         :as => :accept_action_item
   match "users/:user_id/action_items/:id/decline" => "action_items#decline", 
         :as => :decline_action_item
-  match "user_emails/set_primary_email" => "user_emails#set_primary_email", :as => :set_primary_email
+  match "users/:user_id/user_emails/set_primary_email" => "user_emails#set_primary_email", 
+        :as => :set_primary_email
+  match "users/:user_id/user_emails/:id/resend_email_confirmation" => "user_emails#resend_email_confirmation",
+        :as => :resend_email_confirmation
 
   # Metrics
   match "compliments/count" => "compliments#count"
@@ -90,6 +93,7 @@ Ck::Application.routes.draw do
     resources :action_items
     resources :contacts
     resources :groups
+    resources :user_emails
   end
   resources :invitations
   resources :sessions, :only => [:new, :create, :destroy]
@@ -101,6 +105,5 @@ Ck::Application.routes.draw do
   resources :company_departments
   resources :company_users
   resources :companies
-  resources :user_emails
 
 end

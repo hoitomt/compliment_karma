@@ -4,7 +4,10 @@
 			<h1>Account Settings</h1>
 			<ul id="account-settings">
 				<li><%#= link_to 'Privacy Settings', '#' %></li>
-				<li><%= link_to 'Add/Manage Email Addresses', user_emails_path, :remote => true %></li>
+				<li>
+					<%= link_to 'Add/Manage Email Addresses', 
+											user_user_emails_path(:user_id => @user.id), :remote => true %>
+				</li>
 			</ul>
 			<% if view_state(@user) == view_state_company_manager %>
 				<h2>Departments</h2>

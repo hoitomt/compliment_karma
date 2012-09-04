@@ -8,7 +8,9 @@
 		<tr>
 			<td class="email-address <%= email_status_class(ue) %>"><%= ue.email %></td>
 			<td class="primary-status"><%= email_primary_link(ue) %></td>
-			<td class="remove-email"><%= link_to 'Remove', ue, :method => :delete, :remote => true %></td>
+			<td class="remove-email">
+				<%= link_to 'Remove', user_user_email_path(@user, ue), :method => :delete, :remote => true %>
+			</td>
 		</tr>
 	<% end %>
 </table>

@@ -25,6 +25,12 @@
 			FooterResize.init();
 			
 			$('.fancybox').fancybox({
+				beforeLoad: function() {
+					$('body').addClass('lock-screen');
+				},
+				beforeClose: function() {
+					$('body').removeClass('lock-screen');
+				},
 				maxWidth: 800
 			});
 			$('.google-fancybox').fancybox({

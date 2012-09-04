@@ -1,4 +1,6 @@
-<%= form_for user_email, :remote => true, 
+<%= form_for [@user, user_email], 
+						 :url => user_user_emails_path(@user),
+						 :remote => true, 
 						 :html => {:style => "margin: 10px;"} do |f| %>
 	<div id="data-entry" class="clearfix">
 		<div id="field" style="float:left;">

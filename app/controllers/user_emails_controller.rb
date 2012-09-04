@@ -1,9 +1,10 @@
 class UserEmailsController < ApplicationController
 	before_filter :authenticate
 	before_filter :get_email_addresses
+	before_filter :correct_user
 
 	def index
-		@user_email = UserEmail.new	
+		@user_email = @user.email_addresses.build
 	end
 
 	def new
@@ -13,12 +14,13 @@ class UserEmailsController < ApplicationController
 	def create
 		@user_email = UserEmail.new(params[:user_email])
 		@user_email.user_id = current_user.id
+		notice = "Your new email address has been added"
 		if @user_email.save
 			@user_email.associate_compliments
 			@user_email.send_email_confirmation
 			respond_to do |format|
-				format.html { redirect_to current_user, :notice => "Your new email address has been added" }
-				format.js { } #fall through to create.js.erb
+				format.html { redirect_to current_user, :notice => notice }
+				format.js { flash.now[:notice] = notice } #fall through to create.js.erb
 			end
 		else
 			logger.info("Errors: #{@user_email.errors.messages}")
@@ -30,7 +32,16 @@ class UserEmailsController < ApplicationController
 				}
 			end
 		end
+	end
 
+	def resend_email_confirmation
+		@user_email = UserEmail.find(params[:id])
+		@user_email.send_email_confirmation
+		notice = "Your email confirmation has been sent to #{@user_email.email}"
+		respond_to do |format|
+			format.html { redirect_to current_user, :notice => notice }
+		  format.js { flash.now[:notice] = notice }
+		end
 	end
 
 	def error_display(user_email)
@@ -76,4 +87,11 @@ class UserEmailsController < ApplicationController
     def get_email_addresses
     	@user_emails = current_user.email_addresses
     end
+
+    def correct_user
+      @user = User.find(params[:user_id])
+      good_user = current_user?(@user)
+      redirect_to(root_path) unless good_user
+    end
+
 end

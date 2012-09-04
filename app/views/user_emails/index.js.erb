@@ -1,4 +1,6 @@
 view = '<%= j(render :partial => "user_emails/add_manage_emails", 
-										 :locals => {:user_emails => @user_emails, :user_email => @user_email} ) %>';
+										 :locals => {:user_emails => @user_emails, 
+										 						 :user_email => @user_email,
+										 						 :user => @user} ) %>';
 ShowFancybox.init(view);
 InlineForms.init();
