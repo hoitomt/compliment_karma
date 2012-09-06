@@ -1,13 +1,39 @@
+<script>
+	$(function() {
+		$('li.contact').each(function(){
+			var contact = new Contact('#' + this.id);
+		});
+	});
+</script>
+<ul>
 <% contacts.try(:each) do |contact| %>
-	<% user = contact.user %>
-	<div class="contact">
-		<div class="photo">
-			<%= image_tag user.photo.url(:thumb) %>
-		</div>
-		<div class="info">
-			<%= user.first_name %><br />
-			<%= user.last_name %>
-		</div>
-		<div class="clear"></div>
-	</div>
+	<% c_user = contact.user %>
+	<% c_user_memberships = c_user.memberships %>
+		<li id="<%= contact.id %>" class="contact <%= border_color(contact) %>">
+			<div class="photo">
+				<%= image_tag c_user.photo.url(:thumb) %>
+			</div>
+			<div class="info">
+				<%= c_user.first_name %><br />
+				<%= c_user.last_name %> (<%= contact.group_id %>)
+			</div>
+			<div class="popup">
+				<div id="popup-content">
+					<p class="title">Groups</p>
+					<ul class="popup-group-list">
+						<% groups.try(:each) do |group| %>
+							<% unless group.declined? %>
+								<li>
+									<span class="select"><%= group_selected(group, c_user_memberships) %></span>
+									<%= group.name %>
+								</li>
+							<% end %>
+						<% end %>
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</li>
 <% end %>
+</ul>

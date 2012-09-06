@@ -188,16 +188,19 @@ class UsersController < ApplicationController
     @groups = @user.groups
     @group_counts = group_counts
     if @filter.blank?
-      @contacts = @user.contacts.includes(:user).uniq{|x| x.user_id }
+      @contacts = @user.contacts.includes(:user, :group, {:user => :memberships}).uniq{|x| x.user_id}
+      @contacts.sort_by!{|x| x.user_id }
+      @user_contacts_count = @contacts.count
     else
       @contacts = @user.contacts.joins(:user, :group).where('groups.id = ?', @filter.to_i)
+      @user_contacts_count = @contacts.count
     end
     menu_response_handler
   end
 
   def group_counts
     h = Hash.new(0)
-    @user_contacts_count = @user.contacts.count
+    # @user_contacts_count = @user.contacts.count
     @user.groups.each do |group|
       h[group.id] = @user.contacts.joins(:user, :group).where('groups.id = ?', group.id).count
     end

@@ -2,27 +2,59 @@
 @import "user_common";
 
 #user-contacts {
-	// padding: 10px;
-}
-.contact {
-	@include border-radius;
-	background: $main-menu-color;
-	border: 2px solid $border-gray;
-	width: 200px;
-	// height: 35px;
-	float: left;
-	margin: 10px 10px 0 0;
-	font-size: 12px;
-	.photo {
-		float:left;
-		// width: 30px;
-		height: 60px;
-		margin: 5px;
-		text-align: center;
-		overflow: hidden;
+	.contact {
+		@include border-radius;
+		background: $main-menu-color;
+		border: 2px solid $border-gray;
+		width: 200px;
+		float: left;
+		margin: 10px 10px 0 0;
+		font-size: 12px;
+		li {
+		}
+		.photo {
+			float:left;
+			// width: 30px;
+			height: 60px;
+			margin: 5px;
+			text-align: center;
+			overflow: hidden;
+		}
+		.info {
+			padding: 5px;
+			float:left;
+		}
 	}
-	.info {
-		padding: 5px;
-		float:left;
+	.hover {
+		background: #fff;
+	}
+	.social {
+		border: 2px solid #C0504D;
+	}
+	.professional {
+		border: 2px solid #4F81BD;
+	}
+	.hide-me {
+		display: none;
+	}
+	#popup-content {
+		// font-size: 14px;
+		p.title {
+			display: block;
+			color: gray;
+			border-bottom: 1px solid #c0c0c0;
+		}
+	}
+	ul.popup-group-list {
+		li {
+			margin: 5px 0 0 0;
+		}
+		.select {
+			float: left;
+			width: 15px;
+		}
+		.unselected {
+			width: 15px;
+		}
 	}
 }

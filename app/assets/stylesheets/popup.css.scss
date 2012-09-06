@@ -32,12 +32,13 @@
 	#popup-content:after {
 		border: 13px solid transparent;
 		border-bottom-color: #fff;
-		top: $top_arrow_pos - 6px;
+		top: $top_arrow_pos - 8px;
 		left: $left_arrow_pos + 1px;
 	}
 	#popup-content:before {
 		border: 14px solid transparent;
-		border-bottom-color: #e8e8e8;
+		border-bottom-color: #8EBAB8;
+		// border-bottom-color: #e8e8e8;
 		top: $top_arrow_pos - 10px;
 		left: $left_arrow_pos;
 	}

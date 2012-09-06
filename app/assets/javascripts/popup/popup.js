@@ -1,13 +1,14 @@
 function Popup(el, popup) {
+	console.log('init');
 	this.$el = $(el);
 	this.$popup = $(popup);
 	this.hidePopup();
-	// this.bindEvents();
+	this.bindEvents();
 };
 
 Popup.prototype.showPopup = function() {
 	var offsetOptions = {
-		top: this.$el.offset().top + 20,
+		top: this.$el.offset().top + this.$el.height(),
 		left: this.$el.offset().left
 	}
 	this.$popup.offset(offsetOptions);
@@ -21,15 +22,14 @@ Popup.prototype.hidePopup = function(popup) {
 
 Popup.prototype.bindEvents = function() {
 	var popObj = this;
-	this.$el.on({
-		mouseover: function(e) {
-			console.log('hover');
-			popObj.showPopup();
-		},
-		mouseout: function(e) {
-			popObj.hidePopup();
-		}
-	});
+	// this.$el.on({
+	// 	mouseover: function(e) {
+	// 		popObj.showPopup();
+	// 	},
+	// 	mouseout: function(e) {
+	// 		popObj.hidePopup();
+	// 	}
+	// });
 	this.$popup.on({
 		mouseover: function(e) {
 			popObj.showPopup();

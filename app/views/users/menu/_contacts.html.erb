@@ -22,7 +22,8 @@
 			</span>
 		<% end %>
 		<div class="clear"></div>
-		<%= render 'contacts/list_with_picture', :contacts => @contacts %>
+		<%= render :partial => 'contacts/list_with_picture', 
+							 :locals => {:contacts => @contacts, :user => @user, :groups => @groups} %>
 		<div class="clear"></div>
 	</div>
 </div>

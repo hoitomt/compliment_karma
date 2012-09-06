@@ -10,6 +10,10 @@ class Group < ActiveRecord::Base
 		return self.name == 'Professional'
 	end
 
+	def social?
+		return self.name == 'Social'
+	end
+
 	def declined?
 		return self.name == "Declined"
 	end
