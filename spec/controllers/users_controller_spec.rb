@@ -461,7 +461,6 @@ describe UsersController do
         response.should be_success
       end
 
-      it "should not show pages for unconfirmed users"
     end
     
   end

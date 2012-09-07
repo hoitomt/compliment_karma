@@ -18,13 +18,13 @@ describe UserEmailsController do
 
 		it "should create a new User Email" do
 			lambda do
-				post :create, :user_email => @attr
+				post :create, :user_email => @attr, :user_id => @user.id 
 			end.should change(UserEmail, :count).by(1)
 		end
 
 		it "should send a confirmation email to the new address" do 
 			reset_email
-			post :create, :user_email => @attr
+			post :create, :user_email => @attr, :user_id => @user.id 
 			user_email = UserEmail.last
 			last_email.to[0].should == user_email.email
 			last_email.body.should have_content(new_email_confirmation_url(:confirm_id => user_email.new_email_confirmation_token))
@@ -38,7 +38,7 @@ describe UserEmailsController do
 			x = user3.compliments_sent
 			x.length.should == 1
 			reset_email
-			post :create, :user_email => @attr
+			post :create, :user_email => @attr, :user_id => @user.id 
 			# after create, the compliments should be associated (receiver_user_id is updated)
 			y = @user.compliments_received
 			y.length.should == 1
@@ -61,7 +61,7 @@ describe UserEmailsController do
 			user_email_1 = UserEmail.where(:user_id => @user.id, :email => @user.email).first
 			user_email_1.is_primary?.should be_true
 			# Set the second address to primary
-			post :set_primary_email, :id => @user_email_2.id
+			post :set_primary_email, :id => @user_email_2.id, :user_id => @user.id 
 			user_email_2 = UserEmail.find(@user_email_2.id)
 			user_email_1 = UserEmail.find(user_email_1.id)
 			user_email_2.is_primary?.should be_true
@@ -77,7 +77,7 @@ describe UserEmailsController do
 
 		it "should create a new User Email" do
 			lambda do
-				post :create, :user_email => @attr
+				post :create, :user_email => @attr, :user_id => @user.id 
 			end.should change(UserEmail, :count).by(1)
 		end
 
@@ -85,21 +85,21 @@ describe UserEmailsController do
 			email = @user.email
 			user_email = @user.primary_email
 			lambda do
-				delete :destroy, :id => user_email.id
+				delete :destroy, :id => user_email.id, :user_id => @user.id 
 			end.should_not change(UserEmail, :count)
 		end
 
 		it "should be successful" do
-			post :create, :user_email => @attr
+			post :create, :user_email => @attr, :user_id => @user.id 
 			e = UserEmail.last
 			e.email.should == @attr[:email]
 			lambda do
-				delete :destroy, :id => e.id
+				delete :destroy, :id => e.id, :user_id => @user.id 
 			end.should change(UserEmail, :count).by(-1)
 		end
 
 		it "should disassociate all compliments" do
-			post :create, :user_email => @attr
+			post :create, :user_email => @attr, :user_id => @user.id 
 			e = UserEmail.last
 			e.email.should == @attr[:email]
 			c = Compliment.create(:sender_email => user3.email, :receiver_email => e.email,
@@ -109,7 +109,7 @@ describe UserEmailsController do
 			x = user3.compliments_sent
 			x.length.should == 1
 			reset_email
-			delete :destroy, :id => e.id
+			delete :destroy, :id => e.id, :user_id => @user.id 
 			# after delete, the compliments should be disassociated (receiver_user_id is updated to nil)
 			y = User.find(user3.id).compliments_sent
 			y.length.should == 1

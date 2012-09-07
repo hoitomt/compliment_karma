@@ -1,7 +1,7 @@
 <script>
 	$(function() {
 		$('li.contact').each(function(){
-			var contact = new Contact('#' + this.id);
+			var contact = new Contact(this);
 		});
 	});
 </script>
@@ -9,13 +9,13 @@
 <% contacts.try(:each) do |contact| %>
 	<% c_user = contact.user %>
 	<% c_user_memberships = c_user.memberships %>
-		<li id="<%= contact.id %>" class="contact <%= border_color(contact) %>">
+		<li class="contact <%= border_color(contact) %>">
 			<div class="photo">
 				<%= image_tag c_user.photo.url(:thumb) %>
 			</div>
 			<div class="info">
 				<%= c_user.first_name %><br />
-				<%= c_user.last_name %> (<%= contact.group_id %>)
+				<%= c_user.last_name %>
 			</div>
 			<div class="popup">
 				<div id="popup-content">
@@ -24,8 +24,13 @@
 						<% groups.try(:each) do |group| %>
 							<% unless group.declined? %>
 								<li>
-									<span class="select"><%= group_selected(group, c_user_memberships) %></span>
-									<%= group.name %>
+									<%= link_to add_remove_contact_path(:user_id => user.id, 
+																											:group_id => group.id,
+																											:contact_user_id => c_user.id), 
+															:remote => true do %>
+										<span class="select"><%= group_selected(group, c_user_memberships) %></span>
+										<%= group.name %>
+									<% end %>
 								</li>
 							<% end %>
 						<% end %>

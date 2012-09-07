@@ -1,29 +1,16 @@
 <div id="user-contacts" class="right-two-thirds drop-box-white">
 	<div style="padding: 10px;">
 		<h1 style="display: inline;">Contacts</h1>
-		<% if @filter.blank? %>
-			<span style="font-weight: bold; margin-left: 15px;">
-		<% else %>
-			<span style="margin-left: 15px;">
-		<% end %>
-		<%= link_to "All (#{@user_contacts_count})",  
-								user_contacts_path(@user),
-								:class => "ul_hover" %>
-		</span>
-		<% @groups.try(:each) do |group| %>
-			<% if group.id == @filter.to_i %>
-				<span style="font-weight: bold; margin-left: 15px;">
-			<% else %>
-				<span style="margin-left: 15px;">
-			<% end %>
-			<%= link_to "#{group.name} (#{@group_counts[group.id]})", 
-									user_contacts_path(@user, :filter => group.id),
-									:class => "ul_hover" %>
-			</span>
-		<% end %>
-		<div class="clear"></div>
+		<%= render :partial => 'contacts/list_header',
+							 :locals => { :user_contacts_count => @user_contacts_count,
+							 							:user => @user,
+							 							:groups => @groups,
+							 							:filter => @filter,
+							 							:group_counts => @group_counts } %>
 		<%= render :partial => 'contacts/list_with_picture', 
-							 :locals => {:contacts => @contacts, :user => @user, :groups => @groups} %>
+							 :locals => {:contacts => @contacts, 
+							 						 :user => @user, 
+							 						 :groups => @groups} %>
 		<div class="clear"></div>
 	</div>
 </div>

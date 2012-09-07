@@ -24,6 +24,14 @@ Contact.prototype.showPopup = function(el) {
 		left: $(el).offset().left
 	}
 	$(popup).offset(offsetOptions);
+	$(popup).find('li').hover(
+		function(e){
+			$(this).addClass('list-hover');
+		},
+		function(e){
+			$(this).removeClass('list-hover');
+		}
+	)
 	$(popup).show();
 }
 

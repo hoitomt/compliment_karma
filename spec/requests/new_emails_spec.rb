@@ -25,7 +25,8 @@ describe "NewEmails" do
     it "should confirm the new email address" do
       @user.should_not be_nil
       @user.should be_confirmed
-      page.driver.post user_emails_path, :user_email => {:email => "testing@complimentkarma.com"}
+      page.driver.post user_user_emails_path( :user_id => @user.id,
+                       :user_email => {:email => "testing@complimentkarma.com"})
       user_email = UserEmail.find_by_email("testing@complimentkarma.com")
       user_email.should_not be_is_confirmed
       user_email.should_not be_nil

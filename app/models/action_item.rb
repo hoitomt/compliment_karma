@@ -13,7 +13,8 @@ class ActionItem < ActiveRecord::Base
 		update_attributes(:complete => "Y")
 	end
 
-	def self.incomplete_for_user(user)
+	def self.incomplete_for_user(user=nil)
+		return nil if user.blank?
 		ActionItem.where('user_id = ? and complete <> ?', user.id, 'Y')
 	end
 
