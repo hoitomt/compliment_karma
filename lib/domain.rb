@@ -11,7 +11,7 @@ class Domain
 			'ca.ibm.com', 'intuit.com', 'microstrategy.com', 'in.fujitsu.com', 'hbc.com', 'oracle.com',
 			'gogoair.com', 'gspann.com', 'sap.com', 'dannon.com', 'tribune.com', 'csx.com', 'chase.com',
 			'jpmc.com', 'boa.com', 'bankofamerica.com', 'artofliving.org', 'nbc.com', 'avanade.com',
-			'officemax.com'
+			'officemax.com', 'dunkinbrands.com'
 		]
 	end
 
