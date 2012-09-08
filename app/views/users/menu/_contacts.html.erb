@@ -1,16 +1,21 @@
 <div id="user-contacts" class="right-two-thirds drop-box-white">
 	<div style="padding: 10px;">
 		<h1 style="display: inline;">Contacts</h1>
-		<%= render :partial => 'contacts/list_header',
-							 :locals => { :user_contacts_count => @user_contacts_count,
-							 							:user => @user,
-							 							:groups => @groups,
-							 							:filter => @filter,
-							 							:group_counts => @group_counts } %>
-		<%= render :partial => 'contacts/list_with_picture', 
-							 :locals => {:contacts => @contacts, 
-							 						 :user => @user, 
-							 						 :groups => @groups} %>
+		<div id="contact-list-header">
+			<%= render :partial => 'contacts/list_header',
+								 :locals => { :user_contacts_count => @user_contacts_count,
+								 							:user => @user,
+								 							:groups => @groups,
+								 							:filter => @filter,
+								 							:group_counts => @group_counts } %>
+		</div>
+		<div id="contact-list">
+			<%= render :partial => 'contacts/list_with_picture', 
+								 :locals => {:contacts => @contacts, 
+								 						 :user => @user, 
+								 						 :groups => @groups,
+								 						 :filter_id => @filter} %>
+		</div>
 		<div class="clear"></div>
 	</div>
 </div>

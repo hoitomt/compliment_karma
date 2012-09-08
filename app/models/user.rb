@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   has_many :action_items
   has_many :groups
   has_many :contacts, :through => :groups
-
   has_many :memberships, :class_name => 'Contact', :foreign_key => 'user_id'
   
   attr_accessor :password
@@ -571,6 +570,14 @@ class User < ActiveRecord::Base
   def confirm_account
     update_attributes(:account_status => AccountStatus.CONFIRMED)
     self.primary_email.update_attributes(:confirmed => 'Y')
+  end
+
+  def existing_contact?(user)
+    self.existing_contacts.count > 0
+  end
+
+  def existing_contacts(user)
+    self.memberships.where('group_id in (?)', user.groups)
   end
 
   private

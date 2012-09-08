@@ -15,6 +15,14 @@ Contact.prototype.bindEvents = function() {
 			contactObj.hidePopup(this);
 		}
 	);
+	// $('.delete-link').hover(
+	// 	function(e) {
+	// 		contactObj.hidePopup(this);
+	// 	},
+	// 	function(e) {
+	// 		contactObj.showPopup(this);
+	// 	}
+	// );
 }
 
 Contact.prototype.showPopup = function(el) {

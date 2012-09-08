@@ -62,8 +62,11 @@ Ck::Application.routes.draw do
         :as => :user_sent_compliments
   match "users/:id/achievements" => "users#achievements", :as => :user_achievements
   match "users/:id/contacts" => "users#contacts", :as => :user_contacts
+  match "users/:id/filter_contacts" => "users#filter_contacts", :as => :user_filter_contacts
   match "users/:user_id/contacts/add_remove_contact" => "contacts#add_remove_contact",
         :as => :add_remove_contact
+  match "users/:user_id/contacts/:id/decline" => "contacts#decline",
+        :as => :decline_contact
   match "users/:id/settings" => "users#settings", :as => :user_settings
   match "users/:id/employees" => "users#employees", :as => :user_employees
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo

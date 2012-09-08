@@ -7,9 +7,15 @@
 </script>
 <ul>
 <% contacts.try(:each) do |contact| %>
+	<% 
+		if contact.group.declined? && !Group.find_by_id(filter_id).try(:declined?)
+			next
+		end
+	%>
+
 	<% c_user = contact.user %>
 	<% c_user_memberships = c_user.memberships %>
-		<li class="contact <%= border_color(contact) %>">
+		<li class="contact">
 			<div class="photo">
 				<%= image_tag c_user.photo.url(:thumb) %>
 			</div>
@@ -17,27 +23,19 @@
 				<%= c_user.first_name %><br />
 				<%= c_user.last_name %>
 			</div>
-			<div class="popup">
-				<div id="popup-content">
-					<p class="title">Groups</p>
-					<ul class="popup-group-list">
-						<% groups.try(:each) do |group| %>
-							<% unless group.declined? %>
-								<li>
-									<%= link_to add_remove_contact_path(:user_id => user.id, 
-																											:group_id => group.id,
-																											:contact_user_id => c_user.id), 
-															:remote => true do %>
-										<span class="select"><%= group_selected(group, c_user_memberships) %></span>
-										<%= group.name %>
-									<% end %>
-								</li>
-							<% end %>
-						<% end %>
-					</ul>
-				</div>
-				<div class="clear"></div>
+			<div class="delete-link">
+				<%= link_to image_tag('delete_x_gray.png'), 
+										decline_contact_path(:user_id => user.id, :id => contact.id), 
+										:remote => true,
+										:method => :post,
+										:confirm => "Are you sure you want to remove #{c_user.first_last} as a contact?" %>
 			</div>
+			<%= render :partial => 'contacts/popup',
+								 :locals => {:groups => groups, 
+								 						 :user => user,
+								 						 :c_user => c_user,
+								 						 :c_user_memberships => c_user_memberships,
+								 						 :filter_id => filter_id} %>
 			<div class="clear"></div>
 		</li>
 <% end %>

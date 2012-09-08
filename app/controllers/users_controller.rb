@@ -185,26 +185,20 @@ class UsersController < ApplicationController
 
   def contacts
     @filter = params[:filter]
-    @groups = @user.groups
-    @group_counts = group_counts
-    if @filter.blank?
-      @contacts = @user.contacts.includes(:user, :group, {:user => :memberships}).uniq{|x| x.user_id}
-      @contacts.sort_by!{|x| x.user_id }
-      @user_contacts_count = @contacts.count
-    else
-      @contacts = @user.contacts.joins(:user, :group).where('groups.id = ?', @filter.to_i)
-      @user_contacts_count = @contacts.count
-    end
+    set_contacts_data
     menu_response_handler
   end
 
-  def group_counts
-    h = Hash.new(0)
-    # @user_contacts_count = @user.contacts.count
-    @user.groups.each do |group|
-      h[group.id] = @user.contacts.joins(:user, :group).where('groups.id = ?', group.id).count
-    end
-    return h
+  def filter_contacts
+    @filter = params[:filter]
+    set_contacts_data
+  end
+
+  def set_contacts_data
+    @groups = @user.groups
+    @group_counts = Contact.group_counts(@user)
+    @contacts = Contact.filtered_list(@user, @filter)
+    @user_contacts_count = @user.contacts.includes(:user).uniq{|x| x.user_id}.count
   end
 
   def settings

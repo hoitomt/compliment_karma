@@ -1,0 +1,23 @@
+<div class="popup">
+	<div id="popup-content">
+		<p class="title">Groups</p>
+		<ul class="popup-group-list">
+			<% groups.try(:each) do |group| %>
+				<% unless group.declined? %>
+					<li>
+						<%= link_to add_remove_contact_path(:user_id => user.id, 
+																								:group_id => group.id,
+																								:contact_user_id => c_user.id,
+																								:filter_id => filter_id), 
+												:method => :post,
+												:remote => true do %>
+							<span class="select"><%= group_selected(group, c_user_memberships) %></span>
+							<%= group.name %>
+						<% end %>
+					</li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+	<div class="clear"></div>
+</div>

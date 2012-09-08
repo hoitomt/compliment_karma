@@ -3,8 +3,8 @@
 <% else %>
 	<span style="margin-left: 15px;">
 <% end %>
-<%= link_to "All (#{user_contacts_count})",  
-						user_contacts_path(user),
+<%= link_to "All (#{user_contacts_count})", 
+						user_filter_contacts_path(user),
 						:class => "ul_hover",
 						:remote => true %>
 </span>
@@ -14,10 +14,12 @@
 	<% else %>
 		<span style="margin-left: 15px;">
 	<% end %>
-	<%= link_to "#{group.name} (#{group_counts[group.id]})", 
-							user_contacts_path(user, :filter => group.id),
+	<%= link_to user_filter_contacts_path(user, :filter => group.id),
 							:class => "ul_hover",
-							:remote => true %>
+							:remote => true do %>
+		<%= group.name %> 
+			(<span id="update-group-count-<%= group.id %>"><%= group_counts[group.id] %></span>)
+	<% end %>
 	</span>
 <% end %>
 <div class="clear"></div>

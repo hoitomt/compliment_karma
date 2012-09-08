@@ -1,0 +1,20 @@
+var groupCounts = <%=raw @group_counts.to_json %>;
+$.each(groupCounts, function(i, n) {
+	var tag = '#update-group-count-' + i;
+	$(tag).html(n);
+});
+
+var cHeader = "<%=j render :partial => 'contacts/list_header',
+							 						:locals => { :user_contacts_count => @user_contacts_count,
+												 							 :user => @user,
+												 							 :groups => @groups,
+												 							 :filter => @filter,
+												 							 :group_counts => @group_counts } %>";
+$('#contact-list-header').html(cHeader);
+
+var cList = "<%=j render :partial => 'contacts/list_with_picture', 
+									 			 :locals => {:contacts => @contacts, 
+								 										 :user => @user, 
+								 						 				 :groups => @groups,
+								 						 				 :filter_id => @filter } %>";
+$('#contact-list').html(cList);

@@ -23,6 +23,15 @@
 		.info {
 			padding: 5px;
 			float:left;
+			height: 40px;
+			width: 120px;
+		}
+		.delete-link {
+			// display: block;
+			margin: 0 2px 0 0;
+			clear: right;
+			float: right;
+			text-align: right;
 		}
 	}
 	.hover {
@@ -49,7 +58,7 @@
 		margin: 5px 0 0 0;
 		li {
 			margin: 0 0 0 0;
-			padding: 3px;
+			// padding: 3px;
 		}
 		.select {
 			float: left;
@@ -60,6 +69,11 @@
 		}
 		.list-hover {
 			background: #FFFC7F;
+		}
+		a { 
+			color: #000;
+			display: block;
+			padding: 3px;
 		}
 	}
 }
