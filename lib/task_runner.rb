@@ -21,7 +21,7 @@ class TaskRunner
 	end
 
 	# Initialize the Redis instance with user data
-	def self.add_user_to_redis
+	def self.add_users_to_redis
 		users = User.all
 		users.each do |u|
 			u.add_to_redis

@@ -150,10 +150,6 @@ EmploymentType.create(:name => "Employee")
 EmploymentType.create(:name => "Contractor")
 EmploymentType.create(:name => "Intern")
 
-GroupType.create(:name => "Professional")
-GroupType.create(:name => "Social")
-GroupType.create(:name => "Declined")
-
 if Skill.find_by_name('User Defined').nil?
   s = Skill.create(:name => 'User Defined')
   s.update_attributes(:parent_skill_id => s.id)
