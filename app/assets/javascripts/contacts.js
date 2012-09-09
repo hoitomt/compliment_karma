@@ -1,5 +1,9 @@
-function Contact(el) {
+function Contact(el, showPopupEl, deleteLinkEl) {
 	this.$el = $(el);
+	var popup = $(el).find('.popup');
+	this.$popup = $(popup);
+	this.$showPopupEl = $(showPopupEl);
+	this.$deleteLinkEl = $(deleteLinkEl);
 	this.bindEvents();
 }
 
@@ -7,32 +11,40 @@ Contact.prototype.bindEvents = function() {
 	var contactObj = this;
 	this.$el.hover(
 		function(e) {
+			contactObj.$deleteLinkEl.show();
 			$(this).addClass('hover');
+		},
+		function(e) {
+			contactObj.$deleteLinkEl.hide();
+			$(this).removeClass('hover');
+		}
+	);
+	this.$showPopupEl.hover(
+		function(e) {
 			contactObj.showPopup(this);
 		},
 		function(e) {
-			$(this).removeClass('hover');
 			contactObj.hidePopup(this);
 		}
-	);
-	// $('.delete-link').hover(
-	// 	function(e) {
-	// 		contactObj.hidePopup(this);
-	// 	},
-	// 	function(e) {
-	// 		contactObj.showPopup(this);
-	// 	}
-	// );
+	)
+	this.$popup.hover(
+		function(e) {
+			contactObj.showPopup(this);
+		},
+		function(e) {
+			contactObj.hidePopup(this);
+		}
+	)
 }
 
-Contact.prototype.showPopup = function(el) {
-	var popup = $(el).find('.popup');
+Contact.prototype.showPopup = function() {
+	var offset = this.$el.offset();
 	var offsetOptions = {
-		top: $(el).offset().top + $(el).height(),
-		left: $(el).offset().left
+		top: offset.top + this.$el.height() + $(window).scrollTop(),
+		left: offset.left
 	}
-	$(popup).offset(offsetOptions);
-	$(popup).find('li').hover(
+	this.$popup.offset(offsetOptions);
+	this.$popup.find('li').hover(
 		function(e){
 			$(this).addClass('list-hover');
 		},
@@ -40,11 +52,13 @@ Contact.prototype.showPopup = function(el) {
 			$(this).removeClass('list-hover');
 		}
 	)
-	$(popup).show();
+	this.$popup.show();
 }
 
 Contact.prototype.hidePopup = function(el) {
-	var popup = $(el).find('.popup');
-	$(popup).offset({top: 0, left: 0});
-	$(popup).hide();
+	this.$popup.offset({top: 0, left: 0});
+	this.$popup.hide();
+	// var popup = $(el).find('.popup');
+	// $(popup).offset({top: 0, left: 0});
+	// $(popup).hide();
 }

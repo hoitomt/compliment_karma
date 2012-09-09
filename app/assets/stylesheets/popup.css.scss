@@ -31,7 +31,7 @@
 	}
 	#popup-content:after {
 		border: 13px solid transparent;
-		border-bottom-color: #fff;
+		border-bottom-color: $main-menu-color;
 		top: $top_arrow_pos - 8px;
 		left: $left_arrow_pos + 1px;
 	}
@@ -41,5 +41,36 @@
 		// border-bottom-color: #e8e8e8;
 		top: $top_arrow_pos - 10px;
 		left: $left_arrow_pos;
+	}
+	#popup-content {
+		// font-size: 14px;
+		background: $main-menu-color;
+		p.title {
+			display: block;
+			color: gray;
+			border-bottom: 1px solid #c0c0c0;
+		}
+	}
+	ul.popup-group-list {
+		margin: 5px 0 0 0;
+		li {
+			margin: 0 0 0 0;
+			// padding: 3px;
+		}
+		.select {
+			float: left;
+			width: 15px;
+		}
+		.unselected {
+			width: 15px;
+		}
+		.list-hover {
+			background: #FFFC7F;
+		}
+		a { 
+			color: #000;
+			display: block;
+			padding: 3px;
+		}
 	}
 }

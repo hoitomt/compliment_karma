@@ -1,5 +1,4 @@
 function Popup(el, popup) {
-	console.log('init');
 	this.$el = $(el);
 	this.$popup = $(popup);
 	this.hidePopup();

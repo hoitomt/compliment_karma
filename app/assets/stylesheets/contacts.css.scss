@@ -4,8 +4,9 @@
 #user-contacts {
 	.contact {
 		@include border-radius;
-		background: $main-menu-color;
-		border: 2px solid $border-gray;
+		background: rgb(233, 233, 233); /* Fall back for shitty browsers */
+		background: rgba(233, 233, 233, .5);
+		border: 1px solid $border-gray;
 		width: 200px;
 		float: left;
 		margin: 10px 10px 0 0;
@@ -24,15 +25,32 @@
 			padding: 5px;
 			float:left;
 			height: 40px;
-			width: 120px;
+			width: 100px;
 		}
-		.delete-link {
-			// display: block;
-			margin: 0 2px 0 0;
-			clear: right;
-			float: right;
+		.hover-container {
+			position: absolute;
 			text-align: right;
+			.delete-link-container {
+				position: relative;
+				cursor: pointer;
+				height: 15px;
+				width: 10px;
+				right: -179px;
+				cursor: pointer;
+			}
+			.delete-link {				
+				display: none;
+			}
+			.show-contact-type{
+				position: relative;
+				cursor: pointer;
+				height: 25px;
+				width: 20px;
+				right: -173px;
+				bottom: -37px;
+			}
 		}
+
 	}
 	.hover {
 		background: #fff;
@@ -45,35 +63,5 @@
 	}
 	.hide-me {
 		display: none;
-	}
-	#popup-content {
-		// font-size: 14px;
-		p.title {
-			display: block;
-			color: gray;
-			border-bottom: 1px solid #c0c0c0;
-		}
-	}
-	ul.popup-group-list {
-		margin: 5px 0 0 0;
-		li {
-			margin: 0 0 0 0;
-			// padding: 3px;
-		}
-		.select {
-			float: left;
-			width: 15px;
-		}
-		.unselected {
-			width: 15px;
-		}
-		.list-hover {
-			background: #FFFC7F;
-		}
-		a { 
-			color: #000;
-			display: block;
-			padding: 3px;
-		}
 	}
 }

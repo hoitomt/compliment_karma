@@ -18,8 +18,13 @@ var CommonScripts = {
 			setTimeout(function() {
 				$('#explanation').slideUp();
 			}, 17500);
+			this.setCloseHandler();
 		}
-
+	},
+	setCloseHandler: function() {
+		$('#close-x').click(function() {
+			$('#explanation').slideUp();
+		});
 	},
 	stickyFlashContainer: function() {
 		var stickMe = $('#flash-container');

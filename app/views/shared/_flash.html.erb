@@ -3,6 +3,10 @@
 	  <% flash.each do |key, value| %>
 	    <div class="flash <%= key %>"><%= value %></div>
 	  <% end %>
+	  <div id="close-x" style="float: right; margin-top: -20px; cursor: pointer;">
+	  	<%= image_tag('delete_x_white.png') %>
+	  	<%#= link_to image_tag('delete_x_white.png'), '#' %>
+	  </div>
 	</section>
 	<div class="clear"></div>
 <% end %>

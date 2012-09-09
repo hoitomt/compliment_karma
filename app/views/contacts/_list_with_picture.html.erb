@@ -1,7 +1,9 @@
 <script>
 	$(function() {
 		$('li.contact').each(function(){
-			var contact = new Contact(this);
+			var showPopup = $(this).find('.show-contact-type');
+			var deleteLink = $(this).find('.delete-link');
+			var contact = new Contact(this, showPopup, deleteLink);
 		});
 	});
 </script>
@@ -12,7 +14,6 @@
 			next
 		end
 	%>
-
 	<% c_user = contact.user %>
 	<% c_user_memberships = c_user.memberships %>
 		<li class="contact">
@@ -23,12 +24,19 @@
 				<%= c_user.first_name %><br />
 				<%= c_user.last_name %>
 			</div>
-			<div class="delete-link">
-				<%= link_to image_tag('delete_x_gray.png'), 
-										decline_contact_path(:user_id => user.id, :id => contact.id), 
-										:remote => true,
-										:method => :post,
-										:confirm => "Are you sure you want to remove #{c_user.first_last} as a contact?" %>
+			<div class="hover-container">
+				<div class="delete-link-container">
+					<div class="delete-link">
+						<%= link_to image_tag('delete_x_gray.png'), 
+												decline_contact_path(:user_id => user.id, :id => contact.id), 
+												:remote => true,
+												:method => :post,
+												:confirm => "Are you sure you want to remove #{c_user.first_last} as a contact?" %>
+					</div>
+				</div>
+				<div class="show-contact-type">
+					<span style="color:#e9e9e9;">&#9660;</span>
+				</div>
 			</div>
 			<%= render :partial => 'contacts/popup',
 								 :locals => {:groups => groups, 

@@ -13,10 +13,20 @@ module ContactsHelper
 	def group_selected(group, c_user_memberships)
 		user_groups = Array.new(c_user_memberships)
 		matching_groups = user_groups.keep_if{|g| g.group.id == group.id }
-		if user_groups && !matching_groups.blank?
+		return user_groups && !matching_groups.blank?
+	end
+
+	def check_selected(selected)
+		if selected
 			return "&#10003;".html_safe
 		else
 			return "&nbsp;".html_safe
+		end
+	end
+
+	def bold_selected(selected)
+		if selected
+			return "font-weight: bold;".html_safe
 		end
 	end
 

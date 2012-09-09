@@ -42,7 +42,12 @@ class Contact < ActiveRecord::Base
     else
       contacts = user.contacts.joins(:user, :group).where('groups.id = ?', filter.to_i)
     end
-    return contacts.sort_by!{|x| x.user_id }
+    return contacts.sort!{|x, y| 
+    	x_name_string = "#{x.try(:user).try(:last_name)} #{x.try(:user).try(:first_name)}"
+    	y_name_string = "#{y.try(:user).try(:last_name)} #{y.try(:user).try(:first_name)}"
+    	# x <=> y
+    	y <=> x
+    }
 	end
 
 	def self.create_declined_contact(contact_user, group_owner)

@@ -2,7 +2,7 @@ var HomePage = {
 	init: function(showFlash){
 		this.slider();
 		// this.setStatusHandlers();
-		this.displayComplimentForm(showFlash);
+		// this.displayComplimentForm(showFlash);
 	},
 	slider: function() {
 		$('#slider').cycle({
