@@ -172,7 +172,7 @@ describe ContactsController do
       end
     end
 
-    it "should put the contact in only the declined group from 1 group" do
+    it "should delete the contact" do
       post :add_remove_contact, :user_id => @user2.id,
                                 :group_id => @social_group.id,
                                 :contact_user_id => @user3.id
@@ -182,12 +182,11 @@ describe ContactsController do
       post :decline, :user_id => @user2.id,
                      :id => @user2.contacts.last
       u = User.find(@user2.id)
-      u.contacts.count.should == 1
-      u.contacts.last.group.name.should == 'Declined'
+      u.contacts.count.should == 0
     end
 
 
-    it "should put the contact in only the declined group from 2 groups" do
+    it "should delete only one of the group affiliations" do
       post :add_remove_contact, :user_id => @user2.id,
                                 :group_id => @social_group.id,
                                 :contact_user_id => @user3.id
@@ -201,7 +200,7 @@ describe ContactsController do
                      :id => @user2.contacts.last
       u = User.find(@user2.id)
       u.contacts.count.should == 1
-      u.contacts.last.group.name.should == 'Declined'
+      u.contacts.last.group.name.should == 'Social'
     end
 
   end

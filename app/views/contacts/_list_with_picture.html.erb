@@ -39,7 +39,7 @@
 	<% end %>
 <% contacts.try(:each) do |contact| %>
 	<% 
-		if contact.group.declined? && !Group.find_by_id(filter).try(:declined?)
+		if contact.group.declined? && !Group.find_by_id(filter_id).try(:declined?)
 			next
 		end
 	%>
