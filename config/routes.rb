@@ -65,6 +65,7 @@ Ck::Application.routes.draw do
   match "users/:id/filter_contacts" => "users#filter_contacts", :as => :user_filter_contacts
   match "users/:user_id/contacts/add_remove_contact" => "contacts#add_remove_contact",
         :as => :add_remove_contact
+  match "users/:user_id/contacts/create_contact" => "contacts#create", :as => :create_contact
   match "users/:user_id/contacts/:id/decline" => "contacts#decline",
         :as => :decline_contact
   match "users/:id/settings" => "users#settings", :as => :user_settings

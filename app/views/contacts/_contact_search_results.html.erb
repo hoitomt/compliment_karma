@@ -1,0 +1,37 @@
+<script>
+	$(function() {
+		$('.new-contact-assign-type').each(function() {
+			var contactSearch = new ContactSearch(this);
+		})
+	});
+</script>
+<% if users %>
+	<div id="contact-search-results" class="clearfix">
+		<ul id="new-content">
+			<% users.each do |user| %>
+				<li id="<%= user.id %>" class="contact-search-result clearfix" style="padding: 3px;">
+					<div class="search-result-photo">
+						<%= image_tag(user.photo.url(:mini)) %>
+					</div>
+					<%= search_result_info(user) %>
+					<span class="value-for-input-field"><%= user.first_last %></span>
+					<span class="id-for-input-field"><%= user.id %></span>
+					<div style="float:right; padding: 8px 5px 0 0;">
+						<%= link_to 'Add', 
+												'#',
+												:class => 'new-contact-assign-type handle-action-item accept-action-item' %>
+					</div>
+					<div class="clear"></div>
+					<div id="new-contact-type">
+						<%= render :partial => "contacts/new",
+											 :locals => {:groups => @groups, 
+																	 :user => current_user,
+																	 :contact => Contact.new,
+																	 :contact_user => user} %> 
+					</div>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="clear"></div>
+<% end %>

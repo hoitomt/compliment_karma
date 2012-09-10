@@ -28,16 +28,23 @@ var SiteSearch = {
 		});
 	},
 	searchFx: function() {
+		var $newContactForm = $('#new-contact-form');
 		var searchString = $('input#search_string').val();
-		var results = SiteSearch.ajaxSearch(searchString);
+		var source = 'main';
+		if($newContactForm.is(':visible')) {
+			var inputField = $newContactForm.find('input#search_string');
+			searchString = $(inputField).val();
+			source = 'new-contact'
+		}
+		var results = SiteSearch.ajaxSearch(searchString, source);
 	},
 	hideResults: function() {
 		$('#site-search').hide();
 	},
-	ajaxSearch: function(searchString) {
+	ajaxSearch: function(searchString, source) {
 		$.ajax({
 			url: '/search/site.js',
-			data: {'search_string' : searchString}
+			data: {'search_string' : searchString, 'source' : source}
 		});
 	},
 	retrieveUser: function(userId) {

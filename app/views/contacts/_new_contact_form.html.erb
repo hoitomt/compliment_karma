@@ -1,0 +1,21 @@
+<script>
+	$(function() {
+		$('#search_string').last().focus();
+	})
+</script>
+<div id="new-contact-form" style="display:none">
+	<div id="new-contact-search-form">
+		<div class="new-contact-input">
+			<%= text_field_tag "search_string", 
+													nil,
+													:autocomplete => 'off', 
+													:placeholder => "Start typing your new contact's name" %>
+			<%= hidden_field_tag "user_id_result" %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="results">
+		<div id="contact-search" class="drop-box"></div>
+	</div>
+	<div class="clear"></div>
+</div>

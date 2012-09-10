@@ -29,6 +29,8 @@ class SearchController < ApplicationController
 
 	def site
     @search_string = params[:search_string]
+    @source = params[:source]
+    @groups = current_user.try(:groups)
     if @search_string.blank?
       @results = nil
     else

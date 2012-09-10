@@ -1,15 +1,23 @@
 var searchString = '<%= @search_string %>';
+var source = '<%= @source %>';
 var results = <%=raw @results.to_json %>;
 
-var container = $('#site-search');
-container.html('<%= j(render "search/site_search_results", :users => @results) %>');
+var $container = null;
+if(source && source == 'new-contact') {
+	$container = $('#contact-search');
+	$container.html('<%= j(render "contacts/contact_search_results", :users => @results) %>');
+} else {
+	$container = $('#site-search');
+	$container.html('<%= j(render "search/site_search_results", :users => @results) %>');
+}
 
 if(results && results.length > 0) {
-	var list = container.find('li');
+	var list = $container.find('li');
 	var inputTextField = $('input#search_string');
 	var inputIdField = $('input#user_id_result')
-	container.show();
-	ListNavigator.init(list, inputTextField, inputIdField, null, container);
+	$container.show();
+
+	ListNavigator.init(list, inputTextField, inputIdField, null, $container);
 } else {
-	container.hide();
+	$container.hide();
 }

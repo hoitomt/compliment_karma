@@ -53,6 +53,7 @@ body {
 #flash {
 	margin: 0 auto;
 	width: 600px;
+	padding: 0 25px;
 }
 .flash {
 	@include explanation-radius;

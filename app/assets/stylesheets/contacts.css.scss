@@ -2,7 +2,7 @@
 @import "user_common";
 
 #user-contacts {
-	.contact {
+	.contact, .new-contact {
 		@include border-radius;
 		background: rgb(233, 233, 233); /* Fall back for shitty browsers */
 		background: rgba(233, 233, 233, .5);
@@ -52,8 +52,28 @@
 		}
 
 	}
-	.hover {
+	.new-contact {
 		background: #fff;
+		border: none;
+		border: 2px dashed $border-gray;
+		height: 68px;
+		.plus-sign {
+			float:left; 
+			font-size:38px;
+			color: gray;
+			padding: 0 10px 0 10px;
+		}
+		.tagline {
+			float: left;
+			font-size: 16px;
+			padding: 8px 0 0 10px;
+			color: black;
+			width: 100px;
+		}
+		a { color: black; }
+	}
+	.hover {
+		background: $main-menu-color;
 	}
 	.social {
 		border: 2px solid #C0504D;
@@ -63,5 +83,48 @@
 	}
 	.hide-me {
 		display: none;
+	}
+}
+#new-contact-form {
+	background: $background-color;
+	// padding: 20px;
+	input {
+		@include border-radius-5;
+		outline: none;
+		display: block;
+		width: 300px;
+		// min-height: auto	9;
+		padding: 8px 0 8px 8px;
+		font-size: 14px;
+		// color: #666;
+		background-color: #fff;
+		border: 0;
+		-webkit-box-shadow: inset 0 1px 2px 
+		rgba(0, 0, 0, .2);
+		-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+		box-shadow: inset 0 1px 2px 
+		rgba(0, 0, 0, .2);
+	}
+	#new-contact-search-form {
+		padding: 20px;
+	}
+	.results {
+		min-height: 500px;
+	}
+	.contact-search-container {
+		background: $background-color;
+	}
+}
+#new-contact-type-form {
+	display: none;
+	padding: 10px;
+	margin: 5px 0 0 0;
+	background: $border-gray;
+	input {
+		float: left;
+		width: 25px;
+	}
+	li.contact-type-list-element {
+		background-color: $border-gray;
 	}
 }

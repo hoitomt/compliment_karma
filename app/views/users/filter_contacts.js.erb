@@ -1,3 +1,4 @@
+$.fancybox.close();
 var groupCounts = <%=raw @group_counts.to_json %>;
 $.each(groupCounts, function(i, n) {
 	var tag = '#update-group-count-' + i;
@@ -18,3 +19,6 @@ var cList = "<%=j render :partial => 'contacts/list_with_picture',
 								 						 				 :groups => @groups,
 								 						 				 :filter_id => @filter } %>";
 $('#contact-list').html(cList);
+
+var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
+CommonScripts.showFlash(flashContent);

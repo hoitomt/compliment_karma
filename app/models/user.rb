@@ -573,11 +573,11 @@ class User < ActiveRecord::Base
   end
 
   def existing_contact?(user)
-    self.existing_contacts.count > 0
+    self.existing_contacts(user).count > 0
   end
 
   def existing_contacts(user)
-    self.memberships.where('group_id in (?)', user.groups)
+    self.memberships.where('group_id in (?)', user.try(:groups))
   end
 
   private

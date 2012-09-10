@@ -18,37 +18,41 @@ describe ContactsController do
 
   describe "POST 'create'" do
   	before(:each) do
-  		@attr = {
-  			:group_id => @user2.groups.first,
-  			:user_id => @user3.id
-  		}
+  		# @attr = {
+  		# 	:group_id => @user2.groups.first,
+  		# 	:contact_user_id => @user3.id
+  		# }
+      @attr = {
+        :user_id => @user2.id,
+        :contact_user_id => @user3.id,
+        :groups => {@user2.groups.first.id => "yes"},
+      }
   	end
 
   	it "should create new contact" do
   		lambda do
-	  		post :create, :contact => @attr, :user_id => @user2.id
+	  		post :create, @attr
 	  	end.should change(Contact, :count).by(1)
   	end
 
   	it "should add user as new contact" do
-  		post :create, :contact => @attr, :user_id => @user2.id
+      post :create, @attr
   		@user3.memberships.count.should == 1
   		@user2.contacts.count.should == 1
   		@user2.contacts.first.group.group_type.should == @user2.groups.first.group_type
   	end
 
   	it "should not create a duplicate contact" do
-  		post :create, :contact => @attr, :user_id => @user2.id
+      post :create, @attr
   		@user3.memberships.count.should == 1
-  		post :create, :contact => @attr, :user_id => @user2.id
+      post :create, @attr
   		@user3.memberships.count.should == 1
   		@user2.contacts.count.should_not == 2
   	end
 
     it "should not add a user to their own group" do
       lambda do
-        post :create, :contact => @attr.merge(:user_id => @user2.id),
-                      :user_id => @user2.id
+        post :create, @attr.merge(:user_id => @user2.id)
       end.should_not change(Contact, :count)
     end
 

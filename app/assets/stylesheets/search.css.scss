@@ -71,7 +71,7 @@
 .xactive {
 	background: #FFFC7F;
 }
-#site-search {
+#site-search, #contact-search {
 	@include drop-box-shadow;
 	display: none;
 	position: absolute;
@@ -128,6 +128,33 @@
 		padding: 0 0 0 0;
 		color: #347284;
 		display: block;
+	}
+}
+#contact-search {
+	width: 306px;
+	padding: 0 20px;
+	background: $background-color;
+	margin: 0 0 0 0px;
+	li {
+		background-color: #fff;
+		border-top: none;
+		border-bottom: none;
+	}
+	li:not(:first-child) {
+		border: none;
+	}
+	li:not(:last-child) {
+		border: none;
+	}
+	li:last-child {
+		border: none;
+	}
+	li:first-child {
+		border-top: none;
+	}
+	li:hover {
+		cursor: default;
+		background: #fff;
 	}
 }
 .value-for-input-field,

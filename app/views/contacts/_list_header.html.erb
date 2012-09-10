@@ -9,6 +9,11 @@
 						:remote => true %>
 </span>
 <% groups.try(:each) do |group| %>
+	<% 
+		if group.declined? && !Group.find_by_id(filter).try(:declined?)
+			next
+		end
+	%>
 	<% if group.id == filter.to_i %>
 		<span style="font-weight: bold; margin-left: 15px;">
 	<% else %>

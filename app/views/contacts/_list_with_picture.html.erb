@@ -5,12 +5,41 @@
 			var deleteLink = $(this).find('.delete-link');
 			var contact = new Contact(this, showPopup, deleteLink);
 		});
+
+		$('.search-fancybox').fancybox({
+			beforeLoad: function() {
+				$('body').addClass('lock-screen');
+			},
+			beforeClose: function() {
+				$('body').removeClass('lock-screen');
+			},
+			maxWidth: 800,
+			// minHeight: 500,
+			padding: 0,
+			wrapCSS: 'background-color: #A7DBD8;',
+			helpers: {
+				// overlay: {
+				// 	css: {
+				// 		'background-color': '#A7DBD8'
+				// 	}
+				// },
+				title: null
+			}
+		});
 	});
 </script>
 <ul>
+	<%= link_to '#new-contact-form', :class => 'search-fancybox' do %>
+		<li class="new-contact">
+			<div class="plus-sign">+</div>
+			<div class="tagline">
+				Add a new contact
+			</div>
+		</li>
+	<% end %>
 <% contacts.try(:each) do |contact| %>
 	<% 
-		if contact.group.declined? && !Group.find_by_id(filter_id).try(:declined?)
+		if contact.group.declined? && !Group.find_by_id(filter).try(:declined?)
 			next
 		end
 	%>
@@ -35,7 +64,7 @@
 					</div>
 				</div>
 				<div class="show-contact-type">
-					<span style="color:#e9e9e9;">&#9660;</span>
+					<span style="color:gray;">&#9660;</span>
 				</div>
 			</div>
 			<%= render :partial => 'contacts/popup',
@@ -48,3 +77,4 @@
 		</li>
 <% end %>
 </ul>
+<%= render 'contacts/new_contact_form' %>

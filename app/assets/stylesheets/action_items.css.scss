@@ -1,8 +1,9 @@
 @import "common";
 @import "user_common";
 
-#action-item-content {
-	a.handle-action-item {
+#new-content {
+	a.handle-action-item,
+	button.handle-action-item {
 		border: 1px solid #005B15;
 		color: #ffffff;
 		font-weight: bold;
