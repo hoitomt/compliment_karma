@@ -83,6 +83,13 @@ var CommonScripts = {
 		// client.open("GET", url, false);
 		// client.setRequestHeader("Content-Type", "application/json");
 		// client.send();
+	},
+	closeNarrowFlash: function($container) {
+		var existingFlash = $container.find('#flash-narrow');
+		$(existingFlash).slideUp();
+		// $(existingFlash).each(function() {
+		// 	$container.remove(this);
+		// });
 	}
 }
 

@@ -1,3 +1,5 @@
+var $container = $('.results');
+CommonScripts.closeNarrowFlash($container);
 var searchString = '<%= @search_string %>';
 var source = '<%= @source %>';
 var results = <%=raw @results.to_json %>;

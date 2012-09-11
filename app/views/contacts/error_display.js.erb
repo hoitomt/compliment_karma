@@ -2,10 +2,7 @@ var errorContainer = '<%=j @error_container %>';
 var flashContent = '<%=j render("shared/flash_narrow", :flash => flash ) %>';
 if(errorContainer && errorContainer.length > 0) {
 	var $container = $('.results');
-	var existingFlash = $container.find('#flash-narrow');
-	$(existingFlash).each(function() {
-		$container.remove(this);
-	})
+	CommonScripts.closeNarrowFlash($container);
 	$container.prepend(flashContent);
 	$('#flash').slideDown();
 	$('#close-x').click(function() {
