@@ -27,6 +27,7 @@ class ActionItemsController < ApplicationController
         group_names << Group.find_by_id(k).try(:name)
       end
     end
+    accept_relationship(originator)
     if @action_item.set_complete
       flash[:notice] = "#{originator.full_name} has been added as a contact in the following groups: 
                         #{group_names.join(', ')}"
@@ -39,10 +40,21 @@ class ActionItemsController < ApplicationController
     originator = User.find(params[:originator_id])
     group = Group.get_declined_group(@user)
     Contact.create(:group_id => group.id, :user_id => originator.id)
+    decline_relationship(originator)
     if @action_item.set_complete
       flash[:notice] = "You have chose not to accept compliments from #{originator.full_name}"
       redirect_to @user
     end
+  end
+
+  def accept_relationship(originator)
+    relationship = Relationship.get_relationship(originator, @user)
+    relationship.accept_relationship
+  end
+
+  def decline_relationship(originator)
+    relationship = Relationship.get_relationship(originator, @user)
+    relationship.decline_relationship
   end
 
 	private

@@ -25,12 +25,6 @@
 		<div class="edit-link">
 			<%= link_to 'Edit', edit_from_profile_path(@user), :class => "ul_hover", :remote => true %>
 			<div class="clear"></div>
-			<div style="float: right">
-				<% if current_user?(@user) && @pending_items && @pending_items.size > 0 %>
-					<p><%= link_to "pending (#{@pending_items.size})", '#pending-items', 
-												:class => 'fancybox' %>
-				<% end %>
-			</div>
 		</div>
 	<% end %>
 	<div class="clear"></div>

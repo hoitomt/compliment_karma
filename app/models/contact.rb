@@ -46,7 +46,7 @@ class Contact < ActiveRecord::Base
     	x_name_string = "#{x.try(:user).try(:last_name)} #{x.try(:user).try(:first_name)}"
     	y_name_string = "#{y.try(:user).try(:last_name)} #{y.try(:user).try(:first_name)}"
     	# x <=> y
-    	y <=> x
+    	x_name_string <=> y_name_string
     }
 	end
 
