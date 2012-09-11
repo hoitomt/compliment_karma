@@ -12,7 +12,7 @@ class Contact < ActiveRecord::Base
 		members = group.try(:contacts)
 		user_in_table = members.keep_if{|c| c.user_id == self.user_id} if members
 		unless user_in_table.blank?
-			errors.add(:user_id, "User already exists in this group")
+			errors.add(:user_id, "The selected user is already one of your contacts")
 		end
 	end
 

@@ -28,7 +28,7 @@ var SiteSearch = {
 		});
 	},
 	searchFx: function() {
-		var $newContactForm = $('#new-contact-form');
+		var $newContactForm = $('.new-contact-input');
 		var searchString = $('input#search_string').val();
 		var source = 'main';
 		if($newContactForm.is(':visible')) {
