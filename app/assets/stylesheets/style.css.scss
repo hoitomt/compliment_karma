@@ -53,11 +53,14 @@ body {
 #flash {
 	margin: 0 auto;
 	width: 600px;
-	padding: 0 25px;
+}
+#flash-narrow {
+	margin: 0 auto;
+	width: 300px;
 }
 .flash {
 	@include explanation-radius;
-	padding: 5px;
+	padding: 0 15px;
 	display: block;
 	// font-weight: bold;
 	font-size: 16px;

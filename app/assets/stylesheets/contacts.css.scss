@@ -70,8 +70,8 @@
 			color: black;
 			width: 100px;
 		}
-		a { color: black; }
 	}
+	li.new-contact:hover, 
 	.hover {
 		background: $main-menu-color;
 	}
@@ -106,13 +106,16 @@
 		rgba(0, 0, 0, .2);
 	}
 	#new-contact-search-form {
-		padding: 20px;
+		padding: 20px 20px 0 20px;
 	}
 	.results {
 		min-height: 500px;
 	}
 	.contact-search-container {
 		background: $background-color;
+	}
+	#contact-search-results {
+		// padding: 0 20px;
 	}
 }
 #new-contact-type-form {

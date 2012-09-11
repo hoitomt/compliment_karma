@@ -1,35 +1,33 @@
 <script>
 	$(function() {
 		$('li.contact').each(function(){
-			var showPopup = $(this).find('.show-contact-type');
-			var deleteLink = $(this).find('.delete-link');
-			var contact = new Contact(this, showPopup, deleteLink);
+			var contact = new Contact(this);
 		});
+		var searchField = $('#new-contact-form').find('#search_string');
 
 		$('.search-fancybox').fancybox({
 			beforeLoad: function() {
 				$('body').addClass('lock-screen');
+				SiteSearch.resetContactSearch();
+			},
+			afterLoad: function() {
+				$(searchField).focus();
+				SiteSearch.init();
 			},
 			beforeClose: function() {
 				$('body').removeClass('lock-screen');
 			},
 			maxWidth: 800,
-			// minHeight: 500,
 			padding: 0,
 			wrapCSS: 'background-color: #A7DBD8;',
 			helpers: {
-				// overlay: {
-				// 	css: {
-				// 		'background-color': '#A7DBD8'
-				// 	}
-				// },
 				title: null
 			}
 		});
 	});
 </script>
 <ul>
-	<%= link_to '#new-contact-form', :class => 'search-fancybox' do %>
+	<%= link_to '#new-contact-form', :class => 'search-fancybox new-contact-wrap' do %>
 		<li class="new-contact">
 			<div class="plus-sign">+</div>
 			<div class="tagline">
@@ -64,7 +62,7 @@
 					</div>
 				</div>
 				<div class="show-contact-type">
-					<span style="color:gray;">&#9660;</span>
+					<span style="color:#bbb;">&#9660;</span>
 				</div>
 			</div>
 			<%= render :partial => 'contacts/popup',

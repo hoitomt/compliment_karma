@@ -382,7 +382,7 @@ class User < ActiveRecord::Base
                                   lower(email) like ? OR lower(city) like ?) AND 
                                   account_status_id = ? AND 
                                   (lower(domain) = ? OR lower(domain) = ?)',
-                                  term, term, term, term, confirmed, domain, Domain.master_domain)
+                                  term, term, term, term, confirmed, domain, Domain.master_domain).limit(10)
     elsif sa.length == 2
       term1 = "%#{sa[0]}%"
       term2 = "%#{sa[1]}%"
@@ -398,7 +398,7 @@ class User < ActiveRecord::Base
                                   (lower(domain) = ? OR lower(domain) = ?)',
                                   term1, term2, term1, term2, term1, term2, term1, term2,
                                   term1, term2, term1, term2, term1, term2, term1, term2,
-                                  confirmed, domain, Domain.master_domain)
+                                  confirmed, domain, Domain.master_domain).limit(10)
     end
     return search_array.flatten.uniq
   end
@@ -414,7 +414,7 @@ class User < ActiveRecord::Base
       search_array << User.where('(lower(first_name) like ? OR lower(last_name) like ? OR
                                   lower(email) like ? OR lower(city) like ?) AND 
                                   account_status_id = ?',
-                                  term, term, term, term, confirmed)
+                                  term, term, term, term, confirmed).limit(10)
     elsif sa.length == 2
       term1 = "%#{sa[0]}%"
       term2 = "%#{sa[1]}%"
@@ -429,7 +429,7 @@ class User < ActiveRecord::Base
                                   account_status_id = ?',
                                   term1, term2, term1, term2, term1, term2, term1, term2,
                                   term1, term2, term1, term2, term1, term2, term1, term2,
-                                  confirmed)
+                                  confirmed).limit(10)
     end
     return search_array.flatten.uniq
   end

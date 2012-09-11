@@ -31,28 +31,28 @@ describe ContactsController do
 
   	it "should create new contact" do
   		lambda do
-	  		post :create, @attr
+	  		post :create, @attr.merge(:format => 'js')
 	  	end.should change(Contact, :count).by(1)
   	end
 
   	it "should add user as new contact" do
-      post :create, @attr
+      post :create, @attr.merge(:format => 'js')
   		@user3.memberships.count.should == 1
   		@user2.contacts.count.should == 1
   		@user2.contacts.first.group.group_type.should == @user2.groups.first.group_type
   	end
 
   	it "should not create a duplicate contact" do
-      post :create, @attr
+      post :create, @attr.merge(:format => 'js')
   		@user3.memberships.count.should == 1
-      post :create, @attr
+      post :create, @attr.merge(:format => 'js')
   		@user3.memberships.count.should == 1
   		@user2.contacts.count.should_not == 2
   	end
 
     it "should not add a user to their own group" do
       lambda do
-        post :create, @attr.merge(:user_id => @user2.id)
+        post :create, @attr.merge(:contact_user_id => @user2.id, :format => 'js')
       end.should_not change(Contact, :count)
     end
 

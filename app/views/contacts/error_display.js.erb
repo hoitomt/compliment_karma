@@ -1,8 +1,11 @@
 var errorContainer = '<%=j @error_container %>';
-var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
+var flashContent = '<%=j render("shared/flash_narrow", :flash => flash ) %>';
 if(errorContainer && errorContainer.length > 0) {
 	$('.results').prepend(flashContent);
 	$('#flash').slideDown();
+	$('#close-x').click(function() {
+		$('#flash-narrow').slideUp();
+	})
 } else {
 	CommonScripts.showFlash(flashContent);
 }

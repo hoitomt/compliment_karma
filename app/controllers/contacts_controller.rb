@@ -26,7 +26,7 @@ class ContactsController < ApplicationController
         unless contact.save
         	error = true
         	errors = []
-        	contact.errors.messages.each {|k, v| errors << "#{k} #{v}"}
+        	contact.errors.messages.each {|k, v| errors << "#{v.join("\n")}"}
         	flash.now[:error] = errors.join("\n")
         	break
         end

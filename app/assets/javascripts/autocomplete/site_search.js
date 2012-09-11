@@ -50,5 +50,12 @@ var SiteSearch = {
 	retrieveUser: function(userId) {
 		var userPath = '/users/' + userId.toString();
 		window.location.href = userPath;
+	},
+	resetContactSearch: function() {
+		var searchField = $('#new-contact-form').find('#search_string');		
+		$(searchField).val('');
+		$('#flash-narrow').hide();
+		$container = $('#contact-search');
+		$container.html('');
 	}
 }
