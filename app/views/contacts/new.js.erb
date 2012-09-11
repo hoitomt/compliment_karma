@@ -1,23 +1,20 @@
-var view = '<%=j render :partial => "contacts/new",
-												:locals => {:groups => @groups, 
-																		:user => @user,
-																		:contact => @contact,
-																		:contact_user => @contact_user} %>'
+var view = '<%=j render "contacts/new_contact_form" %>';
+
 $.fancybox(view, {
 	beforeLoad: function() {
 		$('body').addClass('lock-screen');
+		SiteSearch.resetContactSearch();
 	},
 	beforeClose: function() {
 		$('body').removeClass('lock-screen');
 	},
-	minWidth: 300,
-	minHeight: 50,
-	// padding: 0,
+	maxWidth: 800,
+	padding: 0,
+	wrapCSS: 'background-color: #A7DBD8;',
 	helpers: {
-		overlay: {
-			css: {
-				'background': '#A7DBD8'
-			}
-		}
+		title: null
 	}
 });
+
+var searchField = $('#new-contact-form').find('#search_string');
+var siteSearchContact = new SiteSearch(searchField, 'new-contact');

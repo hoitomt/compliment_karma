@@ -3,31 +3,12 @@
 		$('li.contact').each(function(){
 			var contact = new Contact(this);
 		});
-		var searchField = $('#new-contact-form').find('#search_string');
-
-		$('.search-fancybox').fancybox({
-			beforeLoad: function() {
-				$('body').addClass('lock-screen');
-				SiteSearch.resetContactSearch();
-			},
-			afterLoad: function() {
-				$(searchField).focus();
-				SiteSearch.init();
-			},
-			beforeClose: function() {
-				$('body').removeClass('lock-screen');
-			},
-			maxWidth: 800,
-			padding: 0,
-			wrapCSS: 'background-color: #A7DBD8;',
-			helpers: {
-				title: null
-			}
-		});
 	});
 </script>
 <ul>
-	<%= link_to '#new-contact-form', :class => 'search-fancybox new-contact-wrap' do %>
+	<%= link_to new_user_contact_path(:user_id => user.id), 
+							:class => 'search-fancybox new-contact-wrap',
+							:remote => true do %>
 		<li class="new-contact">
 			<div class="plus-sign">+</div>
 			<div class="tagline">
@@ -75,4 +56,3 @@
 		</li>
 <% end %>
 </ul>
-<%= render 'contacts/new_contact_form' %>

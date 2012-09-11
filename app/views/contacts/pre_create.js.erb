@@ -1,0 +1,23 @@
+var view = '<%=j render :partial => "contacts/pre_create",
+												:locals => {:groups => @groups, 
+																		:user => @user,
+																		:contact => @contact,
+																		:contact_user => @contact_user} %>'
+$.fancybox(view, {
+	beforeLoad: function() {
+		$('body').addClass('lock-screen');
+	},
+	beforeClose: function() {
+		$('body').removeClass('lock-screen');
+	},
+	minWidth: 300,
+	minHeight: 50,
+	// padding: 0,
+	helpers: {
+		overlay: {
+			css: {
+				'background': '#A7DBD8'
+			}
+		}
+	}
+});

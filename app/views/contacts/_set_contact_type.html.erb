@@ -1,0 +1,28 @@
+<%= content_for :stylesheets do %>
+	<style type="text/css">
+		#flash{width: 250px;}
+	</style>
+<% end %>
+<div id="new-contact-type-form">
+	<p style="font-size: 12px; margin: 5px 0; color: #000;">
+		What type of contact is <%= contact_user.full_name %>
+	</p>
+	<%= form_tag create_contact_path(:user_id => user.id), :remote => true do %>
+		<%= hidden_field_tag 'contact_user_id', contact_user.id %>
+		<ul>
+			<% groups.try(:each) do |group| %>
+				<% unless group.declined? %>
+					<li class='contact-type-list-element'>
+						<%= check_box_tag "groups[#{group.id}]", 'yes', group.professional? %>
+						<%= group.name %>
+					</li>
+				<% end %>
+			<% end %>
+		</ul>
+		<div style="margin: 5px 0 0 0; text-align: center;">
+			<button type=submit class="handle-action-item accept-action-item">Add Contact</button>
+		</div>
+		<div class="clear"></div>
+	<% end %>
+</div>
+

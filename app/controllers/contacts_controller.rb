@@ -3,6 +3,9 @@ class ContactsController < ApplicationController
 	before_filter :correct_user
 
 	def new
+	end
+
+	def pre_create
 		@contact_user = User.find_by_id(params[:contact_user_id])
 		if @contact_user.existing_contact?(@user)
 			logger.info("Existing Contact")
