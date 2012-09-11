@@ -7,7 +7,6 @@ function SiteSearch(el, source) {
 SiteSearch.prototype.bindEvents = function() {
 	var ssObj = this;
 	this.$el.off('keyup');
-	console.log(ssObj);
 	this.$el.on({
 		keyup: function(event) {				
 			// Don't search if an arror key, enter(13), shift (9), or tab(16) is selected

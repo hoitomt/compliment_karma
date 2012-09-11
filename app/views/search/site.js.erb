@@ -4,21 +4,18 @@ var results = <%=raw @results.to_json %>;
 var $container = null;
 if(source && source == 'new-contact') {
 	$container = $('#contact-search');
-	var view = '<%= j(render "contacts/contact_search_results", :users => @results) %>'
-	// console.log(view);
+	var view = '<%= j(render "contacts/contact_search_results", :users => @results) %>';
 	$container.html(view);
 } else {
 	$container = $('#site-search');
 	$container.html('<%= j(render "search/site_search_results", :users => @results) %>');
 }
 
-console.log($container);
 if(results && results.length > 0) {
 	var list = $container.find('li');
 	var inputTextField = $('input#search_string');
 	var inputIdField = $('input#user_id_result')
 	$container.show();
-	console.log("show list");
 	ListNavigator.init(list, inputTextField, inputIdField, null, $container);
 } else {
 	$container.hide();
