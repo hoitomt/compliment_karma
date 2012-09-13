@@ -119,14 +119,10 @@
 	}
 }
 #new-contact-type-form {
-	@include border-radius-5;
-	@include tooltip-box-shadow;
 	display: none;
-	position: absolute;
-	top: 0px;
-	left: 0px;
 	padding: 10px;
-	background: #fff;
+	margin: 5px 0 0 0;
+	background: $border-gray;
 	input {
 		float: left;
 		width: 25px;
