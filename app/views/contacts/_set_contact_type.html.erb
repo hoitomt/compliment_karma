@@ -4,8 +4,9 @@
 	</style>
 <% end %>
 <div id="new-contact-type-form">
-	<p style="font-size: 12px; margin: 5px 0; color: #000;">
-		What type of contact is <%= contact_user.full_name %>
+	<p style="font-size: 12px; border-bottom: 1px #bbb solid; margin-bottom: 5px;">Contact Type</p>
+	<p style="font-size: 12px; margin: 5px 0; color: #000; font-weight: bold;">
+		<%= contact_user.full_name %>
 	</p>
 	<%= form_tag create_contact_path(:user_id => user.id), :remote => true do %>
 		<%= hidden_field_tag 'contact_user_id', contact_user.id %>

@@ -12,13 +12,36 @@ ContactSearch.prototype.bindEvents = function() {
 	this.$el.click(function(event) {
 		obj.$elListParent.off('hover');
 		obj.toggleFormDisplay();
-	});
+	});	
+	this.$el.hover(
+		function(event) {
+			obj.$elListParent.off('hover');
+			obj.toggleFormDisplay();
+		},
+		function(event) {
+			obj.$elListParent.off('hover');
+			obj.toggleFormDisplay();
+		}
+	);
 }
 
 ContactSearch.prototype.toggleFormDisplay = function() {
 	if(this.$elForm.is(':visible')) {
-		this.$elForm.slideUp();
+		this.$elForm.hide();
 	} else {
 		this.$elForm.slideDown();
+		this.setPopupPosition();
 	}
+}
+
+ContactSearch.prototype.setPopupPosition = function() {
+	var offsetOptions = {
+		top: this.$el.offset().top + this.$el.height(),
+		left: this.$el.offset().left
+	}
+	this.$popup.offset(offsetOptions);
+}
+
+ContactSearch.prototype.resetPopupPosition = function() {
+	this.$popup.offset({top: 0, left: 0});
 }
