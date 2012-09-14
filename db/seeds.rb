@@ -112,6 +112,10 @@ RecognitionType.create(:name => 'Compliment')
 RecognitionType.create(:name => 'Reward')
 RecognitionType.create(:name => 'Accomplishment')
 
+GroupType.create(:name => "Professional")
+GroupType.create(:name => "Social")
+GroupType.create(:name => "Declined")
+
 # Compliments
 UpdateHistoryType.create(:name => 'Received Compliment', :text => 'received a compliment')
 UpdateHistoryType.create(:name => 'Accepted Compliment Receiver', :text => 'accepted your compliment')

@@ -164,6 +164,14 @@ describe ComplimentsController do
         uh = UpdateHistory.find_by_user_id(c.receiver_user_id)
         uh.update_history_type_id.should eq(UpdateHistoryType.Received_Compliment.id)
       end
+
+      it "should create an action item to the receiver" do
+        lambda do
+          post :create, @attr
+        end.should change(Compliment, :count).from(0).to(1)
+        ac = ActionItem.find_by_user_id(user2.id)
+        ac.should_not be_nil
+      end
       
     end
 
