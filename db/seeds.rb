@@ -33,6 +33,14 @@ ComplimentType.create(:name => "Social to Professional",
                       :list_name => "from my SOCIAL to receivers PROFESSIONAL profile")
 ComplimentType.create(:name => "Social to Social", 
                       :list_name => "from my SOCIAL to receivers SOCIAL profile")
+c = ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+c.update_attributes(:sender_type => 'Professional', :receiver_type => 'Professional')
+c = ComplimentType.PROFESSIONAL_TO_PERSONAL
+c.update_attributes(:sender_type => 'Professional', :receiver_type => 'Social')
+c = ComplimentType.PERSONAL_TO_PROFESSIONAL
+c.update_attributes(:sender_type => 'Social', :receiver_type => 'Professional')
+c = ComplimentType.PERSONAL_TO_PERSONAL
+c.update_attributes(:sender_type => 'Social', :receiver_type => 'Social')
   
 Visibility.create(:name => 'sender and receiver')
 Visibility.create(:name => 'coworkers from this job')

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914021231) do
+ActiveRecord::Schema.define(:version => 20120915035952) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(:version => 20120914021231) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "list_name"
+    t.string   "sender_type"
+    t.string   "receiver_type"
   end
 
   create_table "compliments", :force => true do |t|
@@ -161,6 +163,13 @@ ActiveRecord::Schema.define(:version => 20120914021231) do
   create_table "follows", :force => true do |t|
     t.integer  "subject_user_id"
     t.integer  "follower_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_relationships", :force => true do |t|
+    t.integer  "sub_group_id"
+    t.integer  "super_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -258,6 +267,14 @@ ActiveRecord::Schema.define(:version => 20120914021231) do
   create_table "skills", :force => true do |t|
     t.string   "name"
     t.integer  "parent_skill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.integer  "recognition_id"
+    t.integer  "recognition_type_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

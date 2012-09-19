@@ -219,11 +219,11 @@ class User < ActiveRecord::Base
   
   def self.get_account_status(email)
     u = User.find_user_by_email(email)
-    logger.info("User at this email address #{email} is nil: #{u.nil?} ")
-    if u
-      return u.account_status
-    else
+    logger.info("User at this email address #{email} is blank: #{u.blank?} ")
+    if u.blank?
       return nil
+    else
+      return u.account_status
     end
   end
   
@@ -268,9 +268,7 @@ class User < ActiveRecord::Base
   end
 
   def create_groups
-    Group.create_professional(self)
-    Group.create_social(self)
-    Group.create_declined(self)
+    Group.initialize_groups(self)
   end
   
   # Updates the status one level for the receiver

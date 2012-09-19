@@ -99,4 +99,28 @@ class ComplimentType < ActiveRecord::Base
     end
   end
 
+  def professional?
+    self.professional_sender? || self.professional_receiver?
+  end
+
+  def social?
+    self.social_sender? || self.social_receiver?
+  end
+
+  def professional_sender?
+    self.sender_type == 'Professional'
+  end
+
+  def social_sender?
+    self.sender_type == 'Social'
+  end
+
+  def professional_receiver?
+    self.receiver_type == 'Professional'
+  end
+
+  def social_receiver?
+    self.receiver_type == 'Social'
+  end
+
 end

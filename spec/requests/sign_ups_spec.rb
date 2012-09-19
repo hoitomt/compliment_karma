@@ -148,7 +148,7 @@ describe "SignUps" do
       response.should_not have_selector('a', :content => "Resend Link")
     end
 
-    it "should attach pending compliments the user" do
+    it "should update the compliment status with user confirmation" do
       @user.account_status.should eq(AccountStatus.UNCONFIRMED)
       c_pre = Compliment.create(:sender_email => user2.email,
                         :receiver_email => @user.email,
@@ -166,6 +166,28 @@ describe "SignUps" do
       user.account_status.should eq(AccountStatus.CONFIRMED)
       c_post = Compliment.find(c_pre.id)
       c_post.compliment_status.should eq(ComplimentStatus.ACTIVE)
+    end
+
+    it "should attach pending compliments to new users" do
+      email = "test_x_user@complimentkarma.com"
+      c_pre = Compliment.create(:sender_email => user2.email,
+                        :receiver_email => email,
+                        :skill_id => Skill.last.id,
+                        :compliment_type_id => ComplimentType.PERSONAL_TO_PERSONAL.id,
+                        :comment => 'Testing')
+      c_pre.compliment_status.should eq(ComplimentStatus.PENDING_RECEIVER_REGISTRATION)
+      visit signup_path
+      fill_in "Email", :with => email
+      fill_in "Full Name", :with => "test user jones"
+      fill_in "Password", :with => "1234 on the floor"
+      click_button 'Sign Up Free'
+      u = User.find_by_email(email)
+      u.should_not be_nil
+      u.compliments_received.count.should == 1
+      c = u.compliments_received.first
+      c.compliment_status.should eq(ComplimentStatus.PENDING_RECEIVER_CONFIRMATION)
+      c.tags.count.should == 1
+      c.tags.first.group.should be_social
     end
 
     it "should mark all emails as confirmed" do

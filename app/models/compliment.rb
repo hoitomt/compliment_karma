@@ -7,6 +7,10 @@ class Compliment < ActiveRecord::Base
 
   belongs_to :receiver, :class_name => 'User', :foreign_key => 'receiver_user_id'
   belongs_to :sender, :class_name => 'User', :foreign_key => 'sender_user_id'
+
+  has_many :tags, :foreign_key => :recognition_id,
+                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}
+  has_many :groups, :through => :tags
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -40,6 +44,7 @@ class Compliment < ActiveRecord::Base
   after_create :send_fulfillment
   after_create :set_relationship
   after_create :update_history
+  after_create :create_tags
 
   default_scope :order => "created_at DESC"
   
@@ -200,13 +205,13 @@ class Compliment < ActiveRecord::Base
   
   def set_compliment_status
     if receiver_status == AccountStatus.CONFIRMED
-      logger.info("Set Comliment Status - Active")
+      logger.info("Set Compliment Status - Active")
       self.compliment_status = ComplimentStatus.ACTIVE
     elsif receiver_status == AccountStatus.UNCONFIRMED
-      logger.info("Set Comliment Status - Pending Receiver Confirmation")
+      logger.info("Set Compliment Status - Pending Receiver Confirmation")
       self.compliment_status = ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
     else
-      logger.info("Set Comliment Status - Pending Receiver Registration")
+      logger.info("Set Compliment Status - Pending Receiver Registration")
       self.compliment_status = ComplimentStatus.PENDING_RECEIVER_REGISTRATION
     end
   end
@@ -281,6 +286,24 @@ class Compliment < ActiveRecord::Base
       #   end
       # end
     end
+  end
+
+  def create_tags
+    create_sender_tag
+    create_receiver_tag
+  end
+
+  def create_sender_tag
+    logger.info("Create Sender compliment")
+    sender_group = Group.get_sender_group_by_compliment_type(self.compliment_type, self.sender)
+    Tag.create_from_compliment(self, sender_group)
+  end
+
+  def create_receiver_tag
+    return if self.receiver_user_id.blank?
+    logger.info("Create Receiver compliment")
+    receiver_group = Group.get_receiver_group_by_compliment_type(self.compliment_type, self.receiver)
+    Tag.create_from_compliment(self, receiver_group)
   end
 
   def get_sender
@@ -400,6 +423,45 @@ class Compliment < ActiveRecord::Base
                      user.email, user.email, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
   end
   
+  def self.karma_activity_list(visitor, page_owner)
+    compliment_type_id = RecognitionType.COMPLIMENT.id
+    public_group = Group.get_public_group(page_owner)
+    membership_group_ids = visitor.memberships.select(:group_id).uniq.collect{|x| x.group_id} if visitor
+    logger.info("Visitor Memberships: #{membership_group_ids}")
+    if visitor && visitor.id == page_owner.id # viewing your own page
+      followed_user_ids = page_owner.followed_users.select(:subject_user_id).uniq.collect{|x| x.subject_user_id}
+      sql = "SELECT distinct(c.*) from compliments c
+             JOIN tags t on (t.recognition_type_id = ? AND t.recognition_id = c.id)
+             JOIN groups g on g.id = t.group_id
+             JOIN group_relationships gr on gr.sub_group_id = g.id
+             WHERE (c.sender_user_id in (?) OR c.receiver_user_id in (?))
+             AND (gr.super_group_id in (?) OR 
+                      (select count(1)
+                       from group_relationships grx, groups gx
+                       where grx.super_group_id = gx.id
+                       and grx.sub_group_id = g.id
+                       and gx.name = 'Public') > 0)"
+      compliments = find_by_sql([sql, compliment_type_id, followed_user_ids,
+                                     followed_user_ids, membership_group_ids])
+    else
+      sql = "SELECT distinct(c.*) FROM compliments c
+             JOIN tags t ON (t.recognition_type_id = ? AND t.recognition_id = c.id)
+             JOIN groups g ON g.id = t.group_id
+             JOIN group_relationships gr ON gr.sub_group_id = g.id
+             WHERE (c.sender_user_id = ? OR c.receiver_user_id = ?)
+             AND (gr.super_group_id in (?) OR 
+                      (select count(1)
+                       from group_relationships grx, groups gx
+                       where grx.super_group_id = gx.id
+                       and grx.sub_group_id = g.id
+                       and gx.name = 'Public') > 0)"
+      compliments = find_by_sql([sql, compliment_type_id, 
+                                      page_owner.id, page_owner.id, 
+                                      membership_group_ids])
+    end
+    return compliments
+  end
+
   def self.only_mine(user)
     logger.info("Compliments: Only Mine")
     v = [Visibility.SENDER_AND_RECEIVER.id,

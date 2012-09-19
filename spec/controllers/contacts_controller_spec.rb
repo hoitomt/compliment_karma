@@ -11,8 +11,8 @@ describe ContactsController do
     controller.class.skip_before_filter :shell_authenticate
     @user2 = FactoryGirl.create(:user2)
     @user3 = FactoryGirl.create(:user3)
-    @user2.groups.count.should == 3
-    @user3.groups.count.should == 3
+    @user2.groups.count.should == 6
+    @user3.groups.count.should == 6
     test_sign_in(@user2)
   end
 

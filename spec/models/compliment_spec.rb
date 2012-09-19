@@ -68,6 +68,26 @@ describe Compliment do
     c = Compliment.new(@attr.merge(:comment => long_comment))
     c.should_not be_valid
   end
+
+  describe "confirmed user to confirmed user" do
+    let(:user2){FactoryGirl.create(:user2)}
+    let(:user3){FactoryGirl.create(:user3)}
+
+    before(:each) do
+      @attr = @attr.merge(:sender_email => user2.email, :receiver_email => user3.email)
+    end
+
+    it "should create a compliment" do
+      lambda do
+        Compliment.create!(@attr)
+      end.should change(Compliment, :count).by(1)
+    end
+
+    it "should tag the compliment" do
+      c = Compliment.create(@attr)
+      c.tags.count.should == 2
+    end
+  end
   
   describe "compliment status" do
     
@@ -102,6 +122,7 @@ describe Compliment do
     let(:user3) {FactoryGirl.create(:user3)}
 
     it "should return the correct number of compliments for other sender/receiver" do
+      Compliment.delete_all
       lambda do
         10.times do |index|
           s = Skill.find_by_id(index) || Skill.create(:name => "skill #{index}")
@@ -394,4 +415,161 @@ describe Compliment do
 
   end
 
+  describe "Privacy" do
+    let(:user2) {FactoryGirl.create(:user2)}
+    let(:user3) {FactoryGirl.create(:user3)}
+    let(:unconfirmed_user) {FactoryGirl.create(:unconfirmed_user)}
+    let(:unconfirmed_user2) {FactoryGirl.create(:unconfirmed_user2)}
+    let(:sears_user) {FactoryGirl.create(:sears_user)}
+    let(:groupon_user) {FactoryGirl.create(:groupon_user)}
+    
+    before(:each) do
+      Compliment.delete_all
+    end
+
+    describe "Compliment is tagged as professional" do
+      before (:each) do
+        @attr = {
+          :sender_email => sears_user.email,
+          :receiver_email => groupon_user.email,
+          :skill_id => Skill.first.id,
+          :comment => "Test this",
+          :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL.id
+        }
+        @compliment = Compliment.create(@attr)
+        @sears_pro_group = Group.get_professional_group(sears_user)
+        @sears_soc_group = Group.get_social_group(sears_user)
+        @sears_public_group = Group.get_public_group(sears_user)
+      end
+
+      it "should tag the compliment correctly" do
+        @groupon_pro_group = Group.get_professional_group(groupon_user)
+        tag_group_ids = @compliment.tags.collect{|x| x.group_id}
+        tag_group_ids.count.should == 2
+        tag_group_ids.should include(@sears_pro_group.id)
+        tag_group_ids.should include(@groupon_pro_group.id)
+      end
+
+      # User 2 is following Sears User.  Sears User sent compliment to Group User
+      describe "when professional group is visible to public and professional" do
+        before(:each) do
+          GroupRelationship.create!(:super_group_id => @sears_public_group.id, 
+                                    :sub_group_id => @sears_pro_group.id)
+          @compliment.groups.count.should == 2 # Should be pro and public
+          # puts @compliment.groups.collect{|x| x.name}
+        end
+
+        describe "when user is viewing their own karma activity" do
+          before(:each) do
+            Follow.create!(:subject_user_id => sears_user.id, :follower_user_id => user2.id)
+          end
+
+          it "should show the compliment to an unassociated follower" do
+            Compliment.karma_activity_list(user2, user2).count.should == 1
+          end
+
+          it "should show the compliment to a professional follower" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_pro_group.id)
+            Compliment.karma_activity_list(user2, user2).count.should == 1
+          end
+
+          it "should show the compliment to a social follower" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_soc_group.id)
+            Compliment.karma_activity_list(user2, user2).count.should == 1
+          end
+        end
+
+        describe "when registered user is visiting the sender's page" do
+          before(:each) do
+            Follow.delete_all
+          end
+
+          it "should show the compliment to an unassociated follower" do
+            Compliment.karma_activity_list(user2, sears_user).count.should == 1
+          end
+
+          it "should show the compliment to a professional follower" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_pro_group.id)
+            Compliment.karma_activity_list(user2, sears_user).count.should == 1
+          end
+
+          it "should show the compliment to a social follower" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_soc_group.id)
+            Compliment.karma_activity_list(user2, sears_user).count.should == 1
+          end
+        end
+
+        describe "when unregistered user is visiting the sender's page" do
+          before(:each) do
+            Follow.delete_all
+          end
+
+          it "should show the compliment to an unassociated follower" do
+            Compliment.karma_activity_list(nil, sears_user).count.should == 1
+          end
+        end
+
+      end
+
+      describe "Professional group is visible only to professional" do
+        before(:each) do
+          GroupRelationship.create!(:super_group_id => @sears_pro_group.id, 
+                                    :sub_group_id => @sears_pro_group.id)
+        end
+
+        describe "when user is viewing their own karma activity" do
+          before(:each) do
+            Follow.create(:subject_user_id => sears_user.id, :follower_user_id => user2.id)
+          end
+
+          it "should not show the compliment to an unassociated follower" do
+            Compliment.karma_activity_list(user2, user2).count.should == 0
+          end
+
+          it "should show the compliment to a professional follower" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_pro_group.id)
+            Compliment.karma_activity_list(user2, user2).count.should == 1
+          end
+
+          it "should not show the compliment to a social follower" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_soc_group.id)
+            Compliment.karma_activity_list(user2, user2).count.should == 0
+          end
+        end
+
+        describe "when user is visiting the sender's page" do
+          before(:each) do
+            Follow.delete_all
+          end
+
+          it "should not show the compliment to an unassociated visitor" do
+            Compliment.karma_activity_list(user2, sears_user).count.should == 0
+          end
+
+          it "should show the compliment to a professional visitor" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_pro_group.id)
+            Compliment.karma_activity_list(user2, sears_user).count.should == 1
+          end
+
+          it "should not show the compliment to a social visitor" do
+            Contact.create!(:user_id => user2.id, :group_id => @sears_soc_group.id)
+            Compliment.karma_activity_list(user2, sears_user).count.should == 0
+          end
+        end
+
+        describe "when unregistered user is visiting the sender's page" do
+          before(:each) do
+            Follow.delete_all
+          end
+
+          it "should not show the compliment to an unassociated follower" do
+            Compliment.karma_activity_list(nil, sears_user).count.should == 0
+          end
+        end
+
+      end
+
+    end
+
+  end
 end
