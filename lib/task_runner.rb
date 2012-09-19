@@ -1,7 +1,7 @@
 class TaskRunner
 
 	def self.run_task
-		create_groups_and_migrate
+		# create_groups_and_migrate
 	end
 
 	# Create the public, only me, and contacts groups and associations

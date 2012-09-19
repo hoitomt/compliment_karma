@@ -3,7 +3,7 @@
 		UserProfile.followButtonHover();
 	})
 </script>
-<div id="follows-button-<%= user.id %>" class="profile-button">
+<div id="follows-button-<%= user.try(:id) %>" class="profile-button">
 	<% unless current_user?(user) %>
 			<%= follows_button_medium(user) %>
 	<% end %>

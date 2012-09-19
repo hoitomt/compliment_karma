@@ -7,6 +7,11 @@ class Tag < ActiveRecord::Base
 															:conditions => {:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id}
   belongs_to :group
 
+  validates_presence_of :recognition_id, :recognition_type_id, :group_id
+
+  validates_uniqueness_of :group_id, :scope => [:recognition_type_id, :recognition_id],
+  																				:message => "The item has already been tagged"
+
   def self.create_from_compliment(compliment, group)
   	create(:recognition_id => compliment.id,
   				 :recognition_type_id => RecognitionType.COMPLIMENT,

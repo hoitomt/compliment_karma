@@ -177,15 +177,15 @@ module UsersHelper
   def compliments_link(feed_item, link_text)
     if feed_item && feed_item.item_type_id == @recognition_type_compliment_id
       if link_text =~ /Sender/
-        sender = User.find(feed_item.item_object.sender_user_id)
+        sender = User.find_by_id(feed_item.item_object.sender_user_id)
         return "" if current_user?(sender)
         return link_to sender.full_name, 
                        new_compliment_path(:recipient_id => sender.id),
                                            :remote => true
       elsif link_text =~ /Receiver/
-        receiver = User.find(feed_item.item_object.receiver_user_id)
-        return "" if current_user?(receiver)
-        return link_to receiver.full_name, 
+        receiver = User.find_by_id(feed_item.item_object.receiver_user_id)
+        return "Colleague" if receiver.blank? || current_user?(receiver)
+        return link_to receiver.full_name,
                         new_compliment_path(:recipient_id => receiver.id),
                                             :remote => true
       else
@@ -275,10 +275,11 @@ module UsersHelper
   def follows_link(feed_item, link_text=nil)
     if feed_item.item_type_id == @recognition_type_compliment_id
       if link_text =~ /Sender/
-        sender = User.find(feed_item.item_object.sender_user_id)
+        sender = User.find_by_id(feed_item.item_object.sender_user_id)
         return follow_single_link(sender.id, sender.full_name)
       elsif link_text =~ /Receiver/
-        receiver = User.find(feed_item.item_object.receiver_user_id)
+        receiver = User.find_by_id(feed_item.item_object.receiver_user_id)
+        return '' if receiver.blank?
         return follow_single_link(receiver.id, receiver.full_name)
       else
         return link_to "Follow", '#'

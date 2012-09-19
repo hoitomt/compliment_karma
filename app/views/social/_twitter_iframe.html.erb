@@ -3,12 +3,12 @@
 		compliment = Compliment.find(recognition_id)
 		s = compliment.sender
 		r = compliment.receiver
-		@text = "ComplimentKarma%20#{s.first_last}%20compliments%20#{r.first_last}"
+		@text = "ComplimentKarma%20#{s.try(:first_last)}%20compliments%20#{r.try(:first_last)}"
 	elsif recognition_type_id == RecognitionType.REWARD.id
 		reward = Reward.find(recognition_id)
 		p = reward.presenter
 		r = reward.receiver
-		@text = "ComplimentKarma%20#{p.first_last}%rewards%20#{r.first_last}"
+		@text = "ComplimentKarma%20#{p.first_last}%rewards%20#{r.try(:first_last)}"
 	elsif recognition_type_id == RecognitionType.ACCOMPLISHMENT.id
 		acc = UserAccomplishment.find(recognition_id)
 		u = acc.user
