@@ -482,61 +482,13 @@ class UsersController < ApplicationController
       user = @user if view_state(@user) == view_state_company_manager
       return user
     end
-
-    # def set_compliment_panel
-    #   @compliment = Compliment.new(params[:compliment])
-    #   @compliment.sender_email = current_user.email
-    #   @sender_is_a_company = sender_is_a_company?
-    #   @receiver_is_a_company = false
-    #   set_this_week_compliments
-    #   if !current_user?(@user) #&& current_user.is_company_administrator?(@user.company.id)
-    #     @compliment.receiver_display = @user.search_result_display
-    #     @compliment.receiver_user_id = @user.id
-    #     @receiver_is_a_company = @user.is_a_company?
-    #   end
-    #   # @skills = Skill.list_for_autocomplete
-    #   @compliment_types = ComplimentType.compliment_type_list(@sender_is_a_company, @receiver_is_a_company)
-    #   if flash[:compliment]
-    #     @compliment = Compliment.new(flash[:compliment].attributes)
-    #     flash[:compliment].errors.each do |attr, msg|
-    #       @compliment.errors.add(attr, msg)
-    #     end
-    #     @compliment.errors.full_messages.each do |msg|
-    #       logger.info("Error: #{msg}")
-    #     end
-    #   end
-    #   logger.info("Compliment Types: #{@compliment_types}")
-    #   flash.delete(:compliment)
-    # end
     
     def get_karma_live_items(feed_item_type_id, relation_type_id)
-      # logger.info("User get feed items: #{feed_item_type_id} | #{relation_type_id}")
-      # case feed_item_type_id.to_i
-      # when FeedItemType.ONLY_COMPLIMENTS.id
-      #   logger.info("Only Compliments")
-      #   compliments = Compliment.compliment_by_relation_item_type(@user, relation_type_id)
-      # when FeedItemType.ONLY_REWARDS.id
-      #   logger.info("Only Rewards")
-      #   rewards = UserReward.rewards_from_followed(@user)
-      # when FeedItemType.ONLY_ACCOMPLISHMENTS.id
-      #   logger.info("Only Accomplishments")
-      #   accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
-      # else
-      #   logger.info("Everything")
-      #   compliments = Compliment.compliment_by_relation_item_type(@user, relation_type_id)
-      #   rewards = UserReward.rewards_from_followed(@user)
-      #   accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
-      # end
-      # FeedItem.construct_items(compliments, rewards, accomplishments)
-
-      # Use this until the filtering is needed
+      compliments = Compliment.karma_activity_list(current_user, @user)
       if current_user?(@user)
-        compliments = Compliment.all_compliments_from_followed_in_domain(@user)
         rewards = Reward.rewards_from_followed(@user)
         accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
       else
-        compliments = Compliment.all_active_compliments_in_domain(@user, current_user)
-        # compliments = Compliment.all_active_compliments(@user)
         rewards = Reward.all_completed_rewards_in_visitor_domain(@user, current_user)
         accomplishments = @user.accomplishments
       end

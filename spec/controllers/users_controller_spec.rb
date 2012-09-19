@@ -95,13 +95,19 @@ describe UsersController do
       describe "as viewed by page owner: User 2 viewing User 2s page" do
         before(:each) do
           test_sign_in(user2)
+          @user3_pro_group = Group.get_professional_group(user3)
+          @user3_public_group = Group.get_public_group(user3)
+          GroupRelationship.create!(:super_group_id => @user3_pro_group.id, 
+                                    :sub_group_id => @user3_pro_group.id)
+          GroupRelationship.create!(:super_group_id => @user3_public_group.id, 
+                                    :sub_group_id => @user3_pro_group.id)
         end
 
+        # Unknown Follower
         it "should have the correct number of Compliments in Karma Live" do
           # should see followed
           get :show, :id => user2
           assigns(:karma_live_items_count).should eq(30)
-          # karma_live_items = controller.instance_variable_get(:all_karma_live_items)
           c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
           c.count.should eq(10)
           cx = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user.email)
@@ -129,6 +135,12 @@ describe UsersController do
       describe "as viewed by visitor: User 3 viewing User 2s page" do
         before(:each) do
           test_sign_in(user3)
+          @user3_pro_group = Group.get_professional_group(user3)
+          @user3_public_group = Group.get_public_group(user3)
+          GroupRelationship.create!(:super_group_id => @user3_pro_group.id, 
+                                    :sub_group_id => @user3_pro_group.id)
+          GroupRelationship.create!(:super_group_id => @user3_public_group.id, 
+                                    :sub_group_id => @user3_pro_group.id)
         end
 
         it "should have the correct number of Compliments in Karma Live" do
