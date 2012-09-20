@@ -3,7 +3,7 @@
 		<p class="title">Contact Type</p>
 		<ul class="popup-group-list">
 			<% groups.try(:each) do |group| %>
-				<% unless group.declined? %>
+				<% if group.display? %>
 					<% selected = group_selected(group, c_user_memberships) %>
 					<li style="<%= bold_selected(selected) %>">
 						<%= link_to add_remove_contact_path(:user_id => user.id, 

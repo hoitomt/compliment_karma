@@ -9,28 +9,32 @@ class Group < ActiveRecord::Base
 
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
 
+	def display?
+		return self.display == "Y"
+	end
+
 	def professional?
-		return self.name == 'Professional'
+		return self.name.downcase == 'professional'
 	end
 
 	def social?
-		return self.name == 'Social'
+		return self.name.downcase == 'social'
 	end
 
 	def declined?
-		return self.name == "Declined"
+		return self.name.downcase == "declined"
 	end
 
 	def public?
-		return self.name == "Public"
+		return self.name.downcase == "public"
 	end
 
 	def only_me?
-		return self.name == "Only Me"
+		return self.name.downcase == "only me"
 	end
 
 	def contacts?
-		return self.name == "Contacts"
+		return self.name.downcase == "contacts"
 	end
 
 	def self.initialize_groups(user)
