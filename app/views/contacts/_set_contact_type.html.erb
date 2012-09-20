@@ -12,7 +12,7 @@
 		<%= hidden_field_tag 'contact_user_id', contact_user.id %>
 		<ul>
 			<% groups.try(:each) do |group| %>
-				<% unless group.declined? %>
+				<% if group.display? %>
 					<li class='contact-type-list-element'>
 						<%= check_box_tag "groups[#{group.id}]", 'yes', group.professional? %>
 						<%= group.name %>

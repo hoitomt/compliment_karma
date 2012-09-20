@@ -10,7 +10,7 @@
 </span>
 <% groups.try(:each) do |group| %>
 	<% 
-		if group.declined? && !Group.find_by_id(filter).try(:declined?)
+		unless group.display?
 			next
 		end
 	%>
