@@ -22,7 +22,7 @@ class UserEmail < ActiveRecord::Base
   # before_validation :set_primary
   after_save :update_redis
   after_destroy :update_redis
-  after_destroy :disassociate_compliments
+  # after_destroy :disassociate_compliments
 
   default_scope :order => 'primary_email DESC, confirmed DESC, email ASC'
 
@@ -87,7 +87,7 @@ class UserEmail < ActiveRecord::Base
 
   def associate_compliments
     logger.info("User Email - Associate Compliments")
-    Compliment.where(:receiver_email => email)
+    Compliment.where(:receiver_email => self.email)
               .update_all(:receiver_user_id => user_id,
                           :compliment_status_id => ComplimentStatus.ACTIVE.id)
   end

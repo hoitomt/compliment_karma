@@ -2,7 +2,7 @@ module SearchHelper
 
 	def skill_result_display(skill_name, search_string)
 		len = search_string.length
-		start = skill_name.downcase.index(search_string.to_s.downcase)
+		start = skill_name.downcase.index(search_string.to_s.downcase) || 0
 		stop = start + len
 		result = skill_name.insert(stop, "</strong>")
 		result = result.insert(start, "<strong>")

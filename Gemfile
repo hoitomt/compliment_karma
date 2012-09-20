@@ -12,6 +12,7 @@ gem 'marginalia', "~> 1.1.0"
 gem 'restful_metrics'
 gem 'rack-mini-profiler'
 gem 'redis'
+gem 'tire'
 
 # Email - HTTP to mailgun and Bancbox
 gem 'rest-client', '1.6.7'

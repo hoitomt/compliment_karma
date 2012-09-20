@@ -370,4 +370,57 @@ describe "Compliments" do
     
   end
 
+  describe "manage action items" do
+    let(:user2){FactoryGirl.create(:user2)}
+    let(:user3){FactoryGirl.create(:user3)}
+
+    before(:each) do
+      @attr = {
+        :receiver_email => user3.email,
+        :sender_email => user2.email,
+        :skill_id => Skill.first.id,
+        :comment => "I love what you did with our application",
+        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      }
+    end
+
+    it "should create a compliment" do
+      lambda do
+        Compliment.create!(@attr)
+      end.should change(Compliment, :count).by(1)
+    end
+
+    it "should create an action item for a compliment from a non-contact" do
+      Compliment.create!(@attr)
+      user3.action_items.should == 1
+    end
+
+    it "should approve an action item and create the contact in the correct group" do
+      Compliment.create!(@attr)
+      user3.action_items.should == 1
+      action_item = user3.action_items.first
+      groups = [Group.get_professional_group(user3).id]
+      visit accept_action_item_path(:user_id => user3, 
+                                    :id => action_item.id, 
+                                    :groups => groups,
+                                    :originator_id => user2.id)
+      user3.existing_contact?(user2).should be_true
+      contacts = user3.existing_contacts(user2)
+      contacts.collect{|c| c.group_id}.should include(Group.get_professional_group(user3).id)
+    end
+
+    it "should not create the contact if the action item is declined" do
+      Compliment.create!(@attr)
+      user3.action_items.should == 1
+      action_item = user3.action_items.first
+      groups = [Group.get_professional_group(user3).id]
+      visit decline_action_item_path(:user_id => user3.id,
+                                     :id => action_item.id,
+                                     :originator_id => user2.id)
+      user3.existing_contact?(user2).should be_true
+      contacts = user3.existing_contacts(user2)
+    end
+
+  end
+
 end
