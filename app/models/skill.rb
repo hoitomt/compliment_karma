@@ -6,7 +6,7 @@ class Skill < ActiveRecord::Base
 	# ElasticSearch mapping
 	mapping do
 		indexes :id
-		indexes :name
+		indexes :name, :boost => 100
 		indexes :parent_skill_id
 	end
 

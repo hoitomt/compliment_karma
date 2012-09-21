@@ -4,7 +4,11 @@ module SearchHelper
 		len = search_string.length
 		start = skill_name.downcase.index(search_string.to_s.downcase) || 0
 		stop = start + len
-		result = skill_name.insert(stop, "</strong>")
+    if stop > skill_name.length
+      result = skill_name << "</strong>"
+    else
+  		result = skill_name.insert(stop, "</strong>")
+    end
 		result = result.insert(start, "<strong>")
 		return result.html_safe
 	end

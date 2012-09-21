@@ -6,28 +6,14 @@ class SearchController < ApplicationController
     if @search_string.blank?
       @skills = nil
     else
-      s = "*#{@search_string}*"
-      @skills = Skill.search s
+      s = format_search_string(@search_string)
+      logger.info(s)
+      @skills = Skill.search do
+        query { string s }
+      end
       # @skills = Skill.get_autocomplete_results(@search_string)
     end
 	end
-
-  # def skills
-  #   @search_string = params[:search_string]
-  #   skill_array = []
-  #   if @search_string.blank?
-  #     # @skills = nil
-  #     @skills = Skill.first(10)
-  #     h = {}
-  #     @skills.each { |skill| h[skill.id] = skill.name }
-  #   else
-  #     @skills = Skill.get_autocomplete_results(@search_string)
-  #   end
-  #   respond_to do |format|
-  #     format.js { render :json => h.to_json}
-  #   end
-  #   # render :nothing => true
-  # end
 
 	def site
     @search_string = params[:search_string]
@@ -61,6 +47,12 @@ class SearchController < ApplicationController
     def set_static_vars
       @page = (params[:page] || 1).to_i
       @per_page = 10
+    end
+
+    def format_search_string(s)
+      x = s.lstrip.rstrip
+      x.gsub!(/\s/, '* + *')
+      return "*#{x}*"
     end
 	
 end
