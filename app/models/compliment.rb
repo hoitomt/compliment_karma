@@ -43,6 +43,7 @@ class Compliment < ActiveRecord::Base
   before_create :set_visibility
   after_create :send_fulfillment
   after_create :set_relationship
+  after_create :create_action_item
   after_create :update_history
   after_create :create_tags
 
@@ -201,6 +202,10 @@ class Compliment < ActiveRecord::Base
                             :relationship_status_id => new_relationship_status.id)
       end
     end      
+  end
+
+  def create_action_item
+    ActionItem.create_from_compliment(self)
   end
   
   def set_compliment_status

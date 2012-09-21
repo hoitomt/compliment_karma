@@ -20,9 +20,11 @@ class ActionItemsController < ApplicationController
     originator = User.find(params[:originator_id])
     groups = params[:groups]
     group_names = []
+    logger.info("Groups #{groups}")
     groups.try(:each) do |k,v|
+      logger.info("LOOP Groups #{k} => #{v}")
       if v.downcase == 'yes'
-        # logger.info("YES")
+        logger.info("YES")
         Contact.create(:group_id => k, :user_id => originator.id)
         group_names << Group.find_by_id(k).try(:name)
       end

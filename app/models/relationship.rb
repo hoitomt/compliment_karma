@@ -13,7 +13,6 @@ class Relationship < ActiveRecord::Base
   
   before_create :set_relationship_status
   before_create :set_visibility
-  after_create :create_action_item
   
   def set_relationship_status
     if self.relationship_status.blank?
@@ -32,21 +31,6 @@ class Relationship < ActiveRecord::Base
       else
         self.visibility = Visibility.SENDER_AND_RECEIVER
       end
-    end
-  end
-
-  def create_action_item
-    unless self.relationship_status == RelationshipStatus.ACCEPTED
-      # Compliments: user 1 is the sender, user 2 is the receiver
-      c = User.find_by_id(user_1_id)
-              .compliments_sent
-              .where('receiver_user_id = ?', self.user_2_id)
-              .first
-      action_item = ActionItem.create(:user_id => self.user_2_id,
-                                      :recognition_type_id => RecognitionType.COMPLIMENT.id,
-                                      :recognition_id => c.try(:id),
-                                      :action_item_type_id => ActionItemType.Authorize_Contact.id,
-                                      :originating_user_id => self.user_1_id )
     end
   end
   

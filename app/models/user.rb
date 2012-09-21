@@ -243,9 +243,7 @@ class User < ActiveRecord::Base
       logger.info("New Status = #{new_status.name}")
       c.update_attributes(:receiver_user_id => self.id, 
                           :compliment_status_id => new_status.id)
-      # c.receiver_user_id = self.id
-      # c.compliment_status =  update_receiver_status(c.compliment_status)
-      # c.save
+      ActionItem.create_from_compliment(c)
       UpdateHistory.Received_Compliment(c)
     end
   end
@@ -570,10 +568,12 @@ class User < ActiveRecord::Base
     self.primary_email.update_attributes(:confirmed => 'Y')
   end
 
+  # Checking if self is a contact in user's groups
   def existing_contact?(user)
     self.existing_contacts(user).count > 0
   end
 
+  # Return the groups where self is a contact in user's groups
   def existing_contacts(user)
     self.memberships.where('group_id in (?)', user.try(:groups))
   end

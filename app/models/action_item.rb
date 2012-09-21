@@ -18,4 +18,29 @@ class ActionItem < ActiveRecord::Base
 		ActionItem.where('user_id = ? and complete <> ?', user.id, 'Y')
 	end
 
+	def self.create_from_compliment(compliment)
+		return if compliment.blank? || compliment.receiver.blank? ||
+							receiver_is_an_accepted_contact?(compliment)
+		create(:user_id => compliment.receiver.id,
+           :recognition_type_id => RecognitionType.COMPLIMENT.id,
+           :recognition_id => compliment.id,
+           :action_item_type_id => ActionItemType.Authorize_Contact.id,
+           :originating_user_id => compliment.sender.id )
+  end
+
+  def self.receiver_is_an_accepted_contact?(compliment)
+  	contacts = compliment.sender.existing_contacts(compliment.receiver)
+  	logger.info("Compliment Receiver: #{compliment.receiver.primary_email.email}")
+  	c = contacts.collect{|x| x.group.name }
+  	logger.info("New Action Item from compliment Contacts: #{c}")
+  	if contacts.length > 0
+  		contacts.each do |c|
+  			return false if c.group.declined?
+  		end
+  		return true
+		else
+			return false
+		end
+  end
+
 end

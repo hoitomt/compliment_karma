@@ -2,7 +2,7 @@ class Metrics
 
 	@@app_name = 'app6296184@heroku.com'
 	def self.new_metric(type)
-		RestfulMetrics::Client.add_metric(@@app_name, type, 1)
+		# RestfulMetrics::Client.add_metric(@@app_name, type, 1)
 	end
 
 	def self.new_invitation

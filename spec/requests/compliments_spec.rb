@@ -382,6 +382,10 @@ describe "Compliments" do
         :comment => "I love what you did with our application",
         :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
       }
+      visit login_path
+      fill_in "Email", :with => user3.email
+      fill_in "Password", :with => user3.password
+      click_button('Log In')
     end
 
     it "should create a compliment" do
@@ -392,33 +396,51 @@ describe "Compliments" do
 
     it "should create an action item for a compliment from a non-contact" do
       Compliment.create!(@attr)
-      user3.action_items.should == 1
+      user3.action_items.count.should == 1
     end
 
     it "should approve an action item and create the contact in the correct group" do
       Compliment.create!(@attr)
-      user3.action_items.should == 1
+      user3.action_items.count.should == 1
       action_item = user3.action_items.first
-      groups = [Group.get_professional_group(user3).id]
-      visit accept_action_item_path(:user_id => user3, 
+      groups = {Group.get_professional_group(user3).id => 'yes'}
+      visit accept_action_item_path(:user_id => user3.id, 
                                     :id => action_item.id, 
                                     :groups => groups,
                                     :originator_id => user2.id)
-      user3.existing_contact?(user2).should be_true
-      contacts = user3.existing_contacts(user2)
+      a = ActionItem.find(action_item.id)
+      a.complete.should == 'Y'
+      user2.existing_contact?(user3).should be_true
+      contacts = user2.existing_contacts(user3)
       contacts.collect{|c| c.group_id}.should include(Group.get_professional_group(user3).id)
     end
 
-    it "should not create the contact if the action item is declined" do
+    it "should create a declined contact if the action item is declined" do
       Compliment.create!(@attr)
-      user3.action_items.should == 1
+      user3.action_items.count.should == 1
       action_item = user3.action_items.first
-      groups = [Group.get_professional_group(user3).id]
       visit decline_action_item_path(:user_id => user3.id,
                                      :id => action_item.id,
                                      :originator_id => user2.id)
-      user3.existing_contact?(user2).should be_true
-      contacts = user3.existing_contacts(user2)
+      user2.existing_contact?(user3).should be_true
+      contacts = user2.existing_contacts(user3)
+      contacts.collect{|c| c.group_id}.should include(Group.get_declined_group(user3).id)
+    end
+
+    it "should create an action item if the sender is a declined contact" do
+      group = Group.get_declined_group(user3)
+      c = Contact.create(:user_id => user2.id, :group_id => group.id)
+      Compliment.create!(@attr)
+      user3.action_items.count.should == 1
+    end
+
+    it "should not create an action item if the sender is an accepted contact" do 
+      group = Group.get_professional_group(user3)
+      c = Contact.create(:user_id => user2.id, :group_id => group.id)
+      c.should_not be_nil
+      c.should be_valid
+      Compliment.create!(@attr)
+      user3.action_items.count.should == 0
     end
 
   end
