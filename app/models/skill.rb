@@ -1,7 +1,7 @@
 class Skill < ActiveRecord::Base
 	include Tire::Model::Search
 	include Tire::Model::Callbacks
-	# index_name BONSAI_INDEX_NAME
+	index_name BONSAI_INDEX_NAME
 
 	# ElasticSearch mapping
 	mapping do
