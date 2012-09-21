@@ -6,8 +6,9 @@ class SearchController < ApplicationController
     if @search_string.blank?
       @skills = nil
     else
-      # @skills = Skill.search @search_string
-      @skills = Skill.get_autocomplete_results(@search_string)
+      s = "*#{@search_string}*"
+      @skills = Skill.search s
+      # @skills = Skill.get_autocomplete_results(@search_string)
     end
 	end
 
