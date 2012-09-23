@@ -11,11 +11,12 @@
 			<h1>Privacy Settings</h1>
 			<p><strong>Which contacts can see your items</strong></p>
 			<ul id="user-privacy">
-				<% @groups.try(:each) do |group| %>
-					<% next unless group.display? %>
+				<% @groups.try(:each) do |g| %>
+					<p><%#= g.name %></p>
+					<% next unless g.display? %>
 					<li class="user-group">
 						<div class="group-info">
-							<%= group.name %>
+							<%= g.name %>
 						</div>
 						<div class="hover-container">
 							<div class="show-popup show-tag-groups">
@@ -24,7 +25,7 @@
 						</div>
 						<%= render :partial => 'users/privacy/popup',
 											 :locals => {:groups => @groups,
-											 						 :subject_group => group} %>
+											 						 :subject_group => g} %>
 						<div class="clear"></div>
 					</li>
 				<% end %>
