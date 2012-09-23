@@ -1,24 +1,29 @@
 <li class="no-hover">
+	<%#= link_to 'Facebook', user_facebook_path(current_user), :remote => true %>
 	<% if iframe %>
 		<%= render 'social/facebook_iframe', { :recognition_type_id => recognition_type_id,
-																				 :recognition_id => recognition_id } %>
+																				 	 :recognition_id => recognition_id } %>
 	<% else %>
+		<%= link_to 'Facebook', user_facebook_path(current_user), :remote => true %>
 		<%= render 'social/facebook_link', { :recognition_type_id => recognition_type_id,
 																			 :recognition_id => recognition_id,
 																			 :show_count => show_count } %>
 	<% end %>
+	<div id="hidden-facebook">
+		<div id="fb-root"></div>
+	</div>
 </li>
 <li class="no-hover">
 	<% if iframe %>
-		<%= render 'social/twitter_iframe', { :recognition_type_id => recognition_type_id,
+		<%#= render 'social/twitter_iframe', { :recognition_type_id => recognition_type_id,
 																			:recognition_id => recognition_id }  %>
 	<% else %>
-		<%= render 'social/twitter_link', { :recognition_type_id => recognition_type_id,
+		<%#= render 'social/twitter_link', { :recognition_type_id => recognition_type_id,
 																			:recognition_id => recognition_id,
 																			:show_count => show_count }  %>
   <% end %>
 </li>
 <li class="no-hover">
-	<%= render 'social/google_link_no_js', { :recognition_type_id => recognition_type_id,
+	<%#= render 'social/google_link_no_js', { :recognition_type_id => recognition_type_id,
 																		 			 :recognition_id => recognition_id }  %>
 </li>

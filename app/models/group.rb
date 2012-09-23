@@ -8,6 +8,7 @@ class Group < ActiveRecord::Base
 	has_many :super_group_relationships, :class_name => 'GroupRelationship', :foreign_key => 'sub_group_id'
 
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
+	default_scope :order => 'sort_order'
 
 	def display?
 		return self.display_ind.downcase == "y"
@@ -47,27 +48,36 @@ class Group < ActiveRecord::Base
 	end
 
 	def self.create_professional(user)
-		create(:name => 'Professional', :user_id => user.id, :group_type => GroupType.Professional)
+		sort_o = define_sort_order('Professional')
+		create(:name => 'Professional', :user_id => user.id, 
+					 :group_type => GroupType.Professional, :sort_order => sort_o)
 	end
 
 	def self.create_social(user)
-		create(:name => 'Social', :user_id => user.id, :group_type => GroupType.Social)
+		sort_o = define_sort_order('Social')
+		create(:name => 'Social', :user_id => user.id, 
+					 :group_type => GroupType.Social, :sort_order => sort_o)
 	end
 
 	def self.create_declined(user)
-		create(:name => 'Declined', :user_id => user.id, :group_type => GroupType.Declined)
+		sort_o = define_sort_order('Declined')
+		create(:name => 'Declined', :user_id => user.id, 
+			     :group_type => GroupType.Declined, :sort_order => sort_o)
 	end
 
 	def self.create_public(user)
-		create(:name => 'Public', :user_id => user.id)
+		sort_o = define_sort_order('Public')
+		create(:name => 'Public', :user_id => user.id, :sort_order => sort_o)
 	end
 
 	def self.create_only_me(user)
-		create(:name => 'Only Me', :user_id => user.id)
+		sort_o = define_sort_order('Only Me')
+		create(:name => 'Only Me', :user_id => user.id, :sort_order => sort_o)
 	end
 
 	def self.create_contacts(user)
-		create(:name => 'Contacts', :user_id => user.id)
+		sort_o = define_sort_order('Contacts')
+		create(:name => 'Contacts', :user_id => user.id, :sort_order => sort_o)
 	end
 
 	def self.get_professional_group(user)
@@ -115,6 +125,26 @@ class Group < ActiveRecord::Base
 			return get_social_group(user)
 		else
 			return nil
+		end
+	end
+
+	def self.define_sort_order(group_name)
+		return 100 if group_name.nil?
+		case group_name.downcase
+		when "public"
+			return 1
+		when "contact of contacts"
+			return 2
+		when "contacts"
+			return 3
+		when "professional"
+			return 4
+		when "social"
+			return 5
+		when "only me"
+			return 6
+		else
+			return 100
 		end
 	end
 

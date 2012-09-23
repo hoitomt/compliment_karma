@@ -3,6 +3,7 @@
 		<p class="title">Visible To (Contacts)</p>
 		<ul class="popup-group-list">
 			<% groups.try(:each) do |group| %>
+				<% next if group.declined? %>
 				<% super_group = super_group?(group, subject_group) %>
 				<li style="<%= bold_selected(super_group) %>">
 					<%= link_to '#', 

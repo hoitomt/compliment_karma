@@ -428,6 +428,10 @@ class UsersController < ApplicationController
     redirect_to current_user
   end
 
+  def facebook
+    
+  end
+
   private
     def authenticate
       deny_access unless signed_in?

@@ -12,15 +12,18 @@
 			<p><strong>Which contacts can see your items</strong></p>
 			<ul id="user-privacy">
 				<% @groups.try(:each) do |g| %>
-					<p><%#= g.name %></p>
 					<% next unless g.display? %>
 					<li class="user-group">
 						<div class="group-info">
 							<%= g.name %>
 						</div>
+						<div class="group-visibility">
+							<% sg = g.super_group_relationships.collect{|sgr| sgr.super_group.name} %>
+							<p><strong>Visible To: </strong><%= sg.join(', ') %></p>
+						</div>
 						<div class="hover-container">
 							<div class="show-popup show-tag-groups">
-								<span style="color:#bbb;">&#9660;</span>
+								<span style="color:#bbb;">&#9660; Change Visibility</span>
 							</div>
 						</div>
 						<%= render :partial => 'users/privacy/popup',
