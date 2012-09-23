@@ -3,7 +3,7 @@
 		<div id="user-profile-details" class="first-row clearfix container">
 			<h1>Account Settings</h1>
 			<ul id="account-settings">
-				<li><%#= link_to 'Privacy Settings', '#' %></li>
+				<li><%= link_to 'Privacy Settings', user_privacy_path(current_user) %></li>
 				<li>
 					<%= link_to 'Add/Manage Email Addresses', 
 											user_user_emails_path(:user_id => @user.id), :remote => true %>

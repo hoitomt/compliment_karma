@@ -69,6 +69,7 @@ Ck::Application.routes.draw do
   match "users/:user_id/contacts/:id/decline" => "contacts#decline",
         :as => :decline_contact
   match "users/:id/settings" => "users#settings", :as => :user_settings
+  match "users/:id/privacy" => "users#privacy", :as => :user_privacy
   match "users/:id/employees" => "users#employees", :as => :user_employees
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
   match "users/:id/rewards" => "users#rewards", :as => :user_rewards

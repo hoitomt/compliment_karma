@@ -4,8 +4,8 @@ class Group < ActiveRecord::Base
 	has_many :contacts
 	has_many :tags
 	has_many :users, :through => :contacts
-	has_many :sub_group_ids, :class_name => 'GroupRelationship', :foreign_key => 'super_group_id'
-	has_many :super_group_ids, :class_name => 'GroupRelationship', :foreign_key => 'sub_group_id'
+	has_many :sub_group_relationships, :class_name => 'GroupRelationship', :foreign_key => 'super_group_id'
+	has_many :super_group_relationships, :class_name => 'GroupRelationship', :foreign_key => 'sub_group_id'
 
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
 

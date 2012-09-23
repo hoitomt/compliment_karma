@@ -1,6 +1,6 @@
 function Contact(el) {
 	this.$el = $(el);
-	var showPopupEl = this.$el.find('.show-contact-type');
+	var showPopupEl = this.$el.find('.show-popup');
 	var deleteLinkEl = this.$el.find('.delete-link');
 	var popup = $(el).find('.popup');
 	this.$popup = $(popup);

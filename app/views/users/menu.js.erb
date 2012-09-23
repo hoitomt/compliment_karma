@@ -32,6 +32,9 @@ switch(currentAction) {
 	case "employees":
 		$('#content-container').html('<%= j(render "users/menu/employees") %>');
 		break;
+	case "privacy":
+		$('#content-container').html('<%= j(render "users/menu/privacy") %>');
+		break;
 	case "show":
 		$('#content-container').html('<%= j(render "users/menu/karma_live") %>');
 		var userId = '<%= @user.id %>';

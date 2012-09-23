@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   before_filter :set_compliment_panel, 
                 :only => [:show, :my_updates, :my_updates_all, :professional_profile,
                           :social_profile, :received_compliments, :sent_compliments,
-                          :achievements, :contacts, :settings, :employees ]
+                          :achievements, :contacts, :settings, :privacy, :employees ]
     
   def new
     @user = User.new
@@ -204,6 +204,11 @@ class UsersController < ApplicationController
   def settings
     @company = @user.company
     @departments = @company.departments if @company
+    menu_response_handler
+  end
+
+  def privacy
+    @groups = @user.groups
     menu_response_handler
   end
 

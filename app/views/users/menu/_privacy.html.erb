@@ -1,0 +1,34 @@
+<script>
+	$(function() {
+		$('li.user-group').each(function(){
+			var contact = new Contact(this);
+		});
+	});
+</script>
+<div id="user-profile">
+	<div id="user-overview" class="right-two-thirds drop-box-white clearfix">
+		<div id="user-profile-details" class="first-row clearfix container">
+			<h1>Privacy Settings</h1>
+			<p><strong>Which contacts can see your items</strong></p>
+			<ul id="user-privacy">
+				<% @groups.try(:each) do |group| %>
+					<% next unless group.display? %>
+					<li class="user-group">
+						<div class="group-info">
+							<%= group.name %>
+						</div>
+						<div class="hover-container">
+							<div class="show-popup show-tag-groups">
+								<span style="color:#bbb;">&#9660;</span>
+							</div>
+						</div>
+						<%= render :partial => 'users/privacy/popup',
+											 :locals => {:groups => @groups,
+											 						 :subject_group => group} %>
+						<div class="clear"></div>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

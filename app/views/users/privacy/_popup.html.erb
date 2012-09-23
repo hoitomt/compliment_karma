@@ -1,0 +1,19 @@
+<div class="popup">
+	<div id="popup-content">
+		<p class="title">Visible To (Contacts)</p>
+		<ul class="popup-group-list">
+			<% groups.try(:each) do |group| %>
+				<% super_group = super_group?(group, subject_group) %>
+				<li style="<%= bold_selected(super_group) %>">
+					<%= link_to '#', 
+											:method => :post,
+											:remote => true do %>
+						<span class="select"><%= check_selected(super_group) %></span>
+						<%= group.name %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="clear"></div>
+</div>
