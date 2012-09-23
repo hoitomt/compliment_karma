@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
 
 	def display?
-		return self.display.downcase == "y"
+		return self.display_ind.downcase == "y"
 	end
 
 	def professional?
