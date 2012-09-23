@@ -12,7 +12,6 @@
 			<p><strong>Which contacts can see your items</strong></p>
 			<ul id="user-privacy">
 				<% @groups.try(:each) do |group| %>
-					<p><%= group.name %></p>
 					<% next unless group.display? %>
 					<li class="user-group">
 						<div class="group-info">
