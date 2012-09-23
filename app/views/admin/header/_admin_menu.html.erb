@@ -19,9 +19,16 @@
 					<div class="am-user-info">
 						<span class="am-name"><%= current_user.first_last %></span><br />
 						<span class="am-email"><%= current_user.email %></span><br />
-						<%= link_to "Account", 
-												user_settings_path(:id => current_user.id), 
-												:class => 'ul_hover am-current-user-links' %>
+						<div style="float:left;">
+							<%= link_to "Account", 
+													user_settings_path(:id => current_user.id), 
+													:class => 'ul_hover am-current-user-links' %>
+						</div>
+						<div style="float:right;">
+							<%= link_to "Privacy", 
+													user_privacy_path(:id => current_user.id), 
+													:class => 'ul_hover am-current-user-links' %>
+						</div>
 					</div>
 				<% end %>
 				<div class="clear"></div>
