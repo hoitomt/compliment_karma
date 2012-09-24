@@ -1,9 +1,9 @@
-console.log("Facebook Handler");
+// console.log("Facebook Handler");
 var fbView = '<%=j render :partial => "social/facebook_link", 
 													:locals => { :recognition_type_id => 1,
 																			 :recognition_id => 190,
 																		   :show_count => false }  %>'
-console.log(fbView);
+// console.log(fbView);
 var $container = $('#hidden-facebook');
 $container.html(fbView);
 
@@ -16,6 +16,6 @@ $container.html(fbView);
 }(document, 'script', 'facebook-jssdk'));
 
 var form = $('#hidden-facebook').contents().find("iframe");
-console.log("Form");
-console.log(form);
+// console.log("Form");
+// console.log(form);
 $(form).submit();

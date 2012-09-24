@@ -13,7 +13,7 @@
 			<ul id="user-privacy">
 				<% @groups.try(:each) do |g| %>
 					<% next unless g.display? %>
-					<li class="user-group">
+					<li id="<%= g.id %>" class="user-group">
 						<div class="group-info">
 							<%= g.name %>
 						</div>
@@ -26,9 +26,11 @@
 								<span style="color:#bbb;">&#9660; Change Visibility</span>
 							</div>
 						</div>
-						<%= render :partial => 'users/privacy/popup',
-											 :locals => {:groups => @groups,
-											 						 :subject_group => g} %>
+						<div class="popup">
+							<%= render :partial => 'users/privacy/popup',
+												 :locals => {:groups => @groups,
+												 						 :subject_group => g} %>
+ 						</div>
 						<div class="clear"></div>
 					</li>
 				<% end %>

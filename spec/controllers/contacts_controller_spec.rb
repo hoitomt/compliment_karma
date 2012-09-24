@@ -195,12 +195,13 @@ describe ContactsController do
                                 :contact_user_id => @user3.id
       u = User.find(@user2.id)
       u.contacts.count.should == 2
+      group = u.contacts.first.group
 
       post :decline, :user_id => @user2.id,
                      :id => @user2.contacts.last
       u = User.find(@user2.id)
       u.contacts.count.should == 1
-      u.contacts.last.group.name.should == 'Social'
+      u.contacts.last.group.name.should == group.name
     end
 
   end

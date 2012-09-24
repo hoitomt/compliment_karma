@@ -1,23 +1,23 @@
-<div class="popup">
-	<div id="popup-content">
-		<p class="title">Visible To (Contacts)</p>
-		<ul class="popup-group-list">
-			<% groups.try(:each) do |group| %>
-				<% next if group.declined? %>
-				<% if subject_group.professional? || subject_group.social? %>
-					<% next if group.only_me? %>
-				<% end %>
-				<% super_group = super_group?(group, subject_group) %>
-				<li style="<%= bold_selected(super_group) %>">
-					<%= link_to '#', 
-											:method => :post,
-											:remote => true do %>
-						<span class="select"><%= check_selected(super_group) %></span>
-						<%= group.name %>
-					<% end %>
-				</li>
+<div id="popup-content">
+	<p class="title">Visible To (Contacts)</p>
+	<ul class="popup-group-list">
+		<% groups.try(:each) do |group| %>
+			<% next if group.declined? %>
+			<% if subject_group.professional? || subject_group.social? %>
+				<% next if group.only_me? %>
 			<% end %>
-		</ul>
-	</div>
-	<div class="clear"></div>
+			<% is_super_group = super_group?(group, subject_group) %>
+			<li style="<%= bold_selected(is_super_group) %>">
+				<%= link_to update_super_group_path(:user_id => current_user.id, 
+																						:id => subject_group.id,
+																						:super_group_id => group.id), 
+										:method => :post,
+										:remote => true do %>
+					<span class="select"><%= check_selected(is_super_group) %></span>
+					<%= group.name %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
 </div>
+<div class="clear"></div>

@@ -79,6 +79,8 @@ Ck::Application.routes.draw do
         :as => :accept_action_item
   match "users/:user_id/action_items/:id/decline" => "action_items#decline", 
         :as => :decline_action_item
+  match "users/:user_id/groups/:id/update_super_group" => "groups#update_super_group", 
+        :as => :update_super_group
   match "users/:user_id/user_emails/set_primary_email" => "user_emails#set_primary_email", 
         :as => :set_primary_email
   match "users/:user_id/user_emails/:id/resend_email_confirmation" => "user_emails#resend_email_confirmation",

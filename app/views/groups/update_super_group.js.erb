@@ -1,0 +1,7 @@
+// update popup-content
+var listId = 'li#<%= @group.id %>';
+var container = $(listId).find('.popup');
+var content = '<%=j render :partial => "users/privacy/popup",
+													 :locals => {:groups => @groups,
+													 						 :subject_group => @group} %>';
+$(container).html(content);
