@@ -90,6 +90,16 @@ var CommonScripts = {
 		// $(existingFlash).each(function() {
 		// 	$container.remove(this);
 		// });
+	},
+	setFacebookHandler: function() {
+		d = document;
+		s = 'script';
+		id = 'facebook-jssdk';
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
 	}
 }
 

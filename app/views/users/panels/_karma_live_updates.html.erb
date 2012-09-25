@@ -1,3 +1,8 @@
+<script>
+	$(function() {
+		// CommonScripts.setFacebookHandler();
+	});
+</script>
 <% @count = @page * @per_page - @per_page %>
 <% unless @karma_live_items.blank? && @count == 0 %>
 	<% @karma_live_items.each do |time, feed_item| %>

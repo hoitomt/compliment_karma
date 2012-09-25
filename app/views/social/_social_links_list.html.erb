@@ -1,17 +1,14 @@
+<div id="fb-root"></div>
 <li class="no-hover">
-	<%#= link_to 'Facebook', user_facebook_path(current_user), :remote => true %>
 	<% if iframe %>
 		<%= render 'social/facebook_iframe', { :recognition_type_id => recognition_type_id,
 																				 	 :recognition_id => recognition_id } %>
 	<% else %>
-		<%= link_to 'Facebook', user_facebook_path(current_user), :remote => true %>
-		<%= render 'social/facebook_link', { :recognition_type_id => recognition_type_id,
-																			 :recognition_id => recognition_id,
-																			 :show_count => show_count } %>
+		<%= link_to 'FB', 'http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.complimentkarma.com&send=false&layout=button_count&width=450&show_faces=false&action=like&colorscheme=light&font&height=21' %>
+		<%#= render 'social/facebook_link', { :recognition_type_id => recognition_type_id,
+																			   :recognition_id => recognition_id,
+																			   :show_count => show_count } %>
 	<% end %>
-	<div id="hidden-facebook">
-		<div id="fb-root"></div>
-	</div>
 </li>
 <li class="no-hover">
 	<% if iframe %>

@@ -226,7 +226,9 @@
 			display: block; float: left; margin-right: 20px; z-index: 20;
 		}
 		li:lastChild { margin-right: 0px;}
-		li.social-link-style {}
+		li.social-link-style {
+			// ul li {width: 100px;}
+		}
 		li.social-link-style:hover {text-decoration: none; color: #4A8396;};
 		a {
 			display: inline-block;

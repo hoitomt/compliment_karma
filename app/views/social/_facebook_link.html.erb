@@ -1,9 +1,16 @@
-<div class="fb-like" 
+<!-- <div class="fb-like" 
 			data-href="<%= social_link(recognition_type_id, recognition_id) %>" 
 			data-send="false" 
-			<% unless show_count %>
+			<%# if show_count %>
 				data-layout="button_count" 
-			<% end %>
+			<%# end %>
 			data-width="450" 
 			data-show-faces="false">
-</div>
+</div> -->
+
+<fb:like href="<%= social_link(recognition_type_id, recognition_id) %>" 
+				 send="false" 
+				 layout="button_count" 
+				 width="450" 
+				 show_faces="false">
+</fb:like>
