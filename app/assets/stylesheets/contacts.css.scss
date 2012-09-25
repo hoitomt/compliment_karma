@@ -2,7 +2,7 @@
 @import "user_common";
 
 #user-contacts, #user-privacy {
-	.contact, .new-contact, .user-group {
+	.contact, .new-contact {
 		@include border-radius;
 		background: rgb(233, 233, 233); /* Fall back for shitty browsers */
 		background: rgba(233, 233, 233, .5);
@@ -49,15 +49,20 @@
 				right: -173px;
 				bottom: -37px;
 			}
-			.show-tag-groups {
-				position: relative;
-				cursor: pointer;
-				height: 25px;
-				width: 150px;
-				right: -145px;
-				bottom: -40px;
-			}
+			// .show-tag-groups {
+			// 	position: relative;
+			// 	cursor: pointer;
+			// 	height: 25px;
+			// 	width: 150px;
+			// 	right: -145px;
+			// 	bottom: -40px;
+			// }
 		}
+	}
+	.show-tag-groups {
+		cursor: pointer;
+		height: 25px;
+		// width: 150px;
 	}
 	li.user-group {
 		width: 400px;
@@ -69,13 +74,16 @@
 			font-size: 18px;
 			float: left;
 			// font-weight: bold;
-			padding: 15px;
+			padding: 15px 5px 15px 0;
+			width: 130px;
+			text-align: right;
 		}
 		.group-visibility {
-			float: right;
-			padding: 5px;
+			float: left;
+			padding: 18px 0 10px 0;
 			margin-right: 5px;
-			width: 200px;
+			// cursor: pointer;
+			// width: 200px;
 		}
 	}
 	.new-contact {
@@ -97,8 +105,11 @@
 			width: 100px;
 		}
 	}
-	li.new-contact:hover,
-	li.user-group:hover, 
+	li.user-group:hover {
+		background: none;
+		// cursor: pointer;
+	}
+	li.new-contact:hover, 
 	.hover {
 		background: $main-menu-color;
 	}

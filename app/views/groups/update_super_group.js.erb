@@ -5,3 +5,10 @@ var content = '<%=j render :partial => "users/privacy/popup",
 													 :locals => {:groups => @groups,
 													 						 :subject_group => @group} %>';
 $(container).html(content);
+
+var groupList = '<%= super_group_list(@group) %>';
+console.log(groupList);
+var csvList = $(listId).find('#csv-list-groups');
+console.log($(listId));
+console.log(csvList);
+csvList.html(groupList);

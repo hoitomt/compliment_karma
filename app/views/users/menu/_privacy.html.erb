@@ -9,7 +9,8 @@
 	<div id="user-overview" class="right-two-thirds drop-box-white clearfix">
 		<div id="user-profile-details" class="first-row clearfix container">
 			<h1>Privacy Settings</h1>
-			<p><strong>Which contacts can see your items</strong></p>
+			<p><strong>Who can see my Profile and Activity </strong>
+				(Compliments, Achievements, Rewards, etc.</p>
 			<ul id="user-privacy">
 				<% @groups.try(:each) do |g| %>
 					<% next unless g.display? %>
@@ -18,13 +19,15 @@
 							<%= g.name %>
 						</div>
 						<div class="group-visibility">
-							<% sg = g.super_group_relationships.collect{|sgr| sgr.super_group.name} %>
-							<p><strong>Visible To: </strong><%= sg.join(', ') %></p>
+							<div class="show-popup show-tag-groups">
+								<div style="float: left; color:blue;">
+									<div style="float: left; margin-right: 5px;">&#9660;</div>
+									<div id="csv-list-groups" style="float: left;"><%= super_group_list(g) %></div>
+									<div class="clear"></div>
+								</div>
+							</div>
 						</div>
 						<div class="hover-container">
-							<div class="show-popup show-tag-groups">
-								<span style="color:#bbb;">&#9660; Change Visibility</span>
-							</div>
 						</div>
 						<div class="popup">
 							<%= render :partial => 'users/privacy/popup',

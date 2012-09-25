@@ -74,3 +74,22 @@
 		}
 	}
 }
+
+#user-privacy {
+	.popup {
+		$left_arrow_pos_priv: 14px;
+		$top_arrow_pos_priv: -18px;
+		#popup-content:before, #popup-content:after {
+			top: $top_arrow_pos_priv;
+			left: $left_arrow_pos_priv;
+		}
+		#popup-content:after {
+			top: $top_arrow_pos_priv - 8px;
+			left: $left_arrow_pos_priv + 1px;
+		}
+		#popup-content:before {
+			top: $top_arrow_pos_priv - 10px;
+			left: $left_arrow_pos_priv;
+		}
+	}
+}

@@ -40,11 +40,11 @@ Contact.prototype.bindEvents = function() {
 }
 
 Contact.prototype.showPopup = function() {
-	var offset = this.$el.offset();
-	var offsetOptions = {
-		top: offset.top + this.$el.height() + $(window).scrollTop(),
-		left: offset.left
-	}
+	var offsetOptions = this.getOffset();
+	// var offsetOptions = {
+	// 	top: offset.top + this.$el.height() + $(window).scrollTop(),
+	// 	left: offset.left
+	// }
 	this.$popup.offset(offsetOptions);
 	this.$popup.find('li').hover(
 		function(e){
@@ -55,6 +55,23 @@ Contact.prototype.showPopup = function() {
 		}
 	)
 	this.$popup.show();
+}
+
+Contact.prototype.getOffset = function() {
+	var options = {};
+	var offset = this.$el.offset();
+	if(this.$el.is('li.contact')) {
+		options = {
+			top: offset.top + this.$el.height() + $(window).scrollTop(),
+			left: offset.left
+		};
+	} else {
+		options = {
+			top: offset.top + this.$el.height() - 20 + $(window).scrollTop(),
+			left: offset.left + 115
+		};
+	}
+	return options;
 }
 
 Contact.prototype.hidePopup = function(el) {

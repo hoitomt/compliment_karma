@@ -10,4 +10,10 @@ module PrivacyHelper
 		return false
 	end
 
+	def super_group_list(ref_group)
+		a = ref_group.super_group_relationships.sort{|x,y| x.super_group.sort_order <=> y.super_group.sort_order}
+		sg = a.collect{|sgr| sgr.super_group.name}
+		return sg.join(', ')
+	end
+
 end
