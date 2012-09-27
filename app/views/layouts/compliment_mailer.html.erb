@@ -10,9 +10,9 @@
 			</div>
 			<div id="content-compliment">
 				<div style="float: left; text-align: center; overflow: hidden; width: 100px; height: 100px;">
-					<%= image_tag @sender.photo.url(:small), :height => '100' %>
+					<%= image_tag @sender.photo.url(:small), :height => '100', :alt => @sender.first_last %>
 				</div>
-				<div style="float: left; margin-left: 10px; width: 370px;">
+				<div style="float: left; margin-left: 10px; width: 360px;">
 					<strong><%= @sender.first_last %></strong> sent you a compliment<br /><br />
 					<%= @compliment.comment %><br /><br />
 					
@@ -23,7 +23,7 @@
 					<strong><%= @compliment.try(:compliment_type).name %></strong>
 					<br />
 				</div>
-				<div style="float: right; margin-left: 10px; width: 60px;">
+				<div style="float: right; margin-left: 10px; width: 60px; padding-top: 40px">
 					<span style="text-align: right; margin-top: 40px;"><%= @timestamp %></span>
 				</div>
 			</div>

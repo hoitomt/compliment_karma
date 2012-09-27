@@ -188,8 +188,8 @@ class User < ActiveRecord::Base
     if self.is_a_company?
       return self.company.name
     else
-      # return self.full_name + ' &#60;' + self.email + '&#62;'
-      return "#{self.full_name} (#{self.email})"
+      # return "#{self.full_name} (#{self.email})"
+      return "#{self.full_name}"
     end
   end
   
