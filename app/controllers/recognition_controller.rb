@@ -1,5 +1,5 @@
 class RecognitionController < ApplicationController
-  before_filter :authenticate, :except => [:show]
+  before_filter :authenticate#, :except => [:show]
   
   def show
     session.delete(:return_to)

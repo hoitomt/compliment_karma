@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def link_to_submit(text, css_class=nil)
+    link_to_function text, "$(this).closest('form').submit()", :class => css_class
+  end
+
   def site_url
     return "http://www.complimentkarma.com/"
   end

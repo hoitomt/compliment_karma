@@ -4,22 +4,10 @@ class GroupsController < ApplicationController
 
 	def update_super_group
 		@groups = @user.groups
+		new_super_group_ids = params[:super_group_ids].try(:keys) || Hash.new
 		@group = Group.find(params[:id])
-		@super_group = Group.find(params[:super_group_id])
-		existing_relationship = GroupRelationship.where(:sub_group_id => @group.id, :super_group_id => @super_group.id)
-		if existing_relationship.blank?
-			add_super_group
-		else
-			remove_super_group(existing_relationship.first)
-		end
-	end
-
-	def add_super_group
-		GroupRelationship.create(:sub_group_id => @group.id, :super_group_id => @super_group.id)
-	end
-
-	def remove_super_group(group_relationship)
-		group_relationship.destroy
+		@group.update_super_groups(new_super_group_ids)
+		@group.reload
 	end
 
 	private

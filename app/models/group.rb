@@ -148,4 +148,49 @@ class Group < ActiveRecord::Base
 		end
 	end
 
+	def update_super_groups(new_super_group_ids)
+		sgr = self.super_group_relationships
+		existing_super_group_ids = sgr.collect{|x| x.super_group_id}
+		# Establish new relationships
+		new_super_group_ids.each do |sg_id|
+			unless existing_super_group_ids.include?(sg_id.to_i)
+				GroupRelationship.create(:sub_group_id => self.id, :super_group_id => sg_id)
+			end
+		end
+		# Remove existing, expired, relationships
+		sgr.each do |r|
+			unless new_super_group_ids.include?(r.super_group_id.to_s)
+				r.destroy
+			end
+		end
+	end
+
+	def detach_from_all_groups
+		self.super_group_relationships.destroy_all
+	end
+
+	def attach_to_all_groups
+		Group.public_group_list(self.group_owner).each do |super_group|
+			GroupRelationship.create(:sub_group_id => self.id, :super_group_id => super_group.id)
+		end
+	end
+
+	def self.public_group_list(user)
+		return [] if user.blank?
+		group_list = user.groups
+		dg = Group.get_declined_group(user)
+		group_list.delete(dg) unless dg.blank?
+		return group_list
+	end
+
+	def has_public_visibility?
+		public_group = Group.get_public_group(self.group_owner)
+		has_group_visibility?(public_group)
+	end
+
+	def has_group_visibility?(super_group)
+		super_group_ids = self.super_group_relationships.collect{|sgr| sgr.super_group_id}
+		return super_group_ids.include?(super_group.id)
+	end
+
 end

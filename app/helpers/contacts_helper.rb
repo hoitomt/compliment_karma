@@ -24,6 +24,14 @@ module ContactsHelper
 		end
 	end
 
+	def check_box_selected(selected)
+		if selected
+			return "1"
+		else
+			return "0"
+		end
+	end
+
 	def bold_selected(selected)
 		if selected
 			return "font-weight: bold;".html_safe

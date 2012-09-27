@@ -1,23 +1,28 @@
+<script>
+	$(function() {
+		$('ul.popup-group-list li').each(function() {
+			var privacyObj = new Privacy(this);
+		});
+	});
+</script>
 <div id="popup-content">
-	<p class="title">Visible To (Contacts)</p>
-	<ul class="popup-group-list">
-		<% groups.try(:each) do |group| %>
-			<% next if group.declined? %>
-			<% if subject_group.professional? || subject_group.social? %>
-				<% next if group.only_me? %>
-			<% end %>
-			<% is_super_group = super_group?(group, subject_group) %>
-			<li style="<%= bold_selected(is_super_group) %>">
-				<%= link_to update_super_group_path(:user_id => current_user.id, 
-																						:id => subject_group.id,
-																						:super_group_id => group.id), 
-										:method => :post,
-										:remote => true do %>
-					<span class="select"><%= check_selected(is_super_group) %></span>
-					<%= group.name %>
+	<p class="title">Provide Access to:</p>
+	<%= form_tag(update_super_group_path(current_user.id), :remote => true) do %>
+		<%= hidden_field_tag 'id', subject_group.id.to_s %>
+		<ul class="popup-group-list">
+			<% groups.try(:each) do |group| %>
+				<% next if group.declined? %>
+				<% if subject_group.professional? || subject_group.social? %>
+					<% next if group.only_me? %>
 				<% end %>
-			</li>
-		<% end %>
-	</ul>
+				<% is_super_group = super_group?(group, subject_group) %>
+				<li style="<%= bold_selected(is_super_group) %>">
+						<%= check_box_tag "super_group_ids[#{group.id}]", "yes", is_super_group %>
+						<span id="group-name"><%= group.name %></span>
+				</li>
+			<% end %>
+		</ul>
+		<p><%= link_to_submit 'Apply', 'submit_link' %></p>
+	<% end %>
 </div>
 <div class="clear"></div>
