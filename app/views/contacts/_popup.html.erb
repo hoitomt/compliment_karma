@@ -1,24 +1,23 @@
 <div class="popup">
 	<div id="popup-content">
 		<p class="title">Contact Type</p>
-		<ul class="popup-group-list">
-			<% groups.try(:each) do |group| %>
-				<% if group.display? %>
-					<% selected = group_selected(group, c_user_memberships) %>
-					<li style="<%= bold_selected(selected) %>">
-						<%= link_to add_remove_contact_path(:user_id => user.id, 
-																								:group_id => group.id,
-																								:contact_user_id => c_user.id,
-																								:filter_id => filter_id), 
-												:method => :post,
-												:remote => true do %>
-							<span class="select"><%= check_selected(selected) %></span>
-							<%= group.name %>
-						<% end %>
-					</li>
+		<%= form_tag(add_remove_contact_path(:user_id => user.id, 
+																				 :contact_user_id => c_user.id,
+																				 :filter_id => filter_id),
+								 :remote => true) do %>
+			<ul class="popup-group-list">
+				<% groups.try(:each) do |group| %>
+					<% if group.display? %>
+						<% selected = group_selected(group, c_user_memberships) %>
+						<li style="<%= bold_selected(selected) %>">
+							<%= check_box_tag "contact_group[#{group.id}]", "yes", selected %>
+							<span id="contact-group-name" style="font-size: 14px;"><%= group.name %></span>
+						</li>
+					<% end %>
 				<% end %>
-			<% end %>
-		</ul>
+			</ul>
+			<p><%= link_to_submit 'Apply', 'submit_link' %></p>
+		<% end %>
 	</div>
 	<div class="clear"></div>
 </div>

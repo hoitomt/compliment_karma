@@ -6,11 +6,27 @@ function Contact(el) {
 	this.$popup = $(popup);
 	this.$showPopupEl = $(showPopupEl);
 	this.$deleteLinkEl = $(deleteLinkEl);
+	this.groupName = this.$el.find('#contact-group-name').html();
 	this.bindEvents();
 }
 
 Contact.prototype.bindEvents = function() {
 	var contactObj = this;
+
+	this.$el.find('ul li').each(function() {
+		$(this).off('click');
+		$(this).click(function(event) {
+				var checkboxClicked = $(event.target).is(':input');
+				if(!checkboxClicked) {
+				var cb = $(this).find('input[type=checkbox]');
+				if($(cb).is(':checked')) {
+					$(cb).attr('checked', false);
+				} else {
+					$(cb).attr('checked', true);
+				}
+			}
+		});
+	});
 	this.$el.hover(
 		function(e) {
 			contactObj.$deleteLinkEl.show();

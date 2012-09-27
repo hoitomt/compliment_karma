@@ -54,25 +54,12 @@ class ContactsController < ApplicationController
 
 	def add_remove_contact
 		contact_user = User.find_by_id(params[:contact_user_id])
-		group = Group.find_by_id(params[:group_id])
-		contact = Contact.where(:group_id => group.try(:id), :user_id => contact_user.try(:id))
-		if !group.blank? && !contact_user.blank?
-			if contact.blank?
-				Contact.remove_declined_contact(contact_user, @user)
-				@contact = Contact.create(:group_id => group.try(:id), :user_id => contact_user.try(:id))
-			else
-				# Find out how many groups the user is in
-				contacts = contact_user.existing_contacts(@user)
-				logger.info("Contacts from the user: #{contacts.length}")
-				# if 2 or more then we can delete
-				if contacts.length > 1
-					contact.first.delete
-					# Contact.find(contact.first.id).delete
-				else
-					flash.now[:error] = "You cannot remove a contact from their last group. 
-															 Please delete the contact using the [x]"
-				end
-			end
+		new_group_ids = params[:contact_group].collect{|k, v| k} || Array.new
+		if new_group_ids.length == 0
+			flash.now[:error] = "You cannot remove a contact from their last group. 
+													 Please delete the contact using the [x]"
+		else
+			Contact.update_groups(@user, contact_user, new_group_ids)
 		end
 		ui_vars
 		respond_to do |format|

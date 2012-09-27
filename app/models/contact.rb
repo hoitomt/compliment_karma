@@ -40,7 +40,7 @@ class Contact < ActiveRecord::Base
 		if filter.blank?
       contacts = user.contacts.includes(:user, :group, {:user => :memberships}).uniq{|x| x.user_id}
     else
-      contacts = user.contacts.joins(:user, :group).where('groups.id = ?', filter.to_i)
+      contacts = user.contacts.unscoped.joins(:user, :group).where('groups.id = ?', filter.to_i)
     end
     return contacts.sort!{|x, y| 
     	x_name_string = "#{x.try(:user).try(:last_name)} #{x.try(:user).try(:first_name)}"
@@ -61,6 +61,38 @@ class Contact < ActiveRecord::Base
 		unless declined_contacts.blank?
 			declined_contacts.first.delete
 		end
+	end
+
+	def self.get_contact_groups(user, contact_user)
+		sql = "SELECT distinct g.* from groups g
+					 JOIN users u on g.user_id = u.id
+					 JOIN contacts c on g.id = c.group_id
+					 WHERE u.id = ?
+					 AND c.user_id = ?"
+		Group.find_by_sql([sql, user.id, contact_user.id])
+	end
+
+	def self.update_groups(user, contact_user, new_group_ids)
+		logger.info("New Groups: #{new_group_ids}")
+		existing_groups = get_contact_groups(user, contact_user)
+		existing_group_ids = existing_groups.collect{|g| g.id.to_s }
+		logger.info("Existing Groups: #{existing_group_ids}")
+
+		# Add user to group
+		new_group_ids.each do |g_id|
+			unless existing_group_ids.include?(g_id)
+				Contact.create(:group_id => g_id, :user_id => contact_user.id)
+			end
+		end
+
+		# Remove contacts that are no longer validate
+		existing_group_ids.each do |eg_id|
+			unless new_group_ids.include?(eg_id)
+				c_delete_me = Contact.where(:group_id => eg_id, :user_id => contact_user.id)
+				c_delete_me.destroy_all
+			end
+		end
+
 	end
 
 end
