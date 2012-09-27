@@ -45,8 +45,4 @@ Ck::Application.configure do
   # Redis - created a Redis to Go instance specifically for local development
   ENV["REDISTOGO_URL"] = 'redis://hoitomt:124f63476172c052815d93d14915c6db@clingfish.redistogo.com:9104/' 
 
-  config.after_initialize do
-    # Bullet gem
-    Bullet.enable = false
-  end
 end
