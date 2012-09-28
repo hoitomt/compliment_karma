@@ -504,4 +504,40 @@ describe UsersController do
     
   end
 
+  describe "view social profile" do
+    let(:user2) { FactoryGirl.create(:user2) }
+    let(:user3) { FactoryGirl.create(:user3) }
+
+    before(:each) do
+      @u3_pro_group = Group.get_professional_group(user3)
+      @u3_soc_group = Group.get_social_group(user3)
+      @u3_public_group = Group.get_public_group(user3)
+      Contact.create!(:group_id => @u3_pro_group.id, :user_id => user2.id)
+      test_sign_in(user2)
+      gr = GroupRelationship.create(:sub_group_id => @u3_soc_group.id, 
+                                    :super_group_id => @u3_soc_group.id)
+      gr_x = GroupRelationship.where(:sub_group_id => @u3_soc_group.id)
+      gr_x.length.should == 1
+    end
+
+    it "should allow visibility to the social profile" do
+      gr = GroupRelationship.create(:sub_group_id => @u3_soc_group.id, 
+                                    :super_group_id => @u3_public_group.id)
+      gr_x = GroupRelationship.where(:sub_group_id => @u3_soc_group.id)
+      gr_x.length.should == 2
+      get :social_profile, {:id => user3.id, :format => 'js'}
+      assigns(:valid_visitor).should == true
+      response.should be_success
+    end
+
+    it "should no allow visiblity to the social profile" do
+      c = @u3_soc_group.contacts
+      c.length == 0
+      get :social_profile, {:id => 3, :format => 'js'}
+      assigns(:valid_visitor).should == false
+      response.should be_success
+    end
+
+  end
+
 end

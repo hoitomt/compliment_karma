@@ -422,9 +422,7 @@ describe "Compliments" do
       visit decline_action_item_path(:user_id => user3.id,
                                      :id => action_item.id,
                                      :originator_id => user2.id)
-      user2.existing_contact?(user3).should be_true
-      contacts = user2.existing_contacts(user3)
-      contacts.collect{|c| c.group_id}.should include(Group.get_declined_group(user3).id)
+      user2.existing_contact?(user3).should be_false
     end
 
     it "should create an action item if the sender is a declined contact" do

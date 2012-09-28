@@ -85,6 +85,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def self.get_social_group(user)
+		logger.info(user.first_last)
 		where('user_id = ? and name = ?', user.id, 'Social').first
 	end
 
