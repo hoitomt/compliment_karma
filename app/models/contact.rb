@@ -64,6 +64,7 @@ class Contact < ActiveRecord::Base
 	end
 
 	def self.get_contact_groups(user, contact_user)
+		return [] if user.blank? || contact_user.blank?
 		sql = "SELECT distinct g.* from groups g
 					 JOIN users u on g.user_id = u.id
 					 JOIN contacts c on g.id = c.group_id
@@ -73,6 +74,7 @@ class Contact < ActiveRecord::Base
 	end
 
 	def self.update_groups(user, contact_user, new_group_ids)
+		return if contact_user.blank? || user.blank? || new_group_ids.blank?
 		logger.info("New Groups: #{new_group_ids}")
 		existing_groups = get_contact_groups(user, contact_user)
 		existing_group_ids = existing_groups.collect{|g| g.id.to_s }

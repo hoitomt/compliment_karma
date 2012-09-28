@@ -39,24 +39,22 @@ class ActionItemsController < ApplicationController
 
   def decline
     @action_item = ActionItem.find(params[:id])
-    originator = User.find(params[:originator_id])
-    group = Group.get_declined_group(@user)
-    Contact.create(:group_id => group.id, :user_id => originator.id)
+    originator = User.find_by_id(params[:originator_user_id])
     decline_relationship(originator)
     if @action_item.set_complete
-      flash[:notice] = "You have chose not to accept compliments from #{originator.full_name}"
+      flash[:notice] = "You have chosen not to accept compliments from #{originator.try(:full_name)}"
       redirect_to @user
     end
   end
 
   def accept_relationship(originator)
     relationship = Relationship.get_relationship(originator, @user)
-    relationship.accept_relationship
+    relationship.accept_relationship unless relationship.blank?
   end
 
   def decline_relationship(originator)
     relationship = Relationship.get_relationship(originator, @user)
-    relationship.decline_relationship
+    relationship.decline_relationship unless relationship.blank?
   end
 
 	private

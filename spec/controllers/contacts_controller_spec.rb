@@ -76,85 +76,81 @@ describe ContactsController do
       # c_pro = Contact.create(:group_id => @professional_group.id, :user_id => @user3.id)
       # c_soc = Contact.create(:group_id => @social_group.id, :user_id => @user3.id)
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @social_group.id,
-                                :contact_user_id => @user3.id
-      post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@social_group.id.to_s => "yes", 
+                                                   @professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
       @user2.contacts.count.should == 2
     end
 
     it "should remove a contact" do
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @social_group.id,
+                                :contact_group => {@social_group.id.to_s => "yes", 
+                                                   @professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
-                                :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 2
+      @user2.reload
+      @user2.contacts.count.should == 2
 
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
     end
 
     it "should not remove the last contact" do
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
 
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
     end
 
     it "should ressurect a declined user" do
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @declined_group.id,
+                                :contact_group => {@declined_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
 
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
     end
 
     it "should not blow up on null group_id" do
       post :add_remove_contact, :user_id => @user2.id,
                                 :group_id => nil,
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 0
+      @user2.reload
+      @user2.contacts.count.should == 0
 
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
     end
 
     it "should not blow up on null contact_id" do
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @social_group.id,
+                                :contact_group => {@social_group.id.to_s => "yes"},
                                 :contact_user_id => nil
-      u = User.find(@user2.id)
-      u.contacts.count.should == 0
+      @user2.reload
+      @user2.contacts.count.should == 0
 
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
+                                :contact_group => {@professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
+      @user2.reload
+      @user2.contacts.count.should == 1
     end
 
   end
@@ -174,34 +170,32 @@ describe ContactsController do
 
     it "should delete the contact" do
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @social_group.id,
+                                :contact_group => {@social_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
       u = User.find(@user2.id)
       u.contacts.count.should == 1
 
       post :decline, :user_id => @user2.id,
                      :id => @user2.contacts.last
-      u = User.find(@user2.id)
-      u.contacts.count.should == 0
+      @user2.reload
+      @user2.contacts.count.should == 0
     end
 
 
     it "should delete only one of the group affiliations" do
       post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @social_group.id,
+                                :contact_group => {@social_group.id.to_s => "yes",
+                                                   @professional_group.id.to_s => "yes"},
                                 :contact_user_id => @user3.id
-      post :add_remove_contact, :user_id => @user2.id,
-                                :group_id => @professional_group.id,
-                                :contact_user_id => @user3.id
-      u = User.find(@user2.id)
-      u.contacts.count.should == 2
-      group = u.contacts.first.group
+      @user2.reload
+      @user2.contacts.count.should == 2
+      group = @user2.contacts.first.group
 
       post :decline, :user_id => @user2.id,
                      :id => @user2.contacts.last
-      u = User.find(@user2.id)
-      u.contacts.count.should == 1
-      u.contacts.last.group.name.should == group.name
+      @user2.reload
+      @user2.contacts.count.should == 1
+      @user2.contacts.last.group.name.should == group.name
     end
 
   end

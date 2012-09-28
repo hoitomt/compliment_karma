@@ -53,14 +53,7 @@ class ContactsController < ApplicationController
 	end
 
 	def add_remove_contact
-		contact_user = User.find_by_id(params[:contact_user_id])
-		new_group_ids = params[:contact_group].collect{|k, v| k} || Array.new
-		if new_group_ids.length == 0
-			flash.now[:error] = "You cannot remove a contact from their last group. 
-													 Please delete the contact using the [x]"
-		else
-			Contact.update_groups(@user, contact_user, new_group_ids)
-		end
+		update_groups(params)
 		ui_vars
 		respond_to do |format|
 			format.html { redirect_to @user }
@@ -72,6 +65,31 @@ class ContactsController < ApplicationController
 				end
 			}
 		end
+	end
+
+	def update_groups(params)
+		contact_user = get_contact_user(params)
+		return if contact_user.blank?
+		new_group_ids = get_new_group_ids(params)
+		return if new_group_ids.blank?
+		Contact.update_groups(@user, contact_user, new_group_ids)
+	end
+
+	def get_contact_user(params)
+		contact_user = User.find_by_id(params[:contact_user_id])
+		flash.now[:error] = "A contact must be specified" if contact_user.blank?
+		return contact_user
+	end
+
+	def get_new_group_ids(params)
+		contact_groups = params[:contact_group]
+		if contact_groups.blank?
+			flash.now[:error] = "A group must be specified"
+			return
+		end
+		new_group_ids = contact_groups.collect{|k, v| k} || Array.new
+		flash.now[:error] = "A group must be specified" if new_group_ids.blank?
+		return new_group_ids
 	end
 
 	def decline

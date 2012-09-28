@@ -14,15 +14,14 @@ describe GroupsController do
 			@pro_group = Group.get_professional_group(user3)
 			@contacts_group = Group.get_contacts_group(user3)
 			@params = {:user_id => user3.id,
-								 :id => @pro_group.id
+								 :id => @pro_group.id, 
+								 :format => 'js'
 								}
 		end
 
 		it "should add contacts group visibility to the pro group" do
-			format = mock("format")
-			format.should_receive(:js)
 			@params = @params.merge(:super_group_ids => {@contacts_group.id.to_s => "yes"})
-			post :update_super_group, @params, :format => 'js'
+			post :update_super_group, @params
 			@pro_group.reload
 			@pro_group.has_group_visibility?(@contacts_group).should == true
 		end
