@@ -530,7 +530,7 @@ describe UsersController do
       response.should be_success
     end
 
-    it "should no allow visiblity to the social profile" do
+    it "should not allow visiblity to the social profile" do
       c = @u3_soc_group.contacts
       c.length == 0
       get :social_profile, {:id => 3, :format => 'js'}
