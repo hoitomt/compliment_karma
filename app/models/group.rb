@@ -8,7 +8,7 @@ class Group < ActiveRecord::Base
 	has_many :super_group_relationships, :class_name => 'GroupRelationship', :foreign_key => 'sub_group_id'
 
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
-	# default_scope :order => 'sort_order'
+	default_scope :order => 'sort_order'
 
 	def display?
 		return self.display_ind.downcase == "y"
