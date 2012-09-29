@@ -515,6 +515,7 @@ describe Compliment do
         before(:each) do
           GroupRelationship.create!(:super_group_id => @sears_pro_group.id, 
                                     :sub_group_id => @sears_pro_group.id)
+          @sears_pro_group.super_group_relationships.count.should == 1
         end
 
         describe "when user is viewing their own karma activity" do

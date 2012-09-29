@@ -427,16 +427,19 @@ class Compliment < ActiveRecord::Base
   end
   
   def self.karma_activity_list(visitor, page_owner)
+    logger.info("Visitor: #{visitor.first_last if visitor} -> " +
+                "Page Owner #{page_owner.first_last if page_owner}")
     compliment_type_id = RecognitionType.COMPLIMENT.id
     active_compliment_id = ComplimentStatus.ACTIVE.id
     public_group = Group.get_public_group(page_owner)
     membership_group_ids = visitor.memberships.select(:group_id).uniq.collect{|x| x.group_id} if visitor
     logger.info("Visitor Memberships: #{membership_group_ids}")
-    if visitor && visitor.id == page_owner.id # viewing your own page
+    if visitor && visitor.id == page_owner.id
+      logger.info("Viewing your own page")
       followed_user_ids = page_owner.followed_users.select(:subject_user_id).uniq.collect{|x| x.subject_user_id}
       sql = "SELECT distinct(c.*) from compliments c
              JOIN tags t on (t.recognition_type_id = ? AND t.recognition_id = c.id)
-             JOIN groups g on g.id = t.group_id
+             JOIN groups g on g.id = t.group_id AND g.user_id in (?)
              JOIN group_relationships gr on gr.sub_group_id = g.id
              WHERE (c.sender_user_id in (?) OR c.receiver_user_id in (?))
              AND c.compliment_status_id = ?
@@ -446,12 +449,13 @@ class Compliment < ActiveRecord::Base
                        where grx.super_group_id = gx.id
                        and grx.sub_group_id = g.id
                        and gx.name = 'Public') > 0)"
-      compliments = find_by_sql([sql, compliment_type_id, followed_user_ids,
+      compliments = find_by_sql([sql, compliment_type_id, followed_user_ids, followed_user_ids,
                                      followed_user_ids, active_compliment_id, membership_group_ids])
     else
+      logger.info("Visiting someone's page")
       sql = "SELECT distinct(c.*) FROM compliments c
              JOIN tags t ON (t.recognition_type_id = ? AND t.recognition_id = c.id)
-             JOIN groups g ON g.id = t.group_id
+             JOIN groups g ON g.id = t.group_id AND g.user_id = ?
              JOIN group_relationships gr ON gr.sub_group_id = g.id
              WHERE (c.sender_user_id = ? OR c.receiver_user_id = ?)
              and c.compliment_status_id = ?
@@ -461,7 +465,7 @@ class Compliment < ActiveRecord::Base
                        where grx.super_group_id = gx.id
                        and grx.sub_group_id = g.id
                        and gx.name = 'Public') > 0)"
-      compliments = find_by_sql([sql, compliment_type_id, 
+      compliments = find_by_sql([sql, compliment_type_id, page_owner.id,
                                       page_owner.id, page_owner.id, 
                                       active_compliment_id, membership_group_ids])
     end
