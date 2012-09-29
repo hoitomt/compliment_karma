@@ -180,7 +180,9 @@ class Group < ActiveRecord::Base
 		return [] if user.blank?
 		group_list = user.groups
 		dg = Group.get_declined_group(user)
+		om = Group.get_only_me_group(user)
 		group_list.delete(dg) unless dg.blank?
+		group_list.delete(om) unless om.blank?
 		return group_list
 	end
 
