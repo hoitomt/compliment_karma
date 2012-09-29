@@ -69,10 +69,10 @@ class ComplimentsController < ApplicationController
     input_user = User.find_user_by_email(receiver_display.downcase) if User.valid_email?(receiver_display.downcase)
     if !receiver_id.blank?
       @compliment.receiver_user_id = receiver_id
-      @compliment.receiver_email = User.find(receiver_id).email
+      @compliment.receiver_email = User.find(receiver_id).primary_email.email
     elsif !input_user.blank?
       @compliment.receiver_user_id = input_user.id
-      @compliment.receiver_email = input_user.email
+      @compliment.receiver_email = input_user.primary_email.email
     else
       @compliment.receiver_email = params[:compliment][:receiver_display]
     end
@@ -82,7 +82,7 @@ class ComplimentsController < ApplicationController
     if params[:compliment][:sender_email]
       @compliment.sender_email = params[:compliment][:sender_email]
     elsif current_user
-      @compliment.sender_email = current_user.email
+      @compliment.sender_email = current_user.primary_email.email
     else
       return nil
     end

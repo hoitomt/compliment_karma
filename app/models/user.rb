@@ -575,6 +575,7 @@ class User < ActiveRecord::Base
 
   # Return the groups where self is a contact in user's groups
   def existing_contacts(user)
+    return false if user.blank?
     self.memberships.where('group_id in (?)', user.try(:groups))
   end
 

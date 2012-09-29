@@ -12,7 +12,7 @@ class ActionItemsController < ApplicationController
   def pre_accept
     @action_item = ActionItem.find(params[:id])
     @originator = User.find(params[:originator_user_id])
-    @groups = @user.groups
+    @groups = @user.groups.where(:display_ind => 'Y')
   end
 
   def accept

@@ -94,10 +94,10 @@ class ContactsController < ApplicationController
 
 	def decline
 		@contact = Contact.find(params[:id])
-		@contact.destroy
+		group_ids = @user.groups.collect{|g| g.id}
 		contact_user = @contact.user
-		# reset_contacts(contact_user)
-		# Contact.create_declined_contact(contact_user, @user)
+		matching_contacts = Contact.where('user_id = ? AND group_id in (?)', contact_user.id, group_ids)
+		matching_contacts.destroy_all
 		ui_vars
 		flash.now[:notice] = "#{contact_user.first_last} has been removed from your contacts"
 		respond_to do |format|
