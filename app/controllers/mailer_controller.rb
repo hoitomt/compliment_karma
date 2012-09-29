@@ -7,7 +7,8 @@ class MailerController < ApplicationController
     @sender = @compliment.sender
     @receiver = @compliment.receiver
     @first_compliment = Compliment.first_compliment?(@sender, @receiver)
-    @relationship = Relationship.get_relationship(@sender, @receiver)
+    # @action_item = ActionItem.retrieve_from_complinment(@compliment)
+    @action_item = ActionItem.where(:complete => 'N').first
     @existing_contact = @receiver.existing_contact?(@sender)
     @timestamp = DateUtil.date_time_format(@compliment.created_at)
 		render :file => 'compliment_mailer/send_compliment.html.erb', :layout => 'compliment_mailer'

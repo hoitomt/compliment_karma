@@ -41,7 +41,7 @@ class Group < ActiveRecord::Base
 	def self.initialize_groups(user)
 		create_professional(user)
 		create_social(user)
-		create_declined(user)
+		# create_declined(user)
 		create_public(user)
 		create_only_me(user)
 		create_contacts(user)

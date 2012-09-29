@@ -28,6 +28,13 @@ class ActionItem < ActiveRecord::Base
            :originating_user_id => compliment.sender.id )
   end
 
+  def self.retrieve_from_compliment(compliment)
+  	return nil if compliment.blank?
+  	ActionItem.where(:recognition_type_id => RecognitionType.COMPLIMENT,
+  									 :recognition_id => compliment.id,
+  									 :complete => 'N').first
+  end
+
   def self.receiver_is_an_accepted_contact?(compliment)
   	contacts = compliment.sender.existing_contacts(compliment.receiver)
   	logger.info("Compliment Receiver: #{compliment.receiver.primary_email.email}")

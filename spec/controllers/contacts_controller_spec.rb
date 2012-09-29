@@ -11,8 +11,8 @@ describe ContactsController do
     controller.class.skip_before_filter :shell_authenticate
     @user2 = FactoryGirl.create(:user2)
     @user3 = FactoryGirl.create(:user3)
-    @user2.groups.count.should == 6
-    @user3.groups.count.should == 6
+    @user2.groups.count.should == 5
+    @user3.groups.count.should == 5
     test_sign_in(@user2)
   end
 
@@ -111,20 +111,6 @@ describe ContactsController do
       @user2.contacts.count.should == 1
     end
 
-    it "should ressurect a declined user" do
-      post :add_remove_contact, :user_id => @user2.id,
-                                :contact_group => {@declined_group.id.to_s => "yes"},
-                                :contact_user_id => @user3.id
-      @user2.reload
-      @user2.contacts.count.should == 1
-
-      post :add_remove_contact, :user_id => @user2.id,
-                                :contact_group => {@professional_group.id.to_s => "yes"},
-                                :contact_user_id => @user3.id
-      @user2.reload
-      @user2.contacts.count.should == 1
-    end
-
     it "should not blow up on null group_id" do
       post :add_remove_contact, :user_id => @user2.id,
                                 :group_id => nil,
@@ -194,8 +180,7 @@ describe ContactsController do
       post :decline, :user_id => @user2.id,
                      :id => @user2.contacts.last
       @user2.reload
-      @user2.contacts.count.should == 1
-      @user2.contacts.last.group.name.should == group.name
+      @user2.contacts.count.should == 0
     end
 
   end

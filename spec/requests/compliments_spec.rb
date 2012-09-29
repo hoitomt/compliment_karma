@@ -425,12 +425,12 @@ describe "Compliments" do
       user2.existing_contact?(user3).should be_false
     end
 
-    it "should create an action item if the sender is a declined contact" do
-      group = Group.get_declined_group(user3)
-      c = Contact.create(:user_id => user2.id, :group_id => group.id)
-      Compliment.create!(@attr)
-      user3.action_items.count.should == 1
-    end
+    # it "should create an action item if the sender is a declined contact" do
+    #   group = Group.get_declined_group(user3)
+    #   c = Contact.create(:user_id => user2.id, :group_id => group.id)
+    #   Compliment.create!(@attr)
+    #   user3.action_items.count.should == 1
+    # end
 
     it "should not create an action item if the sender is an accepted contact" do 
       group = Group.get_professional_group(user3)

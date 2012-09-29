@@ -30,6 +30,10 @@ Ck::Application.routes.draw do
         :as => :invitation_acceptance
   match "/email_api/compliment_new" => "email_api#compliment_new",
         :as => :compliment_new_user
+  match "/email_api/accept_compliment" => "email_api#accept_compliment",
+        :as => :accept_compliment
+  match "/email_api/decline_compliment" => "email_api#decline_compliment",
+        :as => :decline_compliment
   match "/recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
         :as => :show_recognition
   match "/relationships/:id/accept" => "relationships#accept", :as => :accept_relationship

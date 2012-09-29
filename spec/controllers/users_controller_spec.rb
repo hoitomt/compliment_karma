@@ -135,12 +135,12 @@ describe UsersController do
       describe "as viewed by visitor: User 3 viewing User 2s page" do
         before(:each) do
           test_sign_in(user3)
-          @user3_pro_group = Group.get_professional_group(user3)
-          @user3_public_group = Group.get_public_group(user3)
-          GroupRelationship.create!(:super_group_id => @user3_pro_group.id, 
-                                    :sub_group_id => @user3_pro_group.id)
-          GroupRelationship.create!(:super_group_id => @user3_public_group.id, 
-                                    :sub_group_id => @user3_pro_group.id)
+          @user2_pro_group = Group.get_professional_group(user2)
+          @user2_public_group = Group.get_public_group(user2)
+          GroupRelationship.create!(:super_group_id => @user2_pro_group.id, 
+                                    :sub_group_id => @user2_pro_group.id)
+          GroupRelationship.create!(:super_group_id => @user2_public_group.id, 
+                                    :sub_group_id => @user2_pro_group.id)
         end
 
         it "should have the correct number of Compliments in Karma Live" do

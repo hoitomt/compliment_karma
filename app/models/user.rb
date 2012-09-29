@@ -570,6 +570,7 @@ class User < ActiveRecord::Base
 
   # Checking if self is a contact in user's groups
   def existing_contact?(user)
+    return false if user.blank?
     self.existing_contacts(user).count > 0
   end
 

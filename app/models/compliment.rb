@@ -41,9 +41,9 @@ class Compliment < ActiveRecord::Base
   before_save :set_receiver_user_id
   before_save :remove_naughty_words
   before_create :set_visibility
-  after_create :send_fulfillment
   after_create :set_relationship
   after_create :create_action_item
+  after_create :send_fulfillment
   after_create :update_history
   after_create :create_tags
 
@@ -205,7 +205,10 @@ class Compliment < ActiveRecord::Base
   end
 
   def create_action_item
-    ActionItem.create_from_compliment(self)
+    if !self.sender.existing_contact?(self.receiver) || 
+      logger.info("Create Action Item")
+      ActionItem.create_from_compliment(self)
+    end
   end
   
   def set_compliment_status
@@ -557,4 +560,21 @@ class Compliment < ActiveRecord::Base
                           sender.id, receiver.id).count
     return c == 1
   end
+
+  def get_sender_group_from_compliment_type
+    if self.compliment_type.professional_sender?
+      return Group.get_professional_group(self.sender)
+    else
+      return Group.get_social_group(self.sender)
+    end
+  end
+
+  def get_receiver_group_from_compliment_type
+    if self.compliment_type.professional_receiver?
+      return Group.get_professional_group(self.receiver)
+    else
+      return Group.get_social_group(self.receiver)
+    end
+  end
+
 end

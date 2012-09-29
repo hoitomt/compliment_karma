@@ -12,8 +12,9 @@ class ComplimentMailer < ActionMailer::Base
     @sender = @compliment.sender
     @receiver = @compliment.receiver
     @first_compliment = Compliment.first_compliment?(@sender, @receiver)
-    @relationship = Relationship.get_relationship(@sender, @receiver)
-    @existing_contact = @receiver.existing_contact?(@sender)
+    @action_item = ActionItem.retrieve_from_compliment(@compliment)
+    logger.info("Action Item Blank? #{@action_item.blank?}")
+    @existing_contact = @sender.existing_contact?(@receiver)
     @timestamp = DateUtil.date_time_format(@compliment.created_at)
     mail to: compliment.receiver_email,
          subject: "You have received a compliment",
