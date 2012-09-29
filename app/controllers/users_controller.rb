@@ -141,7 +141,7 @@ class UsersController < ApplicationController
 
   def professional_profile
     @user = User.find_by_id(params[:id])
-    @valid_visitor = current_user.eligible_to_view_social?(@user)
+    @valid_visitor = current_user.eligible_to_view_professional?(@user)
     @user_is_a_company = @user.is_a_company?
     @professional_experiences = @user.experiences
     @current_experience = @user.experiences.first
