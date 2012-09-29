@@ -581,9 +581,6 @@ class User < ActiveRecord::Base
   def eligible_to_view_social?(target_user)
     # user must be in social group OR group must be visible to social OR social group must be public
     target_social_group = Group.get_social_group(target_user)
-    logger.info("Supers: #{target_social_group.super_group_relationships.collect{|sgr| sgr.super_group_id}}")
-    logger.info("Target Social Group #{target_social_group.id}: Group Owner: #{target_social_group.user_id}")
-    logger.info("Target Social Group is Public: #{target_social_group.has_public_visibility?}")
     return true if target_social_group.has_public_visibility?
     contacts = target_social_group.contacts
     contact_ids = contacts.collect{|c| c.id.to_i}

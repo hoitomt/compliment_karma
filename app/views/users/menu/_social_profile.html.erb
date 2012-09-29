@@ -1,26 +1,32 @@
 <div id="user-profile">
 	<div id="user-overview" class="right-two-thirds drop-box-white">
-		<div id="user-profile-details" class="first-row clearfix container">
-			<div class="personal-container clearfix">
-				<div class="demographics-container">
-					<div class="demographics">
-						<%= render 'follows/follows_button', :user => @user %>
+		<% if @valid_visitor %>
+			<div id="user-profile-details" class="first-row clearfix container">
+				<div class="personal-container clearfix">
+					<div class="demographics-container">
+						<div class="demographics">
+							<%= render 'follows/follows_button', :user => @user %>
+						</div>
+					</div>
+					<div class="rank-buttons">
+						<div class="profile-rank-image">
+							<%= complimenter_rank_image(@compliments_sent.to_i) %>
+						</div>
+						<div class="profile-rank-image">
+							<%= rewarder_rank_image(@rewards_sent.to_i) %>
+						</div>
 					</div>
 				</div>
-				<div class="rank-buttons">
-					<div class="profile-rank-image">
-						<%= complimenter_rank_image(@compliments_sent.to_i) %>
-					</div>
-					<div class="profile-rank-image">
-						<%= rewarder_rank_image(@rewards_sent.to_i) %>
-					</div>
-				</div>
+
+				<%= render 'users/menu/profile/profile_stats', :type => "social" %>
+
 			</div>
-
-			<%= render 'users/menu/profile/profile_stats', :type => "social" %>
-
-		</div>
-		<%= render 'users/menu/profile/achievements',
-							 :compliments_received_by_skill => @compliments_received_by_skill %>
+			<%= render 'users/menu/profile/achievements',
+								 :compliments_received_by_skill => @compliments_received_by_skill %>
+		<% else %>
+			<div style="padding: 20px;">
+				<h1><%= @user.first_last %> is not sharing the Social Profile</h1>
+			</div>
+		<% end %>
 	</div>
 </div>
