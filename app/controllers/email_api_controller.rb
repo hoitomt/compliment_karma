@@ -48,7 +48,7 @@ class EmailApiController < ApplicationController
   end
   
   def accept_compliment
-    action_item = ActionItem.find_by_id(params[:action_item_id])
+    action_item = ActionItem.find_by_id(params[:id])
     compliment = Compliment.find_by_id(@action_item.recognition_id)
     group = compliment.get_sender_group_from_compliment_type
     redirect_to accept_action_item_path(:user_id => action_item.user_id,
@@ -58,7 +58,7 @@ class EmailApiController < ApplicationController
   end
 
   def decline_compliment
-    action_item = ActionItem.find_by_id(params[:action_item_id])
+    action_item = ActionItem.find_by_id(params[:id])
     redirect_to decline_action_item_path(:user_id => action_item.user_id,
                                         :id => action_item.id,
                                         :originator_id => action_item.originating_user_id)
