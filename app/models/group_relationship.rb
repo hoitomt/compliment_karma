@@ -8,8 +8,10 @@ class GroupRelationship < ActiveRecord::Base
 	before_destroy :cannot_delete_relationship_to_self
 
 	def group_is_not_related_to_a_group_of_another_user
+		return if self.blank? || self.sub_group_id.blank? || self.super_group_id.blank?
 		u1 = self.sub_group.group_owner
 		u2 = self.super_group.group_owner
+		return if u1.blank? || u2.blank?
 		unless u1.id == u2.id
 			errors.add(:sub_group_id, 'The group cannot be associated with another user')
 		end

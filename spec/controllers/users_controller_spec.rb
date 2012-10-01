@@ -39,7 +39,7 @@ describe UsersController do
     
     describe "compliments" do
       before(:each) do
-        GroupRelationship.delete_all
+        # GroupRelationship.delete_all
         UpdateHistory.delete_all
         # Confirmed compliment
         # 10 compliments from User 2 to User 3
