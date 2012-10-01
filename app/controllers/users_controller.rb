@@ -29,13 +29,14 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    if !@user.on_whitelist?
-      flash[:notice] = "Thanks a lot for your interest. We 
-          have added you to our priority invite list. Once we have 
-          more invitations available, we will gladly email you one."
-      Invitation.create_invitation(@user.email)
-      redirect_to root_path
-    elsif @user.save
+    # if !@user.on_whitelist?
+    #   flash[:notice] = "Thanks a lot for your interest. We 
+    #       have added you to our priority invite list. Once we have 
+    #       more invitations available, we will gladly email you one."
+    #   Invitation.create_invitation(@user.email)
+    #   redirect_to root_path
+    # els
+    if @user.save
       @user.send_account_confirmation
       sign_in(@user, false)
       # redirect_to invite_coworkers_path

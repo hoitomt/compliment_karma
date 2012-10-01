@@ -1,0 +1,16 @@
+<div id="sub-title">
+	Request an invitation for a free account
+</div>
+<%= form_for(@invitation, :validate => true, :html => {:id => 'main-page-invitation'}) do |f| %>
+	<div id="data-entry" class="home-page-invite">
+		<div id="field">
+			<%= f.text_field :invite_email, 
+											 :align => 'middle', 
+											 :placeholder => 'Enter your email' %>
+		</div>
+	</div>
+	<div id="home-page-button">
+		<button type="submit", class="home-page-btn">Request Invite</button>
+	</div>
+	<div class="clear"></div>
+<% end %>
