@@ -8,6 +8,7 @@ class ComplimentsController < ApplicationController
     @compliment = Compliment.new
     @recipient = User.find_by_id(params[:recipient_id])
     @recipient_email = @recipient.email if @recipient
+    @recipient_name = @recipient.first_last
   end
 
   def create    
