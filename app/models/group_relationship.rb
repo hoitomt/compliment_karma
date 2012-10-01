@@ -3,6 +3,7 @@ class GroupRelationship < ActiveRecord::Base
 	belongs_to :super_group, :class_name => 'Group', :foreign_key => 'super_group_id'
 
 	validates_uniqueness_of :sub_group_id, :scope => [:super_group_id]
+	validates_presence_of :sub_group_id, :super_group_id
 	validate :group_is_not_related_to_a_group_of_another_user
 
 	before_destroy :cannot_delete_relationship_to_self

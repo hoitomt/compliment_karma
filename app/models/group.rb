@@ -44,6 +44,7 @@ class Group < ActiveRecord::Base
 		create_contacts(user)
 		create_professional(user)
 		create_social(user)
+		create_relationships(user)
 		# create_declined(user)
 	end
 
@@ -52,10 +53,6 @@ class Group < ActiveRecord::Base
 		pro_g = create(:name => 'Professional', :user_id => user.id, 
 									 :group_type => GroupType.Professional, :sort_order => sort_o,
 									 :display_ind => 'Y')
-		pub_g = get_public_group(user)
-		pro_g ||= get_professional_group(user)
-		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pro_g.id)
-		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pub_g.id)
 	end
 
 	def self.create_social(user)
@@ -63,10 +60,21 @@ class Group < ActiveRecord::Base
 		soc_g = create(:name => 'Social', :user_id => user.id, 
 									 :group_type => GroupType.Social, :sort_order => sort_o,
 									 :display_ind => 'Y')
+	end
+
+	def self.create_relationships(user)
 		pub_g = get_public_group(user)
-		soc_g ||= get_social_group(user)
-		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => soc_g.id)
+		con_g = get_contacts_group(user)
+		soc_g = get_social_group(user) 
+		pro_g = get_professional_group(user)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pro_g.id)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pub_g.id)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => soc_g.id)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => con_g.id)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => pro_g.id)
 		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => pub_g.id)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => soc_g.id)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => con_g.id)
 	end
 
 	def self.create_declined(user)
