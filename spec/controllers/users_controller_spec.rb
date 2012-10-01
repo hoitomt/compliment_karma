@@ -259,19 +259,20 @@ describe UsersController do
         end.should_not change(User, :count)
       end
       
-      it "should have the right title" do
-        post :create, :user => @attr
-        # response.should have_selector("title", :content => @new_title)
-        # Private Beta redirects to root
-        response.should redirect_to(root_url)
-      end
+      # Whitelist signup
+      # it "should have the right title" do
+      #   post :create, :user => @attr
+      #   # response.should have_selector("title", :content => @new_title)
+      #   # Private Beta redirects to root
+      #   response.should redirect_to(root_url)
+      # end
       
-      it "should render the 'new' page" do
-        post :create, :user => @attr
-        # response.should render_template('new')
-        # Private Beta
-        response.should render_template('invitation_mailer/beta_invitation')
-      end
+      # it "should render the 'new' page" do
+      #   post :create, :user => @attr
+      #   # response.should render_template('new')
+      #   # Private Beta
+      #   response.should render_template('invitation_mailer/beta_invitation')
+      # end
     end
     
     describe "success" do
@@ -490,21 +491,22 @@ describe UsersController do
       end.should change(User, :count).by(1)
     end
 
-    it "should allow signup for capital letter domain" do
-      lambda do
-        post :create, :user => @attr.merge(:email => 'nicole@Bancbox.com')
-      end.should_not change(User, :count).by(1)
-    end
+    # Whitelist Signup
+    # it "should allow signup for capital letter domain" do
+    #   lambda do
+    #     post :create, :user => @attr.merge(:email => 'nicole@Bancbox.com')
+    #   end.should_not change(User, :count).by(1)
+    # end
 
-    it "should not allow signup for non-whitelist" do
-      lambda do
-        post :create, :user => @attr.merge(:email => 'nicole@gmail.com')
-      end.should_not change(User, :count)
-    end
+    # it "should not allow signup for non-whitelist" do
+    #   lambda do
+    #     post :create, :user => @attr.merge(:email => 'nicole@gmail.com')
+    #   end.should_not change(User, :count)
+    # end
     
   end
 
-  describe "view social profile" do
+  describe "view profiles" do
     let(:user2) { FactoryGirl.create(:user2) }
     let(:user3) { FactoryGirl.create(:user3) }
 
@@ -538,6 +540,21 @@ describe UsersController do
       response.should be_success
     end
 
+    it "should allow visiblity to the social profile for self" do
+      c = @u3_soc_group.contacts
+      c.length == 0
+      get :social_profile, {:id => user2.id, :format => 'js'}
+      assigns(:valid_visitor).should == true
+      response.should be_success
+    end
+
+    it "should allow visiblity to the professional profile for self" do
+      c = @u3_soc_group.contacts
+      c.length == 0
+      get :professional_profile, {:id => user2.id, :format => 'js'}
+      assigns(:valid_visitor).should == true
+      response.should be_success
+    end
   end
 
 end

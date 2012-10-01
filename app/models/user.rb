@@ -581,6 +581,8 @@ class User < ActiveRecord::Base
   end
 
   def eligible_to_view_social?(target_user)
+    logger.info("target_user id: #{target_user.id} self id: #{self.id}")
+    return true if target_user.id.to_i == self.id
     # user must be in social group OR group must be visible to social OR social group must be public
     target_social_group = Group.get_social_group(target_user)
     return true if target_social_group.has_public_visibility?
@@ -590,6 +592,7 @@ class User < ActiveRecord::Base
   end
 
   def eligible_to_view_professional?(target_user)
+    return true if target_user.id == self.id
     # user must be in professional group OR group must be visible to professional OR pro group must be public
     target_professional_group = Group.get_professional_group(target_user)
     return true if target_professional_group.has_public_visibility?
