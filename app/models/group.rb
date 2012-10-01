@@ -49,14 +49,22 @@ class Group < ActiveRecord::Base
 
 	def self.create_professional(user)
 		sort_o = define_sort_order('Professional')
-		create(:name => 'Professional', :user_id => user.id, 
-					 :group_type => GroupType.Professional, :sort_order => sort_o)
+		pro_g = create(:name => 'Professional', :user_id => user.id, 
+									 :group_type => GroupType.Professional, :sort_order => sort_o,
+									 :display_ind => 'Y')
+		pub_g = get_public_group(user)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pro_g.id)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pub_g.id)
 	end
 
 	def self.create_social(user)
 		sort_o = define_sort_order('Social')
-		create(:name => 'Social', :user_id => user.id, 
-					 :group_type => GroupType.Social, :sort_order => sort_o)
+		soc_g = create(:name => 'Social', :user_id => user.id, 
+									 :group_type => GroupType.Social, :sort_order => sort_o,
+									 :display_ind => 'Y')
+		pub_g = get_public_group(user)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => soc_g.id)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => pub_g.id)
 	end
 
 	def self.create_declined(user)

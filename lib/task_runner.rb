@@ -23,6 +23,21 @@ class TaskRunner
 		end
 	end
 
+	def self.user_create_more_groups_and_relationships(user)
+		pro_g = Group.get_professional_group(user)
+		soc_g = Group.get_social_group(user)
+		pub_g = Group.create(:name => 'Public', :user_id => user.id)
+		only_me_g = Group.create(:name => 'Only Me', :user_id => user.id)
+		contacts_g = Group.create(:name => 'Contacts', :user_id => user.id)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pro_g.id)
+		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pub_g.id)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => soc_g.id)
+		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => pub_g.id)
+		GroupRelationship.create(:sub_group_id => pub_g.id, :super_group_id => pub_g.id)
+		GroupRelationship.create(:sub_group_id => only_me_g.id, :super_group_id => only_me_g.id)
+		GroupRelationship.create(:sub_group_id => contacts_g.id, :super_group_id => contacts_g.id)
+	end
+
 	# Create the user groups and assign relationships to groups
 	def self.create_groups_and_migrate
 		@users = User.all
