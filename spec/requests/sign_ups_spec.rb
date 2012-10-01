@@ -141,8 +141,11 @@ describe "SignUps" do
       # user = User.last
       visit new_account_confirmation_url(:confirm_id => @user.new_account_confirmation_token)
       page.should have_selector('title', :content => 'Account Confirmation')
-      click_link 'profile'
+      # click_link 'profile'
       user = User.find(@user.id)
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
+      click_button ("Log In")
       user.account_status.should eq(AccountStatus.CONFIRMED)
       page.should have_selector('title', :content => "Profile")
       response.should_not have_selector('a', :content => "Resend Link")
@@ -159,10 +162,14 @@ describe "SignUps" do
       user = User.find(@user.id)
       visit new_account_confirmation_url(:confirm_id => user.new_account_confirmation_token)
       page.should have_selector('title', :content => 'Account Confirmation')
-      click_link 'profile'
-      page.should have_selector('title', :content => "Profile")
-      response.should_not have_selector('a', :content => "Resend Link")
-      user = User.last
+      # click_link 'profile'
+      # page.should have_selector('title', :content => "Profile")
+      # response.should_not have_selector('a', :content => "Resend Link")
+      # user = User.last
+      user.reload
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
+      click_button ("Log In")
       user.account_status.should eq(AccountStatus.CONFIRMED)
       c_post = Compliment.find(c_pre.id)
       c_post.compliment_status.should eq(ComplimentStatus.ACTIVE)

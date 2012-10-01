@@ -18,6 +18,8 @@ class EmailApiController < ApplicationController
         redirect_to root_path
       end
     end
+    sign_out
+    redirect_to login_path
   end
 
   def new_email_confirmation

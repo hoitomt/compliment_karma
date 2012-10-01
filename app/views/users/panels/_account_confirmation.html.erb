@@ -5,7 +5,8 @@
 			<%= link_to 'Resend Link', 
 									resend_new_account_confirmation_path(@user),
 									:style => "color: #ffffff; text-decoration: underline;" %><br />
-			<%= link_to 'Change Email Address', '#',
-									:style => "color: #ffffff; text-decoration: underline;" %>
+			<%= link_to 'Change Email Address', user_user_emails_path(@user),
+									:style => "color: #ffffff; text-decoration: underline;",
+									:remote => true %>
 	</div>
 <% end %>

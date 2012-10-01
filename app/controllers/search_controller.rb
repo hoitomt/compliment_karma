@@ -22,11 +22,12 @@ class SearchController < ApplicationController
     if @search_string.blank?
       @results = nil
     else
-      if current_user.is_site_admin?
-        @results = User.search(@search_string)
-      else
-        @results = User.search_with_domain(@search_string, current_user.try(:domain))
-      end
+      @results = User.search(@search_string)
+      # if current_user.is_site_admin?
+      #   @results = User.search(@search_string)
+      # else
+      #   @results = User.search_with_domain(@search_string, current_user.try(:domain))
+      # end
     end
 	end
 
