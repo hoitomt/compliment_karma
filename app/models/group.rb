@@ -39,12 +39,12 @@ class Group < ActiveRecord::Base
 	end
 
 	def self.initialize_groups(user)
-		create_professional(user)
-		create_social(user)
-		# create_declined(user)
 		create_public(user)
 		create_only_me(user)
 		create_contacts(user)
+		create_professional(user)
+		create_social(user)
+		# create_declined(user)
 	end
 
 	def self.create_professional(user)
@@ -53,6 +53,7 @@ class Group < ActiveRecord::Base
 									 :group_type => GroupType.Professional, :sort_order => sort_o,
 									 :display_ind => 'Y')
 		pub_g = get_public_group(user)
+		pro_g ||= get_professional_group(user)
 		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pro_g.id)
 		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pub_g.id)
 	end
@@ -63,6 +64,7 @@ class Group < ActiveRecord::Base
 									 :group_type => GroupType.Social, :sort_order => sort_o,
 									 :display_ind => 'Y')
 		pub_g = get_public_group(user)
+		soc_g ||= get_social_group(user)
 		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => soc_g.id)
 		GroupRelationship.create(:sub_group_id => soc_g.id, :super_group_id => pub_g.id)
 	end
