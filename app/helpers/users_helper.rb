@@ -184,7 +184,8 @@ module UsersHelper
                                            :remote => true
       elsif link_text =~ /Receiver/
         receiver = User.find_by_id(feed_item.item_object.receiver_user_id)
-        return "Colleague" if receiver.blank? || current_user?(receiver)
+        return "" if current_user?(receiver)
+        return "Colleague" if receiver.blank?
         return link_to receiver.full_name,
                         new_compliment_path(:recipient_id => receiver.id),
                                             :remote => true

@@ -453,6 +453,7 @@ describe Compliment do
       # User 2 is following Sears User.  Sears User sent compliment to Group User
       describe "when professional group is visible to public and professional" do
         before(:each) do
+          GroupRelationship.delete_all
           GroupRelationship.create!(:super_group_id => @sears_public_group.id, 
                                     :sub_group_id => @sears_pro_group.id)
           @compliment.groups.count.should == 2 # Should be pro and public
@@ -513,6 +514,7 @@ describe Compliment do
 
       describe "Professional group is visible only to professional" do
         before(:each) do
+          GroupRelationship.delete_all
           GroupRelationship.create!(:super_group_id => @sears_pro_group.id, 
                                     :sub_group_id => @sears_pro_group.id)
           @sears_pro_group.super_group_relationships.count.should == 1

@@ -12,6 +12,7 @@ describe GroupRelationship do
 	end
 
 	it "should create a new group relationship" do
+		GroupRelationship.delete_all
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @soc.id)
 		@pro.sub_group_relationships.count.should == 1
 		@pro.super_group_relationships.count.should == 0
@@ -20,12 +21,14 @@ describe GroupRelationship do
 	end
 
 	it "should allow a group to be a sub of itself" do
+		GroupRelationship.delete_all
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @pro.id)
 		@pro.sub_group_relationships.count.should == 1
 		@pro.super_group_relationships.count.should == 1
 	end
 
 	it "should not allow a group to have the same sub group more than once" do
+		GroupRelationship.delete_all
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @soc.id)
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @soc.id)
 		@pro.sub_group_relationships.count.should == 1
@@ -33,6 +36,7 @@ describe GroupRelationship do
 	end
 
 	it "should allow the same sub group to be assigned to different super groups" do
+		GroupRelationship.delete_all
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @new.id)
 		gr = GroupRelationship.create(:super_group_id => @soc.id, :sub_group_id => @new.id)
 		@new.super_group_relationships.count.should == 2
@@ -41,6 +45,7 @@ describe GroupRelationship do
 	end
 
 	it "should not allow a group relationship between groups of different users" do
+		GroupRelationship.delete_all
 		soc2 = Group.get_social_group(user2)
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => soc2.id)
 		@pro.sub_group_relationships.count.should == 0
@@ -48,6 +53,7 @@ describe GroupRelationship do
 	end
 
 	it "should not allow self relationship to be destroyed" do
+		GroupRelationship.delete_all
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @pro.id)
 		@pro.sub_group_relationships.count.should == 1
 		gr.destroy
@@ -55,6 +61,7 @@ describe GroupRelationship do
 	end
 
 	it "should destroy the relationship" do
+		GroupRelationship.delete_all
 		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @pro.id)
 		gr2 = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => @soc.id)
 		@pro.sub_group_relationships.count.should == 2
