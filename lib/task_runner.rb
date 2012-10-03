@@ -4,6 +4,33 @@ class TaskRunner
 		# create_groups_and_migrate
 	end
 
+	def self.find_user_relationships(user_id)
+		h = {}
+		u = User.find_by_id(user_id)
+		h['User Exists'] = !u.blank?
+		return h if u.blank?
+		h['Has Email addresses'] = 	!u.email_addresses.blank?
+		h['Has Groups'] = 					!u.groups.blank?
+		h['Sent Compliments'] = 		!u.compliments_sent.blank?
+		h['Received Compliments'] = !u.compliments_received.blank?
+		h['Following Users'] = 			!u.followed_users.blank?
+		h['Has Followers'] = 				!u.followers.blank?
+		h['Has Companies'] = 				!u.companies.blank?
+		h['Presented Rewards'] = 		!u.rewards_presented.blank?
+		h['Received Rewards'] = 		!u.rewards_received.blank?
+		h['Has Accomplishments'] = 	!u.accomplishments.blank?
+		h['Has Likes'] = 						!u.ck_likes.blank?
+		h['Is employee'] = 					!u.company_departments.blank?
+		h['Has Experiences'] = 			!u.experiences.blank?
+		h['Has Action Items'] = 		!u.action_items.blank?
+		h['Has memberships'] = 			!u.memberships.blank?
+		return h
+	end
+
+	def self.delete_user(user_id)
+
+	end
+
 	# Create the public, only me, and contacts groups and associations
 	def self.create_more_groups_and_relationships
 		@users = User.all

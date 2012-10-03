@@ -3,28 +3,36 @@ class User < ActiveRecord::Base
   # User Representation of the company
   belongs_to :company
   # Users that are company application administrators
-  has_many :company_users
-  has_many :companies, :through => :company_users
-  has_many :rewards_presented, :class_name => 'Reward', :foreign_key => 'presenter_id'
-  has_many :rewards_received, :class_name => 'Reward', :foreign_key => 'receiver_id'
-  has_many :compliments_sent, :class_name => 'Compliment', :foreign_key => 'sender_user_id'
-  has_many :compliments_received, :class_name => 'Compliment', :foreign_key => 'receiver_user_id'
-  has_many :followed_users, :class_name => 'Follow', :foreign_key => 'follower_user_id'
-  has_many :followers, :class_name => 'Follow', :foreign_key => 'subject_user_id'
-  has_many :user_accomplishments
+  has_many :company_users, :dependent => :delete_all
+  has_many :companies, :through => :company_users, :dependent => :delete_all
+  has_many :rewards_presented, :class_name => 'Reward', 
+                               :foreign_key => 'presenter_id', :dependent => :delete_all
+  has_many :rewards_received, :class_name => 'Reward', 
+                              :foreign_key => 'receiver_id', :dependent => :delete_all
+  has_many :compliments_sent, :class_name => 'Compliment', 
+                              :foreign_key => 'sender_user_id', :dependent => :delete_all
+  has_many :compliments_received, :class_name => 'Compliment', 
+                                  :foreign_key => 'receiver_user_id', :dependent => :delete_all
+  has_many :followed_users, :class_name => 'Follow', 
+                            :foreign_key => 'follower_user_id', :dependent => :delete_all
+  has_many :followers, :class_name => 'Follow', 
+                       :foreign_key => 'subject_user_id', :dependent => :delete_all
+  has_many :user_accomplishments, :dependent => :delete_all
   has_many :accomplishments, :through => :user_accomplishments
-  has_many :ck_likes
-  has_many :company_department_users
+  has_many :ck_likes, :dependent => :delete_all
+  has_many :company_department_users, :dependent => :delete_all
   has_many :company_departments, :through => :company_department_users
-  has_many :experiences
-  has_many :email_addresses, :class_name => 'UserEmail', :foreign_key => 'user_id'
+  has_many :experiences, :dependent => :delete_all
+  has_many :email_addresses, :class_name => 'UserEmail', 
+                             :foreign_key => 'user_id', :dependent => :delete_all
   has_one  :primary_email, :class_name => 'UserEmail', 
                            :foreign_key => 'user_id', 
                            :conditions => "primary_email = 'Y'"
-  has_many :action_items
-  has_many :groups
+  has_many :action_items, :dependent => :delete_all
+  has_many :groups, :dependent => :delete_all
   has_many :contacts, :through => :groups
-  has_many :memberships, :class_name => 'Contact', :foreign_key => 'user_id'
+  has_many :memberships, :class_name => 'Contact', 
+                         :foreign_key => 'user_id', :dependent => :delete_all
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned
