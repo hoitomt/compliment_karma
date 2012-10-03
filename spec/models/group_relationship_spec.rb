@@ -46,10 +46,16 @@ describe GroupRelationship do
 
 	it "should not allow a group relationship between groups of different users" do
 		GroupRelationship.delete_all
+		# gr = GroupRelationship.all
+		pro_g = Group.get_professional_group(user)
 		soc2 = Group.get_social_group(user2)
-		gr = GroupRelationship.create(:super_group_id => @pro.id, :sub_group_id => soc2.id)
-		@pro.sub_group_relationships.count.should == 0
-		soc2.super_group_relationships.count.should == 0
+		# soc2.super_group_relationships.count.should == 0
+		gr = GroupRelationship.create(:super_group_id => pro_g.id, :sub_group_id => soc2.id)
+		puts "Pro Group Owner: #{pro_g.group_owner.first_last} - #{pro_g.group_owner.id}"
+		puts "Soc Group Owner: #{soc2.group_owner.first_last} - #{soc2.group_owner.id}"
+		gr = GroupRelationship.where('sub_group_id = ? AND super_group_id = ?', soc2.id, pro_g.id)
+		pro_g.sub_group_relationships.count.should == 0
+		gr.count.should == 0
 	end
 
 	it "should not allow self relationship to be destroyed" do
