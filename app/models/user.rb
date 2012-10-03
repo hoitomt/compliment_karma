@@ -278,6 +278,8 @@ class User < ActiveRecord::Base
       return ComplimentStatus.ACTIVE
     when ComplimentStatus.PENDING_RECEIVER_REGISTRATION
       return ComplimentStatus.PENDING_RECEIVER_CONFIRMATION
+    when ComplimentStatus.ACTIVE
+      return ComplimentStatus.ACTIVE
     else
       return ComplimentStatus.ACTIVE
     end
