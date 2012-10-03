@@ -46,6 +46,7 @@ class Compliment < ActiveRecord::Base
   after_create :send_fulfillment
   after_create :update_history
   after_create :create_tags
+  after_create :add_accomplishment
 
   default_scope :order => "created_at DESC"
   
@@ -299,6 +300,22 @@ class Compliment < ActiveRecord::Base
   def create_tags
     create_sender_tag
     create_receiver_tag
+  end
+
+  def add_accomplishment
+    sender = self.sender
+    case sender.compliments_sent.count
+    when 1
+      Accomplishment.add_accomplishment(self.sender, Accomplishment.LEVEL_1_COMPLIMENTER.id)
+    when 50
+      Accomplishment.add_accomplishment(self.sender, Accomplishment.LEVEL_2_COMPLIMENTER.id)
+    when 200
+      Accomplishment.add_accomplishment(self.sender, Accomplishment.LEVEL_3_COMPLIMENTER.id)
+    when 500
+      Accomplishment.add_accomplishment(self.sender, Accomplishment.LEVEL_4_COMPLIMENTER.id)
+    when 1000
+      Accomplishment.add_accomplishment(self.sender, Accomplishment.LEVEL_5_COMPLIMENTER.id)
+    end
   end
 
   def create_sender_tag

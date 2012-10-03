@@ -108,7 +108,7 @@ describe UsersController do
         it "should have the correct number of Compliments in Karma Live" do
           # should see followed
           get :show, :id => user2
-          assigns(:karma_live_items_count).should eq(30)
+          assigns(:karma_live_items_count).should eq(31)
           c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
           c.count.should eq(10)
           cx = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user.email)
@@ -117,9 +117,9 @@ describe UsersController do
 
         it "should create the correct number of Update Histories" do
           uh2 = UpdateHistory.find_all_by_user_id(user2.id)
-          uh2.count.should eq(10)
+          uh2.count.should eq(11)
           uh3 = UpdateHistory.find_all_by_user_id(user3.id)
-          uh3.count.should eq(11)
+          uh3.count.should eq(12)
         end
 
         # it "should have the correct entries in menu" do
@@ -148,7 +148,7 @@ describe UsersController do
         it "should have the correct number of Compliments in Karma Live" do
           # should see followed
           get :show, :id => user2
-          assigns(:karma_live_items_count).should eq(20)
+          assigns(:karma_live_items_count).should eq(21)
           c = Compliment.where('sender_email = ? and receiver_email = ?', user3.email, user2.email)
           c.count.should eq(10)
           cu = Compliment.where('sender_email = ? and receiver_email = ? and compliment_status_id = ?', 
@@ -159,9 +159,9 @@ describe UsersController do
 
         it "should create the correct number of Update Histories" do
           uh2 = UpdateHistory.find_all_by_user_id(user2.id)
-          uh2.count.should eq(10)
+          uh2.count.should eq(11)
           uh3 = UpdateHistory.find_all_by_user_id(user3.id)
-          uh3.count.should eq(11)
+          uh3.count.should eq(12)
         end
 
         it "should have the correct number of compliments after paging" do

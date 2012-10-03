@@ -51,8 +51,6 @@ describe GroupRelationship do
 		soc2 = Group.get_social_group(user2)
 		# soc2.super_group_relationships.count.should == 0
 		gr = GroupRelationship.create(:super_group_id => pro_g.id, :sub_group_id => soc2.id)
-		puts "Pro Group Owner: #{pro_g.group_owner.first_last} - #{pro_g.group_owner.id}"
-		puts "Soc Group Owner: #{soc2.group_owner.first_last} - #{soc2.group_owner.id}"
 		gr = GroupRelationship.where('sub_group_id = ? AND super_group_id = ?', soc2.id, pro_g.id)
 		pro_g.sub_group_relationships.count.should == 0
 		gr.count.should == 0

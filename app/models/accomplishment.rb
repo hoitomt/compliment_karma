@@ -64,6 +64,10 @@ class Accomplishment < ActiveRecord::Base
     find_by_name('Level 5 Rewarder')
   end
 
+  def self.add_accomplishment(user, acc_name_id)
+    UserAccomplishment.create(:user_id => user.id, :accomplishment_id => acc_name_id)
+  end
+
   def self.badge(count)
     if count >= Accomplishment.GRAND_MASTER_BADGE.threshold
       return Accomplishment.GRAND_MASTER_BADGE

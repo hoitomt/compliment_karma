@@ -68,6 +68,17 @@ describe Compliment do
     c = Compliment.new(@attr.merge(:comment => long_comment))
     c.should_not be_valid
   end
+  
+  it "should add an accomplishment for the sender" do
+    Compliment.create!(@attr)
+    a = user.accomplishments
+    a.count.should == 1
+    a.first.name.should == Accomplishment.LEVEL_1_COMPLIMENTER.name
+    u = UpdateHistory.where(:user_id => user.id, 
+                            :recognition_id => a.first.id,
+                            :update_history_type_id => UpdateHistoryType.Earned_an_Accomplishment.id)
+    u.count.should == 1
+  end
 
   describe "confirmed user to confirmed user" do
     let(:user2){FactoryGirl.create(:user2)}
