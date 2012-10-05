@@ -47,7 +47,29 @@ module ApplicationHelper
     end
   end
 
-  def get_user_photo_thumb(user)
+  def get_update_user_full_name(item, user=nil)
+    if user.blank?
+      if item && item.recognition_type_id == RecognitionType.ACCOMPLISHMENT.id
+        user = item.user
+      else
+        user = item.originating_user
+      end
+    end
+    if user
+      return user.full_name
+    else
+      return "Unknown User"
+    end
+  end
+
+  def get_user_photo_thumb(item, user=nil)
+    if user.blank?
+      if item && item.recognition_type_id == RecognitionType.ACCOMPLISHMENT.id
+        user = item.user
+      else
+        user = item.originating_user
+      end
+    end
     if user
       image_tag(user.photo.url(:thumb))
     else

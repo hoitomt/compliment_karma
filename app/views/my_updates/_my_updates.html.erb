@@ -11,16 +11,17 @@
 		<ul id="my-update-content">
 			<% @my_update_items.each do |item| %>
 				<% originator = User.find_by_id(item.originating_user_id) %>
+				<% item_user = User.find_by_id(item.user_id) %>
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
 					<%= link_to user_path(:id => originator.id, :update_history_id => item.id) do %>
 						<li class="clearfix <%= set_read_status_css(item) %> my-updates-list" 
 							  style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-all-item-image">
-								<%= get_user_photo_thumb(originator) %>
+								<%= get_user_photo_thumb(item) %>
 							</div>
 							<div class="my-update-item-note">
 								<p class="originator-note">
-									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+									<strong><%= get_update_user_full_name(item) %></strong> <%= item.note %>
 								</p>
 								<%= render 'my_updates/update_compliments_all', :item => item %>
 							</div>
@@ -35,11 +36,11 @@
 						<li class="clearfix <%= set_read_status_css(item) %> my-updates-list" 
 								style="border-left: 2px solid #DCF1EF; margin-left: -2px">
 							<div class="my-update-all-item-image">
-								<%= get_user_photo_thumb(originator) %>
+								<%= get_user_photo_thumb(item) %>
 							</div>
 							<div class="my-update-item-note clearfix">
 								<p class="originator-note">
-									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+									<strong><%= get_update_user_full_name(item) %></strong> <%= item.note %>
 								</p>
 								<%= render 'my_updates/update_compliments_all', :item => item %>
 							</div>

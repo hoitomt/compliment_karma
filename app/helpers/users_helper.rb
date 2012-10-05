@@ -408,8 +408,8 @@ module UsersHelper
   end
 
   def get_accomplishment_image(id)
-    ua = UserAccomplishment.find_by_id(id)
-    return image_tag(ua.accomplishment.image_mini)
+    a = Accomplishment.find_by_id(id)
+    return image_tag(a.try(:image_mini))
   end
 
   def social_url(feed_item)

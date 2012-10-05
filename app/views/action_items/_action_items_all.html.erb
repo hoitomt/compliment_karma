@@ -9,11 +9,11 @@
 						<li class="clearfix my-updates-list" 
 							  style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-all-item-image">
-								<%= get_user_photo_thumb(originator) %>
+								<%= get_user_photo_thumb(item) %>
 							</div>
 							<div class="my-update-item-note">
 								<p class="originator-note">
-									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+									<strong><%= get_update_user_full_name(item) %></strong> <%= item.note %>
 								</p>
 								<%= render 'my_updates/update_compliments_all', :item => item %>
 							</div>
@@ -28,11 +28,11 @@
 						<li class="clearfix my-updates-list" 
 								style="border-left: 2px solid #DCF1EF; margin-left: -2px">
 							<div class="my-update-all-item-image">
-								<%= get_user_photo_thumb(originator) %>
+								<%= get_user_photo_thumb(item) %>
 							</div>
 							<div class="my-update-item-note clearfix">
 								<p class="originator-note">
-									<strong><%= get_user_full_name(originator) %></strong> <%= item.note %>
+									<strong><%= get_update_user_full_name(item) %></strong> <%= item.note %>
 								</p>
 								<%= render 'my_updates/update_compliments_all', :item => item %>
 							</div>

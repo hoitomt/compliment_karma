@@ -1,5 +1,7 @@
 class UpdateHistory < ActiveRecord::Base
 	belongs_to :update_history_type
+  belongs_to :user
+  belongs_to :originating_user, :class_name => "User", :foreign_key => 'originating_user_id'
   default_scope :order => 'created_at DESC'
 
   def self.get_recent_item_count(user)
