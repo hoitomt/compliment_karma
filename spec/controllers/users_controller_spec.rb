@@ -560,4 +560,10 @@ describe UsersController do
     end
   end
 
+  describe "view my updates" do 
+    let(:user2) { FactoryGirl.create(:user2) }
+    let(:user3) { FactoryGirl.create(:user3) }
+    
+  end
+
 end

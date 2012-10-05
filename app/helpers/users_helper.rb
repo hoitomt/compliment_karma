@@ -355,7 +355,7 @@ module UsersHelper
   def ajax_helpers_accomplishment(feed_item, count)
     html = ajax_helpers_standard(feed_item, count)
   	html += hidden_field_tag "recognition-type-id", RecognitionType.ACCOMPLISHMENT.id
-    html += hidden_field_tag "user-id", feed_item.item_object.user_id
+    html += hidden_field_tag "user-id", @user.id
   end
 
   def action_item_image(item)
