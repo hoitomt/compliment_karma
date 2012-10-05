@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   before_filter :get_confirmation_status, :except => [:new, :create]
   before_filter :confirmed_user, :except => [:new, :create, :new_account_confirmation]
   before_filter :hide_unconfirmed_user, :only => [:show]
-  before_filter :verify_privacy, :except => [:new, :create, :new_account_confirmation]
+  # before_filter :verify_privacy, :except => [:new, :create, :new_account_confirmation]
   before_filter :set_static_vars
   before_filter :set_compliment_panel, 
                 :only => [:show, :my_updates, :my_updates_all, :professional_profile,
