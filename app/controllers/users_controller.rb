@@ -502,7 +502,7 @@ class UsersController < ApplicationController
         accomplishments = UserAccomplishment.accomplishments_from_followed(@user)
       else
         rewards = Reward.all_completed_rewards_in_visitor_domain(@user, current_user)
-        accomplishments = @user.accomplishments
+        accomplishments = @user.user_accomplishments
       end
       FeedItem.construct_items(compliments, rewards, accomplishments)
     end
