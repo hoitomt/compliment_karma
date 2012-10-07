@@ -33,6 +33,15 @@ module ApplicationHelper
   
   def get_image(path)
     if path
+      image_tag(path, :size => "60x60")
+    else
+      image_tag('/photos/thumb/missing.png')
+    end 
+  end
+
+  def get_accomplishment_image(path)
+    logger.info("Path: #{path}")
+    if path
       image_tag(path)
     else
       image_tag('/photos/thumb/missing.png')

@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
                            :foreign_key => 'user_id', 
                            :conditions => "primary_email = 'Y'"
   has_many :action_items, :dependent => :delete_all
+  has_many :originated_action_items, :class_name => 'ActionItem',
+                                     :foreign_key => 'originating_user_id',
+                                     :dependent => :delete_all
   has_many :groups, :dependent => :delete_all
   has_many :contacts, :through => :groups
   has_many :memberships, :class_name => 'Contact', 

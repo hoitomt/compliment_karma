@@ -521,7 +521,7 @@ module UsersHelper
       else
         return link_to 'Add location', 
                        edit_from_profile_path(user), 
-                       :class => 'js-click-update-user ul_hover',
+                       :class => 'js-click-update-user ul_hover dark',
                        :remote => true
       end
     end

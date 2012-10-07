@@ -85,6 +85,7 @@ class UpdateHistory < ActiveRecord::Base
   end
 
   def self.Like_Accomplishment(ck_like, current_user_id)
+    logger.info(ck_like.recognition_id)
     a = UserAccomplishment.find_by_id(ck_like.recognition_id)
     add_update_history_no_duplicates( a.user_id,
                         UpdateHistoryType.Like_Accomplishment.id,

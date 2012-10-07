@@ -23,7 +23,9 @@ $top-row-height: 245px;
 	.rank-buttons { position: absolute; bottom: 0px; margin-left: 10px; }
 	.profile-rank-image { margin: 0 0 0 10px; padding: 5px 0 0 0; float: left;}
 }
-.profile-button { float: left;}
+.profile-button { float: left; 
+	// a {color: #fff; }
+}
 .primary-stats {
 	width: 225px;
 	height: $top-row-height;

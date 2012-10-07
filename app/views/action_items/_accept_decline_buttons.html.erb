@@ -1,3 +1,4 @@
+<% originator_id = originator.blank? ? '' : originator.id %>
 <div class="clear"></div>
 <div style="margin: 10px 0 5px 0;">
 	<div style="margin-left: 60px;">
@@ -5,7 +6,7 @@
 			<%= link_to 'Accept', 
 									pre_accept_action_item_path(:user_id => user.id, 
 																							:id => item.id, 
-																							:originator_user_id => originator.id), 
+																							:originator_user_id => originator_id), 
 									:id => item.id,
 									:class => 'handle-action-item accept-action-item',
 									:remote => true %>
@@ -14,7 +15,7 @@
 			<%= link_to 'Decline', 
 									decline_action_item_path(:user_id => user.id, 
 																					 :id => item.id, 
-																					 :originator_user_id => originator.id),
+																					 :originator_user_id => originator_id),
 									:class => 'handle-action-item decline-action-item' %>
 		</div>
 		<div class="clear"></div>
