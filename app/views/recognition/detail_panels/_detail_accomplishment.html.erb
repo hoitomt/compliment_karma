@@ -19,9 +19,11 @@
 	<div class="action accomplishment-action">Earns</div>
 </div>
 <div class="right-column">
-	<div class="image-function">
-		<%= image_tag @accomplishment.image_thumb %>
-		<div class="functions">
+	<div class="image-function detail-view-accomplishment">
+		<div style="padding: 60px 0 130px 0; border-bottom:2px solid #E9E9E9">
+			<%= image_tag @accomplishment.image_thumb %>
+		</div>
+		<div>
 			<h3><%= @accomplishment.name %></h3>
 		</div>
 	</div>
