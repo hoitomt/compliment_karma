@@ -32,8 +32,15 @@
 			<ul id="detail-comments-list-js">
 				<%= render 'recognition_comments/comment_list', :comments => @comments %>
 			</ul>
+
+			<% if @recognition_type_id == @recognition_type_accomplishment_id
+				   data_for_recognition_id = @user_accomplishment.id 
+				 else
+				 	 data_for_recognition_id = @recognition_id
+			 	 end
+			%>
 			<%= render :partial => 'recognition_comments/new',
-								 :locals => { :recognition_id => @recognition_id,
+								 :locals => { :recognition_id => data_for_recognition_id,
 								 							:recognition_type_id => @recognition_type_id }  %>
 		</div>
 		<div class="item-likes clearfix">

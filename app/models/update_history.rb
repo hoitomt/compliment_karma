@@ -146,7 +146,7 @@ class UpdateHistory < ActiveRecord::Base
   end  
   
   def self.Comment_on_Accomplishment(recognition_comment, current_user_id)
-    a = UserAccomplishment.find_by_accomplishment_id(recognition_comment.recognition_id)
+    a = UserAccomplishment.find_by_id(recognition_comment.recognition_id)
     add_update_history( a.user_id,
                         UpdateHistoryType.Comment_on_Accomplishment.id,
                         recognition_comment.recognition_type_id,
