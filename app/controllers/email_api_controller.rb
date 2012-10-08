@@ -8,6 +8,7 @@ class EmailApiController < ApplicationController
       logger.info("User is logged in")
       current_user.confirm_account
       Compliment.user_confirmation(current_user)
+      flash[:notice] = ("Thank you for confirming your ComplimentKarma account. Please log in.")
     else
       logger.info("User is not logged in")
       logger.info("User ID: #{@user.id} ") if @user

@@ -351,7 +351,7 @@ class UsersController < ApplicationController
     first_name = "#{@user.first_name} " || ""
     middle_name = "#{@user.middle_name} " || ""
     last_name = "#{@user.last_name} " || ""
-    @title = "#{first_name}#{middle_name}#{last_name}Profile"
+    @title = "#{first_name}#{middle_name}#{last_name}"
   end
 
   def set_detail_variables

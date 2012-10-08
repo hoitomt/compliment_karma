@@ -19,6 +19,7 @@ AccountStatus.create(:name => 'Terminated') if AccountStatus.find_by_name('Termi
 ComplimentStatus.create(:name => 'Pending Receiver Registration')
 ComplimentStatus.create(:name => 'Pending Receiver Confirmation')
 ComplimentStatus.create(:name => 'Active')
+ComplimentStatus.create(:name => 'Declined')
 ComplimentStatus.create(:name => 'Withdrawn')
 
 RewardStatus.create(:name => 'Pending')

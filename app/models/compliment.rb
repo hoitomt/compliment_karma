@@ -34,12 +34,12 @@ class Compliment < ActiveRecord::Base
   validate :not_short_term_duplicate, :on => :create
   
   before_save :set_sender
-  before_save :set_compliment_status
   before_save :parse_sender_domain
   before_save :parse_receiver_domain
   before_save :set_sender_user_id
   before_save :set_receiver_user_id
   before_save :remove_naughty_words
+  before_create :set_compliment_status
   before_create :set_visibility
   after_create :set_relationship
   after_create :create_action_item
@@ -255,6 +255,12 @@ class Compliment < ActiveRecord::Base
 
   def remove_naughty_words
     self.comment = Blacklist.clean_string(self.comment)
+  end
+
+  def decline
+    logger.info("Decline Compliment")
+    self.compliment_status = ComplimentStatus.DECLINED
+    self.save!
   end
 
   def self.user_confirmation(user)

@@ -39,8 +39,14 @@ class ActionItemsController < ApplicationController
 
   def decline
     @action_item = ActionItem.find(params[:id])
-    originator = User.find_by_id(params[:originator_user_id])
+    originator = User.find_by_id(params[:originator_id])
     decline_relationship(originator)
+    logger.info("Action Item: #{@action_item.inspect}")
+    if @action_item.recognition_type_id == RecognitionType.COMPLIMENT.id
+      compliment = Compliment.find_by_id(@action_item.recognition_id)
+      logger.info("Compliment: #{compliment.try(:inspect)}")
+      compliment.try(:decline)
+    end
     if @action_item.set_complete
       flash[:notice] = "You have chosen not to accept compliments from #{originator.try(:full_name)}"
       redirect_to @user

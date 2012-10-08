@@ -6,7 +6,11 @@ class ComplimentStatus < ActiveRecord::Base
   def self.ACTIVE
     find_by_name('Active')
   end
-  
+    
+  def self.DECLINED
+    find_by_name('Declined')
+  end
+
   def self.PENDING_RECEIVER_CONFIRMATION
     find_by_name('Pending Receiver Confirmation')
   end
