@@ -97,4 +97,14 @@ class Contact < ActiveRecord::Base
 
 	end
 
+	def self.create_from_compliment(compliment)
+    unless compliment.receiver_user_id.blank?
+      group = Group.get_sender_group_by_compliment_type(compliment.compliment_type, compliment.sender)
+      logger.info(group.inspect)
+      if group
+	      create(:group_id => group.id, :user_id => compliment.receiver_user_id)
+	    end
+    end
+	end
+
 end

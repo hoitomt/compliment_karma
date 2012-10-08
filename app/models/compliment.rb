@@ -47,6 +47,7 @@ class Compliment < ActiveRecord::Base
   after_create :update_history
   after_create :create_tags
   after_create :add_accomplishment
+  after_create :create_contact
 
   default_scope :order => "created_at DESC"
   
@@ -206,9 +207,18 @@ class Compliment < ActiveRecord::Base
   end
 
   def create_action_item
-    if !self.sender.existing_contact?(self.receiver) || 
+    if !self.sender.existing_contact?(self.receiver)
       logger.info("Create Action Item")
       ActionItem.create_from_compliment(self)
+    end
+  end
+
+  def create_contact
+    logger.info("Create Contact")
+    if !self.receiver.blank? &&
+       !self.receiver.existing_contact?(self.sender)
+      logger.info("Not Existing")
+      Contact.create_from_compliment(self)
     end
   end
   
