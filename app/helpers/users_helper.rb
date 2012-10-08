@@ -277,43 +277,45 @@ module UsersHelper
     if feed_item.item_type_id == @recognition_type_compliment_id
       if link_text =~ /Sender/
         sender = User.find_by_id(feed_item.item_object.sender_user_id)
-        return follow_single_link(sender.id, sender.full_name)
+        return follow_single_link(sender)
       elsif link_text =~ /Receiver/
         receiver = User.find_by_id(feed_item.item_object.receiver_user_id)
         return '' if receiver.blank?
-        return follow_single_link(receiver.id, receiver.full_name)
+        return follow_single_link(receiver)
       else
         return link_to "Follow", '#'
       end
     elsif feed_item.item_type_id == @recognition_type_reward_id
       if link_text =~ /Presenter/
         presenter = User.find(feed_item.item_object.presenter.id)
-        return follow_single_link(presenter.id, presenter.full_name)
+        return follow_single_link(presenter)
       elsif link_text =~ /Receiver/
         receiver = User.find(feed_item.item_object.receiver.id)
-        return follow_single_link(receiver.id, receiver.full_name)
+        return follow_single_link(receiver)
       else
         return "Follow"
       end
     else
-      return follow_single_link(feed_item.item_object.user_id, "Follow")
+      user = User.find_by_id(feed_item.item_object.user_id)
+      return follow_single_link(user)
     end
   end
 
-  def follow_single_link(subject_id, link_text)
-    unfollow = link_text
-    if follow_exists?(subject_id)
-      unfollow = "Following #{link_text}"
-    elsif subject_id == current_user.id
+  def follow_single_link(subject)
+    unfollow = "Follow #{subject.first_last}"
+    if follow_exists?(subject.try(:id))
+      unfollow = "Following #{subject.first_last}"
+    elsif subject.try(:id) == current_user.id
       return
     end
     link_to unfollow, 
-            follows_path(:subject_user_id => subject_id,
+            follows_path(:subject_user_id => subject.try(:id),
                          :follower_user_id => current_user.id),
                          :method => :post
   end
 
   def follow_exists?(subject_id)
+    return false if subject_id.blank?
     follow_exists = Follow.follow_exists?(subject_id, current_user.id)
   end
 

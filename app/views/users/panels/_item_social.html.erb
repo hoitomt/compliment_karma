@@ -21,18 +21,18 @@
 					</ul>
 				<% end %>
 			</li>
-			<li class="social-follow social-link-style"><%= follows_link(feed_item) %>
-				<% if feed_item.item_type_id == @recognition_type_compliment_id ||
-							feed_item.item_type_id == @recognition_type_reward_id %>
-					<ul class="sub-menu">
-						<% if feed_item.item_type_id == @recognition_type_reward_id %>
-							<li class="social-follow-sender"><%= follows_link(feed_item, "Presenter") %></li>
-						<% else %>
-							<li class="social-follow-sender"><%= follows_link(feed_item, "Sender") %></li>
-						<% end %>
+			<li class="social-follow social-link-style">Follow<%#= follows_link(feed_item) %>
+				<ul class="sub-menu">
+					<% if feed_item.item_type_id == @recognition_type_reward_id %>
+						<li class="social-follow-sender"><%= follows_link(feed_item, "Presenter") %></li>
 						<li class="social-follow-receiver"><%= follows_link(feed_item, "Receiver") %></li>
-					</ul>
-				<% end %>
+					<% elsif feed_item.item_type_id == @recognition_type_compliment_id %>
+						<li class="social-follow-sender"><%= follows_link(feed_item, "Sender") %></li>
+						<li class="social-follow-receiver"><%= follows_link(feed_item, "Receiver") %></li>
+					<% else %>
+						<li class="social-follow-sender"><%= follows_link(feed_item) %></li>
+					<% end %>
+				</ul>
 			</li>
 <!-- 			<li class="social-share social-link-style"><%= link_to 'Share', '#' %>
 				<ul class="sub-menu">
