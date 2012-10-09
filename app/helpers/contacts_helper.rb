@@ -12,7 +12,7 @@ module ContactsHelper
 
 	def group_selected(group, c_user_memberships)
 		user_groups = Array.new(c_user_memberships)
-		matching_groups = user_groups.keep_if{|g| g.group.id == group.id }
+		matching_groups = user_groups.keep_if{|g| g.group_id == group.id }
 		return user_groups && !matching_groups.blank?
 	end
 
