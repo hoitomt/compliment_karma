@@ -160,7 +160,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Earned_an_Accomplishment.id,
                         RecognitionType.ACCOMPLISHMENT.id,
                         user_accomplishment.accomplishment_id,
-                        "earned a #{a.name}", nil)
+                        "You earned a #{a.name} badge by sending a compliment", nil)
   end
 
   def self.Received_Reward(reward)
