@@ -13,7 +13,7 @@
 				<% originator = User.find_by_id(item.originating_user_id) %>
 				<% item_user = User.find_by_id(item.user_id) %>
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
-					<%= link_to user_path(:id => originator.id, :update_history_id => item.id) do %>
+					<%= link_to user_path(:id => originator.try(:id), :update_history_id => item.id) do %>
 						<li class="clearfix <%= set_read_status_css(item) %> my-updates-list" 
 							  style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-all-item-image">
