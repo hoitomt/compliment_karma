@@ -11,11 +11,15 @@ class UserAccomplishment < ActiveRecord::Base
 
   def self.accomplishments_from_followed(user)
     followed = Follow.find_all_by_follower_user_id(user.id)
-    list_of_accomplishments = []
-    followed.each do |follow|
-      u = User.find_by_id(follow.subject_user_id)
-      list_of_accomplishments += u.user_accomplishments
-    end
-    return list_of_accomplishments
+    f_array = followed.collect{|x| x.subject_user_id}
+    UserAccomplishment.where('user_id in (?)', f_array)
+
+
+    # list_of_accomplishments = []
+    # followed.each do |follow|
+    #   u = User.find_by_id(follow.subject_user_id)
+    #   list_of_accomplishments += u.user_accomplishments
+    # end
+    # return list_of_accomplishments
   end
 end
