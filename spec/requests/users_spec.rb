@@ -38,7 +38,7 @@ describe "Users" do
           fill_in "Email", :with => "user@complimentkarma.com"
           fill_in "Password", :with => "foobar"
           click_button 'Sign Up Free'
-          page.should have_selector('title', :content => "Profile")
+          page.should have_selector('title', :content => "Example User")
         end.should change(User, :count).by(1)
       end
     end

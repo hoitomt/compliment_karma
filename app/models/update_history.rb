@@ -59,7 +59,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Like_Sent_Compliment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
-                        "liked your compliment to #{c.get_receiver.full_name}", current_user_id)
+                        "liked your compliment to #{c.get_receiver.first_last}", current_user_id)
   end
 
   def self.Like_Received_Compliment(ck_like, current_user_id)
@@ -68,12 +68,12 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Like_Received_Compliment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
-                        "liked your compliment from #{c.get_sender.full_name}", current_user_id)
+                        "liked your compliment from #{c.get_sender.first_last}", current_user_id)
   end
 
   def self.Like_Reward(ck_like, current_user_id)
     r = Reward.find_by_id(ck_like.recognition_id)
-    reward_presenter = User.find_by_id(r.presenter_id).full_name unless r.presenter_id.blank?
+    reward_presenter = User.find_by_id(r.presenter_id).first_last unless r.presenter_id.blank?
     note = "liked your reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
     add_update_history_no_duplicates( r.receiver_id,
@@ -91,7 +91,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Like_Accomplishment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
-                        "liked your #{a.accomplishment.name}", current_user_id)
+                        "liked your #{a.accomplishment.name} badge", current_user_id)
   end
 
   def self.Received_Compliment(compliment)
@@ -121,7 +121,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Comment_on_Sent_Compliment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
-                        "commented on your compliment to #{c.get_receiver.full_name}", current_user_id)
+                        "commented on your compliment to #{c.get_receiver.first_last}", current_user_id)
   end
 
   def self.Comment_on_Received_Compliment(recognition_comment, current_user_id)
@@ -130,12 +130,12 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Comment_on_Received_Compliment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
-                        "commented on your compliment from #{c.get_sender.full_name}", current_user_id)
+                        "commented on your compliment from #{c.get_sender.first_last}", current_user_id)
   end
 
   def self.Comment_on_Reward(recognition_comment, current_user_id)
     r = Reward.find_by_id(recognition_comment.recognition_id)
-    reward_presenter = User.find_by_id(r.presenter_id).full_name unless r.presenter_id.blank?
+    reward_presenter = User.find_by_id(r.presenter_id).first_last unless r.presenter_id.blank?
     note = "commented on your #{r.value} reward"
     note += " from #{reward_presenter}" unless reward_presenter.blank?
     add_update_history( r.receiver_id,
@@ -151,7 +151,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Comment_on_Accomplishment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
-                        "commented on your #{a.accomplishment.name}", current_user_id)
+                        "commented on your #{a.accomplishment.name} badge", current_user_id)
   end
 
   def self.Earned_an_Accomplishment(user_accomplishment)
@@ -159,12 +159,12 @@ class UpdateHistory < ActiveRecord::Base
     add_update_history( user_accomplishment.user_id,
                         UpdateHistoryType.Earned_an_Accomplishment.id,
                         RecognitionType.ACCOMPLISHMENT.id,
-                        user_accomplishment.accomplishment_id,
-                        "You earned a #{a.name} badge by sending a compliment", nil)
+                        user_accomplishment.id,
+                        "earned a #{a.name} badge by sending a compliment", nil)
   end
 
   def self.Received_Reward(reward)
-    reward_presenter = User.find_by_id(reward.presenter_id).full_name unless 
+    reward_presenter = User.find_by_id(reward.presenter_id).first_last unless 
                             reward.presenter_id.blank?
     value = "$%6.2f" % reward.value
     note = "received a #{value} reward"

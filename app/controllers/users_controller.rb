@@ -437,6 +437,8 @@ class UsersController < ApplicationController
 
   private
     def authenticate
+      logger.info("Current User #{current_user}")
+      logger.info("Remember token: #{cookies.signed[:remember_token]}")
       deny_access unless signed_in?
     end
     

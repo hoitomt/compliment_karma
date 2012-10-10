@@ -57,11 +57,14 @@ module ApplicationHelper
   end
 
   def get_update_user_full_name(item, user=nil)
+    logger.info("Update History: #{item.inspect}")
     if user.blank?
-      if item && item.recognition_type_id == RecognitionType.ACCOMPLISHMENT.id
+      if item && 
+         item.recognition_type_id == RecognitionType.ACCOMPLISHMENT.id &&
+         item.try(:update_history_type_id) != UpdateHistoryType.Like_Accomplishment.id
         user = item.user
       else
-        user = item.originating_user
+        user = item.try(:originating_user)
       end
     end
     if user

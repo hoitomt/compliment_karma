@@ -49,8 +49,7 @@ Spork.prefork do
     def test_founder_sign_in
       founder = Factory(:founder)
       controller.sign_into_shell(founder)
-    end
-    
+    end    
   end
 end
 

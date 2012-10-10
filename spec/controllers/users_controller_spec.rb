@@ -560,10 +560,45 @@ describe UsersController do
     end
   end
 
-  describe "view my updates" do 
-    let(:user2) { FactoryGirl.create(:user2) }
-    let(:user3) { FactoryGirl.create(:user3) }
-    
+  describe "my notifications" do 
+    let(:user2){FactoryGirl.create(:user2)}
+    let(:user3){FactoryGirl.create(:user3)}
+
+    before(:each) do
+      @c_attr = {
+        :receiver_email => user3.email,
+        :sender_email => user2.email,
+        :skill_id => Skill.first.id,
+        :comment => "I love what you did with our application",
+        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      }
+      test_sign_in(user2)
+    end
+
+    it "should create a compliment" do
+      lambda do
+        Compliment.create(@c_attr)
+      end.should change(Compliment, :count).by(1)
+    end
+
+    it "should display a notification for an accomplishment" do
+      c = Compliment.create(@c_attr)
+      a = user2.accomplishments
+      a.count.should == 1
+      get :my_updates_all, {:id => user2.id}
+      response.should be_success
+      response.body.should have_content("#{user2.first_last} earned a #{a.first.name} badge")
+    end
+
+    it "should display a notification for a like" do
+      c = Compliment.create(@c_attr)
+      a = user2.accomplishments
+      a.count.should == 1
+      get :my_updates_all, {:id => user2.id}
+      response.should be_success
+      response.body.should have_content("#{user2.first_last} earned a #{a.first.name} badge")
+    end
+
   end
 
 end
