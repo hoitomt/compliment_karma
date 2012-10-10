@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   has_many :contacts, :through => :groups
   has_many :memberships, :class_name => 'Contact', 
                          :foreign_key => 'user_id', :dependent => :delete_all
+  has_many :update_histories, :dependent => :delete_all
   
   attr_accessor :password
   # use attr_accessible to white list vars that can be mass assigned
