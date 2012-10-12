@@ -71,9 +71,9 @@ describe Compliment do
   
   it "should add an accomplishment for the sender" do
     Compliment.create!(@attr)
-    a = user.accomplishments
+    a = user.user_accomplishments
     a.count.should == 1
-    a.first.name.should == Accomplishment.LEVEL_1_COMPLIMENTER.name
+    a.first.accomplishment.name.should == Accomplishment.LEVEL_1_COMPLIMENTER.name
     u = UpdateHistory.where(:user_id => user.id, 
                             :recognition_id => a.first.id,
                             :update_history_type_id => UpdateHistoryType.Earned_an_Accomplishment.id)
