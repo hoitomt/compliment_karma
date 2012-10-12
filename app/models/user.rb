@@ -580,7 +580,7 @@ class User < ActiveRecord::Base
     self.primary_email.update_attributes(:confirmed => 'Y')
   end
 
-  # Checking if self is a contact in user's groups
+  # Checking if self is a contact of user
   def existing_contact?(user)
     return false if user.blank?
     self.existing_contacts(user).count > 0

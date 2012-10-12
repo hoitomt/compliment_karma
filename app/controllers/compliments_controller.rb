@@ -11,12 +11,14 @@ class ComplimentsController < ApplicationController
     @recipient_name = @recipient.try(:first_last) || ""
   end
 
-  def create    
+  def create
     referrer = request.referrer
     @compliment = Compliment.new
     @compliment.comment = params[:compliment][:comment]
     @compliment.compliment_type_id = params[:compliment][:compliment_type_id]
     skill = Skill.find_or_create_skill(params[:skill_id_result], params[:compliment][:skill_id])
+    logger.info("Skill #{skill.inspect}")
+    error_msg = error_display(skill) unless skill.valid?
     @compliment.skill_id = skill.id
     set_sender
     set_receiver
@@ -27,20 +29,19 @@ class ComplimentsController < ApplicationController
       process_redirect("success", referrer)
     else
       logger.info("compliment NOT saved")
-      logger.info(@compliment.errors.messages)
+      logger.info(error_display(@compliment))
+      error_msg ||= error_display(@compliment)
       respond_to do |format|
         format.html {
-          error_msg = ""
-          @compliment.errors.messages.each do |k,v|
-            v.each do |error_str|
-              error_msg += "#{error_str}<br />"
-            end
-          end
           if request.format.js?
             flash.now[:error] = "Your compliment could not be sent. #{error_msg}".html_safe
           else
             flash[:error] = "Your compliment could not be sent. #{error_msg}".html_safe
           end
+          process_redirect("failure", referrer)
+        }
+        format.js {
+          flash.now[:error] = "Your compliment could not be sent.<br />#{error_msg}".html_safe
           process_redirect("failure", referrer)
         }
       end
@@ -50,7 +51,7 @@ class ComplimentsController < ApplicationController
   def process_redirect(result, referrer)
     logger.info("Redirect")
     # Don't send the compliment back to the screen
-    flash[:compliment] = @compliment if result == "failure"
+    # flash[:compliment] = @compliment if result == "failure"
     user = User.find_user_by_email(@compliment.sender_email)
     respond_to do |format|
       format.html {redirect_to referrer}
@@ -93,7 +94,7 @@ class ComplimentsController < ApplicationController
     if @compliment.compliment_status == ComplimentStatus.ACTIVE
       msg = "Your compliment has been sent"
       if @compliment.new_contact_created
-        msg += "<br />#{@compliment.receiver.first_last} has been added to your contacts."
+        msg += "<br />#{@compliment.receiver.first_last} has been added to your contacts.".html_safe
       end
     elsif @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION ||
           @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_REGISTRATION
@@ -121,6 +122,10 @@ class ComplimentsController < ApplicationController
       format.json { render :json => @compliments_count }
       format.xml { render :xml => @compliments_count }
     end
+  end
+
+  def error_display(c_object)
+    return c_object.errors.full_messages.join("<br />")
   end
 
 end

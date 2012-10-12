@@ -12,15 +12,26 @@ class Skill < ActiveRecord::Base
 
 	has_many :compliments
 	
-	validates :name, :presence => true
+	validates :name, :presence => true,
+									 :length => {:minimum => 2},
+                   :exclusion => { :in => %w(Undefined, undefined), 
+                  								 :message => "#{self.name} is not a valid skill"}
 
   validates_uniqueness_of :name,
                           :message => "This skill already exists"
+  validate :name_value
 
   before_create :remove_naughty_words
 
   def remove_naughty_words
   	self.name = Blacklist.clean_string(self.name)
+  end
+
+  def name_value
+  	return if self.name.blank?
+  	if %w(Undefined, undefined).include?(self.name)
+  		self.errors[:base] << "#{self.name.capitalize!} cannot be used for a skill"
+  	end
   end
 
 	# returns a hash of {k,v} => {parent name, skill name}
