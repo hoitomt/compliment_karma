@@ -12,14 +12,12 @@ class Skill < ActiveRecord::Base
 
 	has_many :compliments
 	
-	validates :name, :presence => true,
-									 :length => {:minimum => 2},
-                   :exclusion => { :in => %w(Undefined, undefined), 
-                  								 :message => "#{self.name} is not a valid skill"}
+	validates :name, :presence => true
 
   validates_uniqueness_of :name,
                           :message => "This skill already exists"
   validate :name_value
+  validate :name_length
 
   before_create :remove_naughty_words
 
@@ -31,6 +29,14 @@ class Skill < ActiveRecord::Base
   	return if self.name.blank?
   	if %w(Undefined, undefined).include?(self.name)
   		self.errors[:base] << "#{self.name.capitalize!} cannot be used for a skill"
+  	end
+  end
+
+  def name_length
+  	return if self.name.blank?
+  	logger.info("Skill NAME: #{self.name}")
+  	if self.name.length < 2
+  		self.errors[:base] << "The Skill is too short<br />The minimum length is 2 characters"
   	end
   end
 

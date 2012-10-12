@@ -94,16 +94,16 @@ class ComplimentsController < ApplicationController
     if @compliment.compliment_status == ComplimentStatus.ACTIVE
       msg = "Your compliment has been sent"
       if @compliment.new_contact_created
-        msg += "<br />#{@compliment.receiver.first_last} has been added to your contacts.".html_safe
+        msg += "<br />#{@compliment.receiver.first_last} has been added to your contacts."
       end
     elsif @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION ||
           @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_REGISTRATION
       msg = "Your compliment has been saved"
     end
     if request.format.js?
-      flash.now[:notice] = msg
+      flash.now[:notice] = msg.html_safe
     else
-      flash[:notice] = msg
+      flash[:notice] = msg.html_safe
     end
   end
 
