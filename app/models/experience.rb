@@ -10,6 +10,7 @@ class Experience < ActiveRecord::Base
 
   def start_date_is_before_end_date
   	return if self.start_date.blank? && self.end_date.blank? #it's ok if they are both blank
+    logger.info("Experience: #{self.inspect}")
   	if self.start_date.blank?
   		errors.add(:start_date, "can not be blank when the end date is set")
   	elsif !self.end_date.blank? && self.start_date >= self.end_date

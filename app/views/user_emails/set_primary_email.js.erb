@@ -1,2 +1,5 @@
 var container = $('#email-table');
 container.html('<%=j render "user_emails/email_table", :user_emails => @user_emails %>')
+var emailContainer = $('#header-email-container');
+var primaryEmail = '<%=j @user_email.email %>'
+emailContainer.html(primaryEmail + ' &#9660;');

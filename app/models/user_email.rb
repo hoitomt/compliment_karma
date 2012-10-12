@@ -15,7 +15,7 @@ class UserEmail < ActiveRecord::Base
 	# 													:message => "The primary email address indicator must by Y or N"}
 
   before_create :set_domain
-  before_create :set_confirmed
+  before_create :init_confirmed
   before_create :set_primary
   # before_validation :set_domain
   # before_validation :set_confirmed
@@ -45,7 +45,7 @@ class UserEmail < ActiveRecord::Base
     self.domain = domain_array.last
   end
 
-  def set_confirmed
+  def init_confirmed
   	self.confirmed = "N" if self.confirmed.blank?
   end
 
@@ -68,8 +68,6 @@ class UserEmail < ActiveRecord::Base
     logger.info("Set Primary Override")
     current_primary_email = self.user.primary_email
     current_primary_email.update_attributes(:primary_email => "N")
-  	# addresses = self.user.email_addresses
-  	# addresses.each { |e| e.update_attributes(:primary_email => "N") }
   	self.update_attributes(:primary_email => "Y")
   end
   

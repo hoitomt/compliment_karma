@@ -30,8 +30,12 @@ class ExperiencesController < ApplicationController
 	end
 
 	def update
-		@experience = Experience.find(params[:experience_id])		
-		unless @experience.update_attributes(params[:experience])
+		@experience = Experience.find(params[:experience_id])
+		# logger.info("Experience: #{@experience.inspect}")
+		@experience.assign_attributes(params[:experience])
+		@experience.start_date = parse_date(params[:experience][:start_date])
+		@experience.end_date = parse_date(params[:experience][:end_date])
+		unless @experience.save
 			flash.now[:error] = error_display(@experience)
 			render 'error_display'
 		else
