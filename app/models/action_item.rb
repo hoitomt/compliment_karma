@@ -50,4 +50,12 @@ class ActionItem < ActiveRecord::Base
 		end
   end
 
+  def send_accept_notification
+    UpdateHistory.Accepted_Compliment_Receiver(self)
+  end
+
+  def send_decline_notification
+    UpdateHistory.Rejected_Compliment_Receiver(self)
+  end
+
 end

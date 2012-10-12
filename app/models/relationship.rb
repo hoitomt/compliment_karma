@@ -60,7 +60,6 @@ class Relationship < ActiveRecord::Base
     return unless self.relationship_status != RelationshipStatus.ACCEPTED
     self.update_attributes(:relationship_status_id => RelationshipStatus.ACCEPTED.id,
                            :default_visibility_id => Visibility.EVERYBODY.id)
-    UpdateHistory.Accepted_Compliments_Receiver(self)
   end
   
   def decline_relationship
@@ -74,7 +73,6 @@ class Relationship < ActiveRecord::Base
       logger.info("Decline: Update compliment visibility #{c.visibility_id}")
       c.update_attributes(:visibility_id => Visibility.SENDER_AND_RECEIVER.id)
     end
-    UpdateHistory.Rejected_Compliment_Receiver(self)
   end
 
   def get_other_user(user)

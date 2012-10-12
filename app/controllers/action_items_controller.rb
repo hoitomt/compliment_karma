@@ -31,6 +31,7 @@ class ActionItemsController < ApplicationController
     end
     accept_relationship(originator)
     if @action_item.set_complete
+      @action_item.send_accept_notification
       flash[:notice] = "#{originator.full_name} has been added as a contact in the following groups: 
                         #{group_names.join(', ')}"
       redirect_to @user
@@ -39,7 +40,7 @@ class ActionItemsController < ApplicationController
 
   def decline
     @action_item = ActionItem.find(params[:id])
-    originator = User.find_by_id(params[:originator_id])
+    originator = User.find_by_id(params[:originator_user_id])
     decline_relationship(originator)
     logger.info("Action Item: #{@action_item.inspect}")
     if @action_item.recognition_type_id == RecognitionType.COMPLIMENT.id
@@ -48,7 +49,8 @@ class ActionItemsController < ApplicationController
       compliment.try(:decline)
     end
     if @action_item.set_complete
-      flash[:notice] = "You have chosen not to accept compliments from #{originator.try(:full_name)}"
+      @action_item.send_decline_notification
+      flash[:notice] = "You have chosen not to accept compliments from #{originator.try(:first_last)}"
       redirect_to @user
     end
   end

@@ -92,6 +92,9 @@ class ComplimentsController < ApplicationController
   def set_success_notice
     if @compliment.compliment_status == ComplimentStatus.ACTIVE
       msg = "Your compliment has been sent"
+      if @compliment.new_contact_created
+        msg += "<br />#{@compliment.receiver.first_last} has been added to your contacts."
+      end
     elsif @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION ||
           @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_REGISTRATION
       msg = "Your compliment has been saved"

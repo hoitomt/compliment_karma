@@ -176,20 +176,20 @@ class UpdateHistory < ActiveRecord::Base
                         note, reward.presenter_id)
   end
 
-  def self.Accepted_Compliments_Receiver(relationship)
-    add_update_history(relationship.user_1_id,
+  def self.Accepted_Compliment_Receiver(action_item)
+    add_update_history(action_item.originating_user_id,
                        UpdateHistoryType.Accepted_Compliment_Receiver.id,
                        nil,
                        nil,
-                       "accepted your compliment", relationship.user_2_id)
+                       "accepted your compliment", action_item.user_id)
   end
 
-  def self.Rejected_Compliment_Receiver(relationship)
-    add_update_history(relationship.user_1_id,
+  def self.Rejected_Compliment_Receiver(action_item)
+    add_update_history(action_item.originating_user_id,
                        UpdateHistoryType.Rejected_Compliment_Receiver.id,
                        nil,
                        nil,
-                       "rejected your compliment", relationship.user_2_id)
+                       "rejected your compliment", action_item.user_id)
   end
 
   def self.is_duplicate?(user_id, update_history_type_id, recognition_type_id, 

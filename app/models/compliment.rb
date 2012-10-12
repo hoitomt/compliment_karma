@@ -14,7 +14,7 @@ class Compliment < ActiveRecord::Base
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  attr_accessor :receiver_display, :suppress_fulfillment # for seeding data only
+  attr_accessor :receiver_display, :new_contact_created, :suppress_fulfillment # for seeding data only
   
   validates :receiver_email, :presence => true,
                              :format => { :with => email_regex }
@@ -218,7 +218,8 @@ class Compliment < ActiveRecord::Base
     if !self.receiver.blank? &&
        !self.receiver.existing_contact?(self.sender)
       logger.info("Not Existing")
-      Contact.create_from_compliment(self)
+      c = Contact.create_from_compliment(self)
+      self.new_contact_created = true if !c.blank? && c.valid?
     end
   end
   

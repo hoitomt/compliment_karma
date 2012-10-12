@@ -586,4 +586,29 @@ describe Compliment do
     end
 
   end
+
+  describe "Contacts" do
+    let(:user2) {FactoryGirl.create(:user2)}
+    let(:user3) {FactoryGirl.create(:user3)}
+
+    before(:each) do
+      @attr_contacts = {
+        :receiver_email => user3.email,
+        :sender_email => user2.email,
+        :skill_id => Skill.first.id,
+        :comment => "I love what you did with our application",
+        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      }      
+    end
+
+    it "should create a new contact" do
+      user3.existing_contact?(user2).should be_false
+      c = Compliment.create(@attr_contacts)
+      c.valid?.should be_true
+      user3.reload
+      user3.existing_contact?(user2).should be_true
+      c.new_contact_created.should be_true
+    end
+  end
+
 end

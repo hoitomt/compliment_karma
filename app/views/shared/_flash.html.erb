@@ -1,7 +1,7 @@
 <% if flash && !flash.empty? %>
 	<section id="flash">
 	  <% flash.each do |key, value| %>
-	    <div class="flash <%= key %>"><%= value %></div>
+	    <div class="flash <%= key %>"><%= value.html_safe %></div>
 	  <% end %>
 	  <div id="close-x" style="float: right; margin-top: -20px; cursor: pointer;">
 	  	<%= image_tag('delete_x_white.png') %>
