@@ -36,7 +36,7 @@ class Skill < ActiveRecord::Base
   	return if self.name.blank?
   	logger.info("Skill NAME: #{self.name}")
   	if self.name.length < 2
-  		self.errors[:base] << "The Skill is too short<br />The minimum length is 2 characters"
+  		self.errors[:base] << "The Skill is too short. The minimum length is 2 characters"
   	end
   end
 
