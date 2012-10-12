@@ -3,8 +3,10 @@
 		<ul id="my-update-content">
 			<% @my_update_items.each do |item| %>
 				<% originator = User.find_by_id(item.originating_user_id) %>
+				<% item_user = User.find_by_id(item.user_id) %>
 				<% if item.recognition_type_id.nil? || item.recognition_id.nil? %>
-					<%= link_to user_path(:id => originator.id, :update_history_id => item.id) do %>
+					<% user_link_id = originator.try(:id) || item_user.try(:id) || current_user.id %>
+					<%= link_to user_path(:id => user_link_id) do %>
 						<li class="clearfix <%= set_read_status_css(item) %>" style="border-left: 1px solid #C9E6EE; margin-left: -1px">
 							<div class="my-update-all-item-image">
 								<%= get_user_photo_thumb(item) %>
