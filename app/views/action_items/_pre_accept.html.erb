@@ -4,7 +4,7 @@
 		<div class="clear"></div>
 	</div>
 	<%= form_tag accept_action_item_path(:user_id => user.id, :id => action_item.id) do %>
-		<%= hidden_field_tag 'originator_id', originator.id %>
+		<%= hidden_field_tag 'originator_user_id', originator.id %>
 		<ul>
 			<% groups.try(:each) do |group| %>
 				<% unless group.declined? %>

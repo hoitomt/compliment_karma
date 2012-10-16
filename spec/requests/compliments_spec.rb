@@ -407,7 +407,7 @@ describe "Compliments" do
       visit accept_action_item_path(:user_id => user3.id, 
                                     :id => action_item.id, 
                                     :groups => groups,
-                                    :originator_id => user2.id)
+                                    :originator_user_id => user2.id)
       a = ActionItem.find(action_item.id)
       a.complete.should == 'Y'
       user2.existing_contact?(user3).should be_true
@@ -421,7 +421,7 @@ describe "Compliments" do
       action_item = user3.action_items.first
       visit decline_action_item_path(:user_id => user3.id,
                                      :id => action_item.id,
-                                     :originator_id => user2.id)
+                                     :originator_user_id => user2.id)
       user2.existing_contact?(user3).should be_false
     end
 

@@ -17,7 +17,7 @@ class ActionItemsController < ApplicationController
 
   def accept
     @action_item = ActionItem.find(params[:id])
-    originator = User.find(params[:originator_id])
+    originator = User.find(params[:originator_user_id])
     groups = params[:groups]
     group_names = []
     logger.info("Groups #{groups}")

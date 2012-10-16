@@ -22,7 +22,7 @@ describe ActionItemsController do
 		before(:each) do
 			@action_item = ActionItem.create(@attr)
 			@attr_accept = {:groups => {@group.id => 'yes'}, :user_id => user2.id, 
-										 :originator_id => user3.id, :id => @action_item.id}
+										 :originator_user_id => user3.id, :id => @action_item.id}
 		end
 
 		it "should update complete to 'yes'" do
