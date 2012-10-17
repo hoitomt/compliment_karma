@@ -53,15 +53,12 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
-    @skills = Skill.all
+    @user ||= User.find(params[:id])
     logger.info("User Name: " + @user.full_name)
     set_title
     set_karma_live_panel
     set_pending_items
-    # my_updates
     set_update_history_read
-    logger.info("Confirmation status - Unconfirmed?: #{@unconfirmed}")
     menu_response_handler
   end
 
