@@ -1,0 +1,16 @@
+<div id="user-confirmation">
+  <h2>Welcome <%= @user.first_last %>!</h2><br />
+  <p>Please click the activation link in the email we just sent you. If you have not received an email from us please check your spam folder.</p>
+  <div class="links">
+    <p>
+      <%= link_to '- Resend Confirmation Email', 
+                resend_new_account_confirmation_path(@user),
+                :class => "ul_hover" %>
+    </p>
+    <p>
+      <%= link_to '- Change Email Address', user_user_emails_path(@user, :source => "confirmation"),
+                  :class => "ul_hover",
+                  :remote => true %>
+    </p>
+  </div>
+</div>

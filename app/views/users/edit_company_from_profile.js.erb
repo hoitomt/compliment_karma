@@ -1,3 +1,6 @@
 view = '<%= j(render "inline_forms/profile_edit_company", :company => @company) %>';
-ShowFancybox.init(view);
+var options = {
+  view: view
+};
+ShowFancybox.init(options);
 InlineForms.init();

@@ -1,6 +1,18 @@
-view = '<%= j(render :partial => "user_emails/add_manage_emails", 
-										 :locals => {:user_emails => @user_emails, 
-										 						 :user_email => @user_email,
-										 						 :user => @user} ) %>';
-ShowFancybox.init(view);
+var source = '<%= @source %>';
+var userId = '<%= @user.id %>';
+console.log(source);
+var view = '<%= j(render :partial => "user_emails/add_manage_emails", 
+										     :locals => {:user_emails => @user_emails, 
+										 						     :user_email => @user_email,
+										 						     :user => @user} ) %>';
+var redirectView = '<%=j render(:partial => "users/fancyboxes/unconfirmed",
+                                :locals => {:user => @user}) %>';
+var options = {
+  view: view,
+  source: source,
+  userId: userId,
+  redirectView: redirectView
+};
+console.log(options);
+ShowFancybox.init(options);
 InlineForms.init();

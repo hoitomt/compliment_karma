@@ -1,5 +1,9 @@
 var view = '<%= j(render :partial => "inline_forms/experience", 
 												 :locals => {:user => @user, 
 												 						 :experience => @experience} ) %>';
-ShowFancybox.init(view, 650);
+var options = {
+  view: view,
+  width: 650
+};
+ShowFancybox.init(options);
 InlineForms.init();

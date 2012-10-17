@@ -5,6 +5,7 @@ class UserEmailsController < ApplicationController
 
 	def index
 		@user_email = @user.email_addresses.build
+		@source = params[:source]
 	end
 
 	def new

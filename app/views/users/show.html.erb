@@ -2,7 +2,11 @@
 	<script type="text/javascript">
 		$(function() {
 			var confirmed = <%= @confirmed %>;
-			console.log(confirmed);
+			if(!confirmed) {
+				var unconfirmedView = '<%=j render(:partial => "users/fancyboxes/unconfirmed",
+																					 :locals => {:user => @user}) %>';
+				UserConfirmation.init(unconfirmedView);
+			}
 			var flashMsg = '<%= flash[:error] %>';
 			if(flashMsg.length > 0) {
 				$('#field label').hide();

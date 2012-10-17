@@ -203,3 +203,11 @@ button.add-email {
 button.add-email:hover {
 	background: #A6A6A6;
 }
+#user-confirmation {
+	width: 500px;
+	.links {
+		margin: 20px 0 20px 140px;
+		p { margin-bottom: 5px; }
+		a { font-size: 16px; }
+	}
+}
