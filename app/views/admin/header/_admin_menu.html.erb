@@ -18,7 +18,7 @@
 				<% else %>
 					<div class="am-user-info">
 						<span class="am-name"><%= current_user.first_last %></span><br />
-						<span class="am-email"><%= current_user.try(:primary_email) %></span><br />
+						<span class="am-email"><%= current_user.try(:primary_email).try(:email) %></span><br />
 						<div style="float:left;">
 							<%= link_to "Account", 
 													user_settings_path(:id => current_user.id), 
