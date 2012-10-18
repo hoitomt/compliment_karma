@@ -79,11 +79,10 @@ class User < ActiveRecord::Base
   before_create :set_domain
   before_create :set_account_status
   after_create :create_user_email
+  after_create :create_groups
   after_create :associate_received_compliments
   after_create :associate_sent_compliments
   after_create :create_relationships
-  after_create :metrics_send_new_user
-  after_create :create_groups
   after_save :add_to_redis
   
   # Return true if the user's password matches the submitted password
@@ -248,13 +247,12 @@ class User < ActiveRecord::Base
   def associate_received_compliments
     logger.info("Associate Received Compliments")
     my_received_compliments = Compliment.where('receiver_email = ?', self.email)
-    logger.info("Number of received compliments: #{my_received_compliments.length}")
     my_received_compliments.each do |c|
-      logger.info("Status = #{c.compliment_status.name}")
       new_status = update_receiver_status(c.compliment_status)
-      logger.info("New Status = #{new_status.name}")
       c.update_attributes(:receiver_user_id => self.id, 
                           :compliment_status_id => new_status.id)
+      receiver_group = c.get_receiver_group_from_compliment_type
+      Tag.create_from_compliment(c, receiver_group)
       ActionItem.create_from_compliment(c)
       UpdateHistory.Received_Compliment(c)
     end
@@ -496,10 +494,6 @@ class User < ActiveRecord::Base
 
   def is_company_administrator?(company_id)
     CompanyUser.administers_company?(self.id, company_id)
-  end
-  
-  def metrics_send_new_user
-    Metrics.new_user
   end
 
   def create_user_email
