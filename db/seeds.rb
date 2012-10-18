@@ -186,6 +186,7 @@ if mike.nil?
 else
   mike.update_attributes(mike_attr)
 end
+UserEmail.create!(:user_id => mike.id, :email => 'mike@hoitomt.com', :confirmed => 'Y')
 
 mike_ck = User.find_by_email("mike@complimentkarma.com")
 mike_ck_attr = {:email => "mike@complimentkarma.com", 
