@@ -57,6 +57,9 @@ class EmailApiController < ApplicationController
     action_item = ActionItem.find_by_id(params[:id])
     if action_item.blank?
       redirect_to root_path
+    elsif action_item.complete?
+      flash['notice'] = "You have already taken action on this item"
+      redirect_to root_path
     else
       compliment = Compliment.find_by_id(action_item.recognition_id)
       group = compliment.get_receiver_group_from_compliment_type
@@ -69,9 +72,14 @@ class EmailApiController < ApplicationController
 
   def decline_compliment
     action_item = ActionItem.find_by_id(params[:id])
-    redirect_to decline_action_item_path(:user_id => action_item.user_id,
-                                        :id => action_item.id,
-                                        :originator_user_id => action_item.originating_user_id)
+    if action_item.complete?
+      flash['notice'] = "You have already taken action on this item"
+      redirect_to root_path
+    else
+      redirect_to decline_action_item_path(:user_id => action_item.user_id,
+                                          :id => action_item.id,
+                                          :originator_user_id => action_item.originating_user_id)
+    end
   end
 
   def compliment_new

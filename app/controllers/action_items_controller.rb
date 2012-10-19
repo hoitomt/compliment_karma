@@ -50,7 +50,7 @@ class ActionItemsController < ApplicationController
     end
     if @action_item.set_complete
       @action_item.send_decline_notification
-      flash[:notice] = "You have chosen not to accept compliments from #{originator.try(:first_last)}"
+      flash[:notice] = "You have declined the compliment from #{originator.try(:first_last)}"
       redirect_to @user
     end
   end
