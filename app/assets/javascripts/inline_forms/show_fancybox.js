@@ -38,11 +38,10 @@ var ShowFancybox = {
 			},
 			beforeClose: function() {
 				$('body').removeClass('lock-screen');
-        window.location.href = 'http://ck-dev.herokuapp.com/users/' + userId;
 			},
 			afterClose: function() {
 				// UserConfirmation.init(options.redirectView);
-        // window.location.href = 'http://localhost:3000/users/' + userId;
+        window.location.href = options.redirectHost + userId;
 			},
 			minWidth: options.width,
 			padding: 0,

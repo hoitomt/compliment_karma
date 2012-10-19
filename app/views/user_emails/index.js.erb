@@ -7,11 +7,16 @@ var view = '<%= j(render :partial => "user_emails/add_manage_emails",
 										 						     :user => @user} ) %>';
 var redirectView = '<%=j render(:partial => "users/fancyboxes/unconfirmed",
                                 :locals => {:user => @user}) %>';
+var host = 'http://www.complimentkarma.com/users'
+<% if Rails.env.development? %>
+  host = 'http://localhost:3000/users/'
+<% end %>
 var options = {
   view: view,
   source: source,
   userId: userId,
-  redirectView: redirectView
+  redirectView: redirectView,
+  redirectHost: host
 };
 console.log(options);
 ShowFancybox.init(options);
