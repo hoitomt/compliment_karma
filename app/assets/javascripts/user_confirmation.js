@@ -1,8 +1,9 @@
 var UserConfirmation = {
   init: function(view) {
-    // $.fancybox.close(true);
     this.showFancybox(view);
-  }, 
+    var $slideDiv = $('#email-address');
+    this.setClickHandlers($slideDiv);
+  },
   showFancybox: function(view) {
     $.fancybox(view, {
       beforeShow: function() {
@@ -21,6 +22,14 @@ var UserConfirmation = {
         title: null
       }
     });
+  },
+  setClickHandlers: function($slideDiv) {
+    $('#change-email').click(function() {
+      if($slideDiv.is(':visible')) {
+        $slideDiv.slideUp();
+      } else {
+        $slideDiv.slideDown();
+      }
+    })
   }
-
 }

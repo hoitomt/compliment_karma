@@ -87,6 +87,9 @@ Ck::Application.routes.draw do
         :as => :update_super_group
   match "users/:user_id/user_emails/set_primary_email" => "user_emails#set_primary_email", 
         :as => :set_primary_email
+  match "users/:user_id/user_emails/:id/update_unconfirmed_user_email" => 
+          "user_emails#update_unconfirmed_user_email", 
+        :as => :update_unconfirmed_user_email
   match "users/:user_id/user_emails/:id/resend_email_confirmation" => "user_emails#resend_email_confirmation",
         :as => :resend_email_confirmation
 

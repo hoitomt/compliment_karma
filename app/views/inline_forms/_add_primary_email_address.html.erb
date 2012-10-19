@@ -1,0 +1,14 @@
+<%= form_for [user, user_email], 
+             :url => update_unconfirmed_user_email_path(user, user_email),
+             :remote => true do |f| %>
+  <div id="data-entry" class="clearfix">
+    <div id="field" style="float:left;">
+      <%= f.text_field :email,
+                       :style => "width: 300px; text-align: center; font-size: 14px;" %>
+    </div>
+    <div>
+      <button class="add-email" type=submit>Change Email</button>
+    </div>
+    <div class="clear"></div>
+  </div>
+<% end %>

@@ -195,7 +195,7 @@ button.add-email {
 	border: 2px solid #A6A6A6;
 	color: #000000;
 	float: left;
-	width: 100px; 
+	// width: 100px; 
 	margin: 0 0 0 10px; 
 	text-align: center; 
 	padding: 5px 10px;
@@ -204,10 +204,18 @@ button.add-email:hover {
 	background: #A6A6A6;
 }
 #user-confirmation {
-	width: 500px;
+	width: 600px;
 	.links {
-		margin: 20px 0 20px 140px;
+		margin: 20px 0 20px 190px;
 		p { margin-bottom: 5px; }
 		a { font-size: 16px; }
+	}
+	#email-address {
+		margin: 0px auto; 
+		background-color: inherit; 
+		padding-left: 100px;
+		padding-bottom: 0px;
+		display: none;
+		height: 35px;
 	}
 }

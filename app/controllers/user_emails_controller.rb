@@ -35,6 +35,29 @@ class UserEmailsController < ApplicationController
 		end
 	end
 
+	# Only to be used by new users
+	def update_unconfirmed_user_email
+		@user_email = UserEmail.find(params[:id])
+		notice = "Your email address has been changed.<br />
+						  A confirmation message has been sent to your new email address".html_safe
+		if @user_email.update_attributes(:email => params[:user_email][:email])
+			@user.send_account_confirmation
+			respond_to do |format|
+				format.html { redirect_to current_user, :notice => notice }
+				format.js { flash.now[:notice] = notice }
+			end
+		else
+			logger.info("Errors: #{@user_email.errors.messages}")
+			respond_to do |format|
+				format.html { render 'new' }
+				format.js { 
+					flash.now[:error] = error_display(@user_email)
+					render 'error_display'
+				}
+			end
+		end
+	end
+
 	def resend_email_confirmation
 		@user_email = UserEmail.find(params[:id])
 		@user_email.send_email_confirmation

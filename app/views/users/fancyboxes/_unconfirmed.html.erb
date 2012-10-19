@@ -1,24 +1,29 @@
-<div id="user-confirmation">
-  <div>
-    <div style="float: left;">
-    <h2>Welcome <%= @user.first_last %>!</h2><br />
+<div id="user-info-form-container">
+  <div id="user-confirmation">
+    <div>
+      <div style="float: left;">
+      <h2>Welcome <%= @user.first_last %>!</h2><br />
+      </div>
+      <div style="float: right;">
+        <%= link_to 'Log Out', logout_path, :style => "color: white; font-size: 10px;" %>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div style="float: right;">
-      <%= link_to 'Log Out', logout_path, :style => "color: white; font-size: 10px;" %>
+    <p>Please click the activation link in the email we just sent you. If you have not received the email please check your spam folder.</p>
+    <div class="links">
+      <p>
+        <%= link_to '- Resend Confirmation Email', 
+                  resend_new_account_confirmation_path(@user),
+                  :class => "ul_hover" %>
+      </p>
+      <p>
+        <%= link_to '- Change Email Address', '#', :class => "ul_hover", :id => "change-email" %>
+      </p>
     </div>
-    <div class="clear"></div>
-  </div>
-  <p>Please click the activation link in the email we just sent you. If you have not received the email please check your spam folder.</p>
-  <div class="links">
-    <p>
-      <%= link_to '- Resend Confirmation Email', 
-                resend_new_account_confirmation_path(@user),
-                :class => "ul_hover" %>
-    </p>
-    <p>
-      <%= link_to '- Change Email Address', user_user_emails_path(@user, :source => "confirmation"),
-                  :class => "ul_hover",
-                  :remote => true %>
-    </p>
+    <div id="email-address" class="popup-form">
+      <%= render :partial => 'inline_forms/add_primary_email_address', 
+                 :locals => {:user_email => @user.primary_email,
+                             :user => @user} %>
+    </div>
   </div>
 </div>
