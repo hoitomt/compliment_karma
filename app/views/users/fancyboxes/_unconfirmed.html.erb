@@ -14,7 +14,8 @@
       <p>
         <%= link_to '- Resend Confirmation Email', 
                   resend_new_account_confirmation_path(@user),
-                  :class => "ul_hover" %>
+                  :class => "ul_hover show-spinner",
+                  :remote => true %>
       </p>
       <p>
         <%= link_to '- Change Email Address', '#', :class => "ul_hover", :id => "change-email" %>

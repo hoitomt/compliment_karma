@@ -1,3 +1,4 @@
-var container = $('#user-information');
+var container = $('#user-info-form-container');
 container.prepend('<%=j render "shared/flash", :flash => flash %>');
 $('#flash').show();
+CommonScripts.setCloseHandler();

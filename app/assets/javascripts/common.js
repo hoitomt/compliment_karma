@@ -101,6 +101,14 @@ var CommonScripts = {
 	  js = d.createElement(s); js.id = id;
 	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 	  fjs.parentNode.insertBefore(js, fjs);
+	},
+	showSpinner: function() {
+    $('a.show-spinner').on('ajax:beforeSend', function(event, xhr, settings) {
+      $('body').css('cursor', 'progress');
+    });
+    $('a.show-spinner').on('ajax:complete', function(event, xhr, settings) {
+      $('body').css('cursor', 'auto');
+    });
 	}
 }
 

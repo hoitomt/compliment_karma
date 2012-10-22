@@ -4,4 +4,6 @@ if(existingFlash != null && existingFlash.length > 0) {
   container.remove(existingFlash);
 }
 container.prepend('<%=j render "shared/flash", :flash => flash %>');
+
 $('#flash').slideDown();
+CommonScripts.setCloseHandler();

@@ -260,10 +260,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.send_account_confirmation
     sign_in(@user, false)
-    flash[:notice] = "Your account confirmation link has been resent"
+    msg = "Your account confirmation link has been resent"
     respond_to do |format|
-      format.html {redirect_to @user}
-      format.js {  }
+      format.html {
+        flash[:notice] = msg
+        redirect_to @user
+      }
+      format.js {
+        flash.now[:notice] = msg
+      }
     end
   end
   

@@ -23,6 +23,7 @@
 		$(function() {
 			var flashContent = '<%=j render("shared/flash", :flash => flash ) %>';
 			CommonScripts.showFlash(flashContent);
+			CommonScripts.showSpinner();
 			FooterResize.init();
 			
 			$('.fancybox').fancybox({

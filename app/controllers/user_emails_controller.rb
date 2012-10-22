@@ -37,10 +37,12 @@ class UserEmailsController < ApplicationController
 
 	# Only to be used by new users
 	def update_unconfirmed_user_email
+		new_email = params[:user_email][:email]
 		@user_email = UserEmail.find(params[:id])
 		notice = "Your email address has been changed.<br />
 						  A confirmation message has been sent to your new email address".html_safe
-		if @user_email.update_attributes(:email => params[:user_email][:email])
+		if @user_email.update_attributes(:email => new_email)
+			@user.update_attributes(:email => new_email)
 			@user.send_account_confirmation
 			respond_to do |format|
 				format.html { redirect_to current_user, :notice => notice }
