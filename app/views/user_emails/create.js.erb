@@ -9,3 +9,4 @@ if(existingFlash != null && existingFlash.length > 0) {
 }
 container.prepend('<%=j render "shared/flash", :flash => flash %>');
 $('#flash').slideDown();
+CommonScripts.setCloseHandler();

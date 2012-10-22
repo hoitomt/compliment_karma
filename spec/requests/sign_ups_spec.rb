@@ -193,7 +193,7 @@ describe "SignUps" do
       u.compliments_received.count.should == 1
       c = u.compliments_received.first
       c.compliment_status.should eq(ComplimentStatus.PENDING_RECEIVER_CONFIRMATION)
-      c.tags.count.should == 1
+      c.tags.count.should == 2
       c.tags.first.group.should be_social
     end
 

@@ -24,6 +24,7 @@ var CommonScripts = {
 	setCloseHandler: function() {
 		$('#close-x').click(function() {
 			$('#explanation').slideUp();
+		  $('#flash').slideUp();
 		});
 	},
 	stickyFlashContainer: function() {

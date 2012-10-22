@@ -99,22 +99,29 @@ $arrow-height: 45px;
 		float: left;
 	}
 	.field_with_errors {
+		// float: left;
 		display: inline;
-	}
-	.field_with_errors .message {
-		
+		.message {
+			font-size: 12px;
+			text-align: left;
+			font-weight: bold;
+			color: red;
+			margin: 0 0 0 10px;
+			padding: 0 0 0 0;
+			width: 200px;
+		}
 	}
 	#validation-error {
 		display: block;
 		background: $inline-error-red;
 		color: #fff;
-		width: 300px;
+		width: 304px;
 		margin-top: -4px;
 		padding: 2px;
 	}
 	#data-entry {
 		display: block;
-			margin-bottom: 5px;
+		margin-bottom: 10px;
 	}
 	#label {
 		float: left;
@@ -151,7 +158,7 @@ $arrow-height: 45px;
 		font-size: 18px;
 		width: 300px;
 		height: 30px;
-		margin-bottom: 4px;
+		// margin-bottom: 4px;
 		padding-left: 4px;
 	}
 	.invitation {

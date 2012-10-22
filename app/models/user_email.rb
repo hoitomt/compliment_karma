@@ -7,22 +7,12 @@ class UserEmail < ActiveRecord::Base
   validates :email, :presence => true,
                     :format => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
-	# validates :confirmed, 
-	# 					:inclusion => { :in => %w(Y N),
-	# 													:message => "The confirmed indicator must by Y or N"}
-	# validates :primary, 
-	# 					:inclusion => { :in => %w(Y N),
-	# 													:message => "The primary email address indicator must by Y or N"}
 
   before_create :set_domain
   before_create :init_confirmed
   before_create :set_primary
-  # before_validation :set_domain
-  # before_validation :set_confirmed
-  # before_validation :set_primary
   after_save :update_redis
   after_destroy :update_redis
-  # after_destroy :disassociate_compliments
 
   default_scope :order => 'primary_email DESC, confirmed DESC, email ASC'
 

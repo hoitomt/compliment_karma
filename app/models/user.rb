@@ -72,6 +72,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true,
                        :length => { :within => 6..40 },
                        :on => :create
+  validate :primary_email_valid
   # validate :on_whitelist
 
   before_create :encrypt_password
@@ -150,6 +151,13 @@ class User < ActiveRecord::Base
   
   def on_whitelist?
     Domain.whitelist.include?(self.set_domain)
+  end
+
+  def primary_email_valid
+    e = UserEmail.new(:user_id => self.id, :email => self.email)
+    unless e.valid?
+      errors.add(:email, "The spcified email address belongs to another user")
+    end
   end
 
   def set_name
