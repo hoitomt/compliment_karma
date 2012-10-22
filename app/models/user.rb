@@ -72,7 +72,8 @@ class User < ActiveRecord::Base
   validates :password, :presence => true,
                        :length => { :within => 6..40 },
                        :on => :create
-  validate :primary_email_valid
+  validate :primary_email_valid,
+           :on => :create
   # validate :on_whitelist
 
   before_create :encrypt_password
@@ -154,8 +155,9 @@ class User < ActiveRecord::Base
   end
 
   def primary_email_valid
-    e = UserEmail.new(:user_id => self.id, :email => self.email)
-    unless e.valid?
+    logger.info("My ID: #{self.id}")
+    e = UserEmail.where(:email => self.email)
+    unless e.blank?
       errors.add(:email, "The spcified email address belongs to another user")
     end
   end
