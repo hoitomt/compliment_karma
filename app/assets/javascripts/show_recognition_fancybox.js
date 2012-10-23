@@ -26,13 +26,13 @@ var ShowRecognitionFancyBox = {
 					css: {
 						'background-color': '#A7DBD8'
 					}
-				},
-				title: {
-					// type: 'float',
-					css: {
-						'width': '600px'
-					}
-				}
+				}//,
+				// title: {
+				// 	// type: 'float',
+				// 	css: {
+				// 		'width': '600px'
+				// 	}
+				// }
 			}
 		});
 	}
