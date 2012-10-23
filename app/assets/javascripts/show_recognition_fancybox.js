@@ -28,9 +28,9 @@ var ShowRecognitionFancyBox = {
 					}
 				},
 				title: {
-					type: 'float',
+					// type: 'float',
 					css: {
-						'width': '10px'
+						'width': '600px'
 					}
 				}
 			}

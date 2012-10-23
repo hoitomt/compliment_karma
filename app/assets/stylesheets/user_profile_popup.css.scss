@@ -176,10 +176,12 @@ $popup-border-bottom: 1px solid #f2f2f2;
 	background-color: $background-color;
 }
 .fancybox-title-float-wrap {
+	// position: relative;
 	top: 0;
-	right: 0;
+	left: 0px;
+	text-align: left;
 	.child {
-		margin: 20px 0 0 20px;
+		margin: 20px 0 0 -100px;
 		padding: 0 0 0 0;
 		background: none;
 		text-align: left;
