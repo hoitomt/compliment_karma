@@ -10,7 +10,7 @@ var UserConfirmation = {
         $(".fancybox-skin").css("backgroundColor", "#A7DBD8");
       },
       // minWidth: 600,
-      // padding: 0,
+      padding: 0,
       modal: true,
       helpers: {
         overlay: {
