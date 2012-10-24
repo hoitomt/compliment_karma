@@ -1,0 +1,55 @@
+<script type="text/javascript">
+	// $(function() {
+	// 	// UserProfile.showCommentButtonOnClick();
+	// 	// UserProfile.followButtonHover();
+	// 	// $('.popup-like-item').tooltip();
+	// })
+</script>
+<div class="popup-box">
+	<div class="popup-header clearfix">
+		<div class="date">
+			<%= timestamp(@updated_at) %>
+		</div>
+		<div class="like-button-container">
+			<% if @recognition_type_id == @recognition_type_compliment_id && @compliment_popup %>
+				<%= like_button(@compliment_popup.id, @recognition_type_id) %>
+			<% elsif @recognition_type_id == @recognition_type_reward_id %>
+				<%= like_button(@reward.id, @recognition_type_id) %>
+			<% elsif @recognition_type_id == @recognition_type_accomplishment_id %>
+				<%= like_button(@user_accomplishment.id, @recognition_type_id) %>
+			<% end %>
+		</div>
+	</div>	
+	<div class="popup-box-container">
+		<% if @recognition_type_id == @recognition_type_compliment_id %>
+			<%= render 'recognitions/detail_panels/detail_compliment' %>
+		<% elsif @recognition_type_id == @recognition_type_reward_id %>
+			<%= render 'recognitions/detail_panels/detail_reward' %>
+		<% elsif @recognition_type_id == @recognition_type_accomplishment_id %>
+			<%= render 'recognitions/detail_panels/detail_accomplishment' %>
+		<% end %>
+		<div class="item-comments clearfix">
+			<ul id="detail-comments-list-js">
+				<%= render 'recognition_comments/comment_list', :comments => @comments %>
+			</ul>
+
+			<% if @recognition_type_id == @recognition_type_accomplishment_id
+				   data_for_recognition_id = @user_accomplishment.id 
+				 else
+				 	 data_for_recognition_id = @recognition_id
+			 	 end
+			%>
+			<%= render :partial => 'recognition_comments/new',
+								 :locals => { :recognition_id => data_for_recognition_id,
+								 							:recognition_type_id => @recognition_type_id }  %>
+		</div>
+		<div class="item-likes clearfix">
+			<h5><%= display_likes_header_count(@likes_count) %></h5>
+			<% if @likes_users %>
+				<% @likes_users.each do |u| %>
+				  <%= get_user_photo_link_mini(u) %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

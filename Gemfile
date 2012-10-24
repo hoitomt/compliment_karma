@@ -26,6 +26,9 @@ gem 'em-http-request'
 gem 'paperclip', '~>3.0.2'
 gem 'aws-sdk', '1.4.1'
 
+# URL Shortener
+gem 'url_shortener'
+
 group :development do
 	gem 'rspec-rails', '2.6.1'
   gem 'bullet'

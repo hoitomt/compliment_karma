@@ -43,6 +43,8 @@ Ck::Application.configure do
   Rack::MiniProfiler.config.position = 'right'
 
   # Redis - created a Redis to Go instance specifically for local development
-  ENV["REDISTOGO_URL"] = 'redis://hoitomt:124f63476172c052815d93d14915c6db@clingfish.redistogo.com:9104/' 
+  ENV["REDISTOGO_URL"] = 'redis://hoitomt:124f63476172c052815d93d14915c6db@clingfish.redistogo.com:9104/'
 
+  # Domain based on env
+  ENV["SITE_DOMAIN"] = 'localhost:3000'
 end

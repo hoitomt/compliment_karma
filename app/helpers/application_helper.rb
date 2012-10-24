@@ -187,7 +187,7 @@ module ApplicationHelper
   end
 
   def social_link(recognition_type_id, recognition_id)
-    return "#{site_url}recognition/#{recognition_type_id}/#{recognition_id}".html_safe
+    return "#{site_url}recognitions/#{recognition_type_id}/#{recognition_id}".html_safe
   end
 
   def state_list

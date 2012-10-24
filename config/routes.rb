@@ -1,4 +1,5 @@
 Ck::Application.routes.draw do
+
   root :to => "pages#index"
   
   match 'mailer(/:action(/:id(.:format)))' => 'mailer#:action'
@@ -34,7 +35,7 @@ Ck::Application.routes.draw do
         :as => :accept_compliment
   match "/email_api/decline_compliment" => "email_api#decline_compliment",
         :as => :decline_compliment
-  match "/recognition/:recognition_type_id/:recognition_id" => "recognition#show", 
+  match "/recognitions/:recognition_type_id/:recognition_id" => "recognitions#show", 
         :as => :show_recognition
   match "/relationships/:id/accept" => "relationships#accept", :as => :accept_relationship
   match "/relationships/:id/decline" => "relationships#decline", :as => :decline_relationship
@@ -56,10 +57,10 @@ Ck::Application.routes.draw do
   match "users/:id/my_updates_all" => "users#my_updates_all", :as => :my_updates_all
   match "users/:id/professional_profile" => "users#professional_profile", 
         :as => :user_professional_profile
-  match "users/:id/resend_new_account_confirmation" => "users#resend_new_account_confirmation",
-        :as => :resend_new_account_confirmation
   match "users/:id/show_recognition_detail" => "users#show_recognition_detail", 
         :as => :show_recognition_detail
+  match "users/:id/resend_new_account_confirmation" => "users#resend_new_account_confirmation",
+        :as => :resend_new_account_confirmation
   match "users/:id/switch_accounts" => "users#switch_accounts", :as => :switch_accounts
   match "users/:id/edit_from_profile" => "users#edit_from_profile", :as => :edit_from_profile
   match "users/:id/upload_photo" => "users#upload_photo", :as => :upload_photo
@@ -127,5 +128,6 @@ Ck::Application.routes.draw do
   resources :company_departments
   resources :company_users
   resources :companies
+  resources :recognitions
 
 end

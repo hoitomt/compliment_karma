@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018033203) do
+ActiveRecord::Schema.define(:version => 20121024013201) do
 
   create_table "accomplishments", :force => true do |t|
     t.string   "name"
@@ -225,6 +225,15 @@ ActiveRecord::Schema.define(:version => 20121018033203) do
 
   create_table "recognition_types", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recognitions", :force => true do |t|
+    t.integer  "recognition_type_id"
+    t.integer  "recognition_id"
+    t.string   "public_url"
+    t.string   "url_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

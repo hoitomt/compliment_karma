@@ -10,6 +10,8 @@ class Compliment < ActiveRecord::Base
 
   has_many :tags, :foreign_key => :recognition_id,
                   :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}
+  has_one :recognition, :foreign_key => :recognition_id,
+                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}
   has_many :groups, :through => :tags
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -50,7 +50,7 @@ Ck::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => "www.complimentkarma.com" }
+  config.action_mailer.default_url_options = { :host => "ck-dev.herokuapp.com" }
   # config.action_mailer.delivery_method = :ses
 
   # Enable threaded mode
@@ -67,10 +67,9 @@ Ck::Application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
       :api_key  => 'key-1ed8ophkrawc5969zsvmff02w1f0fiv2',
-      :api_host => 'ck.mailgun.org'
+      :api_host => 'ck-local.mailgun.org'
   }
 
   # Domain based on env
-  ENV["SITE_DOMAIN"] = 'www.complimentkarma.com'
-  
+  ENV["SITE_DOMAIN"] = 'ck-dev.herokuapp.com'
 end

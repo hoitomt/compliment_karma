@@ -1,0 +1,12 @@
+<div class="popup-user-info">
+	<% if professional %>
+		<% current_experience = user.try(:experiences).try(:first) %>
+		<% if current_experience %>
+			<p><%= current_experience.title %></p>
+			<p><%= current_experience.company %></p>
+			<p><%= location_display(current_experience) %></p>
+		<% end %>
+	<% else %>
+		<p><%= location_display(user) %></p>
+	<% end %>
+</div>

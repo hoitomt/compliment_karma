@@ -1,0 +1,8 @@
+var userId = '<%= current_user.id %>';
+var view = '<%= j(render "recognitions/detail_view") %>';
+var socialPopup = '<%= j(render "recognitions/social_popup_links",
+																		{:recognition_id => @recognition_id,
+																		 :recognition_type_id => @recognition_type_id,
+																		 :iframe => true}) %>'
+ShowRecognitionFancyBox.init(view, socialPopup, 0);
+// CommonScripts.setFacebookHandler();

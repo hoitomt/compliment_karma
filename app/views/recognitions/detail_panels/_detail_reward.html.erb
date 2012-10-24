@@ -1,0 +1,44 @@
+<div class="left-column">
+	<div class="image-function">
+		<div class="photo-profile">
+			<%= get_user_photo_link_profile(@presenter) %>
+		</div>
+		<h3><%= link_to @presenter.full_name, @presenter, :class => "black hover_blue"  %></h3>
+		<%= render :partial => 'recognitions/popup_user_info', 
+								 :locals => {:user => @presenter,
+								 						 :professional => true } %>
+		<div class="functions clearfix">
+			<div class="profile-button" style="margin-right: 10px;">
+				<%= compliment_button_medium(@presenter) %>
+			</div>
+			<%= render 'follows/follows_button', :user => @presenter %>
+		</div>
+	</div>
+</div>
+<div class="left-column">
+	<div class="action reward-action">Rewards</div>
+</div>
+<div class="right-column">
+	<div class="image-function">
+		<div class="photo-profile">
+			<%= get_user_photo_link_profile(@receiver) %>
+		</div>
+		<h3><%= link_to get_user_full_name(@receiver), @receiver, :class => "black hover_blue"  %></h3>
+		<%= render :partial => 'recognitions/popup_user_info', 
+								 :locals => {:user => @receiver,
+								 						 :professional => true } %>
+		<div class="functions clearfix">
+			<div class="profile-button" style="margin-right: 10px;">
+				<%= compliment_button_medium(@receiver) %>
+			</div>
+			<%= render 'follows/follows_button', :user => @receiver %>
+		</div>
+	</div>
+</div><div class="clear"></div>
+<div class="item-details clearfix">
+	<div class="item-details-label">Reward Amount</div>
+	<div class="item-details-comment money"><%= number_to_currency(@reward.value) %></div>
+	<div class="clear"></div>
+	<div class="item-details-label">Reward Funded By</div>
+	<div class="item-details-comment"><%= @presenter.full_name %></div>
+</div>

@@ -44,4 +44,7 @@ Ck::Application.configure do
   # ENV["REDISTOGO_URL"] = 'redis://hoitomt:124f63476172c052815d93d14915c6db@clingfish.redistogo.com:9104/' 
 
   $redis = MockRedis.new
+
+  # Domain based on env
+  ENV["SITE_DOMAIN"] = 'test.host'
 end

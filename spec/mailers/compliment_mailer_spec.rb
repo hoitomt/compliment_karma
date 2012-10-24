@@ -55,7 +55,7 @@ describe ComplimentMailer do
       existing_contact = c.sender.existing_contact?(c.receiver)
       existing_contact.should_not be_blank
       last_email.body.should_not include("testing")
-      last_email.body.should include("http://test.host/recognition/1/#{c.id}")
+      last_email.body.should include("http://test.host/recognitions/1/#{c.id}")
     end
   end
 
