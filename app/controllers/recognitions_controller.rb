@@ -25,8 +25,8 @@ class RecognitionsController < ApplicationController
 
   def set_parameters
     @recognition = Recognition.find_by_url_token(params[:id])
-    @recognition_type_id = recognition.recognition_type_id
-    @recognition_id = recognition.recognition_id
+    @recognition_type_id = @recognition.recognition_type_id
+    @recognition_id = @recognition.recognition_id
   end
 
   def set_parameters_virtually
