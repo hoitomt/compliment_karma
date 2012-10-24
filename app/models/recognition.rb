@@ -31,9 +31,9 @@ class Recognition < ActiveRecord::Base
     end while Recognition.exists?(column => self[column])
   end
 
-  def self.create_from_accomplishment(accomplishment)
+  def self.create_from_user_accomplishment(ua)
     create(:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id,
-           :recognition_id => accomplishment.id)
+           :recognition_id => ua.id)
   end
 
   def self.create_from_compliment(compliment)

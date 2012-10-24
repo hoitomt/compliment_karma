@@ -11,8 +11,8 @@ class PopulateRecognitionTable < ActiveRecord::Migration
     end
 
     p "Create recognition from accomplishment"
-    Accomplishment.all.each do |a|
-      Recognition.create_from_accomplishment(a)
+    UserAccomplishment.all.each do |a|
+      Recognition.create_from_user_accomplishment(a)
     end
 
   end
