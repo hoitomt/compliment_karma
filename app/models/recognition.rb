@@ -34,9 +34,9 @@ class Recognition < ActiveRecord::Base
   def set_public_url
     begin
       url = "http://#{ENV['SITE_DOMAIN']}/recognitions/#{self.url_token}"
-      self.public_url = BITLY.shorten(url).urls
-    rescue UrlShortener::ResponseFailure
-      logger.warn "You have attempted to shorten an invalid URI"
+      self.public_url = TinyUrl.tiny_url(url)
+    rescue => e
+      logger.warn "#{e} You have attempted to shorten an invalid URI - #{url}"
     end
   end
 
