@@ -1,6 +1,9 @@
 class UserAccomplishment < ActiveRecord::Base
   belongs_to :user
   belongs_to :accomplishment
+  has_one :recognition, :foreign_key => :recognition_id,
+                        :conditions => {:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id}, 
+                        :dependent => :delete_all
 
   after_create :update_history
 
@@ -13,13 +16,5 @@ class UserAccomplishment < ActiveRecord::Base
     followed = Follow.find_all_by_follower_user_id(user.id)
     f_array = followed.collect{|x| x.subject_user_id}
     UserAccomplishment.where('user_id in (?)', f_array)
-
-
-    # list_of_accomplishments = []
-    # followed.each do |follow|
-    #   u = User.find_by_id(follow.subject_user_id)
-    #   list_of_accomplishments += u.user_accomplishments
-    # end
-    # return list_of_accomplishments
   end
 end

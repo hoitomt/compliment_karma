@@ -1,8 +1,6 @@
 class Accomplishment < ActiveRecord::Base
   has_many :user_accomplishments
   has_many :users, :through => :user_accomplishments
-  has_one :recognition, :foreign_key => :recognition_id,
-                        :conditions => {:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id}
   
   validates_uniqueness_of :name
 

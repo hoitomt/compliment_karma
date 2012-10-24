@@ -2,8 +2,8 @@ class Recognition < ActiveRecord::Base
   belongs_to :compliment, :foreign_key => :recognition_id
   belongs_to :reward, :foreign_key => :recognition_id,
                       :conditions => {:recognition_type_id => RecognitionType.REWARD.id}
-  belongs_to :accomplishment, :foreign_key => :recognition_id,
-                              :conditions => {:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id}
+  belongs_to :user_accomplishment, :foreign_key => :recognition_id,
+                      :conditions => {:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id}
 
   validates_presence_of :recognition_id, :recognition_type_id
   validates_uniqueness_of :recognition_id, :scope => [:recognition_type_id]

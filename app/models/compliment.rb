@@ -9,10 +9,13 @@ class Compliment < ActiveRecord::Base
   belongs_to :sender, :class_name => 'User', :foreign_key => 'sender_user_id'
 
   has_many :tags, :foreign_key => :recognition_id,
-                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}
+                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}, 
+                  :dependent => :delete_all
   has_one :recognition, :foreign_key => :recognition_id,
-                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}
-  has_many :groups, :through => :tags
+                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}, 
+                  :dependent => :delete_all
+  has_many :groups, :through => :tags, 
+                    :dependent => :delete_all
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

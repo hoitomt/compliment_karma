@@ -117,7 +117,7 @@ module ApplicationHelper
   end
 
   def get_user_photo_link_profile(user)
-    if user
+    if user.try(:photo) && user.photo.url(:profile)
       link_to image_tag(user.photo.url(:profile), :style => "max-width: 200"), user_path(user.id)
     else
       image_tag('/photos/profile/missing.png')
