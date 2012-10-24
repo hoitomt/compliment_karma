@@ -1,4 +1,6 @@
 class ComplimentsController < ApplicationController
+
+  before_filter :authenticate
   
   def index
     @compliments = Compliment.all
@@ -129,5 +131,11 @@ class ComplimentsController < ApplicationController
   def error_display(c_object)
     return c_object.errors.full_messages.join("<br />")
   end
+
+  private
+    
+    def authenticate
+      deny_access unless signed_in?
+    end
 
 end

@@ -1,6 +1,5 @@
 class Recognition < ActiveRecord::Base
-  belongs_to :compliment, :foreign_key => :recognition_id,
-                          :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}
+  belongs_to :compliment, :foreign_key => :recognition_id
   belongs_to :reward, :foreign_key => :recognition_id,
                       :conditions => {:recognition_type_id => RecognitionType.REWARD.id}
   belongs_to :accomplishment, :foreign_key => :recognition_id,
@@ -11,21 +10,6 @@ class Recognition < ActiveRecord::Base
 
   before_create :set_url_token
   before_create :set_public_url
-
-  def self.create_from_accomplishment(accomplishment)
-    create(:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id,
-           :recognition_id => accomplishment.id)
-  end
-
-  def self.create_from_compliment(compliment)
-    create(:recognition_type_id => RecognitionType.COMPLIMENT.id,
-           :recognition_id => compliment.id)
-  end
-
-  def self.create_from_reward(reward)
-    create(:recognition_type_id => RecognitionType.REWARD.id,
-           :recognition_id => reward.id)
-  end
 
   def set_url_token
     generate_token('url_token')
@@ -45,6 +29,21 @@ class Recognition < ActiveRecord::Base
       logger.info("Generate Token: #{column}")
       self[column] = SecureRandom.urlsafe_base64
     end while Recognition.exists?(column => self[column])
+  end
+
+  def self.create_from_accomplishment(accomplishment)
+    create(:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id,
+           :recognition_id => accomplishment.id)
+  end
+
+  def self.create_from_compliment(compliment)
+    create(:recognition_type_id => RecognitionType.COMPLIMENT.id,
+           :recognition_id => compliment.id)
+  end
+
+  def self.create_from_reward(reward)
+    create(:recognition_type_id => RecognitionType.REWARD.id,
+           :recognition_id => reward.id)
   end
 
 end

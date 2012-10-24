@@ -4,7 +4,7 @@
 	})
 </script>
 <div id="follows-button-<%= user.try(:id) %>" class="profile-button">
-	<% unless current_user?(user) %>
+	<% if !current_user?(user) && !current_user.blank? %>
 			<%= follows_button_medium(user) %>
 	<% end %>
 </div>

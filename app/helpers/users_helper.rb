@@ -115,9 +115,7 @@ module UsersHelper
   end
   
   def get_like_status(recognition_id, recognition_type_id)
-    logger.info("Recognition ID: #{recognition_id}")
-    logger.info("Recognition Type ID: #{recognition_type_id}")
-    logger.info("User ID: #{current_user.id}")
+    return CkLike.UNLIKE unless current_user
     return CkLike.get_like_status(recognition_id, recognition_type_id, current_user.id)
   end
 
@@ -146,7 +144,7 @@ module UsersHelper
     return link_to button_text.html_safe, ck_likes_path(:recognition_type_id => recognition_type_id,
                                       :recognition_id => recognition_id,
                                       :count => @count,
-                                      :user_id => current_user.id),
+                                      :user_id => current_user.try(:id)),
                         :method => :post,
                         :remote => true,
                         :class => button_class
@@ -225,9 +223,9 @@ module UsersHelper
   end
 
   def compliment_button(user=nil, button_class=nil)
-    if user && user.id == current_user.id
+    if user && user.id == current_user.try(:id)
       return ""
-    elsif user && user.id != current_user.id
+    elsif user && user.id != current_user.try(:id)
       return link_to "Compliment", 
                      new_compliment_path(:recipient_id => user.id), 
                      :class => "compliment-button #{button_class}",

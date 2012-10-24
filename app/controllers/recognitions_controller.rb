@@ -1,10 +1,13 @@
 class RecognitionsController < ApplicationController
-  before_filter :authenticate#, :except => [:show]
+  before_filter :authenticate, :except => [:show]
   
   def show
     session.delete(:return_to)
-    @recognition_type_id = params[:recognition_type_id].to_i
-    @recognition_id = params[:recognition_id].to_i
+    if params[:id]
+      set_parameters
+    else
+      set_parameters_virtually
+    end
     set_update_history_read
     @recognition_type_compliment_id = RecognitionType.COMPLIMENT.id
     @recognition_type_reward_id = RecognitionType.REWARD.id
@@ -18,6 +21,17 @@ class RecognitionsController < ApplicationController
     elsif @recognition_type_id == @recognition_type_accomplishment_id
       set_accomplishment_detail
     end
+  end
+
+  def set_parameters
+    @recognition = Recognition.find_by_url_token(params[:id])
+    @recognition_type_id = recognition.recognition_type_id
+    @recognition_id = recognition.recognition_id
+  end
+
+  def set_parameters_virtually
+    @recognition_type_id = params[:recognition_type_id].to_i
+    @recognition_id = params[:recognition_id].to_i
   end
   
   def set_detail_variables

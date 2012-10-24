@@ -7,7 +7,7 @@
 																			{:recognition_id => @recognition_id,
 																			 :recognition_type_id => @recognition_type_id,
 																			 :iframe => true}) %>';
-			var userId = '<%= current_user.id %>';
+			var userId = '<%= current_user.try(:id) %>';
 			ShowRecognitionFancyBox.init(view, socialPopup, userId);
 			UserProfile.showCommentButtonOnClick();
 			UserProfile.followButtonHover();

@@ -14,6 +14,8 @@ var ShowRecognitionFancyBox = {
 			afterClose: function() {
 				if(userId != null && userId > 0) {
 					window.location.href = 'http://www.complimentkarma.com/users/' + userId;
+				} else {
+					window.location.href = 'http://www.complimentkarma.com';
 				}
 			},
 			// fitToView: false,
