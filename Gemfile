@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.8'
 gem 'thin', '1.3.1'
 gem 'pg', '0.13.2'
-gem 'heroku'
 gem 'bcrypt-ruby', '3.0.1', :require => "bcrypt"
 gem 'jquery-rails'
 gem 'client_side_validations', '3.1.4'
