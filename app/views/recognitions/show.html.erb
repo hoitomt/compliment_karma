@@ -4,8 +4,7 @@
 			UserProfile.reinitialize();
 			var view = '<%= j(render "recognitions/detail_view") %>';
 			var socialPopup = '<%= j(render "recognitions/social_popup_links",
-																			{:recognition_id => @recognition_id,
-																			 :recognition_type_id => @recognition_type_id,
+																			{:recognition => @recognition,
 																			 :iframe => true}) %>';
 			var userId = '<%= current_user.try(:id) %>';
 			options = {

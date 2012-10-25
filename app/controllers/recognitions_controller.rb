@@ -8,44 +8,47 @@ class RecognitionsController < ApplicationController
     else
       set_parameters_virtually
     end
-    set_update_history_read
-    @recognition_type_compliment_id = RecognitionType.COMPLIMENT.id
-    @recognition_type_reward_id = RecognitionType.REWARD.id
-    @recognition_type_accomplishment_id = RecognitionType.ACCOMPLISHMENT.id
-    set_detail_variables
-    logger.info("recognition_type_id: #{@recognition_type_id} | recognition_id: #{@recognition_id}")
-    if @recognition_type_id == @recognition_type_compliment_id
-      set_compliment_detail
-    elsif @recognition_type_id == @recognition_type_reward_id
-      set_reward_detail
-    elsif @recognition_type_id == @recognition_type_accomplishment_id
-      set_accomplishment_detail
+    if @recognition.blank?
+      redirect_to root_path
+    else
+      set_update_history_read
+      set_details
     end
   end
 
   def set_parameters
     @recognition = Recognition.find_by_url_token(params[:id])
-    @recognition_type_id = @recognition.recognition_type_id
-    @recognition_id = @recognition.recognition_id
   end
 
   def set_parameters_virtually
-    @recognition_type_id = params[:recognition_type_id].to_i
-    @recognition_id = params[:recognition_id].to_i
+    @recognition = Recognition.find_by_type_and_id(params[:recognition_type_id], params[:recognition_id])
   end
   
-  def set_detail_variables
-    @ck_likes = CkLike.get_all_likes(@recognition_id, @recognition_type_id)
+  def set_details
+    set_reference_variables
+    logger.info("recognition: #{@recognition.inspect}")
+    if @recognition.is_compliment?
+      set_compliment_detail
+    elsif @recognition.is_reward?
+      set_reward_detail
+    elsif @recognition_type_id.is_accomplishment?
+      set_accomplishment_detail
+    end
+  end
+
+  def set_reference_variables
+    @ck_likes = CkLike.get_all_likes(@recognition.recognition_id, @recognition.recognition_type_id)
     @likes_count = @ck_likes.count
     @likes_users = likes_users(@ck_likes)
-    @comments = RecognitionComment.get_all_comments(@recognition_id, @recognition_type_id)
+    @comments = RecognitionComment.get_all_comments(@recognition.recognition_id, 
+                                                    @recognition.recognition_type_id)
     @compliment_new = Compliment.new
     @comment_new = RecognitionComment.new
   end
   
   def set_compliment_detail
     logger.info('Compliment Detail')
-    @compliment_popup = Compliment.find(@recognition_id)
+    @compliment_popup = Compliment.find(@recognition.recognition_id)
     if @compliment_popup
       @sender = @compliment_popup.get_sender
       @receiver = @compliment_popup.get_receiver
@@ -58,7 +61,7 @@ class RecognitionsController < ApplicationController
   
   def set_reward_detail
     logger.info('Reward Detail')
-    @reward = Reward.find(@recognition_id)
+    @reward = Reward.find(@recognition.recognition_id)
     if @reward
       @receiver = @reward.receiver
       @presenter = @reward.presenter
@@ -68,7 +71,7 @@ class RecognitionsController < ApplicationController
   
   def set_accomplishment_detail
     logger.info('Accomplishment Detail')
-    @user_accomplishment = UserAccomplishment.find(@recognition_id)
+    @user_accomplishment = UserAccomplishment.find(@recognition.recognition_id)
     if @user_accomplishment
       @user = @user_accomplishment.user
       @updated_at = @user_accomplishment.updated_at

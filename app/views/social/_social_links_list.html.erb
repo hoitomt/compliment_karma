@@ -1,14 +1,10 @@
 <li class="no-hover">
-	<%# if iframe %>
-		<%#= render 'social/facebook_iframe', { :recognition_type_id => recognition_type_id,
-																				 	 :recognition_id => recognition_id } %>
-	<%# else %>
-<!-- 		<div class="fb-like" data-href="http://www.complimentkarma.com/recognitions/<%= recognition_type_id %>/<%= recognition_id %>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div> -->
-		<%#= link_to 'FB', 'http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.complimentkarma.com&send=false&layout=button_count&width=450&show_faces=false&action=like&colorscheme=light&font&height=21' %>
-		<%= render 'social/facebook_link', { :recognition_type_id => recognition_type_id,
-																			   :recognition_id => recognition_id,
-																			   :show_count => show_count } %>
-	<%# end %>
+	<fb:like href="<%= social_link(recognition) %>" 
+			 send="false" 
+			 layout="button_count" 
+			 width="450" 
+			 show_faces="false">
+	</fb:like>
 </li>
 <li class="no-hover">
 	<% if iframe %>

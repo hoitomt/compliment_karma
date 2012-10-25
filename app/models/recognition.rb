@@ -11,6 +11,10 @@ class Recognition < ActiveRecord::Base
   before_create :set_url_token
   before_create :set_public_url
 
+  @@recognition_type_compliment_id = RecognitionType.COMPLIMENT.id
+  @@recognition_type_reward_id = RecognitionType.REWARD.id
+  @@recognition_type_accomplishment_id = RecognitionType.ACCOMPLISHMENT.id
+
   def set_url_token
     generate_token('url_token')
   end
@@ -44,6 +48,26 @@ class Recognition < ActiveRecord::Base
   def self.create_from_reward(reward)
     create(:recognition_type_id => RecognitionType.REWARD.id,
            :recognition_id => reward.id)
+  end
+
+  def self.find_by_type_and_id(recognition_type_id, recognition_id)
+    where(:recognition_type_id => recognition_type_id,
+          :recognition_id => recognition_id).first
+  end
+
+  def is_compliment?
+    self.recognition_type_id == @@recognition_type_compliment_id
+    # self.recognition_type_id == RecognitionType.COMPLIMENT.id
+  end
+
+  def is_reward?
+    self.recognition_type_id == @@recognition_type_reward_id
+    # self.recognition_type_id == RecognitionType.REWARD.id
+  end
+
+  def is_accomplishment?
+    self.recognition_type_id == @@recognition_type_accomplishment_id
+    # self.recognition_type_id == RecognitionType.ACCOMPLISHMENT.id
   end
 
 end

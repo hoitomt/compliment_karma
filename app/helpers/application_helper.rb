@@ -186,8 +186,9 @@ module ApplicationHelper
     return "<option>People</option><option>Businesses</option>".html_safe
   end
 
-  def social_link(recognition_type_id, recognition_id)
-    return "#{site_url}recognitions/#{recognition_type_id}/#{recognition_id}".html_safe
+  def social_link(recognition)
+    url = recognition.public_url.blank? ? 'http://www.complimentkarma.com' : recognition.public_url
+    return url.html_safe
   end
 
   def state_list
