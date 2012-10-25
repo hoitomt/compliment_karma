@@ -3,8 +3,10 @@ require 'spec_helper'
 describe ComplimentsController do
   render_views
   
+  let(:user2){FactoryGirl.create(:user2)}
   before(:each) do
     controller.class.skip_before_filter :shell_authenticate
+    test_sign_in(user2)
   end
   
   describe "POST 'create'" do
@@ -225,7 +227,7 @@ describe ComplimentsController do
     end
 
     describe "default relationship of compliments" do
-      let(:company1_user1) {FactoryGirl.create(:user2)}
+      let(:company1_user1) {user2}
       let(:company1_user2) {FactoryGirl.create(:user3)}
       let(:company2_user1) {FactoryGirl.create(:user)}
       
@@ -281,7 +283,7 @@ describe ComplimentsController do
     end
       
     describe "default visibility of compliment" do
-      let(:company1_user1) {FactoryGirl.create(:user2)}
+      let(:company1_user1) {user2}
       let(:company1_user2) {FactoryGirl.create(:user3)}
       let(:company2_user1) {FactoryGirl.create(:user)}
       
