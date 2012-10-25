@@ -1,6 +1,12 @@
 development:
-  # bucket: compliment_karma_dev
-  bucket: compliment_karma_prod
+  bucket: compliment_karma_dev
+  # bucket: compliment_karma_prod
+  access_key_id: AKIAJRZ7Q4I6MW3WMNHQ
+  secret_access_key: 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
+  tmp_file_directory: tmp_upload
+staging:
+  bucket: compliment_karma_dev
+  # bucket: compliment_karma_prod
   access_key_id: AKIAJRZ7Q4I6MW3WMNHQ
   secret_access_key: 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
   tmp_file_directory: tmp_upload

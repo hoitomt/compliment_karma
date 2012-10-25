@@ -1,5 +1,4 @@
 class ComplimentsController < ApplicationController
-
   before_filter :authenticate
   
   def index
