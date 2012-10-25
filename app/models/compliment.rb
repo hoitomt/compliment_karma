@@ -13,7 +13,7 @@ class Compliment < ActiveRecord::Base
                   :dependent => :delete_all
   has_one :recognition, :foreign_key => :recognition_id,
                   :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}, 
-                  :dependent => :delete_all
+                  :dependent => :destroy
   has_many :groups, :through => :tags, 
                     :dependent => :delete_all
   

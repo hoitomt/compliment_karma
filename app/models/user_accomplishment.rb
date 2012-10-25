@@ -3,7 +3,7 @@ class UserAccomplishment < ActiveRecord::Base
   belongs_to :accomplishment
   has_one :recognition, :foreign_key => :recognition_id,
                         :conditions => {:recognition_type_id => RecognitionType.ACCOMPLISHMENT.id}, 
-                        :dependent => :delete_all
+                        :dependent => :destroy
 
   after_create :update_history
 

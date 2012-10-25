@@ -3,7 +3,8 @@ class Reward < ActiveRecord::Base
   belongs_to :presenter, :class_name => 'User', :foreign_key => 'presenter_id'
   belongs_to :reward_status
   has_one :recognition, :foreign_key => :recognition_id,
-                        :conditions => {:recognition_type_id => RecognitionType.REWARD.id}
+                        :conditions => {:recognition_type_id => RecognitionType.REWARD.id},
+                        :dependent => :destroy
 
   validates_presence_of :receiver_id, :presenter_id, :value
   validates_numericality_of :value
