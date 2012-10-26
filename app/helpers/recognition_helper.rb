@@ -41,7 +41,7 @@ module RecognitionHelper
     end
   end
 
-  def og_meta_url(recognition)
+  def fb_like_url(recognition)
     if Rails.env.staging?
       url = "http://ck-dev.herokuapp.com/recognitions/#{recognition.url_token}"
     else
