@@ -1,5 +1,6 @@
 <div class="comment-photo">
-	<%= image_tag(current_user.photo.url(:mini)) %>
+	<img src=<%= current_user.photo.url(:mini) %> >
+	<%#= image_tag(current_user.photo.url(:mini)) %>
 </div>
 <div class="comment-text-new">
 	<% @comment_new ||= RecognitionComment.new %>

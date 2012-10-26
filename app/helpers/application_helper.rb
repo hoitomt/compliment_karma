@@ -99,37 +99,41 @@ module ApplicationHelper
 
   def get_user_photo_link_mini(user)
     if user
-      link_to image_tag(user.photo.url(:mini)), 
-              user_path(user.id), 
-              :class => "popup-like-item",
-              :title => "#{user.full_name}"
+      get_user_photo_link(user, :mini)
     else
-      image_tag('/photos/mini/missing.png')
-    end 
+      "<img src=/photos/profile/missing.png>".html_safe
+    end
   end
 
   def get_user_photo_link_small(user)
     if user
-      link_to image_tag(user.photo.url(:small)), user_path(user.id)
+      get_user_photo_link(user, :small)
     else
-      image_tag('/photos/small/missing.png')
-    end 
+      "<img src=/photos/profile/missing.png>".html_safe
+    end
   end
 
   def get_user_photo_link_profile(user)
-    if user.try(:photo) && user.photo.url(:profile)
-      link_to image_tag(user.photo.url(:profile), :style => "max-width: 200"), user_path(user.id)
+    if user
+      get_user_photo_link(user, :profile)
     else
-      image_tag('/photos/profile/missing.png')
-    end 
+      "<img src=/photos/profile/missing.png>".html_safe
+    end
   end
 
   def get_user_photo_link_medium(user)
     if user
-      link_to image_tag(user.photo.url(:medium), :style => "max-width: 200"), user_path(user.id)
+      get_user_photo_link(user, :medium)
     else
       image_tag('/photos/medium/missing.png', :width => '200')
     end 
+  end
+
+  def get_user_photo_link(user, size)
+    html = "<a href=/users/#{user.id} class='popup-like-item' title='#{user.first_last}'>"
+    html += "<img alt='#{user.first_last}' src=#{user.photo.url(size.to_sym)} style='max-width: 200'>"
+    html += "</a>"
+    return html.html_safe
   end
 
   def date_format_month_day(date)

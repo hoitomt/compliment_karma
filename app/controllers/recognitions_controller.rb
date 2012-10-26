@@ -31,7 +31,7 @@ class RecognitionsController < ApplicationController
       set_compliment_detail
     elsif @recognition.is_reward?
       set_reward_detail
-    elsif @recognition_type_id.is_accomplishment?
+    elsif @recognition.is_accomplishment?
       set_accomplishment_detail
     end
   end
