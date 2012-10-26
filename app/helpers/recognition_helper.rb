@@ -41,4 +41,13 @@ module RecognitionHelper
     end
   end
 
+  def og_meta_url(recognition)
+    if Rails.env.staging?
+      url = "http://ck-dev.herokuapp.com/recognitions/#{recognition.url_token}"
+    else
+      url = "http://www.complimentkarma.com/recognitions/#{recognition.url_token}"
+    end
+    return url.html_safe
+  end
+
 end
