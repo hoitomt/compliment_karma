@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" >
 	<meta name="description" content="Send / Receive Compliments from your Professional / Social Network. Build Proof of Experience and Earn your Employer sponsored Rewards">
@@ -10,6 +12,7 @@
   <%= csrf_meta_tags %>
 	<%= yield :stylesheets %>
 	<%= yield :javascript %>
+	<%= yield :metatags %>
   <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 	<!--[if gte IE 9]>
 	  <style type="text/css">
