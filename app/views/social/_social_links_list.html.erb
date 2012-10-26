@@ -1,11 +1,5 @@
 <li class="no-hover">
-<div class="fb-like" 
-		 data-href="http://www.complimentkarma.com/recognitions/1/312<%#= social_link(recognition) %>" 
-		 data-send="false" 
-		 data-layout="button_count" 
-		 data-width="100" 
-		 data-show-faces="false">
-</div>
+	<%= render 'social/facebook_iframe', :recognition => recognition %>
 </li>
 <li class="no-hover">
 	<% if iframe %>
@@ -21,4 +15,3 @@
 	<%#= render 'social/google_link_no_js', { :recognition_type_id => recognition_type_id,
 																		 			 :recognition_id => recognition_id }  %>
 </li>
-<%= render 'social/facebook_javascript' %>

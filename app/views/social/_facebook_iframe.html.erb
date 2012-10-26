@@ -1,9 +1,9 @@
 <% 
-if Rails.env.development?
+if Rails.env.staging?
 	domain = "ck-dev.herokuapp.com"
 else
 	domain = "www.complimentkarma.com"
 end
 %>
 
-<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2F<%= domain %>%2Frecognition%2F<%=recognition_type_id%>%2F<%=recognition_id%>%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=113049115514717" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+<iframe src="//www.facebook.com/plugins/like.php?href=<%= social_link(recognition) %>&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=113049115514717" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
