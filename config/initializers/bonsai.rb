@@ -8,3 +8,4 @@ else
   app_env = Rails.env
   BONSAI_INDEX_NAME = "#{app_name}-#{app_env}"
 end
+BONSAI_INDEX_NAME = "ck-development"
