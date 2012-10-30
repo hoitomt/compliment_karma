@@ -1,5 +1,7 @@
 module RecognitionHelper
+
   def og_meta_title(recognition)
+    return nil if recognition.blank?
     if recognition.is_compliment?
       c = recognition.compliment
       if c.blank? || c.receiver.blank?
@@ -25,6 +27,7 @@ module RecognitionHelper
   end
 
   def og_meta_type(recognition)
+    return nil if recognition.blank?
     if recognition.is_compliment?
       return "compliment"
     elsif recognition.is_reward?
@@ -35,19 +38,32 @@ module RecognitionHelper
   end
 
   def og_meta_description(recognition)
-    if recognition.is_compliment?
-    elsif recognition.is_reward?
-    elsif recognition.is_accomplishment?
-    end
+    return og_meta_title(recognition)
+    # return nil if recognition.blank?
+    # if recognition.is_compliment?
+    # elsif recognition.is_reward?
+    # elsif recognition.is_accomplishment?
+    # end
   end
 
   def fb_like_url(recognition)
+    return nil if recognition.blank?
     if Rails.env.staging?
       url = "http://ck-dev.herokuapp.com/recognitions/#{recognition.url_token}"
     else
       url = "http://www.complimentkarma.com/recognitions/#{recognition.url_token}"
     end
     return url.html_safe
+  end
+
+  def meta_content(recognition)
+    if recognition.blank?
+      content = "Send / Receive Compliments from your Professional / Social Network. 
+                 Build Proof of Experience and Earn your Employer sponsored Rewards"
+    else
+      content = og_meta_description(recognition)
+    end
+    return content
   end
 
 end

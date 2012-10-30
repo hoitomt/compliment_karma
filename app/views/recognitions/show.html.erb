@@ -2,13 +2,15 @@
 	<script type="text/javascript">
 		$(function() {
 			UserProfile.reinitialize();
-			var view = '<%= j(render "recognitions/detail_view") %>';
+			var view = '<%= j(render "recognitions/detail_view", :recognition => @recognition) %>';
+			var metaData = '<%=j(render "layouts/facebook_meta_tags", :recognition => @recognition) %>';
 			var socialPopup = '<%= j(render "recognitions/social_popup_links",
 																			{:recognition => @recognition,
 																			 :iframe => true}) %>';
 			var userId = '<%= current_user.try(:id) %>';
 			options = {
 			  view: view,
+			  metaData: metaData,
 			  socialPopup: socialPopup,
 			  userId: userId,
 			  redirectOnClose: true

@@ -4,10 +4,13 @@ var ShowRecognitionFancyBox = {
 		var socialPopup = options.socialPopup;
 		var redirectOnClose = options.redirectOnClose;
 		var view = options.view;
+		var metaData = options.metaData;
+		// this.setMetaData(options.metaData);
 
 		$.fancybox(view, {
 			beforeLoad: function() {
 				$('body').addClass('lock-screen');
+				$('head').append(metaData);
 				this.title = socialPopup;// String(socialPopup);
 			},
 			afterShow: function() {
@@ -40,5 +43,8 @@ var ShowRecognitionFancyBox = {
 				// }
 			}
 		});
+	},
+	setMetaData: function(metaView) {
+		$('head').append(metaView);
 	}
 }
