@@ -1,6 +1,7 @@
 var userId = '<%= current_user.id %>';
 var view = '<%= j(render "recognitions/detail_view", :recognition => @recognition) %>';
 var metaData = '<%=j(render "layouts/facebook_meta_tags", :recognition => @recognition) %>';
+var metaDataDescription = '<%= meta_content(@recognition) %>'
 console.log('Meta Data', metaData);
 var socialPopup = '<%= j(render "recognitions/social_popup_links",
 																		{:recognition => @recognition,
@@ -8,6 +9,7 @@ var socialPopup = '<%= j(render "recognitions/social_popup_links",
 options = {
   view: view,
   metaData: metaData,
+  metaDataDescription: metaDataDescription,
   socialPopup: socialPopup,
   userId: userId,
   redirectOnClose: false

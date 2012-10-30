@@ -4,6 +4,7 @@
 			UserProfile.reinitialize();
 			var view = '<%= j(render "recognitions/detail_view", :recognition => @recognition) %>';
 			var metaData = '<%=j(render "layouts/facebook_meta_tags", :recognition => @recognition) %>';
+			var metaDataDescription = '<%= meta_content(@recognition) %>'
 			var socialPopup = '<%= j(render "recognitions/social_popup_links",
 																			{:recognition => @recognition,
 																			 :iframe => true}) %>';
@@ -11,6 +12,7 @@
 			options = {
 			  view: view,
 			  metaData: metaData,
+			  metaDataDescription: metaDataDescription,
 			  socialPopup: socialPopup,
 			  userId: userId,
 			  redirectOnClose: true
