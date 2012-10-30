@@ -96,7 +96,7 @@ class ComplimentsController < ApplicationController
       msg = "Your compliment has been sent"
       group = @compliment.get_receiver_group_from_compliment_type
       if @compliment.new_contact_created
-        msg += "<br />#{@compliment.receiver.first_last} has been added to your contacts"
+        msg += "<br />#{@compliment.receiver_name} has been added to your contacts"
         msg += " as a #{group.name} contact" unless group.nil?
       end
     elsif @compliment.compliment_status == ComplimentStatus.PENDING_RECEIVER_CONFIRMATION ||

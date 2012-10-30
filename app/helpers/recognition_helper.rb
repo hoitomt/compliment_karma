@@ -7,7 +7,7 @@ module RecognitionHelper
       if c.blank? || c.receiver.blank?
         @title = "ComplimentKarma - Compliment"
       else
-        @title = "Compliment from #{c.sender.first_last} to #{c.receiver.first_last}"
+        @title = "Compliment from #{c.sender.first_last} to #{c.receiver_name}"
       end
     elsif recognition.is_reward?
       r = recognition.reward
@@ -38,12 +38,22 @@ module RecognitionHelper
   end
 
   def og_meta_description(recognition)
-    return og_meta_title(recognition)
-    # return nil if recognition.blank?
-    # if recognition.is_compliment?
-    # elsif recognition.is_reward?
-    # elsif recognition.is_accomplishment?
-    # end
+    # return og_meta_title(recognition)
+    return nil if recognition.blank?
+    if recognition.is_compliment?
+      c = recognition.compliment
+      html = "#{c.sender.first_last} complimented #{c.receiver_name} for #{c.skill.name}. "
+      html += "#{recognition.public_url} via @ComplimentKarma"
+    elsif recognition.is_reward?
+      r = recognition.reward
+      html = "#{r.receiver.first_last} was rewarded #{reward.value} by #{r.presenter.first_last}. "
+      html += "#{recognition.public_url} via @ComplimentKarma"
+    elsif recognition.is_accomplishment?
+      ua = recognition.user_accomplishment
+      html = "#{ua.user.first_last} earned a #{ua.accomplishment.name} badge. "
+      html += "#{recognition.public_url} via @ComplimentKarma"
+    end
+    return html.html_safe
   end
 
   def fb_like_url(recognition)
@@ -63,7 +73,7 @@ module RecognitionHelper
     else
       content = og_meta_description(recognition)
     end
-    return content
+    return content.html_safe
   end
 
 end

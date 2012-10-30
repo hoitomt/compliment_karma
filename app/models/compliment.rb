@@ -362,6 +362,10 @@ class Compliment < ActiveRecord::Base
   def update_history
     UpdateHistory.Received_Compliment(self)
   end
+
+  def receiver_name
+    self.receiver_user_id.blank? ? "New User" : self.receiver.first_last
+  end
   
   def self.compliment_by_relation_item_type(user, relation_item_type_id=nil)
     if relation_item_type_id

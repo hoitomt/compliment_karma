@@ -59,7 +59,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Like_Sent_Compliment.id,
                         ck_like.recognition_type_id,
                         ck_like.recognition_id,
-                        "liked your compliment to #{c.get_receiver.first_last}", current_user_id)
+                        "liked your compliment to #{c.receiver_name}", current_user_id)
   end
 
   def self.Like_Received_Compliment(ck_like, current_user_id)
@@ -121,7 +121,7 @@ class UpdateHistory < ActiveRecord::Base
                         UpdateHistoryType.Comment_on_Sent_Compliment.id,
                         recognition_comment.recognition_type_id,
                         recognition_comment.recognition_id,
-                        "commented on your compliment to #{c.get_receiver.first_last}", current_user_id)
+                        "commented on your compliment to #{c.receiver_name}", current_user_id)
   end
 
   def self.Comment_on_Received_Compliment(recognition_comment, current_user_id)
