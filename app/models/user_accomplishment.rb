@@ -6,10 +6,15 @@ class UserAccomplishment < ActiveRecord::Base
                         :dependent => :destroy
 
   after_create :update_history
+  after_create :create_recognition
 
   def update_history
     logger.info("Create Update History")
     UpdateHistory.Earned_an_Accomplishment(self)
+  end
+
+  def create_recognition
+    Recognition.create_from_user_accomplishment(self)
   end
 
   def self.accomplishments_from_followed(user)

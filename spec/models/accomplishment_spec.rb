@@ -26,4 +26,14 @@ describe Accomplishment do
     uh.length.should == 1
   end
 
+  it "should create two recognitions" do
+    lambda do
+      Compliment.create(@attr)
+    end.should change(Recognition, :count).by(2)
+    c = UserAccomplishment.last
+    t = RecognitionType.ACCOMPLISHMENT
+    r = Recognition.find_by_type_and_id(t.id, c.id)
+    r.should_not be_blank
+  end
+
 end

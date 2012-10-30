@@ -10,11 +10,16 @@ class Reward < ActiveRecord::Base
   validates_numericality_of :value
   
   after_create :update_history
+  after_create :create_recognition
 
   def update_history
     if self.reward_status == RewardStatus.complete
       UpdateHistory.Received_Reward(self)
     end
+  end
+
+  def create_recognition
+    Recognition.create_from_reward(self)
   end
 
   def self.rewards_from_followed(user)

@@ -53,6 +53,7 @@ class Compliment < ActiveRecord::Base
   after_create :create_tags
   after_create :add_accomplishment
   after_create :create_contact
+  after_create :create_recognition
 
   default_scope :order => "created_at DESC"
   
@@ -226,6 +227,10 @@ class Compliment < ActiveRecord::Base
       c = Contact.create_from_compliment(self)
       self.new_contact_created = true if !c.blank? && c.valid?
     end
+  end
+
+  def create_recognition
+    Recognition.create_from_compliment(self)
   end
   
   def set_compliment_status

@@ -611,4 +611,29 @@ describe Compliment do
     end
   end
 
+  describe "Recognitions" do
+    let(:user2) {FactoryGirl.create(:user2)}
+    let(:user3) {FactoryGirl.create(:user3)}
+
+    before(:each) do
+      @attr_contacts = {
+        :receiver_email => user3.email,
+        :sender_email => user2.email,
+        :skill_id => Skill.first.id,
+        :comment => "I love what you did with our application",
+        :compliment_type_id => ComplimentType.PROFESSIONAL_TO_PROFESSIONAL
+      }      
+    end
+
+    it "should create a new recognition" do
+      lambda do
+        c = Compliment.create(@attr_contacts)
+      end.should change(Recognition, :count).by(2)
+      c = Compliment.last
+      t = RecognitionType.COMPLIMENT
+      r = Recognition.find_by_type_and_id(t.id, c.id)
+      r.should_not be_blank
+    end
+  end
+
 end
