@@ -46,7 +46,7 @@ module RecognitionHelper
       html += "#{recognition.public_url} via @ComplimentKarma"
     elsif recognition.is_reward?
       r = recognition.reward
-      html = "#{r.receiver.first_last} was rewarded #{reward.value} by #{r.presenter.first_last}. "
+      html = "#{r.receiver.first_last} was rewarded #{r.value} by #{r.presenter.first_last}. "
       html += "#{recognition.public_url} via @ComplimentKarma"
     elsif recognition.is_accomplishment?
       ua = recognition.user_accomplishment
