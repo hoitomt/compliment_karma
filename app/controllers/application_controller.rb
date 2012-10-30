@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   include ShellHelper
   include ViewStateHelper
   include ComplimentsHelper
+  include RecognitionHelper
   
   before_filter :shell_authenticate
   before_filter :current_view
+  before_filter :set_meta
   
   def shell_authenticate
     if Rails.env.development?
@@ -20,6 +22,15 @@ class ApplicationController < ActionController::Base
   	@current_controller = params[:controller]
     @current_action = params[:action]
     logger.info("Current Controller|Action: #{@current_controller}|#{@current_view}")
+  end
+
+  def set_meta
+    logger.info("Request URL: #{request.url}")
+    description = "Send / Receive Compliments from your Professional / Social Network. 
+                   Build Proof of Experience and Earn your Employer sponsored Rewards"
+    @og_meta_url = request.url
+    @og_meta_title = "ComplimentKarma"
+    @og_meta_description, @meta_description = description
   end
   
 end

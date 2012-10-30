@@ -14,6 +14,14 @@ class RecognitionsController < ApplicationController
       set_update_history_read
       set_details
     end
+    set_meta_tags
+  end
+
+  def set_meta_tags
+    @og_meta_url = fb_like_url(@recognition)
+    @og_meta_title = og_meta_title(@recognition)
+    @og_meta_description, @meta_description = og_meta_description(@recognition)
+    # @meta_description = og_meta_description(recognition)
   end
 
   def set_parameters
