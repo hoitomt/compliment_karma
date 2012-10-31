@@ -1,10 +1,10 @@
 var currentAction = "<%= @current_action %>";
+console.log("Current Action");
 CommonScripts.toggleScrolling();
 UserMenu.setCurrentMenuItem(currentAction);
 ComplimentUI.removeStickyCompliment();
 UserProfile.removeInfiniteScroll();
 scroll(0,0);
-
 switch(currentAction) {
 	case "professional_profile":
 		$('#content-container').html('<%= j(render "users/menu/professional_profile") %>');

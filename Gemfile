@@ -38,6 +38,7 @@ group :test do
 	gem 'rspec-rails', '2.6.1'
 	# gem 'webrat', '0.7.1'
   gem 'capybara'
+  gem 'launchy'
 	gem 'spork', '0.9.0'
   gem 'turn', '0.8.2', :require => false
 	gem 'factory_girl_rails', '~> 3.0'

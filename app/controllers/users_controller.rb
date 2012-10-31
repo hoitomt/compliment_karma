@@ -131,6 +131,7 @@ class UsersController < ApplicationController
   end
 
   def menu_response_handler
+    logger.info("Current Action: #{@current_action}")
     respond_to do |format| 
       format.html { }
       format.js { render 'menu' }

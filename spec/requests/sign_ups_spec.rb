@@ -12,7 +12,7 @@ describe "SignUps" do
   
   describe "GET '/signup'" do
     it "should be success" do
-      get '/signup'
+      visit '/signup'
       response.should be_success
     end
     

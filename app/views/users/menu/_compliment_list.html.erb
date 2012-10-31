@@ -22,7 +22,7 @@
 							<% 
 								user_display = compliment.try(:sender).try(:first_last)
 								if sent_compliments
-									user_display = receiver_name
+									user_display = compliment.receiver_name
 								end
 								skill = Skill.find_by_id(compliment.skill_id)
 							%>

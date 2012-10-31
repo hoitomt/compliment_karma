@@ -7,10 +7,6 @@ describe "Compliments" do
   before(:each) do
     @relation = Relation.COWORKER
     @type_display = "from my PROFESSIONAL to receivers PROFESSIONAL profile"
-    # visit new_shell_path
-    # fill_in "Email", :with => founder.email
-    # fill_in "Password", :with => founder.password
-    # click_button('Submit')
   end
   
   describe "quick validation test" do
