@@ -1,5 +1,5 @@
 <li class="no-hover">
-	<% if current_user && current_user.id == 2 %>
+	<% if current_user && (current_user.id == 2 || current_user.id == 4) %>
 		<%= render 'social/facebook_iframe', :recognition => recognition %>
 	<% end %>
 </li>
