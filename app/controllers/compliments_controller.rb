@@ -94,7 +94,7 @@ class ComplimentsController < ApplicationController
   def set_success_notice
     if @compliment.compliment_status == ComplimentStatus.ACTIVE
       msg = "Your compliment has been sent"
-      group = @compliment.get_receiver_group_from_compliment_type
+      group = @compliment.get_sender_group_from_compliment_type
       if @compliment.new_contact_created
         msg += "<br />#{@compliment.receiver_name} has been added to your contacts"
         msg += " as a #{group.name} contact" unless group.nil?
