@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper
+
 module RecognitionHelper
 
   def og_meta_title(recognition)
@@ -42,15 +44,16 @@ module RecognitionHelper
     return nil if recognition.blank?
     if recognition.is_compliment?
       c = recognition.compliment
-      html = "#{c.sender.first_last} complimented #{c.receiver_name} for #{c.skill.name}. "
+      html = "#{c.sender.first_last} complimented #{c.receiver_name} for #{c.skill.name} "
       html += "#{recognition.public_url}"
     elsif recognition.is_reward?
       r = recognition.reward
-      html = "#{r.receiver.first_last} was rewarded #{r.value} by #{r.presenter.first_last}. "
+      value = number_to_currency(r.value)
+      html = "#{r.receiver.first_last} was rewarded #{value} by #{r.presenter.first_last} "
       html += "#{recognition.public_url}"
     elsif recognition.is_accomplishment?
       ua = recognition.user_accomplishment
-      html = "#{ua.user.first_last} earned a #{ua.accomplishment.name} badge. "
+      html = "#{ua.user.first_last} earned a #{ua.accomplishment.name} badge "
       html += "#{recognition.public_url}"
     end
     return html.html_safe
@@ -80,6 +83,10 @@ module RecognitionHelper
     if recognition.nil?
       return "https://s3.amazonaws.com/compliment_karma_prod/assets/ck_logo_fb_profile.jpeg"
     end
+  end
+
+  def helpers
+    helper = ActionView::Helpers::NumberHelper.new
   end
 
 end
