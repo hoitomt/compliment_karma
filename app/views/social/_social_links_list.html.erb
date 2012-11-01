@@ -1,12 +1,12 @@
-<li class="no-hover">
-	<% if current_user && (current_user.id == 2 || current_user.id == 4) %>
-		<%= render 'social/facebook_iframe', :recognition => recognition %>
-	<% end %>
-</li>
-<li class="no-hover">
-		<%= render 'social/twitter_iframe', :recognition => recognition  %>
-</li>
-<li class="no-hover">
-	<%#= render 'social/google_link_no_js', { :recognition_type_id => recognition_type_id,
-																		 			 :recognition_id => recognition_id }  %>
-</li>
+<% if current_user && (current_user.id == 2 || current_user.id == 4) %>
+	<li class="no-hover">
+			<%= render 'social/facebook_iframe', :recognition => recognition %>
+	</li>
+	<li class="no-hover">
+			<%= render 'social/twitter_iframe', :recognition => recognition  %>
+	</li>
+	<li class="no-hover">
+		<%#= render 'social/google_link_no_js', { :recognition_type_id => recognition_type_id,
+																			 			 :recognition_id => recognition_id }  %>
+	</li>
+<% end %>
