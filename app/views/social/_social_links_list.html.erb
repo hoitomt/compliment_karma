@@ -8,8 +8,12 @@
 	<li class="no-hover">
 		<div class="g-plusone" data-size="medium"></div>
 	</li>
+	<li class="no-hover">
+		<%= render 'social/linked_in_button', :recognition => recognition %>
+	</li>
 <% end %>
 
+<!-- Google Plus One -->
 <script type="text/javascript">
   (function() {
     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -17,3 +21,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 </script>
+
+<!-- Linked In -->
+<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
