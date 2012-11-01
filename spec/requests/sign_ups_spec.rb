@@ -13,7 +13,7 @@ describe "SignUps" do
   describe "GET '/signup'" do
     it "should be success" do
       visit '/signup'
-      response.should be_success
+      current_path.should == signup_path
     end
     
     it "should sign up a user and skip to display the users profile page" do

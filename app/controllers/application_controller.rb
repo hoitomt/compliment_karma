@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     @og_meta_url = request.url
     @og_meta_title = "ComplimentKarma"
     @og_meta_description, @meta_description = description
+    @og_meta_image = og_meta_image
   end
   
 end

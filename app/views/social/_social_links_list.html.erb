@@ -4,14 +4,7 @@
 	<% end %>
 </li>
 <li class="no-hover">
-	<% if iframe %>
-		<%#= render 'social/twitter_iframe', { :recognition_type_id => recognition_type_id,
-																			:recognition_id => recognition_id }  %>
-	<% else %>
-		<%#= render 'social/twitter_link', { :recognition_type_id => recognition_type_id,
-																			:recognition_id => recognition_id,
-																			:show_count => show_count }  %>
-  <% end %>
+		<%#= render 'social/twitter_iframe', :recognition => recognition  %>
 </li>
 <li class="no-hover">
 	<%#= render 'social/google_link_no_js', { :recognition_type_id => recognition_type_id,

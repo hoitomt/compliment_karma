@@ -43,15 +43,15 @@ module RecognitionHelper
     if recognition.is_compliment?
       c = recognition.compliment
       html = "#{c.sender.first_last} complimented #{c.receiver_name} for #{c.skill.name}. "
-      html += "#{recognition.public_url} via @ComplimentKarma"
+      html += "#{recognition.public_url}"
     elsif recognition.is_reward?
       r = recognition.reward
       html = "#{r.receiver.first_last} was rewarded #{r.value} by #{r.presenter.first_last}. "
-      html += "#{recognition.public_url} via @ComplimentKarma"
+      html += "#{recognition.public_url}"
     elsif recognition.is_accomplishment?
       ua = recognition.user_accomplishment
       html = "#{ua.user.first_last} earned a #{ua.accomplishment.name} badge. "
-      html += "#{recognition.public_url} via @ComplimentKarma"
+      html += "#{recognition.public_url}"
     end
     return html.html_safe
   end
@@ -74,6 +74,12 @@ module RecognitionHelper
       content = og_meta_description(recognition)
     end
     return content.html_safe
+  end
+
+  def og_meta_image(recognition=nil)
+    if recognition.nil?
+      return "https://s3.amazonaws.com/compliment_karma_prod/assets/ck_logo_fb_profile.jpeg"
+    end
   end
 
 end

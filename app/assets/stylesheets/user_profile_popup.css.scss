@@ -178,11 +178,11 @@ $popup-border-bottom: 1px solid #f2f2f2;
 .fancybox-title-float-wrap {
 	// position: relative;
 	top: 0;
-	left: 0px;
+	right: 0;
 	text-align: left;
 	width: 10px;
 	.child {
-		margin: 20px 0 0 -100px;
+		margin: 20px 0 0 30px;
 		padding: 0 0 0 0;
 		background: none;
 		text-align: left;
