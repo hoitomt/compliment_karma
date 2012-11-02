@@ -81,7 +81,8 @@ module RecognitionHelper
 
   def og_meta_image(recognition=nil)
     if recognition.nil?
-      return "https://s3.amazonaws.com/compliment_karma_prod/assets/ck_logo_fb_profile.jpeg"
+      return "http://www.complimentkarma.com/assets/social/ck_logo_fb_profile_180.png"
+      # return "https://s3.amazonaws.com/compliment_karma_prod/assets/ck_logo_fb_profile.jpeg"
     end
   end
 
