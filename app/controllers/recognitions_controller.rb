@@ -20,7 +20,7 @@ class RecognitionsController < ApplicationController
   def set_meta_tags
     @og_meta_url = fb_like_url(@recognition)
     @og_meta_title = og_meta_description(@recognition)
-    @og_meta_description = "ComplimentKarma.com+1%0D%0ATest+1%0D%0AAgain"
+    @og_meta_description = "ComplimentKarma.com<center>&nbsp;</center>Test<center></center>Again"
     @meta_description = og_meta_description(@recognition)
     @og_meta_image = og_meta_image(@recognition)
   end
