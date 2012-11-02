@@ -5,25 +5,27 @@ class EmailApiController < ApplicationController
     @title = "Account Confirmation"
     @user = User.find_by_new_account_confirmation_token(params[:confirm_id])
     if current_user?(@user)
-      logger.info("User is logged in")
       current_user.confirm_account
       Compliment.user_confirmation(current_user)
       flash[:notice] = "Welcome #{current_user.first_last}. 
                         Thanks for signing up.<br />Please log in and Happy Complimenting".html_safe
+      sign_out
+      redirect_to login_path
     else
-      logger.info("User is not logged in")
-      logger.info("User ID: #{@user.id} ") if @user
       if @user
         Compliment.user_confirmation(@user)
         @user.confirm_account
-      flash[:notice] = "Welcome #{@user.first_last}. 
+        flash[:notice] = "Welcome #{@user.first_last}. 
                         Thanks for signing up.<br />Please log in and Happy Complimenting".html_safe
+        sign_out
+        redirect_to login_path
       else
+        flash[:notice] = "The confirmation link that you clicked was not recognized. 
+                          Please click the link from the latest confirmation email or 
+                          resend your confirmation email. Thanks"
         redirect_to root_path
       end
     end
-    sign_out
-    redirect_to login_path
   end
 
   def new_email_confirmation

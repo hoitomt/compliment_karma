@@ -120,7 +120,7 @@ describe "SignUps" do
     
   end
   
-  describe "sign up confirmation" do
+  describe "sign up confirmation success" do
     let(:user2) { FactoryGirl.create(:user2) }
 
     before(:each) do
@@ -201,6 +201,14 @@ describe "SignUps" do
       @user.email_addresses.count.should == 1
     end
     
+  end
+
+  describe "sign up confirmation failure" do 
+    it "should not confirm the user when using an invalid token" do
+      bad_token = 'vFZgbwWT_aUJ6BGcowwJ3A'
+      visit new_account_confirmation_url(:confirm_id => bad_token)
+      current_path.should == root_path
+    end
   end
   
 end
