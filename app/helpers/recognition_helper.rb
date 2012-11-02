@@ -44,7 +44,7 @@ module RecognitionHelper
     return nil if recognition.blank?
     if recognition.is_compliment?
       c = recognition.compliment
-      html = "#{c.sender.first_last} complimented #{c.receiver_name} for #{c.skill.name}"
+      html = "#{c.sender.first_last} complimented #{c.receiver_name} for: #{c.skill.name}"
       # html += " #{recognition.public_url}"
     elsif recognition.is_reward?
       r = recognition.reward
