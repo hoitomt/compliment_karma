@@ -63,7 +63,7 @@ module RecognitionHelper
     html = "ComplimentKarma.com"
     if !recognition.nil? && recognition.is_compliment?
       c = recognition.compliment
-      html += "  <br />#{c.comment}"
+      html += "  -  #{c.comment}"
     end
     return html.html_safe
   end
