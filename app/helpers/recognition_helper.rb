@@ -85,7 +85,10 @@ module RecognitionHelper
       # return "https://s3.amazonaws.com/compliment_karma_prod/assets/ck_logo_fb_profile.jpeg"
     elsif recognition.is_accomplishment?
       ua = recognition.user_accomplishment
-      return image_tag(ua.accomplishment.image_thumb, :height => 110)
+      return "http://www.complimentkarma.com/assets/#{ua.accomplishment.image_thumb}"
+    elsif recognition.is_reward?
+      r = recognition.reward
+      return "http://www.complimentkarma.com/assets/reward/reward_fb_money.png"
     end
   end
 
