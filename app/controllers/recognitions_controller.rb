@@ -22,6 +22,7 @@ class RecognitionsController < ApplicationController
     @og_meta_title = og_meta_title(@recognition)
     @og_meta_description = og_meta_description(@recognition)
     @meta_description = og_meta_description(@recognition)
+    @og_meta_image = og_meta_image
   end
 
   def set_parameters
