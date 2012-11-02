@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
                    Build Proof of Experience and Earn your Employer sponsored Rewards"
     @og_meta_url = request.url
     @og_meta_title = description
-    @og_meta_description = "ComplimentKarma.com"
+    @og_meta_description = fb_og_meta_description
     @meta_description = description
     @og_meta_image = og_meta_image
   end

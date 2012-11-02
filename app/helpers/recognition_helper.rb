@@ -59,6 +59,15 @@ module RecognitionHelper
     return html.html_safe
   end
 
+  def fb_og_meta_description(recognition=nil)
+    html = "ComplimentKarma.com"
+    if !recognition.nil? && recognition.is_compliment?
+      c = recognition.compliment
+      html += "  <br />#{c.comment}"
+    end
+    return html.html_safe
+  end
+
   def fb_like_url(recognition)
     return nil if recognition.blank?
     if Rails.env.staging?
