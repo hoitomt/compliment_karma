@@ -63,7 +63,7 @@ module RecognitionHelper
     html = "ComplimentKarma.com"
     if !recognition.nil? && recognition.is_compliment?
       c = recognition.compliment
-      html += "  -  #{c.comment}"
+      html = "#{c.comment.capitalize!} via ComplimentKarma.com"
     end
     return html.html_safe
   end
