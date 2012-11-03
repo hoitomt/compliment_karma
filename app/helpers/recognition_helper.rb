@@ -91,13 +91,12 @@ module RecognitionHelper
   def og_meta_image(recognition=nil)
     if recognition.nil? || recognition.is_compliment?
       return "http://www.complimentkarma.com/assets/social/ck_logo_fb_profile_180.png"
-      # return "https://s3.amazonaws.com/compliment_karma_prod/assets/ck_logo_fb_profile.jpeg"
     elsif recognition.is_accomplishment?
       ua = recognition.user_accomplishment
       return "http://www.complimentkarma.com/assets/#{ua.accomplishment.image_thumb}"
     elsif recognition.is_reward?
       r = recognition.reward
-      return "http://www.complimentkarma.com/assets/reward/reward_fb_money.png"
+      return "http://www.complimentkarma.com/assets/reward/reward_gp_money.png"
     end
   end
 
