@@ -1,17 +1,15 @@
-<% if current_user && (current_user.id == 2 || current_user.id == 4) %>
-	<li class="no-hover">
-			<%= render 'social/facebook_iframe', :recognition => recognition %>
-	</li>
-	<li class="no-hover">
-			<%= render 'social/twitter_iframe', :recognition => recognition  %>
-	</li>
-	<li class="no-hover">
-		<div class="g-plusone" data-size="medium" data-href="<%= @og_meta_url %>"></div>
-	</li>
-	<li class="no-hover">
-		<%= render 'social/linked_in_button', :recognition => recognition %>
-	</li>
-<% end %>
+<li class="no-hover">
+		<%= render 'social/facebook_iframe', :recognition => recognition %>
+</li>
+<li class="no-hover">
+		<%= render 'social/twitter_iframe', :recognition => recognition  %>
+</li>
+<li class="no-hover">
+	<div class="g-plusone" data-size="medium" data-href="<%= @og_meta_url %>"></div>
+</li>
+<li class="no-hover">
+	<%= render 'social/linked_in_button', :recognition => recognition %>
+</li>
 
 <!-- Google Plus One -->
 <script type="text/javascript">
