@@ -17,3 +17,5 @@
 
 # Ignore Procfile var
 .env
+
+# config/s3.yml
