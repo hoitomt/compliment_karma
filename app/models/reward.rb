@@ -1,14 +1,14 @@
-class Reward < ActiveRecord::Base  
+class Reward < ActiveRecord::Base
   belongs_to :receiver, :class_name => 'User', :foreign_key => 'receiver_id'
   belongs_to :presenter, :class_name => 'User', :foreign_key => 'presenter_id'
   belongs_to :reward_status
   has_one :recognition, :foreign_key => :recognition_id,
-                        :conditions => {:recognition_type_id => RecognitionType.REWARD.id},
+                        :conditions => {:recognition_type_id => RecognitionType.REWARD ? RecognitionType.REWARD.id : nil},
                         :dependent => :destroy
 
   validates_presence_of :receiver_id, :presenter_id, :value
   validates_numericality_of :value
-  
+
   after_create :update_history
   after_create :create_recognition
 
@@ -51,9 +51,9 @@ class Reward < ActiveRecord::Base
     else
       domains = [visitor.domain, Domain.master_domain]
       Reward.joins(:receivers, :presenters)
-      Reward.joins('inner join users "receivers" on receivers.id = rewards.receiver_id', 
+      Reward.joins('inner join users "receivers" on receivers.id = rewards.receiver_id',
                    'inner join users "presenters" on presenters.id = rewards.presenter_id')
-            .where('((rewards.receiver_id = ? AND presenters.domain in (?)) OR 
+            .where('((rewards.receiver_id = ? AND presenters.domain in (?)) OR
                      (rewards.presenter_id = ? AND receivers.domain in (?)))
                       AND rewards.reward_status_id = ?',
                    user.id, domains, user.id, domains, RewardStatus.complete.id )
@@ -61,11 +61,11 @@ class Reward < ActiveRecord::Base
 
       # r = user.rewards_received
       #         .joins(:users)
-      #         .where('users.domain in (?) AND reward_status_id = ?', 
+      #         .where('users.domain in (?) AND reward_status_id = ?',
       #                domains, RewardStatus.complete.id)
       # rx = user.rewards_presented
       #         .joins('users on users.id = presenter_id')
-      #         # .where('users.domain in (?) AND reward_status_id = ?', 
+      #         # .where('users.domain in (?) AND reward_status_id = ?',
       #         #        domains, RewardStatus.complete.id)
     end
   end
@@ -87,8 +87,8 @@ class Reward < ActiveRecord::Base
     employees = Reward.employee_universe(company, department)
     employees_result = []
     employees.each do |user|
-      employees_result << get_individual_employee_vo(user, activity_type_id, 
-                                                     number_of_employees, start_date, 
+      employees_result << get_individual_employee_vo(user, activity_type_id,
+                                                     number_of_employees, start_date,
                                                      stop_date)
     end
     employees_result = employees_result.sort { |x, y| y[:activity_type] <=> x[:activity_type] }
@@ -96,7 +96,7 @@ class Reward < ActiveRecord::Base
   end
 
   def self.get_individual_employee_vo(user, activity_type_id,
-                                      number_of_employees, start_date, 
+                                      number_of_employees, start_date,
                                       stop_date)
     e = {}
     e[:id] = user.id

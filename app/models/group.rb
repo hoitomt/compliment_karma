@@ -8,7 +8,6 @@ class Group < ActiveRecord::Base
 	has_many :super_group_relationships, :class_name => 'GroupRelationship', :foreign_key => 'sub_group_id'
 
 	validates_uniqueness_of :name, :scope => [:user_id, :group_type_id]
-	default_scope :order => 'sort_order'
 
 	def display?
 		return self.display_ind.downcase == "y"
@@ -50,14 +49,14 @@ class Group < ActiveRecord::Base
 
 	def self.create_professional(user)
 		sort_o = define_sort_order('Professional')
-		pro_g = create(:name => 'Professional', :user_id => user.id, 
+		pro_g = create(:name => 'Professional', :user_id => user.id,
 									 :group_type => GroupType.Professional, :sort_order => sort_o,
 									 :display_ind => 'Y')
 	end
 
 	def self.create_social(user)
 		sort_o = define_sort_order('Social')
-		soc_g = create(:name => 'Social', :user_id => user.id, 
+		soc_g = create(:name => 'Social', :user_id => user.id,
 									 :group_type => GroupType.Social, :sort_order => sort_o,
 									 :display_ind => 'Y')
 	end
@@ -65,7 +64,7 @@ class Group < ActiveRecord::Base
 	def self.create_relationships(user)
 		pub_g = get_public_group(user)
 		con_g = get_contacts_group(user)
-		soc_g = get_social_group(user) 
+		soc_g = get_social_group(user)
 		pro_g = get_professional_group(user)
 		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pro_g.id)
 		GroupRelationship.create(:sub_group_id => pro_g.id, :super_group_id => pub_g.id)
@@ -79,7 +78,7 @@ class Group < ActiveRecord::Base
 
 	def self.create_declined(user)
 		sort_o = define_sort_order('Declined')
-		create(:name => 'Declined', :user_id => user.id, 
+		create(:name => 'Declined', :user_id => user.id,
 			     :group_type => GroupType.Declined, :sort_order => sort_o)
 	end
 
@@ -122,7 +121,7 @@ class Group < ActiveRecord::Base
 	def self.get_contacts_group(user)
 		where('user_id = ? and name = ?', user.id, 'Contacts').first
 	end
-	
+
 	def self.get_sender_group_by_compliment_type(compliment_type, user)
 		logger.info("Compliment Type: #{compliment_type.name} - Professional: #{compliment_type.professional_sender?}")
 		if compliment_type.professional_sender?

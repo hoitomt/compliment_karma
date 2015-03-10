@@ -19,3 +19,6 @@
 .env
 
 # config/s3.yml
+
+# Vendored Gems
+/vendor/ruby

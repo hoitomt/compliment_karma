@@ -29,7 +29,11 @@ Ck::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
+  config.assets.enabled = true
+  config.assets.compile = true
+  # config.serve_static_assets = true
   config.assets.debug = true
+  config.assets.raise_runtime_errors = true
   # config.assets.debug = false # Use for IE testing only
 
   # Configure Mailgun to use http, rather than smtp

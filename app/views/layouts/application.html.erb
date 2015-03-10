@@ -14,6 +14,7 @@
 	<meta property="og:url" content="<%= @og_meta_url %>"/>
 	<meta property="og:description" content="<%= @og_meta_description %>"/>
   <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 	<%= yield :stylesheets %>
@@ -32,7 +33,7 @@
 			CommonScripts.showFlash(flashContent);
 			CommonScripts.showSpinner();
 			FooterResize.init();
-			
+
 			$('.fancybox').fancybox({
 				beforeLoad: function() {
 					$('body').addClass('lock-screen');

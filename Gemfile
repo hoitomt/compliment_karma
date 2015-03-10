@@ -29,14 +29,12 @@ gem 'aws-sdk', '1.4.1'
 gem 'url_shortener'
 
 group :development do
-	gem 'rspec-rails', '2.6.1'
   gem 'bullet'
 end
 
 group :test do
   # Pretty printed test output
 	gem 'rspec-rails', '2.6.1'
-	# gem 'webrat', '0.7.1'
   gem 'capybara'
   gem 'launchy'
 	gem 'spork', '0.9.0'

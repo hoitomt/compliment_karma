@@ -1,0 +1,2 @@
+# ComplimentKarma
+ComplimentKarma is a network where you can send and receive compliments from your professional and social network to earn employer-sponsored monetary rewards and build proof of experience. Our goal is to bring more positivity and satisfaction to everyone’s professional and personal life.

@@ -9,35 +9,35 @@ class Compliment < ActiveRecord::Base
   belongs_to :sender, :class_name => 'User', :foreign_key => 'sender_user_id'
 
   has_many :tags, :foreign_key => :recognition_id,
-                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}, 
+                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT ? RecognitionType.COMPLIMENT.id : nil},
                   :dependent => :delete_all
   has_one :recognition, :foreign_key => :recognition_id,
-                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT.id}, 
+                  :conditions => {:recognition_type_id => RecognitionType.COMPLIMENT ? RecognitionType.COMPLIMENT.id : nil},
                   :dependent => :destroy
-  has_many :groups, :through => :tags, 
+  has_many :groups, :through => :tags,
                     :dependent => :delete_all
-  
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   attr_accessor :receiver_display, :new_contact_created, :suppress_fulfillment # for seeding data only
-  
+
   validates :receiver_email, :presence => true,
                              :format => { :with => email_regex }
-  
+
   validates :sender_email, :presence => true,
                            :format => { :with => email_regex }
-  
+
   validates :skill_id, :presence => true
-  
+
   validates :comment, :presence => true,
                       :length => {:within => 2..140, :message => "Too short"}
-  
+
   validates :compliment_type_id, :presence => true
 
   validate :compliment_cannot_be_to_self
   validate :sender_is_confirmed_user
   validate :not_short_term_duplicate, :on => :create
-  
+
   before_save :set_sender
   before_save :parse_sender_domain
   before_save :parse_receiver_domain
@@ -56,7 +56,7 @@ class Compliment < ActiveRecord::Base
   after_create :create_recognition
 
   default_scope :order => "created_at DESC"
-  
+
 
   def create_from_api(recipient_email, params)
     sender_email = clean_email_address(params['from']) if params['from']
@@ -139,24 +139,24 @@ class Compliment < ActiveRecord::Base
   def self.get_pending_compliments(receiver_email)
     pending = Compliment.where("receiver_email = ? AND receiver_user_id is null", receiver_email)
   end
-  
+
   def compliment_cannot_be_to_self
     if(self.sender_email == self.receiver_email)
-      errors.add(:receiver_email, 
-                  "We think you are wonderful too but you cannot compliment yourself") 
+      errors.add(:receiver_email,
+                  "We think you are wonderful too but you cannot compliment yourself")
     end
   end
 
   def sender_is_confirmed_user
     user = User.find_user_by_email(self.sender_email)
     if(!user || !user.confirmed?)
-      errors.add(:sender_email, "Please confirm your account prior to complimenting") 
+      errors.add(:sender_email, "Please confirm your account prior to complimenting")
     end
   end
 
   def not_short_term_duplicate
     t = DateTime.now - 1.minute
-    c = Compliment.where('(sender_email = ? OR sender_user_id = ?) AND 
+    c = Compliment.where('(sender_email = ? OR sender_user_id = ?) AND
                           (receiver_email = ? OR receiver_user_id = ?) AND
                           skill_id = ? AND comment = ? AND compliment_type_id = ? AND
                           created_at > ?',
@@ -167,7 +167,7 @@ class Compliment < ActiveRecord::Base
       errors.add(:comment, "Duplicate compliment with recent compliment")
     end
   end
-  
+
   def send_fulfillment
     return if suppress_fulfillment
     begin
@@ -192,7 +192,7 @@ class Compliment < ActiveRecord::Base
       self.sender_email = current_user.email
     end
   end
-  
+
   # If both the sender and receiver have user_ids, create a relationship
   def set_relationship
     if self.compliment_status == ComplimentStatus.ACTIVE ||
@@ -209,7 +209,7 @@ class Compliment < ActiveRecord::Base
                             :user_2_id => receiver.id,
                             :relationship_status_id => new_relationship_status.id)
       end
-    end      
+    end
   end
 
   def create_action_item
@@ -232,7 +232,7 @@ class Compliment < ActiveRecord::Base
   def create_recognition
     Recognition.create_from_compliment(self)
   end
-  
+
   def set_compliment_status
     if receiver_status == AccountStatus.CONFIRMED
       logger.info("Set Compliment Status - Active")
@@ -245,30 +245,30 @@ class Compliment < ActiveRecord::Base
       self.compliment_status = ComplimentStatus.PENDING_RECEIVER_REGISTRATION
     end
   end
-  
+
   def sender_status
     return User.get_account_status(self.sender_email)
   end
-  
+
   def receiver_status
     return User.get_account_status(self.receiver_email)
   end
-  
+
   def parse_sender_domain
     d = self.sender_email.split('@')
     self.sender_domain = d[1] if d.size > 1
   end
-  
+
   def parse_receiver_domain
     d = self.receiver_email.split('@')
     self.receiver_domain = d[1] if d.size > 1
   end
-  
+
   def set_sender_user_id
     u = User.find_user_by_email(self.sender_email)
     self.sender_user_id = u.id if u
   end
-  
+
   def set_receiver_user_id
     u = User.find_user_by_email(self.receiver_email)
     self.receiver_user_id = u.id if u
@@ -286,12 +286,12 @@ class Compliment < ActiveRecord::Base
 
   def self.user_confirmation(user)
     logger.info("Confirm account for #{user.first_last if user}")
-    Compliment.where('receiver_user_id = ? AND 
+    Compliment.where('receiver_user_id = ? AND
                           (compliment_status_id = ? OR compliment_status_id = ?)',
                           user.id, ComplimentStatus.PENDING_RECEIVER_CONFIRMATION,
                           ComplimentStatus.PENDING_RECEIVER_REGISTRATION)
                   .update_all(:compliment_status_id => ComplimentStatus.ACTIVE.id)
-    # c.each do |compliment| 
+    # c.each do |compliment|
     #   compliment.update_attributes()
     # end
   end
@@ -300,7 +300,7 @@ class Compliment < ActiveRecord::Base
     Compliment.where(:receiver_email => email)
               .update_all(:receiver_user_id => user_id)
   end
-  
+
   def set_visibility
     if self.visibility_id.blank?
       # Set this for now
@@ -313,7 +313,7 @@ class Compliment < ActiveRecord::Base
       # if relationship
       #   self.visibility = relationship.visibility
       # end
-      
+
       # if self.visibility.nil?
       #   if self.sender_domain == self.receiver_domain
       #     self.visibility = Visibility.EVERYBODY
@@ -359,7 +359,7 @@ class Compliment < ActiveRecord::Base
   def get_sender
     User.find(self.sender_user_id) unless self.sender_user_id.blank?
   end
-  
+
   def get_receiver
     User.find(self.receiver_user_id) unless self.receiver_user_id.blank?
   end
@@ -371,7 +371,7 @@ class Compliment < ActiveRecord::Base
   def receiver_name
     self.receiver_user_id.blank? ? "New User" : self.receiver.first_last
   end
-  
+
   def self.compliment_by_relation_item_type(user, relation_item_type_id=nil)
     if relation_item_type_id
       case relation_item_type_id.to_i
@@ -389,7 +389,7 @@ class Compliment < ActiveRecord::Base
       # return Compliment.all_compliments(user)
     end
   end
-  
+
   def self.all_compliments(user)
     logger.info("Compliments: All")
     Compliment.where('sender_email = ? OR receiver_email = ?',
@@ -426,7 +426,7 @@ class Compliment < ActiveRecord::Base
     logger.info("Compliments from everybody user is following and the user")
     followed = Follow.find_all_by_follower_user_id(user.id)
     list_of_compliments = all_active_compliments(user)
-    followed.each do |follow| 
+    followed.each do |follow|
       list_of_compliments += all_active_compliments(follow.subject_user)
     end
     logger.info("Count of Compliments: " + list_of_compliments.count.to_s)
@@ -443,28 +443,28 @@ class Compliment < ActiveRecord::Base
   def self.all_active_compliments_in_domain(user, visitor)
     logger.info("Active Compliments")
     if visitor.domain == Domain.master_domain
-      Compliment.where('(sender_user_id = ? OR receiver_user_id = ?) 
+      Compliment.where('(sender_user_id = ? OR receiver_user_id = ?)
                        AND compliment_status_id = ? AND visibility_id = ?',
                        user.id, user.id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
     else
       domains = [visitor.domain, Domain.master_domain]
-      Compliment.where('( (sender_user_id = ? AND receiver_domain in (?)) OR 
-                          (receiver_user_id = ? AND sender_domain in (?)) ) 
+      Compliment.where('( (sender_user_id = ? AND receiver_domain in (?)) OR
+                          (receiver_user_id = ? AND sender_domain in (?)) )
                        AND compliment_status_id = ? AND visibility_id = ?',
-                       user.id, domains, user.id, domains, 
+                       user.id, domains, user.id, domains,
                        ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
     end
   end
-  
-  # Sandbox for attempting to reduce the number of queries 
+
+  # Sandbox for attempting to reduce the number of queries
   def self.all_active_compliments_optimize(user_id)
     type_id = RecognitionType.COMPLIMENT.id
     Compliment.order(:created_at).
               # select("compliments.*").
               select("compliments.*, count(ck_likes.id) as likes_count").
-              joins("left outer join ck_likes on (recognition_id = compliments.id AND 
+              joins("left outer join ck_likes on (recognition_id = compliments.id AND
                                                    recognition_type_id = #{type_id})").
-              where('(sender_user_id = ? OR receiver_user_id = ?) 
+              where('(sender_user_id = ? OR receiver_user_id = ?)
                      AND compliment_status_id = ? AND visibility_id = ?',
                      user_id, user_id, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id).
               group("compliments.id")
@@ -476,7 +476,7 @@ class Compliment < ActiveRecord::Base
                      'AND compliment_status_id = ? AND visibility_id = ?',
                      user.email, user.email, ComplimentStatus.ACTIVE.id, Visibility.EVERYBODY.id)
   end
-  
+
   def self.karma_activity_list(visitor, page_owner)
     logger.info("Visitor: #{visitor.first_last if visitor} -> " +
                 "Page Owner #{page_owner.first_last if page_owner}")
@@ -494,7 +494,7 @@ class Compliment < ActiveRecord::Base
              JOIN group_relationships gr on gr.sub_group_id = g.id
              WHERE (c.sender_user_id in (?) OR c.receiver_user_id in (?))
              AND c.compliment_status_id = ?
-             AND (gr.super_group_id in (?) OR 
+             AND (gr.super_group_id in (?) OR
                       (select count(1)
                        from group_relationships grx, groups gx
                        where grx.super_group_id = gx.id
@@ -510,14 +510,14 @@ class Compliment < ActiveRecord::Base
              JOIN group_relationships gr ON gr.sub_group_id = g.id
              WHERE (c.sender_user_id = ? OR c.receiver_user_id = ?)
              and c.compliment_status_id = ?
-             AND (gr.super_group_id in (?) OR 
+             AND (gr.super_group_id in (?) OR
                       (select count(1)
                        from group_relationships grx, groups gx
                        where grx.super_group_id = gx.id
                        and grx.sub_group_id = g.id
                        and gx.name = 'Public') > 0)"
       compliments = find_by_sql([sql, compliment_type_id, page_owner.id,
-                                      page_owner.id, page_owner.id, 
+                                      page_owner.id, page_owner.id,
                                       active_compliment_id, membership_group_ids])
     end
     return compliments
@@ -529,11 +529,11 @@ class Compliment < ActiveRecord::Base
          Visibility.EVERYBODY.id,
          Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
          Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
-    Compliment.where('(sender_user_id = ? AND visibility_id in (?) ) OR ' + 
+    Compliment.where('(sender_user_id = ? AND visibility_id in (?) ) OR ' +
                      '(receiver_user_id = ? and visibility_id in (?) )',
                      user.id, Visibility.all_visibility_ids, user.id, v)
   end
-  
+
   def self.internal_coworkers(user)
     logger.info("Compliments: Internal Coworkers")
     internal_relationships = Relationship.all_internal_contacts(user)
@@ -545,7 +545,7 @@ class Compliment < ActiveRecord::Base
     Compliment.where('(sender_user_id in (?) OR receiver_user_id in (?)) AND visibility_id in (?)',
                     internal_relationships.keys, internal_relationships.keys, v)
   end
-  
+
   def self.external_colleagues(user)
     logger.info("Compliments: External")
     external_relationships = Relationship.all_external_contacts(user)
@@ -554,22 +554,22 @@ class Compliment < ActiveRecord::Base
                 Visibility.EVERYBODY.id,
                 Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
                 Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
-    receiver_v = [Visibility.EVERYBODY.id,            
+    receiver_v = [Visibility.EVERYBODY.id,
                   Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_THIS_JOB.id,
                   Visibility.COWORKERS_AND_EXTERNAL_CONTACTS_FROM_ALL_JOBS.id]
     Compliment.where('(sender_user_id in (?) AND visibility_id in (?)) '+
                      'OR (receiver_user_id in (?) AND visibility_id in (?))',
                      external_relationships.keys, sender_v, external_relationships.keys, receiver_v)
   end
-  
+
   def self.get_compliments_by_relationship(relationship)
     logger.info("Compliments: Get by Relationship")
-    c = Compliment.where('(sender_user_id = ? AND receiver_user_id = ?) OR ' + 
+    c = Compliment.where('(sender_user_id = ? AND receiver_user_id = ?) OR ' +
                      '(sender_user_id = ? and receiver_user_id = ?)',
-                     relationship.user_1_id, relationship.user_2_id, 
+                     relationship.user_1_id, relationship.user_2_id,
                      relationship.user_2_id, relationship.user_1_id)
   end
-  
+
   def self.get_compliments_since_monday(user)
     logger.info("Compliments: This week")
     d = DateUtil.get_previous_monday_at_zero_time
@@ -580,9 +580,9 @@ class Compliment < ActiveRecord::Base
     logger.info("Sent Professional")
     types = ComplimentType.professional_send_ids
     status_id = ComplimentStatus.ACTIVE.id
-    Compliment.where('sender_user_id = ? AND 
+    Compliment.where('sender_user_id = ? AND
                       compliment_type_id in (?) AND
-                      compliment_status_id = ?', 
+                      compliment_status_id = ?',
                       user.id, types, status_id)
   end
 
@@ -590,9 +590,9 @@ class Compliment < ActiveRecord::Base
     logger.info("Sent Social")
     types = ComplimentType.social_send_ids
     status_id = ComplimentStatus.ACTIVE.id
-    Compliment.where('sender_user_id = ? AND 
+    Compliment.where('sender_user_id = ? AND
                       compliment_type_id in (?) AND
-                      compliment_status_id = ?', 
+                      compliment_status_id = ?',
                       user.id, types, status_id)
   end
 
@@ -600,9 +600,9 @@ class Compliment < ActiveRecord::Base
     logger.info("Received Professional")
     types = ComplimentType.professional_receive_ids
     status_id = ComplimentStatus.ACTIVE.id
-    Compliment.where('receiver_user_id = ? AND 
+    Compliment.where('receiver_user_id = ? AND
                       compliment_type_id in (?) AND
-                      compliment_status_id = ?', 
+                      compliment_status_id = ?',
                       user.id, types, status_id)
   end
 
@@ -610,11 +610,11 @@ class Compliment < ActiveRecord::Base
     logger.info("Received Social")
     types = ComplimentType.social_receive_ids
     status_id = ComplimentStatus.ACTIVE.id
-    Compliment.where('receiver_user_id = ? AND 
+    Compliment.where('receiver_user_id = ? AND
                       compliment_type_id in (?) AND
-                      compliment_status_id = ?', 
+                      compliment_status_id = ?',
                       user.id, types, status_id)
-  end  
+  end
 
   def metrics_send_new_compliment
     Metrics.new_compliment
